@@ -1,15 +1,5 @@
 # GitHub Actions workflow for scheduled watchlist checks.
-#
-# NOTE: this file lives inside media-tracker/workflows/ ON PURPOSE so it
-# does not activate on the audition-scoring repo. To turn scheduling on:
-#   1. Move media-tracker to its own repository (git subtree split, or
-#      just copy the directory) — scheduled workflows only fire on a
-#      repo's default branch.
-#   2. Copy this file to .github/workflows/media-tracker.yml there.
-#   3. Add the NTFY_TOPIC repository secret (Settings -> Secrets ->
-#      Actions).
-# Paths below assume the tracker sits at the repo root after the split;
-# if you keep the media-tracker/ subdirectory, set defaults.run.working-directory.
+# Requires the NTFY_TOPIC repository secret (Settings -> Secrets -> Actions).
 
 name: media-tracker
 

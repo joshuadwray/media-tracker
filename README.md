@@ -61,10 +61,9 @@ Phones on your home wifi can use it too: find your computer's IP
 
 Every check run writes `docs/index.html` — a clean, phone-friendly
 summary of new/current sightings, source health, and your watchlist.
-Once this project moves to its own repo, enable **GitHub Pages**
-(Settings → Pages → "Deploy from a branch" → `/docs` folder) and that
-page gets a public URL that auto-updates after every scheduled run —
-bookmark it on your phone. Until then, the same file opens locally.
+Enable **GitHub Pages** (Settings → Pages → "Deploy from a branch" →
+`/docs` folder) and that page gets a public URL that auto-updates after
+every scheduled run — bookmark it on your phone.
 
 ### The CLI
 
@@ -122,17 +121,11 @@ after seeing real probe output, not before:
 
 ## Scheduling
 
-The workflow in `workflows/media-tracker.yml` runs the check ~8am and
-~6pm Central and commits state back. It is intentionally **not** in
-`.github/workflows/` — scheduled workflows only fire on a repo's
-default branch, and this project currently lives on a feature branch of
-the audition-scoring repo. When ready:
+The workflow in `.github/workflows/media-tracker.yml` runs the check
+~8am and ~6pm Central and commits state back. To finish setup:
 
-1. Split `media-tracker/` into its own repo (copy the directory, or
-   `git subtree split -P media-tracker`).
-2. Copy `workflows/media-tracker.yml` → `.github/workflows/`.
-3. Add the `NTFY_TOPIC` Actions secret.
-4. Run the workflow manually once (workflow_dispatch) and check the
+1. Add the `NTFY_TOPIC` Actions secret (Settings → Secrets → Actions).
+2. Run the workflow manually once (workflow_dispatch) and check the
    report; if a source 403s from GitHub's IPs, disable it there and run
    just that source from a home machine via cron:
    `python -m tracker check --source denton-library`.
