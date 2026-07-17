@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>media tracker</title>
+<style>
+:root { color-scheme: light dark;
+  --line: rgba(128,128,128,.35); --mut: rgba(128,128,128,.85);
+  --ok: #2e7d32; --err: #c62828; --accent: #1565c0; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif; margin: 0 auto; max-width: 760px; padding: 16px; line-height: 1.45; }
+h1 { font-size: 1.35rem; margin: 0 0 14px; }
+h2 { font-size: .95rem; margin: 24px 0 8px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--mut); }
+button { font: inherit; padding: 7px 14px; border-radius: 8px;
+  border: 1px solid var(--line); background: transparent; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent);
+  color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+input, select { font: inherit; padding: 7px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: transparent; width: 100%; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.row > input { flex: 1; min-width: 160px; }
+.card { border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 8px; }
+.card.new { border-left: 5px solid var(--ok); }
+.item-row { display: flex; justify-content: space-between; gap: 8px;
+  padding: 6px 4px; border-bottom: 1px dashed var(--line); align-items: baseline; }
+.item-row:last-child { border-bottom: none; }
+.item-row .x { color: var(--err); background: none; border: none;
+  cursor: pointer; font-size: 1rem; padding: 0 6px; }
+.muted { color: var(--mut); font-size: .9rem; }
+.ok { color: var(--ok); } .err { color: var(--err); }
+.cand { cursor: pointer; }
+.cand:hover { border-color: var(--accent); }
+pre { white-space: pre-wrap; word-break: break-word; font-size: .78rem;
+  background: rgba(128,128,128,.12); border-radius: 8px; padding: 10px;
+  max-height: 320px; overflow: auto; }
+.pill { display: inline-block; font-size: .75rem; border: 1px solid var(--line);
+  border-radius: 99px; padding: 1px 9px; margin-left: 6px; }
+#toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  background: #333; color: #fff; padding: 9px 18px; border-radius: 10px;
+  opacity: 0; transition: opacity .25s; pointer-events: none; max-width: 90%; }
+#toast.show { opacity: .95; }
+.tabs { display: flex; gap: 6px; margin-bottom: 4px; }
+.tabs button.active { background: var(--accent); color: #fff;
+  border-color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>📚🎬 media tracker</h1>
+
+<div class="row">
+  <button class="primary" id="checkBtn" onclick="runCheck()">Check now</button>
+  <span id="checkStatus" class="muted"></span>
+</div>
+
+<h2>Add to watchlist</h2>
+<div class="tabs">
+  <button id="tab-book" class="active" onclick="setKind('book')">Book</button>
+  <button id="tab-movie" onclick="setKind('movie')">Movie</button>
+</div>
+<div class="row">
+  <input id="addTitle" placeholder="title, e.g. nickel boys"
+         onkeydown="if(event.key==='Enter')startAdd()">
+  <input id="addYear" placeholder="year (optional)" style="max-width:130px; display:none">
+  <button class="primary" onclick="startAdd()">Add</button>
+</div>
+<div id="candidates"></div>
+
+<h2>Latest sightings</h2>
+<div id="sightings" class="muted">loading…</div>
+
+<h2>Watchlist</h2>
+<div class="card"><strong>Books</strong><div id="books"></div></div>
+<div class="card"><strong>Movies</strong><div id="movies"></div></div>
+
+<h2>Source health</h2>
+<div class="muted" style="margin-bottom:6px">Click a source to test it and see
+exactly what it gets back — paste that output to Claude if something's off.</div>
+<div id="sources"></div>
+<pre id="probeOut" style="display:none"></pre>
+
+<div id="toast"></div>
+
+<script>
+let kind = 'book';
+const $ = id => document.getElementById(id);
+const esc = s => { const d = document.createElement('div');
+  d.textContent = s == null ? '' : String(s); return d.innerHTML; };
+
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+async function api(path, opts) {
+  const r = await fetch(path, opts);
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error || r.statusText);
+  return data;
+}
+
+function setKind(k) {
+  kind = k;
+  $('tab-book').classList.toggle('active', k === 'book');
+  $('tab-movie').classList.toggle('active', k === 'movie');
+  $('addYear').style.display = k === 'movie' ? '' : 'none';
+  $('candidates').innerHTML = '';
+}
+
+async function loadWatchlist() {
+  const wl = await api('/api/watchlist');
+  const render = (items, section, label) => items.length
+    ? items.map(x => `<div class="item-row"><span>${esc(x.title)}` +
+        (x.author ? ` <span class="muted">— ${esc(x.author)}</span>` : '') +
+        (x.year ? ` <span class="muted">(${esc(x.year)})</span>` : '') +
+        ((x.isbn || x.bib_id) ? ' <span class="pill">verified</span>' : '') +
+        `</span><button class="x" title="remove"
+          onclick="removeItem('${section}', ${JSON.stringify(x.title).replace(/"/g,'&quot;')})">✕</button></div>`).join('')
+    : `<div class="muted">no ${label} yet</div>`;
+  $('books').innerHTML = render(wl.books, 'books', 'books');
+  $('movies').innerHTML = render(wl.movies, 'movies', 'movies');
+  $('sources').innerHTML = wl.sources.map(s =>
+    `<div class="item-row"><span>${esc(s.id)}
+       <span class="muted">(${esc(s.kind)})</span>
+       ${s.enabled ? '' : '<span class="pill">off</span>'}</span>
+     <button onclick="probe('${esc(s.id)}')" ${s.enabled ? '' : 'disabled'}>test</button>
+     </div>`).join('');
+}
+
+async function removeItem(section, title) {
+  if (!confirm(`Remove "${title}" from ${section}?`)) return;
+  try {
+    await api(`/api/watchlist/${section}`, { method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({title}) });
+    toast(`removed "${title}"`); loadWatchlist();
+  } catch (e) { toast(e.message); }
+}
+
+async function startAdd() {
+  const title = $('addTitle').value.trim();
+  if (!title) return;
+  if (kind === 'movie') {
+    const body = { title };
+    const year = $('addYear').value.trim();
+    if (year) body.year = year;
+    try {
+      await api('/api/watchlist/movies', { method: 'POST',
+        headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body) });
+      toast(`added "${title}"`); $('addTitle').value = ''; $('addYear').value = '';
+      loadWatchlist();
+    } catch (e) { toast(e.message); }
+    return;
+  }
+  // books: search live catalogs so the exact record can be picked
+  $('candidates').innerHTML = '<div class="muted">searching the catalogs…</div>';
+  let cands = [];
+  try { cands = (await api('/api/search/books?q=' + encodeURIComponent(title))).candidates; }
+  catch (e) { toast('search failed: ' + e.message); }
+  const asTyped = `<div class="card cand" onclick='addBook(null)'>
+      <strong>Add exactly as typed:</strong> ${esc(title)}
+      <div class="muted">fuzzy matching will apply</div></div>`;
+  $('candidates').innerHTML = (cands.length
+    ? '<div class="muted" style="margin:6px 0">Pick the record you mean:</div>' +
+      cands.map((c, i) => `<div class="card cand" onclick='addBook(${i})'>
+        <strong>${esc(c.title)}</strong>
+        ${c.author ? '— ' + esc(c.author) : ''}
+        <span class="pill">${esc(c.format || '?')}</span>
+        <span class="pill">${esc(c.source)}</span></div>`).join('')
+    : '<div class="muted" style="margin:6px 0">No catalog records found (source may be unreachable).</div>')
+    + asTyped;
+  window._cands = cands;
+}
+
+async function addBook(idx) {
+  const title = $('addTitle').value.trim();
+  const body = idx === null ? { title }
+    : { title, candidate: window._cands[idx] };
+  try {
+    const res = await api('/api/watchlist/books', { method: 'POST',
+      headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body) });
+    toast(`added "${res.added.title}"`);
+    $('addTitle').value = ''; $('candidates').innerHTML = '';
+    loadWatchlist();
+  } catch (e) { toast(e.message); }
+}
+
+async function runCheck() {
+  try { await api('/api/check', { method: 'POST' }); }
+  catch (e) { toast(e.message); return; }
+  $('checkBtn').disabled = true;
+  $('checkStatus').textContent = 'checking every source…';
+  const poll = setInterval(async () => {
+    const st = await api('/api/check/status');
+    if (st.running) return;
+    clearInterval(poll);
+    $('checkBtn').disabled = false;
+    const last = st.last || {};
+    if (!last.ok) { $('checkStatus').textContent = ''; toast('check failed: ' + (last.error || '?')); return; }
+    $('checkStatus').textContent =
+      `done — ${last.new.length} new, ${last.observations} total sighting(s)` +
+      (last.errors.length ? `, ${last.errors.length} source error(s)` : '');
+    if (last.new.length) toast(`🎉 ${last.new.length} new sighting(s)!`);
+    loadReport();
+  }, 1200);
+}
+
+async function loadReport() {
+  const { report } = await api('/api/report');
+  if (!report) { $('sightings').textContent =
+    'no runs yet — hit Check now'; return; }
+  // Show the "new" + "current" sections of the markdown report, simply.
+  const cut = report.indexOf('## Source status');
+  const body = (cut > 0 ? report.slice(0, cut) : report)
+    .replace(/^# .*$/m, '').trim();
+  $('sightings').innerHTML = '<pre>' + esc(body) + '</pre>';
+}
+
+async function probe(id) {
+  const out = $('probeOut');
+  out.style.display = ''; out.textContent = `testing ${id}… (can take ~30s)`;
+  try {
+    const res = await api('/api/probe/' + encodeURIComponent(id));
+    out.textContent = `===== ${id} =====\n` + res.output;
+  } catch (e) { out.textContent = `probe ${id} failed: ${e.message}`; }
+}
+
+loadWatchlist(); loadReport();
+</script>
+</body>
+</html>

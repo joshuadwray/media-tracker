@@ -1,0 +1,54 @@
+# GitHub Actions workflow for scheduled watchlist checks.
+#
+# NOTE: this file lives inside media-tracker/workflows/ ON PURPOSE so it
+# does not activate on the audition-scoring repo. To turn scheduling on:
+#   1. Move media-tracker to its own repository (git subtree split, or
+#      just copy the directory) — scheduled workflows only fire on a
+#      repo's default branch.
+#   2. Copy this file to .github/workflows/media-tracker.yml there.
+#   3. Add the NTFY_TOPIC repository secret (Settings -> Secrets ->
+#      Actions).
+# Paths below assume the tracker sits at the repo root after the split;
+# if you keep the media-tracker/ subdirectory, set defaults.run.working-directory.
+
+name: media-tracker
+
+on:
+  schedule:
+    # ~8:00 and ~18:00 Central (13:00/23:00 UTC in summer). GitHub cron
+    # is UTC and best-effort; exact minutes drift.
+    - cron: "0 13,23 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write # to commit state.json / report.md back
+
+concurrency:
+  group: media-tracker
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Run watchlist check
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python -m tracker check
+
+      - name: Commit updated state
+        run: |
+          git config user.name "media-tracker bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state/ docs/
+          git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+          git push

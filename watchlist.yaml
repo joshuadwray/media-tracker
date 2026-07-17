@@ -1,0 +1,58 @@
+# ============================================================
+# media-tracker watchlist
+# Edit freely — or use the guardrailed adder, which verifies the
+# title against live catalog records and stores canonical IDs:
+#   python -m tracker add book "nickel boys"
+#   python -m tracker add movie "the substance" --year 2024
+# ============================================================
+
+books:
+  # - title: The Nickel Boys
+  #   author: Colson Whitehead
+  #   isbn: "9780385537070"     # optional: makes library matching exact
+  #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
+
+movies:
+  # - title: The Substance
+  #   year: 2024
+
+sources:
+  denton-library:
+    kind: bibliocommons
+    library: denton              # https://denton.bibliocommons.com
+    formats: [BK, EBOOK, AB, AUDIOBOOK]
+
+  cloudlibrary:
+    kind: cloudlibrary
+    # Your cloudLibrary id is in the URL you use to log in:
+    # https://ebook.yourcloudlibrary.com/library/<THIS PART>/...
+    library: denton
+
+  texas-theatre:
+    kind: pages
+    pages:
+      - name: Texas Theatre
+        url: https://thetexastheatre.com/
+
+  cinemark:
+    kind: cinemark
+    theatres:
+      # Verify each URL by loading it in a browser, then run:
+      #   python -m tracker probe --source cinemark
+      - name: Cinemark Denton 14
+        url: https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14
+
+  amc:
+    kind: amc
+    theatres:
+      - name: AMC Stonebriar 24
+        url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes
+
+  # Alamo has the cleanest showtime feed in the metro (one JSON request
+  # covers every DFW location) — flip enabled to true to include it.
+  alamo:
+    kind: drafthouse
+    market: dfw
+    enabled: false
+
+state_file: state/state.json
