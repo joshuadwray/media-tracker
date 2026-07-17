@@ -40,7 +40,20 @@ class CloudLibrarySource(Source):
         lib = self.library_id
         q = quote(query)
         return [
-            {   # current web-patron search API
+            {   # current web patron (Remix app): route loaders return JSON
+                # when asked with _data=<route id>. NOTE: format= must be
+                # present but EMPTY (a value like "all" returns 0 results),
+                # and the library id is case-sensitive ("Denton", not
+                # "denton" — wrong case redirects to the marketing site).
+                # The first request 302s to itself to set a session cookie;
+                # requests.Session follows it and keeps the cookie.
+                "method": "GET",
+                "url": f"https://ebook.yourcloudlibrary.com/library/{lib}"
+                       f"/search?title={q}&format=&available=any&language="
+                       f"&sort=relevance&segment=posts&orderBy=relevence"
+                       f"&owned=any&_data=routes%2Flibrary.%24name.search",
+            },
+            {   # legacy web-patron search API (404 as of 2026-07)
                 "method": "GET",
                 "url": f"https://ebook.yourcloudlibrary.com/uisvc/{lib}"
                        f"/Search/CatalogSearch?media=all&src=lib&segment=posts"
@@ -91,6 +104,11 @@ class CloudLibrarySource(Source):
                 if ep["method"] == "GET":
                     resp = http.get(sess, ep["url"],
                                     headers={"Accept": "application/json"})
+                    if resp.status_code == 204:
+                        # Remix answers a data request with 204 + Set-Cookie
+                        # when it wants to redirect; retry with the cookie.
+                        resp = http.get(sess, ep["url"],
+                                        headers={"Accept": "application/json"})
                 else:
                     resp = http.post_json(sess, ep["url"], ep["payload"])
                 transcript.append(
@@ -151,7 +169,8 @@ def _parse_items(data: Any) -> list[dict[str, Any]]:
             )):
                 items.append({
                     "title": title,
-                    "format": node.get("MediaType") or node.get("mediaType"),
+                    "format": node.get("productFormDescription")
+                              or node.get("MediaType") or node.get("mediaType"),
                     "available": _availability(node),
                     "raw": {k: node[k] for k in list(node)[:12]},
                 })
@@ -170,7 +189,8 @@ def _availability(node: dict) -> bool | None:
     for key in ("IsAvailable", "isAvailable", "Available", "available"):
         if key in node:
             return bool(node[key])
-    for key in ("CurrentAvailable", "currentAvailable", "AvailableCopies"):
+    for key in ("CurrentAvailable", "currentAvailable", "AvailableCopies",
+                "currentlyAvailable"):
         if key in node:
             try:
                 return int(node[key]) > 0

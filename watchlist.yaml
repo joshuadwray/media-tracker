@@ -26,7 +26,8 @@ sources:
     kind: cloudlibrary
     # Your cloudLibrary id is in the URL you use to log in:
     # https://ebook.yourcloudlibrary.com/library/<THIS PART>/...
-    library: denton
+    # Case-sensitive! Wrong case redirects to the marketing site.
+    library: Denton
 
   texas-theatre:
     kind: pages
