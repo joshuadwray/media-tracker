@@ -162,17 +162,17 @@ async function startAdd() {
   try { cands = (await api('/api/search/books?q=' + encodeURIComponent(title))).candidates; }
   catch (e) { toast('search failed: ' + e.message); }
   const asTyped = `<div class="card cand" onclick='addBook(null)'>
-      <strong>Add exactly as typed:</strong> ${esc(title)}
-      <div class="muted">fuzzy matching will apply</div></div>`;
-  $('candidates').innerHTML = (cands.length
-    ? '<div class="muted" style="margin:6px 0">Pick the record you mean:</div>' +
+      <strong>Watch for "${esc(title)}"</strong>
+      <div class="muted">Doesn't need to be in a catalog yet — you'll be
+      notified when it appears anywhere (title matching).</div></div>`;
+  $('candidates').innerHTML = asTyped + (cands.length
+    ? '<div class="muted" style="margin:6px 0">…or pin an exact catalog record (precise matching):</div>' +
       cands.map((c, i) => `<div class="card cand" onclick='addBook(${i})'>
         <strong>${esc(c.title)}</strong>
         ${c.author ? '— ' + esc(c.author) : ''}
         <span class="pill">${esc(c.format || '?')}</span>
         <span class="pill">${esc(c.source)}</span></div>`).join('')
-    : '<div class="muted" style="margin:6px 0">No catalog records found (source may be unreachable).</div>')
-    + asTyped;
+    : '<div class="muted" style="margin:6px 0">No catalog records found yet (or source unreachable) — watching is exactly right for that.</div>');
   window._cands = cands;
 }
 

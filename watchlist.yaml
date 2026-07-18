@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: The Buffalo Hunter Hunter
+    author: Jones, Stephen Graham
+    bib_id: S127C1958624
   - title: The Tainted Cup
     author: Robert Jackson Bennett
     bib_id: "S127C1826377"   # Denton print record; no isbn on purpose so
@@ -27,7 +30,10 @@ sources:
   denton-library:
     kind: bibliocommons
     library: denton              # https://denton.bibliocommons.com
-    formats: [BK, EBOOK, AB, AUDIOBOOK]
+    # EBOOK/AUDIOBOOK excluded — Denton's digital side is cloudLibrary,
+    # which we watch separately, so those would be duplicate notifs.
+    # AB = audiobook on CD (physical), which cloudLibrary doesn't cover.
+    formats: [BK, AB]
 
   cloudlibrary:
     kind: cloudlibrary

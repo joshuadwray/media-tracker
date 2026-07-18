@@ -22,6 +22,19 @@ from ..matching import titles_match
 from ..models import Observation
 from .base import Source, register
 
+# BiblioCommons format codes -> reader-friendly names for notifications.
+FORMAT_NAMES = {
+    "BK": "print book",
+    "PAPERBACK": "print book",
+    "LPRINT": "large print book",
+    "EBOOK": "ebook",
+    "AB": "audiobook (CD)",
+    "AUDIOBOOK": "audiobook",
+    "MUSIC_CD": "music CD",
+    "DVD": "DVD",
+    "BLURAY": "Blu-ray",
+}
+
 @register
 class BiblioCommonsSource(Source):
     kind = "bibliocommons"
@@ -70,20 +83,21 @@ class BiblioCommonsSource(Source):
                 if wanted_formats and fmt not in wanted_formats and "?" != fmt:
                     continue
                 status = (bib.get("status") or "unknown").upper()
-                avail = bib.get("availableCopies")
-                copies = f", {avail} available" if avail is not None else ""
+                friendly = FORMAT_NAMES.get(fmt, fmt.lower())
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
-                    summary=f"{fmt} {status.lower()}{copies} at {self.subdomain} library",
+                    summary=f"{friendly} in {self.subdomain} library catalog",
                     url=url,
                     # Presence in the catalog is the hit — the user is happy
                     # to join hold queues, so availability isn't the bar and
                     # status/copy-count changes don't re-notify.
                     positive=True,
-                    event=f"{fmt} in catalog",
-                    detail={"format": fmt, "status": status, "found_title": title},
+                    event=f"{friendly} in catalog",
+                    detail={"format": fmt, "status": status,
+                            "available_copies": bib.get("availableCopies"),
+                            "found_title": title},
                 ))
         return observations
 

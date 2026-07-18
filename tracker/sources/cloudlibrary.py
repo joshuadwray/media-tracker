@@ -78,17 +78,11 @@ class CloudLibrarySource(Source):
                 if not book.isbn and not titles_match(book.title, title):
                     continue
                 fmt = item.get("format") or "ebook/audio"
-                available = item.get("available")
-                status = (
-                    "available now" if available
-                    else "in catalog (all copies out)" if available is False
-                    else "in catalog"
-                )
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
-                    summary=f"{fmt} {status} on cloudLibrary ({self.library_id})",
+                    summary=f"{fmt} in cloudLibrary catalog ({self.library_id})",
                     url=f"https://ebook.yourcloudlibrary.com/library/{self.library_id}"
                         f"/search?query={query.replace(' ', '%20')}",
                     positive=True,  # in catalog = hit; hold queues are fine
@@ -168,10 +162,18 @@ def _parse_items(data: Any) -> list[dict[str, Any]]:
             if title and any(k in node for k in (
                 "Authors", "authors", "ISBN", "isbn", "MediaType", "mediaType", "Id", "id"
             )):
+                # Current API doesn't name the format, but audiobooks carry a
+                # duration and ebooks a nonzero epubFormat.
+                fmt = (node.get("productFormDescription")
+                       or node.get("MediaType") or node.get("mediaType"))
+                if not fmt:
+                    if node.get("duration"):
+                        fmt = "audiobook"
+                    elif node.get("epubFormat"):
+                        fmt = "ebook"
                 items.append({
                     "title": title,
-                    "format": node.get("productFormDescription")
-                              or node.get("MediaType") or node.get("mediaType"),
+                    "format": fmt,
                     "available": _availability(node),
                     "raw": {k: node[k] for k in list(node)[:12]},
                 })

@@ -47,7 +47,8 @@ def send_push(new_observations: list[Observation]) -> None:
             requests.post(url, data=obs.summary.encode(), headers=headers,
                           timeout=TIMEOUT).raise_for_status()
     else:
-        lines = [f"• {o.item_label}: {o.summary}" for o in new_observations]
+        ordered = sorted(new_observations, key=lambda o: o.item_label.lower())
+        lines = [f"• {o.item_label}: {o.summary}" for o in ordered]
         headers = dict(headers_base)
         headers["Title"] = f"{len(new_observations)} new watchlist sightings"
         headers["Tags"] = "mag"

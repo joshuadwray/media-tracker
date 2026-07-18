@@ -15,7 +15,7 @@ def build_report(config: Config, results: list[SourceResult],
 
     lines.append(f"## New sightings ({len(new)})")
     if new:
-        for obs in new:
+        for obs in sorted(new, key=lambda o: o.item_label.lower()):
             link = f" — [link]({obs.url})" if obs.url else ""
             lines.append(f"- **{obs.item_label}**: {obs.summary}{link}")
     else:
