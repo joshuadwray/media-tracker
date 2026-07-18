@@ -6,8 +6,6 @@ ranked: true
 items:
   - title: The Antidote
     author: Karen Russell
-    # OL indexes this as "Antidote" (no "The") so the lookup whiffs
-    cover: https://covers.openlibrary.org/b/id/14853350-L.jpg
   - title: The Loneliness of Sonia and Sunny
     author: Kiran Desai
   - title: We Do Not Part
@@ -103,7 +101,7 @@ items:
   - title: Big Chief
     author: Jon Hickey
   - title: The Usual Desire to Kill
-    author: Camille Bordas
+    author: Camilla Barnes
   - title: Good Girl
     author: Aria Aber
   - title: Life in Three Dimensions
@@ -113,7 +111,7 @@ items:
   - title: Wild Dark Shore
     author: Charlotte McConaghy
   - title: The Ferryman and His Wife
-    author: Alison McCullough
+    author: Frode Grytten
   - title: Bury Our Bones in the Midnight Soil
     author: V. E. Schwab
   - title: Midnight in Soap Lake

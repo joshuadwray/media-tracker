@@ -10,10 +10,14 @@ rank; a text editor is the ranking UX.
 Cover rules:
   - a manual `cover:` URL on an item always wins
   - otherwise the cache is consulted (hand-editable; delete an entry to
-    force a fresh lookup, or set its "cover_id" to fix a bad match)
-  - otherwise one Open Library search per item (polite UA, spaced out);
-    the result — including "no cover found" — is cached
+    force a fresh lookup, or set its "cover_url" to fix a bad match)
+  - otherwise iTunes/Apple Books search (US store -> English editions,
+    consistent high-res artwork), then Open Library as fallback; the
+    result — including "no cover found" — is cached
   - no cover -> typographic tile, never a broken image
+
+Both lookups verify the author surname against the result, so a wrong
+author in the YAML yields a typographic tile, never a wrong-book cover.
 """
 from __future__ import annotations
 
@@ -33,8 +37,11 @@ CACHE_PATH = LISTS_DIR / "covers-cache.json"
 
 SEARCH_URL = "https://openlibrary.org/search.json"
 COVER_URL = "https://covers.openlibrary.org/b/id/{}-L.jpg"
+ITUNES_URL = "https://itunes.apple.com/search"
+ARTWORK_SIZE = "600x600bb"  # mzstatic keeps aspect ratio within the box
 USER_AGENT = "media-tracker-lists (personal project)"
-REQUEST_SPACING = 0.25  # seconds between Open Library hits
+OL_SPACING = 0.25  # seconds between Open Library hits
+ITUNES_SPACING = 3.0  # Apple's informal Search API limit is ~20/min
 RECENT_YEAR = 2023  # prefer editions at least this new
 
 
@@ -106,12 +113,55 @@ def resolve_cover(item: ListItem, cache: dict,
             return None
         entry = _lookup(session, item.title, item.author, log=log)
         cache[item.cache_key] = entry
-        time.sleep(REQUEST_SPACING)
-    cover_id = entry.get("cover_id")
+    return _entry_url(entry)
+
+
+def _entry_url(entry: dict) -> str | None:
+    if entry.get("cover_url"):
+        return entry["cover_url"]
+    cover_id = entry.get("cover_id")  # older cache entries
     return COVER_URL.format(cover_id) if cover_id else None
 
 
+def _author_ok(author: str, *names: str) -> bool:
+    """Surname guard: never return a cover credited to a different author."""
+    if not author:
+        return True
+    surname = author.split()[-1].lower()
+    return any(surname in (n or "").lower() for n in names)
+
+
 def _lookup(session, title: str, author: str, log=None) -> dict:
+    entry = (_itunes_lookup(session, title, author)
+             or _openlibrary_lookup(session, title, author)
+             or {"cover_url": None, "source": None, "matched": None})
+    if log:
+        status = entry["source"] or "no cover"
+        log(f"  lookup: {title!r} -> {status}")
+    return entry
+
+
+def _itunes_lookup(session, title: str, author: str) -> dict | None:
+    resp = session.get(ITUNES_URL,
+                       params={"term": f"{title} {author}".strip(),
+                               "media": "ebook", "limit": 5, "country": "US"},
+                       timeout=30)
+    resp.raise_for_status()
+    results = resp.json().get("results") or []
+    time.sleep(ITUNES_SPACING)
+    for hit in results:
+        track = hit.get("trackName") or ""
+        artist = hit.get("artistName") or ""
+        art = hit.get("artworkUrl100")
+        if (art and title.lower() in track.lower()
+                and _author_ok(author, artist)):
+            return {"cover_url": art.replace("100x100bb", ARTWORK_SIZE),
+                    "source": "itunes",
+                    "matched": f"{track} — {artist}"}
+    return None
+
+
+def _openlibrary_lookup(session, title: str, author: str) -> dict | None:
     params = {"title": title, "limit": 20,
               "fields": "title,author_name,first_publish_year,cover_i"}
     if author:
@@ -119,24 +169,23 @@ def _lookup(session, title: str, author: str, log=None) -> dict:
     resp = session.get(SEARCH_URL, params=params, timeout=30)
     resp.raise_for_status()
     docs = resp.json().get("docs") or []
-    with_cover = [d for d in docs if d.get("cover_i")]
+    time.sleep(OL_SPACING)
+    with_cover = [d for d in docs
+                  if d.get("cover_i")
+                  and _author_ok(author, *(d.get("author_name") or []))]
     # Prefer a recent edition's cover; fall back to any cover. When an
     # author was given we do NOT retry title-only: a wrong-book cover is
     # worse than a typographic tile.
     pick = next((d for d in with_cover
                  if (d.get("first_publish_year") or 0) >= RECENT_YEAR),
                 None) or (with_cover[0] if with_cover else None)
-    if pick:
-        entry = {"cover_id": pick["cover_i"],
-                 "matched": f"{pick.get('title')} — "
-                            f"{(pick.get('author_name') or ['?'])[0]} "
-                            f"({pick.get('first_publish_year')})"}
-    else:
-        entry = {"cover_id": None, "matched": None}
-    if log:
-        status = "ok" if pick else "no cover"
-        log(f"  lookup: {title!r} -> {status}")
-    return entry
+    if not pick:
+        return None
+    return {"cover_url": COVER_URL.format(pick["cover_i"]),
+            "source": "openlibrary",
+            "matched": f"{pick.get('title')} — "
+                       f"{(pick.get('author_name') or ['?'])[0]} "
+                       f"({pick.get('first_publish_year')})"}
 
 
 # ------------------------------------------------------------------ html

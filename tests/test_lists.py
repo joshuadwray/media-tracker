@@ -55,6 +55,12 @@ def test_resolve_cover_manual_override_wins():
 
 def test_resolve_cover_cache_hit_no_network():
     item = ListItem("We Do Not Part", "Han Kang")
+    cache = {item.cache_key: {"cover_url": "https://example.com/wdnp.jpg"}}
+    assert resolve_cover(item, cache, _NoNetwork()) == "https://example.com/wdnp.jpg"
+
+
+def test_resolve_cover_old_style_cache_entry_still_works():
+    item = ListItem("We Do Not Part", "Han Kang")
     cache = {item.cache_key: {"cover_id": 14835467}}
     assert resolve_cover(item, cache, _NoNetwork()) == COVER_URL.format(14835467)
 
