@@ -48,6 +48,16 @@ sources:
       - name: Texas Theatre
         url: https://thetexastheatre.com/
 
+  # Angelika Dallas: parked. The site is a client-rendered React app (page
+  # text is just "Movie Information | Tickets | Showtimes") and its backend
+  # (production-api.readingcinemas.com) requires a bearer token behind a
+  # reCAPTCHA flow — no clean, polite way to watch it as of 2026-07.
+  # angelika:
+  #   kind: pages
+  #   pages:
+  #     - name: Angelika Dallas
+  #       url: https://angelikafilmcenter.com/dallas
+
   cinemark:
     kind: cinemark
     theatres:
@@ -55,12 +65,20 @@ sources:
       #   python -m tracker probe --source cinemark
       - name: Cinemark Denton 14
         url: https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14
+      - name: Cinemark West Plano
+        url: https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd
+      - name: Cinemark Dallas IMAX
+        url: https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax
 
   amc:
     kind: amc
     theatres:
       - name: AMC Stonebriar 24
         url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes
+      - name: AMC Grapevine Mills 30
+        url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes
+      - name: AMC Northpark 15
+        url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes
 
   # Alamo has the cleanest showtime feed in the metro (one JSON request
   # covers every DFW location) — flip enabled to true to include it.

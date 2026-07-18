@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Watchlist">
+<title>add to watchlist</title>
+<style>
+:root { color-scheme: light dark;
+  --line: rgba(128,128,128,.35); --mut: rgba(128,128,128,.85);
+  --ok: #2e7d32; --err: #c62828; --accent: #1565c0; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif; margin: 0 auto; max-width: 480px; padding: 20px 16px;
+  line-height: 1.45; }
+h1 { font-size: 1.25rem; margin: 0 0 16px; }
+button { font: inherit; padding: 12px 16px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent);
+  color: #fff; width: 100%; font-size: 1.05rem; margin-top: 12px; }
+button:disabled { opacity: .5; }
+input { font: inherit; padding: 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; width: 100%;
+  margin-top: 8px; }
+.tabs { display: flex; gap: 8px; }
+.tabs button { flex: 1; }
+.tabs button.active { background: var(--accent); color: #fff;
+  border-color: var(--accent); }
+.muted { color: var(--mut); font-size: .88rem; }
+#status { margin-top: 14px; min-height: 1.4em; }
+#status.ok { color: var(--ok); } #status.err { color: var(--err); }
+details { margin-top: 26px; }
+summary { color: var(--mut); cursor: pointer; }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>&#128218;&#127916; add to watchlist</h1>
+
+<div class="tabs">
+  <button id="tab-book" class="active" onclick="setKind('book')">Book</button>
+  <button id="tab-movie" onclick="setKind('movie')">Movie</button>
+</div>
+<input id="title" placeholder="title" autocomplete="off"
+       onkeydown="if(event.key==='Enter')go()">
+<input id="year" placeholder="year (optional)" inputmode="numeric"
+       style="display:none">
+<button class="primary" id="goBtn" onclick="go()">Add</button>
+<div id="status" class="muted"></div>
+<div class="muted" style="margin-top:6px">
+  Books are verified against the live library catalogs in the background;
+  you&rsquo;ll get an ntfy push in a minute or two confirming what was added
+  (and any immediate sightings).
+</div>
+
+<details id="setup">
+  <summary>token setup</summary>
+  <p class="muted">This page triggers a GitHub Actions workflow, which needs a
+  <a href="https://github.com/settings/personal-access-tokens/new">fine-grained
+  personal access token</a>: repository access = only
+  <strong>media-tracker</strong>, permissions = <strong>Actions:
+  read&nbsp;and&nbsp;write</strong> (nothing else). It stays in this
+  browser&rsquo;s local storage.</p>
+  <input id="pat" placeholder="github_pat_..." autocomplete="off">
+  <button onclick="saveTok()" style="margin-top:8px">Save token</button>
+  <button onclick="clearTok()" style="margin-top:8px">Clear</button>
+</details>
+
+<script>
+const REPO = 'joshuadwray/media-tracker';
+const WORKFLOW = 'add-item.yml';
+let kind = 'book';
+const $ = id => document.getElementById(id);
+
+function setKind(k) {
+  kind = k;
+  $('tab-book').classList.toggle('active', k === 'book');
+  $('tab-movie').classList.toggle('active', k === 'movie');
+  $('year').style.display = k === 'movie' ? '' : 'none';
+}
+
+function saveTok() {
+  const t = $('pat').value.trim();
+  if (t) { localStorage.setItem('mt_pat', t); $('pat').value = '';
+    status('token saved', 'ok'); $('setup').open = false; }
+}
+function clearTok() { localStorage.removeItem('mt_pat'); status('token cleared'); }
+
+function status(msg, cls) {
+  const s = $('status'); s.textContent = msg;
+  s.className = cls || 'muted';
+}
+
+async function go() {
+  const title = $('title').value.trim();
+  if (!title) return;
+  const token = localStorage.getItem('mt_pat');
+  if (!token) { status('no token yet — open "token setup" below', 'err');
+    $('setup').open = true; return; }
+  const inputs = { kind, title };
+  const year = $('year').value.trim();
+  if (kind === 'movie' && year) inputs.year = year;
+
+  $('goBtn').disabled = true;
+  status('sending\u2026');
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,
+      { method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token,
+                   'Accept': 'application/vnd.github+json',
+                   'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: 'main', inputs }) });
+    if (r.status === 204) {
+      status(`sent \u2014 "${title}" is being verified; watch for the ntfy push`, 'ok');
+      $('title').value = ''; $('year').value = '';
+    } else if (r.status === 401) {
+      status('token rejected (expired?) \u2014 make a new one in token setup', 'err');
+    } else {
+      const data = await r.json().catch(() => ({}));
+      status(`GitHub said ${r.status}: ${data.message || 'unknown error'}`, 'err');
+    }
+  } catch (e) {
+    status('network error: ' + e.message, 'err');
+  }
+  $('goBtn').disabled = false;
+}
+</script>
+</body>
+</html>

@@ -44,6 +44,10 @@ def main(argv: list[str] | None = None) -> int:
     p_add.add_argument("--isbn")
     p_add.add_argument("--yes", action="store_true",
                        help="skip the interactive pick; add exactly as typed")
+    p_add.add_argument("--auto", action="store_true",
+                       help="non-interactive: pin the best matching catalog "
+                            "record if unambiguous, else add as typed; "
+                            "sends an ntfy confirmation")
 
     p_probe = sub.add_parser("probe", help="dump raw source responses for "
                                            "endpoint/selector debugging")
@@ -98,7 +102,8 @@ def cmd_check(config: Config, args: argparse.Namespace) -> int:
 
 def cmd_add(config: Config, args: argparse.Namespace) -> int:
     if args.kind == "book":
-        entry = _pick_book(config, args)
+        entry = _auto_pick_book(config, args) if args.auto \
+            else _pick_book(config, args)
         section = "books"
     else:
         entry = {"title": args.title}
@@ -106,11 +111,69 @@ def cmd_add(config: Config, args: argparse.Namespace) -> int:
             entry["year"] = args.year
         section = "movies"
 
+    if args.auto and _already_watched(config, args.kind,
+                                      entry["title"], args.title):
+        msg = f"already on the watchlist: {entry['title']}"
+        print(msg)
+        _send_note("watchlist add", msg, tags="information_source")
+        return 0
+
     watchlist_path = Path(args.watchlist) if args.watchlist else \
         Path(__file__).resolve().parent.parent / "watchlist.yaml"
     append_entry(watchlist_path, section, entry)
     print(f"added to {section}: {entry}")
+    if args.auto:
+        if entry.get("bib_id") or entry.get("isbn"):
+            how = "pinned to an exact catalog record"
+        elif args.kind == "book":
+            how = "no unambiguous catalog match — watching by title"
+        else:
+            how = "watching by title"
+        _send_note("watchlist add", f"added {args.kind}: {entry['title']} ({how})")
     return 0
+
+
+def _already_watched(config: Config, kind: str,
+                     *titles: str) -> bool:
+    from .models import normalize_key
+    existing = {b.key for b in config.books} | {m.key for m in config.movies}
+    return any(f"{kind}:{normalize_key(t)}" in existing for t in titles)
+
+
+def _auto_pick_book(config: Config, args: argparse.Namespace) -> dict:
+    """Non-interactive pick: pin a BiblioCommons record when the title
+    matches unambiguously; otherwise add as typed (fuzzy title matching
+    still catches it everywhere, including cloudLibrary)."""
+    from .matching import titles_match
+
+    as_typed = {"title": args.title}
+    if args.author:
+        as_typed["author"] = args.author
+    if args.isbn:
+        as_typed["isbn"] = args.isbn
+
+    candidates = search_book_candidates(config, args.title, log=print)
+    matches = [c for c in candidates
+               if c.get("title") and titles_match(args.title, c["title"])]
+    # Prefer the print record's bib_id (the manual convention: bib_id pins
+    # the library record, no isbn so cloudLibrary title-matches every format).
+    pinned = next((c for c in matches if c.get("bib_id")
+                   and (c.get("format") or "").upper() in ("BK", "PAPERBACK")),
+                  None) or next((c for c in matches if c.get("bib_id")), None)
+    if not pinned:
+        return as_typed
+    entry = candidate_to_entry(pinned, isbn_override=args.isbn)
+    if not args.isbn:
+        entry.pop("isbn", None)
+    return entry
+
+
+def _send_note(title: str, message: str, tags: str = "heavy_plus_sign") -> None:
+    from . import notify
+    try:
+        notify.send_note(title, message, tags=tags)
+    except Exception as exc:  # noqa: BLE001 — the add itself succeeded
+        print(f"(ntfy confirmation failed: {exc})", file=sys.stderr)
 
 
 def _pick_book(config: Config, args: argparse.Namespace) -> dict:

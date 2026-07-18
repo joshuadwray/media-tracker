@@ -1,0 +1,82 @@
+# Mobile add flow: triggered by docs/add.html (GitHub Pages) via the
+# workflow_dispatch API. Verifies books against live catalogs, commits the
+# watchlist change, then runs an immediate check so the ntfy confirmation
+# and any sightings land on your phone within a minute or two.
+
+name: add-item
+run-name: "add ${{ inputs.kind }}: ${{ inputs.title }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: what kind of item
+        required: true
+        type: choice
+        options: [book, movie]
+      title:
+        description: title (as best you know it)
+        required: true
+        type: string
+      year:
+        description: release year (movies only, optional)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+# Same group as the scheduled check so an add never races a run that
+# commits state back.
+concurrency:
+  group: media-tracker
+  cancel-in-progress: false
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    env:
+      KIND: ${{ inputs.kind }}
+      TITLE: ${{ inputs.title }}
+      YEAR: ${{ inputs.year }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Add item (verified against live catalogs)
+        run: |
+          args=(add "$KIND" "$TITLE" --auto)
+          [ -n "$YEAR" ] && args+=(--year "$YEAR")
+          python -m tracker "${args[@]}"
+
+      - name: Commit watchlist
+        run: |
+          git config user.name "media-tracker bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add watchlist.yaml
+          git diff --cached --quiet || git commit -m "add $KIND: $TITLE (mobile)"
+          git push
+
+      - name: Run immediate check
+        run: python -m tracker check
+
+      - name: Commit updated state
+        run: |
+          git add state/ docs/
+          git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+          git push
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s \
+            -H "Title: watchlist add failed" -H "Tags: warning" \
+            -d "add $KIND: $TITLE failed — check the Actions log" \
+            "https://ntfy.sh/$NTFY_TOPIC" > /dev/null

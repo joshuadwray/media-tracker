@@ -28,6 +28,18 @@ def push_configured() -> bool:
     return bool(env("NTFY_TOPIC"))
 
 
+def send_note(title: str, message: str, tags: str = "heavy_plus_sign") -> None:
+    """One-off informational push (e.g. add-item confirmations)."""
+    if not push_configured():
+        return
+    server = (env("NTFY_SERVER", "https://ntfy.sh") or "").rstrip("/")
+    headers = {"Title": title.encode("ascii", "ignore").decode(), "Tags": tags}
+    if env("NTFY_TOKEN"):
+        headers["Authorization"] = f"Bearer {env('NTFY_TOKEN')}"
+    requests.post(f"{server}/{env('NTFY_TOPIC')}", data=message.encode(),
+                  headers=headers, timeout=TIMEOUT).raise_for_status()
+
+
 def send_push(new_observations: list[Observation]) -> None:
     if not new_observations or not push_configured():
         return
