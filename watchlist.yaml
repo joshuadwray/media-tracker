@@ -7,25 +7,12 @@
 # ============================================================
 
 books:
-  - title: Yesteryear
-    author: Burke, Caro Claire
-    bib_id: S127C1976249
-  - title: The Buffalo Hunter Hunter
-    author: Jones, Stephen Graham
-    bib_id: S127C1958624
-  - title: The Tainted Cup
-    author: Robert Jackson Bennett
-    bib_id: "S127C1826377"   # Denton print record; no isbn on purpose so
-                             # cloudLibrary matches ebook AND audiobook by title
   # - title: The Nickel Boys
   #   author: Colson Whitehead
   #   isbn: "9780385537070"     # optional: makes library matching exact
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
-  - title: hadestown
-  - title: tony
-    year: 2026
   # - title: The Substance
   #   year: 2024
 
