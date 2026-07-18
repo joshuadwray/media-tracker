@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Yesteryear
+    author: Burke, Caro Claire
+    bib_id: S127C1976249
   - title: The Buffalo Hunter Hunter
     author: Jones, Stephen Graham
     bib_id: S127C1958624
