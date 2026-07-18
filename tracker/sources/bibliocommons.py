@@ -22,9 +22,6 @@ from ..matching import titles_match
 from ..models import Observation
 from .base import Source, register
 
-POSITIVE_STATUSES = {"AVAILABLE", "IN", "ON_SHELF"}
-
-
 @register
 class BiblioCommonsSource(Source):
     kind = "bibliocommons"
@@ -81,7 +78,11 @@ class BiblioCommonsSource(Source):
                     item_label=str(book),
                     summary=f"{fmt} {status.lower()}{copies} at {self.subdomain} library",
                     url=url,
-                    positive=status in POSITIVE_STATUSES or (avail or 0) > 0,
+                    # Presence in the catalog is the hit — the user is happy
+                    # to join hold queues, so availability isn't the bar and
+                    # status/copy-count changes don't re-notify.
+                    positive=True,
+                    event=f"{fmt} in catalog",
                     detail={"format": fmt, "status": status, "found_title": title},
                 ))
         return observations

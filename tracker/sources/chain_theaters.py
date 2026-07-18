@@ -39,6 +39,13 @@ _LDJSON_RE = re.compile(
 # date. Entries without showtimes are site-wide carousels, not this theatre.
 _JSON_MODEL_RE = re.compile(r'data-json-model="([^"]+)"')
 
+# Cinemark "Advance Tickets" cards: on-sale-now special events with no
+# showtimes on the selected date. Verified theatre-specific (different
+# theatres list different events). Title rides in an sr-only span.
+_ADVANCE_RE = re.compile(
+    r'card__movie--advanced-tickets.{0,2000}?sr-only">([^<]+)<', re.DOTALL
+)
+
 # AMC's showtimes page is Next.js App Router: the data rides in RSC "flight"
 # chunks (self.__next_f.push). Inside the decoded blob, a movie-filter
 # dropdown maps slug -> title, and each showtime object carries
@@ -93,11 +100,13 @@ class ChainTheaterSource(Source):
                             continue
                         dates = found.get("dates")
                         when = f" ({', '.join(sorted(dates)[:4])})" if dates else ""
+                        verb = ("advance tickets on sale at"
+                                if found.get("advance") else "playing at")
                         observations.append(Observation(
                             source=self.source_id,
                             item_key=movie.key,
                             item_label=str(movie),
-                            summary=f'"{found["title"]}" playing at '
+                            summary=f'"{found["title"]}" {verb} '
                                     f'{theatre["name"]}{when}',
                             url=theatre["url"],
                             positive=True,
@@ -178,8 +187,14 @@ def _extract_movies(html: str) -> Iterator[dict[str, Any]]:
             if isinstance(start, str) and start:
                 dates.add(start[:10])
     _flight_movies(html, found)
+    advance: set[str] = set()
+    for m in _ADVANCE_RE.finditer(html):
+        title = unescape(m.group(1)).strip()
+        if title and title not in found:
+            advance.add(title)
+            found.setdefault(title, set())
     for title, dates in found.items():
-        yield {"title": title, "dates": dates}
+        yield {"title": title, "dates": dates, "advance": title in advance}
 
 
 def _flight_movies(html: str, found: dict[str, set[str]]) -> None:

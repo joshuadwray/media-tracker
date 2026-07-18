@@ -91,7 +91,8 @@ class CloudLibrarySource(Source):
                     summary=f"{fmt} {status} on cloudLibrary ({self.library_id})",
                     url=f"https://ebook.yourcloudlibrary.com/library/{self.library_id}"
                         f"/search?query={query.replace(' ', '%20')}",
-                    positive=bool(available) or available is None,
+                    positive=True,  # in catalog = hit; hold queues are fine
+                    event=f"{fmt} in catalog",  # availability flips don't re-notify
                     detail={"found_title": title, "raw": item.get("raw", {})},
                 ))
         return observations

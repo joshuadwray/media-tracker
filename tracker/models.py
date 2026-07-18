@@ -50,10 +50,14 @@ class Observation:
     url: Optional[str] = None
     detail: dict = field(default_factory=dict)  # source-specific extras
     positive: bool = True  # False = informational (e.g. "on order", "all copies out")
+    event: Optional[str] = None  # stable identity for dedup; defaults to summary.
+                                 # Set this when the summary contains volatile
+                                 # detail (copy counts, statuses) that shouldn't
+                                 # re-trigger a notification when it changes.
 
     @property
     def fingerprint(self) -> str:
-        return f"{self.source}|{self.item_key}|{self.summary}"
+        return f"{self.source}|{self.item_key}|{self.event or self.summary}"
 
 
 @dataclass
