@@ -325,12 +325,14 @@ async function save() {
     } else if (r.status === 409 || r.status === 422) {
       status('conflict: the file changed since you loaded it \u2014 ' +
              'copy your edits, re-pick the list, redo', 'err');
-    } else if (r.status === 401 || r.status === 403) {
-      status('token rejected \u2014 needs Contents read & write on this repo',
-             'err');
     } else {
       const data = await r.json().catch(() => ({}));
-      status(`GitHub said ${r.status}: ${data.message || 'unknown error'}`,
+      let hint = '';
+      if (r.status === 401) hint = ' (bad/expired token?)';
+      // fine-grained PATs get 403/404 when the permission is missing
+      if (r.status === 403 || r.status === 404)
+        hint = ' (token likely lacks Contents read & write on this repo)';
+      status(`GitHub said ${r.status}: ${data.message || 'no detail'}${hint}`,
              'err');
     }
   } catch (e) { status('network error: ' + e.message, 'err'); }
