@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Reading">
+<title>reading log</title>
+<style>
+:root { color-scheme: light dark;
+  --line: rgba(128,128,128,.35); --mut: rgba(128,128,128,.85);
+  --ok: #2e7d32; --err: #c62828; --accent: #1565c0; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif; margin: 0 auto; max-width: 560px; padding: 20px 16px;
+  line-height: 1.45; }
+h1 { font-size: 1.25rem; margin: 0 0 12px; }
+h2 { font-size: .95rem; margin: 22px 0 8px; text-transform: uppercase;
+  letter-spacing: .04em; opacity: .65; }
+button { font: inherit; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent);
+  color: #fff; width: 100%; font-size: 1.05rem; margin-top: 12px; }
+button:disabled { opacity: .5; }
+button.danger { color: var(--err); }
+input, select { font: inherit; padding: 10px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; width: 100%; }
+.book { border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px; margin-bottom: 10px; }
+.book .t { font-weight: 600; }
+.book .prog { color: var(--mut); font-size: .88rem; margin: 2px 0 8px; }
+.bar { height: 6px; border-radius: 3px; background: rgba(128,128,128,.2);
+  margin-bottom: 10px; overflow: hidden; }
+.bar div { height: 100%; background: var(--accent); }
+.logrow { display: flex; gap: 8px; }
+.logrow input { width: 6.5em; text-align: center; }
+.logrow button { white-space: nowrap; }
+.finrow { display: flex; gap: 8px; margin-top: 8px; }
+.finrow select { flex: 1; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.grid2 input { width: 100%; }
+.stack > * { margin-bottom: 8px; }
+#status { margin-top: 12px; min-height: 1.4em; }
+#status.ok { color: var(--ok); } #status.err { color: var(--err); }
+.muted { color: var(--mut); font-size: .88rem; }
+details { margin-top: 26px; }
+summary { color: var(--mut); cursor: pointer; }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>&#128214; reading log</h1>
+
+<h2>Currently reading</h2>
+<div id="reading"></div>
+
+<h2>Start a book</h2>
+<div class="stack">
+  <input id="nt" placeholder="title" autocomplete="off">
+  <div class="grid2">
+    <input id="na" placeholder="author" autocomplete="off">
+    <input id="np" placeholder="pages (optional)" inputmode="numeric">
+  </div>
+  <button onclick="startBook()">start reading</button>
+</div>
+
+<h2>Settings</h2>
+<div class="grid2">
+  <input id="goal" inputmode="numeric" onchange="setGoal()">
+  <div class="muted" style="align-self:center">pages/day goal</div>
+</div>
+
+<button class="primary" id="saveBtn" onclick="save()" disabled>
+  Save &amp; publish</button>
+<div id="status" class="muted"></div>
+<div class="muted" style="margin-top:6px">
+  Saving commits reading/log.json; a GitHub Action then rebuilds the
+  <a href="./">calendar</a> and book pages (&#8776;2 min).
+  <a href="../lists/">lists</a>
+</div>
+
+<details id="setup">
+  <summary>token setup</summary>
+  <p class="muted">Saving needs a
+  <a href="https://github.com/settings/personal-access-tokens">fine-grained
+  personal access token</a>: repository access = only
+  <strong>media-tracker</strong>, permissions = <strong>Contents:
+  read&nbsp;and&nbsp;write</strong>. Same token as the add and list-edit
+  pages &mdash; all three share it. It stays in this browser&rsquo;s
+  local storage. Reading needs no token.</p>
+  <input id="pat" placeholder="github_pat_..." autocomplete="off">
+  <button onclick="saveTok()" style="margin-top:8px">Save token</button>
+  <button onclick="clearTok()" style="margin-top:8px">Clear</button>
+</details>
+
+<script>
+const REPO = 'joshuadwray/media-tracker';
+const API = `https://api.github.com/repos/${REPO}/contents/`;
+const $ = id => document.getElementById(id);
+
+let sha = null;    // blob sha of reading/log.json at load (conflict guard)
+let data = null;   // parsed log.json
+let pcache = {};   // pagecount-cache.json (read-only, for display + finish)
+let dirty = false;
+
+const today = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-` +
+         String(d.getDate()).padStart(2, '0');
+};
+const key = b => `${b.title.trim().toLowerCase()}|` +
+                 b.author.trim().toLowerCase();
+const lastPage = b => b.sessions.length
+  ? Math.max(...b.sessions.map(s => parseInt(s.split(' ')[1], 10))) : 0;
+const pageCount = b => b.page_count ||
+  ((pcache[key(b)] || {}).page_count || null);
+
+/* ------------- canonical stringify (byte-identical to Python) ---------
+   Python side: tracker/reading_gen.py dump_log() — fixed key order,
+   json.dumps(indent=2, ensure_ascii=False) + "\n", integral floats as
+   ints. JSON.stringify(x, null, 2) matches that exactly as long as the
+   objects are built in the same key order. */
+const BOOK_KEYS = ['title', 'author', 'slug', 'status', 'rating',
+                   'page_count', 'started', 'finished', 'sessions'];
+function serialize(d) {
+  const books = d.books.map(b => {
+    const o = {};
+    for (const k of BOOK_KEYS) o[k] = b[k] === undefined ? null : b[k];
+    return o;
+  });
+  return JSON.stringify({ settings: d.settings, books }, null, 2) + '\n';
+}
+
+function slugify(t) {
+  const s = t.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
+             .replace(/^-+|-+$/g, '');
+  return s || 'book';
+}
+function uniqueSlug(t) {
+  let s = slugify(t), n = 2;
+  const taken = new Set(['index', 'log',
+                         ...data.books.map(b => b.slug)]);
+  let out = s;
+  while (taken.has(out)) out = `${s}-${n++}`;
+  return out;
+}
+
+/* ------------------------------- UI ----------------------------------- */
+
+function markDirty() { dirty = true; $('saveBtn').disabled = false; }
+
+function render() {
+  const box = $('reading');
+  box.textContent = '';
+  const cur = data.books.filter(b => b.status === 'reading');
+  if (!cur.length) {
+    const d = document.createElement('div');
+    d.className = 'muted'; d.textContent = 'nothing on the go';
+    box.append(d);
+  }
+  for (const b of cur) {
+    const card = document.createElement('div'); card.className = 'book';
+    const at = lastPage(b), pc = pageCount(b);
+    const t = document.createElement('div'); t.className = 't';
+    t.textContent = b.title; card.append(t);
+    const prog = document.createElement('div'); prog.className = 'prog';
+    prog.textContent = (b.author ? b.author + ' \u00b7 ' : '') +
+      (pc ? `p.${at} / ${pc}` : `p.${at}`);
+    card.append(prog);
+    if (pc) {
+      const bar = document.createElement('div'); bar.className = 'bar';
+      const fill = document.createElement('div');
+      fill.style.width = Math.min(100, Math.round(at * 100 / pc)) + '%';
+      bar.append(fill); card.append(bar);
+    }
+    const row = document.createElement('div'); row.className = 'logrow';
+    const pg = document.createElement('input');
+    pg.inputMode = 'numeric'; pg.value = at || '';
+    pg.placeholder = 'page'; pg.onfocus = () => pg.select();
+    const logBtn = document.createElement('button');
+    logBtn.textContent = 'log today';
+    logBtn.onclick = () => {
+      const p = parseInt(pg.value, 10);
+      if (isNaN(p) || p < 0) { status('enter the page you\u2019re on', 'err');
+        return; }
+      logSession(b, p);
+    };
+    row.append(pg, logBtn); card.append(row);
+
+    const fin = document.createElement('div'); fin.className = 'finrow';
+    const rate = document.createElement('select');
+    rate.append(new Option('rating\u2026', ''));
+    for (let r = 5; r >= 0.5; r -= 0.5)
+      rate.append(new Option('\u2605'.repeat(Math.floor(r)) +
+                             (r % 1 ? '\u00bd' : '') + ` ${r}`, r));
+    const finBtn = document.createElement('button');
+    finBtn.textContent = 'finish';
+    finBtn.onclick = () => {
+      if (rate.value === '') { status('pick a rating first', 'err'); return; }
+      finishBook(b, parseFloat(rate.value));
+    };
+    const drop = document.createElement('button');
+    drop.className = 'danger'; drop.textContent = 'abandon';
+    drop.onclick = () => {
+      if (!confirm(`abandon "${b.title}"?`)) return;
+      b.status = 'abandoned'; b.finished = today();
+      markDirty(); render();
+    };
+    fin.append(rate, finBtn, drop); card.append(fin);
+    box.append(card);
+  }
+  $('goal').value = data.settings.daily_goal_pages || 0;
+}
+
+function logSession(b, page) {
+  const t = today();
+  const last = b.sessions[b.sessions.length - 1];
+  if (last && last.startsWith(t + ' '))
+    b.sessions[b.sessions.length - 1] = `${t} ${page}`;
+  else
+    b.sessions.push(`${t} ${page}`);
+  markDirty(); render();
+  status(`logged p.${page} \u2014 don\u2019t forget Save`, 'ok');
+}
+
+function finishBook(b, rating) {
+  const t = today(), pc = pageCount(b), at = lastPage(b);
+  if (pc && at < pc) b.sessions.push(`${t} ${pc}`);
+  b.status = 'finished'; b.rating = rating; b.finished = t;
+  markDirty(); render();
+  status(`finished \u2014 ${rating}\u2605 \u2014 don\u2019t forget Save`, 'ok');
+}
+
+function startBook() {
+  const title = $('nt').value.trim();
+  if (!title) { status('title needed', 'err'); return; }
+  const pages = parseInt($('np').value, 10);
+  data.books.push({
+    title, author: $('na').value.trim(), slug: uniqueSlug(title),
+    status: 'reading', rating: null,
+    page_count: isNaN(pages) ? null : pages,
+    started: today(), finished: null, sessions: [] });
+  $('nt').value = $('na').value = $('np').value = '';
+  markDirty(); render();
+}
+
+function setGoal() {
+  const g = parseInt($('goal').value, 10);
+  if (!isNaN(g) && g >= 0) { data.settings.daily_goal_pages = g; markDirty(); }
+}
+
+function status(msg, cls) {
+  const s = $('status'); s.textContent = msg; s.className = cls || 'muted';
+}
+function saveTok() {
+  const t = $('pat').value.trim();
+  if (t) { localStorage.setItem('mt_pat', t); $('pat').value = '';
+    status('token saved', 'ok'); $('setup').open = false; }
+}
+function clearTok() { localStorage.removeItem('mt_pat'); status('token cleared'); }
+
+/* ----------------------------- GitHub API ----------------------------- */
+
+const b64decode = s => new TextDecoder().decode(
+  Uint8Array.from(atob(s.replace(/\n/g, '')), c => c.charCodeAt(0)));
+function b64encode(s) {
+  const bytes = new TextEncoder().encode(s);
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
+}
+
+async function load() {
+  status('loading\u2026');
+  try {
+    const r = await fetch(API + 'reading/log.json');
+    if (!r.ok) throw new Error('GitHub said ' + r.status);
+    const blob = await r.json();
+    sha = blob.sha;
+    data = JSON.parse(b64decode(blob.content));
+    data.settings = data.settings || {};
+    data.books = data.books || [];
+    try {
+      const pr = await fetch(API + 'reading/pagecount-cache.json');
+      if (pr.ok) pcache = JSON.parse(b64decode((await pr.json()).content));
+    } catch (e) { /* cache is optional */ }
+    render();
+    dirty = false; $('saveBtn').disabled = true;
+    status(`${data.books.length} book(s) loaded`);
+  } catch (e) { status('load failed: ' + e.message, 'err'); }
+}
+
+async function save() {
+  if (!data || !dirty) return;
+  const token = localStorage.getItem('mt_pat');
+  if (!token) { status('no token yet \u2014 open "token setup" below', 'err');
+    $('setup').open = true; return; }
+  $('saveBtn').disabled = true;
+  status('saving\u2026');
+  try {
+    const r = await fetch(API + 'reading/log.json', {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + token,
+                 'Accept': 'application/vnd.github+json',
+                 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'reading log (web)',
+        content: b64encode(serialize(data)), sha }) });
+    if (r.ok) {
+      const resp = await r.json();
+      sha = resp.content.sha;
+      dirty = false;
+      status('saved \u2014 pages rebuilding, live in ~2 min', 'ok');
+      return;
+    } else if (r.status === 409 || r.status === 422) {
+      status('conflict: the log changed since you loaded it \u2014 ' +
+             'reload and redo your entry', 'err');
+    } else {
+      const resp = await r.json().catch(() => ({}));
+      let hint = '';
+      if (r.status === 401) hint = ' (bad/expired token?)';
+      if (r.status === 403 || r.status === 404)
+        hint = ' (token likely lacks Contents read & write on this repo)';
+      status(`GitHub said ${r.status}: ${resp.message || 'no detail'}${hint}`,
+             'err');
+    }
+  } catch (e) { status('network error: ' + e.message, 'err'); }
+  $('saveBtn').disabled = false;
+}
+
+load();
+</script>
+</body>
+</html>

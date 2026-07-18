@@ -1,10 +1,10 @@
-# Rebuild the list pages whenever a list YAML changes, and commit the
-# rendered docs/lists/ + cover cache back. This makes the publish flow
-# "edit lists/*.yaml anywhere (incl. github.com mobile editor), push,
-# done" — no local build needed.
+# Rebuild the list AND reading pages whenever a list YAML or the reading
+# log changes, and commit the rendered docs/ + caches back. One combined
+# build because they cross-reference: list tiles link to reading pages,
+# and reading pages reuse the lists cover cache.
 #
-# Only *.yaml triggers this: the bot's own commit touches
-# lists/covers-cache.json and docs/lists/, which don't match, and
+# Only lists/*.yaml and reading/log.json trigger this: the bot's own
+# commit touches the caches and docs/, which don't match, and
 # GITHUB_TOKEN pushes don't re-trigger workflows anyway.
 
 name: build-lists
@@ -12,7 +12,7 @@ name: build-lists
 on:
   push:
     branches: [main]
-    paths: ["lists/*.yaml"]
+    paths: ["lists/*.yaml", "reading/log.json"]
   workflow_dispatch: {}
 
 permissions:
@@ -40,10 +40,15 @@ jobs:
       - name: Render list pages (covers cached)
         run: python -m tracker lists
 
-      - name: Commit rendered pages + cover cache
+      # after lists so listed books' covers are already cached — the
+      # ISBN bridge then needs zero iTunes calls for them
+      - name: Render reading pages (page counts cached)
+        run: python -m tracker reading
+
+      - name: Commit rendered pages + caches
         run: |
           git config user.name "media-tracker bot"
           git config user.email "actions@users.noreply.github.com"
-          git add docs/lists/ lists/covers-cache.json
+          git add docs/lists/ docs/reading/ lists/covers-cache.json reading/pagecount-cache.json
           git diff --cached --quiet || git commit -m "lists: rebuild $(date -u +%Y-%m-%dT%H:%M)"
           git push

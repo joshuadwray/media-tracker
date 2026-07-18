@@ -6,6 +6,7 @@
   python -m tracker probe [--source ID] [--query "..."]
   python -m tracker list
   python -m tracker lists [--no-fetch]
+  python -m tracker reading [--no-fetch]
   python -m tracker web [--port 8765] [--no-browser]
 """
 from __future__ import annotations
@@ -63,6 +64,13 @@ def main(argv: list[str] | None = None) -> int:
                          help="never hit Open Library; uncached items get "
                               "typographic tiles")
 
+    p_reading = sub.add_parser("reading", help="render docs/reading/ pages "
+                                               "from reading/log.json "
+                                               "(page counts cached)")
+    p_reading.add_argument("--no-fetch", action="store_true",
+                           help="never hit iTunes/Open Library; uncached "
+                                "books get no page count")
+
     p_web = sub.add_parser("web", help="run the local web app")
     p_web.add_argument("--port", type=int, default=DEFAULT_WEB_PORT)
     p_web.add_argument("--no-browser", action="store_true",
@@ -82,6 +90,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "lists":
         from .lists_gen import build_all
         build_all(fetch=not args.no_fetch)
+        return 0
+    if args.command == "reading":
+        from .reading_gen import build_all as build_reading
+        build_reading(fetch=not args.no_fetch)
         return 0
     if args.command == "web":
         from .web import run_web

@@ -220,6 +220,7 @@ ol.grid { list-style: none; margin: 0; padding: 0; display: grid;
 .cap .a { font-size: .8rem; opacity: .65; }
 ul.lists { padding-left: 20px; }
 ul.lists li { margin: 6px 0; }
+a.tl { color: inherit; text-decoration: none; display: block; }
 """
 
 
@@ -227,9 +228,15 @@ def _tile_hue(title: str) -> int:
     return sum(ord(c) for c in title) % 360
 
 
-def render_list(blist: BookList, covers: list) -> str:
-    """covers: one URL-or-None per item, same order as blist.items."""
+def render_list(blist: BookList, covers: list,
+                reading_links: dict | None = None) -> str:
+    """covers: one URL-or-None per item, same order as blist.items.
+
+    reading_links: {'title|author': '../reading/<slug>.html'} — items
+    with a reading-log entry get their tile wrapped in a link.
+    """
     e = html.escape
+    reading_links = reading_links or {}
     parts = [
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
@@ -256,9 +263,12 @@ def render_list(blist: BookList, covers: list) -> str:
                    f"<div class='nt'>{e(item.title)}</div>{author}</div>")
         author_cap = (f"<div class='a'>{e(item.author)}</div>"
                       if item.author else "")
-        parts.append(f"<li class='tile'>{badge}{img}"
-                     f"<div class='cap'><div class='t'>{e(item.title)}</div>"
-                     f"{author_cap}</div></li>")
+        body = (f"{img}<div class='cap'><div class='t'>{e(item.title)}</div>"
+                f"{author_cap}</div>")
+        href = reading_links.get(item.cache_key)
+        if href:
+            body = f"<a class='tl' href='{e(href)}'>{body}</a>"
+        parts.append(f"<li class='tile'>{badge}{body}</li>")
     parts.append("</ol></body></html>")
     return "".join(parts)
 
@@ -279,6 +289,7 @@ def render_index(blists: list) -> str:
                      "</li>")
     parts.append("</ul>")
     parts.append("<div class='meta' style='margin-top:18px'>"
+                 "<a href='../reading/'>&#128214; reading</a> &middot; "
                  "<a href='../add.html'>+ add to watchlist</a></div>")
     parts.append("</body></html>")
     return "".join(parts)
@@ -299,6 +310,9 @@ def build_all(lists_dir: Path = LISTS_DIR, out_dir: Path = OUT_DIR,
         session = requests.Session()
         session.headers["User-Agent"] = USER_AGENT
 
+    from .reading_gen import reading_links as _reading_links
+    links = _reading_links()
+
     written = []
     blists = []
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -314,7 +328,7 @@ def build_all(lists_dir: Path = LISTS_DIR, out_dir: Path = OUT_DIR,
                     log(f"  cover lookup failed for {item.title!r}: {exc}")
                 covers.append(None)
         out = out_dir / f"{blist.stem}.html"
-        out.write_text(render_list(blist, covers), encoding="utf-8")
+        out.write_text(render_list(blist, covers, links), encoding="utf-8")
         written.append(out)
         with_cover = sum(1 for c in covers if c)
         if log:

@@ -92,7 +92,12 @@ def build_dashboard(config: Config, results: list[SourceResult],
         parts.append(f"<li>📖 {e(str(b))}</li>")
     for m in config.movies:
         parts.append(f"<li>🎬 {e(str(m))}</li>")
-    parts.append("</ul></body></html>")
+    parts.append("</ul>")
+    parts.append("<div class='ts' style='margin-top:18px'>"
+                 "<a href='lists/'>lists</a> · "
+                 "<a href='reading/'>reading</a> · "
+                 "<a href='add.html'>+ add</a></div>")
+    parts.append("</body></html>")
     return "".join(parts)
 
 
