@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_run": "2026-07-18T19:37:12+00:00"
+    "last_run": "2026-07-18T20:08:01+00:00"
   },
   "seen": {
     "cinemark|movie:hadestown|\"Hadestown: The Musical\" advance tickets on sale at Cinemark Dallas IMAX": "2026-07-18T19:37:12+00:00",
@@ -12,9 +12,12 @@
     "cloudlibrary|book:the-tainted-cup|audiobook in catalog": "2026-07-18T00:57:09+00:00",
     "cloudlibrary|book:the-tainted-cup|ebook in catalog": "2026-07-18T00:57:09+00:00",
     "cloudlibrary|book:the-tainted-cup|ebook/audio in catalog": "2026-07-18T00:51:48+00:00",
+    "cloudlibrary|book:yesteryear|audiobook in catalog": "2026-07-18T20:08:01+00:00",
+    "cloudlibrary|book:yesteryear|ebook in catalog": "2026-07-18T20:08:01+00:00",
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": "2026-07-18T00:51:48+00:00",
     "denton-library|book:the-buffalo-hunter-hunter|ebook in catalog": "2026-07-18T00:57:09+00:00",
     "denton-library|book:the-tainted-cup|BK in catalog": "2026-07-18T00:51:48+00:00",
-    "denton-library|book:the-tainted-cup|print book in catalog": "2026-07-18T00:57:09+00:00"
+    "denton-library|book:the-tainted-cup|print book in catalog": "2026-07-18T00:57:09+00:00",
+    "denton-library|book:yesteryear|print book in catalog": "2026-07-18T20:08:01+00:00"
   }
 }
