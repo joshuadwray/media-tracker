@@ -213,6 +213,13 @@ function addItem() {
   rows[rows.length - 1].scrollIntoView({ block: 'center' });
 }
 
+function setMode(raw) {
+  rawMode = raw;
+  $('raw').style.display = raw ? '' : 'none';
+  $('rows').style.display = raw ? 'none' : '';
+  $('modeBtn').textContent = raw ? 'rows' : 'raw YAML';
+}
+
 function toggleMode() {
   if (!model) return;
   if (!rawMode) {
@@ -222,10 +229,7 @@ function toggleMode() {
     catch (e) { status('raw YAML problem: ' + e.message, 'err'); return; }
     render();
   }
-  rawMode = !rawMode;
-  $('raw').style.display = rawMode ? '' : 'none';
-  $('rows').style.display = rawMode ? 'none' : '';
-  $('modeBtn').textContent = rawMode ? 'rows' : 'raw YAML';
+  setMode(!rawMode);
   status('');
 }
 
@@ -280,7 +284,8 @@ async function loadList(name) {
     const data = await r.json();
     sha = data.sha;
     model = parseList(b64decode(data.content));
-    rawMode = true; toggleMode();      // force rows mode + render
+    render();
+    setMode(false);
     $('viewLink').href = file.replace(/\.yaml$/, '.html');
     status(`${model.items.length} items loaded`);
   } catch (e) { status('load failed: ' + e.message, 'err'); }
