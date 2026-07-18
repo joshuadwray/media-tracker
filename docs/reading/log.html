@@ -302,6 +302,22 @@ async function lookupPages(title, author) {
           return d.number_of_pages_median;
     } catch (e) { /* try next */ }
   }
+  // Google Books usually has counts for brand-new releases before OL
+  // does. Keyless quota is a shared pool (fails with 429 some days) —
+  // fine as a last resort since it runs from the phone, not CI.
+  try {
+    const q = `intitle:"${title}"` +
+      (author.trim() ? `+inauthor:${author.trim().split(/\s+/).pop()}` : '');
+    const r = await fetch('https://www.googleapis.com/books/v1/volumes?q=' +
+      encodeURIComponent(q) + '&country=US&maxResults=10');
+    if (r.ok)
+      for (const it of ((await r.json()).items || [])) {
+        const v = it.volumeInfo || {};
+        if (v.pageCount > 0 && (v.authors || []).some(surOk) &&
+            (v.title || '').toLowerCase().includes(title.toLowerCase()))
+          return v.pageCount;
+      }
+  } catch (e) { /* give up */ }
   return null;
 }
 
