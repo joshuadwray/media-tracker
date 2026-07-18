@@ -1,0 +1,122 @@
+title: Best Books of 2025
+kind: books
+ranked: true
+# File order IS the rank. Per-item optional fields:
+#   cover: https://...jpg   — manual cover URL, always wins over lookup
+items:
+  - title: The Antidote
+    author: Karen Russell
+    # OL indexes this as "Antidote" (no "The") so the lookup whiffs
+    cover: https://covers.openlibrary.org/b/id/14853350-L.jpg
+  - title: The Loneliness of Sonia and Sunny
+    author: Kiran Desai
+  - title: We Do Not Part
+    author: Han Kang
+  - title: The Buffalo Hunter Hunter
+    author: Stephen Graham Jones
+  - title: Helm
+    author: Sarah Hall
+  - title: Will There Ever Be Another You
+    author: Patricia Lockwood
+  - title: Disappoint Me
+    author: Nicola Dinan
+  - title: Exit Zero
+    author: Marie-Helene Bertino
+  - title: A Drop of Corruption
+    author: Robert Jackson Bennett
+  - title: The White Hot
+    author: Quiara Alegría Hudes
+  - title: Nesting
+    author: Roisín O'Donnell
+  - title: Twist
+    author: Colum McCann
+  - title: Mothers and Sons
+    author: Adam Haslett
+  - title: Audition
+    author: Katie Kitamura
+  - title: Too Soon
+    author: Betty Shamieh
+  - title: Stone Yard Devotional
+    author: Charlotte Wood
+  - title: Bad Bad Girl
+    author: Gish Jen
+  - title: The Echoes
+    author: Evie Wyld
+  - title: Run for the Hills
+    author: Kevin Wilson
+  - title: "Maggie; or, A Man and a Woman Walk into a Bar"
+    author: Katie Yee
+  - title: Sky Daddy
+    author: Kate Folk
+  - title: Tilt
+    author: Emma Pattee
+  - title: Goddess Complex
+    author: Sanjena Sathian
+  - title: Theory & Practice
+    author: Michelle de Kretser
+  - title: Archive of Unknown Universes
+    author: Ruben Reyes Jr.
+  - title: Ultramarine
+    author: Mariette Navarro
+  - title: The River Has Roots
+    author: Amal El-Mohtar
+  - title: Theft
+    author: Abdulrazak Gurnah
+  - title: Vantage Point
+    author: Sara Sligar
+  - title: The Dream Hotel
+    author: Laila Lalami
+  - title: Vanishing World
+    author: Sayaka Murata
+  - title: Stop Me If You've Heard This One
+    author: Kristen Arnett
+  - title: Bring the House Down
+    author: Charlotte Runcie
+  - title: Stag Dance
+    author: Torrey Peters
+  - title: A New New Me
+    author: Helen Oyeyemi
+  - title: Death Takes Me
+    author: Cristina Rivera Garza
+  - title: Cleavage
+    author: Jennifer Finney Boylan
+  - title: Gliff
+    author: Ali Smith
+  - title: Deep Cuts
+    author: Holly Brickley
+  - title: Heartwood
+    author: Amity Gaige
+  - title: Palaver
+    author: Bryan Washington
+  - title: Seascraper
+    author: Benjamin Wood
+  - title: Hunchback
+    author: Saou Ichikawa
+  - title: The Names
+    author: Florence Knapp
+  - title: The Emperor of Gladness
+    author: Ocean Vuong
+  - title: Death of the Author
+    author: Nnedi Okorafor
+  - title: Dream Count
+    author: Chimamanda Ngozi Adichie
+  - title: Big Chief
+    author: Jon Hickey
+  - title: The Usual Desire to Kill
+    author: Camille Bordas
+  - title: Good Girl
+    author: Aria Aber
+  - title: Life in Three Dimensions
+    author: Shigehiro Oishi
+  - title: Victorian Psycho
+    author: Virginia Feito
+  - title: Wild Dark Shore
+    author: Charlotte McConaghy
+  - title: The Ferryman and His Wife
+    author: Alison McCullough
+  - title: Bury Our Bones in the Midnight Soil
+    author: V. E. Schwab
+  - title: Midnight in Soap Lake
+    author: Matthew Sullivan
+  - title: The Art of Vanishing
+    author: Morgan Pager
