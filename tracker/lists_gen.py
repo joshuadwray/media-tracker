@@ -235,7 +235,8 @@ def render_list(blist: BookList, covers: list) -> str:
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         f"<title>{e(blist.title)}</title>",
         f"<style>{_CSS}</style></head><body>",
-        "<a class='back' href='./'>&larr; all lists</a>",
+        "<a class='back' href='./'>&larr; all lists</a> &middot; "
+        f"<a class='back' href='edit.html?list={e(blist.stem)}'>edit</a>",
         f"<h1>{e(blist.title)}</h1>",
         f"<div class='meta'>{len(blist.items)} "
         f"{'titles, ranked' if blist.ranked else 'titles'}</div>",
@@ -273,7 +274,9 @@ def render_index(blists: list) -> str:
     ]
     for bl in blists:
         parts.append(f"<li><a href='{e(bl.stem)}.html'>{e(bl.title)}</a> "
-                     f"<span class='meta'>({len(bl.items)})</span></li>")
+                     f"<span class='meta'>({len(bl.items)}) &middot; "
+                     f"<a href='edit.html?list={e(bl.stem)}'>edit</a></span>"
+                     "</li>")
     parts.append("</ul></body></html>")
     return "".join(parts)
 

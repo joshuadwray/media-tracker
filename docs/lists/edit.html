@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Lists">
+<title>edit list</title>
+<style>
+:root { color-scheme: light dark;
+  --line: rgba(128,128,128,.35); --mut: rgba(128,128,128,.85);
+  --ok: #2e7d32; --err: #c62828; --accent: #1565c0; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif; margin: 0 auto; max-width: 560px; padding: 20px 16px;
+  line-height: 1.45; }
+h1 { font-size: 1.25rem; margin: 0 0 12px; }
+button { font: inherit; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; cursor: pointer; }
+button.primary { background: var(--accent); border-color: var(--accent);
+  color: #fff; width: 100%; font-size: 1.05rem; margin-top: 12px; }
+button:disabled { opacity: .5; }
+input, select, textarea { font: inherit; padding: 10px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; width: 100%; }
+select { margin-bottom: 12px; }
+.bar { display: flex; gap: 8px; margin-bottom: 12px; }
+.bar button { flex: 1; }
+.row { display: flex; gap: 8px; align-items: center; padding: 6px 0;
+  border-bottom: 1px dashed rgba(128,128,128,.25); }
+.rk { min-width: 2em; text-align: right; color: var(--mut);
+  font-variant-numeric: tabular-nums; }
+.fields { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.fields input { padding: 7px 9px; }
+.fields .a { font-size: .88rem; opacity: .85; }
+.btns { display: flex; flex-direction: column; gap: 2px; }
+.btns button { padding: 2px 9px; font-size: .95rem; line-height: 1.35; }
+.note { color: var(--mut); font-size: .82rem; }
+#raw { min-height: 420px; font-family: ui-monospace, SFMono-Regular, Menlo,
+  monospace; font-size: .82rem; white-space: pre; }
+#status { margin-top: 12px; min-height: 1.4em; }
+#status.ok { color: var(--ok); } #status.err { color: var(--err); }
+.muted { color: var(--mut); font-size: .88rem; }
+details { margin-top: 26px; }
+summary { color: var(--mut); cursor: pointer; }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>&#9999;&#65039; edit list</h1>
+
+<select id="picker" onchange="loadList(this.value)"></select>
+
+<div class="bar">
+  <button id="addBtn" onclick="addItem()">+ add book</button>
+  <button id="modeBtn" onclick="toggleMode()">raw YAML</button>
+</div>
+
+<div id="rows"></div>
+<textarea id="raw" style="display:none" spellcheck="false"></textarea>
+
+<button class="primary" id="saveBtn" onclick="save()">Save &amp; publish</button>
+<div id="status" class="muted"></div>
+<div class="muted" style="margin-top:6px">
+  Saving commits the YAML to the repo; a GitHub Action then resolves any
+  new covers and republishes the page (&#8776;2 min).
+  <a id="viewLink" href="./">view list</a>
+</div>
+
+<details id="setup">
+  <summary>token setup</summary>
+  <p class="muted">Saving needs a
+  <a href="https://github.com/settings/personal-access-tokens">fine-grained
+  personal access token</a>: repository access = only
+  <strong>media-tracker</strong>, permissions = <strong>Contents:
+  read&nbsp;and&nbsp;write</strong>. You can add that permission to the
+  token the add-page already uses &mdash; both pages share the same saved
+  token. It stays in this browser&rsquo;s local storage.
+  Reading needs no token.</p>
+  <input id="pat" placeholder="github_pat_..." autocomplete="off">
+  <button onclick="saveTok()" style="margin-top:8px">Save token</button>
+  <button onclick="clearTok()" style="margin-top:8px">Clear</button>
+</details>
+
+<script>
+const REPO = 'joshuadwray/media-tracker';
+const API = `https://api.github.com/repos/${REPO}/contents/`;
+const $ = id => document.getElementById(id);
+
+// state
+let file = null;   // 'best-books-2025.yaml'
+let sha = null;    // blob sha at load time (conflict guard)
+let model = null;  // { header: [lines], items: [{title, author, pre, extra}], trailing: [lines] }
+let rawMode = false;
+
+/* ---------------- constrained YAML (preserves comments) ----------------
+   Handles exactly the list-file shape: a free-form header up to and
+   including the "items:" line (kept verbatim), then items of
+     - title: ...
+       author: ...        (optional)
+       <anything else>    (cover:, comments — kept verbatim, moves with item)
+   Comment/blank lines between items attach to the item BELOW them. */
+
+function unq(s) {
+  s = s.trim();
+  if (s.length > 1 && s[0] === '"' && s.endsWith('"'))
+    return s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+  if (s.length > 1 && s[0] === "'" && s.endsWith("'"))
+    return s.slice(1, -1).replace(/''/g, "'");
+  return s;
+}
+function q(s) {
+  // quote only when a plain scalar would break or change meaning
+  if (s === '' || /: |: *$| #|^[\s\-?:,\[\]{}#&*!|>'"%@`]|\s$|^\s/.test(s))
+    return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
+  return s;
+}
+
+function parseList(text) {
+  const lines = text.replace(/\n+$/, '').split('\n');
+  let i = 0;
+  const header = [];
+  while (i < lines.length && !/^items:\s*(#.*)?$/.test(lines[i]))
+    header.push(lines[i++]);
+  if (i === lines.length) throw new Error('no "items:" line found');
+  header.push(lines[i++]);
+  const items = [];
+  let pending = [], cur = null;
+  for (; i < lines.length; i++) {
+    const ln = lines[i];
+    let m;
+    if ((m = ln.match(/^ {2}- title:\s*(.*)$/))) {
+      cur = { title: unq(m[1]), author: '', pre: pending, extra: [] };
+      pending = []; items.push(cur);
+    } else if (cur && (m = ln.match(/^ {4}author:\s*(.*)$/))) {
+      cur.author = unq(m[1]);
+    } else if (/^\s*(#.*)?$/.test(ln)) {          // comment or blank
+      pending.push(ln);
+    } else if (cur && /^ {4}\S/.test(ln)) {       // cover: etc.
+      cur.extra.push(ln);
+    } else {
+      throw new Error(`line ${i + 1} not understood: ${ln}`);
+    }
+    // pending comments directly above an item's extras stay with the item
+    if (cur && pending.length && /^ {4}/.test(lines[i + 1] || '')) {
+      cur.extra.push(...pending); pending = [];
+    }
+  }
+  return { header, items, trailing: pending };
+}
+
+function serialize(m) {
+  const out = [...m.header];
+  for (const it of m.items) {
+    out.push(...it.pre);
+    out.push(`  - title: ${q(it.title)}`);
+    if (it.author) out.push(`    author: ${q(it.author)}`);
+    out.push(...it.extra);
+  }
+  out.push(...m.trailing);
+  return out.join('\n').replace(/\n+$/, '') + '\n';
+}
+
+/* ------------------------------- UI ----------------------------------- */
+
+function render() {
+  const box = $('rows');
+  box.textContent = '';
+  model.items.forEach((it, idx) => {
+    const row = document.createElement('div'); row.className = 'row';
+    const rk = document.createElement('span'); rk.className = 'rk';
+    rk.textContent = idx + 1;
+    const fl = document.createElement('div'); fl.className = 'fields';
+    const t = document.createElement('input');
+    t.value = it.title; t.placeholder = 'title';
+    t.oninput = () => { it.title = t.value; };
+    const a = document.createElement('input'); a.className = 'a';
+    a.value = it.author; a.placeholder = 'author';
+    a.oninput = () => { it.author = a.value; };
+    fl.append(t, a);
+    if (it.extra.some(l => /^\s*cover:/.test(l))) {
+      const n = document.createElement('div'); n.className = 'note';
+      n.textContent = 'has manual cover (edit in raw mode)';
+      fl.append(n);
+    }
+    const btns = document.createElement('div'); btns.className = 'btns';
+    for (const [label, fn] of [
+        ['\u2191', () => move(idx, -1)],
+        ['\u2193', () => move(idx, +1)],
+        ['\u00d7', () => { if (confirm(`remove "${it.title}"?`)) {
+            model.items.splice(idx, 1); render(); } }]]) {
+      const b = document.createElement('button');
+      b.textContent = label; b.onclick = fn; btns.append(b);
+    }
+    row.append(rk, fl, btns);
+    box.append(row);
+  });
+}
+
+function move(idx, d) {
+  const j = idx + d;
+  if (j < 0 || j >= model.items.length) return;
+  [model.items[idx], model.items[j]] = [model.items[j], model.items[idx]];
+  render();
+}
+
+function addItem() {
+  if (rawMode) toggleMode();
+  if (!model) return;
+  model.items.push({ title: '', author: '', pre: [], extra: [] });
+  render();
+  const rows = $('rows').children;
+  rows[rows.length - 1].querySelector('input').focus();
+  rows[rows.length - 1].scrollIntoView({ block: 'center' });
+}
+
+function toggleMode() {
+  if (!model) return;
+  if (!rawMode) {
+    $('raw').value = serialize(model);
+  } else {
+    try { model = parseList($('raw').value); }
+    catch (e) { status('raw YAML problem: ' + e.message, 'err'); return; }
+    render();
+  }
+  rawMode = !rawMode;
+  $('raw').style.display = rawMode ? '' : 'none';
+  $('rows').style.display = rawMode ? 'none' : '';
+  $('modeBtn').textContent = rawMode ? 'rows' : 'raw YAML';
+  status('');
+}
+
+function status(msg, cls) {
+  const s = $('status'); s.textContent = msg; s.className = cls || 'muted';
+}
+function saveTok() {
+  const t = $('pat').value.trim();
+  if (t) { localStorage.setItem('mt_pat', t); $('pat').value = '';
+    status('token saved', 'ok'); $('setup').open = false; }
+}
+function clearTok() { localStorage.removeItem('mt_pat'); status('token cleared'); }
+
+/* ----------------------------- GitHub API ----------------------------- */
+
+const b64decode = s => new TextDecoder().decode(
+  Uint8Array.from(atob(s.replace(/\n/g, '')), c => c.charCodeAt(0)));
+function b64encode(s) {
+  const bytes = new TextEncoder().encode(s);
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
+}
+
+async function loadPicker() {
+  try {
+    const r = await fetch(API + 'lists');
+    const entries = await r.json();
+    const yamls = entries.filter(e => e.name.endsWith('.yaml')
+                                      && e.name !== 'covers-cache.json');
+    const want = new URLSearchParams(location.search).get('list');
+    $('picker').textContent = '';
+    for (const e of yamls) {
+      const o = document.createElement('option');
+      o.value = e.name; o.textContent = e.name.replace(/\.yaml$/, '');
+      $('picker').append(o);
+    }
+    file = (want && yamls.some(e => e.name === want + '.yaml'))
+      ? want + '.yaml' : (yamls[0] || {}).name;
+    if (!file) { status('no list files found', 'err'); return; }
+    $('picker').value = file;
+    await loadList(file);
+  } catch (e) { status('load failed: ' + e.message, 'err'); }
+}
+
+async function loadList(name) {
+  file = name;
+  status('loading\u2026');
+  try {
+    const r = await fetch(API + 'lists/' + file);
+    if (!r.ok) throw new Error('GitHub said ' + r.status);
+    const data = await r.json();
+    sha = data.sha;
+    model = parseList(b64decode(data.content));
+    rawMode = true; toggleMode();      // force rows mode + render
+    $('viewLink').href = file.replace(/\.yaml$/, '.html');
+    status(`${model.items.length} items loaded`);
+  } catch (e) { status('load failed: ' + e.message, 'err'); }
+}
+
+async function save() {
+  if (!model) return;
+  const token = localStorage.getItem('mt_pat');
+  if (!token) { status('no token yet \u2014 open "token setup" below', 'err');
+    $('setup').open = true; return; }
+  let text;
+  if (rawMode) {
+    try { model = parseList($('raw').value); }
+    catch (e) { status('raw YAML problem: ' + e.message, 'err'); return; }
+    text = $('raw').value;
+  } else {
+    const blank = model.items.find(it => !it.title.trim());
+    if (blank) { status('a row has no title \u2014 fill it or remove it', 'err');
+      return; }
+    text = serialize(model);
+  }
+  $('saveBtn').disabled = true;
+  status('saving\u2026');
+  try {
+    const r = await fetch(API + 'lists/' + file, {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + token,
+                 'Accept': 'application/vnd.github+json',
+                 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `edit list: ${file.replace(/\.yaml$/, '')} (web)`,
+        content: b64encode(text), sha }) });
+    if (r.ok) {
+      const data = await r.json();
+      sha = data.content.sha;
+      status('saved \u2014 covers resolving, page live in ~2 min', 'ok');
+    } else if (r.status === 409 || r.status === 422) {
+      status('conflict: the file changed since you loaded it \u2014 ' +
+             'copy your edits, re-pick the list, redo', 'err');
+    } else if (r.status === 401 || r.status === 403) {
+      status('token rejected \u2014 needs Contents read & write on this repo',
+             'err');
+    } else {
+      const data = await r.json().catch(() => ({}));
+      status(`GitHub said ${r.status}: ${data.message || 'unknown error'}`,
+             'err');
+    }
+  } catch (e) { status('network error: ' + e.message, 'err'); }
+  $('saveBtn').disabled = false;
+}
+
+loadPicker();
+</script>
+</body>
+</html>
