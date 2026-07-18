@@ -33,8 +33,11 @@ input, select { font: inherit; padding: 10px; border-radius: 10px;
   margin-bottom: 10px; overflow: hidden; }
 .bar div { height: 100%; background: var(--accent); }
 .logrow { display: flex; gap: 8px; }
-.logrow input { width: 6.5em; text-align: center; }
+.logrow input { width: 5.5em; text-align: center; }
+.logrow input[type=date] { flex: 1; width: auto; text-align: left; }
 .logrow button { white-space: nowrap; }
+.pcrow { display: flex; gap: 8px; margin-top: 8px; }
+.pcrow input { width: 6.5em; text-align: center; }
 .finrow { display: flex; gap: 8px; margin-top: 8px; }
 .finrow select { flex: 1; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -177,15 +180,42 @@ function render() {
     const pg = document.createElement('input');
     pg.inputMode = 'numeric'; pg.value = at || '';
     pg.placeholder = 'page'; pg.onfocus = () => pg.select();
+    const when = document.createElement('input');
+    when.type = 'date'; when.value = today(); when.max = today();
     const logBtn = document.createElement('button');
-    logBtn.textContent = 'log today';
+    logBtn.textContent = 'log';
     logBtn.onclick = () => {
       const p = parseInt(pg.value, 10);
       if (isNaN(p) || p < 0) { status('enter the page you\u2019re on', 'err');
         return; }
-      logSession(b, p);
+      if (!when.value) { status('pick a date', 'err'); return; }
+      logSession(b, p, when.value);
     };
-    row.append(pg, logBtn); card.append(row);
+    row.append(pg, when, logBtn); card.append(row);
+
+    if (!pc) {
+      const pcr = document.createElement('div'); pcr.className = 'pcrow';
+      const tot = document.createElement('input');
+      tot.inputMode = 'numeric'; tot.placeholder = 'total pages';
+      const find = document.createElement('button');
+      find.textContent = 'find';
+      find.onclick = async () => {
+        find.disabled = true; status('looking up page count\u2026');
+        const p = await lookupPages(b.title, b.author);
+        find.disabled = false;
+        if (p) { tot.value = p; status(`found ${p} pages \u2014 tap set`, 'ok'); }
+        else status('no page count found \u2014 enter it manually', 'err');
+      };
+      const set = document.createElement('button');
+      set.textContent = 'set';
+      set.onclick = () => {
+        const p = parseInt(tot.value, 10);
+        if (isNaN(p) || p <= 0) { status('enter the total pages', 'err');
+          return; }
+        b.page_count = p; markDirty(); render();
+      };
+      pcr.append(tot, find, set); card.append(pcr);
+    }
 
     const fin = document.createElement('div'); fin.className = 'finrow';
     const rate = document.createElement('select');
@@ -212,15 +242,18 @@ function render() {
   $('goal').value = data.settings.daily_goal_pages || 0;
 }
 
-function logSession(b, page) {
-  const t = today();
-  const last = b.sessions[b.sessions.length - 1];
-  if (last && last.startsWith(t + ' '))
-    b.sessions[b.sessions.length - 1] = `${t} ${page}`;
-  else
-    b.sessions.push(`${t} ${page}`);
+function logSession(b, page, day) {
+  const i = b.sessions.findIndex(s => s.startsWith(day + ' '));
+  if (i >= 0) b.sessions[i] = `${day} ${page}`;
+  else {
+    b.sessions.push(`${day} ${page}`);
+    // keep date order so backdated entries don't read as corrections
+    // (stable sort on the date prefix only)
+    b.sessions.sort((x, y) => x.slice(0, 10) < y.slice(0, 10) ? -1 :
+                              x.slice(0, 10) > y.slice(0, 10) ? 1 : 0);
+  }
   markDirty(); render();
-  status(`logged p.${page} \u2014 don\u2019t forget Save`, 'ok');
+  status(`logged p.${page} on ${day} \u2014 don\u2019t forget Save`, 'ok');
 }
 
 function finishBook(b, rating) {
@@ -231,17 +264,65 @@ function finishBook(b, rating) {
   status(`finished \u2014 ${rating}\u2605 \u2014 don\u2019t forget Save`, 'ok');
 }
 
-function startBook() {
+/* Same chain as tracker/reading_gen.py, run in the browser (both APIs
+   send CORS headers): iTunes ebook search -> ISBN-13 in the artwork
+   filename -> OL editions page count; fallback OL search median,
+   fielded then loose q=. Surname guard against wrong-book matches. */
+async function lookupPages(title, author) {
+  const surOk = a => !author.trim() || (a || '').toLowerCase()
+    .includes(author.trim().split(/\s+/).pop().toLowerCase());
+  try {
+    const r = await fetch('https://itunes.apple.com/search?' +
+      new URLSearchParams({ term: `${title} ${author}`.trim(),
+                            media: 'ebook', limit: 5, country: 'US' }));
+    for (const h of ((await r.json()).results || [])) {
+      if (!h.artworkUrl100 || !surOk(h.artistName) ||
+          !(h.trackName || '').toLowerCase().includes(title.toLowerCase()))
+        continue;
+      const m = h.artworkUrl100.match(/97[89]\d{10}/);
+      if (m) {
+        const or = await fetch(`https://openlibrary.org/isbn/${m[0]}.json`);
+        if (or.ok) {
+          const p = (await or.json()).number_of_pages;
+          if (p) return p;
+        }
+      }
+      break;
+    }
+  } catch (e) { /* fall through */ }
+  const fielded = { title };
+  if (author.trim()) fielded.author = author;
+  for (const params of [fielded, { q: `${title} ${author}`.trim() }]) {
+    try {
+      const r = await fetch('https://openlibrary.org/search.json?' +
+        new URLSearchParams({ ...params, limit: 10,
+          fields: 'title,author_name,number_of_pages_median' }));
+      for (const d of ((await r.json()).docs || []))
+        if (d.number_of_pages_median && (d.author_name || []).some(surOk))
+          return d.number_of_pages_median;
+    } catch (e) { /* try next */ }
+  }
+  return null;
+}
+
+async function startBook() {
   const title = $('nt').value.trim();
   if (!title) { status('title needed', 'err'); return; }
-  const pages = parseInt($('np').value, 10);
+  const author = $('na').value.trim();
+  let pages = parseInt($('np').value, 10);
+  if (isNaN(pages)) {
+    status('looking up page count\u2026');
+    pages = await lookupPages(title, author) || NaN;
+  }
   data.books.push({
-    title, author: $('na').value.trim(), slug: uniqueSlug(title),
+    title, author, slug: uniqueSlug(title),
     status: 'reading', rating: null,
     page_count: isNaN(pages) ? null : pages,
     started: today(), finished: null, sessions: [] });
   $('nt').value = $('na').value = $('np').value = '';
   markDirty(); render();
+  status(isNaN(pages) ? 'started (no page count found \u2014 you can set ' +
+         'it on the card)' : `started \u2014 ${pages} pages`, 'ok');
 }
 
 function setGoal() {
