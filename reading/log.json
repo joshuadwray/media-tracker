@@ -2,5 +2,19 @@
   "settings": {
     "daily_goal_pages": 30
   },
-  "books": []
+  "books": [
+    {
+      "title": "go gentle",
+      "author": "maria semple",
+      "slug": "go-gentle",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-07-18",
+      "finished": null,
+      "sessions": [
+        "2026-07-18 46"
+      ]
+    }
+  ]
 }
