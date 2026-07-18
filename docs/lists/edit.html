@@ -27,8 +27,9 @@ select { margin-bottom: 12px; }
 .bar button { flex: 1; }
 .row { display: flex; gap: 8px; align-items: center; padding: 6px 0;
   border-bottom: 1px dashed rgba(128,128,128,.25); }
-.rk { min-width: 2em; text-align: right; color: var(--mut);
-  font-variant-numeric: tabular-nums; }
+input.rk { width: 3.1em; text-align: center; color: var(--mut);
+  font-variant-numeric: tabular-nums; padding: 6px 2px; }
+button.expand { width: 100%; margin-top: 10px; color: var(--mut); }
 .fields { flex: 1; display: flex; flex-direction: column; gap: 4px; }
 .fields input { padding: 7px 9px; }
 .fields .a { font-size: .88rem; opacity: .85; }
@@ -91,6 +92,8 @@ let file = null;   // 'best-books-2025.yaml'
 let sha = null;    // blob sha at load time (conflict guard)
 let model = null;  // { header: [lines], items: [{title, author, pre, extra}], trailing: [lines] }
 let rawMode = false;
+let expanded = false;
+const COLLAPSED_ROWS = 10;
 
 /* ---------------- constrained YAML (preserves comments) ----------------
    Handles exactly the list-file shape: a free-form header up to and
@@ -165,10 +168,25 @@ function serialize(m) {
 function render() {
   const box = $('rows');
   box.textContent = '';
-  model.items.forEach((it, idx) => {
+  const showAll = expanded || model.items.length <= COLLAPSED_ROWS;
+  const visible = showAll ? model.items
+                          : model.items.slice(0, COLLAPSED_ROWS);
+  visible.forEach((it, idx) => {
     const row = document.createElement('div'); row.className = 'row';
-    const rk = document.createElement('span'); rk.className = 'rk';
-    rk.textContent = idx + 1;
+    // rank is editable: typing a number moves the book to that position
+    const rk = document.createElement('input'); rk.className = 'rk';
+    rk.value = idx + 1; rk.inputMode = 'numeric';
+    rk.onfocus = () => rk.select();
+    rk.onchange = () => {
+      let n = parseInt(rk.value, 10);
+      if (isNaN(n)) { rk.value = idx + 1; return; }
+      n = Math.max(1, Math.min(model.items.length, n)) - 1;
+      if (n !== idx) {
+        const [moved] = model.items.splice(idx, 1);
+        model.items.splice(n, 0, moved);
+      }
+      render();
+    };
     const fl = document.createElement('div'); fl.className = 'fields';
     const t = document.createElement('input');
     t.value = it.title; t.placeholder = 'title';
@@ -194,6 +212,14 @@ function render() {
     row.append(rk, fl, btns);
     box.append(row);
   });
+  if (model.items.length > COLLAPSED_ROWS) {
+    const b = document.createElement('button');
+    b.className = 'expand';
+    b.textContent = showAll ? 'collapse'
+      : `show all ${model.items.length} \u25be`;
+    b.onclick = () => { expanded = !expanded; render(); };
+    box.append(b);
+  }
 }
 
 function move(idx, d) {
@@ -206,6 +232,7 @@ function move(idx, d) {
 function addItem() {
   if (rawMode) toggleMode();
   if (!model) return;
+  expanded = true;
   model.items.push({ title: '', author: '', pre: [], extra: [] });
   render();
   const rows = $('rows').children;
@@ -284,6 +311,7 @@ async function loadList(name) {
     const data = await r.json();
     sha = data.sha;
     model = parseList(b64decode(data.content));
+    expanded = false;
     render();
     setMode(false);
     $('viewLink').href = file.replace(/\.yaml$/, '.html');

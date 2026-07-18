@@ -277,7 +277,10 @@ def render_index(blists: list) -> str:
                      f"<span class='meta'>({len(bl.items)}) &middot; "
                      f"<a href='edit.html?list={e(bl.stem)}'>edit</a></span>"
                      "</li>")
-    parts.append("</ul></body></html>")
+    parts.append("</ul>")
+    parts.append("<div class='meta' style='margin-top:18px'>"
+                 "<a href='../add.html'>+ add to watchlist</a></div>")
+    parts.append("</body></html>")
     return "".join(parts)
 
 
