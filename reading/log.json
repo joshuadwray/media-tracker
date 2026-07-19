@@ -20,12 +20,14 @@
       "title": "transcription",
       "author": "ben lerner",
       "slug": "transcription",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4.5,
       "page_count": null,
       "started": "2026-07-18",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-07-18",
+      "sessions": [
+        "2026-07-18 144"
+      ]
     }
   ]
 }
