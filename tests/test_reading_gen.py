@@ -9,8 +9,8 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from tracker.reading_gen import (  # noqa: E402
-    Book, ReadingLog, daily_pages, dump_log, isbn_from_cover_url, load_log,
-    pages_by_date, slugify,
+    Book, ReadingLog, _pages_from_ldjson, daily_pages, dump_log,
+    isbn_from_cover_url, load_log, pages_by_date, slugify,
 )
 
 
@@ -91,6 +91,20 @@ def test_isbn_from_real_mzstatic_url():
            "/600x600bb.jpg")
     assert isbn_from_cover_url(url) == "9780593723838"
     assert isbn_from_cover_url("https://example.com/no-isbn.jpg") is None
+
+
+def test_pages_from_ldjson():
+    page = ('<html><script type="application/ld+json">'
+            '{"@type":"Book","isbn":"9798217176656",'
+            '"name":"Go Gentle: Oprah\'s Book Club","numberOfPages":384}'
+            '</script></html>')
+    assert _pages_from_ldjson(page) == 384
+    assert _pages_from_ldjson("<html>no ld json</html>") is None
+    # list-shaped blocks and broken JSON are tolerated
+    page2 = ('<script type="application/ld+json">not json</script>'
+             '<script type="application/ld+json">'
+             '[{"@type":"Book","numberOfPages":144}]</script>')
+    assert _pages_from_ldjson(page2) == 144
 
 
 def test_dump_log_shape_and_key_order():

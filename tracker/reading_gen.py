@@ -40,7 +40,15 @@ PAGECACHE_PATH = READING_DIR / "pagecount-cache.json"
 OUT_DIR = ROOT / "docs" / "reading"
 
 OL_ISBN_URL = "https://openlibrary.org/isbn/{}.json"
+ITUNES_LOOKUP_URL = "https://itunes.apple.com/lookup"
 ISBN13_RE = re.compile(r"(97[89]\d{10})")
+LDJSON_RE = re.compile(
+    r"<script[^>]*application/ld\+json[^>]*>(.*?)</script>", re.S)
+# books.apple.com serves the JSON-LD (with numberOfPages) only to
+# browser-looking user agents; the plain project UA gets a stub page.
+BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+              "AppleWebKit/605.1.15 (KHTML, like Gecko) "
+              "Version/17.4 Safari/605.1.15")
 RESERVED_SLUGS = {"index", "log"}
 STATUSES = {"reading", "finished", "abandoned"}
 
@@ -169,6 +177,38 @@ def _ol_pages_by_isbn(session, isbn: str) -> int | None:
     return int(pages) if pages else None
 
 
+def _pages_from_ldjson(text: str) -> int | None:
+    """numberOfPages from any schema.org JSON-LD block in an HTML page."""
+    for block in LDJSON_RE.findall(text):
+        try:
+            data = json.loads(block)
+        except ValueError:
+            continue
+        for obj in data if isinstance(data, list) else [data]:
+            if isinstance(obj, dict) and obj.get("numberOfPages"):
+                return int(obj["numberOfPages"])
+    return None
+
+
+def _apple_books_pages(session, isbn: str) -> int | None:
+    """Apple's store page has page counts for new releases long before
+    Open Library does — and iTunes matched the book already, so the
+    ISBN->store-page hop stays within the same catalog."""
+    resp = session.get(ITUNES_LOOKUP_URL,
+                       params={"isbn": isbn, "country": "US"}, timeout=30)
+    resp.raise_for_status()
+    time.sleep(lists_gen.ITUNES_SPACING)
+    url = next((r.get("trackViewUrl")
+                for r in resp.json().get("results") or []
+                if r.get("trackViewUrl")), None)
+    if not url:
+        return None
+    page = session.get(url.split("?")[0], timeout=30,
+                       headers={"User-Agent": BROWSER_UA})
+    page.raise_for_status()
+    return _pages_from_ldjson(page.text)
+
+
 def _ol_pages_by_search(session, title: str, author: str) -> int | None:
     # Fielded search first, then the looser q= (OL indexes some titles
     # without their leading article — "Antidote" for "The Antidote").
@@ -217,6 +257,10 @@ def resolve_page_count(book: Book, cache: dict, covers_cache: dict,
         pages = _ol_pages_by_isbn(session, isbn)
         if pages:
             source = "openlibrary-isbn"
+        else:
+            pages = _apple_books_pages(session, isbn)
+            if pages:
+                source = "apple-books"
     if not pages:
         pages = _ol_pages_by_search(session, book.title, book.author)
         if pages:
