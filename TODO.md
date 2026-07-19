@@ -7,6 +7,10 @@
   reading/finished/abandoned; total pages → `page_count`; if no per-day
   history, synthesize one session at finish/export date. Merge by
   title|author, never overwrite, idempotent, print a report.
+  When this lands: (1) add a jump-to-month select next to the calendar's
+  older/newer pager — 60 months of history means 60 taps otherwise;
+  (2) expect the first CI rebuild to crawl (page-count chain is rate-
+  limited ~20 req/min per new book; one-time, caches after).
 - **Pages vs local-app asymmetry** — the GH Pages surfaces (dashboard,
   add, lists + editor, reading log/calendar) are the real app now, while
   `tracker web` is machine-bound but has the richest add flow
@@ -30,7 +34,11 @@
   Done 2026-07-19: dropped the per-day pg number entirely (the flat list
   view shows page numbers; kept the green goal-day border + stats panel).
 - Book pages like the movie pages — richer per-book pages à la
-  `docs/watching/<slug>.html`.
+  `docs/watching/<slug>.html`. Partly there 2026-07-19: in-place
+  editor, sessions table + chart, calendar thumbs now link through.
+  Remaining: richer metadata (genres/description via iTunes?).
+- Calendar shows one month at a time (2026-07-19) — older/newer
+  buttons, newest first; JS-off falls back to the full stack.
 - Create new lists from the web — lists/edit.html only edits
   existing lists today.
 - UI pass: calendar page polish, cleaner tabs/links/organization
