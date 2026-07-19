@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Dead but Dreaming of Electric Sheep
+    author: Tremblay, Paul
+    bib_id: S127C1979611
   - title: "Attention-Seeking Behavior: A Novel"
     author: Varfis-van Warmelo, Aea
     isbn: 9781644453919
