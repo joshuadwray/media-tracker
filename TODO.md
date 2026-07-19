@@ -80,6 +80,16 @@
   behaviorally right. EXPERIMENT: when the user returns Dog Days,
   re-probe it (owned=yes + owned=any, check ppu/totalCopies) to
   confirm the flip. Also: what does `ppuTitleExcludes` mean?
+  Later probe (same day, vs user's BC-cataloged digital checkouts):
+  Lewinsky ebook has NO cloudLibrary record at all — Denton runs
+  another digital vendor whose titles get full BiblioCommons EBOOK
+  records; Antimemetics is BOTH in the CL pool (ppu, 3 copies) and
+  BC-cataloged (AB+EBOOK); Wolf Hour is CL-pool-only (ppu, 12/7
+  copies, no BC record). All CL records seen so far are ppu=true —
+  totalCopies looks like network-pool copies, not Denton holdings.
+  Model: CL API = what patrons can reach; BC cataloging = the only
+  (incomplete, laggy) marker of Denton ownership. Tracker coverage is
+  the union of both sources, which is what we want.
 
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a
