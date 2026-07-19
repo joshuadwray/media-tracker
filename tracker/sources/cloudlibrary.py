@@ -45,13 +45,16 @@ class CloudLibrarySource(Source):
                 # present but EMPTY (a value like "all" returns 0 results),
                 # and the library id is case-sensitive ("Denton", not
                 # "denton" — wrong case redirects to the marketing site).
+                # owned=yes is ESSENTIAL: owned=any searches the whole
+                # cloudLibrary marketplace, not this library's holdings
+                # (verified 2026-07-19 — false-positive source).
                 # The first request 302s to itself to set a session cookie;
                 # requests.Session follows it and keeps the cookie.
                 "method": "GET",
                 "url": f"https://ebook.yourcloudlibrary.com/library/{lib}"
                        f"/search?title={q}&format=&available=any&language="
                        f"&sort=relevance&segment=posts&orderBy=relevence"
-                       f"&owned=any&_data=routes%2Flibrary.%24name.search",
+                       f"&owned=yes&_data=routes%2Flibrary.%24name.search",
             },
             {   # legacy web-patron search API (404 as of 2026-07)
                 "method": "GET",
