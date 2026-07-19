@@ -27,29 +27,24 @@
   of everything watched/read, alongside the calendar.~~
   Done 2026-07-18: docs/reading/list.html (one row per session/viewing,
   newest first) with a calendar · list toggle on both pages.
-- Edit diary entries individually — reading side done 2026-07-19:
+- ~~Edit diary entries individually.~~ Done 2026-07-19 for books:
   in-place editors on the generated pages via docs/reading/edit.js
-  (fresh-fetch log.json + Contents-API PUT). List diary: per-session
-  edit (date/page/delete); book page: full editor (fields, sessions,
-  delete book). log.html stays fast-logging only. Films still
-  sync-only (watching/log.json comes from Letterboxd RSS).
+  (fresh-fetch log.json + Contents-API PUT). Films are sync-only BY
+  DESIGN — Letterboxd is the full-featured editor; the RSS sync picks
+  up changes (within its ~50-item window).
 - ~~Page counts on the calendar fix — the pg/goal display refinements
   deferred from the unified-diary pass.~~
   Done 2026-07-19: dropped the per-day pg number entirely (the flat list
   view shows page numbers; kept the green goal-day border + stats panel).
-- Book pages like the movie pages — richer per-book pages à la
-  `docs/watching/<slug>.html`. Partly there 2026-07-19: in-place
-  editor, sessions table + chart, calendar thumbs now link through.
-  Remaining: richer metadata (genres/description via iTunes?).
 - Calendar shows one month at a time (2026-07-19) — older/newer
   buttons, newest first; JS-off falls back to the full stack.
 - ~~Create new lists from the web — lists/edit.html only edits
   existing lists today.~~ Done 2026-07-19: "+ new list" button
   (title + ranked toggle) creates `lists/<stem>.yaml` via a sha-less
   Contents PUT, then loads the empty list for item entry.
-- UI pass: partly done 2026-07-19 — shared BASE_CSS + pill-tab nav in
+- UI pass: done 2026-07-19 — shared BASE_CSS + pill-tab nav in
   tracker/site.py (generators dieted; nav pasted into the 3 hand-written
-  pages). Remaining: calendar page polish.
+  pages).
 
 ## Reading-log follow-ups
 - ~~Re-reads: second pass through a book (`slug-2` convention).~~
@@ -60,9 +55,6 @@
   again" link on book pages clones the entry via edit.js.
 - ~~Surface ratings on list tiles (star overlay for finished books).~~
   Done 2026-07-18: ★ badge on tiles + finish-date chip on the calendar.
-- Streak / chart polish on the calendar.
-- ISBN → bib_id bridge: pagecount-cache already stores ISBN-13s; use
-  them to auto-pin library catalog records for watchlist adds.
 - Cached page-count misses never self-retry; if that bites, add a
   retry-after-N-days rule (manual fix today: delete the cache entry or
   set the count on the card).
@@ -101,10 +93,8 @@
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a
   reCAPTCHA-gated bearer token.
-- Extract more media-diary features into this flat-file/Actions
-  architecture: diary logging beyond books, TMDB/MusicBrainz search,
-  Fable imports. (Letterboxd: done 2026-07-18 — daily RSS sync into
-  watching/log.json, and films now surface on the unified diary
-  calendar + docs/watching/ pages.)
-- iTunes metadata beyond covers (genres, descriptions, release dates)
-  as future enrichment for lists/reading pages.
+- ISBN → bib_id bridge — demoted 2026-07-19: cached ISBNs mostly
+  cover already-read books, not watchlist adds; author_matches + the
+  pin queue already fixed the false-positive problem. Revisit only if
+  pin-queue traffic gets annoying (better version: iTunes ISBN lookup
+  at add time, works for any book).
