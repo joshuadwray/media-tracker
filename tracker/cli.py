@@ -7,6 +7,7 @@
   python -m tracker list
   python -m tracker lists [--no-fetch]
   python -m tracker reading [--no-fetch]
+  python -m tracker letterboxd
   python -m tracker web [--port 8765] [--no-browser]
 """
 from __future__ import annotations
@@ -71,6 +72,9 @@ def main(argv: list[str] | None = None) -> int:
                            help="never hit iTunes/Open Library; uncached "
                                 "books get no page count")
 
+    sub.add_parser("letterboxd", help="sync Letterboxd diary RSS into "
+                                      "watching/log.json")
+
     p_web = sub.add_parser("web", help="run the local web app")
     p_web.add_argument("--port", type=int, default=DEFAULT_WEB_PORT)
     p_web.add_argument("--no-browser", action="store_true",
@@ -95,6 +99,9 @@ def main(argv: list[str] | None = None) -> int:
         from .reading_gen import build_all as build_reading
         build_reading(fetch=not args.no_fetch)
         return 0
+    if args.command == "letterboxd":
+        from .letterboxd_sync import sync
+        return sync()
     if args.command == "web":
         from .web import run_web
         return run_web(config_path=args.watchlist, port=args.port,

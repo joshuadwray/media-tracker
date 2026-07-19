@@ -30,6 +30,9 @@
   reCAPTCHA-gated bearer token.
 - Extract more media-diary features into this flat-file/Actions
   architecture: diary logging beyond books, TMDB/MusicBrainz search,
-  Letterboxd/Fable imports.
+  Fable imports. (Letterboxd: done 2026-07-18 — daily RSS sync into
+  watching/log.json via `tracker letterboxd` + letterboxd-sync.yml;
+  next step is surfacing films on the reading calendar / a merged
+  diary page.)
 - iTunes metadata beyond covers (genres, descriptions, release dates)
   as future enrichment for lists/reading pages.
