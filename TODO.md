@@ -69,9 +69,17 @@
   consortium pool, null copy counts) OR `totalCopies > 0` (owned);
   marketplace-only records are ppu=false + null copies. Source now
   searches owned=any again and filters on that (verified against 3
-  known-false + 4 checked-out titles, all pass). Watch for: whether
-  ppu titles ever flip ppu=false while still borrowable (would
-  false-negative), and what `ppuTitleExcludes` means.
+  known-false + 3 of 4 checked-out titles). Follow-up: TWO sharing
+  mechanisms exist. PPU (serpent: ppu=true even while checked out) is
+  caught. Idle-copy consortium share (Dog Days/LaBarge, user's live
+  ebook checkout): invisible under owned=yes AND ppu=false/null-copies
+  under owned=any while the copy is IN USE — indistinguishable from
+  marketplace-only. Hypothesis: it surfaces with real totalCopies only
+  while idle at its home library (= the librarian's appear/disappear
+  story), which is exactly when it's borrowable, so the filter may be
+  behaviorally right. EXPERIMENT: when the user returns Dog Days,
+  re-probe it (owned=yes + owned=any, check ppu/totalCopies) to
+  confirm the flip. Also: what does `ppuTitleExcludes` mean?
 
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a
