@@ -7,7 +7,9 @@
 # ============================================================
 
 books:
-  - title: attention seeking behavior
+  - title: "Attention-Seeking Behavior: A Novel"
+    author: Varfis-van Warmelo, Aea
+    isbn: 9781644453919
   - title: one leg on earth
   # - title: The Nickel Boys
   #   author: Colson Whitehead
