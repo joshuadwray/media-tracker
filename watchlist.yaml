@@ -7,7 +7,9 @@
 # ============================================================
 
 books:
-  - title: we were forbidden
+  - title: We Were Forbidden
+    author: Harpman, Jacqueline, Schwartz, Ros
+    isbn: 9798893380576
   - title: Dead but Dreaming of Electric Sheep
     author: Tremblay, Paul
     bib_id: S127C1979611
