@@ -49,7 +49,7 @@ LDJSON_RE = re.compile(
 BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
               "AppleWebKit/605.1.15 (KHTML, like Gecko) "
               "Version/17.4 Safari/605.1.15")
-RESERVED_SLUGS = {"index", "log"}
+RESERVED_SLUGS = {"index", "log", "list"}
 STATUSES = {"reading", "finished", "abandoned"}
 
 # Fixed key order for books; the JS stringifier in docs/reading/log.html
@@ -396,6 +396,21 @@ td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
 .chart .b { flex: 1; max-width: 34px; background: var(--accent);
        border-radius: 3px 3px 0 0; min-height: 2px; }
 .chart .b span { display: none; }
+.vt { font-size: .85rem; margin: 4px 0 0; }
+.vt strong { color: inherit; }
+.dl { margin-top: 18px; }
+.dl h3 { font-size: .95rem; margin: 18px 0 6px; }
+.row { display: flex; gap: 10px; align-items: center; padding: 5px 0;
+       border-bottom: 1px dashed rgba(128,128,128,.25); font-size: .9rem; }
+.row img, .row .dot { width: 34px; aspect-ratio: 2 / 3; object-fit: cover;
+       border-radius: 3px; flex: none; }
+.row .dot { background: hsl(210,35%,40%); }
+.row.film img { box-shadow: 0 0 0 1.5px var(--accent); }
+.row .rt { flex: 1; min-width: 0; }
+.row .rt .by { opacity: .6; }
+.row .rm { flex: none; text-align: right; font-size: .82rem; opacity: .85;
+       white-space: nowrap; }
+.row .rm .stars { font-size: .95rem; }
 """
 
 _DOWS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -438,6 +453,8 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
     parts.append(site.nav("diary", 1))
     parts.append("<a class='back' href='log.html'>log a session</a>")
     parts.append("<h1>Diary</h1>")
+    parts.append("<div class='vt'><strong>calendar</strong> &middot; "
+                 "<a href='list.html'>list</a></div>")
 
     reading_now = [b for b in log.books if b.status == "reading"]
     if reading_now:
@@ -529,6 +546,97 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
         parts.append("<div class='meta'>no sessions logged yet — "
                      "<a href='log.html'>log one</a></div>")
     parts.append("</body></html>")
+    return "".join(parts)
+
+
+def render_flat_list(rlog: ReadingLog, page_counts: dict, covers_cache: dict,
+                     today: date | None = None, warn=None,
+                     films_by_day: dict | None = None) -> str:
+    """Flat reverse-chronological diary: one row per reading session /
+    film viewing, grouped by day (books first, films after)."""
+    e = html.escape
+    today = today or date.today()
+    films_by_day = films_by_day or {}
+
+    # {date: [html row, ...]} — book rows first (log order), films appended
+    rows: dict = {}
+    for book in rlog.books:
+        pc = page_counts.get(book.slug)
+        # per-day delta + page reached (same delta rules as daily_pages)
+        per_day: dict = {}
+        prev = 0
+        for day, page in book.parsed_sessions():
+            delta = max(0, page - prev)
+            prev = max(prev, page)
+            d, at = per_day.get(day, (0, 0))
+            per_day[day] = (d + delta, max(at, page))
+        if (book.status == "finished" and book.finished
+                and pc and prev < pc):
+            fin = date.fromisoformat(book.finished)
+            d, _ = per_day.get(fin, (0, 0))
+            per_day[fin] = (d + (pc - prev), pc)
+        cover = _cover_url(book, covers_cache)
+        th = (f"<img src='{e(cover)}' alt='' loading='lazy'>" if cover
+              else "<div class='dot'></div>")
+        for day, (delta, at) in per_day.items():
+            if delta <= 0:
+                continue  # corrections — no pages actually read
+            prog = f"p.{at} / {pc}" if pc else f"p.{at}"
+            right = [f"{prog} <b>+{delta}</b>"]
+            if book.status == "finished" and book.finished == day.isoformat():
+                right.append("finished")
+                if book.rating is not None:
+                    right.append(_stars(book.rating))
+            elif (book.status == "abandoned" and book.finished
+                    and book.finished == day.isoformat()):
+                right.append("abandoned")
+            by = (f" <span class='by'>&mdash; {e(book.author)}</span>"
+                  if book.author else "")
+            rows.setdefault(day, []).append(
+                f"<a class='row' style='text-decoration:none;color:inherit' "
+                f"href='{e(book.slug)}.html'>{th}"
+                f"<div class='rt'>{e(book.title)}{by}</div>"
+                f"<div class='rm'>{' &middot; '.join(right)}</div></a>")
+
+    for day, day_films in films_by_day.items():
+        for film in day_films:
+            poster = film.get("poster_url")
+            th = (f"<img src='{e(poster)}' alt='' loading='lazy'>"
+                  if poster else "<div class='dot'></div>")
+            title = film.get("title") or film.get("slug") or "?"
+            year = film.get("year")
+            heading = f"{title} ({year})" if year else str(title)
+            right = []
+            if film.get("rating") is not None:
+                right.append(_stars(film["rating"]))
+            if film.get("rewatch"):
+                right.append("\u21bb")
+            if film.get("liked"):
+                right.append("<span class='heart'>\u2665</span>")
+            rows.setdefault(day, []).append(
+                f"<a class='row film' "
+                f"style='text-decoration:none;color:inherit' "
+                f"href='../watching/{e(film.get('slug') or '')}.html'>{th}"
+                f"<div class='rt'>{e(heading)}</div>"
+                f"<div class='rm'>{' &middot; '.join(right)}</div></a>")
+
+    parts = _page_head("diary")
+    parts.append(site.nav("diary", 1))
+    parts.append("<a class='back' href='log.html'>log a session</a>")
+    parts.append("<h1>Diary</h1>")
+    parts.append("<div class='vt'><a href='index.html'>calendar</a> "
+                 "&middot; <strong>list</strong></div>")
+    parts.append("<div class='dl'>")
+    for day in sorted(rows, reverse=True):
+        label = f"{_calendar.month_name[day.month]} {day.day}"
+        if day.year != today.year:
+            label += f", {day.year}"
+        parts.append(f"<h3>{label}</h3>")
+        parts.extend(rows[day])
+    if not rows:
+        parts.append("<div class='meta'>no sessions logged yet &mdash; "
+                     "<a href='log.html'>log one</a></div>")
+    parts.append("</div></body></html>")
     return "".join(parts)
 
 
@@ -639,6 +747,11 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
                                      warn=warn, films_by_day=films_by_day),
                      encoding="utf-8")
     written.append(index)
+    flat = out_dir / "list.html"
+    flat.write_text(render_flat_list(rlog, page_counts, covers_cache,
+                                     warn=warn, films_by_day=films_by_day),
+                    encoding="utf-8")
+    written.append(flat)
     for book in rlog.books:
         out = out_dir / f"{book.slug}.html"
         out.write_text(render_book(book, page_counts[book.slug],

@@ -15,8 +15,10 @@
   search) or retire `tracker web` once nothing it does is unique.
 
 ## Diary follow-ups (2026-07-18)
-- Non-calendar diary view — a Soderbergh-style flat chronological list
-  of everything watched/read, alongside the calendar.
+- ~~Non-calendar diary view — a Soderbergh-style flat chronological list
+  of everything watched/read, alongside the calendar.~~
+  Done 2026-07-18: docs/reading/list.html (one row per session/viewing,
+  newest first) with a calendar · list toggle on both pages.
 - Edit diary entries individually (watching/log.json entries are
   sync-only today; reading edits go through log.html's whole-file save).
 - Page counts on the calendar fix — the pg/goal display refinements

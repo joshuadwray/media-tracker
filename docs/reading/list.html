@@ -1,0 +1,92 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>diary</title><style>
+:root { color-scheme: light dark;
+  --line: rgba(128,128,128,.35); --mut: rgba(128,128,128,.85);
+  --ok: #2e7d32; --accent: #1565c0; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+       sans-serif; margin: 0 auto; max-width: 860px; padding: 16px;
+       line-height: 1.4; }
+h1 { font-size: 1.35rem; margin: 0 0 2px; }
+h2 { font-size: 1rem; margin: 22px 0 8px; text-transform: uppercase;
+     letter-spacing: .04em; opacity: .65; }
+.meta { font-size: .85rem; opacity: .6; }
+a { color: var(--accent); } a.back { font-size: .85rem; }
+.stats { display: flex; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+.stat { border: 1px solid var(--line); border-radius: 10px;
+        padding: 8px 14px; text-align: center; }
+.stat .n { font-size: 1.25rem; font-weight: 700; }
+.stat .l { font-size: .75rem; opacity: .65; }
+.cur { display: flex; gap: 12px; align-items: center; margin: 10px 0;
+       border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.cur img, .cur .noimg { width: 48px; aspect-ratio: 2 / 3; border-radius: 4px;
+       border: 1px solid var(--line); object-fit: cover; flex: none; }
+.cur .noimg { background: hsl(210,35%,32%); }
+.cur .t { font-weight: 600; }
+.cur .bar { height: 6px; border-radius: 3px; background: rgba(128,128,128,.2);
+       margin-top: 6px; overflow: hidden; }
+.cur .bar div { height: 100%; background: var(--accent); }
+.cur .info { flex: 1; min-width: 0; }
+.month { margin-bottom: 22px; }
+.month h3 { font-size: .95rem; margin: 0 0 6px; }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.dow { font-size: .68rem; text-align: center; opacity: .55;
+       text-transform: uppercase; }
+.day { border: 1px solid var(--line); border-radius: 6px; min-height: 64px;
+       padding: 3px 4px; font-size: .72rem; position: relative; }
+.day.blank { border: none; }
+.day.goal { border-color: var(--ok); box-shadow: inset 0 0 0 1px var(--ok); }
+.day .dn { opacity: .55; }
+.day .pg { position: absolute; bottom: 2px; right: 4px; font-weight: 700; }
+.day.goal .pg { color: var(--ok); }
+.thumbs { display: flex; gap: 2px; margin-top: 2px; }
+.thumbs img { width: 22px; aspect-ratio: 2 / 3; object-fit: cover;
+       border-radius: 3px; }
+.thumbs .dot { width: 22px; aspect-ratio: 2 / 3; border-radius: 3px;
+       background: hsl(210,35%,40%); }
+.thumbs .th { position: relative; display: block; }
+.thumbs .film img { box-shadow: 0 0 0 1.5px var(--accent); }
+.thumbs .more { width: 22px; aspect-ratio: 2 / 3; border-radius: 3px;
+       background: rgba(128,128,128,.25); display: flex;
+       align-items: center; justify-content: center;
+       font-size: .6rem; font-weight: 700; }
+.heart { color: #e05263; }
+.fchip { position: absolute; bottom: 2px; left: 50%;
+       transform: translateX(-50%); background: rgba(0,0,0,.78);
+       color: #ffd166; font-size: .58rem; font-weight: 700;
+       padding: 0 4px; border-radius: 999px; white-space: nowrap; }
+@media (min-width: 520px) { .day { min-height: 80px; font-size: .78rem; }
+       .thumbs img, .thumbs .dot, .thumbs .more { width: 28px; } }
+@media (min-width: 760px) { .day { min-height: 92px; }
+       .thumbs img, .thumbs .dot, .thumbs .more { width: 34px; } }
+.cover, .bignoimg { width: 140px; aspect-ratio: 2 / 3; border-radius: 8px;
+       border: 1px solid var(--line); object-fit: cover; }
+.bignoimg { display: flex; align-items: center; justify-content: center;
+       text-align: center; padding: 10px; color: #fff; font-weight: 700; }
+.head { display: flex; gap: 16px; margin: 14px 0; }
+.stars { color: #e8a512; font-size: 1.2rem; letter-spacing: 1px; }
+.stars .half { display: inline-block; width: .55em; overflow: hidden;
+       vertical-align: bottom; }
+table { border-collapse: collapse; margin-top: 8px; }
+td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
+       border-bottom: 1px dashed rgba(128,128,128,.25); }
+.chart { display: flex; gap: 3px; align-items: flex-end; height: 90px;
+       margin-top: 14px; }
+.chart .b { flex: 1; max-width: 34px; background: var(--accent);
+       border-radius: 3px 3px 0 0; min-height: 2px; }
+.chart .b span { display: none; }
+.vt { font-size: .85rem; margin: 4px 0 0; }
+.vt strong { color: inherit; }
+.dl { margin-top: 18px; }
+.dl h3 { font-size: .95rem; margin: 18px 0 6px; }
+.row { display: flex; gap: 10px; align-items: center; padding: 5px 0;
+       border-bottom: 1px dashed rgba(128,128,128,.25); font-size: .9rem; }
+.row img, .row .dot { width: 34px; aspect-ratio: 2 / 3; object-fit: cover;
+       border-radius: 3px; flex: none; }
+.row .dot { background: hsl(210,35%,40%); }
+.row.film img { box-shadow: 0 0 0 1.5px var(--accent); }
+.row .rt { flex: 1; min-width: 0; }
+.row .rt .by { opacity: .6; }
+.row .rm { flex: none; text-align: right; font-size: .82rem; opacity: .85;
+       white-space: nowrap; }
+.row .rm .stars { font-size: .95rem; }
+.sitenav{font-size:.85rem;margin-bottom:12px} .sitenav b{font-weight:700} .sitenav .sep{opacity:.4}</style></head><body><div class='sitenav'><a href='../index.html'>tracker</a> <span class='sep'>&middot;</span> <b>diary</b> <span class='sep'>&middot;</span> <a href='../lists/'>lists</a> <span class='sep'>&middot;</span> <a href='../add.html'>+ add</a></div><a class='back' href='log.html'>log a session</a><h1>Diary</h1><div class='vt'><a href='index.html'>calendar</a> &middot; <strong>list</strong></div><div class='dl'><h3>July 18</h3><a class='row' style='text-decoration:none;color:inherit' href='go-gentle.html'><img src='https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/67/a2/a8/67a2a8d7-fcf8-065e-8789-1690660609da/9798217176656.d.jpg/600x600bb.jpg' alt='' loading='lazy'><div class='rt'>go gentle <span class='by'>&mdash; maria semple</span></div><div class='rm'>p.46 / 384 <b>+46</b></div></a><a class='row' style='text-decoration:none;color:inherit' href='transcription.html'><img src='https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/5a/78/7b/5a787bf1-4132-a6a7-aac4-21f85cf96000/9780374618605.jpg/600x600bb.jpg' alt='' loading='lazy'><div class='rt'>transcription <span class='by'>&mdash; ben lerner</span></div><div class='rm'>p.144 / 144 <b>+144</b> &middot; finished &middot; <span class='stars' title='4.5/5'>★★★★<span class='half'>★</span></span></div></a><a class='row film' style='text-decoration:none;color:inherit' href='../watching/minions-monsters-2026.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/9/6/8/0/8/1196808-minions-monsters-2026-0-600-0-900-crop.jpg?v=8ff282e996' alt='' loading='lazy'><div class='rt'>Minions &amp; Monsters (2026)</div><div class='rm'><span class='stars' title='3/5'>★★★☆☆</span></div></a><h3>July 16</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-odyssey-2026.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/2/5/5/3/9/4/1255394-the-odyssey-2026-0-600-0-900-crop.jpg?v=1eed046d0c' alt='' loading='lazy'><div class='rt'>The Odyssey (2026)</div><div class='rm'><span class='stars' title='4.5/5'>★★★★<span class='half'>★</span></span></div></a><h3>July 12</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-invite-2026.html'><img src='https://a.ltrbxd.com/resized/film-poster/8/5/4/8/3/1/854831-the-invite-2026-0-600-0-900-crop.jpg?v=ee72905e48' alt='' loading='lazy'><div class='rt'>The Invite (2026)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>July 3</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/maddies-secret.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/3/9/3/5/4/9/1393549-maddies-secret-0-600-0-900-crop.jpg?v=9d1be9dbce' alt='' loading='lazy'><div class='rt'>Maddie&#x27;s Secret (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>June 14</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/disclosure-day.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/5/9/2/5/1/1159251-disclosure-day-0-600-0-900-crop.jpg?v=9ae810e4bb' alt='' loading='lazy'><div class='rt'>Disclosure Day (2026)</div><div class='rm'><span class='stars' title='3.5/5'>★★★<span class='half'>★</span>☆</span></div></a><h3>June 7</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/before-sunset.html'><img src='https://a.ltrbxd.com/resized/film-poster/5/1/9/7/0/51970-before-sunset-0-600-0-900-crop.jpg?v=718e2923ff' alt='' loading='lazy'><div class='rt'>Before Sunset (2004)</div><div class='rm'><span class='stars' title='5/5'>★★★★★</span> &middot; ↻ &middot; <span class='heart'>♥</span></div></a><h3>May 23</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/merrily-we-roll-along-2025.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/8/8/2/4/3/1188243-merrily-we-roll-along-2025-0-600-0-900-crop.jpg?v=1aaf9ed86a' alt='' loading='lazy'><div class='rt'>Merrily We Roll Along (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>April 26</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-green-knight.html'><img src='https://a.ltrbxd.com/resized/film-poster/4/8/8/3/9/9/488399-the-green-knight-0-600-0-900-crop.jpg?v=874a267b92' alt='' loading='lazy'><div class='rt'>The Green Knight (2021)</div><div class='rm'><span class='stars' title='4.5/5'>★★★★<span class='half'>★</span></span> &middot; ↻ &middot; <span class='heart'>♥</span></div></a><h3>April 21</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/mother-mary-2026.html'><img src='https://a.ltrbxd.com/resized/film-poster/9/9/4/3/5/3/994353-mother-mary-2026-0-600-0-900-crop.jpg?v=a2644168b4' alt='' loading='lazy'><div class='rt'>Mother Mary (2026)</div><div class='rm'><span class='stars' title='3.5/5'>★★★<span class='half'>★</span>☆</span> &middot; <span class='heart'>♥</span></div></a><h3>April 4</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-drama.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/2/0/5/4/9/4/1205494-the-drama-0-600-0-900-crop.jpg?v=2320acafd5' alt='' loading='lazy'><div class='rt'>The Drama (2026)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>April 3</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-testament-of-ann-lee.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/2/8/4/6/2/7/1284627-the-testament-of-ann-lee-0-600-0-900-crop.jpg?v=3da6a9dae0' alt='' loading='lazy'><div class='rt'>The Testament of Ann Lee (2025)</div><div class='rm'><span class='stars' title='4.5/5'>★★★★<span class='half'>★</span></span> &middot; ↻</div></a><h3>April 1</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-super-mario-galaxy-movie.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/1/0/0/8/0/1110080-the-super-mario-galaxy-movie-0-600-0-900-crop.jpg?v=fefcfca134' alt='' loading='lazy'><div class='rt'>The Super Mario Galaxy Movie (2026)</div><div class='rm'><span class='stars' title='2.5/5'>★★<span class='half'>★</span>☆☆</span></div></a><h3>March 21</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/project-hail-mary.html'><img src='https://a.ltrbxd.com/resized/film-poster/6/1/1/2/8/8/611288-project-hail-mary-0-600-0-900-crop.jpg?v=ac31b6ec03' alt='' loading='lazy'><div class='rt'>Project Hail Mary (2026)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span> &middot; ↻ &middot; <span class='heart'>♥</span></div></a><h3>March 20</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/project-hail-mary.html'><img src='https://a.ltrbxd.com/resized/film-poster/6/1/1/2/8/8/611288-project-hail-mary-0-600-0-900-crop.jpg?v=ac31b6ec03' alt='' loading='lazy'><div class='rt'>Project Hail Mary (2026)</div><div class='rm'><span class='stars' title='3.5/5'>★★★<span class='half'>★</span>☆</span> &middot; <span class='heart'>♥</span></div></a><h3>March 17</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-secret-agent-2025.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/0/4/3/4/8/1104348-the-secret-agent-2025-0-600-0-900-crop.jpg?v=3bcd2a3e02' alt='' loading='lazy'><div class='rt'>The Secret Agent (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>February 15</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/wuthering-heights-2026.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/9/6/9/1/1/1196911-wuthering-heights-2026-0-600-0-900-crop.jpg?v=7d02cf3bdc' alt='' loading='lazy'><div class='rt'>Wuthering Heights (2026)</div><div class='rm'><span class='stars' title='3/5'>★★★☆☆</span></div></a><a class='row film' style='text-decoration:none;color:inherit' href='../watching/nirvanna-the-band-the-show-the-movie.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/0/4/1/0/1/2/1041012-nirvanna-the-band-the-show-the-movie-0-600-0-900-crop.jpg?v=4d80f82f8a' alt='' loading='lazy'><div class='rt'>Nirvanna the Band the Show the Movie (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>February 14</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/goat-2026.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/7/9/9/5/3/1179953-goat-2026-0-600-0-900-crop.jpg?v=35c7b7eebe' alt='' loading='lazy'><div class='rt'>GOAT (2026)</div><div class='rm'><span class='stars' title='2.5/5'>★★<span class='half'>★</span>☆☆</span></div></a><h3>February 10</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/sinners-2025.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/1/6/6/0/0/1116600-sinners-2025-0-600-0-900-crop.jpg?v=5996b7d555' alt='' loading='lazy'><div class='rt'>Sinners (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span> &middot; ↻</div></a><h3>February 3</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/hamnet.html'><img src='https://a.ltrbxd.com/resized/film-poster/7/7/2/2/3/2/772232-hamnet-0-600-0-900-crop.jpg?v=631489314d' alt='' loading='lazy'><div class='rt'>Hamnet (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span> &middot; ↻</div></a><h3>January 30</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/if-i-had-legs-id-kick-you.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/0/4/6/5/2/2/1046522-if-i-had-legs-id-kick-you-0-600-0-900-crop.jpg?v=831a0c76c9' alt='' loading='lazy'><div class='rt'>If I Had Legs I&#x27;d Kick You (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>January 29</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/fahrenheit-451-2018.html'><img src='https://a.ltrbxd.com/resized/film-poster/3/3/6/5/9/4/336594-fahrenheit-451-0-600-0-900-crop.jpg?v=6127212040' alt='' loading='lazy'><div class='rt'>Fahrenheit 451 (2018)</div><div class='rm'><span class='stars' title='1.5/5'>★<span class='half'>★</span>☆☆☆</span></div></a><a class='row film' style='text-decoration:none;color:inherit' href='../watching/gullivers-travels-2010.html'><img src='https://a.ltrbxd.com/resized/film-poster/2/5/8/7/1/25871-gulliver-s-travels-0-600-0-900-crop.jpg?v=2555cc2db3' alt='' loading='lazy'><div class='rt'>Gulliver&#x27;s Travels (2010)</div><div class='rm'><span class='stars' title='2/5'>★★☆☆☆</span></div></a><h3>January 25</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/highest-2-lowest.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/2/5/0/3/1/1125031-highest-2-lowest-0-600-0-900-crop.jpg?v=4bac6efe11' alt='' loading='lazy'><div class='rt'>Highest 2 Lowest (2025)</div><div class='rm'><span class='stars' title='3/5'>★★★☆☆</span> &middot; ↻</div></a><a class='row film' style='text-decoration:none;color:inherit' href='../watching/blue-moon-2025.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/1/8/1/4/6/3/1181463-blue-moon-2025-0-600-0-900-crop.jpg?v=e7b58cae0d' alt='' loading='lazy'><div class='rt'>Blue Moon (2025)</div><div class='rm'><span class='stars' title='3.5/5'>★★★<span class='half'>★</span>☆</span></div></a><h3>January 24</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/snow-day.html'><img src='https://a.ltrbxd.com/resized/film-poster/4/2/3/3/6/42336-snow-day-0-600-0-900-crop.jpg?v=47cc0b92de' alt='' loading='lazy'><div class='rt'>Snow Day (2000)</div><div class='rm'><span class='stars' title='2.5/5'>★★<span class='half'>★</span>☆☆</span></div></a><h3>January 18</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/no-other-choice-2025.html'><img src='https://a.ltrbxd.com/resized/film-poster/5/6/5/9/5/2/565952-no-other-choice-2025-0-600-0-900-crop.jpg?v=87ef42b9f5' alt='' loading='lazy'><div class='rt'>No Other Choice (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a><h3>January 13</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/his-girl-friday.html'><img src='https://a.ltrbxd.com/resized/film-poster/4/9/8/8/6/49886-his-girl-friday-0-600-0-900-crop.jpg?v=a31152c98c' alt='' loading='lazy'><div class='rt'>His Girl Friday (1940)</div><div class='rm'></div></a><a class='row film' style='text-decoration:none;color:inherit' href='../watching/sentimental-value-2025.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/0/1/3/3/5/7/1013357-sentimental-value-2025-0-600-0-900-crop.jpg?v=e89e64a309' alt='' loading='lazy'><div class='rt'>Sentimental Value (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span> &middot; ↻</div></a><h3>January 6</h3><a class='row film' style='text-decoration:none;color:inherit' href='../watching/the-testament-of-ann-lee.html'><img src='https://a.ltrbxd.com/resized/film-poster/1/2/8/4/6/2/7/1284627-the-testament-of-ann-lee-0-600-0-900-crop.jpg?v=3da6a9dae0' alt='' loading='lazy'><div class='rt'>The Testament of Ann Lee (2025)</div><div class='rm'><span class='stars' title='4/5'>★★★★☆</span></div></a></div></body></html>
