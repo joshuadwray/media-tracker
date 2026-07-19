@@ -14,6 +14,16 @@
   Either port the picker to Pages (workflow round-trip for catalog
   search) or retire `tracker web` once nothing it does is unique.
 
+## Diary follow-ups (2026-07-18)
+- Non-calendar diary view — a Soderbergh-style flat chronological list
+  of everything watched/read, alongside the calendar.
+- Edit diary entries individually (watching/log.json entries are
+  sync-only today; reading edits go through log.html's whole-file save).
+- Page counts on the calendar fix — the pg/goal display refinements
+  deferred from the unified-diary pass.
+- UI pass: calendar page polish, cleaner tabs/links/organization
+  across the site nav surfaces.
+
 ## Reading-log follow-ups
 - Re-reads: second pass through a book (`slug-2` convention).
 - ~~Surface ratings on list tiles (star overlay for finished books).~~
@@ -31,8 +41,7 @@
 - Extract more media-diary features into this flat-file/Actions
   architecture: diary logging beyond books, TMDB/MusicBrainz search,
   Fable imports. (Letterboxd: done 2026-07-18 — daily RSS sync into
-  watching/log.json via `tracker letterboxd` + letterboxd-sync.yml;
-  next step is surfacing films on the reading calendar / a merged
-  diary page.)
+  watching/log.json, and films now surface on the unified diary
+  calendar + docs/watching/ pages.)
 - iTunes metadata beyond covers (genres, descriptions, release dates)
   as future enrichment for lists/reading pages.
