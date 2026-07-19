@@ -204,7 +204,9 @@ function render() {
         const p = await lookupPages(b.title, b.author);
         find.disabled = false;
         if (p) { tot.value = p; status(`found ${p} pages \u2014 tap set`, 'ok'); }
-        else status('no page count found \u2014 enter it manually', 'err');
+        else status('not found from the browser (normal for new releases) ' +
+                    '\u2014 the rebuild after Save checks Apple Books too, ' +
+                    'or enter it manually', 'err');
       };
       const set = document.createElement('button');
       set.textContent = 'set';
@@ -337,8 +339,9 @@ async function startBook() {
     started: today(), finished: null, sessions: [] });
   $('nt').value = $('na').value = $('np').value = '';
   markDirty(); render();
-  status(isNaN(pages) ? 'started (no page count found \u2014 you can set ' +
-         'it on the card)' : `started \u2014 ${pages} pages`, 'ok');
+  status(isNaN(pages) ? 'started \u2014 no count found from the browser; ' +
+         'Save anyway and the rebuild resolves it via Apple Books in ~2 min'
+         : `started \u2014 ${pages} pages`, 'ok');
 }
 
 function setGoal() {
