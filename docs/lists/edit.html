@@ -300,7 +300,9 @@ async function createList() {
   const token = localStorage.getItem('mt_pat');
   if (!token) { status('no token yet \u2014 open "token setup" below', 'err');
     $('setup').open = true; return; }
-  const text = `title: ${q(title)}\n` +
+  // always quote: bare scalars get YAML-typed ("2026" -> int, "no" -> bool)
+  const qt = '"' + title.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
+  const text = `title: ${qt}\n` +
     'kind: books\n' +
     `ranked: ${$('nlRanked').checked}\n` +
     '# File order IS the rank. Per-item optional fields:\n' +

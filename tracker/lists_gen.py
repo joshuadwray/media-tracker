@@ -78,7 +78,8 @@ def parse_list(path: Path) -> BookList:
         items.append(ListItem(title=str(raw["title"]),
                               author=str(raw.get("author") or ""),
                               cover=str(raw.get("cover") or "")))
-    return BookList(title=data.get("title") or path.stem,
+    # str() guard: YAML types bare scalars ("2026" -> int, "no" -> bool)
+    return BookList(title=str(data.get("title") or path.stem),
                     stem=path.stem,
                     ranked=bool(data.get("ranked", True)),
                     kind=data.get("kind") or "books",
