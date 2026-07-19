@@ -60,7 +60,19 @@ a { color: var(--accent); }
 
 <div class="bar">
   <button id="addBtn" onclick="addItem()">+ add book</button>
+  <button id="newBtn" onclick="toggleNewForm()">+ new list</button>
   <button id="modeBtn" onclick="toggleMode()">raw YAML</button>
+</div>
+
+<div id="newForm" style="display:none">
+  <input id="nlTitle" placeholder="new list title" autocomplete="off">
+  <label class="muted" style="display:block;margin:8px 0">
+    <input type="checkbox" id="nlRanked" checked style="width:auto"> ranked
+  </label>
+  <div class="bar">
+    <button id="createBtn" onclick="createList()">create</button>
+    <button onclick="toggleNewForm()">cancel</button>
+  </div>
 </div>
 
 <div id="rows"></div>
@@ -266,6 +278,75 @@ function toggleMode() {
   }
   setMode(!rawMode);
   status('');
+}
+
+function toggleNewForm() {
+  const f = $('newForm');
+  const show = f.style.display === 'none';
+  f.style.display = show ? '' : 'none';
+  if (show) $('nlTitle').focus();
+  status('');
+}
+
+async function createList() {
+  const title = $('nlTitle').value.trim();
+  if (!title) { status('the list needs a title', 'err'); return; }
+  const stem = title.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+  if (!stem) { status('the title needs some letters or numbers', 'err');
+    return; }
+  if ([...$('picker').options].some(o => o.value === stem + '.yaml')) {
+    status(`"${stem}" already exists \u2014 pick it above`, 'err'); return; }
+  const token = localStorage.getItem('mt_pat');
+  if (!token) { status('no token yet \u2014 open "token setup" below', 'err');
+    $('setup').open = true; return; }
+  const text = `title: ${q(title)}\n` +
+    'kind: books\n' +
+    `ranked: ${$('nlRanked').checked}\n` +
+    '# File order IS the rank. Per-item optional fields:\n' +
+    '#   cover: https://...jpg   \u2014 manual cover URL, ' +
+      'always wins over lookup\n' +
+    'items:\n';
+  $('createBtn').disabled = true;
+  status('creating\u2026');
+  try {
+    // no sha -> the Contents API only CREATES; an existing file 422s
+    const r = await fetch(API + 'lists/' + stem + '.yaml', {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + token,
+                 'Accept': 'application/vnd.github+json',
+                 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `new list: ${stem} (web)`,
+                             content: b64encode(text) }) });
+    if (r.ok) {
+      const data = await r.json();
+      sha = data.content.sha;
+      file = stem + '.yaml';
+      const o = document.createElement('option');
+      o.value = file; o.textContent = stem;
+      $('picker').append(o);
+      $('picker').value = file;
+      model = parseList(text);
+      expanded = false;
+      render();
+      setMode(false);
+      $('viewLink').href = stem + '.html';
+      $('newForm').style.display = 'none';
+      $('nlTitle').value = '';
+      status('created \u2014 add books, then Save', 'ok');
+    } else if (r.status === 422) {
+      status(`a file named ${stem}.yaml already exists in the repo`, 'err');
+    } else {
+      const data = await r.json().catch(() => ({}));
+      let hint = '';
+      if (r.status === 401) hint = ' (bad/expired token?)';
+      if (r.status === 403 || r.status === 404)
+        hint = ' (token likely lacks Contents read & write on this repo)';
+      status(`GitHub said ${r.status}: ${data.message || 'no detail'}${hint}`,
+             'err');
+    }
+  } catch (e) { status('network error: ' + e.message, 'err'); }
+  $('createBtn').disabled = false;
 }
 
 function status(msg, cls) {

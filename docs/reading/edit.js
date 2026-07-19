@@ -204,23 +204,65 @@ function buildBookEditor(b, data, sha, onDone) {
   return ed;
 }
 
-window.mtBookPage = function (slug) {
-  const link = document.getElementById('mt-edit');
-  if (!link) return;
-  let ed = null;
-  link.onclick = async ev => {
+function slugify(t) {
+  const s = t.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
+             .replace(/^-+|-+$/g, '');
+  return s || 'book';
+}
+function uniqueSlug(t, books) {
+  let s = slugify(t), n = 2;
+  const taken = new Set(['index', 'log', 'list', ...books.map(b => b.slug)]);
+  let out = s;
+  while (taken.has(out)) out = `${s}-${n++}`;
+  return out;
+}
+
+window.mtBookPage = function () {
+  // one editor per read: single-read pages have one .mt-edit link at the
+  // top; grouped re-read pages have one per "Read N" heading
+  let open = null;   // { ed, link }
+  for (const link of document.querySelectorAll('.mt-edit'))
+    link.onclick = async ev => {
+      ev.preventDefault();
+      if (open) {
+        open.ed.remove();
+        const same = open.link === link;
+        open = null; status('');
+        if (same) return;
+      }
+      status('loading\u2026');
+      let sha, data;
+      try { ({ sha, data } = await fetchLog()); }
+      catch (e) { status('load failed: ' + e.message, 'err'); return; }
+      const b = data.books.find(x => x.slug === link.dataset.slug);
+      if (!b) { status('this read is no longer in the log \u2014 the page ' +
+                       'is stale', 'err'); return; }
+      status('');
+      const ed = buildBookEditor(b, data, sha, () => { open = null; });
+      (link.closest('h2') || document.querySelector('.head')).after(ed);
+      open = { ed, link };
+    };
+
+  const ra = document.getElementById('mt-readagain');
+  if (ra) ra.onclick = async ev => {
     ev.preventDefault();
-    if (ed) { ed.remove(); ed = null; status(''); return; }
     status('loading\u2026');
     let sha, data;
     try { ({ sha, data } = await fetchLog()); }
     catch (e) { status('load failed: ' + e.message, 'err'); return; }
-    const b = data.books.find(x => x.slug === slug);
+    const b = data.books.find(x => x.slug === ra.dataset.slug);
     if (!b) { status('book is no longer in the log \u2014 this page is ' +
                      'stale', 'err'); return; }
-    status('');
-    ed = buildBookEditor(b, data, sha, () => { ed = null; });
-    document.querySelector('.head').after(ed);
+    if (!confirm(`start a new read of "${b.title}"?`)) { status(''); return; }
+    data.books.push({
+      title: b.title, author: b.author,
+      slug: uniqueSlug(b.title, data.books),
+      status: 'reading', rating: null,
+      page_count: b.page_count,
+      started: today(), finished: null, sessions: [] });
+    status('saving\u2026');
+    if (await putLog(sha, data))
+      status('new read started \u2014 this page rebuilds in ~2 min', 'ok');
   };
 };
 

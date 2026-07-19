@@ -309,6 +309,22 @@ def pages_by_date(books: list, page_counts: dict, warn=None) -> tuple:
     return totals, readers
 
 
+def group_reads(books: list) -> tuple:
+    """Group re-reads of the same book. -> (groups, base_of).
+
+    A re-read is a separate log entry (slug <base>-2, -3, ...) with the
+    same title|author; groups collects them by cache_key in file order.
+    The first entry is the base read whose slug names the shared book
+    page. base_of maps every slug to its base slug for link resolution.
+    """
+    groups: dict = {}
+    for b in books:
+        groups.setdefault(b.cache_key, []).append(b)
+    base_of = {b.slug: reads[0].slug
+               for reads in groups.values() for b in reads}
+    return groups, base_of
+
+
 def _streak(totals: dict, today: date) -> int:
     day = today if totals.get(today, 0) > 0 else today - timedelta(days=1)
     n = 0
@@ -427,6 +443,8 @@ td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
        font-size: .9rem; z-index: 9; }
 .edstatus:empty { display: none; }
 .edstatus.ok { color: #7ad97f; } .edstatus.err { color: #ff8a80; }
+.readsec { margin-top: 26px; }
+.readsec h2 a.back { font-size: .8rem; font-weight: 400; margin-left: 8px; }
 .mnav { display: flex; justify-content: space-between; align-items: center;
        margin: 14px 0 6px; }
 .mnav button { font: inherit; font-size: .85rem; padding: 6px 12px;
@@ -651,23 +669,65 @@ function buildBookEditor(b, data, sha, onDone) {
   return ed;
 }
 
-window.mtBookPage = function (slug) {
-  const link = document.getElementById('mt-edit');
-  if (!link) return;
-  let ed = null;
-  link.onclick = async ev => {
+function slugify(t) {
+  const s = t.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
+             .replace(/^-+|-+$/g, '');
+  return s || 'book';
+}
+function uniqueSlug(t, books) {
+  let s = slugify(t), n = 2;
+  const taken = new Set(['index', 'log', 'list', ...books.map(b => b.slug)]);
+  let out = s;
+  while (taken.has(out)) out = `${s}-${n++}`;
+  return out;
+}
+
+window.mtBookPage = function () {
+  // one editor per read: single-read pages have one .mt-edit link at the
+  // top; grouped re-read pages have one per "Read N" heading
+  let open = null;   // { ed, link }
+  for (const link of document.querySelectorAll('.mt-edit'))
+    link.onclick = async ev => {
+      ev.preventDefault();
+      if (open) {
+        open.ed.remove();
+        const same = open.link === link;
+        open = null; status('');
+        if (same) return;
+      }
+      status('loading\u2026');
+      let sha, data;
+      try { ({ sha, data } = await fetchLog()); }
+      catch (e) { status('load failed: ' + e.message, 'err'); return; }
+      const b = data.books.find(x => x.slug === link.dataset.slug);
+      if (!b) { status('this read is no longer in the log \u2014 the page ' +
+                       'is stale', 'err'); return; }
+      status('');
+      const ed = buildBookEditor(b, data, sha, () => { open = null; });
+      (link.closest('h2') || document.querySelector('.head')).after(ed);
+      open = { ed, link };
+    };
+
+  const ra = document.getElementById('mt-readagain');
+  if (ra) ra.onclick = async ev => {
     ev.preventDefault();
-    if (ed) { ed.remove(); ed = null; status(''); return; }
     status('loading\u2026');
     let sha, data;
     try { ({ sha, data } = await fetchLog()); }
     catch (e) { status('load failed: ' + e.message, 'err'); return; }
-    const b = data.books.find(x => x.slug === slug);
+    const b = data.books.find(x => x.slug === ra.dataset.slug);
     if (!b) { status('book is no longer in the log \u2014 this page is ' +
                      'stale', 'err'); return; }
-    status('');
-    ed = buildBookEditor(b, data, sha, () => { ed = null; });
-    document.querySelector('.head').after(ed);
+    if (!confirm(`start a new read of "${b.title}"?`)) { status(''); return; }
+    data.books.push({
+      title: b.title, author: b.author,
+      slug: uniqueSlug(b.title, data.books),
+      status: 'reading', rating: null,
+      page_count: b.page_count,
+      started: today(), finished: null, sessions: [] });
+    status('saving\u2026');
+    if (await putLog(sha, data))
+      status('new read started \u2014 this page rebuilds in ~2 min', 'ok');
   };
 };
 
@@ -771,10 +831,12 @@ def _stars(rating: float) -> str:
 
 def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                     today: date | None = None, warn=None,
-                    films_by_day: dict | None = None) -> str:
+                    films_by_day: dict | None = None,
+                    base_of: dict | None = None) -> str:
     e = html.escape
     today = today or date.today()
     films_by_day = films_by_day or {}
+    base_of = base_of or {}
     totals, readers = pages_by_date(log.books, page_counts, warn=warn)
     goal = log.daily_goal
     parts = _page_head("diary")
@@ -797,7 +859,8 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
         prog = f"p.{at} / {pc} &middot; {pct}%" if pc else f"p.{at}"
         parts.append(
             f"<a class='cur' style='text-decoration:none;color:inherit' "
-            f"href='{e(book.slug)}.html'>{img}<div class='info'>"
+            f"href='{e(base_of.get(book.slug, book.slug))}.html'>"
+            f"{img}<div class='info'>"
             f"<div class='t'>{e(book.title)}</div>"
             f"<div class='meta'>{e(book.author)} &middot; {prog}</div>"
             f"<div class='bar'><div style='width:{pct}%'></div></div>"
@@ -851,8 +914,10 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                         chip = (f"<span class='fchip' "
                                 f"title='{book.rating:g}/5'>"
                                 f"\u2605{whole}{half}</span>")
-                    tt.append(f"<a class='th' "
-                              f"href='{e(book.slug)}.html'>{th}{chip}</a>")
+                    tt.append(
+                        f"<a class='th' href='"
+                        f"{e(base_of.get(book.slug, book.slug))}.html'>"
+                        f"{th}{chip}</a>")
                 for film in day_films:
                     poster = film.get("poster_url")
                     th = (f"<img src='{e(poster)}' alt='' loading='lazy'>"
@@ -896,12 +961,14 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
 
 def render_flat_list(rlog: ReadingLog, page_counts: dict, covers_cache: dict,
                      today: date | None = None, warn=None,
-                     films_by_day: dict | None = None) -> str:
+                     films_by_day: dict | None = None,
+                     base_of: dict | None = None) -> str:
     """Flat reverse-chronological diary: one row per reading session /
     film viewing, grouped by day (books first, films after)."""
     e = html.escape
     today = today or date.today()
     films_by_day = films_by_day or {}
+    base_of = base_of or {}
 
     # {date: [html row, ...]} — book rows first (log order), films appended
     rows: dict = {}
@@ -941,7 +1008,7 @@ def render_flat_list(rlog: ReadingLog, page_counts: dict, covers_cache: dict,
                   if book.author else "")
             row = (
                 f"<a class='row' style='text-decoration:none;color:inherit' "
-                f"href='{e(book.slug)}.html'>{th}"
+                f"href='{e(base_of.get(book.slug, book.slug))}.html'>{th}"
                 f"<div class='rt'>{e(book.title)}{by}</div>"
                 f"<div class='rm'>{' &middot; '.join(right)}</div></a>")
             # edit only where a real session line exists (finish-remainder
@@ -998,56 +1065,92 @@ def render_flat_list(rlog: ReadingLog, page_counts: dict, covers_cache: dict,
     return "".join(parts)
 
 
-def render_book(book: Book, page_count: int | None, pc_source: str,
-                covers_cache: dict, warn=None) -> str:
+def _status_line(book: Book) -> str:
     e = html.escape
-    parts = _page_head(book.title)
-    parts.append(site.nav(None, 1))
-    parts.append("<a class='back' href='log.html'>log a session</a> "
-                 "&middot; <a class='back' href='#' id='mt-edit'>edit</a>")
-
-    cover = _cover_url(book, covers_cache)
-    hue = lists_gen._tile_hue(book.title)
-    img = (f"<img class='cover' src='{e(cover)}' alt='{e(book.title)} cover'>"
-           if cover else f"<div class='bignoimg' style='background:"
-                         f"hsl({hue},35%,32%)'>{e(book.title)}</div>")
-    bits = [f"<h1>{e(book.title)}</h1>"]
-    if book.author:
-        bits.append(f"<div class='meta'>{e(book.author)}</div>")
-    if book.rating is not None:
-        bits.append(f"<div style='margin-top:6px'>{_stars(book.rating)}</div>")
     status = book.status
     if book.started:
         status += f" &middot; started {e(book.started)}"
     if book.finished:
         status += f" &middot; finished {e(book.finished)}"
-    bits.append(f"<div class='meta' style='margin-top:6px'>{status}</div>")
+    return status
+
+
+def render_book_group(reads: list, page_counts: dict, sources: dict,
+                      covers_cache: dict, warn=None) -> str:
+    """One page per BOOK: re-reads (same title|author, slug <base>-N)
+    render as a section per read on the base read's page. Single-read
+    books keep the original single-column layout."""
+    e = html.escape
+    base = reads[0]
+    single = len(reads) == 1
+    parts = _page_head(base.title)
+    parts.append(site.nav(None, 1))
+    links = ["<a class='back' href='log.html'>log a session</a>"]
+    if single:
+        links.append(f"<a class='back mt-edit' href='#' "
+                     f"data-slug='{e(base.slug)}'>edit</a>")
+    links.append(f"<a class='back' href='#' id='mt-readagain' "
+                 f"data-slug='{e(base.slug)}'>read again</a>")
+    parts.append(" &middot; ".join(links))
+
+    cover = _cover_url(base, covers_cache)
+    hue = lists_gen._tile_hue(base.title)
+    img = (f"<img class='cover' src='{e(cover)}' alt='{e(base.title)} cover'>"
+           if cover else f"<div class='bignoimg' style='background:"
+                         f"hsl({hue},35%,32%)'>{e(base.title)}</div>")
+    bits = [f"<h1>{e(base.title)}</h1>"]
+    if base.author:
+        bits.append(f"<div class='meta'>{e(base.author)}</div>")
+    if single:
+        if base.rating is not None:
+            bits.append(
+                f"<div style='margin-top:6px'>{_stars(base.rating)}</div>")
+        bits.append(f"<div class='meta' style='margin-top:6px'>"
+                    f"{_status_line(base)}</div>")
+    else:
+        bits.append(f"<div class='meta' style='margin-top:6px'>"
+                    f"{len(reads)} reads</div>")
+    page_count = page_counts.get(base.slug)
     if page_count:
         bits.append(f"<div class='meta'>{page_count} pages "
-                    f"<span title='source'>({e(pc_source)})</span></div>")
+                    f"<span title='source'>"
+                    f"({e(sources.get(base.slug) or '')})</span></div>")
     parts.append(f"<div class='head'>{img}<div>{''.join(bits)}</div></div>")
 
-    per_day = daily_pages(book, page_count, warn=warn)
-    sessions = book.parsed_sessions()
-    if sessions:
-        parts.append("<h2>Sessions</h2><table>"
-                     "<tr><th>date</th><th>at page</th><th>pages</th></tr>")
-        prev = 0
-        for day, page in sessions:
-            delta = max(0, page - prev)
-            prev = max(prev, page)
-            parts.append(f"<tr><td>{day}</td><td>{page}</td>"
-                         f"<td>{delta}</td></tr>")
-        parts.append("</table>")
-        days = sorted(per_day)
-        peak = max(per_day.values()) or 1
-        bars = "".join(
-            f"<div class='b' style='height:{max(2, round(per_day[d] * 100 / peak))}%'"
-            f" title='{d}: {per_day[d]} pages'><span>{per_day[d]}</span></div>"
-            for d in days)
-        parts.append(f"<div class='chart'>{bars}</div>")
+    for n, read in enumerate(reads, 1):
+        if not single:
+            parts.append("<div class='readsec'>")
+            parts.append(f"<h2>Read {n} <a class='back mt-edit' href='#' "
+                         f"data-slug='{e(read.slug)}'>edit</a></h2>")
+            meta = _status_line(read)
+            if read.rating is not None:
+                meta += f" &middot; {_stars(read.rating)}"
+            parts.append(f"<div class='meta'>{meta}</div>")
+        per_day = daily_pages(read, page_counts.get(read.slug), warn=warn)
+        sessions = read.parsed_sessions()
+        if sessions:
+            if single:
+                parts.append("<h2>Sessions</h2>")
+            parts.append("<table>"
+                         "<tr><th>date</th><th>at page</th><th>pages</th></tr>")
+            prev = 0
+            for day, page in sessions:
+                delta = max(0, page - prev)
+                prev = max(prev, page)
+                parts.append(f"<tr><td>{day}</td><td>{page}</td>"
+                             f"<td>{delta}</td></tr>")
+            parts.append("</table>")
+            days = sorted(per_day)
+            peak = max(per_day.values()) or 1
+            bars = "".join(
+                f"<div class='b' style='height:{max(2, round(per_day[d] * 100 / peak))}%'"
+                f" title='{d}: {per_day[d]} pages'><span>{per_day[d]}</span></div>"
+                for d in days)
+            parts.append(f"<div class='chart'>{bars}</div>")
+        if not single:
+            parts.append("</div>")
     parts.append("<script src='edit.js'></script>"
-                 f"<script>mtBookPage('{e(book.slug)}')</script>"
+                 "<script>mtBookPage()</script>"
                  "</body></html>")
     return "".join(parts)
 
@@ -1062,11 +1165,17 @@ def reading_links(log_path: Path = LOG_PATH) -> dict:
         log = load_log(log_path)
     except (ValueError, json.JSONDecodeError):
         return {}
-    return {b.cache_key: {
-        "href": f"../reading/{b.slug}.html",
-        "rating": (b.rating if b.status == "finished"
-                   and b.rating is not None else None),
-    } for b in log.books}
+    groups, _ = group_reads(log.books)
+    out = {}
+    for key, reads in groups.items():
+        rated = [b for b in reads
+                 if b.status == "finished" and b.rating is not None]
+        out[key] = {
+            "href": f"../reading/{reads[0].slug}.html",
+            "rating": (max(rated, key=lambda b: b.finished or "").rating
+                       if rated else None),
+        }
+    return out
 
 
 def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
@@ -1101,6 +1210,7 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
     films_by_day = watching_gen.films_by_date(films)
 
     warn = (lambda msg: log(f"  WARNING: {msg}")) if log else None
+    groups, base_of = group_reads(rlog.books)
     out_dir.mkdir(parents=True, exist_ok=True)
     written = []
     edit_js = out_dir / "edit.js"
@@ -1108,24 +1218,27 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
     written.append(edit_js)
     index = out_dir / "index.html"
     index.write_text(render_calendar(rlog, page_counts, covers_cache,
-                                     warn=warn, films_by_day=films_by_day),
+                                     warn=warn, films_by_day=films_by_day,
+                                     base_of=base_of),
                      encoding="utf-8")
     written.append(index)
     flat = out_dir / "list.html"
     flat.write_text(render_flat_list(rlog, page_counts, covers_cache,
-                                     warn=warn, films_by_day=films_by_day),
+                                     warn=warn, films_by_day=films_by_day,
+                                     base_of=base_of),
                     encoding="utf-8")
     written.append(flat)
-    for book in rlog.books:
-        out = out_dir / f"{book.slug}.html"
-        out.write_text(render_book(book, page_counts[book.slug],
-                                   sources[book.slug], covers_cache),
+    for reads in groups.values():
+        out = out_dir / f"{reads[0].slug}.html"
+        out.write_text(render_book_group(reads, page_counts, sources,
+                                         covers_cache),
                        encoding="utf-8")
         written.append(out)
 
     # prune pages for books deleted from the log (log/index/list are in
-    # RESERVED_SLUGS, so hand-written pages survive)
-    keep = RESERVED_SLUGS | {b.slug for b in rlog.books}
+    # RESERVED_SLUGS, so hand-written pages survive); re-read slugs get
+    # no page of their own, so any old <base>-2.html prunes here too
+    keep = RESERVED_SLUGS | {reads[0].slug for reads in groups.values()}
     for stale in out_dir.glob("*.html"):
         if stale.stem not in keep:
             stale.unlink()

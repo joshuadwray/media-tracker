@@ -43,14 +43,21 @@
   Remaining: richer metadata (genres/description via iTunes?).
 - Calendar shows one month at a time (2026-07-19) — older/newer
   buttons, newest first; JS-off falls back to the full stack.
-- Create new lists from the web — lists/edit.html only edits
-  existing lists today.
+- ~~Create new lists from the web — lists/edit.html only edits
+  existing lists today.~~ Done 2026-07-19: "+ new list" button
+  (title + ranked toggle) creates `lists/<stem>.yaml` via a sha-less
+  Contents PUT, then loads the empty list for item entry.
 - UI pass: partly done 2026-07-19 — shared BASE_CSS + pill-tab nav in
   tracker/site.py (generators dieted; nav pasted into the 3 hand-written
   pages). Remaining: calendar page polish.
 
 ## Reading-log follow-ups
-- Re-reads: second pass through a book (`slug-2` convention).
+- ~~Re-reads: second pass through a book (`slug-2` convention).~~
+  Done 2026-07-19: log entries stay one-per-read (`<base>-2` slugs);
+  generation groups by title|author onto ONE page at the base slug
+  ("Read N" sections, per-read editors), diary/list-tile links resolve
+  to the base page, list-tile rating = latest finished read. "read
+  again" link on book pages clones the entry via edit.js.
 - ~~Surface ratings on list tiles (star overlay for finished books).~~
   Done 2026-07-18: ★ badge on tiles + finish-date chip on the calendar.
 - Streak / chart polish on the calendar.
