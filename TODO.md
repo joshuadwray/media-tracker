@@ -60,6 +60,22 @@
   retry-after-N-days rule (manual fix today: delete the cache entry or
   set the count on the card).
 
+## Investigate
+- **cloudLibrary consortium title-sharing vs `owned=yes`** (user,
+  2026-07-19). Per a Denton library employee, Denton is in some sharing
+  network where a title not in use at its home library temporarily
+  appears in (and later disappears from) Denton's catalog — one of the
+  reasons these checks exist. Open question: do shared-in titles count
+  as `owned=yes` in the search API, or only permanent holdings? If
+  shared titles need `owned=any`, we can't just revert (owned=any =
+  whole marketplace, the 2026-07-19 false-positive source); we'd need a
+  middle path — e.g. probe a known shared-in title while it's visible,
+  or check whether the record JSON carries an ownership/consortium
+  field (`raw` keeps only the first 12 keys; look at the full node).
+  Research approach: when a title notification appears and then the
+  title vanishes from the patron site, immediately probe it with
+  owned=yes vs owned=any and diff the record fields.
+
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a
   reCAPTCHA-gated bearer token.
