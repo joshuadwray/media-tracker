@@ -21,8 +21,14 @@
   newest first) with a calendar · list toggle on both pages.
 - Edit diary entries individually (watching/log.json entries are
   sync-only today; reading edits go through log.html's whole-file save).
-- Page counts on the calendar fix — the pg/goal display refinements
-  deferred from the unified-diary pass.
+- ~~Page counts on the calendar fix — the pg/goal display refinements
+  deferred from the unified-diary pass.~~
+  Done 2026-07-19: dropped the per-day pg number entirely (the flat list
+  view shows page numbers; kept the green goal-day border + stats panel).
+- Book pages like the movie pages — richer per-book pages à la
+  `docs/watching/<slug>.html`.
+- Create new lists from the web — lists/edit.html only edits
+  existing lists today.
 - UI pass: calendar page polish, cleaner tabs/links/organization
   across the site nav surfaces.
 

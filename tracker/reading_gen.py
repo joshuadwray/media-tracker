@@ -358,8 +358,6 @@ a { color: var(--accent); } a.back { font-size: .85rem; }
 .day.blank { border: none; }
 .day.goal { border-color: var(--ok); box-shadow: inset 0 0 0 1px var(--ok); }
 .day .dn { opacity: .55; }
-.day .pg { position: absolute; bottom: 2px; right: 4px; font-weight: 700; }
-.day.goal .pg { color: var(--ok); }
 .thumbs { display: flex; gap: 2px; margin-top: 2px; }
 .thumbs img { width: 22px; aspect-ratio: 2 / 3; object-fit: cover;
        border-radius: 3px; }
@@ -537,9 +535,8 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                     tt = tt[:2] + [f"<span class='more'>+{len(tt) - 2}"
                                    "</span>"]
                 thumbs = f"<div class='thumbs'>{''.join(tt)}</div>"
-            pg = f"<span class='pg'>{pages}</span>" if pages > 0 else ""
             parts.append(f"<div class='{cls}'>"
-                         f"<span class='dn'>{day.day}</span>{thumbs}{pg}"
+                         f"<span class='dn'>{day.day}</span>{thumbs}"
                          "</div>")
         parts.append("</div></div>")
     if not months:
