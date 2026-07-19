@@ -1,0 +1,6 @@
+title: 2026
+kind: books
+ranked: true
+# File order IS the rank. Per-item optional fields:
+#   cover: https://...jpg   — manual cover URL, always wins over lookup
+items:
