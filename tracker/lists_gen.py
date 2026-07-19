@@ -30,6 +30,8 @@ from pathlib import Path
 import requests
 import yaml
 
+from . import site
+
 ROOT = Path(__file__).resolve().parent.parent
 LISTS_DIR = ROOT / "lists"
 OUT_DIR = ROOT / "docs" / "lists"
@@ -288,7 +290,8 @@ def render_index(blists: list) -> str:
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>lists</title>",
-        f"<style>{_CSS}</style></head><body>",
+        f"<style>{_CSS}{site.NAV_CSS}</style></head><body>",
+        site.nav("lists", 1),
         "<h1>Lists</h1><ul class='lists'>",
     ]
     for bl in blists:
@@ -297,9 +300,6 @@ def render_index(blists: list) -> str:
                      f"<a href='edit.html?list={e(bl.stem)}'>edit</a></span>"
                      "</li>")
     parts.append("</ul>")
-    parts.append("<div class='meta' style='margin-top:18px'>"
-                 "<a href='../reading/'>&#128214; reading</a> &middot; "
-                 "<a href='../add.html'>+ add to watchlist</a></div>")
     parts.append("</body></html>")
     return "".join(parts)
 

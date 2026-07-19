@@ -65,9 +65,11 @@ def main(argv: list[str] | None = None) -> int:
                          help="never hit Open Library; uncached items get "
                               "typographic tiles")
 
-    p_reading = sub.add_parser("reading", help="render docs/reading/ pages "
-                                               "from reading/log.json "
-                                               "(page counts cached)")
+    p_reading = sub.add_parser("reading", help="render the diary: "
+                                               "docs/reading/ calendar + "
+                                               "book pages + docs/watching/ "
+                                               "film pages (page counts "
+                                               "cached)")
     p_reading.add_argument("--no-fetch", action="store_true",
                            help="never hit iTunes/Open Library; uncached "
                                 "books get no page count")

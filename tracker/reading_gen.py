@@ -31,7 +31,7 @@ from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-from . import lists_gen
+from . import lists_gen, site
 
 ROOT = Path(__file__).resolve().parent.parent
 READING_DIR = ROOT / "reading"
@@ -366,14 +366,20 @@ a { color: var(--accent); } a.back { font-size: .85rem; }
 .thumbs .dot { width: 22px; aspect-ratio: 2 / 3; border-radius: 3px;
        background: hsl(210,35%,40%); }
 .thumbs .th { position: relative; display: block; }
+.thumbs .film img { box-shadow: 0 0 0 1.5px var(--accent); }
+.thumbs .more { width: 22px; aspect-ratio: 2 / 3; border-radius: 3px;
+       background: rgba(128,128,128,.25); display: flex;
+       align-items: center; justify-content: center;
+       font-size: .6rem; font-weight: 700; }
+.heart { color: #e05263; }
 .fchip { position: absolute; bottom: 2px; left: 50%;
        transform: translateX(-50%); background: rgba(0,0,0,.78);
        color: #ffd166; font-size: .58rem; font-weight: 700;
        padding: 0 4px; border-radius: 999px; white-space: nowrap; }
 @media (min-width: 520px) { .day { min-height: 80px; font-size: .78rem; }
-       .thumbs img, .thumbs .dot { width: 28px; } }
+       .thumbs img, .thumbs .dot, .thumbs .more { width: 28px; } }
 @media (min-width: 760px) { .day { min-height: 92px; }
-       .thumbs img, .thumbs .dot { width: 34px; } }
+       .thumbs img, .thumbs .dot, .thumbs .more { width: 34px; } }
 .cover, .bignoimg { width: 140px; aspect-ratio: 2 / 3; border-radius: 8px;
        border: 1px solid var(--line); object-fit: cover; }
 .bignoimg { display: flex; align-items: center; justify-content: center;
@@ -401,7 +407,7 @@ def _page_head(title: str) -> list:
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         f"<title>{e(title)}</title>",
-        f"<style>{_CSS}</style></head><body>",
+        f"<style>{_CSS}{site.NAV_CSS}</style></head><body>",
     ]
 
 
@@ -421,15 +427,17 @@ def _stars(rating: float) -> str:
 
 
 def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
-                    today: date | None = None, warn=None) -> str:
+                    today: date | None = None, warn=None,
+                    films_by_day: dict | None = None) -> str:
     e = html.escape
     today = today or date.today()
+    films_by_day = films_by_day or {}
     totals, readers = pages_by_date(log.books, page_counts, warn=warn)
     goal = log.daily_goal
-    parts = _page_head("reading")
-    parts.append("<a class='back' href='../lists/'>&larr; lists</a> &middot; "
-                 "<a class='back' href='log.html'>log a session</a>")
-    parts.append("<h1>Reading</h1>")
+    parts = _page_head("diary")
+    parts.append(site.nav("diary", 1))
+    parts.append("<a class='back' href='log.html'>log a session</a>")
+    parts.append("<h1>Diary</h1>")
 
     reading_now = [b for b in log.books if b.status == "reading"]
     if reading_now:
@@ -461,7 +469,9 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                  f"<div class='l'>this week (goal {goal * 7})</div></div>"
                  "</div>")
 
-    months = sorted({(d.year, d.month) for d in totals}, reverse=True)
+    months = sorted({(d.year, d.month) for d in totals}
+                    | {(d.year, d.month) for d in films_by_day},
+                    reverse=True)
     cal = _calendar.Calendar(firstweekday=6)  # Sunday first
     for year, month in months:
         parts.append(f"<div class='month'><h3>"
@@ -474,10 +484,11 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                 continue
             pages = totals.get(day, 0)
             cls = "day goal" if goal and pages >= goal else "day"
+            day_films = films_by_day.get(day, [])
             thumbs = ""
-            if pages > 0:
+            if pages > 0 or day_films:
                 tt = []
-                for book in readers.get(day, [])[:3]:
+                for book in readers.get(day, []):
                     cover = _cover_url(book, covers_cache)
                     th = (f"<img src='{e(cover)}' alt='' loading='lazy'>"
                           if cover else "<div class='dot'></div>")
@@ -491,6 +502,23 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                                 f"title='{book.rating:g}/5'>"
                                 f"\u2605{whole}{half}</span>")
                     tt.append(f"<span class='th'>{th}{chip}</span>")
+                for film in day_films:
+                    poster = film.get("poster_url")
+                    th = (f"<img src='{e(poster)}' alt='' loading='lazy'>"
+                          if poster else "<div class='dot'></div>")
+                    chip = ""
+                    if film.get("rating") is not None:
+                        whole = int(film["rating"])
+                        half = "\u00bd" if film["rating"] - whole else ""
+                        chip = (f"<span class='fchip' "
+                                f"title='{film['rating']:g}/5'>"
+                                f"\u2605{whole}{half}</span>")
+                    tt.append(
+                        f"<a class='th film' href='../watching/"
+                        f"{e(film.get('slug') or '')}.html'>{th}{chip}</a>")
+                if len(tt) > 3:
+                    tt = tt[:2] + [f"<span class='more'>+{len(tt) - 2}"
+                                   "</span>"]
                 thumbs = f"<div class='thumbs'>{''.join(tt)}</div>"
             pg = f"<span class='pg'>{pages}</span>" if pages > 0 else ""
             parts.append(f"<div class='{cls}'>"
@@ -508,8 +536,8 @@ def render_book(book: Book, page_count: int | None, pc_source: str,
                 covers_cache: dict, warn=None) -> str:
     e = html.escape
     parts = _page_head(book.title)
-    parts.append("<a class='back' href='./'>&larr; calendar</a> &middot; "
-                 "<a class='back' href='log.html'>log a session</a>")
+    parts.append(site.nav(None, 1))
+    parts.append("<a class='back' href='log.html'>log a session</a>")
 
     cover = _cover_url(book, covers_cache)
     hue = lists_gen._tile_hue(book.title)
@@ -597,12 +625,19 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
         page_counts[book.slug] = pages
         sources[book.slug] = source
 
+    from . import watching_gen  # late import: watching_gen uses our helpers
+    films = []
+    if watching_gen.LOG_PATH.exists():
+        _, films = watching_gen.load_log()
+    films_by_day = watching_gen.films_by_date(films)
+
     warn = (lambda msg: log(f"  WARNING: {msg}")) if log else None
     out_dir.mkdir(parents=True, exist_ok=True)
     written = []
     index = out_dir / "index.html"
     index.write_text(render_calendar(rlog, page_counts, covers_cache,
-                                     warn=warn), encoding="utf-8")
+                                     warn=warn, films_by_day=films_by_day),
+                     encoding="utf-8")
     written.append(index)
     for book in rlog.books:
         out = out_dir / f"{book.slug}.html"
@@ -620,4 +655,5 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
         lists_gen.save_cache(covers_cache)
     if log:
         log(f"reading: {len(rlog.books)} book(s) -> {out_dir}")
+    written += watching_gen.build_all(log=log)
     return written

@@ -10,6 +10,7 @@ from __future__ import annotations
 import html
 from datetime import datetime, timezone
 
+from . import site
 from .config import Config
 from .models import Observation, SourceResult
 from .state import State
@@ -49,7 +50,8 @@ def build_dashboard(config: Config, results: list[SourceResult],
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>media tracker</title>",
-        f"<style>{_CSS}</style></head><body>",
+        f"<style>{_CSS}{site.NAV_CSS}</style></head><body>",
+        site.nav("tracker", 0),
         "<h1>📚🎬 media tracker</h1>",
         f"<div class='ts'>last checked {e(now)}</div>",
     ]
@@ -93,10 +95,6 @@ def build_dashboard(config: Config, results: list[SourceResult],
     for m in config.movies:
         parts.append(f"<li>🎬 {e(str(m))}</li>")
     parts.append("</ul>")
-    parts.append("<div class='ts' style='margin-top:18px'>"
-                 "<a href='lists/'>lists</a> · "
-                 "<a href='reading/'>reading</a> · "
-                 "<a href='add.html'>+ add</a></div>")
     parts.append("</body></html>")
     return "".join(parts)
 
