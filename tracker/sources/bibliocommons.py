@@ -18,7 +18,7 @@ from typing import Any, Iterator
 
 from .. import http
 from ..config import Config
-from ..matching import titles_match
+from ..matching import author_matches, titles_match
 from ..models import Observation
 from .base import Source, register
 
@@ -79,6 +79,9 @@ class BiblioCommonsSource(Source):
                         continue
                 elif not book.isbn and not titles_match(book.title, title):
                     continue
+                elif not book.isbn and book.author and \
+                        not author_matches(book.author, _author_str(bib)):
+                    continue  # fuzzy title hit on the wrong author
                 fmt = (bib.get("format") or "?").upper()
                 if wanted_formats and fmt not in wanted_formats and "?" != fmt:
                     continue
@@ -135,6 +138,16 @@ class BiblioCommonsSource(Source):
             f"extracted {len(bibs)} bib records:\n"
             + json.dumps(bibs[:5], indent=2)[:3000]
         )
+
+
+def _author_str(bib: dict) -> str | None:
+    authors = bib.get("authors")
+    if isinstance(authors, list):
+        authors = ", ".join(
+            a.get("name", str(a)) if isinstance(a, dict) else str(a)
+            for a in authors
+        )
+    return str(authors) if authors else None
 
 
 _JSON_SCRIPT_RE = re.compile(

@@ -11,12 +11,16 @@
   older/newer pager — 60 months of history means 60 taps otherwise;
   (2) expect the first CI rebuild to crawl (page-count chain is rate-
   limited ~20 req/min per new book; one-time, caches after).
-- **Pages vs local-app asymmetry** — the GH Pages surfaces (dashboard,
-  add, lists + editor, reading log/calendar) are the real app now, while
-  `tracker web` is machine-bound but has the richest add flow
-  (interactive catalog candidate picking; add.html is `--auto` only).
-  Either port the picker to Pages (workflow round-trip for catalog
-  search) or retire `tracker web` once nothing it does is unique.
+- **Pages vs local-app asymmetry** — largely resolved 2026-07-19: the
+  catalog-candidate picker is on Pages now as an *async pin queue*
+  (ambiguous `--auto` adds queue to state/pending-pins.json; add.html
+  shows "needs pinning" cards → pin-item.yml → `tracker pin`). cloudLibrary
+  isn't browser-callable (CORS), hence async rather than live picking.
+  Remaining: retire `tracker web` once the pin queue proves out.
+  Root cause this fixed: bare "yesteryear" add fired false-positive
+  cloudLibrary notifications (fuzzy `titles_match`, no author check) —
+  now guarded by `author_matches` (surname, fail-open) in
+  cloudlibrary/bibliocommons checks + pinning.
 
 ## Diary follow-ups (2026-07-18)
 - ~~Non-calendar diary view — a Soderbergh-style flat chronological list
@@ -41,8 +45,9 @@
   buttons, newest first; JS-off falls back to the full stack.
 - Create new lists from the web — lists/edit.html only edits
   existing lists today.
-- UI pass: calendar page polish, cleaner tabs/links/organization
-  across the site nav surfaces.
+- UI pass: partly done 2026-07-19 — shared BASE_CSS + pill-tab nav in
+  tracker/site.py (generators dieted; nav pasted into the 3 hand-written
+  pages). Remaining: calendar page polish.
 
 ## Reading-log follow-ups
 - Re-reads: second pass through a book (`slug-2` convention).

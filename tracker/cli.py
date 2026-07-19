@@ -3,6 +3,7 @@
   python -m tracker check [--dry-run] [--no-notify] [--source ID]
   python -m tracker add book "title" [--yes]
   python -m tracker add movie "title" [--year 2026] [--yes]
+  python -m tracker pin ID (--choice N | --keep | --remove) [--expect BIB/ISBN]
   python -m tracker probe [--source ID] [--query "..."]
   python -m tracker list
   python -m tracker lists [--no-fetch]
@@ -57,6 +58,20 @@ def main(argv: list[str] | None = None) -> int:
     p_probe.add_argument("--source", help="only probe this source id")
     p_probe.add_argument("--query", help="override the probe search query")
 
+    p_pin = sub.add_parser("pin", help="resolve a pending-pin record queued "
+                                       "by an ambiguous mobile add")
+    p_pin.add_argument("id", help="pending record id from state/pending-pins.json")
+    group = p_pin.add_mutually_exclusive_group(required=True)
+    group.add_argument("--choice", type=int,
+                       help="1-based candidate number to pin the entry to")
+    group.add_argument("--keep", action="store_true",
+                       help="keep the entry as typed (fuzzy matching)")
+    group.add_argument("--remove", action="store_true",
+                       help="remove the entry from the watchlist")
+    p_pin.add_argument("--expect",
+                       help="optional bib_id/isbn guard: fail if the chosen "
+                            "candidate doesn't carry it")
+
     sub.add_parser("list", help="show the parsed watchlist")
 
     p_lists = sub.add_parser("lists", help="render docs/lists/ pages from "
@@ -89,6 +104,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_check(config, args)
     if args.command == "add":
         return cmd_add(config, args)
+    if args.command == "pin":
+        return cmd_pin(config, args)
     if args.command == "probe":
         return cmd_probe(config, args)
     if args.command == "list":
@@ -133,9 +150,12 @@ def cmd_check(config: Config, args: argparse.Namespace) -> int:
 
 
 def cmd_add(config: Config, args: argparse.Namespace) -> int:
+    matches: list[dict] = []
     if args.kind == "book":
-        entry = _auto_pick_book(config, args) if args.auto \
-            else _pick_book(config, args)
+        if args.auto:
+            entry, matches = _auto_pick_book(config, args)
+        else:
+            entry = _pick_book(config, args)
         section = "books"
     else:
         entry = {"title": args.title}
@@ -152,13 +172,23 @@ def cmd_add(config: Config, args: argparse.Namespace) -> int:
 
     watchlist_path = Path(args.watchlist) if args.watchlist else \
         Path(__file__).resolve().parent.parent / "watchlist.yaml"
-    append_entry(watchlist_path, section, entry)
+    added = append_entry(watchlist_path, section, entry)
     print(f"added to {section}: {entry}")
     if args.auto:
         if entry.get("bib_id") or entry.get("isbn"):
             how = "pinned to an exact catalog record"
-        elif args.kind == "book":
-            how = "no unambiguous catalog match — watching by title"
+        elif args.kind == "book" and added:
+            # Ambiguous (0 or 2+ catalog matches): queue it so the add
+            # page can surface a "needs pinning" card. The entry still
+            # watches as typed in the meantime.
+            from .pending import add_pending
+            record = add_pending(args.title, args.author, matches)
+            print(f"queued for pinning: {record['id']}")
+            if matches:
+                how = (f"{len(matches)} candidates need pinning — "
+                       "open the add page")
+            else:
+                how = "not found in catalog — open the add page"
         else:
             how = "watching by title"
         _send_note("watchlist add", f"added {args.kind}: {entry['title']} ({how})")
@@ -172,10 +202,13 @@ def _already_watched(config: Config, kind: str,
     return any(f"{kind}:{normalize_key(t)}" in existing for t in titles)
 
 
-def _auto_pick_book(config: Config, args: argparse.Namespace) -> dict:
+def _auto_pick_book(config: Config,
+                    args: argparse.Namespace) -> tuple[dict, list[dict]]:
     """Non-interactive pick: pin a BiblioCommons record when the title
     matches unambiguously; otherwise add as typed (fuzzy title matching
-    still catches it everywhere, including cloudLibrary)."""
+    still catches it everywhere, including cloudLibrary). Returns
+    (entry, title-matched candidates) — the caller queues the candidate
+    list for async pinning when nothing was pinned."""
     from .matching import titles_match
 
     as_typed = {"title": args.title}
@@ -193,11 +226,70 @@ def _auto_pick_book(config: Config, args: argparse.Namespace) -> dict:
                    and (c.get("format") or "").upper() in ("BK", "PAPERBACK")),
                   None) or next((c for c in matches if c.get("bib_id")), None)
     if not pinned:
-        return as_typed
+        return as_typed, matches
     entry = candidate_to_entry(pinned, isbn_override=args.isbn)
     if not args.isbn:
         entry.pop("isbn", None)
-    return entry
+    return entry, matches
+
+
+def cmd_pin(config: Config, args: argparse.Namespace) -> int:
+    """Resolve a queued pending-pin record (see tracker/pending.py)."""
+    from . import pending
+    from .watchlist_io import remove_entry, update_entry
+
+    record = pending.pop(pending.PENDING_PATH, args.id)
+    if record is None:
+        # Already resolved (double-tap from the add page) — nothing to do.
+        print(f"no pending record with id {args.id!r}; already resolved?")
+        return 0
+
+    title = record["typed_title"]
+    watchlist_path = Path(args.watchlist) if args.watchlist else \
+        Path(__file__).resolve().parent.parent / "watchlist.yaml"
+
+    if args.remove:
+        if remove_entry(watchlist_path, "books", title):
+            msg = f"removed from watchlist: {title}"
+        else:
+            msg = f"{title} already gone from watchlist"
+        print(msg)
+        _send_note("watchlist pin", msg, tags="wastebasket")
+        return 0
+
+    if args.keep:
+        msg = f"keeping as typed: {title}"
+        print(msg)
+        _send_note("watchlist pin", msg)
+        return 0
+
+    candidates = record.get("candidates") or []
+    if not 1 <= args.choice <= len(candidates):
+        pending.add_pending(title, record.get("typed_author"), candidates,
+                            kind=record.get("kind", "book"))
+        sys.exit(f"choice {args.choice} out of range (1-{len(candidates)}); "
+                 "record re-queued")
+    picked = candidates[args.choice - 1]
+    if args.expect and args.expect not in (picked.get("bib_id"),
+                                           picked.get("isbn")):
+        pending.add_pending(title, record.get("typed_author"), candidates,
+                            kind=record.get("kind", "book"))
+        sys.exit(f"candidate {args.choice} doesn't carry expected id "
+                 f"{args.expect!r}; record re-queued")
+
+    # Same convention as _auto_pick_book: bib_id pins the library record;
+    # drop the isbn so cloudLibrary keeps title-matching every format.
+    entry = candidate_to_entry(picked)
+    if picked.get("bib_id"):
+        entry.pop("isbn", None)
+    if update_entry(watchlist_path, "books", title, entry):
+        msg = f"pinned {title} -> {entry.get('bib_id') or entry.get('isbn')}"
+    else:
+        # Entry hand-deleted meanwhile — treat as resolved, don't fail.
+        msg = f"{title} no longer on watchlist; nothing to pin"
+    print(msg)
+    _send_note("watchlist pin", msg, tags="pushpin")
+    return 0
 
 
 def _send_note(title: str, message: str, tags: str = "heavy_plus_sign") -> None:

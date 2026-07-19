@@ -32,14 +32,14 @@ def append_entry(path: Path, section: str, entry: dict) -> bool:
     return False
 
 
-def remove_entry(path: Path, section: str, title: str) -> bool:
-    """Remove the entry with this exact title from a section.
+def _find_entry_span(lines: list[str], section: str,
+                     title: str) -> tuple[int, int] | None:
+    """(start, end) line span of the entry with this exact title.
 
     Finds the `- title: ...` line whose parsed value equals `title`
-    (so quoting differences don't matter) and drops it plus its
-    following indented attribute lines. Returns False if not found.
+    (so quoting differences don't matter); the span covers it plus its
+    following indented attribute lines. None if not found.
     """
-    lines = path.read_text().splitlines()
     in_section = False
     for i, line in enumerate(lines):
         stripped = line.strip()
@@ -66,10 +66,40 @@ def remove_entry(path: Path, section: str, title: str) -> bool:
             if nxt_indent <= entry_indent or nxt.lstrip().startswith("- "):
                 break
             end += 1
-        del lines[i:end]
-        path.write_text("\n".join(lines) + "\n")
-        return True
-    return False
+        return i, end
+    return None
+
+
+def remove_entry(path: Path, section: str, title: str) -> bool:
+    """Remove the entry with this exact title from a section.
+    Returns False if not found."""
+    lines = path.read_text().splitlines()
+    span = _find_entry_span(lines, section, title)
+    if span is None:
+        return False
+    del lines[span[0]:span[1]]
+    path.write_text("\n".join(lines) + "\n")
+    return True
+
+
+def update_entry(path: Path, section: str, title: str, new_entry: dict) -> bool:
+    """Replace the entry with this exact title by new_entry, in place.
+
+    Splice-based like the rest of the module (comments elsewhere in the
+    file survive), but inline comments INSIDE the replaced entry's own
+    lines are lost. Returns False if the entry isn't found.
+    """
+    lines = path.read_text().splitlines()
+    span = _find_entry_span(lines, section, title)
+    if span is None:
+        return False
+    snippet = [f"  - title: {yaml_str(new_entry['title'])}"]
+    for k, v in new_entry.items():
+        if k != "title":
+            snippet.append(f"    {k}: {yaml_str(v)}")
+    lines[span[0]:span[1]] = snippet
+    path.write_text("\n".join(lines) + "\n")
+    return True
 
 
 def yaml_str(v: object) -> str:

@@ -33,11 +33,26 @@ input { font: inherit; padding: 12px; border-radius: 10px;
 details { margin-top: 26px; }
 summary { color: var(--mut); cursor: pointer; }
 a { color: var(--accent); }
-.sitenav{font-size:.85rem;margin-bottom:12px} .sitenav b{font-weight:700} .sitenav .sep{opacity:.4}
+.sitenav { display: flex; gap: 8px; flex-wrap: wrap; font-size: .85rem;
+  margin-bottom: 16px; }
+.sitenav a, .sitenav b { padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line); text-decoration: none; color: inherit; }
+.sitenav b { background: var(--accent); border-color: var(--accent);
+  color: #fff; font-weight: 600; }
+#pending { margin-top: 24px; }
+#pending h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--mut); margin: 0 0 8px; }
+.pcard { border: 1px solid var(--line); border-radius: 10px; padding: 12px;
+  margin-bottom: 12px; }
+.pcard .ptitle { font-weight: 600; }
+.pcard .page { color: var(--mut); font-size: .82rem; margin-left: 6px; }
+.pcard button { display: block; width: 100%; text-align: left;
+  margin-top: 8px; padding: 10px 12px; font-size: .92rem; }
+.pcard button.alt { color: var(--mut); }
 </style>
 </head>
 <body>
-<div class='sitenav'><a href='index.html'>tracker</a> <span class='sep'>&middot;</span> <a href='reading/'>diary</a> <span class='sep'>&middot;</span> <a href='lists/'>lists</a> <span class='sep'>&middot;</span> <b>+ add</b></div>
+<div class='sitenav'><a href='index.html'>tracker</a><a href='reading/'>diary</a><a href='lists/'>lists</a><b>+ add</b></div>
 <h1>&#128218;&#127916; add to watchlist</h1>
 
 <div class="tabs">
@@ -55,6 +70,8 @@ a { color: var(--accent); }
   you&rsquo;ll get an ntfy push in a minute or two confirming what was added
   (and any immediate sightings).
 </div>
+
+<div id="pending" style="display:none"></div>
 
 <div class="muted" style="margin-top:20px">
   <a href="lists/">&#128218; book lists &rarr;</a>
@@ -110,28 +127,132 @@ async function go() {
 
   $('goBtn').disabled = true;
   status('sending\u2026');
+  const r = await dispatch(WORKFLOW, inputs);
+  if (r && r.status === 204) {
+    status(`sent \u2014 "${title}" is being verified; watch for the ntfy push`, 'ok');
+    $('title').value = ''; $('year').value = '';
+    setTimeout(loadPending, 5000);
+  }
+  $('goBtn').disabled = false;
+}
+
+// Fire a workflow_dispatch; reports errors via status(). Returns the
+// Response (or null on network error) — 204 means accepted.
+async function dispatch(workflow, inputs) {
+  const token = localStorage.getItem('mt_pat');
+  if (!token) { status('no token yet — open "token setup" below', 'err');
+    $('setup').open = true; return null; }
   try {
     const r = await fetch(
-      `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,
+      `https://api.github.com/repos/${REPO}/actions/workflows/${workflow}/dispatches`,
       { method: 'POST',
         headers: { 'Authorization': 'Bearer ' + token,
                    'Accept': 'application/vnd.github+json',
                    'Content-Type': 'application/json' },
         body: JSON.stringify({ ref: 'main', inputs }) });
-    if (r.status === 204) {
-      status(`sent \u2014 "${title}" is being verified; watch for the ntfy push`, 'ok');
-      $('title').value = ''; $('year').value = '';
-    } else if (r.status === 401) {
+    if (r.status === 401) {
       status('token rejected (expired?) \u2014 make a new one in token setup', 'err');
-    } else {
+    } else if (r.status !== 204) {
       const data = await r.json().catch(() => ({}));
       status(`GitHub said ${r.status}: ${data.message || 'unknown error'}`, 'err');
     }
+    return r;
   } catch (e) {
     status('network error: ' + e.message, 'err');
+    return null;
   }
-  $('goBtn').disabled = false;
 }
+
+// ---- async pin queue (state/pending-pins.json) ----
+
+async function loadPending() {
+  const box = $('pending');
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/state/pending-pins.json?ref=main`,
+      { headers: { 'Accept': 'application/vnd.github.raw+json' } });
+    if (!r.ok) { box.style.display = 'none'; return; }
+    const data = await r.json();
+    renderPending(data.pending || []);
+  } catch (e) { box.style.display = 'none'; }
+}
+
+function renderPending(records) {
+  const box = $('pending');
+  box.textContent = '';
+  if (!records.length) { box.style.display = 'none'; return; }
+  const h = document.createElement('h2');
+  h.textContent = 'needs pinning';
+  box.appendChild(h);
+  for (const rec of records) box.appendChild(pinCard(rec));
+  box.style.display = '';
+}
+
+function pinCard(rec) {
+  const card = document.createElement('div');
+  card.className = 'pcard';
+  const head = document.createElement('div');
+  const t = document.createElement('span');
+  t.className = 'ptitle'; t.textContent = rec.typed_title;
+  const age = document.createElement('span');
+  age.className = 'page'; age.textContent = ago(rec.added);
+  head.appendChild(t); head.appendChild(age);
+  card.appendChild(head);
+
+  const cands = rec.candidates || [];
+  if (!cands.length) {
+    const n = document.createElement('div');
+    n.className = 'muted'; n.style.marginTop = '6px';
+    n.textContent = 'not found in catalog';
+    card.appendChild(n);
+  }
+  cands.forEach((c, i) => {
+    const bits = [c.title || '?'];
+    if (c.author) bits.push(c.author);
+    if (c.format) bits.push(c.format);
+    const b = document.createElement('button');
+    b.textContent = bits.join(' \u2014 ') + (c.source ? ` [${c.source}]` : '');
+    b.onclick = () => resolvePin(card, rec, 'pin', i + 1,
+                                 c.bib_id || c.isbn || '');
+    card.appendChild(b);
+  });
+  const keep = document.createElement('button');
+  keep.className = 'alt'; keep.textContent = 'keep as typed';
+  keep.onclick = () => resolvePin(card, rec, 'keep');
+  card.appendChild(keep);
+  const rm = document.createElement('button');
+  rm.className = 'alt'; rm.textContent = 'remove entry';
+  rm.onclick = () => resolvePin(card, rec, 'remove');
+  card.appendChild(rm);
+  return card;
+}
+
+async function resolvePin(card, rec, action, choice, expect) {
+  const inputs = { id: rec.id, action };
+  if (action === 'pin') {
+    inputs.choice = String(choice);
+    if (expect) inputs.expect = String(expect);
+  }
+  for (const b of card.querySelectorAll('button')) b.disabled = true;
+  const r = await dispatch('pin-item.yml', inputs);
+  if (r && r.status === 204) {
+    card.remove();
+    if (!$('pending').querySelector('.pcard')) $('pending').style.display = 'none';
+    status(`${action === 'remove' ? 'removing' : 'pinning'} \u2014 ntfy will confirm`, 'ok');
+  } else {
+    for (const b of card.querySelectorAll('button')) b.disabled = false;
+  }
+}
+
+function ago(iso) {
+  if (!iso) return '';
+  const mins = Math.max(0, (Date.now() - Date.parse(iso)) / 60000);
+  if (mins < 60) return `${Math.round(mins)}m ago`;
+  if (mins < 48 * 60) return `${Math.round(mins / 60)}h ago`;
+  return `${Math.round(mins / 1440)}d ago`;
+}
+
+loadPending();
 </script>
 </body>
 </html>

@@ -44,11 +44,16 @@ button.expand { width: 100%; margin-top: 10px; color: var(--mut); }
 details { margin-top: 26px; }
 summary { color: var(--mut); cursor: pointer; }
 a { color: var(--accent); }
-.sitenav{font-size:.85rem;margin-bottom:12px} .sitenav b{font-weight:700} .sitenav .sep{opacity:.4}
+.sitenav { display: flex; gap: 8px; flex-wrap: wrap; font-size: .85rem;
+  margin-bottom: 16px; }
+.sitenav a, .sitenav b { padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--line); text-decoration: none; color: inherit; }
+.sitenav b { background: var(--accent); border-color: var(--accent);
+  color: #fff; font-weight: 600; }
 </style>
 </head>
 <body>
-<div class='sitenav'><a href='../index.html'>tracker</a> <span class='sep'>&middot;</span> <a href='../reading/'>diary</a> <span class='sep'>&middot;</span> <a href='../lists/'>lists</a> <span class='sep'>&middot;</span> <a href='../add.html'>+ add</a></div>
+<div class='sitenav'><a href='../index.html'>tracker</a><a href='../reading/'>diary</a><a href='../lists/'>lists</a><a href='../add.html'>+ add</a></div>
 <h1>&#9999;&#65039; edit list</h1>
 
 <select id="picker" onchange="loadList(this.value)"></select>

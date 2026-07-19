@@ -16,15 +16,6 @@ from .models import Observation, SourceResult
 from .state import State
 
 _CSS = """
-:root { color-scheme: light dark; }
-* { box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-       sans-serif; margin: 0 auto; max-width: 640px; padding: 16px;
-       line-height: 1.45; }
-h1 { font-size: 1.3rem; margin: 0 0 2px; }
-h2 { font-size: 1rem; margin: 22px 0 8px; text-transform: uppercase;
-     letter-spacing: .04em; opacity: .65; }
-.ts { font-size: .85rem; opacity: .6; }
 .card { border: 1px solid rgba(128,128,128,.35); border-radius: 10px;
         padding: 10px 12px; margin-bottom: 8px; }
 .card.new { border-left: 5px solid #2e7d32; }
@@ -50,10 +41,10 @@ def build_dashboard(config: Config, results: list[SourceResult],
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>media tracker</title>",
-        f"<style>{_CSS}{site.NAV_CSS}</style></head><body>",
+        f"<style>{site.BASE_CSS}{_CSS}</style></head><body>",
         site.nav("tracker", 0),
         "<h1>📚🎬 media tracker</h1>",
-        f"<div class='ts'>last checked {e(now)}</div>",
+        f"<div class='meta'>last checked {e(now)}</div>",
     ]
 
     parts.append(f"<h2>New this run ({len(new)})</h2>")

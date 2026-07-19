@@ -321,18 +321,7 @@ def _streak(totals: dict, today: date) -> int:
 # ------------------------------------------------------------------ html
 
 _CSS = """
-:root { color-scheme: light dark;
-  --line: rgba(128,128,128,.35); --mut: rgba(128,128,128,.85);
-  --ok: #2e7d32; --accent: #1565c0; }
-* { box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-       sans-serif; margin: 0 auto; max-width: 860px; padding: 16px;
-       line-height: 1.4; }
-h1 { font-size: 1.35rem; margin: 0 0 2px; }
-h2 { font-size: 1rem; margin: 22px 0 8px; text-transform: uppercase;
-     letter-spacing: .04em; opacity: .65; }
-.meta { font-size: .85rem; opacity: .6; }
-a { color: var(--accent); } a.back { font-size: .85rem; }
+a.back { font-size: .85rem; }
 .stats { display: flex; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
 .stat { border: 1px solid var(--line); border-radius: 10px;
         padding: 8px 14px; text-align: center; }
@@ -760,7 +749,8 @@ def _page_head(title: str) -> list:
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         f"<title>{e(title)}</title>",
-        f"<style>{_CSS}{site.NAV_CSS}</style></head><body>",
+        f"<style>{site.BASE_CSS}{_CSS}</style></head>"
+        "<body style='--pagew:860px'>",
     ]
 
 

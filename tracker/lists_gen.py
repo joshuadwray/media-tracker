@@ -193,13 +193,7 @@ def _openlibrary_lookup(session, title: str, author: str) -> dict | None:
 # ------------------------------------------------------------------ html
 
 _CSS = """
-:root { color-scheme: light dark; }
-* { box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-       sans-serif; margin: 0 auto; max-width: 860px; padding: 16px;
-       line-height: 1.4; }
-h1 { font-size: 1.35rem; margin: 0 0 2px; }
-.meta { font-size: .85rem; opacity: .6; margin-bottom: 18px; }
+.meta { margin-bottom: 18px; }
 a.back { font-size: .85rem; }
 ol.grid { list-style: none; margin: 0; padding: 0; display: grid;
           gap: 16px 12px; grid-template-columns: repeat(2, 1fr); }
@@ -247,7 +241,9 @@ def render_list(blist: BookList, covers: list,
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         f"<title>{e(blist.title)}</title>",
-        f"<style>{_CSS}</style></head><body>",
+        f"<style>{site.BASE_CSS}{_CSS}</style></head>"
+        "<body style='--pagew:860px'>",
+        site.nav(None, 1),
         "<a class='back' href='./'>&larr; all lists</a> &middot; "
         f"<a class='back' href='edit.html?list={e(blist.stem)}'>edit</a>",
         f"<h1>{e(blist.title)}</h1>",
@@ -290,7 +286,8 @@ def render_index(blists: list) -> str:
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>lists</title>",
-        f"<style>{_CSS}{site.NAV_CSS}</style></head><body>",
+        f"<style>{site.BASE_CSS}{_CSS}</style></head>"
+        "<body style='--pagew:860px'>",
         site.nav("lists", 1),
         "<h1>Lists</h1><ul class='lists'>",
     ]

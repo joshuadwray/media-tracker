@@ -16,7 +16,7 @@ from typing import Any
 
 from .. import http
 from ..config import Config
-from ..matching import titles_match
+from ..matching import author_matches, titles_match
 from ..models import Observation
 from .base import Source, register
 
@@ -77,6 +77,9 @@ class CloudLibrarySource(Source):
                 title = item.get("title") or ""
                 if not book.isbn and not titles_match(book.title, title):
                     continue
+                if not book.isbn and book.author and \
+                        not author_matches(book.author, _raw_authors(item)):
+                    continue  # fuzzy title hit on the wrong author
                 fmt = item.get("format") or "ebook/audio"
                 observations.append(Observation(
                     source=self.source_id,
@@ -150,6 +153,14 @@ class CloudLibrarySource(Source):
             f"query: {q!r}\n{transcript}\n\nfirst items:\n"
             + json.dumps(items[:5], indent=2, default=str)[:3000]
         )
+
+
+def _raw_authors(item: dict) -> str | None:
+    raw = item.get("raw", {})
+    authors = raw.get("Authors") or raw.get("authors")
+    if isinstance(authors, list):
+        authors = ", ".join(str(a) for a in authors)
+    return str(authors) if authors else None
 
 
 def _parse_items(data: Any) -> list[dict[str, Any]]:

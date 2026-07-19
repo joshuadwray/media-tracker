@@ -63,6 +63,22 @@ def _sequel_suffix(remainder: str) -> bool:
     return first in _SEQUEL_WORDS or first.isdigit()
 
 
+def author_matches(wanted: str, found: str | None) -> bool:
+    """True if a found author plausibly is the watched author.
+
+    Surname check: the last token of the normalized wanted author must
+    appear (word boundary) in the normalized found author. Fails OPEN
+    when the source didn't report an author — presence checks shouldn't
+    drop records over missing metadata.
+    """
+    if not found:
+        return True
+    surname = normalize_blob(wanted).split()[-1:]
+    if not surname:
+        return True
+    return surname[0] in normalize_blob(found).split()
+
+
 def text_contains_title(page_text: str, title: str) -> bool:
     """True if a blob of page text mentions the title as a phrase.
 

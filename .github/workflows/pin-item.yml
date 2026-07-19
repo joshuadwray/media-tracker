@@ -1,0 +1,92 @@
+# Async pin queue: triggered by docs/add.html's "needs pinning" cards via
+# the workflow_dispatch API. Resolves a state/pending-pins.json record
+# (pin to a catalog candidate / keep as typed / remove), commits, then
+# runs an immediate check so the ntfy confirmation lands fast.
+
+name: pin-item
+run-name: "pin ${{ inputs.id }} (${{ inputs.action }})"
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: pending record id (from state/pending-pins.json)
+        required: true
+        type: string
+      action:
+        description: how to resolve it
+        required: true
+        type: choice
+        options: [pin, keep, remove]
+      choice:
+        description: 1-based candidate number (pin only)
+        required: false
+        type: string
+      expect:
+        description: expected bib_id/isbn guard (pin only, optional)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+# Same group as the scheduled check so a pin never races a run that
+# commits state back.
+concurrency:
+  group: media-tracker
+  cancel-in-progress: false
+
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    env:
+      ID: ${{ inputs.id }}
+      ACTION: ${{ inputs.action }}
+      CHOICE: ${{ inputs.choice }}
+      EXPECT: ${{ inputs.expect }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Resolve pending pin
+        run: |
+          args=(pin "$ID")
+          case "$ACTION" in
+            pin)    args+=(--choice "$CHOICE")
+                    [ -n "$EXPECT" ] && args+=(--expect "$EXPECT") ;;
+            keep)   args+=(--keep) ;;
+            remove) args+=(--remove) ;;
+          esac
+          python -m tracker "${args[@]}"
+
+      - name: Commit watchlist + queue
+        run: |
+          git config user.name "media-tracker bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add watchlist.yaml state/pending-pins.json
+          git diff --cached --quiet || git commit -m "pin $ID ($ACTION)"
+          git push
+
+      - name: Run immediate check
+        run: python -m tracker check
+
+      - name: Commit updated state
+        run: |
+          git add state/ docs/
+          git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+          git push
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s \
+            -H "Title: watchlist pin failed" -H "Tags: warning" \
+            -d "pin $ID ($ACTION) failed — check the Actions log" \
+            "https://ntfy.sh/$NTFY_TOPIC" > /dev/null
