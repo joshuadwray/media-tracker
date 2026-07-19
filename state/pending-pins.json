@@ -1,3 +1,21 @@
 {
-  "pending": []
+  "pending": [
+    {
+      "id": "attention-seeking-behavior-20260719T130815Z",
+      "kind": "book",
+      "typed_title": "attention seeking behavior",
+      "typed_author": null,
+      "added": "2026-07-19T13:08:15Z",
+      "candidates": [
+        {
+          "title": "Attention-Seeking Behavior: A Novel",
+          "author": "Varfis-van Warmelo, Aea",
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": "9781644453919",
+          "source": "cloudlibrary"
+        }
+      ]
+    }
+  ]
 }
