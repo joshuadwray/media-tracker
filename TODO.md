@@ -61,20 +61,17 @@
   set the count on the card).
 
 ## Investigate
-- **cloudLibrary consortium title-sharing vs `owned=yes`** (user,
-  2026-07-19). Per a Denton library employee, Denton is in some sharing
-  network where a title not in use at its home library temporarily
-  appears in (and later disappears from) Denton's catalog — one of the
-  reasons these checks exist. Open question: do shared-in titles count
-  as `owned=yes` in the search API, or only permanent holdings? If
-  shared titles need `owned=any`, we can't just revert (owned=any =
-  whole marketplace, the 2026-07-19 false-positive source); we'd need a
-  middle path — e.g. probe a known shared-in title while it's visible,
-  or check whether the record JSON carries an ownership/consortium
-  field (`raw` keeps only the first 12 keys; look at the full node).
-  Research approach: when a title notification appears and then the
-  title vanishes from the patron site, immediately probe it with
-  owned=yes vs owned=any and diff the record fields.
+- ~~cloudLibrary consortium title-sharing vs `owned=yes`.~~ Resolved
+  2026-07-19 same-day using the user's live checkouts as ground truth:
+  "This Is Where the Serpent Lives" was checked out yet absent from
+  owned=yes — shared-in titles are NOT owned. Discriminator found in
+  the full record JSON: borrowable = `isPayPerUse` (pay-per-use/
+  consortium pool, null copy counts) OR `totalCopies > 0` (owned);
+  marketplace-only records are ppu=false + null copies. Source now
+  searches owned=any again and filters on that (verified against 3
+  known-false + 4 checked-out titles, all pass). Watch for: whether
+  ppu titles ever flip ppu=false while still borrowable (would
+  false-negative), and what `ppuTitleExcludes` means.
 
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a

@@ -45,16 +45,19 @@ class CloudLibrarySource(Source):
                 # present but EMPTY (a value like "all" returns 0 results),
                 # and the library id is case-sensitive ("Denton", not
                 # "denton" — wrong case redirects to the marketing site).
-                # owned=yes is ESSENTIAL: owned=any searches the whole
-                # cloudLibrary marketplace, not this library's holdings
-                # (verified 2026-07-19 — false-positive source).
+                # owned=any searches the whole cloudLibrary MARKETPLACE,
+                # not just this library's pool — we filter records to the
+                # borrowable ones ourselves (see _borrowable). owned=yes
+                # is too strict: it drops consortium/pay-per-use titles
+                # (isPayPerUse, totalCopies null) that patrons CAN borrow
+                # (verified 2026-07-19 against live checkouts).
                 # The first request 302s to itself to set a session cookie;
                 # requests.Session follows it and keeps the cookie.
                 "method": "GET",
                 "url": f"https://ebook.yourcloudlibrary.com/library/{lib}"
                        f"/search?title={q}&format=&available=any&language="
                        f"&sort=relevance&segment=posts&orderBy=relevence"
-                       f"&owned=yes&_data=routes%2Flibrary.%24name.search",
+                       f"&owned=any&_data=routes%2Flibrary.%24name.search",
             },
             {   # legacy web-patron search API (404 as of 2026-07)
                 "method": "GET",
@@ -77,6 +80,9 @@ class CloudLibrarySource(Source):
             query = book.isbn or book.title
             items, _ = self._search(sess, query)
             for item in items:
+                if item.get("borrowable") is False:
+                    continue  # marketplace-only record, not in this
+                              # library's owned or pay-per-use pool
                 title = item.get("title") or ""
                 if not book.isbn and not titles_match(book.title, title):
                     continue
@@ -134,6 +140,8 @@ class CloudLibrarySource(Source):
         items, _ = self._search(sess, query)
         out = []
         for item in items:
+            if item.get("borrowable") is False:
+                continue
             raw = item.get("raw", {})
             isbn = raw.get("ISBN") or raw.get("isbn")
             authors = raw.get("Authors") or raw.get("authors")
@@ -189,6 +197,7 @@ def _parse_items(data: Any) -> list[dict[str, Any]]:
                     "title": title,
                     "format": fmt,
                     "available": _availability(node),
+                    "borrowable": _borrowable(node),
                     "raw": {k: node[k] for k in list(node)[:12]},
                 })
                 return
@@ -200,6 +209,21 @@ def _parse_items(data: Any) -> list[dict[str, Any]]:
 
     walk(data)
     return items
+
+
+def _borrowable(node: dict) -> bool | None:
+    """Can a patron of THIS library borrow the record?
+
+    owned=any search results span the whole cloudLibrary marketplace.
+    Borrowable = the library owns copies (totalCopies > 0) OR the title
+    is in its pay-per-use/consortium pool (isPayPerUse — how shared-in
+    titles appear; they carry no copy counts). Marketplace-only records
+    are isPayPerUse false with null copies. None = legacy payload shape
+    without these fields (callers treat unknown as borrowable).
+    """
+    if "isPayPerUse" not in node and "totalCopies" not in node:
+        return None
+    return bool(node.get("isPayPerUse")) or bool(node.get("totalCopies") or 0)
 
 
 def _availability(node: dict) -> bool | None:
