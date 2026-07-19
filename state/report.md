@@ -1,12 +1,11 @@
-# Media tracker report — 2026-07-19 13:09 UTC
+# Media tracker report — 2026-07-19 13:10 UTC
 
-## New sightings (3)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep%20Tremblay%2C%20Paul&searchType=smart)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: audiobook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
+## New sightings (1)
+- **we were forbidden**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=we%20were%20forbidden)
 
-## All current sightings (5)
+## All current sightings (6)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
+- we were forbidden: ebook in cloudLibrary catalog (Denton)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Denton)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in cloudLibrary catalog (Denton)
 - one leg on earth: audiobook in cloudLibrary catalog (Denton)
@@ -14,7 +13,7 @@
 
 ## Source status
 - ✅ `denton-library`: 1 observation(s)
-- ✅ `cloudlibrary`: 4 observation(s)
+- ✅ `cloudlibrary`: 5 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
 - ✅ `amc`: 0 observation(s)
