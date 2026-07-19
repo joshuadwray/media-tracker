@@ -850,7 +850,8 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                         chip = (f"<span class='fchip' "
                                 f"title='{book.rating:g}/5'>"
                                 f"\u2605{whole}{half}</span>")
-                    tt.append(f"<span class='th'>{th}{chip}</span>")
+                    tt.append(f"<a class='th' "
+                              f"href='{e(book.slug)}.html'>{th}{chip}</a>")
                 for film in day_films:
                     poster = film.get("poster_url")
                     th = (f"<img src='{e(poster)}' alt='' loading='lazy'>"
