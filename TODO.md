@@ -20,8 +20,10 @@
   Done 2026-07-18: docs/reading/list.html (one row per session/viewing,
   newest first) with a calendar · list toggle on both pages.
 - Edit diary entries individually — reading side done 2026-07-19:
-  log.html "All books" editor (sessions, status/rating/dates/pages,
-  delete book) + `?book=<slug>` deep links from book pages. Films still
+  in-place editors on the generated pages via docs/reading/edit.js
+  (fresh-fetch log.json + Contents-API PUT). List diary: per-session
+  edit (date/page/delete); book page: full editor (fields, sessions,
+  delete book). log.html stays fast-logging only. Films still
   sync-only (watching/log.json comes from Letterboxd RSS).
 - ~~Page counts on the calendar fix — the pg/goal display refinements
   deferred from the unified-diary pass.~~
