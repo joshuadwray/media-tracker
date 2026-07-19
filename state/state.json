@@ -1,16 +1,20 @@
 {
   "meta": {
-    "last_run": "2026-07-19T13:45:33+00:00"
+    "last_run": "2026-07-19T14:25:59+00:00"
   },
   "seen": {
     "cinemark|movie:hadestown|\"Hadestown: The Musical\" advance tickets on sale at Cinemark Dallas IMAX": "2026-07-18T19:37:12+00:00",
     "cinemark|movie:hadestown|\"Hadestown: The Musical\" advance tickets on sale at Cinemark Denton 14": "2026-07-18T00:51:48+00:00",
     "cinemark|movie:hadestown|\"Hadestown: The Musical\" advance tickets on sale at Cinemark West Plano": "2026-07-18T19:37:12+00:00",
+    "cloudlibrary|book:eradication|audiobook in catalog": "2026-07-19T14:25:59+00:00",
+    "cloudlibrary|book:eradication|ebook in catalog": "2026-07-19T14:25:59+00:00",
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": "2026-07-18T00:57:09+00:00",
     "cloudlibrary|book:the-buffalo-hunter-hunter|ebook in catalog": "2026-07-18T00:57:09+00:00",
     "cloudlibrary|book:the-buffalo-hunter-hunter|ebook/audio in catalog": "2026-07-18T00:51:48+00:00",
     "cloudlibrary|book:yesteryear|audiobook in catalog": "2026-07-18T20:08:01+00:00",
     "cloudlibrary|book:yesteryear|ebook in catalog": "2026-07-18T20:08:01+00:00",
+    "denton-library|book:dead-but-dreaming-of-electric-sheep|print book in catalog": "2026-07-19T14:25:59+00:00",
+    "denton-library|book:eradication|print book in catalog": "2026-07-19T14:25:59+00:00",
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": "2026-07-18T00:51:48+00:00",
     "denton-library|book:the-buffalo-hunter-hunter|ebook in catalog": "2026-07-18T00:57:09+00:00",
     "denton-library|book:the-tainted-cup|BK in catalog": "2026-07-18T00:51:48+00:00",

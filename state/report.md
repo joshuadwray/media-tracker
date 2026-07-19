@@ -1,14 +1,20 @@
-# Media tracker report — 2026-07-19 13:45 UTC
+# Media tracker report — 2026-07-19 14:25 UTC
 
-## New sightings (1)
+## New sightings (4)
 - **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep%20Tremblay%2C%20Paul&searchType=smart)
+- **Eradication — Miles, Jonathan**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Eradication%20Miles%2C%20Jonathan&searchType=smart)
+- **Eradication — Miles, Jonathan**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Eradication)
+- **Eradication — Miles, Jonathan**: audiobook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Eradication)
 
-## All current sightings (1)
+## All current sightings (4)
+- Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
+- Eradication — Miles, Jonathan: ebook in cloudLibrary catalog (Denton)
+- Eradication — Miles, Jonathan: audiobook in cloudLibrary catalog (Denton)
 
 ## Source status
-- ✅ `denton-library`: 1 observation(s)
-- ✅ `cloudlibrary`: 0 observation(s)
+- ✅ `denton-library`: 2 observation(s)
+- ✅ `cloudlibrary`: 2 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
 - ✅ `amc`: 0 observation(s)
