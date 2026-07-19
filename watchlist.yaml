@@ -7,6 +7,7 @@
 # ============================================================
 
 books:
+  - title: one leg on earth
   # - title: The Nickel Boys
   #   author: Colson Whitehead
   #   isbn: "9780385537070"     # optional: makes library matching exact
