@@ -1,8 +1,7 @@
-# Media tracker report — 2026-07-19 04:54 UTC
+# Media tracker report — 2026-07-19 13:03 UTC
 
-## New sightings (2)
-- **one leg on earth**: audiobook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=one%20leg%20on%20earth)
-- **one leg on earth**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=one%20leg%20on%20earth)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (2)
 - one leg on earth: audiobook in cloudLibrary catalog (Denton)
