@@ -438,6 +438,12 @@ td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
        font-size: .9rem; z-index: 9; }
 .edstatus:empty { display: none; }
 .edstatus.ok { color: #7ad97f; } .edstatus.err { color: #ff8a80; }
+.mnav { display: flex; justify-content: space-between; align-items: center;
+       margin: 14px 0 6px; }
+.mnav button { font: inherit; font-size: .85rem; padding: 6px 12px;
+       border: 1px solid var(--line); border-radius: 8px;
+       background: transparent; color: inherit; cursor: pointer; }
+.mnav button:disabled { opacity: .35; cursor: default; }
 """
 
 _DOWS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -821,6 +827,11 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
     months = sorted({(d.year, d.month) for d in totals}
                     | {(d.year, d.month) for d in films_by_day},
                     reverse=True)
+    if months:
+        # one month shown at a time (newest first); JS-off shows all
+        parts.append("<div class='mnav'>"
+                     "<button id='mold'>&larr; older</button>"
+                     "<button id='mnew'>newer &rarr;</button></div>")
     cal = _calendar.Calendar(firstweekday=6)  # Sunday first
     for year, month in months:
         parts.append(f"<div class='month'><h3>"
@@ -877,6 +888,18 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
     if not months:
         parts.append("<div class='meta'>no sessions logged yet — "
                      "<a href='log.html'>log one</a></div>")
+    else:
+        parts.append(
+            "<script>(function(){"
+            "var ms=[].slice.call(document.querySelectorAll('.month')),i=0;"
+            "var o=document.getElementById('mold'),"
+            "n=document.getElementById('mnew');"
+            "function show(){ms.forEach(function(m,j){"
+            "m.style.display=j===i?'':'none'});"
+            "o.disabled=i>=ms.length-1;n.disabled=i<=0;}"
+            "o.onclick=function(){if(i<ms.length-1){i++;show()}};"
+            "n.onclick=function(){if(i>0){i--;show()}};"
+            "show();})()</script>")
     parts.append("</body></html>")
     return "".join(parts)
 
