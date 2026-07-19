@@ -4,3 +4,13 @@ ranked: true
 # File order IS the rank. Per-item optional fields:
 #   cover: https://...jpg   — manual cover URL, always wins over lookup
 items:
+  - title: babylon, south dakota
+    author: tom lin
+  - title: go gentl
+    author: maria semple
+  - title: vigil
+    author: george saunders
+  - title: canon
+    author: paige lewis
+  - title: eating ashes
+    author: brenda navarro
