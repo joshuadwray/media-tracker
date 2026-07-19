@@ -88,6 +88,10 @@ def main(argv: list[str] | None = None) -> int:
     p_reading.add_argument("--no-fetch", action="store_true",
                            help="never hit iTunes/Open Library; uncached "
                                 "books get no page count")
+    p_reading.add_argument("--import-bookmory", metavar="FILE",
+                           help="merge a Bookmory backup.zip (or its "
+                                "new_bookmory.db) into reading/log.json "
+                                "before building")
 
     sub.add_parser("letterboxd", help="sync Letterboxd diary RSS into "
                                       "watching/log.json")
@@ -115,6 +119,10 @@ def main(argv: list[str] | None = None) -> int:
         build_all(fetch=not args.no_fetch)
         return 0
     if args.command == "reading":
+        if args.import_bookmory:
+            from pathlib import Path
+            from .bookmory_import import run as import_bookmory
+            import_bookmory(Path(args.import_bookmory))
         from .reading_gen import build_all as build_reading
         build_reading(fetch=not args.no_fetch)
         return 0

@@ -1,14 +1,170 @@
 {
+ "all systems red|martha wells": {
+  "isbn13": "9780765397522",
+  "matched": "All Systems Red",
+  "page_count": 156,
+  "source": "openlibrary-isbn"
+ },
+ "annihilation|jeff vandermeer": {
+  "isbn13": "9780374710774",
+  "matched": "Annihilation",
+  "page_count": 210,
+  "source": "openlibrary-isbn"
+ },
+ "artificial condition|martha wells": {
+  "isbn13": "9781250186935",
+  "matched": "Artificial Condition",
+  "page_count": 149,
+  "source": "openlibrary-isbn"
+ },
+ "creation lake|rachel kushner": {
+  "isbn13": "9781982116545",
+  "matched": "Creation Lake",
+  "page_count": 416,
+  "source": "apple-books"
+ },
+ "dog man|dav pilkey": {
+  "isbn13": "9781546199373",
+  "matched": "Dog Man",
+  "page_count": 240,
+  "source": "apple-books"
+ },
+ "everyone who is gone is here: the united states, central america, and the making of a crisis|jonathan blitzer": {
+  "isbn13": null,
+  "matched": "Everyone Who Is Gone Is Here: The United States, Central America, and the Making of a Crisis",
+  "page_count": 544,
+  "source": "openlibrary-median"
+ },
+ "funny story|emily henry": {
+  "isbn13": "9780593441220",
+  "matched": "Funny Story",
+  "page_count": 400,
+  "source": "apple-books"
+ },
  "go gentle|maria semple": {
   "isbn13": "9798217176656",
   "matched": "go gentle",
   "page_count": 384,
   "source": "apple-books"
  },
+ "godwin|joseph o'neill": {
+  "isbn13": "9780593701331",
+  "matched": "Godwin",
+  "page_count": 288,
+  "source": "apple-books"
+ },
+ "good material|dolly alderton": {
+  "isbn13": "9780593801314",
+  "matched": "Good Material",
+  "page_count": 336,
+  "source": "apple-books"
+ },
+ "havoc|christopher bollen": {
+  "isbn13": "9780063378919",
+  "matched": "Havoc",
+  "page_count": 256,
+  "source": "apple-books"
+ },
+ "headshot|rita bullwinkel": {
+  "isbn13": "9780593654118",
+  "matched": "Headshot",
+  "page_count": 224,
+  "source": "apple-books"
+ },
+ "hum|helen phillips": {
+  "isbn13": "9781668008850",
+  "matched": "Hum",
+  "page_count": 272,
+  "source": "apple-books"
+ },
+ "lazarus man|richard price": {
+  "isbn13": "9780374610845",
+  "matched": "Lazarus Man",
+  "page_count": 352,
+  "source": "apple-books"
+ },
+ "my brilliant friend|elena ferrante": {
+  "isbn13": "9781609458638",
+  "matched": "My Brilliant Friend",
+  "page_count": 336,
+  "source": "openlibrary-isbn"
+ },
+ "orbital|samantha harvey": {
+  "isbn13": "9780802161550",
+  "matched": "Orbital",
+  "page_count": 193,
+  "source": "apple-books"
+ },
+ "owls and other fantasies: poems and essays|mary oliver": {
+  "isbn13": null,
+  "matched": "Owls and Other Fantasies: Poems and Essays",
+  "page_count": 67,
+  "source": "openlibrary-median"
+ },
+ "rental house|weike wang": {
+  "isbn13": "9780593545560",
+  "matched": "Rental House",
+  "page_count": 224,
+  "source": "apple-books"
+ },
+ "splinters: a memoir|leslie jamison": {
+  "isbn13": null,
+  "matched": "Splinters: A Memoir",
+  "page_count": 272,
+  "source": "openlibrary-median"
+ },
+ "the bad guys episode 10|aaron blabey": {
+  "isbn13": null,
+  "matched": "The Bad Guys Episode 10",
+  "page_count": null,
+  "source": null
+ },
+ "the bee sting|paul murray": {
+  "isbn13": "9780374600310",
+  "matched": "The Bee Sting",
+  "page_count": 656,
+  "source": "apple-books"
+ },
+ "the ministry of time|kaliane bradley": {
+  "isbn13": "9781668045169",
+  "matched": "The Ministry of Time",
+  "page_count": 432,
+  "source": "openlibrary-isbn"
+ },
+ "the nickel boys|colson whitehead": {
+  "isbn13": "9780385537087",
+  "matched": "The Nickel Boys",
+  "page_count": 224,
+  "source": "apple-books"
+ },
+ "the tainted cup|robert jackson bennett": {
+  "isbn13": "9781984820723",
+  "matched": "The Tainted Cup",
+  "page_count": 432,
+  "source": "apple-books"
+ },
+ "this is how you lose the time war|max gladstone, amal el-mohtar": {
+  "isbn13": "9781534431010",
+  "matched": "This Is How You Lose the Time War",
+  "page_count": 208,
+  "source": "openlibrary-isbn"
+ },
  "transcription|ben lerner": {
   "isbn13": "9780374618605",
   "matched": "transcription",
   "page_count": 144,
   "source": "apple-books"
+ },
+ "trust|hernán díaz": {
+  "isbn13": "9780593420331",
+  "matched": "Trust",
+  "page_count": 416,
+  "source": "apple-books"
+ },
+ "winnie-the-pooh|a.a. milne": {
+  "isbn13": null,
+  "matched": "Winnie-the-Pooh",
+  "page_count": 158,
+  "source": "openlibrary-median"
  }
 }

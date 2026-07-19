@@ -1,16 +1,23 @@
 # TODO / pins / ideas
 
 ## Pinned
-- **Bookmory history import** — `tracker reading --import-bookmory FILE`.
-  Blocked on exporting the file from the app. Design: inspect export
-  first; map ratings → 0.5-step floats, statuses reading/finished/quit →
-  reading/finished/abandoned; total pages → `page_count`; if no per-day
-  history, synthesize one session at finish/export date. Merge by
-  title|author, never overwrite, idempotent, print a report.
-  When this lands: (1) add a jump-to-month select next to the calendar's
-  older/newer pager — 60 months of history means 60 taps otherwise;
-  (2) expect the first CI rebuild to crawl (page-count chain is rate-
-  limited ~20 req/min per new book; one-time, caches after).
+- ~~Bookmory history import.~~ Done 2026-07-19:
+  `tracker reading --import-bookmory backup.zip` (tracker/
+  bookmory_import.py reads new_bookmory.db, a sembast_sqflite store).
+  133 books imported (test log wiped first — Bookmory is the sole
+  source now); page_log_list → sessions, 8 synthesized at finish date,
+  covers seeded from Bookmory's own URLs, page counts backfilled.
+  Data gotchas handled: Goodreads "(Series #N)" title suffixes,
+  author only in `authors[]` for manually-added books, double spaces.
+- Jump-to-month select next to the calendar's older/newer pager —
+  now live: 18 months of history means a lot of taps otherwise.
+- Render empty months on the calendar — months with no activity are
+  skipped today, so the older/newer pager jumps over gaps.
+- Backfill Letterboxd to 2025-01-01 for consistency with the imported
+  reading history (settings since=2026-01-01 today). RSS only exposes
+  ~50 recent entries, so this needs the Letterboxd data export
+  (Settings → Import & Export → diary.csv) — one-time import, same
+  upsert keys so the daily RSS sync stays authoritative afterward.
 - **Pages vs local-app asymmetry** — largely resolved 2026-07-19: the
   catalog-candidate picker is on Pages now as an *async pin queue*
   (ambiguous `--auto` adds queue to state/pending-pins.json; add.html

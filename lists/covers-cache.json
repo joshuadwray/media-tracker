@@ -4,35 +4,90 @@
   "matched": "A Drop of Corruption — Robert Jackson Bennett",
   "source": "itunes"
  },
+ "a guardian and a thief|megha majumdar": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1760973092i/232207672.jpg",
+  "matched": "A Guardian and a Thief — Megha Majumdar",
+  "source": "bookmory"
+ },
  "a new new me|helen oyeyemi": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/e4/a5/02/e4a50280-f3c4-4319-470e-88a022469db4/9780593718797.d.jpg/600x600bb.jpg",
   "matched": "A New New Me — Helen Oyeyemi",
   "source": "itunes"
+ },
+ "a tale of two kitties|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1486858508i/33931235.jpg",
+  "matched": "A Tale of Two Kitties — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "a/s/l|jeanne thornton": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1699015365i/201479229.jpg",
+  "matched": "A/S/L — Jeanne Thornton",
+  "source": "bookmory"
+ },
+ "all systems red|martha wells": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1631920710i/59017137.jpg",
+  "matched": "All Systems Red — Martha Wells",
+  "source": "bookmory"
+ },
+ "annihilation|jeff vandermeer": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1403941587i/17934530.jpg",
+  "matched": "Annihilation — Jeff VanderMeer",
+  "source": "bookmory"
  },
  "archive of unknown universes|ruben reyes jr.": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/53/b4/3b/53b43b14-7646-2ebc-5b98-a12385d61d7a/9780063336322.jpg/600x600bb.jpg",
   "matched": "Archive of Unknown Universes — Ruben Reyes Jr.",
   "source": "itunes"
  },
+ "artificial condition|martha wells": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686657474i/177384680.jpg",
+  "matched": "Artificial Condition — Martha Wells",
+  "source": "bookmory"
+ },
  "audition|katie kitamura": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/28/bb/65/28bb65ee-1959-2257-b827-6b002ab21cb5/9780593852330.d.jpg/600x600bb.jpg",
   "matched": "Audition — Katie Kitamura",
   "source": "itunes"
+ },
+ "babel|r.f. kuang": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1640020283i/59879803.jpg",
+  "matched": "Babel — R.F. Kuang",
+  "source": "bookmory"
  },
  "babylon, south dakota|tom lin": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/d8/51/d0/d851d02e-0180-cbe9-41e8-e0e9fb02c7cb/9780316576291.jpg/600x600bb.jpg",
   "matched": "Babylon, South Dakota — Tom Lin",
   "source": "itunes"
  },
+ "back after this|linda holmes": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1728355964i/198563641.jpg",
+  "matched": "Back After This — Linda Holmes",
+  "source": "bookmory"
+ },
  "bad bad girl|gish jen": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/24/0e/83/240e83c7-de23-da85-3a79-4f05f767ab8c/9780593803745.d.jpg/600x600bb.jpg",
   "matched": "Bad Bad Girl — Gish Jen",
   "source": "itunes"
  },
+ "beautyland|marie-helene bertino": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1685992173i/127282939.jpg",
+  "matched": "Beautyland — Marie-Helene Bertino",
+  "source": "bookmory"
+ },
  "big chief|jon hickey": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/cc/ec/4b/ccec4b40-d57d-0c9c-e606-58d509f380fa/9781668046487.jpg/600x600bb.jpg",
   "matched": "Big Chief — Jon Hickey",
   "source": "itunes"
+ },
+ "bitter texas honey|ashley whitaker": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1721764283i/216522700.jpg",
+  "matched": "Bitter Texas Honey — Ashley Whitaker",
+  "source": "bookmory"
+ },
+ "brawl of the wild|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1529175710i/39983554.jpg",
+  "matched": "Brawl of the Wild — Dav Pilkey",
+  "source": "bookmory"
  },
  "bring the house down|charlotte runcie": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/68/66/2b/68662beb-ba29-02b2-f265-47fa880eaa6d/9780385551083.d.jpg/600x600bb.jpg",
@@ -44,15 +99,40 @@
   "matched": "Bury Our Bones in the Midnight Soil — V. E. Schwab",
   "source": "itunes"
  },
+ "bury our bones in the midnight soil|v.e. schwab": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1732122765i/215020997.jpg",
+  "matched": "Bury Our Bones in the Midnight Soil — V.E. Schwab",
+  "source": "bookmory"
+ },
  "canon|paige lewis": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/9d/ee/a3/9deea3f0-e908-84f8-7d6c-4f79b72126dd/9798217059379.d.jpg/600x600bb.jpg",
   "matched": "Canon — Paige Lewis",
   "source": "itunes"
  },
+ "cleavage: men, women, and the space between us|jennifer finney boylan": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1722950515i/211004927.jpg",
+  "matched": "Cleavage: Men, Women, and the Space Between Us — Jennifer Finney Boylan",
+  "source": "bookmory"
+ },
  "cleavage|jennifer finney boylan": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/0b/bb/2a/0bbb2a96-0d8c-9cb9-cc14-d797001b1f03/9781250380067.jpg/600x600bb.jpg",
   "matched": "Cleavage — Jennifer Finney Boylan",
   "source": "itunes"
+ },
+ "colored television|danzy senna": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1729405887i/220588703.jpg",
+  "matched": "Colored Television — Danzy Senna",
+  "source": "bookmory"
+ },
+ "creation lake|rachel kushner": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1708039802i/207595731.jpg",
+  "matched": "Creation Lake — Rachel Kushner",
+  "source": "bookmory"
+ },
+ "darkmotherland|samrat upadhyay": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1739393953i/210244636.jpg",
+  "matched": "Darkmotherland — Samrat Upadhyay",
+  "source": "bookmory"
  },
  "death of the author|nnedi okorafor": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/07/3f/fd/073ffd31-413c-9d0e-192e-af3c7f4286d8/9780063391154.jpg/600x600bb.jpg",
@@ -69,10 +149,40 @@
   "matched": "Deep Cuts — Holly Brickley",
   "source": "itunes"
  },
+ "demon copperhead|barbara kingsolver": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1660050779i/60194162.jpg",
+  "matched": "Demon Copperhead — Barbara Kingsolver",
+  "source": "bookmory"
+ },
  "disappoint me|nicola dinan": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/ce/0c/e0/ce0ce0ae-fda3-708a-0433-cf12b647c2bb/9780593977897.d.jpg/600x600bb.jpg",
   "matched": "Disappoint Me — Nicola Dinan",
   "source": "itunes"
+ },
+ "discontent|beatriz serrano": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1751326283i/237687965.jpg",
+  "matched": "Discontent — Beatriz Serrano",
+  "source": "bookmory"
+ },
+ "dog man and cat kid|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1506776746i/35238109.jpg",
+  "matched": "Dog Man and Cat Kid — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "dog man unleashed|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1500753161i/32148923.jpg",
+  "matched": "Dog Man Unleashed — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "dog man: mothering heights|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1592428828i/54143198.jpg",
+  "matched": "Dog Man: Mothering Heights — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "dog man|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1456963971i/28691896.jpg",
+  "matched": "Dog Man — Dav Pilkey",
+  "source": "bookmory"
  },
  "dream count|chimamanda ngozi adichie": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/5c/f6/06/5cf606fe-852a-c7bb-a702-5c9f182aeb99/9780593802731.d.jpg/600x600bb.jpg",
@@ -84,10 +194,40 @@
   "matched": "Eating Ashes — Brenda Navarro & Megan McDowell",
   "source": "itunes"
  },
+ "everyone who is gone is here: the united states, central america, and the making of a crisis|jonathan blitzer": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1697736195i/145624514.jpg",
+  "matched": "Everyone Who Is Gone Is Here: The United States, Central America, and the Making of a Crisis — Jonathan Blitzer",
+  "source": "bookmory"
+ },
  "exit zero|marie-helene bertino": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/f2/d0/96/f2d096f5-ea31-cd10-75a9-dd3597e34d47/9780374616489.jpg/600x600bb.jpg",
   "matched": "Exit Zero — Marie-Helene Bertino",
   "source": "itunes"
+ },
+ "fetch-22|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1559565709i/44442951.jpg",
+  "matched": "Fetch-22 — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "flesh|david szalay": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1717908661i/214152261.jpg",
+  "matched": "Flesh — David Szalay",
+  "source": "bookmory"
+ },
+ "for whom the ball rolls|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1544590714i/43201782.jpg",
+  "matched": "For Whom the Ball Rolls — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "funny story|emily henry": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1717213921i/194803835.jpg",
+  "matched": "Funny Story — Emily Henry",
+  "source": "bookmory"
+ },
+ "ghostroots|‘pemi aguda": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1702593974i/200124642.jpg",
+  "matched": "Ghostroots — ‘Pemi Aguda",
+  "source": "bookmory"
  },
  "gliff|ali smith": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/5c/00/f5/5c00f53e-1507-9f4e-8e9e-5c5bfeb9e447/9780593701577.d.jpg/600x600bb.jpg",
@@ -109,10 +249,50 @@
   "matched": "Goddess Complex — Sanjena Sathian",
   "source": "itunes"
  },
+ "godwin|joseph o'neill": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1716892510i/198564640.jpg",
+  "matched": "Godwin — Joseph O'Neill",
+  "source": "bookmory"
+ },
  "good girl|aria aber": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/53/5d/b8/535db81b-69d7-cc91-7fa9-92dcd8ffa112/9780593731123.d.jpg/600x600bb.jpg",
   "matched": "Good Girl — Aria Aber",
   "source": "itunes"
+ },
+ "good material|dolly alderton": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1694494162i/96179794.jpg",
+  "matched": "Good Material — Dolly Alderton",
+  "source": "bookmory"
+ },
+ "great expectations|vinson cunningham": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1684817218i/139400711.jpg",
+  "matched": "Great Expectations — Vinson Cunningham",
+  "source": "bookmory"
+ },
+ "grime and punishment|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1585323368i/49090957.jpg",
+  "matched": "Grime and Punishment — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "harmattan season|tochi onyebuchi": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1723298067i/211004159.jpg",
+  "matched": "Harmattan Season — Tochi Onyebuchi",
+  "source": "bookmory"
+ },
+ "havoc|christopher bollen": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1716877190i/209594864.jpg",
+  "matched": "Havoc — Christopher Bollen",
+  "source": "bookmory"
+ },
+ "headshot|rita bullwinkel": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691077222i/174156218.jpg",
+  "matched": "Headshot — Rita Bullwinkel",
+  "source": "bookmory"
+ },
+ "heart the lover|lily king": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1745508457i/228110489.jpg",
+  "matched": "Heart the Lover — Lily King",
+  "source": "bookmory"
  },
  "heartwood|amity gaige": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/94/3e/27/943e27b1-ef3d-232f-f8c2-164d7935356b/9781668063620.jpg/600x600bb.jpg",
@@ -124,40 +304,120 @@
   "matched": "Helm — Sarah Hall",
   "source": "itunes"
  },
+ "house of day, house of night|olga tokarczuk": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1328855040i/537611.jpg",
+  "matched": "House of Day, House of Night — Olga Tokarczuk",
+  "source": "bookmory"
+ },
+ "hum|helen phillips": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1699132200i/195791689.jpg",
+  "matched": "Hum — Helen Phillips",
+  "source": "bookmory"
+ },
  "hunchback|saou ichikawa": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/09/46/21/094621fa-9eb7-0caa-f800-b734f608ef7e/9780593734735.d.jpg/600x600bb.jpg",
   "matched": "Hunchback — Saou Ichikawa & Polly Barton",
   "source": "itunes"
+ },
+ "james|percival everett": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1734976067i/222914685.jpg",
+  "matched": "James — Percival Everett",
+  "source": "bookmory"
+ },
+ "lazarus man|richard price": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1710383925i/205363936.jpg",
+  "matched": "Lazarus Man — Richard Price",
+  "source": "bookmory"
+ },
+ "life in three dimensions: how curiosity, exploration, and exp...|shigehiro oishi": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1731729437i/214709078.jpg",
+  "matched": "Life in Three Dimensions: How Curiosity, Exploration, and Exp... — Shigehiro Oishi",
+  "source": "bookmory"
  },
  "life in three dimensions|shigehiro oishi": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/9c/fa/6c/9cfa6cdb-936f-1e26-f199-1b0144864eb1/9780385550406.d.jpg/600x600bb.jpg",
   "matched": "Life in Three Dimensions — Shigehiro Oishi, PhD",
   "source": "itunes"
  },
+ "lord of the fleas|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1529196856i/37702990.jpg",
+  "matched": "Lord of the Fleas — Dav Pilkey",
+  "source": "bookmory"
+ },
  "maggie; or, a man and a woman walk into a bar|katie yee": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/e8/72/ce/e872cebe-9603-91f1-eb10-4011949a3c82/9781668084236.jpg/600x600bb.jpg",
   "matched": "Maggie; or, A Man and a Woman Walk Into a Bar — Katie Yee",
   "source": "itunes"
+ },
+ "martyr!|kaveh akbar": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1683818219i/139400713.jpg",
+  "matched": "Martyr! — Kaveh Akbar",
+  "source": "bookmory"
+ },
+ "midnight in soap lake|matthew j. sullivan": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1721299821i/210827823.jpg",
+  "matched": "Midnight in Soap Lake — Matthew J. Sullivan",
+  "source": "bookmory"
  },
  "midnight in soap lake|matthew sullivan": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/8a/aa/1e/8aaa1ec7-2d4a-aa7e-5c47-a2cc200c11f4/9780369749055.jpg/600x600bb.jpg",
   "matched": "Midnight in Soap Lake — Matthew Sullivan",
   "source": "itunes"
  },
+ "moby-dick or, the whale|herman melville": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1327940656i/153747.jpg",
+  "matched": "Moby-Dick or, The Whale — Herman Melville",
+  "source": "bookmory"
+ },
  "mothers and sons|adam haslett": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/50/a5/6c/50a56c6f-41cc-850a-8973-6d1f42612d38/9780316574747.jpg/600x600bb.jpg",
   "matched": "Mothers and Sons — Adam Haslett",
   "source": "itunes"
+ },
+ "my brilliant friend|elena ferrante": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1631793642i/58656983.jpg",
+  "matched": "My Brilliant Friend — Elena Ferrante",
+  "source": "bookmory"
  },
  "nesting|roisín o'donnell": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/e5/e4/fa/e5e4fa88-1dd6-7145-d3d3-b95208fd943d/9781643755724.jpg/600x600bb.jpg",
   "matched": "Nesting — Roisín O'Donnell",
   "source": "itunes"
  },
+ "nesting|roisín o’donnell": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1724791930i/214175077.jpg",
+  "matched": "Nesting — Roisín O’Donnell",
+  "source": "bookmory"
+ },
+ "no one is talking about this|patricia lockwood": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1601474686i/53733106.jpg",
+  "matched": "No One Is Talking About This — Patricia Lockwood",
+  "source": "bookmory"
+ },
+ "notes from a regicide|isaac fellman": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1716856018i/211004138.jpg",
+  "matched": "Notes from a Regicide — Isaac Fellman",
+  "source": "bookmory"
+ },
+ "orbital|samantha harvey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1682375874i/123136728.jpg",
+  "matched": "Orbital — Samantha Harvey",
+  "source": "bookmory"
+ },
  "palaver|bryan washington": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/10/f8/ea/10f8ea41-942d-f81c-b70e-7e82189a87ac/9780374609085.jpg/600x600bb.jpg",
   "matched": "Palaver — Bryan Washington",
   "source": "itunes"
+ },
+ "rejection|tony tulathimutte": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1710875320i/199635125.jpg",
+  "matched": "Rejection — Tony Tulathimutte",
+  "source": "bookmory"
+ },
+ "rental house|weike wang": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1708055761i/208584952.jpg",
+  "matched": "Rental House — Weike Wang",
+  "source": "bookmory"
  },
  "run for the hills|kevin wilson": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/ec/66/bb/ec66bb5d-d829-768b-ba82-12bea48ad803/9780063317536.jpg/600x600bb.jpg",
@@ -174,10 +434,20 @@
   "matched": "Sky Daddy — Kate Folk",
   "source": "itunes"
  },
+ "splinters: a memoir|leslie jamison": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691437771i/155685405.jpg",
+  "matched": "Splinters: A Memoir — Leslie Jamison",
+  "source": "bookmory"
+ },
  "stag dance|torrey peters": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/f9/87/78/f9877882-c102-fd25-c854-1ce38c4c638b/9780593446362.d.jpg/600x600bb.jpg",
   "matched": "Stag Dance — Torrey Peters",
   "source": "itunes"
+ },
+ "station eleven|emily st. john mandel": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1680459872i/20170404.jpg",
+  "matched": "Station Eleven — Emily St. John Mandel",
+  "source": "bookmory"
  },
  "stone yard devotional|charlotte wood": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/ed/64/ab/ed64ab90-baec-4d1e-f26c-94a05c57d42a/9798217047376.d.jpg/600x600bb.jpg",
@@ -189,6 +459,16 @@
   "matched": "Stop Me If You've Heard This One — Kristen Arnett",
   "source": "itunes"
  },
+ "swallow the ghost|eugenie montague": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1702080360i/203163884.jpg",
+  "matched": "Swallow the Ghost — Eugenie Montague",
+  "source": "bookmory"
+ },
+ "swamplandia!|karen russell": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1532478763i/40940157.jpg",
+  "matched": "Swamplandia! — Karen Russell",
+  "source": "bookmory"
+ },
  "the antidote|karen russell": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/13/4c/af/134cafe3-19eb-18ec-7ba1-51891a5f3537/9780593802267.d.jpg/600x600bb.jpg",
   "matched": "The Antidote — Karen Russell",
@@ -198,6 +478,16 @@
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/a9/b9/3c/a9b93c73-cc60-d90a-aac6-8627db2ca646/9780593875391.d.jpg/600x600bb.jpg",
   "matched": "The Art of Vanishing — Morgan Pager",
   "source": "itunes"
+ },
+ "the bad guys episode 10|aaron blabey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1571413902i/48500228.jpg",
+  "matched": "The Bad Guys Episode 10 — Aaron Blabey",
+  "source": "bookmory"
+ },
+ "the bee sting|paul murray": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1674502938i/62039166.jpg",
+  "matched": "The Bee Sting — Paul Murray",
+  "source": "bookmory"
  },
  "the buffalo hunter hunter|stephen graham jones": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/75/e4/e8/75e4e842-baec-0d5f-ce96-f85130f984b2/dj.vklketjw.jpg/600x600bb.jpg",
@@ -224,25 +514,80 @@
   "matched": "The Ferryman and His Wife — Frode Grytten & Alison McCullough",
   "source": "itunes"
  },
+ "the god of the woods|liz moore": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1717970585i/199700434.jpg",
+  "matched": "The God of the Woods — Liz Moore",
+  "source": "bookmory"
+ },
+ "the heaven & earth grocery store|james mcbride": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1685350945i/65678550.jpg",
+  "matched": "The Heaven & Earth Grocery Store — James McBride",
+  "source": "bookmory"
+ },
+ "the lion, the witch and the wardrobe|c.s. lewis": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1697079942i/132080146.jpg",
+  "matched": "The Lion, the Witch and the Wardrobe — C.S. Lewis",
+  "source": "bookmory"
+ },
  "the loneliness of sonia and sunny|kiran desai": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/d0/03/ab/d003abed-b757-08bd-1291-a97be0264d57/9781101947494.d.jpg/600x600bb.jpg",
   "matched": "The Loneliness of Sonia and Sunny — Kiran Desai",
   "source": "itunes"
+ },
+ "the masque of the red death|edgar allan poe": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1172667858i/204779.jpg",
+  "matched": "The Masque of the Red Death — Edgar Allan Poe",
+  "source": "bookmory"
+ },
+ "the ministry of time|kaliane bradley": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1714384905i/212305747.jpg",
+  "matched": "The Ministry of Time — Kaliane Bradley",
+  "source": "bookmory"
  },
  "the names|florence knapp": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/99/fb/8c/99fb8c42-6a06-7560-e983-1637895fd060/9780593833919.d.jpg/600x600bb.jpg",
   "matched": "The Names: A Read with Jenna Pick — Florence Knapp",
   "source": "itunes"
  },
+ "the natural way of things|charlotte wood": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1436420572i/25876358.jpg",
+  "matched": "The Natural Way of Things — Charlotte Wood",
+  "source": "bookmory"
+ },
+ "the nickel boys|colson whitehead": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1708798336i/42279228.jpg",
+  "matched": "The Nickel Boys — Colson Whitehead",
+  "source": "bookmory"
+ },
  "the river has roots|amal el-mohtar": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/d6/24/f1/d624f1f3-73df-e5aa-aeed-69691d4609e4/9781250341099.jpg/600x600bb.jpg",
   "matched": "The River Has Roots — Amal El-Mohtar",
   "source": "itunes"
  },
+ "the scarlet shedder|dav pilkey": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1707750291i/196037552.jpg",
+  "matched": "The Scarlet Shedder — Dav Pilkey",
+  "source": "bookmory"
+ },
+ "the slip|lucas schaefer": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1728673760i/220160272.jpg",
+  "matched": "The Slip — Lucas Schaefer",
+  "source": "bookmory"
+ },
+ "the tainted cup|robert jackson bennett": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1735662086i/150247395.jpg",
+  "matched": "The Tainted Cup — Robert Jackson Bennett",
+  "source": "bookmory"
+ },
  "the usual desire to kill|camilla barnes": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/13/a1/49/13a14959-b61d-892e-30dd-75a0c6b867af/9781668062845.jpg/600x600bb.jpg",
   "matched": "The Usual Desire to Kill — Camilla Barnes",
   "source": "itunes"
+ },
+ "the vaster wilds|lauren groff": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1680169653i/62952130.jpg",
+  "matched": "The Vaster Wilds — Lauren Groff",
+  "source": "bookmory"
  },
  "the white hot|quiara alegría hudes": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/64/0b/58/640b5827-b36a-1eb5-c9d9-601a961c280c/9780593732342.d.jpg/600x600bb.jpg",
@@ -259,6 +604,16 @@
   "matched": "Theory & Practice — Michelle de Kretser",
   "source": "itunes"
  },
+ "this is how you lose the time war|max gladstone, amal el-mohtar": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1561903470i/43320231.jpg",
+  "matched": "This Is How You Lose the Time War — Max Gladstone, Amal El-Mohtar",
+  "source": "bookmory"
+ },
+ "this is where the serpent lives|daniyal mueenuddin": {
+  "cover_url": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1747104735i/231363119.jpg",
+  "matched": "This Is Where the Serpent Lives — Daniyal Mueenuddin",
+  "source": "bookmory"
+ },
  "tilt|emma pattee": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/f5/d6/24/f5d62460-fd2e-94c1-696d-1bb25b346afd/9781668055496.jpg/600x600bb.jpg",
   "matched": "Tilt — Emma Pattee",
@@ -273,6 +628,11 @@
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/5a/78/7b/5a787bf1-4132-a6a7-aac4-21f85cf96000/9780374618605.jpg/600x600bb.jpg",
   "matched": "Transcription — Ben Lerner",
   "source": "itunes"
+ },
+ "trust|hernán díaz": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1631246461i/58210933.jpg",
+  "matched": "Trust — Hernán Díaz",
+  "source": "bookmory"
  },
  "twist|colum mccann": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/8d/ee/24/8dee2417-6cf3-3ad9-7c6b-54fd09571c8a/9780593241745.d.jpg/600x600bb.jpg",
@@ -294,6 +654,11 @@
   "matched": "Vantage Point — Sara Sligar",
   "source": "itunes"
  },
+ "vera, or faith|gary shteyngart": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1733965031i/220239019.jpg",
+  "matched": "Vera, or Faith — Gary Shteyngart",
+  "source": "bookmory"
+ },
  "victorian psycho|virginia feito": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/ca/0f/8f/ca0f8fba-bc6e-fbe6-c076-d33185b6a8e0/9781631498640.jpg/600x600bb.jpg",
   "matched": "Victorian Psycho — Virginia Feito",
@@ -309,6 +674,11 @@
   "matched": "We Do Not Part — Han Kang, e. yaewon & Paige Aniyah Morris",
   "source": "itunes"
  },
+ "where the axe is buried|ray nayler": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1726171862i/211934965.jpg",
+  "matched": "Where the Axe Is Buried — Ray Nayler",
+  "source": "bookmory"
+ },
  "wild dark shore|charlotte mcconaghy": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/45/db/3e/45db3e6c-f851-6d58-7379-29edc27bef3d/9781250827999.jpg/600x600bb.jpg",
   "matched": "Wild Dark Shore — Charlotte McConaghy",
@@ -318,5 +688,15 @@
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication221/v4/72/8a/a9/728aa9b2-ab32-9534-dbd8-110d87eb571e/9780593718575.d.jpg/600x600bb.jpg",
   "matched": "Will There Ever Be Another You — Patricia Lockwood",
   "source": "itunes"
+ },
+ "winnie-the-pooh|a.a. milne": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1298440130i/99107.jpg",
+  "matched": "Winnie-the-Pooh — A.A. Milne",
+  "source": "bookmory"
+ },
+ "you dreamed of empires|álvaro enrigue": {
+  "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1681140619i/127938747.jpg",
+  "matched": "You Dreamed of Empires — Álvaro Enrigue",
+  "source": "bookmory"
  }
 }

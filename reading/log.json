@@ -4,29 +4,1778 @@
   },
   "books": [
     {
-      "title": "go gentle",
-      "author": "maria semple",
-      "slug": "go-gentle",
+      "title": "This Is How You Lose the Time War",
+      "author": "Max Gladstone, Amal El-Mohtar",
+      "slug": "this-is-how-you-lose-the-time-war",
       "status": "finished",
       "rating": 4,
       "page_count": null,
-      "started": "2026-07-18",
-      "finished": "2026-07-19",
+      "started": "2025-01-09",
+      "finished": "2025-01-14",
+      "sessions": []
+    },
+    {
+      "title": "All Systems Red",
+      "author": "Martha Wells",
+      "slug": "all-systems-red",
+      "status": "finished",
+      "rating": 3,
+      "page_count": null,
+      "started": "2025-01-15",
+      "finished": "2025-01-16",
+      "sessions": []
+    },
+    {
+      "title": "Hum",
+      "author": "Helen Phillips",
+      "slug": "hum",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2025-01-16",
+      "finished": "2025-01-16",
+      "sessions": []
+    },
+    {
+      "title": "The Bee Sting",
+      "author": "Paul Murray",
+      "slug": "the-bee-sting",
+      "status": "finished",
+      "rating": 5,
+      "page_count": null,
+      "started": "2025-01-17",
+      "finished": "2025-01-20",
+      "sessions": []
+    },
+    {
+      "title": "Annihilation",
+      "author": "Jeff VanderMeer",
+      "slug": "annihilation",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2025-01-22",
+      "finished": "2025-01-23",
+      "sessions": []
+    },
+    {
+      "title": "The Bad Guys Episode 10",
+      "author": "Aaron Blabey",
+      "slug": "the-bad-guys-episode-10",
+      "status": "finished",
+      "rating": null,
+      "page_count": null,
+      "started": "2025-01-22",
+      "finished": "2025-01-25",
+      "sessions": []
+    },
+    {
+      "title": "Winnie-the-Pooh",
+      "author": "A.A. Milne",
+      "slug": "winnie-the-pooh",
+      "status": "finished",
+      "rating": 5,
+      "page_count": null,
+      "started": "2025-01-22",
+      "finished": "2025-02-03",
+      "sessions": []
+    },
+    {
+      "title": "The Nickel Boys",
+      "author": "Colson Whitehead",
+      "slug": "the-nickel-boys",
+      "status": "finished",
+      "rating": 4,
+      "page_count": null,
+      "started": "2025-01-24",
+      "finished": "2025-01-26",
+      "sessions": []
+    },
+    {
+      "title": "Trust",
+      "author": "Hernán Díaz",
+      "slug": "trust",
+      "status": "finished",
+      "rating": 5,
+      "page_count": null,
+      "started": "2025-01-25",
+      "finished": "2025-01-27",
+      "sessions": []
+    },
+    {
+      "title": "Funny Story",
+      "author": "Emily Henry",
+      "slug": "funny-story",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": null,
+      "started": "2025-01-27",
+      "finished": "2025-01-29",
+      "sessions": []
+    },
+    {
+      "title": "Artificial Condition",
+      "author": "Martha Wells",
+      "slug": "artificial-condition",
+      "status": "finished",
+      "rating": 3,
+      "page_count": null,
+      "started": "2025-01-29",
+      "finished": "2025-01-29",
+      "sessions": []
+    },
+    {
+      "title": "The Tainted Cup",
+      "author": "Robert Jackson Bennett",
+      "slug": "the-tainted-cup",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": null,
+      "started": "2025-01-29",
+      "finished": "2025-01-30",
+      "sessions": []
+    },
+    {
+      "title": "Headshot",
+      "author": "Rita Bullwinkel",
+      "slug": "headshot",
+      "status": "finished",
+      "rating": 4,
+      "page_count": null,
+      "started": "2025-01-31",
+      "finished": "2025-02-02",
+      "sessions": []
+    },
+    {
+      "title": "Rental House",
+      "author": "Weike Wang",
+      "slug": "rental-house",
+      "status": "finished",
+      "rating": 3,
+      "page_count": null,
+      "started": "2025-01-31",
+      "finished": "2025-01-31",
+      "sessions": []
+    },
+    {
+      "title": "Creation Lake",
+      "author": "Rachel Kushner",
+      "slug": "creation-lake",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": null,
+      "started": "2025-02-01",
+      "finished": "2025-02-02",
+      "sessions": []
+    },
+    {
+      "title": "Orbital",
+      "author": "Samantha Harvey",
+      "slug": "orbital",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2025-02-02",
+      "finished": "2025-02-03",
+      "sessions": []
+    },
+    {
+      "title": "Good Material",
+      "author": "Dolly Alderton",
+      "slug": "good-material",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": null,
+      "started": "2025-02-03",
+      "finished": "2025-02-05",
+      "sessions": []
+    },
+    {
+      "title": "Dog Man",
+      "author": "Dav Pilkey",
+      "slug": "dog-man",
+      "status": "finished",
+      "rating": null,
+      "page_count": null,
+      "started": "2025-02-04",
+      "finished": "2025-02-07",
+      "sessions": []
+    },
+    {
+      "title": "Havoc",
+      "author": "Christopher Bollen",
+      "slug": "havoc",
+      "status": "finished",
+      "rating": 3,
+      "page_count": null,
+      "started": "2025-02-04",
+      "finished": "2025-02-05",
+      "sessions": []
+    },
+    {
+      "title": "Lazarus Man",
+      "author": "Richard Price",
+      "slug": "lazarus-man",
+      "status": "finished",
+      "rating": 2,
+      "page_count": null,
+      "started": "2025-02-06",
+      "finished": "2025-02-08",
+      "sessions": []
+    },
+    {
+      "title": "The Ministry of Time",
+      "author": "Kaliane Bradley",
+      "slug": "the-ministry-of-time",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2025-02-06",
+      "finished": "2025-02-07",
+      "sessions": []
+    },
+    {
+      "title": "Ghostroots",
+      "author": "‘Pemi Aguda",
+      "slug": "ghostroots",
+      "status": "reading",
+      "rating": null,
+      "page_count": 224,
+      "started": "2025-02-08",
+      "finished": null,
+      "sessions": [
+        "2025-02-08 51"
+      ]
+    },
+    {
+      "title": "Godwin",
+      "author": "Joseph O'Neill",
+      "slug": "godwin",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2025-02-08",
+      "finished": "2025-02-09",
+      "sessions": []
+    },
+    {
+      "title": "Splinters: A Memoir",
+      "author": "Leslie Jamison",
+      "slug": "splinters-a-memoir",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2025-02-08",
+      "finished": "2025-02-09",
+      "sessions": []
+    },
+    {
+      "title": "Cleavage: Men, Women, and the Space Between Us",
+      "author": "Jennifer Finney Boylan",
+      "slug": "cleavage-men-women-and-the-space-between-us",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 256,
+      "started": "2025-02-09",
+      "finished": "2025-02-15",
+      "sessions": [
+        "2025-02-09 42",
+        "2025-02-11 177",
+        "2025-02-15 256"
+      ]
+    },
+    {
+      "title": "Death of the Author",
+      "author": "Nnedi Okorafor",
+      "slug": "death-of-the-author",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 448,
+      "started": "2025-02-10",
+      "finished": "2025-02-10",
+      "sessions": [
+        "2025-02-10 448"
+      ]
+    },
+    {
+      "title": "Beautyland",
+      "author": "Marie-Helene Bertino",
+      "slug": "beautyland",
+      "status": "finished",
+      "rating": 5,
+      "page_count": 336,
+      "started": "2025-02-11",
+      "finished": "2025-02-18",
+      "sessions": [
+        "2025-02-11 101",
+        "2025-02-15 146",
+        "2025-02-17 178",
+        "2025-02-18 336"
+      ]
+    },
+    {
+      "title": "Dog Man Unleashed",
+      "author": "Dav Pilkey",
+      "slug": "dog-man-unleashed",
+      "status": "finished",
+      "rating": null,
+      "page_count": 224,
+      "started": "2025-02-11",
+      "finished": "2025-02-17",
+      "sessions": [
+        "2025-02-11 48",
+        "2025-02-12 102",
+        "2025-02-17 224"
+      ]
+    },
+    {
+      "title": "Babel",
+      "author": "R.F. Kuang",
+      "slug": "babel",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 544,
+      "started": "2025-02-12",
+      "finished": "2025-02-14",
+      "sessions": [
+        "2025-02-12 203",
+        "2025-02-13 399",
+        "2025-02-14 544"
+      ]
+    },
+    {
+      "title": "Everyone Who Is Gone Is Here: The United States, Central America, and the Making of a Crisis",
+      "author": "Jonathan Blitzer",
+      "slug": "everyone-who-is-gone-is-here-the-united-states-central-america-and-the-making-of-a-crisis",
+      "status": "abandoned",
+      "rating": null,
+      "page_count": null,
+      "started": null,
+      "finished": "2025-02-12",
+      "sessions": []
+    },
+    {
+      "title": "My Brilliant Friend",
+      "author": "Elena Ferrante",
+      "slug": "my-brilliant-friend",
+      "status": "abandoned",
+      "rating": null,
+      "page_count": null,
+      "started": null,
+      "finished": "2025-02-12",
+      "sessions": []
+    },
+    {
+      "title": "Owls and Other Fantasies: Poems and Essays",
+      "author": "Mary Oliver",
+      "slug": "owls-and-other-fantasies-poems-and-essays",
+      "status": "abandoned",
+      "rating": null,
+      "page_count": null,
+      "started": null,
+      "finished": "2025-02-12",
+      "sessions": []
+    },
+    {
+      "title": "We Do Not Part",
+      "author": "Han Kang",
+      "slug": "we-do-not-part",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 272,
+      "started": "2025-02-14",
+      "finished": "2025-02-17",
+      "sessions": [
+        "2025-02-14 52",
+        "2025-02-15 145",
+        "2025-02-16 210",
+        "2025-02-17 272"
+      ]
+    },
+    {
+      "title": "Station Eleven",
+      "author": "Emily St. John Mandel",
+      "slug": "station-eleven",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 333,
+      "started": "2025-02-16",
+      "finished": "2025-02-20",
+      "sessions": [
+        "2025-02-16 34",
+        "2025-02-17 84",
+        "2025-02-19 164",
+        "2025-02-20 333"
+      ]
+    },
+    {
+      "title": "A Tale of Two Kitties",
+      "author": "Dav Pilkey",
+      "slug": "a-tale-of-two-kitties",
+      "status": "finished",
+      "rating": null,
+      "page_count": 256,
+      "started": "2025-02-17",
+      "finished": "2025-02-28",
+      "sessions": [
+        "2025-02-17 76",
+        "2025-02-28 256"
+      ]
+    },
+    {
+      "title": "Stone Yard Devotional",
+      "author": "Charlotte Wood",
+      "slug": "stone-yard-devotional",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 304,
+      "started": "2025-02-18",
+      "finished": "2025-02-20",
+      "sessions": [
+        "2025-02-18 50",
+        "2025-02-19 157",
+        "2025-02-20 304"
+      ]
+    },
+    {
+      "title": "The Lion, the Witch and the Wardrobe",
+      "author": "C.S. Lewis",
+      "slug": "the-lion-the-witch-and-the-wardrobe",
+      "status": "reading",
+      "rating": null,
+      "page_count": 180,
+      "started": "2025-02-19",
+      "finished": null,
+      "sessions": [
+        "2025-02-19 27"
+      ]
+    },
+    {
+      "title": "Colored Television",
+      "author": "Danzy Senna",
+      "slug": "colored-television",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 277,
+      "started": "2025-02-20",
+      "finished": "2025-02-21",
+      "sessions": [
+        "2025-02-20 158",
+        "2025-02-21 277"
+      ]
+    },
+    {
+      "title": "Martyr!",
+      "author": "Kaveh Akbar",
+      "slug": "martyr",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 331,
+      "started": "2025-02-20",
+      "finished": "2025-02-22",
+      "sessions": [
+        "2025-02-20 32",
+        "2025-02-22 331"
+      ]
+    },
+    {
+      "title": "The Heaven & Earth Grocery Store",
+      "author": "James McBride",
+      "slug": "the-heaven-earth-grocery-store",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 385,
+      "started": "2025-02-26",
+      "finished": "2025-02-27",
+      "sessions": [
+        "2025-02-26 266",
+        "2025-02-27 385"
+      ]
+    },
+    {
+      "title": "Death Takes Me",
+      "author": "Cristina Rivera Garza",
+      "slug": "death-takes-me",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 320,
+      "started": "2025-02-27",
+      "finished": "2025-03-04",
+      "sessions": [
+        "2025-02-27 58",
+        "2025-03-03 118",
+        "2025-03-04 320"
+      ]
+    },
+    {
+      "title": "Too Soon",
+      "author": "Betty Shamieh",
+      "slug": "too-soon",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 336,
+      "started": "2025-02-28",
+      "finished": "2025-03-03",
+      "sessions": [
+        "2025-02-28 136",
+        "2025-03-03 336"
+      ]
+    },
+    {
+      "title": "Darkmotherland",
+      "author": "Samrat Upadhyay",
+      "slug": "darkmotherland",
+      "status": "reading",
+      "rating": null,
+      "page_count": 768,
+      "started": "2025-03-03",
+      "finished": null,
+      "sessions": [
+        "2025-03-03 120"
+      ]
+    },
+    {
+      "title": "Lord of the Fleas",
+      "author": "Dav Pilkey",
+      "slug": "lord-of-the-fleas",
+      "status": "finished",
+      "rating": null,
+      "page_count": 256,
+      "started": "2025-03-03",
+      "finished": "2025-03-18",
+      "sessions": [
+        "2025-03-18 256"
+      ]
+    },
+    {
+      "title": "The Echoes",
+      "author": "Evie Wyld",
+      "slug": "the-echoes",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 226,
+      "started": "2025-03-05",
+      "finished": "2025-03-07",
+      "sessions": [
+        "2025-03-05 51",
+        "2025-03-06 77",
+        "2025-03-07 226"
+      ]
+    },
+    {
+      "title": "You Dreamed of Empires",
+      "author": "Álvaro Enrigue",
+      "slug": "you-dreamed-of-empires",
+      "status": "finished",
+      "rating": 5,
+      "page_count": 220,
+      "started": "2025-03-05",
+      "finished": "2025-03-05",
+      "sessions": [
+        "2025-03-05 220"
+      ]
+    },
+    {
+      "title": "Gliff",
+      "author": "Ali Smith",
+      "slug": "gliff",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 288,
+      "started": "2025-03-08",
+      "finished": "2025-03-10",
+      "sessions": [
+        "2025-03-08 110",
+        "2025-03-09 151",
+        "2025-03-10 288"
+      ]
+    },
+    {
+      "title": "Victorian Psycho",
+      "author": "Virginia Feito",
+      "slug": "victorian-psycho",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 208,
+      "started": "2025-03-08",
+      "finished": "2025-03-08",
+      "sessions": [
+        "2025-03-08 208"
+      ]
+    },
+    {
+      "title": "Theory & Practice",
+      "author": "Michelle de Kretser",
+      "slug": "theory-practice",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 192,
+      "started": "2025-03-10",
+      "finished": "2025-03-13",
+      "sessions": [
+        "2025-03-10 34",
+        "2025-03-11 94",
+        "2025-03-13 192"
+      ]
+    },
+    {
+      "title": "Rejection",
+      "author": "Tony Tulathimutte",
+      "slug": "rejection",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 272,
+      "started": "2025-03-11",
+      "finished": "2025-03-12",
+      "sessions": [
+        "2025-03-11 92",
+        "2025-03-12 272"
+      ]
+    },
+    {
+      "title": "The God of the Woods",
+      "author": "Liz Moore",
+      "slug": "the-god-of-the-woods",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 478,
+      "started": "2025-03-13",
+      "finished": "2025-03-14",
+      "sessions": [
+        "2025-03-13 214",
+        "2025-03-14 478"
+      ]
+    },
+    {
+      "title": "James",
+      "author": "Percival Everett",
+      "slug": "james",
+      "status": "finished",
+      "rating": 5,
+      "page_count": 303,
+      "started": "2025-03-14",
+      "finished": "2025-03-15",
+      "sessions": [
+        "2025-03-14 112",
+        "2025-03-15 303"
+      ]
+    },
+    {
+      "title": "Life in Three Dimensions: How Curiosity, Exploration, and Exp...",
+      "author": "Shigehiro Oishi",
+      "slug": "life-in-three-dimensions-how-curiosity-exploration-and-exp",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 256,
+      "started": "2025-03-15",
+      "finished": "2025-03-17",
+      "sessions": [
+        "2025-03-15 45",
+        "2025-03-17 256"
+      ]
+    },
+    {
+      "title": "The Antidote",
+      "author": "Karen Russell",
+      "slug": "the-antidote",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 432,
+      "started": "2025-03-16",
+      "finished": "2025-03-19",
+      "sessions": [
+        "2025-03-16 60",
+        "2025-03-17 160",
+        "2025-03-18 208",
+        "2025-03-19 432"
+      ]
+    },
+    {
+      "title": "Dog Man and Cat Kid",
+      "author": "Dav Pilkey",
+      "slug": "dog-man-and-cat-kid",
+      "status": "finished",
+      "rating": null,
+      "page_count": 256,
+      "started": "2025-03-17",
+      "finished": "2025-03-30",
+      "sessions": [
+        "2025-03-30 256"
+      ]
+    },
+    {
+      "title": "Swallow the Ghost",
+      "author": "Eugenie Montague",
+      "slug": "swallow-the-ghost",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 320,
+      "started": "2025-03-18",
+      "finished": "2025-03-19",
+      "sessions": [
+        "2025-03-18 176",
+        "2025-03-19 320"
+      ]
+    },
+    {
+      "title": "The Vaster Wilds",
+      "author": "Lauren Groff",
+      "slug": "the-vaster-wilds",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 272,
+      "started": "2025-03-20",
+      "finished": "2025-03-20",
+      "sessions": [
+        "2025-03-20 272"
+      ]
+    },
+    {
+      "title": "Stag Dance",
+      "author": "Torrey Peters",
+      "slug": "stag-dance",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 304,
+      "started": "2025-03-21",
+      "finished": "2025-03-23",
+      "sessions": [
+        "2025-03-21 32",
+        "2025-03-23 304"
+      ]
+    },
+    {
+      "title": "The River Has Roots",
+      "author": "Amal El-Mohtar",
+      "slug": "the-river-has-roots",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 144,
+      "started": "2025-03-21",
+      "finished": "2025-03-23",
+      "sessions": [
+        "2025-03-21 43",
+        "2025-03-23 144"
+      ]
+    },
+    {
+      "title": "Mothers and Sons",
+      "author": "Adam Haslett",
+      "slug": "mothers-and-sons",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 336,
+      "started": "2025-03-23",
+      "finished": "2025-03-25",
+      "sessions": [
+        "2025-03-23 79",
+        "2025-03-24 139",
+        "2025-03-25 336"
+      ]
+    },
+    {
+      "title": "Hunchback",
+      "author": "Saou Ichikawa",
+      "slug": "hunchback",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 112,
+      "started": "2025-03-25",
+      "finished": "2025-03-25",
+      "sessions": [
+        "2025-03-25 112"
+      ]
+    },
+    {
+      "title": "Demon Copperhead",
+      "author": "Barbara Kingsolver",
+      "slug": "demon-copperhead",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 560,
+      "started": "2025-03-26",
+      "finished": "2025-03-29",
+      "sessions": [
+        "2025-03-27 115",
+        "2025-03-28 338",
+        "2025-03-29 560"
+      ]
+    },
+    {
+      "title": "The Dream Hotel",
+      "author": "Laila Lalami",
+      "slug": "the-dream-hotel",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 336,
+      "started": "2025-03-29",
+      "finished": "2025-03-30",
+      "sessions": [
+        "2025-03-29 106",
+        "2025-03-30 336"
+      ]
+    },
+    {
+      "title": "Theft",
+      "author": "Abdulrazak Gurnah",
+      "slug": "theft",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 296,
+      "started": "2025-03-30",
+      "finished": "2025-04-01",
+      "sessions": [
+        "2025-03-30 42",
+        "2025-03-31 179",
+        "2025-04-01 296"
+      ]
+    },
+    {
+      "title": "Goddess Complex",
+      "author": "Sanjena Sathian",
+      "slug": "goddess-complex",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 304,
+      "started": "2025-04-01",
+      "finished": "2025-04-05",
+      "sessions": [
+        "2025-04-01 29",
+        "2025-04-02 89",
+        "2025-04-03 99",
+        "2025-04-04 149",
+        "2025-04-05 304"
+      ]
+    },
+    {
+      "title": "Great Expectations",
+      "author": "Vinson Cunningham",
+      "slug": "great-expectations",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 272,
+      "started": "2025-04-01",
+      "finished": "2025-04-01",
+      "sessions": [
+        "2025-04-01 272"
+      ]
+    },
+    {
+      "title": "Dream Count",
+      "author": "Chimamanda Ngozi Adichie",
+      "slug": "dream-count",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 416,
+      "started": "2025-04-04",
+      "finished": "2025-04-04",
+      "sessions": [
+        "2025-04-04 416"
+      ]
+    },
+    {
+      "title": "A Drop of Corruption",
+      "author": "Robert Jackson Bennett",
+      "slug": "a-drop-of-corruption",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 480,
+      "started": "2025-04-05",
+      "finished": "2025-04-06",
+      "sessions": [
+        "2025-04-05 133",
+        "2025-04-06 480"
+      ]
+    },
+    {
+      "title": "Good Girl",
+      "author": "Aria Aber",
+      "slug": "good-girl",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 368,
+      "started": "2025-04-08",
+      "finished": "2025-04-09",
+      "sessions": [
+        "2025-04-09 368"
+      ]
+    },
+    {
+      "title": "Nesting",
+      "author": "Roisín O’Donnell",
+      "slug": "nesting",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 382,
+      "started": "2025-04-09",
+      "finished": "2025-04-10",
+      "sessions": [
+        "2025-04-09 41",
+        "2025-04-10 382"
+      ]
+    },
+    {
+      "title": "Audition",
+      "author": "Katie Kitamura",
+      "slug": "audition",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 208,
+      "started": "2025-04-10",
+      "finished": "2025-04-11",
+      "sessions": [
+        "2025-04-10 113",
+        "2025-04-11 208"
+      ]
+    },
+    {
+      "title": "No One Is Talking About This",
+      "author": "Patricia Lockwood",
+      "slug": "no-one-is-talking-about-this",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 215,
+      "started": "2025-04-11",
+      "finished": "2025-04-12",
+      "sessions": [
+        "2025-04-11 85",
+        "2025-04-12 215"
+      ]
+    },
+    {
+      "title": "Back After This",
+      "author": "Linda Holmes",
+      "slug": "back-after-this",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 320,
+      "started": "2025-04-12",
+      "finished": "2025-04-12",
+      "sessions": [
+        "2025-04-12 320"
+      ]
+    },
+    {
+      "title": "Big Chief",
+      "author": "Jon Hickey",
+      "slug": "big-chief",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 320,
+      "started": "2025-04-13",
+      "finished": "2025-04-17",
+      "sessions": [
+        "2025-04-13 25",
+        "2025-04-14 117",
+        "2025-04-17 320"
+      ]
+    },
+    {
+      "title": "The Usual Desire to Kill",
+      "author": "Camilla Barnes",
+      "slug": "the-usual-desire-to-kill",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 256,
+      "started": "2025-04-15",
+      "finished": "2025-04-16",
+      "sessions": [
+        "2025-04-15 100",
+        "2025-04-16 256"
+      ]
+    },
+    {
+      "title": "Vantage Point",
+      "author": "Sara Sligar",
+      "slug": "vantage-point",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 400,
+      "started": "2025-04-17",
+      "finished": "2025-04-18",
+      "sessions": [
+        "2025-04-17 131",
+        "2025-04-18 400"
+      ]
+    },
+    {
+      "title": "Brawl of the Wild",
+      "author": "Dav Pilkey",
+      "slug": "brawl-of-the-wild",
+      "status": "finished",
+      "rating": null,
+      "page_count": 224,
+      "started": "2025-04-18",
+      "finished": "2025-04-22",
+      "sessions": [
+        "2025-04-22 224"
+      ]
+    },
+    {
+      "title": "Notes from a Regicide",
+      "author": "Isaac Fellman",
+      "slug": "notes-from-a-regicide",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 336,
+      "started": "2025-04-19",
+      "finished": "2025-04-20",
+      "sessions": [
+        "2025-04-19 143",
+        "2025-04-20 336"
+      ]
+    },
+    {
+      "title": "The Buffalo Hunter Hunter",
+      "author": "Stephen Graham Jones",
+      "slug": "the-buffalo-hunter-hunter",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 448,
+      "started": "2025-04-21",
+      "finished": "2025-04-22",
+      "sessions": [
+        "2025-04-21 228",
+        "2025-04-22 448"
+      ]
+    },
+    {
+      "title": "Wild Dark Shore",
+      "author": "Charlotte McConaghy",
+      "slug": "wild-dark-shore",
+      "status": "finished",
+      "rating": 2,
+      "page_count": 303,
+      "started": "2025-04-22",
+      "finished": "2025-04-23",
+      "sessions": [
+        "2025-04-22 124",
+        "2025-04-23 303"
+      ]
+    },
+    {
+      "title": "Sky Daddy",
+      "author": "Kate Folk",
+      "slug": "sky-daddy",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 368,
+      "started": "2025-04-24",
+      "finished": "2025-04-26",
+      "sessions": [
+        "2025-04-25 75",
+        "2025-04-26 368"
+      ]
+    },
+    {
+      "title": "For Whom the Ball Rolls",
+      "author": "Dav Pilkey",
+      "slug": "for-whom-the-ball-rolls",
+      "status": "finished",
+      "rating": null,
+      "page_count": 240,
+      "started": "2025-04-26",
+      "finished": "2025-04-28",
+      "sessions": [
+        "2025-04-28 240"
+      ]
+    },
+    {
+      "title": "Deep Cuts",
+      "author": "Holly Brickley",
+      "slug": "deep-cuts",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 277,
+      "started": "2025-04-27",
+      "finished": "2025-04-27",
+      "sessions": [
+        "2025-04-27 277"
+      ]
+    },
+    {
+      "title": "Exit Zero",
+      "author": "Marie-Helene Bertino",
+      "slug": "exit-zero",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 208,
+      "started": "2025-04-28",
+      "finished": "2025-04-29",
+      "sessions": [
+        "2025-04-28 104",
+        "2025-04-29 208"
+      ]
+    },
+    {
+      "title": "Ultramarine",
+      "author": "Mariette Navarro",
+      "slug": "ultramarine",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 161,
+      "started": "2025-04-30",
+      "finished": "2025-04-30",
+      "sessions": [
+        "2025-04-30 161"
+      ]
+    },
+    {
+      "title": "Swamplandia!",
+      "author": "Karen Russell",
+      "slug": "swamplandia",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 418,
+      "started": "2025-05-04",
+      "finished": "2025-05-08",
+      "sessions": [
+        "2025-05-04 186",
+        "2025-05-06 260",
+        "2025-05-07 311",
+        "2025-05-08 418"
+      ]
+    },
+    {
+      "title": "Grime and Punishment",
+      "author": "Dav Pilkey",
+      "slug": "grime-and-punishment",
+      "status": "finished",
+      "rating": null,
+      "page_count": 240,
+      "started": "2025-05-05",
+      "finished": "2025-05-10",
+      "sessions": [
+        "2025-05-08 175",
+        "2025-05-10 240"
+      ]
+    },
+    {
+      "title": "Heartwood",
+      "author": "Amity Gaige",
+      "slug": "heartwood",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 320,
+      "started": "2025-05-05",
+      "finished": "2025-05-06",
+      "sessions": [
+        "2025-05-05 160",
+        "2025-05-06 320"
+      ]
+    },
+    {
+      "title": "Stop Me If You've Heard This One",
+      "author": "Kristen Arnett",
+      "slug": "stop-me-if-you-ve-heard-this-one",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 272,
+      "started": "2025-05-08",
+      "finished": "2025-05-10",
+      "sessions": [
+        "2025-05-08 30",
+        "2025-05-09 86",
+        "2025-05-10 272"
+      ]
+    },
+    {
+      "title": "Fetch-22",
+      "author": "Dav Pilkey",
+      "slug": "fetch-22",
+      "status": "reading",
+      "rating": null,
+      "page_count": 240,
+      "started": "2025-05-10",
+      "finished": null,
+      "sessions": [
+        "2025-05-11 240"
+      ]
+    },
+    {
+      "title": "Twist",
+      "author": "Colum McCann",
+      "slug": "twist",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 256,
+      "started": "2025-05-11",
+      "finished": "2025-05-11",
+      "sessions": [
+        "2025-05-11 256"
+      ]
+    },
+    {
+      "title": "Midnight in Soap Lake",
+      "author": "Matthew J. Sullivan",
+      "slug": "midnight-in-soap-lake",
+      "status": "finished",
+      "rating": 2,
+      "page_count": 416,
+      "started": "2025-05-12",
+      "finished": "2025-05-13",
+      "sessions": [
+        "2025-05-12 151",
+        "2025-05-13 416"
+      ]
+    },
+    {
+      "title": "Moby-Dick or, The Whale",
+      "author": "Herman Melville",
+      "slug": "moby-dick-or-the-whale",
+      "status": "reading",
+      "rating": null,
+      "page_count": 657,
+      "started": "2025-05-12",
+      "finished": null,
+      "sessions": [
+        "2025-05-12 41"
+      ]
+    },
+    {
+      "title": "A/S/L",
+      "author": "Jeanne Thornton",
+      "slug": "a-s-l",
+      "status": "reading",
+      "rating": null,
+      "page_count": 496,
+      "started": "2025-05-13",
+      "finished": null,
+      "sessions": [
+        "2025-05-13 23"
+      ]
+    },
+    {
+      "title": "Tilt",
+      "author": "Emma Pattee",
+      "slug": "tilt",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 229,
+      "started": "2025-05-13",
+      "finished": "2025-05-14",
+      "sessions": [
+        "2025-05-13 191",
+        "2025-05-14 229"
+      ]
+    },
+    {
+      "title": "Where the Axe Is Buried",
+      "author": "Ray Nayler",
+      "slug": "where-the-axe-is-buried",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 336,
+      "started": "2025-05-14",
+      "finished": "2025-05-14",
+      "sessions": [
+        "2025-05-14 336"
+      ]
+    },
+    {
+      "title": "Dog Man: Mothering Heights",
+      "author": "Dav Pilkey",
+      "slug": "dog-man-mothering-heights",
+      "status": "finished",
+      "rating": null,
+      "page_count": 224,
+      "started": "2025-05-15",
+      "finished": "2025-05-17",
+      "sessions": [
+        "2025-05-15 45",
+        "2025-05-16 181",
+        "2025-05-17 224"
+      ]
+    },
+    {
+      "title": "Bitter Texas Honey",
+      "author": "Ashley Whitaker",
+      "slug": "bitter-texas-honey",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 336,
+      "started": "2025-05-26",
+      "finished": "2025-05-27",
+      "sessions": [
+        "2025-05-26 121",
+        "2025-05-27 336"
+      ]
+    },
+    {
+      "title": "The Scarlet Shedder",
+      "author": "Dav Pilkey",
+      "slug": "the-scarlet-shedder",
+      "status": "finished",
+      "rating": null,
+      "page_count": 224,
+      "started": "2025-05-27",
+      "finished": "2025-05-30",
+      "sessions": [
+        "2025-05-30 224"
+      ]
+    },
+    {
+      "title": "The Emperor of Gladness",
+      "author": "Ocean Vuong",
+      "slug": "the-emperor-of-gladness",
+      "status": "finished",
+      "rating": null,
+      "page_count": 416,
+      "started": "2025-05-30",
+      "finished": "2025-05-30",
+      "sessions": [
+        "2025-05-30 99"
+      ]
+    },
+    {
+      "title": "Vanishing World",
+      "author": "Sayaka Murata",
+      "slug": "vanishing-world",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 240,
+      "started": "2025-07-03",
+      "finished": "2025-07-03",
+      "sessions": [
+        "2025-07-03 240"
+      ]
+    },
+    {
+      "title": "Flesh",
+      "author": "David Szalay",
+      "slug": "flesh",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 368,
+      "started": "2025-07-04",
+      "finished": "2025-07-05",
+      "sessions": [
+        "2025-07-04 148",
+        "2025-07-05 368"
+      ]
+    },
+    {
+      "title": "Bury Our Bones in the Midnight Soil",
+      "author": "V.E. Schwab",
+      "slug": "bury-our-bones-in-the-midnight-soil",
+      "status": "abandoned",
+      "rating": 2,
+      "page_count": 535,
+      "started": "2025-07-05",
+      "finished": "2025-07-07",
+      "sessions": [
+        "2025-07-05 122",
+        "2025-07-06 180"
+      ]
+    },
+    {
+      "title": "Archive of Unknown Universes",
+      "author": "Ruben Reyes Jr.",
+      "slug": "archive-of-unknown-universes",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 288,
+      "started": "2025-07-06",
+      "finished": "2025-07-07",
+      "sessions": [
+        "2025-07-06 150",
+        "2025-07-07 288"
+      ]
+    },
+    {
+      "title": "Harmattan Season",
+      "author": "Tochi Onyebuchi",
+      "slug": "harmattan-season",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 240,
+      "started": "2025-07-07",
+      "finished": "2025-07-08",
+      "sessions": [
+        "2025-07-07 92",
+        "2025-07-08 240"
+      ]
+    },
+    {
+      "title": "Run for the Hills",
+      "author": "Kevin Wilson",
+      "slug": "run-for-the-hills",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 256,
+      "started": "2025-07-09",
+      "finished": "2025-07-09",
+      "sessions": [
+        "2025-07-09 256"
+      ]
+    },
+    {
+      "title": "Disappoint Me",
+      "author": "Nicola Dinan",
+      "slug": "disappoint-me",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 320,
+      "started": "2025-07-11",
+      "finished": "2025-07-11",
+      "sessions": [
+        "2025-07-11 320"
+      ]
+    },
+    {
+      "title": "The Art of Vanishing",
+      "author": "Morgan Pager",
+      "slug": "the-art-of-vanishing",
+      "status": "finished",
+      "rating": 1.5,
+      "page_count": 304,
+      "started": "2025-07-11",
+      "finished": "2025-07-12",
+      "sessions": [
+        "2025-07-11 39",
+        "2025-07-12 304"
+      ]
+    },
+    {
+      "title": "Bring the House Down",
+      "author": "Charlotte Runcie",
+      "slug": "bring-the-house-down",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 304,
+      "started": "2025-07-12",
+      "finished": "2025-07-13",
+      "sessions": [
+        "2025-07-13 304"
+      ]
+    },
+    {
+      "title": "The Names",
+      "author": "Florence Knapp",
+      "slug": "the-names",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 336,
+      "started": "2025-09-02",
+      "finished": "2025-09-03",
+      "sessions": [
+        "2025-09-03 336"
+      ]
+    },
+    {
+      "title": "Maggie; or, A Man and a Woman Walk Into a Bar",
+      "author": "Katie Yee",
+      "slug": "maggie-or-a-man-and-a-woman-walk-into-a-bar",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 208,
+      "started": "2025-09-03",
+      "finished": "2025-09-04",
+      "sessions": [
+        "2025-09-03 34",
+        "2025-09-04 208"
+      ]
+    },
+    {
+      "title": "Vera, or Faith",
+      "author": "Gary Shteyngart",
+      "slug": "vera-or-faith",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 256,
+      "started": "2025-09-03",
+      "finished": "2025-09-03",
+      "sessions": [
+        "2025-09-03 256"
+      ]
+    },
+    {
+      "title": "The White Hot",
+      "author": "Quiara Alegría Hudes",
+      "slug": "the-white-hot",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 176,
+      "started": "2025-12-15",
+      "finished": "2025-12-15",
+      "sessions": [
+        "2025-12-15 176"
+      ]
+    },
+    {
+      "title": "Will There Ever Be Another You",
+      "author": "Patricia Lockwood",
+      "slug": "will-there-ever-be-another-you",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 256,
+      "started": "2025-12-18",
+      "finished": "2025-12-26",
+      "sessions": [
+        "2025-12-18 160",
+        "2025-12-26 256"
+      ]
+    },
+    {
+      "title": "Bad Bad Girl",
+      "author": "Gish Jen",
+      "slug": "bad-bad-girl",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 352,
+      "started": "2025-12-28",
+      "finished": "2026-01-02",
+      "sessions": [
+        "2025-12-28 136",
+        "2026-01-02 352"
+      ]
+    },
+    {
+      "title": "Helm",
+      "author": "Sarah Hall",
+      "slug": "helm",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 368,
+      "started": "2026-01-02",
+      "finished": "2026-01-04",
+      "sessions": [
+        "2026-01-02 25",
+        "2026-01-03 207",
+        "2026-01-04 368"
+      ]
+    },
+    {
+      "title": "The Ferryman and His Wife",
+      "author": "Frode Grytten",
+      "slug": "the-ferryman-and-his-wife",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 176,
+      "started": "2026-01-04",
+      "finished": "2026-01-05",
+      "sessions": [
+        "2026-01-04 43",
+        "2026-01-05 176"
+      ]
+    },
+    {
+      "title": "Palaver",
+      "author": "Bryan Washington",
+      "slug": "palaver",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 336,
+      "started": "2026-01-06",
+      "finished": "2026-01-07",
+      "sessions": [
+        "2026-01-06 202",
+        "2026-01-07 336"
+      ]
+    },
+    {
+      "title": "The Slip",
+      "author": "Lucas Schaefer",
+      "slug": "the-slip",
+      "status": "abandoned",
+      "rating": null,
+      "page_count": 496,
+      "started": "2026-01-07",
+      "finished": "2026-01-13",
+      "sessions": [
+        "2026-01-07 27"
+      ]
+    },
+    {
+      "title": "A Guardian and a Thief",
+      "author": "Megha Majumdar",
+      "slug": "a-guardian-and-a-thief",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 224,
+      "started": "2026-01-13",
+      "finished": "2026-01-16",
+      "sessions": [
+        "2026-01-13 62",
+        "2026-01-16 224"
+      ]
+    },
+    {
+      "title": "House of Day, House of Night",
+      "author": "Olga Tokarczuk",
+      "slug": "house-of-day-house-of-night",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 293,
+      "started": "2026-01-20",
+      "finished": "2026-01-21",
+      "sessions": [
+        "2026-01-20 61",
+        "2026-01-21 293"
+      ]
+    },
+    {
+      "title": "Discontent",
+      "author": "Beatriz Serrano",
+      "slug": "discontent",
+      "status": "finished",
+      "rating": 2.5,
+      "page_count": 192,
+      "started": "2026-01-21",
+      "finished": "2026-01-29",
+      "sessions": [
+        "2026-01-29 192"
+      ]
+    },
+    {
+      "title": "Heart the Lover",
+      "author": "Lily King",
+      "slug": "heart-the-lover",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 256,
+      "started": "2026-01-22",
+      "finished": "2026-01-23",
+      "sessions": [
+        "2026-01-22 149",
+        "2026-01-23 256"
+      ]
+    },
+    {
+      "title": "The Loneliness of Sonia and Sunny",
+      "author": "Kiran Desai",
+      "slug": "the-loneliness-of-sonia-and-sunny",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 688,
+      "started": "2026-01-23",
+      "finished": "2026-01-29",
+      "sessions": [
+        "2026-01-23 41",
+        "2026-01-26 185",
+        "2026-01-27 289",
+        "2026-01-29 688"
+      ]
+    },
+    {
+      "title": "The Masque of the Red Death",
+      "author": "Edgar Allan Poe",
+      "slug": "the-masque-of-the-red-death",
+      "status": "finished",
+      "rating": 5,
+      "page_count": 129,
+      "started": "2026-01-24",
+      "finished": "2026-01-24",
+      "sessions": [
+        "2026-01-24 129"
+      ]
+    },
+    {
+      "title": "Seascraper",
+      "author": "Benjamin Wood",
+      "slug": "seascraper",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 176,
+      "started": "2026-01-31",
+      "finished": "2026-01-31",
+      "sessions": [
+        "2026-01-31 176"
+      ]
+    },
+    {
+      "title": "This Is Where the Serpent Lives",
+      "author": "Daniyal Mueenuddin",
+      "slug": "this-is-where-the-serpent-lives",
+      "status": "reading",
+      "rating": null,
+      "page_count": 368,
+      "started": "2026-01-31",
+      "finished": null,
+      "sessions": [
+        "2026-01-31 55"
+      ]
+    },
+    {
+      "title": "Eating Ashes",
+      "author": "Brenda Navarro",
+      "slug": "eating-ashes",
+      "status": "finished",
+      "rating": 2,
+      "page_count": 240,
+      "started": "2026-02-20",
+      "finished": "2026-02-20",
+      "sessions": [
+        "2026-02-20 240"
+      ]
+    },
+    {
+      "title": "Vigil",
+      "author": "George Saunders",
+      "slug": "vigil",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 192,
+      "started": "2026-02-20",
+      "finished": "2026-02-20",
+      "sessions": [
+        "2026-02-20 192"
+      ]
+    },
+    {
+      "title": "Canon",
+      "author": "Paige Lewis",
+      "slug": "canon",
+      "status": "finished",
+      "rating": 3,
+      "page_count": 480,
+      "started": "2026-07-06",
+      "finished": "2026-07-08",
+      "sessions": [
+        "2026-07-06 235",
+        "2026-07-08 480"
+      ]
+    },
+    {
+      "title": "The Natural Way of Things",
+      "author": "Charlotte Wood",
+      "slug": "the-natural-way-of-things",
+      "status": "reading",
+      "rating": null,
+      "page_count": 320,
+      "started": "2026-07-12",
+      "finished": null,
+      "sessions": [
+        "2026-07-12 91"
+      ]
+    },
+    {
+      "title": "Babylon, South Dakota",
+      "author": "Tom Lin",
+      "slug": "babylon-south-dakota",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 336,
+      "started": "2026-07-14",
+      "finished": "2026-07-17",
+      "sessions": [
+        "2026-07-14 198",
+        "2026-07-17 336"
+      ]
+    },
+    {
+      "title": "Go Gentle",
+      "author": "Maria Semple",
+      "slug": "go-gentle",
+      "status": "finished",
+      "rating": 4,
+      "page_count": 384,
+      "started": "2026-07-17",
+      "finished": "2026-07-18",
       "sessions": [
         "2026-07-17 46",
         "2026-07-18 384"
       ]
-    },
-    {
-      "title": "go gentle",
-      "author": "maria semple",
-      "slug": "go-gentle-2",
-      "status": "reading",
-      "rating": null,
-      "page_count": null,
-      "started": "2026-07-19",
-      "finished": null,
-      "sessions": []
     }
   ]
 }
