@@ -457,6 +457,7 @@ async function save() {
 }
 
 loadPicker();
+if (new URLSearchParams(location.search).has('new')) toggleNewForm();
 </script>
 </body>
 </html>

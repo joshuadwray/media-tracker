@@ -289,7 +289,9 @@ def render_index(blists: list) -> str:
         f"<style>{site.BASE_CSS}{_CSS}</style></head>"
         "<body style='--pagew:860px'>",
         site.nav("lists", 1),
-        "<h1>Lists</h1><ul class='lists'>",
+        "<h1>Lists</h1>",
+        "<a class='back' href='edit.html?new=1'>+ new list</a>",
+        "<ul class='lists'>",
     ]
     for bl in blists:
         parts.append(f"<li><a href='{e(bl.stem)}.html'>{e(bl.title)}</a> "
