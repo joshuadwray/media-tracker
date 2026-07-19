@@ -46,6 +46,16 @@ input, select { font: inherit; padding: 10px; border-radius: 10px;
 #status { margin-top: 12px; min-height: 1.4em; }
 #status.ok { color: var(--ok); } #status.err { color: var(--err); }
 .muted { color: var(--mut); font-size: .88rem; }
+.bhead { cursor: pointer; }
+.ed { border-top: 1px dashed var(--line); margin-top: 10px;
+  padding-top: 2px; }
+.ed label { display: block; font-size: .78rem; color: var(--mut);
+  margin: 8px 0 3px; }
+.srow { display: flex; gap: 8px; margin-bottom: 6px; }
+.srow input { width: 5.5em; text-align: center; }
+.srow input[type=date] { flex: 1; width: auto; text-align: left; }
+.btnrow { display: flex; gap: 8px; margin-top: 12px; }
+.btnrow button { flex: 1; }
 details { margin-top: 26px; }
 summary { color: var(--mut); cursor: pointer; }
 a { color: var(--accent); }
@@ -68,6 +78,9 @@ a { color: var(--accent); }
   </div>
   <button onclick="startBook()">start reading</button>
 </div>
+
+<h2>All books</h2>
+<div id="allbooks"></div>
 
 <h2>Settings</h2>
 <div class="grid2">
@@ -143,7 +156,7 @@ function slugify(t) {
 }
 function uniqueSlug(t) {
   let s = slugify(t), n = 2;
-  const taken = new Set(['index', 'log',
+  const taken = new Set(['index', 'log', 'list',
                          ...data.books.map(b => b.slug)]);
   let out = s;
   while (taken.has(out)) out = `${s}-${n++}`;
@@ -153,6 +166,16 @@ function uniqueSlug(t) {
 /* ------------------------------- UI ----------------------------------- */
 
 function markDirty() { dirty = true; $('saveBtn').disabled = false; }
+
+function ratingSelect(current, noneLabel) {
+  const sel = document.createElement('select');
+  sel.append(new Option(noneLabel || 'rating\u2026', ''));
+  for (let r = 5; r >= 0.5; r -= 0.5)
+    sel.append(new Option('\u2605'.repeat(Math.floor(r)) +
+                          (r % 1 ? '\u00bd' : '') + ` ${r}`, r));
+  if (current != null) sel.value = String(current);
+  return sel;
+}
 
 function render() {
   const box = $('reading');
@@ -222,11 +245,7 @@ function render() {
     }
 
     const fin = document.createElement('div'); fin.className = 'finrow';
-    const rate = document.createElement('select');
-    rate.append(new Option('rating\u2026', ''));
-    for (let r = 5; r >= 0.5; r -= 0.5)
-      rate.append(new Option('\u2605'.repeat(Math.floor(r)) +
-                             (r % 1 ? '\u00bd' : '') + ` ${r}`, r));
+    const rate = ratingSelect(null);
     const finBtn = document.createElement('button');
     finBtn.textContent = 'finish';
     finBtn.onclick = () => {
@@ -244,6 +263,147 @@ function render() {
     box.append(card);
   }
   $('goal').value = data.settings.daily_goal_pages || 0;
+  renderAll();
+}
+
+/* --------------------------- edit any book ---------------------------- */
+
+let openSlug = null;   // which All-books editor is expanded (one at a time)
+
+function renderAll() {
+  const box = $('allbooks');
+  box.textContent = '';
+  if (!data.books.length) {
+    const d = document.createElement('div');
+    d.className = 'muted'; d.textContent = 'no books yet';
+    box.append(d); return;
+  }
+  for (const b of data.books) {
+    const card = document.createElement('div');
+    card.className = 'book'; card.id = 'ab-' + b.slug;
+    const head = document.createElement('div'); head.className = 'bhead';
+    const t = document.createElement('div'); t.className = 't';
+    t.textContent = b.title;
+    const m = document.createElement('div'); m.className = 'prog';
+    m.textContent = (b.author ? b.author + ' \u00b7 ' : '') + b.status +
+      (b.rating != null ? ` \u00b7 \u2605${b.rating}` : '');
+    head.append(t, m);
+    head.onclick = () => {
+      openSlug = openSlug === b.slug ? null : b.slug;
+      renderAll();
+    };
+    card.append(head);
+    if (openSlug === b.slug) card.append(buildEditor(b));
+    box.append(card);
+  }
+}
+
+function buildEditor(b) {
+  const ed = document.createElement('div'); ed.className = 'ed';
+  ed.onclick = ev => ev.stopPropagation();
+  const lbl = txt => { const l = document.createElement('label');
+    l.textContent = txt; return l; };
+  const inp = (v, ph) => { const i = document.createElement('input');
+    i.value = v == null ? '' : v; if (ph) i.placeholder = ph; return i; };
+
+  const ti = inp(b.title, 'title');
+  const ai = inp(b.author, 'author');
+  const statusSel = document.createElement('select');
+  for (const s of ['reading', 'finished', 'abandoned'])
+    statusSel.append(new Option(s, s));
+  statusSel.value = b.status;
+  const rateSel = ratingSelect(b.rating, 'no rating');
+  const pcI = inp(b.page_count, 'total pages'); pcI.inputMode = 'numeric';
+  const stI = inp(b.started); stI.type = 'date';
+  const finI = inp(b.finished); finI.type = 'date';
+  statusSel.onchange = () => {   // un-finish clears; user can re-set
+    if (statusSel.value === 'reading') { finI.value = ''; rateSel.value = ''; }
+  };
+
+  ed.append(lbl('title'), ti, lbl('author'), ai);
+  const g1 = document.createElement('div'); g1.className = 'grid2';
+  g1.append(statusSel, rateSel);
+  ed.append(lbl('status / rating'), g1);
+  const g2 = document.createElement('div'); g2.className = 'grid2';
+  g2.append(stI, finI);
+  ed.append(lbl('started / finished'), g2, lbl('total pages'), pcI);
+
+  ed.append(lbl('sessions'));
+  const srows = [];
+  const sbox = document.createElement('div');
+  const addRow = (d, p) => {
+    const row = document.createElement('div'); row.className = 'srow';
+    const di = document.createElement('input'); di.type = 'date';
+    di.value = d || '';
+    const pi = document.createElement('input');
+    pi.inputMode = 'numeric'; pi.placeholder = 'page';
+    pi.value = p == null ? '' : p;
+    const del = document.createElement('button');
+    del.className = 'danger'; del.textContent = '\u00d7';
+    del.onclick = () => { row.remove();
+      srows.splice(srows.indexOf(row), 1); };
+    row._d = di; row._p = pi;
+    row.append(di, pi, del);
+    srows.push(row); sbox.append(row);
+  };
+  for (const s of b.sessions) addRow(s.slice(0, 10), s.slice(11));
+  ed.append(sbox);
+  const add = document.createElement('button');
+  add.textContent = '+ session'; add.onclick = () => addRow('', '');
+  ed.append(add);
+
+  const btns = document.createElement('div'); btns.className = 'btnrow';
+  const apply = document.createElement('button');
+  apply.textContent = 'apply';
+  apply.onclick = () => applyEdit(b, { ti, ai, statusSel, rateSel, pcI,
+                                       stI, finI, srows });
+  const delB = document.createElement('button');
+  delB.className = 'danger'; delB.textContent = 'delete book';
+  delB.onclick = () => {
+    if (!confirm(`delete "${b.title}" and all its sessions?`)) return;
+    data.books.splice(data.books.indexOf(b), 1);
+    openSlug = null; markDirty(); render();
+    status('book deleted \u2014 don\u2019t forget Save', 'ok');
+  };
+  btns.append(apply, delB); ed.append(btns);
+  return ed;
+}
+
+function applyEdit(b, f) {
+  const title = f.ti.value.trim();
+  if (!title) { status('title needed', 'err'); return; }
+  let pc = null;
+  if (f.pcI.value.trim() !== '') {
+    pc = parseInt(f.pcI.value, 10);
+    if (isNaN(pc) || pc <= 0) { status('bad page count', 'err'); return; }
+  }
+  const sess = [], seen = new Set();
+  for (const row of f.srows) {
+    const d = row._d.value, p = parseInt(row._p.value, 10);
+    if (!d) { status('every session needs a date', 'err'); return; }
+    if (isNaN(p) || p < 0) { status(`bad page for ${d}`, 'err'); return; }
+    if (seen.has(d)) { status(`two sessions on ${d} \u2014 merge them`,
+                              'err'); return; }
+    seen.add(d); sess.push(`${d} ${p}`);
+  }
+  // same stable date-prefix sort as logSession
+  sess.sort((x, y) => x.slice(0, 10) < y.slice(0, 10) ? -1 :
+                      x.slice(0, 10) > y.slice(0, 10) ? 1 : 0);
+  const st = f.statusSel.value;
+  let fin = f.finI.value || null;
+  if (st !== 'reading' && !fin) fin = today();
+  b.title = title;
+  b.author = f.ai.value.trim();
+  // NOTE: slug is intentionally left alone on title/author edits — it's
+  // the generated page's filename and the dedup key for lists/covers.
+  b.status = st;
+  b.rating = f.rateSel.value === '' ? null : parseFloat(f.rateSel.value);
+  b.page_count = pc;
+  b.started = f.stI.value || null;
+  b.finished = fin;
+  b.sessions = sess;
+  markDirty(); render();
+  status('updated \u2014 don\u2019t forget Save', 'ok');
 }
 
 function logSession(b, page, day) {
@@ -389,6 +549,12 @@ async function load() {
     render();
     dirty = false; $('saveBtn').disabled = true;
     status(`${data.books.length} book(s) loaded`);
+    const want = new URLSearchParams(location.search).get('book');
+    if (want && data.books.some(x => x.slug === want)) {
+      openSlug = want; renderAll();
+      const el = document.getElementById('ab-' + want);
+      if (el) el.scrollIntoView();
+    }
   } catch (e) { status('load failed: ' + e.message, 'err'); }
 }
 

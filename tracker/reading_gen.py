@@ -642,7 +642,9 @@ def render_book(book: Book, page_count: int | None, pc_source: str,
     e = html.escape
     parts = _page_head(book.title)
     parts.append(site.nav(None, 1))
-    parts.append("<a class='back' href='log.html'>log a session</a>")
+    parts.append("<a class='back' href='log.html'>log a session</a> "
+                 "&middot; <a class='back' "
+                 f"href='log.html?book={e(book.slug)}'>edit</a>")
 
     cover = _cover_url(book, covers_cache)
     hue = lists_gen._tile_hue(book.title)
@@ -755,6 +757,15 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
                                    sources[book.slug], covers_cache),
                        encoding="utf-8")
         written.append(out)
+
+    # prune pages for books deleted from the log (log/index/list are in
+    # RESERVED_SLUGS, so hand-written pages survive)
+    keep = RESERVED_SLUGS | {b.slug for b in rlog.books}
+    for stale in out_dir.glob("*.html"):
+        if stale.stem not in keep:
+            stale.unlink()
+            if log:
+                log(f"  pruned {stale.name} (book no longer in log)")
 
     if len(cache) != known:
         save_pagecache(cache, cache_path)

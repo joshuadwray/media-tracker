@@ -19,8 +19,10 @@
   of everything watched/read, alongside the calendar.~~
   Done 2026-07-18: docs/reading/list.html (one row per session/viewing,
   newest first) with a calendar · list toggle on both pages.
-- Edit diary entries individually (watching/log.json entries are
-  sync-only today; reading edits go through log.html's whole-file save).
+- Edit diary entries individually — reading side done 2026-07-19:
+  log.html "All books" editor (sessions, status/rating/dates/pages,
+  delete book) + `?book=<slug>` deep links from book pages. Films still
+  sync-only (watching/log.json comes from Letterboxd RSS).
 - ~~Page counts on the calendar fix — the pg/goal display refinements
   deferred from the unified-diary pass.~~
   Done 2026-07-19: dropped the per-day pg number entirely (the flat list
