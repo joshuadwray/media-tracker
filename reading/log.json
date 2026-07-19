@@ -15,6 +15,28 @@
       "sessions": [
         "2026-07-18 46"
       ]
+    },
+    {
+      "title": "transcription",
+      "author": "ben lerner",
+      "slug": "transcription",
+      "status": "abandoned",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-07-18",
+      "finished": "2026-07-18",
+      "sessions": []
+    },
+    {
+      "title": "transcription",
+      "author": "ben lerner",
+      "slug": "transcription-2",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-07-18",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
