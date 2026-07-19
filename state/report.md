@@ -1,19 +1,17 @@
-# Media tracker report — 2026-07-19 13:10 UTC
+# Media tracker report — 2026-07-19 13:11 UTC
 
-## New sightings (1)
-- **we were forbidden**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=we%20were%20forbidden)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (6)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
-- we were forbidden: ebook in cloudLibrary catalog (Denton)
+## All current sightings (4)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Denton)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in cloudLibrary catalog (Denton)
 - one leg on earth: audiobook in cloudLibrary catalog (Denton)
 - one leg on earth: ebook in cloudLibrary catalog (Denton)
 
 ## Source status
-- ✅ `denton-library`: 1 observation(s)
-- ✅ `cloudlibrary`: 5 observation(s)
+- ❌ `denton-library`: RuntimeError: search returned HTTP 202 for 'We Were Forbidden' (bot protection? try from a residential IP)
+- ✅ `cloudlibrary`: 4 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
 - ✅ `amc`: 0 observation(s)
