@@ -43,6 +43,11 @@ a { color: var(--accent); } a.back { font-size: .85rem; }
        border-radius: 3px; }
 .thumbs .dot { width: 22px; aspect-ratio: 2 / 3; border-radius: 3px;
        background: hsl(210,35%,40%); }
+.thumbs .th { position: relative; display: block; }
+.fchip { position: absolute; bottom: 2px; left: 50%;
+       transform: translateX(-50%); background: rgba(0,0,0,.78);
+       color: #ffd166; font-size: .58rem; font-weight: 700;
+       padding: 0 4px; border-radius: 999px; white-space: nowrap; }
 @media (min-width: 520px) { .day { min-height: 80px; font-size: .78rem; }
        .thumbs img, .thumbs .dot { width: 28px; } }
 @media (min-width: 760px) { .day { min-height: 92px; }

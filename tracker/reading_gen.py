@@ -365,6 +365,11 @@ a { color: var(--accent); } a.back { font-size: .85rem; }
        border-radius: 3px; }
 .thumbs .dot { width: 22px; aspect-ratio: 2 / 3; border-radius: 3px;
        background: hsl(210,35%,40%); }
+.thumbs .th { position: relative; display: block; }
+.fchip { position: absolute; bottom: 2px; left: 50%;
+       transform: translateX(-50%); background: rgba(0,0,0,.78);
+       color: #ffd166; font-size: .58rem; font-weight: 700;
+       padding: 0 4px; border-radius: 999px; white-space: nowrap; }
 @media (min-width: 520px) { .day { min-height: 80px; font-size: .78rem; }
        .thumbs img, .thumbs .dot { width: 28px; } }
 @media (min-width: 760px) { .day { min-height: 92px; }
@@ -474,8 +479,18 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                 tt = []
                 for book in readers.get(day, [])[:3]:
                     cover = _cover_url(book, covers_cache)
-                    tt.append(f"<img src='{e(cover)}' alt='' loading='lazy'>"
-                              if cover else "<div class='dot'></div>")
+                    th = (f"<img src='{e(cover)}' alt='' loading='lazy'>"
+                          if cover else "<div class='dot'></div>")
+                    chip = ""
+                    if (book.status == "finished"
+                            and book.finished == day.isoformat()
+                            and book.rating is not None):
+                        whole = int(book.rating)
+                        half = "\u00bd" if book.rating - whole else ""
+                        chip = (f"<span class='fchip' "
+                                f"title='{book.rating:g}/5'>"
+                                f"\u2605{whole}{half}</span>")
+                    tt.append(f"<span class='th'>{th}{chip}</span>")
                 thumbs = f"<div class='thumbs'>{''.join(tt)}</div>"
             pg = f"<span class='pg'>{pages}</span>" if pages > 0 else ""
             parts.append(f"<div class='{cls}'>"
@@ -550,7 +565,11 @@ def reading_links(log_path: Path = LOG_PATH) -> dict:
         log = load_log(log_path)
     except (ValueError, json.JSONDecodeError):
         return {}
-    return {b.cache_key: f"../reading/{b.slug}.html" for b in log.books}
+    return {b.cache_key: {
+        "href": f"../reading/{b.slug}.html",
+        "rating": (b.rating if b.status == "finished"
+                   and b.rating is not None else None),
+    } for b in log.books}
 
 
 def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
