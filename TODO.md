@@ -16,7 +16,8 @@
 
 ## Reading-log follow-ups
 - Re-reads: second pass through a book (`slug-2` convention).
-- Surface ratings on list tiles (star overlay for finished books).
+- ~~Surface ratings on list tiles (star overlay for finished books).~~
+  Done 2026-07-18: ★ badge on tiles + finish-date chip on the calendar.
 - Streak / chart polish on the calendar.
 - ISBN → bib_id bridge: pagecount-cache already stores ISBN-13s; use
   them to auto-pin library catalog records for watchlist adds.
