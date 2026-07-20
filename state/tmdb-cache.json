@@ -1,4 +1,28 @@
 {
+  "movie:club-kid": {
+    "searched": "2026-07-20",
+    "tmdb_id": 1585239
+  },
+  "movie:coyote-vs-acme": {
+    "searched": "2026-07-20",
+    "tmdb_id": 1204680
+  },
+  "movie:dune-part-3": {
+    "searched": "2026-07-20",
+    "tmdb_id": 1170608
+  },
+  "movie:fjord": {
+    "searched": "2026-07-20",
+    "tmdb_id": 1401459
+  },
+  "movie:paper-tiger": {
+    "searched": "2026-07-20",
+    "tmdb_id": 1381273
+  },
+  "movie:teenage-sex-and-death-at-camp-miasma": {
+    "searched": "2026-07-20",
+    "tmdb_id": 1240889
+  },
   "movie:the-substance": {
     "searched": "2026-07-20",
     "tmdb_id": 933260
