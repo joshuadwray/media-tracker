@@ -26,10 +26,11 @@ on:
 permissions:
   contents: write
 
-# Same group as the scheduled check so an add never races a run that
-# commits state back.
+# Per-run concurrency: each dispatch gets its own slot so rapid-fire adds
+# don't cancel each other (GitHub's single-slot queue drops middle runs).
+# Race with scheduled checks is handled by pull --rebase before push.
 concurrency:
-  group: media-tracker
+  group: media-tracker-add-${{ github.run_id }}
   cancel-in-progress: false
 
 jobs:

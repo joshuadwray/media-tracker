@@ -30,10 +30,10 @@ on:
 permissions:
   contents: write
 
-# Same group as the scheduled check so a pin never races a run that
-# commits state back.
+# Per-run concurrency so rapid-fire pins don't cancel each other.
+# Race with scheduled checks is handled by pull --rebase before push.
 concurrency:
-  group: media-tracker
+  group: media-tracker-pin-${{ github.run_id }}
   cancel-in-progress: false
 
 jobs:
