@@ -26,6 +26,8 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
+  - title: dune part 3
+    year: 2026
   - title: paper tiger
     year: 2026
   - title: club kid
