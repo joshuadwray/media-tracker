@@ -51,31 +51,49 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Add item (verified against live catalogs)
-        run: |
-          args=(add "$KIND" "$TITLE" --auto)
-          [ -n "$YEAR" ] && args+=(--year "$YEAR")
-          python -m tracker "${args[@]}"
-
-      - name: Commit watchlist
+      - name: Add item and commit
         run: |
           git config user.name "media-tracker bot"
           git config user.email "actions@users.noreply.github.com"
-          git add watchlist.yaml
-          if [ -f state/pending-pins.json ]; then git add state/pending-pins.json; fi
-          git diff --cached --quiet || git commit -m "add $KIND: $TITLE (mobile)"
-          git pull --rebase origin main
-          git push
+          add_args=(add "$KIND" "$TITLE" --auto)
+          [ -n "$YEAR" ] && add_args+=(--year "$YEAR")
+          python -m tracker "${add_args[@]}"
 
-      - name: Run immediate check
-        run: python -m tracker check
+          # Retry loop: parallel runs may conflict on watchlist.yaml.
+          # On conflict, reset to origin, re-run add (dupe guard is safe),
+          # and try again.
+          for attempt in 1 2 3 4 5; do
+            git add watchlist.yaml
+            if [ -f state/pending-pins.json ]; then git add state/pending-pins.json; fi
+            git diff --cached --quiet || git commit -m "add $KIND: $TITLE (mobile)"
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "::warning::Push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            git pull origin main
+            python -m tracker "${add_args[@]}"
+            sleep "$((attempt * 2))"
+          done
 
-      - name: Commit updated state
+      - name: Run immediate check and commit
         run: |
-          git add state/ docs/
-          git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
-          git pull --rebase origin main
-          git push
+          # Retry loop: parallel runs may conflict on state files.
+          # Re-running check on fresh state is safe/idempotent.
+          for attempt in 1 2 3 4 5; do
+            python -m tracker check
+            git add state/ docs/
+            git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "::warning::State push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            git pull origin main
+            sleep "$((attempt * 2))"
+          done
 
       - name: Notify failure
         if: failure()
