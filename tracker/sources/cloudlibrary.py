@@ -45,19 +45,16 @@ class CloudLibrarySource(Source):
                 # present but EMPTY (a value like "all" returns 0 results),
                 # and the library id is case-sensitive ("Denton", not
                 # "denton" — wrong case redirects to the marketing site).
-                # owned=any searches the whole cloudLibrary MARKETPLACE,
-                # not just this library's pool — we filter records to the
-                # borrowable ones ourselves (see _borrowable). owned=yes
-                # is too strict: it drops consortium/pay-per-use titles
-                # (isPayPerUse, totalCopies null) that patrons CAN borrow
-                # (verified 2026-07-19 against live checkouts).
+                # owned=yes limits results to this library's pool.
+                # Consortium copies vanish when on loan, but the
+                # absence-gap feature re-notifies when they return.
                 # The first request 302s to itself to set a session cookie;
                 # requests.Session follows it and keeps the cookie.
                 "method": "GET",
                 "url": f"https://ebook.yourcloudlibrary.com/library/{lib}"
                        f"/search?title={q}&format=&available=any&language="
                        f"&sort=relevance&segment=posts&orderBy=relevence"
-                       f"&owned=any&_data=routes%2Flibrary.%24name.search",
+                       f"&owned=yes&_data=routes%2Flibrary.%24name.search",
             },
             {   # legacy web-patron search API (404 as of 2026-07)
                 "method": "GET",
