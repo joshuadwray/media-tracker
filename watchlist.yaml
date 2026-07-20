@@ -26,6 +26,8 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
+  - title: "spider-man: brand new day"
+    year: 2026
   - title: coyote vs acme
     year: 2026
   - title: teenage sex and death at camp miasma
