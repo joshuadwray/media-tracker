@@ -1,17 +1,26 @@
-# Media tracker report — 2026-07-20 19:45 UTC
+# Media tracker report — 2026-07-20 19:47 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (5)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Denton 14 — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark West Plano — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
 
-## All current sightings (2)
+## All current sightings (7)
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Denton 14
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark West Plano
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Dallas IMAX
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark Dallas IMAX
 
 ## Source status
 - ✅ `denton-library`: 2 observation(s)
 - ✅ `cloudlibrary`: 0 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
-- ✅ `cinemark`: 0 observation(s)
+- ✅ `cinemark`: 5 observation(s)
 - ✅ `amc`: 0 observation(s)
 - ✅ `tmdb-streaming`: 0 observation(s)
 
