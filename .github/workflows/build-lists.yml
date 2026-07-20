@@ -51,4 +51,5 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add docs/lists/ docs/reading/ docs/watching/ lists/covers-cache.json reading/pagecount-cache.json
           git diff --cached --quiet || git commit -m "lists: rebuild $(date -u +%Y-%m-%dT%H:%M)"
+          git pull --rebase origin main
           git push

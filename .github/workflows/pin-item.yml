@@ -72,6 +72,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add watchlist.yaml state/pending-pins.json
           git diff --cached --quiet || git commit -m "pin $ID ($ACTION)"
+          git pull --rebase origin main
           git push
 
       - name: Run immediate check
@@ -81,6 +82,7 @@ jobs:
         run: |
           git add state/ docs/
           git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+          git pull --rebase origin main
           git push
 
       - name: Notify failure

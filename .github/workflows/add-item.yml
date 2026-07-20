@@ -63,6 +63,7 @@ jobs:
           git add watchlist.yaml
           if [ -f state/pending-pins.json ]; then git add state/pending-pins.json; fi
           git diff --cached --quiet || git commit -m "add $KIND: $TITLE (mobile)"
+          git pull --rebase origin main
           git push
 
       - name: Run immediate check
@@ -72,6 +73,7 @@ jobs:
         run: |
           git add state/ docs/
           git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+          git pull --rebase origin main
           git push
 
       - name: Notify failure
