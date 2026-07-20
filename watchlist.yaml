@@ -26,6 +26,8 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
+  - title: club kid
+    year: 2026
   - title: fjord
     year: 2026
   - title: tony
