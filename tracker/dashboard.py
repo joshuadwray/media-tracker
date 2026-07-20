@@ -16,18 +16,19 @@ from .models import Observation, SourceResult
 from .state import State
 
 _CSS = """
-.card { border: 1px solid rgba(128,128,128,.35); border-radius: 10px;
+.card { border: 1px solid var(--line); border-radius: var(--r-md);
+        background: var(--surface); box-shadow: var(--shadow-sm);
         padding: 10px 12px; margin-bottom: 8px; }
-.card.new { border-left: 5px solid #2e7d32; }
+.card.new { border-left: 5px solid var(--ok); }
 .card .item { font-weight: 600; }
 .card .what { margin-top: 2px; }
 .card a { font-size: .85rem; }
 .muted { opacity: .6; }
 .src { display: flex; justify-content: space-between; font-size: .9rem;
-       padding: 4px 2px; border-bottom: 1px dashed rgba(128,128,128,.25); }
-.ok { color: #2e7d32; } .err { color: #c62828; }
+       padding: 4px 2px; border-bottom: 1px dashed var(--line); }
+.ok { color: var(--ok); } .err { color: var(--err); }
 ul.watch { padding-left: 20px; margin: 4px 0; }
-.warn { background: rgba(255,193,7,.15); border-radius: 8px;
+.warn { background: var(--amber-tint); color: #7A5410; border-radius: 8px;
         padding: 8px 12px; font-size: .9rem; }
 """
 
@@ -41,6 +42,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>media tracker</title>",
+        site.head_extra(0),
         f"<style>{site.BASE_CSS}{_CSS}</style></head><body>",
         site.nav("tracker", 0),
         "<h1>📚🎬 media tracker</h1>",

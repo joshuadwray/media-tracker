@@ -202,18 +202,18 @@ ol.grid { list-style: none; margin: 0; padding: 0; display: grid;
 @media (min-width: 760px) { ol.grid { grid-template-columns: repeat(4, 1fr); } }
 .tile { position: relative; }
 .cov, .noimg { display: block; width: 100%; aspect-ratio: 2 / 3;
-       border-radius: 6px; border: 1px solid rgba(128,128,128,.35); }
-.cov { object-fit: cover; background: rgba(128,128,128,.12); }
+       border-radius: 6px; border: 1px solid var(--line); }
+.cov { object-fit: cover; background: var(--surface-sunk); }
 .noimg { display: flex; flex-direction: column; justify-content: center;
          align-items: center; text-align: center; padding: 12px;
          color: #fff; }
 .noimg .nt { font-weight: 700; font-size: .95rem; }
 .noimg .na { font-size: .8rem; opacity: .85; margin-top: 6px; }
 .rank { position: absolute; top: 6px; left: 6px; z-index: 1;
-        background: rgba(0,0,0,.72); color: #fff; font-size: .78rem;
+        background: rgba(58,36,24,.85); color: #F4EBD9; font-size: .78rem;
         font-weight: 700; padding: 1px 8px; border-radius: 999px; }
 .rate { position: absolute; top: 6px; right: 6px; z-index: 1;
-        background: rgba(0,0,0,.72); color: #ffd166; font-size: .78rem;
+        background: rgba(58,36,24,.85); color: #F1D49A; font-size: .78rem;
         font-weight: 700; padding: 1px 8px; border-radius: 999px; }
 .cap { margin-top: 6px; }
 .cap .t { font-weight: 600; font-size: .9rem; }
@@ -242,6 +242,7 @@ def render_list(blist: BookList, covers: list,
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         f"<title>{e(blist.title)}</title>",
+        site.head_extra(1),
         f"<style>{site.BASE_CSS}{_CSS}</style></head>"
         "<body style='--pagew:860px'>",
         site.nav(None, 1),
@@ -287,6 +288,7 @@ def render_index(blists: list) -> str:
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>lists</title>",
+        site.head_extra(1),
         f"<style>{site.BASE_CSS}{_CSS}</style></head>"
         "<body style='--pagew:860px'>",
         site.nav("lists", 1),
