@@ -14,6 +14,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
@@ -25,7 +26,21 @@ from .watchlist_io import append_entry
 DEFAULT_WEB_PORT = 8765
 
 
+def _load_dotenv() -> None:
+    """Load .env from the repo root if it exists (no dependency needed)."""
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    if not env_path.is_file():
+        return
+    for line in env_path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        os.environ.setdefault(key.strip(), val.strip())
+
+
 def main(argv: list[str] | None = None) -> int:
+    _load_dotenv()
     parser = argparse.ArgumentParser(prog="tracker",
                                      description="Watchlist watcher for library "
                                                  "books and movie showtimes")

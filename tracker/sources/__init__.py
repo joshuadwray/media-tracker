@@ -5,5 +5,6 @@ from . import (  # noqa: F401
     cloudlibrary,
     drafthouse,
     generic_page,
+    tmdb_streaming,
 )
 from .base import Source, build_sources  # noqa: F401

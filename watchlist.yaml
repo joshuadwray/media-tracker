@@ -29,6 +29,10 @@ movies:
   # - title: The Substance
   #   year: 2024
 
+streaming:
+  # TMDB provider names (case-insensitive). Rent/buy always notified.
+  services: [Netflix, Hulu, HBO Max, Apple TV Plus, Disney Plus, Amazon Prime Video]
+
 sources:
   denton-library:
     kind: bibliocommons

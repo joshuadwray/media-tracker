@@ -33,6 +33,7 @@ jobs:
       - name: Run watchlist check
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: python -m tracker check
 
       - name: Commit updated state

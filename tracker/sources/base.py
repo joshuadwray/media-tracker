@@ -7,6 +7,7 @@ source shouldn't kill the whole run.
 """
 from __future__ import annotations
 
+import os
 import traceback
 from abc import ABC, abstractmethod
 from typing import Any
@@ -62,4 +63,14 @@ def build_sources(config: Config) -> list[Source]:
                 f"Known kinds: {sorted(_REGISTRY)}"
             )
         sources.append(_REGISTRY[kind](sid, cfg))
+
+    # Auto-enable tmdb-streaming when streaming services are configured
+    # and TMDB_API_KEY is available (no manual sources: entry needed).
+    tmdb_kind = "tmdb-streaming"
+    already = any(s.kind == tmdb_kind for s in sources)
+    if (not already
+            and config.streaming and config.streaming.services
+            and os.environ.get("TMDB_API_KEY")):
+        sources.append(_REGISTRY[tmdb_kind]("tmdb-streaming", {"kind": tmdb_kind}))
+
     return sources

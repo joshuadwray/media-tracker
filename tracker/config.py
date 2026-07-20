@@ -15,11 +15,17 @@ DEFAULT_STATE = Path(__file__).resolve().parent.parent / "state" / "state.json"
 
 
 @dataclass
+class StreamingConfig:
+    services: list[str] = field(default_factory=list)
+
+
+@dataclass
 class Config:
     books: list[WatchBook] = field(default_factory=list)
     movies: list[WatchMovie] = field(default_factory=list)
     sources: dict[str, dict[str, Any]] = field(default_factory=dict)
     state_path: Path = DEFAULT_STATE
+    streaming: StreamingConfig | None = None
 
     def enabled_sources(self) -> dict[str, dict[str, Any]]:
         return {
@@ -61,7 +67,15 @@ def load_config(path: str | Path | None = None) -> Config:
     if not state_path.is_absolute():
         state_path = p.parent / state_path
 
-    return Config(books=books, movies=movies, sources=sources, state_path=state_path)
+    streaming_raw = raw.get("streaming") or {}
+    streaming = None
+    if isinstance(streaming_raw, dict) and streaming_raw.get("services"):
+        streaming = StreamingConfig(
+            services=[str(s) for s in streaming_raw["services"]]
+        )
+
+    return Config(books=books, movies=movies, sources=sources,
+                  state_path=state_path, streaming=streaming)
 
 
 def _req(entry: Any, key: str, section: str) -> str:
