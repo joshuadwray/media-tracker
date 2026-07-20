@@ -93,8 +93,14 @@ def main(argv: list[str] | None = None) -> int:
                                 "new_bookmory.db) into reading/log.json "
                                 "before building")
 
-    sub.add_parser("letterboxd", help="sync Letterboxd diary RSS into "
-                                      "watching/log.json")
+    p_lb = sub.add_parser("letterboxd", help="sync Letterboxd diary RSS "
+                                             "into watching/log.json")
+    p_lb.add_argument("--import", dest="lb_import", metavar="FILE",
+                      help="backfill from a Letterboxd data-export zip "
+                           "instead of syncing RSS")
+    p_lb.add_argument("--import-since", default="2025-01-01",
+                      metavar="DATE", help="oldest watched date to "
+                                           "backfill (default 2025-01-01)")
 
     p_web = sub.add_parser("web", help="run the local web app")
     p_web.add_argument("--port", type=int, default=DEFAULT_WEB_PORT)
@@ -127,6 +133,11 @@ def main(argv: list[str] | None = None) -> int:
         build_reading(fetch=not args.no_fetch)
         return 0
     if args.command == "letterboxd":
+        if args.lb_import:
+            from pathlib import Path
+            from .letterboxd_import import run as lb_import
+            lb_import(Path(args.lb_import), since=args.import_since)
+            return 0
         from .letterboxd_sync import sync
         return sync()
     if args.command == "web":

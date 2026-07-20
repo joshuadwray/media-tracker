@@ -147,6 +147,11 @@ def merge(films, incoming, since):
     """Upsert incoming (watched >= since) into films. Returns
     (films, added, updated, unchanged, skipped_before_since)."""
     by_id = {entry_key(f.get("guid")): f for f in films}
+    # data-export backfills have synthetic guids; match those by
+    # title+date so an RSS entry upgrades them instead of duplicating
+    imported = {((f.get("title") or "").lower(), f.get("watched")): f
+                for f in films
+                if (f.get("guid") or "").startswith("letterboxd-import-")}
     added = updated = unchanged = skipped = 0
     for inc in incoming:
         if inc["watched"] < since:
@@ -154,6 +159,9 @@ def merge(films, incoming, since):
             continue
         key = entry_key(inc["guid"])
         cur = by_id.get(key)
+        if cur is None:
+            cur = imported.get(((inc["title"] or "").lower(),
+                                inc["watched"]))
         if cur is None:
             films.append(inc)
             by_id[key] = inc

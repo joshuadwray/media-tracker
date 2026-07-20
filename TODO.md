@@ -11,13 +11,13 @@
   author only in `authors[]` for manually-added books, double spaces.
 - Jump-to-month select next to the calendar's older/newer pager —
   now live: 18 months of history means a lot of taps otherwise.
-- Render empty months on the calendar — months with no activity are
-  skipped today, so the older/newer pager jumps over gaps.
-- Backfill Letterboxd to 2025-01-01 for consistency with the imported
-  reading history (settings since=2026-01-01 today). RSS only exposes
-  ~50 recent entries, so this needs the Letterboxd data export
-  (Settings → Import & Export → diary.csv) — one-time import, same
-  upsert keys so the daily RSS sync stays authoritative afterward.
+- ~~Backfill Letterboxd to 2025-01-01.~~ Done 2026-07-19:
+  `tracker letterboxd --import <export.zip>` (tracker/
+  letterboxd_import.py) — 81 entries from diary.csv + reviews/likes;
+  slug via boxd.it redirect, poster/tmdb_id scraped from the film
+  page's JSON-LD. Synthetic "letterboxd-import-<md5>" guids; sync's
+  merge now upgrades those by title+date if the RSS window overlaps
+  (it did — 20 dupes purged once). settings.since now 2025-01-01.
 - **Pages vs local-app asymmetry** — largely resolved 2026-07-19: the
   catalog-candidate picker is on Pages now as an *async pin queue*
   (ambiguous `--auto` adds queue to state/pending-pins.json; add.html
