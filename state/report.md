@@ -1,4 +1,4 @@
-# Media tracker report — 2026-07-20 17:39 UTC
+# Media tracker report — 2026-07-20 17:49 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -13,13 +13,14 @@
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
 - ✅ `amc`: 0 observation(s)
-- ✅ `tmdb-streaming`: 0 observation(s)
 
 ## Never matched anywhere (possible typos?)
 These watchlist entries have not matched at any source, ever. Double-check the spelling, or use `tracker add` to pick the exact catalog record.
 - We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea
 - one leg on earth
+- club kid (2026)
+- fjord (2026)
 - tony (2026)
 - wild horse nine (2026)
 
