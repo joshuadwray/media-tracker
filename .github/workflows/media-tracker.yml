@@ -34,7 +34,12 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-        run: python -m tracker check
+        run: |
+          # Wednesday (day 3) deep scan: 21-day theater lookahead
+          if [ "$(date -u +%u)" = "3" ]; then
+            export THEATER_LOOKAHEAD=21
+          fi
+          python -m tracker check
 
       - name: Commit updated state
         run: |

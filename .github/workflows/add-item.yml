@@ -78,6 +78,8 @@ jobs:
           done
 
       - name: Run immediate check and commit
+        env:
+          THEATER_LOOKAHEAD: "21"
         run: |
           # Retry loop: parallel runs may conflict on state files.
           # Re-running check on fresh state is safe/idempotent.

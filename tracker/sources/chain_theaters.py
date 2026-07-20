@@ -18,7 +18,9 @@ Config per source:
 from __future__ import annotations
 
 import json
+import os
 import re
+from datetime import date, timedelta
 from html import unescape
 from typing import Any, Iterator
 
@@ -60,6 +62,16 @@ _FLIGHT_SHOWTIME_RE = re.compile(
 )
 
 
+def _lookahead_dates() -> list[str]:
+    """Return YYYY-MM-DD strings from today through today+N (inclusive).
+
+    N is read from the THEATER_LOOKAHEAD env var (default 3).
+    """
+    n = int(os.environ.get("THEATER_LOOKAHEAD", "3"))
+    today = date.today()
+    return [(today + timedelta(days=d)).isoformat() for d in range(n + 1)]
+
+
 class ChainTheaterSource(Source):
     chain_label = "theater"
 
@@ -74,46 +86,71 @@ class ChainTheaterSource(Source):
                 raise ValueError(f"each theatre needs name + url, got {t!r}")
         return theatres
 
+    @staticmethod
+    def _url_for_date(base: str, dt: str) -> str:
+        """Override in subclasses to append date parameter."""
+        return base
+
     def check(self, config: Config) -> list[Observation]:
         if not config.movies:
             return []
         sess = http.session()
         observations: list[Observation] = []
         errors: list[str] = []
+        dates_to_scan = _lookahead_dates()
         for theatre in self.theatres():
-            try:
-                resp = http.get(sess, theatre["url"])
-                if resp.status_code != 200:
-                    errors.append(f"{theatre['name']}: HTTP {resp.status_code}")
+            # Merge movies across all dates for this theatre.
+            merged: dict[str, dict] = {}  # title -> {dates, advance}
+            page_text = None
+            theatre_ok = False
+            for i, dt in enumerate(dates_to_scan):
+                url = self._url_for_date(theatre["url"], dt)
+                try:
+                    resp = http.get(sess, url)
+                    if resp.status_code != 200:
+                        if i == 0:
+                            errors.append(f"{theatre['name']}: HTTP {resp.status_code}")
+                        continue
+                    theatre_ok = True
+                except http.requests.RequestException as exc:
+                    if i == 0:
+                        errors.append(
+                            f"{theatre['name']}: {type(exc).__name__}: {exc}"
+                        )
                     continue
-                html = resp.text
-            except http.requests.RequestException as exc:
-                errors.append(f"{theatre['name']}: {type(exc).__name__}: {exc}")
+                for entry in _extract_movies(resp.text):
+                    title = entry["title"]
+                    if title not in merged:
+                        merged[title] = {"dates": set(), "advance": entry.get("advance", False)}
+                    merged[title]["dates"].update(entry.get("dates") or set())
+                # Page-text fallback only on the first (today) date.
+                if i == 0 and not merged:
+                    page_text = _html_to_text(resp.text)
+            if not theatre_ok:
                 continue
-
-            listings = list(_extract_movies(html))
-            page_text = None if listings else _html_to_text(html)
             for movie in config.movies:
-                if listings:
-                    for found in listings:
-                        if not titles_match(movie.title, found["title"]):
-                            continue
-                        dates = found.get("dates")
-                        when = f" ({', '.join(sorted(dates)[:4])})" if dates else ""
-                        verb = ("advance tickets on sale at"
-                                if found.get("advance") else "playing at")
-                        observations.append(Observation(
-                            source=self.source_id,
-                            item_key=movie.key,
-                            item_label=str(movie),
-                            summary=f'"{found["title"]}" {verb} '
-                                    f'{theatre["name"]}{when}',
-                            url=theatre["url"],
-                            positive=True,
-                            detail={"theatre": theatre["name"],
-                                    "dates": sorted(dates or [])},
-                        ))
-                elif text_contains_title(page_text, movie.title):
+                matched = False
+                for title, info in merged.items():
+                    if not titles_match(movie.title, title):
+                        continue
+                    matched = True
+                    dates = info["dates"]
+                    when = f" ({', '.join(sorted(dates)[:4])})" if dates else ""
+                    verb = ("advance tickets on sale at"
+                            if info.get("advance") else "playing at")
+                    observations.append(Observation(
+                        source=self.source_id,
+                        item_key=movie.key,
+                        item_label=str(movie),
+                        summary=f'"{title}" {verb} '
+                                f'{theatre["name"]}{when}',
+                        url=theatre["url"],
+                        positive=True,
+                        event=f'"{title}" {verb} {theatre["name"]}',
+                        detail={"theatre": theatre["name"],
+                                "dates": sorted(dates or [])},
+                    ))
+                if not matched and page_text and text_contains_title(page_text, movie.title):
                     observations.append(Observation(
                         source=self.source_id,
                         item_key=movie.key,
@@ -122,6 +159,7 @@ class ChainTheaterSource(Source):
                                 f'{theatre["name"]} page',
                         url=theatre["url"],
                         positive=True,
+                        event=f'"{movie.title}" mentioned on {theatre["name"]}',
                         detail={"theatre": theatre["name"], "matched": "page-text"},
                     ))
         if errors and len(errors) == len(self.theatres()):
@@ -131,23 +169,44 @@ class ChainTheaterSource(Source):
     def probe(self, config: Config, query: str | None = None) -> str:
         sess = http.session()
         lines = []
+        dates_to_scan = _lookahead_dates()
+        lines.append(f"Scanning {len(dates_to_scan)} dates: "
+                      f"{dates_to_scan[0]} .. {dates_to_scan[-1]}")
         for theatre in self.theatres():
-            try:
-                resp = http.get(sess, theatre["url"])
-            except http.requests.RequestException as exc:
-                lines.append(f"{theatre['name']}: FAILED {type(exc).__name__}: {exc}")
-                continue
-            listings = list(_extract_movies(resp.text))
-            lines.append(
-                f"{theatre['name']}: HTTP {resp.status_code}, "
-                f"{len(resp.text)} bytes, {len(listings)} structured movie entries"
-            )
-            for entry in listings[:10]:
-                lines.append(f"  - {json.dumps(entry, default=list)[:200]}")
-            if not listings and resp.status_code == 200:
-                text = _html_to_text(resp.text)
-                lines.append(f"  no structured data; page text {len(text)} chars, "
-                             f"excerpt: {text[:200]!r}")
+            merged: dict[str, dict] = {}
+            status_line = None
+            for i, dt in enumerate(dates_to_scan):
+                url = self._url_for_date(theatre["url"], dt)
+                try:
+                    resp = http.get(sess, url)
+                except http.requests.RequestException as exc:
+                    if i == 0:
+                        lines.append(
+                            f"{theatre['name']}: FAILED {type(exc).__name__}: {exc}"
+                        )
+                    continue
+                if i == 0:
+                    status_line = f"HTTP {resp.status_code}, {len(resp.text)} bytes"
+                for entry in _extract_movies(resp.text):
+                    title = entry["title"]
+                    if title not in merged:
+                        merged[title] = {"dates": set(), "advance": entry.get("advance", False)}
+                    merged[title]["dates"].update(entry.get("dates") or set())
+                if i == 0 and not merged and resp.status_code == 200:
+                    text = _html_to_text(resp.text)
+                    lines.append(f"{theatre['name']}: {status_line}, "
+                                 f"no structured data; page text {len(text)} chars, "
+                                 f"excerpt: {text[:200]!r}")
+            if merged:
+                lines.append(
+                    f"{theatre['name']}: {status_line or 'OK'}, "
+                    f"{len(merged)} movies across {len(dates_to_scan)} dates"
+                )
+                for title, info in sorted(merged.items()):
+                    dates = sorted(info["dates"])
+                    adv = " [advance]" if info.get("advance") else ""
+                    lines.append(f"  - {title}{adv}: {', '.join(dates[:6])}"
+                                 f"{'...' if len(dates) > 6 else ''}")
         return "\n".join(lines)
 
 
@@ -156,11 +215,19 @@ class CinemarkSource(ChainTheaterSource):
     kind = "cinemark"
     chain_label = "Cinemark"
 
+    @staticmethod
+    def _url_for_date(base: str, dt: str) -> str:
+        return f"{base}?showDate={dt}"
+
 
 @register
 class AMCSource(ChainTheaterSource):
     kind = "amc"
     chain_label = "AMC"
+
+    @staticmethod
+    def _url_for_date(base: str, dt: str) -> str:
+        return f"{base.rstrip('/')}/all/{dt}"
 
 
 def _extract_movies(html: str) -> Iterator[dict[str, Any]]:
