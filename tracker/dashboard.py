@@ -8,6 +8,7 @@ phone from anywhere. No JavaScript, inline CSS only, phone-first layout.
 from __future__ import annotations
 
 import html
+from collections import OrderedDict
 from datetime import datetime, timezone
 
 from . import site
@@ -21,8 +22,12 @@ _CSS = """
         padding: 10px 12px; margin-bottom: 8px; }
 .card.new { border-left: 5px solid var(--ok); }
 .card .item { font-weight: 600; }
-.card .what { margin-top: 2px; }
-.card a { font-size: .85rem; }
+.row { display: flex; justify-content: space-between; align-items: center;
+       padding: 3px 0; font-size: .9rem; }
+.row + .row { border-top: 1px dashed var(--line); }
+.row .lbl { flex: 1; }
+.row .st { margin-left: 8px; white-space: nowrap; }
+.row a { font-size: .85rem; margin-left: 6px; }
 .muted { opacity: .6; }
 .src { display: flex; justify-content: space-between; font-size: .9rem;
        padding: 4px 2px; border-bottom: 1px dashed var(--line); }
@@ -35,8 +40,16 @@ ul.watch { padding-left: 20px; margin: 4px 0; }
 
 def build_dashboard(config: Config, results: list[SourceResult],
                     new: list[Observation], state: State) -> str:
-    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    now_dt = datetime.now(timezone.utc)
+    now = now_dt.strftime("%Y-%m-%d %H:%M UTC")
     current = [o for r in results for o in r.observations]
+    new_fps = {o.fingerprint for o in new}
+
+    # Build item_key → label lookup from config.
+    item_labels: dict[str, str] = {}
+    for item in [*config.books, *config.movies]:
+        item_labels[item.key] = str(item)
+
     e = html.escape
     parts = [
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
@@ -49,17 +62,46 @@ def build_dashboard(config: Config, results: list[SourceResult],
         f"<div class='meta'>last checked {e(now)}</div>",
     ]
 
+    # Group current observations by item_key (preserving first-seen order).
+    grouped = _group_by_item(current)
+
+    # Also gather historical (stale) fingerprints per item_key from state,
+    # for items not seen this run but still within the prune window.
+    current_fps = {o.fingerprint for o in current}
+    historical = _historical_by_item(state, current_fps)
+
     parts.append(f"<h2>New this run ({len(new)})</h2>")
     if new:
-        for o in new:
-            parts.append(_card(o, is_new=True))
+        new_grouped = _group_by_item(new)
+        for item_key, obs_list in new_grouped.items():
+            stale = historical.get(item_key, [])
+            label = item_labels.get(item_key, obs_list[0].item_label)
+            parts.append(_grouped_card(label, obs_list, stale, new_fps,
+                                       now_dt, is_new=True))
     else:
         parts.append("<div class='muted'>nothing new</div>")
 
-    parts.append(f"<h2>Everything currently sighted ({len(current)})</h2>")
-    if current:
-        for o in current:
-            parts.append(_card(o))
+    # All items section: merge current + historical into unified cards.
+    # Only include items still on the watchlist (in item_labels).
+    all_keys: list[str] = []
+    all_obs: dict[str, list[Observation]] = {}
+    for key, obs_list in grouped.items():
+        if key in item_labels:
+            all_keys.append(key)
+            all_obs[key] = obs_list
+    for key in historical:
+        if key in item_labels and key not in all_obs:
+            all_keys.append(key)
+            all_obs[key] = []
+
+    parts.append(f"<h2>All tracked items ({len(all_keys)})</h2>")
+    if all_keys:
+        for key in all_keys:
+            obs_list = all_obs.get(key, [])
+            stale = historical.get(key, [])
+            label = item_labels[key]
+            parts.append(_grouped_card(label, obs_list, stale, new_fps,
+                                       now_dt))
     else:
         parts.append("<div class='muted'>no watchlist titles are available "
                      "or playing anywhere right now</div>")
@@ -82,7 +124,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
                      "— double-check the spelling: "
                      + ", ".join(e(t) for t in never) + "</div>")
 
-    parts.append(f"<h2>Watching</h2><ul class='watch'>")
+    parts.append("<h2>Watching</h2><ul class='watch'>")
     for b in config.books:
         parts.append(f"<li>📖 {e(str(b))}</li>")
     for m in config.movies:
@@ -92,13 +134,82 @@ def build_dashboard(config: Config, results: list[SourceResult],
     return "".join(parts)
 
 
-def _card(o: Observation, is_new: bool = False) -> str:
+def _group_by_item(observations: list[Observation]) -> OrderedDict[str, list[Observation]]:
+    groups: OrderedDict[str, list[Observation]] = OrderedDict()
+    for o in observations:
+        groups.setdefault(o.item_key, []).append(o)
+    return groups
+
+
+def _historical_by_item(state: State, current_fps: set[str]) -> dict[str, list[dict]]:
+    """Fingerprints in state.seen that weren't observed this run (stale)."""
+    items: dict[str, list[dict]] = {}
+    for fp, entry in state.seen.items():
+        if fp in current_fps:
+            continue
+        parts = fp.split("|", 2)
+        if len(parts) < 3:
+            continue
+        source, item_key, event = parts
+        items.setdefault(item_key, []).append({
+            "source": source, "event": event, "fp": fp,
+            "first": entry.get("first", ""), "last": entry.get("last", ""),
+        })
+    return items
+
+
+def _grouped_card(label: str, current_obs: list[Observation],
+                  stale: list[dict], new_fps: set[str], now: datetime,
+                  is_new: bool = False) -> str:
     e = html.escape
     cls = "card new" if is_new else "card"
-    link = f"<div><a href='{e(o.url)}'>open ↗</a></div>" if o.url else ""
-    note = "" if o.positive else " <span class='muted'>(informational)</span>"
-    return (f"<div class='{cls}'><div class='item'>{e(o.item_label)}</div>"
-            f"<div class='what'>{e(o.summary)}{note}</div>{link}</div>")
+
+    rows: list[str] = []
+    for o in current_obs:
+        is_fresh = o.fingerprint in new_fps
+        badge = "🟢" if is_fresh else "✅"
+        link = f" <a href='{e(o.url)}'>open&nbsp;↗</a>" if o.url else ""
+        info = "" if o.positive else " <span class='muted'>(info)</span>"
+        row_label = _short_label(o.source, o.event or o.summary)
+        rows.append(f"<div class='row'><span class='lbl'>{e(row_label)}{info}</span>"
+                    f"<span class='st'>{badge}{link}</span></div>")
+
+    for s in stale:
+        last = s["last"]
+        ago = _ago(last, now) if last else ""
+        badge = "⏸️"
+        row_label = _short_label(s["source"], s["event"])
+        rows.append(f"<div class='row'><span class='lbl muted'>"
+                    f"{e(row_label)}"
+                    f"</span><span class='st'>{badge}"
+                    f" <span class='muted'>{e(ago)}</span></span></div>")
+
+    return (f"<div class='{cls}'><div class='item'>{e(label)}</div>"
+            + "".join(rows) + "</div>")
+
+
+def _short_label(source: str, event: str) -> str:
+    """Compact row label: just the format for catalog items, source · event otherwise."""
+    if event.endswith(" in catalog"):
+        return event[: -len(" in catalog")]
+    return f"{source} · {event}"
+
+
+def _ago(ts: str, now: datetime) -> str:
+    try:
+        dt = datetime.fromisoformat(ts)
+        if not dt.tzinfo:
+            dt = dt.replace(tzinfo=timezone.utc)
+    except ValueError:
+        return ""
+    delta = now - dt
+    days = delta.days
+    if days < 1:
+        hours = delta.seconds // 3600
+        return f"{hours}h ago" if hours else "just now"
+    if days == 1:
+        return "1d ago"
+    return f"{days}d ago"
 
 
 def _never_seen(config: Config, current: list[Observation],

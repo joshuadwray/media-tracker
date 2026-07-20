@@ -36,11 +36,14 @@ def run_check(config: Config, *, source_id: str | None = None,
 
     state = State(config.state_path)
     run = CheckRun(results=[s.run(config) for s in sources])
+    ok_sources = {r.source for r in run.results if not r.error}
     for r in run.results:
         for obs in r.observations:
             if state.is_new(obs):
                 run.new.append(obs)
                 state.record(obs)
+            elif r.source in ok_sources:
+                state.touch(obs)
     state.prune()
     run.report = build_report(config, run.results, run.new, state)
 

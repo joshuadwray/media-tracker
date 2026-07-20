@@ -1,11 +1,11 @@
 """Seen-event state: what we've already notified about.
 
-The state file is a small JSON document mapping observation
-fingerprints -> first-seen timestamp. A run only notifies about
-fingerprints it hasn't recorded before, so re-running is always safe.
-Entries are pruned after PRUNE_DAYS to keep the file small; if a
-pruned availability re-appears months later it will simply re-notify,
-which is the behavior you want anyway.
+The state file maps observation fingerprints to {first, last} timestamp
+dicts.  A fingerprint is "new" if unseen or if its last-seen timestamp
+is older than GAP_DAYS — this re-notifies when an item disappears and
+reappears (e.g. a library book's consortium copy returns from loan).
+Entries are pruned after PRUNE_DAYS (based on last-seen) to keep the
+file small.
 """
 from __future__ import annotations
 
@@ -16,12 +16,13 @@ from pathlib import Path
 from .models import Observation
 
 PRUNE_DAYS = 180
+GAP_DAYS = 2
 
 
 class State:
     def __init__(self, path: Path):
         self.path = path
-        self.seen: dict[str, str] = {}
+        self.seen: dict[str, dict[str, str]] = {}
         self.meta: dict = {}
         if path.exists():
             try:
@@ -29,22 +30,36 @@ class State:
                 self.seen = data.get("seen", {})
                 self.meta = data.get("meta", {})
             except (json.JSONDecodeError, OSError):
-                # Corrupt state -> start fresh rather than crash the run.
                 self.seen = {}
                 self.meta = {}
+        # Migrate old string values to {first, last} dicts.
+        for fp, val in self.seen.items():
+            if isinstance(val, str):
+                self.seen[fp] = {"first": val, "last": val}
 
-    def is_new(self, obs: Observation) -> bool:
-        return obs.fingerprint not in self.seen
+    def is_new(self, obs: Observation, now: datetime | None = None) -> bool:
+        entry = self.seen.get(obs.fingerprint)
+        if entry is None:
+            return True
+        last = _parse(entry["last"])
+        gap = (now or datetime.now(timezone.utc)) - last
+        return gap > timedelta(days=GAP_DAYS)
 
     def record(self, obs: Observation, now: datetime | None = None) -> None:
         ts = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
-        self.seen.setdefault(obs.fingerprint, ts)
+        self.seen[obs.fingerprint] = {"first": ts, "last": ts}
+
+    def touch(self, obs: Observation, now: datetime | None = None) -> None:
+        ts = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
+        entry = self.seen.get(obs.fingerprint)
+        if entry is not None:
+            entry["last"] = ts
 
     def prune(self, now: datetime | None = None) -> int:
         cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)
         stale = [
-            fp for fp, ts in self.seen.items()
-            if _parse(ts) < cutoff
+            fp for fp, entry in self.seen.items()
+            if _parse(entry["last"]) < cutoff
         ]
         for fp in stale:
             del self.seen[fp]
