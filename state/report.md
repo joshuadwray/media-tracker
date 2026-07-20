@@ -1,4 +1,4 @@
-# Media tracker report — 2026-07-20 18:02 UTC
+# Media tracker report — 2026-07-20 18:03 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -19,6 +19,8 @@ These watchlist entries have not matched at any source, ever. Double-check the s
 - We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea
 - one leg on earth
+- coyote vs acme (2026)
+- teenage sex and death at camp miasma (2026)
 - dune part 3 (2026)
 - paper tiger (2026)
 - club kid (2026)
