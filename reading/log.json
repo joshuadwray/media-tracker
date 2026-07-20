@@ -1776,6 +1776,19 @@
         "2026-07-17 46",
         "2026-07-18 384"
       ]
+    },
+    {
+      "title": "transcription",
+      "author": "ben lerner",
+      "slug": "transcription",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": null,
+      "started": "2026-07-19",
+      "finished": "2026-07-19",
+      "sessions": [
+        "2026-07-19 144"
+      ]
     }
   ]
 }
