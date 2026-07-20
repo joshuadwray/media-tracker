@@ -26,6 +26,8 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
+  - title: wild horse nine
+    year: 2026
   # - title: The Substance
   #   year: 2024
 
