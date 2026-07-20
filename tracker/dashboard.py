@@ -33,9 +33,45 @@ _CSS = """
        padding: 4px 2px; border-bottom: 1px dashed var(--line); }
 .ok { color: var(--ok); } .err { color: var(--err); }
 ul.watch { padding-left: 20px; margin: 4px 0; }
+ul.watch li { display: flex; align-items: center; justify-content: space-between; }
+ul.watch li span { flex: 1; }
+.rm { background: none; border: none; padding: 2px 6px; cursor: pointer;
+      opacity: .35; font-size: .85rem; line-height: 1; }
+.rm:hover { opacity: .8; }
 .warn { background: var(--amber-tint); color: #7A5410; border-radius: 8px;
         padding: 8px 12px; font-size: .9rem; }
 """
+
+_REMOVE_JS = """
+<script>
+const REPO = 'joshuadwray/media-tracker';
+const WL_API = `https://api.github.com/repos/${REPO}/contents/watchlist.yaml`;
+function b64decode(s) { return decodeURIComponent(escape(atob(s))); }
+async function rmItem(btn, title, kind) {
+  if (!confirm(`Remove \\u201c${title}\\u201d from ${kind}s?`)) return;
+  const token = localStorage.getItem('mt_pat');
+  if (!token) { alert('Set your PAT on the + add page first.'); return; }
+  btn.disabled = true; btn.textContent = '\\u22ef';
+  try {
+    const r = await fetch(WL_API, { headers: { Authorization: 'token ' + token } });
+    if (!r.ok) throw new Error('fetch: ' + r.status);
+    const data = await r.json();
+    const sha = data.sha;
+    const text = b64decode(data.content);
+    const esc = title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');
+    const re = new RegExp(
+      '^[ \\t]*- title: (?:' + esc + '|"' + esc + '"|\\x27' + esc + '\\x27)\\n(?:[ \\t]+(?!- )[^\\n]*\\n)*', 'm');
+    const after = text.replace(re, '');
+    if (after === text) { throw new Error('entry not found in watchlist'); }
+    const put = await fetch(WL_API, { method: 'PUT',
+      headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'remove ' + kind + ': ' + title,
+        content: btoa(unescape(encodeURIComponent(after))), sha }) });
+    if (!put.ok) { const e = await put.json(); throw new Error(e.message || put.status); }
+    btn.closest('li').style.display = 'none';
+  } catch(e) { alert('Remove failed: ' + e.message); btn.disabled = false; btn.textContent = '\\u{1F5D1}'; }
+}
+</script>"""
 
 
 def build_dashboard(config: Config, results: list[SourceResult],
@@ -126,10 +162,15 @@ def build_dashboard(config: Config, results: list[SourceResult],
 
     parts.append("<h2>Watching</h2><ul class='watch'>")
     for b in config.books:
-        parts.append(f"<li>📖 {e(str(b))}</li>")
+        parts.append(f"<li><span>📖 {e(str(b))}</span>"
+                     f"<button class='rm' onclick='rmItem(this,{_jsq(b.title)},\"book\")"
+                     f"' title='Remove'>&#x1F5D1;</button></li>")
     for m in config.movies:
-        parts.append(f"<li>🎬 {e(str(m))}</li>")
+        parts.append(f"<li><span>🎬 {e(str(m))}</span>"
+                     f"<button class='rm' onclick='rmItem(this,{_jsq(m.title)},\"movie\")"
+                     f"' title='Remove'>&#x1F5D1;</button></li>")
     parts.append("</ul>")
+    parts.append(_REMOVE_JS)
     parts.append("</body></html>")
     return "".join(parts)
 
@@ -210,6 +251,12 @@ def _ago(ts: str, now: datetime) -> str:
     if days == 1:
         return "1d ago"
     return f"{days}d ago"
+
+
+def _jsq(s: str) -> str:
+    """Quote a string for safe embedding in an HTML onclick attribute."""
+    import json
+    return html.escape(json.dumps(s), quote=True)
 
 
 def _never_seen(config: Config, current: list[Observation],
