@@ -72,6 +72,7 @@ def head_extra(depth: int = 0) -> str:
         " sizes='16x16' type='image/png'>"
         f"<link rel='apple-touch-icon' href='{p}assets/icons/"
         "apple-touch-icon.png' sizes='180x180'>"
+        f"<link rel='manifest' href='{p}manifest.json'>"
         "<link rel='preconnect' href='https://fonts.googleapis.com'>"
         "<link rel='preconnect' href='https://fonts.gstatic.com'"
         " crossorigin>"
