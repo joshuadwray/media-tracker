@@ -227,7 +227,7 @@ class AMCSource(ChainTheaterSource):
 
     @staticmethod
     def _url_for_date(base: str, dt: str) -> str:
-        return f"{base.rstrip('/')}/all/{dt}"
+        return f"{base}?date={dt}"
 
 
 def _extract_movies(html: str) -> Iterator[dict[str, Any]]:
