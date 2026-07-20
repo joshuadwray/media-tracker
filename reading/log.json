@@ -238,11 +238,11 @@
       "title": "Ghostroots",
       "author": "‘Pemi Aguda",
       "slug": "ghostroots",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 224,
       "started": "2025-02-08",
-      "finished": null,
+      "finished": "2025-02-08",
       "sessions": [
         "2025-02-08 51"
       ]
@@ -441,11 +441,11 @@
       "title": "The Lion, the Witch and the Wardrobe",
       "author": "C.S. Lewis",
       "slug": "the-lion-the-witch-and-the-wardrobe",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 180,
       "started": "2025-02-19",
-      "finished": null,
+      "finished": "2025-02-19",
       "sessions": [
         "2025-02-19 27"
       ]
@@ -525,11 +525,11 @@
       "title": "Darkmotherland",
       "author": "Samrat Upadhyay",
       "slug": "darkmotherland",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 768,
       "started": "2025-03-03",
-      "finished": null,
+      "finished": "2025-03-03",
       "sessions": [
         "2025-03-03 120"
       ]
@@ -1183,11 +1183,11 @@
       "title": "Fetch-22",
       "author": "Dav Pilkey",
       "slug": "fetch-22",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 240,
       "started": "2025-05-10",
-      "finished": null,
+      "finished": "2025-05-11",
       "sessions": [
         "2025-05-11 240"
       ]
@@ -1223,11 +1223,11 @@
       "title": "Moby-Dick or, The Whale",
       "author": "Herman Melville",
       "slug": "moby-dick-or-the-whale",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 657,
       "started": "2025-05-12",
-      "finished": null,
+      "finished": "2025-05-12",
       "sessions": [
         "2025-05-12 41"
       ]
@@ -1236,11 +1236,11 @@
       "title": "A/S/L",
       "author": "Jeanne Thornton",
       "slug": "a-s-l",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 496,
       "started": "2025-05-13",
-      "finished": null,
+      "finished": "2025-05-13",
       "sessions": [
         "2025-05-13 23"
       ]
@@ -1687,11 +1687,11 @@
       "title": "This Is Where the Serpent Lives",
       "author": "Daniyal Mueenuddin",
       "slug": "this-is-where-the-serpent-lives",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 368,
       "started": "2026-01-31",
-      "finished": null,
+      "finished": "2026-01-31",
       "sessions": [
         "2026-01-31 55"
       ]

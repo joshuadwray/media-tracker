@@ -9,8 +9,9 @@
   covers seeded from Bookmory's own URLs, page counts backfilled.
   Data gotchas handled: Goodreads "(Series #N)" title suffixes,
   author only in `authors[]` for manually-added books, double spaces.
-- Jump-to-month select next to the calendar's older/newer pager —
-  now live: 18 months of history means a lot of taps otherwise.
+- ~~Jump-to-month select next to the calendar's older/newer pager.~~
+  Done 2026-07-19: server-rendered <select> between the pager buttons
+  (hidden when JS is off, since all months show stacked then).
 - ~~Backfill Letterboxd to 2025-01-01.~~ Done 2026-07-19:
   `tracker letterboxd --import <export.zip>` (tracker/
   letterboxd_import.py) — 81 entries from diary.csv + reviews/likes;

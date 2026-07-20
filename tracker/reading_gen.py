@@ -451,6 +451,10 @@ td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
        border: 1px solid var(--line); border-radius: 8px;
        background: transparent; color: inherit; cursor: pointer; }
 .mnav button:disabled { opacity: .35; cursor: default; }
+.mnav select { font: inherit; font-size: .85rem; padding: 6px 8px;
+       border: 1px solid var(--line); border-radius: 8px;
+       background: transparent; color: inherit; cursor: pointer; }
+
 """
 
 _DOWS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -882,8 +886,12 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
                     reverse=True)
     if months:
         # one month shown at a time (newest first); JS-off shows all
+        opts = "".join(
+            f"<option value='{j}'>{_calendar.month_name[m]} {y}</option>"
+            for j, (y, m) in enumerate(months))
         parts.append("<div class='mnav'>"
                      "<button id='mold'>&larr; older</button>"
+                     f"<select id='mjump' hidden>{opts}</select>"
                      "<button id='mnew'>newer &rarr;</button></div>")
     cal = _calendar.Calendar(firstweekday=6)  # Sunday first
     for year, month in months:
@@ -948,12 +956,15 @@ def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
             "<script>(function(){"
             "var ms=[].slice.call(document.querySelectorAll('.month')),i=0;"
             "var o=document.getElementById('mold'),"
-            "n=document.getElementById('mnew');"
-            "function show(){ms.forEach(function(m,j){"
-            "m.style.display=j===i?'':'none'});"
-            "o.disabled=i>=ms.length-1;n.disabled=i<=0;}"
+            "n=document.getElementById('mnew'),"
+            "j=document.getElementById('mjump');"
+            "j.hidden=false;"
+            "function show(){ms.forEach(function(m,k){"
+            "m.style.display=k===i?'':'none'});"
+            "o.disabled=i>=ms.length-1;n.disabled=i<=0;j.value=i;}"
             "o.onclick=function(){if(i<ms.length-1){i++;show()}};"
             "n.onclick=function(){if(i>0){i--;show()}};"
+            "j.onchange=function(){i=+j.value;show()};"
             "show();})()</script>")
     parts.append("</body></html>")
     return "".join(parts)
