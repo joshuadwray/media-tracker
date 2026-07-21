@@ -1,11 +1,7 @@
-# Media tracker report — 2026-07-20 19:47 UTC
+# Media tracker report — 2026-07-21 00:04 UTC
 
-## New sightings (5)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Denton 14 — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark West Plano — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (7)
 - Eradication — Miles, Jonathan: print book in denton library catalog
