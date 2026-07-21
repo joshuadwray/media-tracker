@@ -40,6 +40,13 @@ ul.watch li span { flex: 1; }
 .rm:hover { opacity: .8; }
 .warn { background: var(--amber-tint); color: #7A5410; border-radius: 8px;
         padding: 8px 12px; font-size: .9rem; }
+details { margin-bottom: 4px; }
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+details > summary h2 { display: inline; }
+details > summary::after { content: '\\25B8'; margin-left: 6px;
+        font-size: .7rem; vertical-align: middle; color: var(--ink-mute); }
+details[open] > summary::after { content: '\\25BE'; }
 """
 
 _REMOVE_JS = """
@@ -106,7 +113,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
     current_fps = {o.fingerprint for o in current}
     historical = _historical_by_item(state, current_fps)
 
-    parts.append(f"<h2>New this run ({len(new)})</h2>")
+    parts.append(f"<details open><summary><h2>New this run ({len(new)})</h2></summary>")
     if new:
         new_grouped = _group_by_item(new)
         for item_key, obs_list in new_grouped.items():
@@ -116,6 +123,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
                                        now_dt, is_new=True))
     else:
         parts.append("<div class='muted'>nothing new</div>")
+    parts.append("</details>")
 
     # All items section: merge current + historical into unified cards.
     # Only include items still on the watchlist (in item_labels).
@@ -130,7 +138,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
             all_keys.append(key)
             all_obs[key] = []
 
-    parts.append(f"<h2>All tracked items ({len(all_keys)})</h2>")
+    parts.append(f"<details open><summary><h2>All tracked items ({len(all_keys)})</h2></summary>")
     if all_keys:
         for key in all_keys:
             obs_list = all_obs.get(key, [])
@@ -141,8 +149,10 @@ def build_dashboard(config: Config, results: list[SourceResult],
     else:
         parts.append("<div class='muted'>no watchlist titles are available "
                      "or playing anywhere right now</div>")
+    parts.append("</details>")
 
-    parts.append("<h2>Source health</h2>")
+    has_err = any(r.error for r in results)
+    parts.append(f"<details{' open' if has_err else ''}><summary><h2>Source health</h2></summary>")
     for r in results:
         if r.error:
             first = e(r.error.strip().splitlines()[0][:120])
@@ -152,15 +162,17 @@ def build_dashboard(config: Config, results: list[SourceResult],
             parts.append(f"<div class='src'><span>{e(r.source)}</span>"
                          f"<span class='ok'>✓ {len(r.observations)} sighting(s)"
                          "</span></div>")
+    parts.append("</details>")
 
     never = _never_seen(config, current, state)
     if never:
-        parts.append("<h2>Never matched anywhere</h2>")
+        parts.append("<details><summary><h2>Never matched anywhere</h2></summary>")
         parts.append("<div class='warn'>These have never matched at any source "
                      "— double-check the spelling: "
                      + ", ".join(e(t) for t in never) + "</div>")
+        parts.append("</details>")
 
-    parts.append("<h2>Watching</h2><ul class='watch'>")
+    parts.append("<details><summary><h2>Watching</h2></summary><ul class='watch'>")
     for b in config.books:
         parts.append(f"<li><span>📖 {e(str(b))}</span>"
                      f"<button class='rm' onclick='rmItem(this,{_jsq(b.title)},\"book\")"
@@ -169,7 +181,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
         parts.append(f"<li><span>🎬 {e(str(m))}</span>"
                      f"<button class='rm' onclick='rmItem(this,{_jsq(m.title)},\"movie\")"
                      f"' title='Remove'>&#x1F5D1;</button></li>")
-    parts.append("</ul>")
+    parts.append("</ul></details>")
     parts.append(_REMOVE_JS)
     parts.append("</body></html>")
     return "".join(parts)
