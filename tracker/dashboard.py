@@ -21,7 +21,12 @@ _CSS = """
         background: var(--surface); box-shadow: var(--shadow-sm);
         padding: 10px 12px; margin-bottom: 8px; }
 .card.new { border-left: 5px solid var(--ok); }
-.card .item { font-weight: 600; }
+.card > summary { font-weight: 600; cursor: pointer;
+        list-style: none; }
+.card > summary::-webkit-details-marker { display: none; }
+.card > summary::after { content: '\\25B8'; margin-left: 6px;
+        font-size: .7rem; vertical-align: middle; color: var(--ink-mute); }
+.card[open] > summary::after { content: '\\25BE'; }
 .row { display: flex; justify-content: space-between; align-items: center;
        padding: 3px 0; font-size: .9rem; }
 .row + .row { border-top: 1px dashed var(--line); }
@@ -237,8 +242,10 @@ def _grouped_card(label: str, current_obs: list[Observation],
                     f"</span><span class='st'>{badge}"
                     f" <span class='muted'>{e(ago)}</span></span></div>")
 
-    return (f"<div class='{cls}'><div class='item'>{e(label)}</div>"
-            + "".join(rows) + "</div>")
+    open_attr = " open" if is_new else ""
+    return (f"<details class='{cls}'{open_attr}>"
+            f"<summary class='item'>{e(label)}</summary>"
+            + "".join(rows) + "</details>")
 
 
 def _short_label(source: str, event: str) -> str:
