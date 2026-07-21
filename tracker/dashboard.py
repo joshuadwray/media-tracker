@@ -43,7 +43,7 @@ ul.watch li span { flex: 1; }
 .rm { background: none; border: none; padding: 2px 6px; cursor: pointer;
       opacity: .35; font-size: .85rem; line-height: 1; }
 .rm:hover { opacity: .8; }
-.warn { background: var(--amber-tint); color: #7A5410; border-radius: 8px;
+.warn { background: var(--gold-tint); color: #8A6A16; border-radius: 8px;
         padding: 8px 12px; font-size: .9rem; }
 details { margin-bottom: 4px; }
 details > summary { list-style: none; cursor: pointer; }
@@ -106,7 +106,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
         site.head_extra(0),
         f"<style>{site.BASE_CSS}{_CSS}</style></head><body>",
         site.nav("tracker", 0),
-        "<h1>📚🎬 media tracker</h1>",
+        "<h1>media tracker</h1>",
         f"<div class='meta'>last checked {e(now)}</div>",
     ]
 

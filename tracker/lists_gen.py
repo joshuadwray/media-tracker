@@ -210,10 +210,10 @@ ol.grid { list-style: none; margin: 0; padding: 0; display: grid;
 .noimg .nt { font-weight: 700; font-size: .95rem; }
 .noimg .na { font-size: .8rem; opacity: .85; margin-top: 6px; }
 .rank { position: absolute; top: 6px; left: 6px; z-index: 1;
-        background: rgba(58,36,24,.85); color: #F4EBD9; font-size: .78rem;
+        background: rgba(16,34,28,.82); color: #F5F7F4; font-size: .78rem;
         font-weight: 700; padding: 1px 8px; border-radius: 999px; }
 .rate { position: absolute; top: 6px; right: 6px; z-index: 1;
-        background: rgba(58,36,24,.85); color: #F1D49A; font-size: .78rem;
+        background: rgba(16,34,28,.82); color: var(--gold); font-size: .78rem;
         font-weight: 700; padding: 1px 8px; border-radius: 999px; }
 .cap { margin-top: 6px; }
 .cap .t { font-weight: 600; font-size: .9rem; }

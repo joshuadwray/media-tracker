@@ -12,21 +12,24 @@ from __future__ import annotations
 
 BASE_CSS = """
 :root {
-  --bg: #F4EBD9; --surface: #FBF6EC; --surface-sunk: #EDE3D0;
-  --line: #DCCFB8; --line-strong: #CDBB9B;
-  --ink: #3A2418; --ink-soft: #6B5240; --ink-mute: #A5765A;
-  --amber: #E4A138; --amber-tint: #F1D49A;
-  --terracotta: #C25438; --terracotta-2: #A5432B;
-  --terracotta-tint: #E7B8A8;
+  --bg: #F5F7F4; --surface: #FFFFFF; --surface-sunk: #E8ECE6;
+  --line: #CBD5C8; --line-strong: #A8B6A4;
+  --ink: #1A2118; --ink-soft: #4A5648; --ink-mute: #6E7E6B;
+  --gold: #C8962E; --gold-tint: #F0DCAA;
+  --teal: #3E8C7E; --teal-2: #2E6E62;
+  --teal-tint: #B0D8D0;
   --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-mono: 'Space Mono', ui-monospace, monospace;
   --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-pill: 999px;
-  --shadow-sm: 0 2px 6px -2px rgba(58,36,24,.20);
-  --shadow-md: 0 10px 24px -12px rgba(58,36,24,.35);
+  --shadow-sm: 0 2px 6px -2px rgba(16,34,28,.18);
+  --shadow-md: 0 10px 24px -12px rgba(16,34,28,.30);
   --ease: cubic-bezier(.2,.7,.2,1); --dur: 160ms;
-  /* legacy aliases so page-local CSS re-themes for free */
-  --mut: var(--ink-mute); --accent: var(--terracotta);
-  --ok: #4C7A3F; --err: #A03123; }
+  /* legacy aliases — amber/terracotta map to new palette */
+  --amber: var(--gold); --amber-tint: var(--gold-tint);
+  --terracotta: var(--teal); --terracotta-2: var(--teal-2);
+  --terracotta-tint: var(--teal-tint);
+  --mut: var(--ink-mute); --accent: var(--teal);
+  --ok: var(--teal); --err: #B23A2E; }
 * { box-sizing: border-box; }
 body { font-family: var(--font-sans); background: var(--bg);
        color: var(--ink); margin: 0 auto; max-width: var(--pagew, 640px);
@@ -63,7 +66,7 @@ def head_extra(depth: int = 0) -> str:
     below docs/ (icon hrefs are relative for project Pages)."""
     p = "../" * depth
     return (
-        "<meta name='theme-color' content='#F4EBD9'>"
+        "<meta name='theme-color' content='#F5F7F4'>"
         f"<link rel='icon' href='{p}assets/icons/app-icon.svg'"
         " type='image/svg+xml'>"
         f"<link rel='icon' href='{p}assets/icons/favicon-32.png'"

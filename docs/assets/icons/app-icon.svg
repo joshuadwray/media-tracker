@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs><clipPath id="clap"><rect x="212" y="402" width="600" height="60" rx="10"></rect></clipPath></defs>
   <rect width="1024" height="1024" fill="#F4EBD9"></rect>
-  <polyline points="200,376 344,716 512,352 680,716 824,376" fill="none" stroke="#E4A138" stroke-width="90" stroke-linejoin="round" stroke-linecap="round"></polyline>
-  <path d="M512 300 L512 748 Q512 794 464 794 Q430 794 412 770" fill="none" stroke="#C25438" stroke-width="62" stroke-linecap="round" stroke-linejoin="round"></path>
+  <path d="M262 718 L500 728" fill="none" stroke="#08211E" stroke-width="9" stroke-linecap="round"></path>
+  <path d="M762 718 L524 728" fill="none" stroke="#08211E" stroke-width="9" stroke-linecap="round"></path>
+  <path d="M500 500 L246 490 C232 489 224 497 225 507 L246 716 C247 724 255 727 265 726 L500 730 Z" fill="#3E8E82"></path>
+  <path d="M524 500 L778 490 C792 489 800 497 799 507 L778 716 C777 724 769 727 759 726 L524 730 Z" fill="#79C2B4"></path>
+  <g stroke="#F4EBD9" stroke-width="11" stroke-linecap="round"><path d="M300 558 L446 562" fill="none"></path><path d="M578 562 L724 558" fill="none"></path></g>
+  <g transform="rotate(-4 512 432)"><rect x="212" y="402" width="600" height="60" rx="10" fill="#0F2E2B"></rect><g clip-path="url(#clap)" fill="#F4EBD9"><polygon points="260,402 315,402 283,462 228,462"></polygon><polygon points="361,402 416,402 384,462 329,462"></polygon><polygon points="462,402 517,402 485,462 430,462"></polygon><polygon points="562,402 618,402 586,462 531,462"></polygon><polygon points="663,402 719,402 687,462 632,462"></polygon></g></g>
 </svg>
