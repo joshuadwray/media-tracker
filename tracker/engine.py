@@ -39,11 +39,12 @@ def run_check(config: Config, *, source_id: str | None = None,
     ok_sources = {r.source for r in run.results if not r.error}
     for r in run.results:
         for obs in r.observations:
+            obs_dates = obs.detail.get("dates") if isinstance(obs.detail, dict) else None
             if state.is_new(obs):
                 run.new.append(obs)
-                state.record(obs)
+                state.record(obs, dates=obs_dates)
             elif r.source in ok_sources:
-                state.touch(obs)
+                state.touch(obs, dates=obs_dates)
     state.prune()
     run.report = build_report(config, run.results, run.new, state)
 

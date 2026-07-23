@@ -45,15 +45,23 @@ class State:
         gap = (now or datetime.now(timezone.utc)) - last
         return gap > timedelta(days=GAP_DAYS)
 
-    def record(self, obs: Observation, now: datetime | None = None) -> None:
+    def record(self, obs: Observation, now: datetime | None = None,
+               dates: list[str] | None = None) -> None:
         ts = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
-        self.seen[obs.fingerprint] = {"first": ts, "last": ts}
+        entry: dict[str, object] = {"first": ts, "last": ts}
+        if dates:
+            entry["dates"] = sorted(set(dates))
+        self.seen[obs.fingerprint] = entry
 
-    def touch(self, obs: Observation, now: datetime | None = None) -> None:
+    def touch(self, obs: Observation, now: datetime | None = None,
+              dates: list[str] | None = None) -> None:
         ts = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
         entry = self.seen.get(obs.fingerprint)
         if entry is not None:
             entry["last"] = ts
+            if dates:
+                old = set(entry.get("dates") or [])
+                entry["dates"] = sorted(old | set(dates))
 
     def prune(self, now: datetime | None = None) -> int:
         cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)

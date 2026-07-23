@@ -116,21 +116,24 @@ def build_dashboard(config: Config, results: list[SourceResult],
     # Also gather historical (stale) fingerprints per item_key from state,
     # for items not seen this run but still within the prune window.
     current_fps = {o.fingerprint for o in current}
-    historical = _historical_by_item(state, current_fps)
+    today = now_dt.strftime("%Y-%m-%d")
+    historical, carried = _historical_by_item(state, current_fps, today)
 
     parts.append(f"<details open><summary><h2>New this run ({len(new)})</h2></summary>")
     if new:
         new_grouped = _group_by_item(new)
         for item_key, obs_list in new_grouped.items():
             stale = historical.get(item_key, [])
+            carry = carried.get(item_key, [])
             label = item_labels.get(item_key, obs_list[0].item_label)
             parts.append(_grouped_card(label, obs_list, stale, new_fps,
-                                       now_dt, is_new=True))
+                                       now_dt, is_new=True,
+                                       carried=carry))
     else:
         parts.append("<div class='muted'>nothing new</div>")
     parts.append("</details>")
 
-    # All items section: merge current + historical into unified cards.
+    # All items section: merge current + historical + carried into unified cards.
     # Only include items still on the watchlist (in item_labels).
     all_keys: list[str] = []
     all_obs: dict[str, list[Observation]] = {}
@@ -138,7 +141,7 @@ def build_dashboard(config: Config, results: list[SourceResult],
         if key in item_labels:
             all_keys.append(key)
             all_obs[key] = obs_list
-    for key in historical:
+    for key in {*historical, *carried}:
         if key in item_labels and key not in all_obs:
             all_keys.append(key)
             all_obs[key] = []
@@ -148,9 +151,10 @@ def build_dashboard(config: Config, results: list[SourceResult],
         for key in all_keys:
             obs_list = all_obs.get(key, [])
             stale = historical.get(key, [])
+            carry = carried.get(key, [])
             label = item_labels[key]
             parts.append(_grouped_card(label, obs_list, stale, new_fps,
-                                       now_dt))
+                                       now_dt, carried=carry))
     else:
         parts.append("<div class='muted'>no watchlist titles are available "
                      "or playing anywhere right now</div>")
@@ -199,9 +203,19 @@ def _group_by_item(observations: list[Observation]) -> OrderedDict[str, list[Obs
     return groups
 
 
-def _historical_by_item(state: State, current_fps: set[str]) -> dict[str, list[dict]]:
-    """Fingerprints in state.seen that weren't observed this run (stale)."""
-    items: dict[str, list[dict]] = {}
+def _historical_by_item(state: State, current_fps: set[str],
+                        today: str | None = None,
+                        ) -> tuple[dict[str, list[dict]], dict[str, list[dict]]]:
+    """Fingerprints in state.seen that weren't observed this run.
+
+    Returns (stale, carried) where *carried* entries have at least one
+    showtime date today-or-later (so they shouldn't look stale on the
+    dashboard) and *stale* entries have no future dates.
+    """
+    if today is None:
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    stale_items: dict[str, list[dict]] = {}
+    carried_items: dict[str, list[dict]] = {}
     for fp, entry in state.seen.items():
         if fp in current_fps:
             continue
@@ -209,16 +223,23 @@ def _historical_by_item(state: State, current_fps: set[str]) -> dict[str, list[d
         if len(parts) < 3:
             continue
         source, item_key, event = parts
-        items.setdefault(item_key, []).append({
+        rec = {
             "source": source, "event": event, "fp": fp,
             "first": entry.get("first", ""), "last": entry.get("last", ""),
-        })
-    return items
+            "dates": entry.get("dates", []),
+        }
+        future_dates = [d for d in rec["dates"] if d >= today]
+        if future_dates:
+            carried_items.setdefault(item_key, []).append(rec)
+        else:
+            stale_items.setdefault(item_key, []).append(rec)
+    return stale_items, carried_items
 
 
 def _grouped_card(label: str, current_obs: list[Observation],
                   stale: list[dict], new_fps: set[str], now: datetime,
-                  is_new: bool = False) -> str:
+                  is_new: bool = False,
+                  carried: list[dict] | None = None) -> str:
     e = html.escape
     cls = "card new" if is_new else "card"
 
@@ -231,6 +252,15 @@ def _grouped_card(label: str, current_obs: list[Observation],
         row_label = _short_label(o.source, o.event or o.summary)
         rows.append(f"<div class='row'><span class='lbl'>{e(row_label)}{info}</span>"
                     f"<span class='st'>{badge}{link}</span></div>")
+
+    for c in (carried or []):
+        today = now.strftime("%Y-%m-%d")
+        future = sorted(d for d in c.get("dates", []) if d >= today)
+        date_hint = f" ({', '.join(future[:3])})" if future else ""
+        row_label = _short_label(c["source"], c["event"])
+        rows.append(f"<div class='row'><span class='lbl'>{e(row_label)}"
+                    f"<span class='muted'>{e(date_hint)}</span></span>"
+                    f"<span class='st'>✅</span></div>")
 
     for s in stale:
         last = s["last"]
