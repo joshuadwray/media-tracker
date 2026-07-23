@@ -1740,15 +1740,16 @@
       "title": "The Natural Way of Things",
       "author": "Charlotte Wood",
       "slug": "the-natural-way-of-things",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3.5,
       "page_count": 320,
       "started": "2026-07-12",
-      "finished": null,
+      "finished": "2026-07-22",
       "sessions": [
         "2026-07-12 91",
         "2026-07-20 110",
-        "2026-07-21 212"
+        "2026-07-21 212",
+        "2026-07-22 320"
       ]
     },
     {
