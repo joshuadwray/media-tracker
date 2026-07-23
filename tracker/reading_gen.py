@@ -234,6 +234,13 @@ def resolve_page_count(book: Book, cache: dict, covers_cache: dict,
                        session=None, log=None) -> tuple:
     """-> (page_count or None, source str). Caches lookups incl. misses."""
     if book.page_count:
+        # still piggyback a cover lookup if missing from cache
+        if session and book.cache_key not in covers_cache:
+            hit = (lists_gen._itunes_lookup(session, book.title, book.author)
+                   or lists_gen._openlibrary_lookup(session, book.title,
+                                                    book.author))
+            if hit:
+                covers_cache[book.cache_key] = hit
         return int(book.page_count), "manual"
     entry = cache.get(book.cache_key)
     if entry is not None:
