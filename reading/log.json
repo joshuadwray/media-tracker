@@ -1797,11 +1797,11 @@
       "title": "there is no antimemetics division",
       "author": "qntm",
       "slug": "there-is-no-antimemetics-division",
-      "status": "reading",
+      "status": "abandoned",
       "rating": null,
       "page_count": 253,
       "started": "2026-07-21",
-      "finished": null,
+      "finished": "2026-07-23",
       "sessions": [
         "2026-07-20 12"
       ]
@@ -1817,6 +1817,19 @@
       "finished": null,
       "sessions": [
         "2026-07-22 44"
+      ]
+    },
+    {
+      "title": "eradication",
+      "author": "jonathan miles",
+      "slug": "eradication",
+      "status": "reading",
+      "rating": null,
+      "page_count": 159,
+      "started": "2026-07-23",
+      "finished": null,
+      "sessions": [
+        "2026-07-23 46"
       ]
     }
   ]
