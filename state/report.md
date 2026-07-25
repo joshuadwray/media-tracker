@@ -1,6 +1,11 @@
-# Media tracker report — 2026-07-23 03:25 UTC
+# Media tracker report — 2026-07-25 14:29 UTC
 
-## New sightings (8)
+## New sightings (13)
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep%20Tremblay%2C%20Paul&searchType=smart)
+- **Eradication — Miles, Jonathan**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Eradication%20Miles%2C%20Jonathan&searchType=smart)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Denton 14 (2026-07-30, 2026-07-31, 2026-08-01, 2026-08-02) — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark West Plano (2026-07-30, 2026-07-31, 2026-08-01, 2026-08-02) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
+- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano (2026-07-30) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
 - **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" playing at AMC Stonebriar 24 (2026-07-30, 2026-07-31, 2026-08-01, 2026-08-02) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
 - **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day Dolby Opening Night Fan Event" playing at AMC Stonebriar 24 (2026-07-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
 - **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Stonebriar 24 (2026-07-31, 2026-08-01, 2026-08-02) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
