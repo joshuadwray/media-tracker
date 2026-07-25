@@ -8,7 +8,12 @@ on:
     # ~8:00 and ~18:00 Central (13:00/23:00 UTC in summer). GitHub cron
     # is UTC and best-effort; exact minutes drift.
     - cron: "0 13,23 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      deep_scan:
+        description: "Use 21-day theater lookahead"
+        type: boolean
+        default: false
 
 permissions:
   contents: write # to commit state.json / report.md back
@@ -35,8 +40,8 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
-          # Wednesday (day 3) deep scan: 21-day theater lookahead
-          if [ "$(date -u +%u)" = "3" ]; then
+          # Wednesday (day 3) deep scan or manual dispatch with deep_scan
+          if [ "$(date -u +%u)" = "3" ] || [ "${{ inputs.deep_scan }}" = "true" ]; then
             export THEATER_LOOKAHEAD=21
           fi
           python -m tracker check
