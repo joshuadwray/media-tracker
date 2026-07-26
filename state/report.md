@@ -1,8 +1,7 @@
-# Media tracker report — 2026-07-25 14:41 UTC
+# Media tracker report — 2026-07-26 00:07 UTC
 
-## New sightings (2)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (7)
 - Eradication — Miles, Jonathan: print book in denton library catalog
