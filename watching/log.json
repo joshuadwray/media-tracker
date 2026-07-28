@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "The Odyssey",
+      "year": 2026,
+      "slug": "the-odyssey-2026",
+      "watched": "2026-07-27",
+      "rating": 4.5,
+      "rewatch": true,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 1368337,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/1/2/5/5/3/9/4/1255394-the-odyssey-2026-0-600-0-900-crop.jpg?v=1eed046d0c",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/the-odyssey-2026/1/",
+      "guid": "letterboxd-watch-1418724352"
+    },
+    {
       "title": "Avatar Aang: The Last Airbender",
       "year": 2026,
       "slug": "avatar-aang-the-last-airbender",
