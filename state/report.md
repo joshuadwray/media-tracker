@@ -1,9 +1,7 @@
-# Media tracker report — 2026-07-28 00:08 UTC
+# Media tracker report — 2026-07-28 15:28 UTC
 
-## New sightings (3)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Stonebriar 24 (2026-07-31) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Grapevine Mills 30 (2026-07-31) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (16)
 - Eradication — Miles, Jonathan: print book in denton library catalog
@@ -11,7 +9,7 @@
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Denton)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Denton 14 (2026-07-30, 2026-07-31)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark West Plano (2026-07-30, 2026-07-31, 2026-08-01)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano (2026-07-30)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Dallas IMAX (2026-07-30, 2026-07-31, 2026-08-01)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark Dallas IMAX (2026-07-30)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day Dolby Opening Night Fan Event" playing at AMC Stonebriar 24 (2026-07-30)
