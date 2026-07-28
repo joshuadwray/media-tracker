@@ -1,30 +1,30 @@
 {
   "movie:club-kid": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1585239
   },
   "movie:coyote-vs-acme": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1204680
   },
   "movie:dune-part-3": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1170608
   },
   "movie:fjord": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1401459
   },
   "movie:paper-tiger": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1381273
   },
   "movie:spider-man-brand-new-day": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 969681
   },
   "movie:teenage-sex-and-death-at-camp-miasma": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1240889
   },
   "movie:the-substance": {
@@ -32,11 +32,11 @@
     "tmdb_id": 933260
   },
   "movie:tony": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 1329016
   },
   "movie:wild-horse-nine": {
-    "searched": "2026-07-20",
+    "searched": "2026-07-28",
     "tmdb_id": 891621
   }
 }
