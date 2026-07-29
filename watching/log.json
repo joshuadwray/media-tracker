@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "Mile End Kicks",
+      "year": 2025,
+      "slug": "mile-end-kicks",
+      "watched": "2026-07-28",
+      "rating": 3.5,
+      "rewatch": false,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 1177767,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/1/0/6/4/6/1/2/1064612-mile-end-kicks-0-600-0-900-crop.jpg?v=f73de5160c",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/mile-end-kicks/",
+      "guid": "letterboxd-watch-1420583517"
+    },
+    {
       "title": "The Odyssey",
       "year": 2026,
       "slug": "the-odyssey-2026",
