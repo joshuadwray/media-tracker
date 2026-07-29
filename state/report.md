@@ -1,17 +1,15 @@
-# Media tracker report — 2026-07-29 00:10 UTC
+# Media tracker report — 2026-07-29 15:20 UTC
 
-## New sightings (1)
-- **spider-man: brand new day (2026)**: "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-12, 2026-08-18) — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (16)
+## All current sightings (14)
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Denton)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark Denton 14 (2026-07-30, 2026-07-31, 2026-08-01, 2026-08-02)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" advance tickets on sale at Cinemark West Plano (2026-07-30, 2026-07-31, 2026-08-01, 2026-08-02)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark West Plano
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-12, 2026-08-18)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day XD Super Ticket" advance tickets on sale at Cinemark Dallas IMAX
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day Dolby Opening Night Fan Event" playing at AMC Stonebriar 24 (2026-07-30)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Stonebriar 24 (2026-07-30, 2026-07-31, 2026-08-01, 2026-08-02)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Stonebriar 24 (2026-07-31, 2026-08-01, 2026-08-02)
@@ -25,7 +23,7 @@
 - ✅ `denton-library`: 2 observation(s)
 - ✅ `cloudlibrary`: 1 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
-- ✅ `cinemark`: 5 observation(s)
+- ✅ `cinemark`: 3 observation(s)
 - ✅ `amc`: 8 observation(s)
 - ✅ `tmdb-streaming`: 0 observation(s)
 
