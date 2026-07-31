@@ -1823,14 +1823,15 @@
       "title": "eradication",
       "author": "jonathan miles",
       "slug": "eradication",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3.5,
       "page_count": 159,
       "started": "2026-07-23",
-      "finished": null,
+      "finished": "2026-07-31",
       "sessions": [
         "2026-07-23 46",
-        "2026-07-28 105"
+        "2026-07-28 105",
+        "2026-07-31 159"
       ]
     }
   ]
