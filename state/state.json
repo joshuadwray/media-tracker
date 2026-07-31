@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_run": "2026-07-31T22:33:23+00:00"
+    "last_run": "2026-07-31T22:36:07+00:00"
   },
   "seen": {
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day Dolby Opening Night Fan Event\" playing at AMC Grapevine Mills 30": {
@@ -266,7 +266,7 @@
     },
     "cloudlibrary|book:eradication|audiobook in catalog": {
       "first": "2026-07-31T15:25:01+00:00",
-      "last": "2026-07-31T22:33:23+00:00"
+      "last": "2026-07-31T22:36:07+00:00"
     },
     "cloudlibrary|book:eradication|ebook in catalog": {
       "first": "2026-07-19T14:25:59+00:00",
@@ -294,11 +294,11 @@
     },
     "denton-library|book:dead-but-dreaming-of-electric-sheep|print book in catalog": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-07-31T22:33:23+00:00"
+      "last": "2026-07-31T22:36:07+00:00"
     },
     "denton-library|book:eradication|print book in catalog": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-07-31T22:33:23+00:00"
+      "last": "2026-07-31T22:36:07+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
