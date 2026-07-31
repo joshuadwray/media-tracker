@@ -1,29 +1,28 @@
-# Media tracker report — 2026-07-31 15:25 UTC
+# Media tracker report — 2026-07-31 22:33 UTC
 
-## New sightings (1)
-- **Eradication — Miles, Jonathan**: audiobook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Eradication)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (6)
+## All current sightings (5)
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
 - Eradication — Miles, Jonathan: audiobook in cloudLibrary catalog (Denton)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-07-31, 2026-08-01, 2026-08-02, 2026-08-03)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-07-31, 2026-08-01, 2026-08-02, 2026-08-03)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-07-31, 2026-08-01, 2026-08-02, 2026-08-03)
 
 ## Source status
 - ✅ `denton-library`: 2 observation(s)
 - ✅ `cloudlibrary`: 1 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
-- ✅ `cinemark`: 3 observation(s)
+- ✅ `cinemark`: 2 observation(s)
 - ✅ `amc`: 0 observation(s)
-- ✅ `tmdb-streaming`: 0 observation(s)
 
 ## Never matched anywhere (possible typos?)
 These watchlist entries have not matched at any source, ever. Double-check the spelling, or use `tracker add` to pick the exact catalog record.
 - We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea
 - one leg on earth
+- i want your sex (2026)
 - coyote vs acme (2026)
 - teenage sex and death at camp miasma (2026)
 - dune part 3 (2026)
