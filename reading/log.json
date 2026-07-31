@@ -1835,6 +1835,19 @@
         "2026-07-28 105",
         "2026-07-31 159"
       ]
+    },
+    {
+      "title": "this is where the serpent lives",
+      "author": "daniyal mueenuddin",
+      "slug": "this-is-where-the-serpent-lives-2",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-07-31",
+      "finished": null,
+      "sessions": [
+        "2026-07-30 29"
+      ]
     }
   ]
 }
