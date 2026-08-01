@@ -1,19 +1,20 @@
-# Media tracker report — 2026-08-01 00:20 UTC
+# Media tracker report — 2026-08-01 00:23 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (4)
+## All current sightings (5)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
 - Eradication — Miles, Jonathan: audiobook in cloudLibrary catalog (Denton)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-03, 2026-08-04, 2026-08-09, 2026-08-15)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
 - ✅ `cloudlibrary`: 1 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
-- ❌ `cinemark`: RuntimeError: Cinemark Denton 14: HTTP 429; Cinemark West Plano: HTTP 429; Cinemark Dallas IMAX: HTTP 429
+- ✅ `cinemark`: 1 observation(s)
 - ✅ `amc`: 0 observation(s)
 
 ## Never matched anywhere (possible typos?)
