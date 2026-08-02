@@ -1,4 +1,4 @@
-# Media tracker report — 2026-08-02 00:03 UTC
+# Media tracker report — 2026-08-02 14:42 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -15,7 +15,7 @@
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
 - ✅ `cloudlibrary`: 1 observation(s)
-- ✅ `texas-theatre`: 0 observation(s)
+- ❌ `texas-theatre`: RuntimeError: Texas Theatre: ConnectTimeout: HTTPSConnectionPool(host='thetexastheatre.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<HTTPSConnection(host='thetexastheatre.com', port=443) at 0x7fda57600ec0>, 'Connection to thetexastheatre.com timed out. (connect timeout=25)'))
 - ✅ `cinemark`: 3 observation(s)
 - ✅ `amc`: 0 observation(s)
 - ✅ `tmdb-streaming`: 0 observation(s)
