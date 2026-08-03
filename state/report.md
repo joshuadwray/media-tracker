@@ -1,13 +1,12 @@
-# Media tracker report — 2026-08-03 00:04 UTC
+# Media tracker report — 2026-08-03 15:48 UTC
 
-## New sightings (1)
-- **i made you up inside my head**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=i%20made%20you%20up%20inside%20my%20head)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (8)
+## All current sightings (7)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
-- i made you up inside my head: ebook in cloudLibrary catalog (Denton)
 - Eradication — Miles, Jonathan: audiobook in cloudLibrary catalog (Denton)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-03, 2026-08-04, 2026-08-05, 2026-08-06)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-03, 2026-08-04, 2026-08-05, 2026-08-06)
@@ -15,7 +14,7 @@
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
-- ✅ `cloudlibrary`: 2 observation(s)
+- ✅ `cloudlibrary`: 1 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 3 observation(s)
 - ✅ `amc`: 0 observation(s)
