@@ -1,9 +1,9 @@
-# Media tracker report — 2026-08-04 00:14 UTC
+# Media tracker report — 2026-08-04 15:29 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **spider-man: brand new day (2026)**: "spider-man: brand new day" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/969681)
 
-## All current sightings (7)
+## All current sightings (8)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
@@ -11,6 +11,7 @@
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-04, 2026-08-05, 2026-08-06, 2026-08-07)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-04, 2026-08-05, 2026-08-06, 2026-08-07)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-04, 2026-08-05, 2026-08-06, 2026-08-07)
+- spider-man: brand new day (2026): "spider-man: brand new day" available to buy (Fandango At Home)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
@@ -18,7 +19,7 @@
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 3 observation(s)
 - ✅ `amc`: 0 observation(s)
-- ✅ `tmdb-streaming`: 0 observation(s)
+- ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Never matched anywhere (possible typos?)
 These watchlist entries have not matched at any source, ever. Double-check the spelling, or use `tracker add` to pick the exact catalog record.
