@@ -1,4 +1,4 @@
-# Media tracker report — 2026-08-03 15:48 UTC
+# Media tracker report — 2026-08-04 00:14 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -8,9 +8,9 @@
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
 - Eradication — Miles, Jonathan: audiobook in cloudLibrary catalog (Denton)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-03, 2026-08-04, 2026-08-05, 2026-08-06)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-03, 2026-08-04, 2026-08-05, 2026-08-06)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-03, 2026-08-04, 2026-08-05, 2026-08-06)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-04, 2026-08-05, 2026-08-06, 2026-08-07)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-04, 2026-08-05, 2026-08-06, 2026-08-07)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-04, 2026-08-05, 2026-08-06, 2026-08-07)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
