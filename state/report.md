@@ -1,20 +1,21 @@
-# Media tracker report — 2026-08-05 00:13 UTC
+# Media tracker report — 2026-08-05 15:23 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
 
-## All current sightings (7)
+## All current sightings (8)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
 - Eradication — Miles, Jonathan: audiobook in cloudLibrary catalog (Denton)
+- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Denton)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-05, 2026-08-06, 2026-08-07, 2026-08-08)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-05, 2026-08-06, 2026-08-07, 2026-08-08)
 - spider-man: brand new day (2026): "spider-man: brand new day" available to buy (Fandango At Home)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
-- ✅ `cloudlibrary`: 1 observation(s)
+- ✅ `cloudlibrary`: 2 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 2 observation(s)
 - ✅ `amc`: 0 observation(s)
