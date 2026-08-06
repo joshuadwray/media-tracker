@@ -1,7 +1,7 @@
-# Media tracker report — 2026-08-06 00:05 UTC
+# Media tracker report — 2026-08-06 15:21 UTC
 
-## New sightings (1)
-- **teenage sex and death at camp miasma (2026)**: "teenage sex and death at camp miasma" mentioned on Texas Theatre — [link](https://thetexastheatre.com/)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (9)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
