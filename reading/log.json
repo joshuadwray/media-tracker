@@ -1856,13 +1856,14 @@
       "title": "a trade of blood",
       "author": "robert jackson bennett",
       "slug": "a-trade-of-blood",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4.5,
       "page_count": null,
       "started": "2026-08-06",
-      "finished": null,
+      "finished": "2026-08-07",
       "sessions": [
-        "2026-08-05 40"
+        "2026-08-05 40",
+        "2026-08-07 400"
       ]
     }
   ]
