@@ -83,6 +83,14 @@ sources:
     library: lewisvillepubliclibrary
     label: Lewisville            # display name for pushes/report
 
+  libby-fortworth:
+    kind: libby
+    # Fort Worth Public Library. Key is the segment in
+    # https://libbyapp.com/library/<key>. Fort Worth has no cloudLibrary —
+    # Libby is its digital collection. Print is Polaris, not watched (TODO.md).
+    library: fwpl
+    label: Fort Worth
+
   texas-theatre:
     kind: pages
     pages:

@@ -35,6 +35,21 @@ def normalize(text: str) -> str:
     return text
 
 
+def search_query(title: str) -> str:
+    """A watched title trimmed down for a catalog search box.
+
+    Parenthetical suffixes — series names, edition notes, the
+    "(Ana and Din Mysteries)" that a Goodreads-style title carries —
+    return ZERO results at cloudLibrary and OverDrive, which match the
+    query as a phrase. Verified 2026-08: "A Trade of Blood (Ana and Din
+    Mysteries)" found nothing at either, "A Trade of Blood" found it at
+    both. Matching still happens against the full title via titles_match,
+    which normalizes parentheticals away too.
+    """
+    cleaned = re.sub(r"\s+", " ", _PAREN_RE.sub(" ", title)).strip()
+    return cleaned or title
+
+
 def titles_match(wanted: str, found: str, threshold: float = 0.88) -> bool:
     """True if a found title is (fuzzily) the watched title."""
     a, b = normalize(wanted), normalize(found)

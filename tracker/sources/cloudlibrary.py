@@ -16,7 +16,7 @@ from typing import Any
 
 from .. import http
 from ..config import Config
-from ..matching import author_matches, titles_match
+from ..matching import author_matches, search_query, titles_match
 from ..models import Observation, medium_for
 from .base import Source, register
 
@@ -80,7 +80,7 @@ class CloudLibrarySource(Source):
         sess = http.session()
         observations: list[Observation] = []
         for book in config.books:
-            query = book.isbn or book.title
+            query = book.isbn or search_query(book.title)
             items, _ = self._search(sess, query)
             for item in items:
                 if item.get("borrowable") is False:

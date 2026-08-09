@@ -31,6 +31,22 @@ def test_text_contains_title_word_boundaries():
     assert not text_contains_title(page, "Substance Abuse")
 
 
+def test_search_query_drops_parentheticals():
+    """cloudLibrary and OverDrive match the query as a phrase, so a series
+    suffix returns zero results — while the title still has to match in
+    full afterwards."""
+    from tracker.matching import search_query
+
+    assert search_query("A Trade of Blood (Ana and Din Mysteries)") == \
+        "A Trade of Blood"
+    assert search_query("The Substance (2024)") == "The Substance"
+    assert search_query("Eradication") == "Eradication"
+    # Never search for an empty string.
+    assert search_query("(Untitled)") == "(Untitled)"
+    assert titles_match("A Trade of Blood (Ana and Din Mysteries)",
+                        "A Trade of Blood")
+
+
 def _obs(summary="ebook available"):
     return Observation(source="s1", item_key="book:x", item_label="X",
                        summary=summary)
