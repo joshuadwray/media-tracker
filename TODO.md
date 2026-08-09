@@ -68,6 +68,37 @@
   set the count on the card).
 
 ## Investigate
+- **Drop-time breadcrumbs for competitive new ebook/audio (2026-08).**
+  Goal: be ready the instant a hot new title enters a library's borrowable
+  pool. Today we capture NOTHING that pins the drop:
+  - all three library sources set an availability-independent `event`
+    ("ebook in catalog") on purpose, so the pre-order/on-order -> borrowable
+    flip does NOT re-notify — exactly the transition we'd want to catch;
+  - the only timing we keep is our own first-seen (`state.json`), and it's
+    bounded by the twice-daily cron (13/23 UTC) + whenever the title was
+    added — a ~10h+ window, and it conflates "entered catalog" with "we
+    happened to look";
+  - cloudLibrary stores only `raw = {first 12 keys}`; Libby's probe prints a
+    fixed 10-key subset. So any streetDate/onSaleDate/publishDate or
+    pre-order flag riding in the payload is dropped before we ever see it —
+    even though the full JSON has real timing/status fields (that's where the
+    `isPayPerUse`/`totalCopies` borrowability discriminator was found).
+  What the first-seen log ALREADY shows (Dead but Dreaming of Electric Sheep,
+  Tremblay): print @ Denton BiblioCommons 07-25 -> ebook @ Denton cloudLibrary
+  08-05 -> ebook+audio @ Lewisville CL + Fort Worth Libby 08-09. Denton
+  cloudLibrary led the other two digital sources by ~4 days. So mediums and
+  libraries light up on a stagger, and cloudLibrary can be the early edge —
+  consistent with CL being the less-competitive ecosystem (easier to be
+  sharpest there than to out-race Libby's pre-order crowd).
+  NEXT (needs live catalog egress — run locally or on the Actions runner; the
+  web sandbox's proxy 403s both catalog hosts): `python
+  scripts/discover_droptime.py` dumps FULL untruncated cloudLibrary + Libby
+  records and flags date/pre-order/status keys. Confirm which fields exist,
+  then decide among: (a) capture street/release date + a pre-order flag into
+  `detail`; (b) surface a "coming soon / drops <date>" section; (c) add a
+  distinct pre-order->borrowable transition event (the real "drop" notif),
+  optionally with a tightened cron scoped to titles with a known imminent
+  date. cloudLibrary FIRST.
 - **Print catalogs for the two new cards (2026-08).** Both cities run
   something other than BiblioCommons, so each needs its own source:
   - Lewisville — SirsiDynix Enterprise. **Highest value**: it's the
