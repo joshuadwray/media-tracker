@@ -1,17 +1,7 @@
-# Media tracker report — 2026-08-09 05:51 UTC
+# Media tracker report — 2026-08-09 05:55 UTC
 
-## New sightings (11)
-- **coyote vs acme (2026)**: "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme Early Access" playing at AMC Grapevine Mills 30 (2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme Early Access" playing at AMC Northpark 15 (2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
-- **teenage sex and death at camp miasma (2026)**: "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-13, 2026-08-14, 2026-08-15, 2026-08-16) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
-- **tony (2026)**: "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
-- **tony (2026)**: "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
-- **tony (2026)**: "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
-- **tony (2026)**: "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (35)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
@@ -61,7 +51,6 @@
 
 ## Never matched anywhere (possible typos?)
 These watchlist entries have not matched at any source, ever. Double-check the spelling, or use `tracker add` to pick the exact catalog record.
-- zzztest remove me 20260809
 - We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea
 - one leg on earth
