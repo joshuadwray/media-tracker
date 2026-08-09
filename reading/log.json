@@ -1870,12 +1870,14 @@
       "title": "the witch",
       "author": "marie ndiaye",
       "slug": "the-witch",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": null,
       "started": "2026-08-08",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-08-09",
+      "sessions": [
+        "2026-08-09 144"
+      ]
     }
   ]
 }
