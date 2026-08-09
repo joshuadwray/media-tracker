@@ -68,6 +68,22 @@
   set the count on the card).
 
 ## Investigate
+- **Print catalogs for the two new cards (2026-08).** Both cities run
+  something other than BiblioCommons, so each needs its own source:
+  - Lewisville — SirsiDynix Enterprise. **Highest value**: it's the
+    physically closest library, so print holds there are the ones
+    actually worth driving to. Enterprise search is session-heavy;
+    probe before promising anything.
+  - Fort Worth — Polaris (fwmlc.polarislibrary.com), which has a fairly
+    scrapable JSON search API. Theoretically nice, realistically of
+    limited utility given the drive.
+  Digital is covered: Lewisville = cloudLibrary (added 2026-08),
+  Fort Worth = Libby/OverDrive.
+- **OverDrive trap, found 2026-08**: thunder key `denton` still resolves
+  AND serves media, but the record says `"status": "Terminated"` and
+  denton.overdrive.com 302s to /terminated. Denton dropped Libby. Always
+  check `status` before trusting a thunder library key — a dead
+  collection answers queries as if it were live.
 - ~~cloudLibrary consortium title-sharing vs `owned=yes`.~~ Resolved
   2026-07-19 same-day using the user's live checkouts as ground truth:
   "This Is Where the Serpent Lives" was checked out yet absent from

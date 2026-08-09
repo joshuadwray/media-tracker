@@ -80,7 +80,10 @@ def test_dashboard_renders(wl, tmp_path):
     assert "The Substance" in html
     assert "boom" in html
     assert "Plain Book" in html  # never-matched warning includes it
-    assert "<script" not in html  # dashboard is JS-free by design
+    # The remove button is the only script on the dashboard; everything else
+    # is server-rendered. (This assertion used to be "no <script> at all",
+    # which went stale when the 🗑 button landed.)
+    assert html.count("<script") == 1
 
 
 @pytest.fixture

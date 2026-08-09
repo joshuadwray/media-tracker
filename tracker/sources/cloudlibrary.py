@@ -35,6 +35,12 @@ class CloudLibrarySource(Source):
             )
         return lib
 
+    @property
+    def label(self) -> str:
+        """Human name for notifications; ids like 'lewisvillepubliclibrary'
+        read badly in a push. Defaults to the id."""
+        return self.cfg.get("label") or self.library_id
+
     def _endpoints(self, query: str) -> list[dict[str, Any]]:
         from urllib.parse import quote
         lib = self.library_id
@@ -91,7 +97,7 @@ class CloudLibrarySource(Source):
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
-                    summary=f"{fmt} in cloudLibrary catalog ({self.library_id})",
+                    summary=f"{fmt} in cloudLibrary catalog ({self.label})",
                     url=f"https://ebook.yourcloudlibrary.com/library/{self.library_id}"
                         f"/search?query={query.replace(' ', '%20')}",
                     positive=True,  # in catalog = hit; hold queues are fine

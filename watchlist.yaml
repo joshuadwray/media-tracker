@@ -73,6 +73,16 @@ sources:
     # Case-sensitive! Wrong case redirects to the marketing site.
     library: Denton
 
+  cloudlibrary-lewisville:
+    kind: cloudlibrary
+    # Lewisville Public Library — id verified 2026-08 (lowercase here, unlike
+    # Denton's; the id is whatever segment your login URL uses).
+    # Lewisville has no Libby/OverDrive: cloudLibrary is its only digital
+    # vendor. Its print catalog is SirsiDynix Enterprise, not BiblioCommons,
+    # so print isn't watched yet (see TODO.md).
+    library: lewisvillepubliclibrary
+    label: Lewisville            # display name for pushes/report
+
   texas-theatre:
     kind: pages
     pages:

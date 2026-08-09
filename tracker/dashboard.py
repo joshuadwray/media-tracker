@@ -279,9 +279,11 @@ def _grouped_card(label: str, current_obs: list[Observation],
 
 
 def _short_label(source: str, event: str) -> str:
-    """Compact row label: just the format for catalog items, source · event otherwise."""
+    """Compact row label: format · library for catalog items, source · event
+    otherwise. Several libraries are watched per format now, so the source has
+    to stay visible — otherwise two libraries both render as a bare "ebook"."""
     if event.endswith(" in catalog"):
-        return event[: -len(" in catalog")]
+        return f"{event[: -len(' in catalog')]} · {source}"
     return f"{source} · {event}"
 
 
