@@ -1,14 +1,12 @@
-# Media tracker report — 2026-08-09 06:05 UTC
+# Media tracker report — 2026-08-09 06:14 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (22)
-- Eradication — Miles, Jonathan: print book in denton library catalog
+## All current sightings (20)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Lewisville)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in cloudLibrary catalog (Lewisville)
-- Eradication — Miles, Jonathan: audiobook in Libby catalog (Fort Worth) — 1/1 available
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait)
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
@@ -28,10 +26,10 @@
 - tony (2026): "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 
 ## Source status
-- ✅ `denton-library`: 2 observation(s)
+- ✅ `denton-library`: 1 observation(s)
 - ✅ `cloudlibrary`: 0 observation(s)
 - ✅ `cloudlibrary-lewisville`: 2 observation(s)
-- ✅ `libby-fortworth`: 3 observation(s)
+- ✅ `libby-fortworth`: 2 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `cinemark`: 1 observation(s)
 - ✅ `amc`: 13 observation(s)
