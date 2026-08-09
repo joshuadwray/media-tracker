@@ -1865,6 +1865,17 @@
         "2026-08-05 40",
         "2026-08-06 400"
       ]
+    },
+    {
+      "title": "the witch",
+      "author": "marie ndiaye",
+      "slug": "the-witch",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-08-08",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
