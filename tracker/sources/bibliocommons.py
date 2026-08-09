@@ -19,7 +19,7 @@ from typing import Any, Iterator
 from .. import http
 from ..config import Config
 from ..matching import author_matches, titles_match
-from ..models import Observation
+from ..models import Observation, medium_for
 from .base import Source, register
 
 # BiblioCommons format codes -> reader-friendly names for notifications.
@@ -98,6 +98,7 @@ class BiblioCommonsSource(Source):
                     # status/copy-count changes don't re-notify.
                     positive=True,
                     event=f"{friendly} in catalog",
+                    medium=medium_for(fmt),
                     detail={"format": fmt, "status": status,
                             "available_copies": bib.get("availableCopies"),
                             "found_title": title},

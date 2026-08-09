@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from tracker.matching import normalize, text_contains_title, titles_match  # noqa: E402
-from tracker.models import Observation, normalize_key  # noqa: E402
+from tracker.models import Observation, SourceResult, normalize_key  # noqa: E402
 from tracker.state import State  # noqa: E402
 
 
@@ -49,6 +49,100 @@ def test_state_notifies_once(tmp_path):
     assert not state2.is_new(obs)
     # A different sighting of the same item is new again.
     assert state2.is_new(_obs("audiobook available"))
+
+
+def _book_obs(source, medium, item="book:x", label="X"):
+    fmt = {"ebook": "ebook", "audiobook": "audiobook", "print": "print book"}[medium]
+    return Observation(source=source, item_key=item, item_label=label,
+                       summary=f"{fmt} in {source} catalog",
+                       event=f"{fmt} in catalog", medium=medium)
+
+
+def _run_groups(state, observations, ok=None):
+    """Drive engine._notify_groups the way run_check does."""
+    from tracker.engine import CheckRun, _notify_groups
+
+    run = CheckRun(results=[SourceResult(source=o.source, observations=[o])
+                            for o in observations])
+    for r in run.results:
+        for obs in r.observations:
+            if state.is_new(obs):
+                run.new.append(obs)
+                state.record(obs)
+            else:
+                state.touch(obs)
+    sources = {o.source for o in observations} if ok is None else ok
+    return _notify_groups(run, state, sources)
+
+
+def test_notify_groups_one_push_per_medium(tmp_path):
+    """A book carried by several libraries is announced once per medium —
+    and a new library joining later doesn't re-announce it."""
+    state = State(tmp_path / "state.json")
+
+    groups = _run_groups(state, [
+        _book_obs("denton-cl", "ebook"),
+        _book_obs("lewisville-cl", "ebook"),
+        _book_obs("denton-cl", "audiobook"),
+    ])
+    assert sorted(g.medium for g in groups) == ["audiobook", "ebook"]
+    assert next(g for g in groups if g.medium == "ebook").sources == \
+        ["denton-cl", "lewisville-cl"]
+
+    # Same run again (state persisted): nothing new.
+    state.save()
+    state = State(tmp_path / "state.json")
+    assert _run_groups(state, [
+        _book_obs("denton-cl", "ebook"),
+        _book_obs("lewisville-cl", "ebook"),
+        _book_obs("denton-cl", "audiobook"),
+    ]) == []
+
+    # A third library turning up the same ebook is not news.
+    assert _run_groups(state, [_book_obs("fortworth", "ebook")]) == []
+    # A medium nobody had yet is.
+    assert [g.medium for g in _run_groups(state, [_book_obs("fortworth", "print")])] \
+        == ["print"]
+
+
+def test_notify_groups_keep_per_observation_for_movies(tmp_path):
+    """Showtimes have no medium, so they keep firing per sighting/date."""
+    state = State(tmp_path / "state.json")
+    showtime = Observation(source="amc", item_key="movie:dune", item_label="Dune",
+                           summary='"Dune" playing at AMC Northpark 15')
+    groups = _run_groups(state, [showtime])
+    assert len(groups) == 1 and groups[0].medium is None
+    assert _run_groups(state, [showtime]) == []
+
+
+def test_media_map_seeded_from_legacy_state(tmp_path):
+    """Upgrading an existing state file must not re-push everything that is
+    already sitting in a catalog."""
+    import json
+
+    p = tmp_path / "state.json"
+    p.write_text(json.dumps({"meta": {}, "seen": {
+        # both spellings the event string has had over time
+        "denton-library|book:x|BK in catalog":
+            {"first": "2026-07-01T00:00:00+00:00", "last": "2026-08-08T00:00:00+00:00"},
+        "cloudlibrary|book:x|ebook in catalog":
+            {"first": "2026-07-05T00:00:00+00:00", "last": "2026-08-08T00:00:00+00:00"},
+        "amc|movie:dune|playing at AMC":
+            {"first": "2026-08-01T00:00:00+00:00", "last": "2026-08-08T00:00:00+00:00"},
+    }}))
+    state = State(p)
+    assert sorted(state.media) == ["book:x|ebook", "book:x|print"]
+    assert not state.media_is_new("book:x|print")
+    # Movies aren't seeded — they never grouped by medium.
+    assert not any(k.startswith("movie:") for k in state.media)
+
+
+def test_forget_item_clears_both_maps(tmp_path):
+    state = State(tmp_path / "state.json")
+    _run_groups(state, [_book_obs("denton-cl", "ebook")])
+    assert state.media and state.seen
+    assert state.forget_item("book:x") == 2
+    assert not state.media and not state.seen
 
 
 def test_state_survives_corrupt_file(tmp_path):

@@ -54,10 +54,63 @@ class Observation:
                                  # Set this when the summary contains volatile
                                  # detail (copy counts, statuses) that shouldn't
                                  # re-trigger a notification when it changes.
+    medium: Optional[str] = None  # canonical format (see MEDIUM_BY_FORMAT).
+                                  # Notifications group by (item, medium), so a
+                                  # book carried by three libraries in one
+                                  # medium is one push, not three. None keeps
+                                  # per-observation pushes (movies/showtimes).
 
     @property
     def fingerprint(self) -> str:
         return f"{self.source}|{self.item_key}|{self.event or self.summary}"
+
+
+# Source format label (or BiblioCommons code) -> canonical medium. Several
+# libraries describe the same thing differently, and the medium is what the
+# reader actually cares about ("is there an audiobook anywhere?"). These
+# strings are notification keys — changing one re-notifies that medium once.
+MEDIUM_BY_FORMAT = {
+    "BK": "print", "PAPERBACK": "print", "print book": "print",
+    "LPRINT": "large-print", "large print book": "large-print",
+    "EBOOK": "ebook", "ebook": "ebook",
+    "AUDIOBOOK": "audiobook", "audiobook": "audiobook",
+    "AB": "audiobook-cd", "audiobook (CD)": "audiobook-cd",
+    # cloudLibrary's fallback when a record doesn't say which it is
+    "ebook/audio": "ebook-or-audiobook",
+    "MUSIC_CD": "music-cd", "music CD": "music-cd",
+    "DVD": "dvd", "BLURAY": "blu-ray", "Blu-ray": "blu-ray",
+}
+
+
+def medium_for(fmt: Optional[str]) -> Optional[str]:
+    """Canonical medium for a source's format label, or None if unknown
+    (unknown means "notify per observation", the old behavior)."""
+    if not fmt:
+        return None
+    return MEDIUM_BY_FORMAT.get(fmt) or MEDIUM_BY_FORMAT.get(fmt.lower())
+
+
+@dataclass
+class NotifyGroup:
+    """What one push is about: an item in one medium, plus every place it
+    was spotted. Movies and showtimes get a single-observation group so
+    their per-date notification behavior is unchanged."""
+    item_key: str
+    item_label: str
+    medium: Optional[str]
+    observations: list["Observation"] = field(default_factory=list)
+
+    @property
+    def state_key(self) -> str:
+        return f"{self.item_key}|{self.medium}"
+
+    @property
+    def sources(self) -> list[str]:
+        seen: list[str] = []
+        for obs in self.observations:
+            if obs.source not in seen:
+                seen.append(obs.source)
+        return seen
 
 
 @dataclass

@@ -17,7 +17,7 @@ from typing import Any
 from .. import http
 from ..config import Config
 from ..matching import author_matches, titles_match
-from ..models import Observation
+from ..models import Observation, medium_for
 from .base import Source, register
 
 
@@ -102,6 +102,7 @@ class CloudLibrarySource(Source):
                         f"/search?query={query.replace(' ', '%20')}",
                     positive=True,  # in catalog = hit; hold queues are fine
                     event=f"{fmt} in catalog",  # availability flips don't re-notify
+                    medium=medium_for(fmt),
                     detail={"found_title": title, "raw": item.get("raw", {})},
                 ))
         return observations
