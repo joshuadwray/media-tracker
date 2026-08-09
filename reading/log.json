@@ -1879,6 +1879,17 @@
       "sessions": [
         "2026-08-08 144"
       ]
+    },
+    {
+      "title": "john of john",
+      "author": "douglas stuart",
+      "slug": "john-of-john",
+      "status": "reading",
+      "rating": null,
+      "page_count": 398,
+      "started": "2026-08-09",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
