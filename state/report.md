@@ -1,9 +1,9 @@
-# Media tracker report — 2026-08-09 05:55 UTC
+# Media tracker report — 2026-08-09 05:58 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (35)
+## All current sightings (26)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
@@ -19,26 +19,17 @@
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
-- tony (2026): "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Sensory Friendly Screening" playing at AMC Stonebriar 24 (2026-08-12)
-- coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23)
-- coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-- tony (2026): "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Grapevine Mills 30 (2026-08-09)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Sensory Friendly Screening" playing at AMC Grapevine Mills 30 (2026-08-12)
-- coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Grapevine Mills 30 (2026-08-23)
-- coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-- tony (2026): "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
-- coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Northpark 15 (2026-08-23)
-- coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-- teenage sex and death at camp miasma (2026): "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-13, 2026-08-14, 2026-08-15, 2026-08-16)
-- tony (2026): "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
+- spider-man: brand new day (2026): "spider-man: brand new day" available to buy (Fandango At Home)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
@@ -47,7 +38,8 @@
 - ✅ `libby-fortworth`: 5 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `cinemark`: 3 observation(s)
-- ✅ `amc`: 19 observation(s)
+- ✅ `amc`: 9 observation(s)
+- ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Never matched anywhere (possible typos?)
 These watchlist entries have not matched at any source, ever. Double-check the spelling, or use `tracker add` to pick the exact catalog record.

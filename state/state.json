@@ -2,31 +2,31 @@
   "media": {
     "book:a-trade-of-blood-ana-and-din-mysteries|audiobook": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:a-trade-of-blood-ana-and-din-mysteries|ebook": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:a-trade-of-blood-ana-and-din-mysteries|print": {
       "first": "2026-08-01T00:16:53+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:dead-but-dreaming-of-electric-sheep|audiobook": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:dead-but-dreaming-of-electric-sheep|ebook": {
       "first": "2026-08-05T15:23:00+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:dead-but-dreaming-of-electric-sheep|print": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:eradication|audiobook": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:eradication|ebook": {
       "first": "2026-07-19T14:25:59+00:00",
@@ -34,7 +34,7 @@
     },
     "book:eradication|print": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "book:i-made-you-up-inside-my-head|ebook": {
       "first": "2026-08-03T00:04:28+00:00",
@@ -70,7 +70,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-08-09T05:55:13+00:00"
+    "last_run": "2026-08-09T05:58:28+00:00"
   },
   "seen": {
     "amc|movie:coyote-vs-acme|\"Coyote vs. Acme Early Access\" playing at AMC Grapevine Mills 30": {
@@ -134,7 +134,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:i-want-your-sex|\"I Want Your Sex\" playing at AMC Northpark 15": {
       "dates": [
@@ -146,7 +146,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:i-want-your-sex|\"I Want Your Sex\" playing at AMC Stonebriar 24": {
       "dates": [
@@ -158,7 +158,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day Dolby Opening Night Fan Event\" playing at AMC Grapevine Mills 30": {
       "dates": [
@@ -198,7 +198,7 @@
         "2026-08-19"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day\" playing at AMC Northpark 15": {
       "dates": [
@@ -217,7 +217,7 @@
         "2026-08-19"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day\" playing at AMC Stonebriar 24": {
       "dates": [
@@ -244,7 +244,7 @@
         "2026-08-27"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day: Private Theatre Rental\" playing at AMC Grapevine Mills 30": {
       "dates": [
@@ -252,7 +252,7 @@
         "2026-08-09"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day: Private Theatre Rental\" playing at AMC Stonebriar 24": {
       "dates": [
@@ -269,7 +269,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day: Sensory Friendly Screening\" playing at AMC Stonebriar 24": {
       "dates": [
@@ -277,7 +277,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "amc|movie:teenage-sex-and-death-at-camp-miasma|\"Teenage Sex and Death at Camp Miasma\" playing at AMC Northpark 15": {
       "dates": [
@@ -434,7 +434,7 @@
         "2026-08-18"
       ],
       "first": "2026-07-29T00:10:19+00:00",
-      "last": "2026-08-09T05:45:58+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cinemark|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day\" playing at Cinemark Denton 14": {
       "dates": [
@@ -461,7 +461,7 @@
         "2026-08-19"
       ],
       "first": "2026-07-30T00:06:22+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cinemark|movie:spider-man-brand-new-day|\"Spider-Man: Brand New Day\" playing at Cinemark West Plano": {
       "dates": [
@@ -488,7 +488,7 @@
         "2026-08-19"
       ],
       "first": "2026-07-30T00:06:22+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cinemark|movie:tony|\"Tony\" playing at Cinemark West Plano": {
       "dates": [
@@ -501,19 +501,19 @@
     },
     "cloudlibrary-lewisville|book:a-trade-of-blood-ana-and-din-mysteries|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cloudlibrary-lewisville|book:a-trade-of-blood-ana-and-din-mysteries|ebook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cloudlibrary-lewisville|book:dead-but-dreaming-of-electric-sheep|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cloudlibrary-lewisville|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "cloudlibrary|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-05T15:23:00+00:00",
@@ -553,15 +553,15 @@
     },
     "denton-library|book:a-trade-of-blood-ana-and-din-mysteries|print book in catalog": {
       "first": "2026-08-01T00:16:53+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "denton-library|book:dead-but-dreaming-of-electric-sheep|print book in catalog": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "denton-library|book:eradication|print book in catalog": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
@@ -585,31 +585,31 @@
     },
     "libby-fortworth|book:a-trade-of-blood-ana-and-din-mysteries|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "libby-fortworth|book:a-trade-of-blood-ana-and-din-mysteries|ebook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "libby-fortworth|book:dead-but-dreaming-of-electric-sheep|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "libby-fortworth|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "libby-fortworth|book:eradication|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "texas-theatre|movie:teenage-sex-and-death-at-camp-miasma|\"teenage sex and death at camp miasma\" mentioned on Texas Theatre": {
       "first": "2026-08-06T00:05:40+00:00",
-      "last": "2026-08-09T05:55:13+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     },
     "tmdb-streaming|movie:spider-man-brand-new-day|spider-man: brand new day available to buy": {
       "first": "2026-08-04T15:29:31+00:00",
-      "last": "2026-08-09T05:45:58+00:00"
+      "last": "2026-08-09T05:58:28+00:00"
     }
   }
 }
