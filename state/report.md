@@ -1,17 +1,19 @@
-# Media tracker report — 2026-08-09 05:45 UTC
+# Media tracker report — 2026-08-09 05:51 UTC
 
-## New sightings (9)
-- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: ebook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=A%20Trade%20of%20Blood)
-- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: audiobook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=A%20Trade%20of%20Blood)
-- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: ebook in Libby catalog (Fort Worth) — 0/4 available, 39 holds (~140d wait) — [link](https://libbyapp.com/library/fwpl/media/12163338)
-- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: audiobook in Libby catalog (Fort Worth) — 0/4 available, 39 holds (~140d wait) — [link](https://libbyapp.com/library/fwpl/media/12162753)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: audiobook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait) — [link](https://libbyapp.com/library/fwpl/media/12371033)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait) — [link](https://libbyapp.com/library/fwpl/media/12403739)
-- **Eradication — Miles, Jonathan**: audiobook in Libby catalog (Fort Worth) — 1/1 available — [link](https://libbyapp.com/library/fwpl/media/11941996)
+## New sightings (11)
+- **coyote vs acme (2026)**: "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
+- **coyote vs acme (2026)**: "Coyote vs. Acme Early Access" playing at AMC Grapevine Mills 30 (2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
+- **coyote vs acme (2026)**: "Coyote vs. Acme Early Access" playing at AMC Northpark 15 (2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
+- **teenage sex and death at camp miasma (2026)**: "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-13, 2026-08-14, 2026-08-15, 2026-08-16) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
+- **tony (2026)**: "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
+- **tony (2026)**: "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
+- **tony (2026)**: "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
+- **tony (2026)**: "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
 
-## All current sightings (26)
+## All current sightings (35)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
@@ -27,17 +29,26 @@
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- tony (2026): "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Sensory Friendly Screening" playing at AMC Stonebriar 24 (2026-08-12)
+- coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23)
+- coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+- tony (2026): "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Grapevine Mills 30 (2026-08-09)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day: Sensory Friendly Screening" playing at AMC Grapevine Mills 30 (2026-08-12)
+- coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Grapevine Mills 30 (2026-08-23)
+- coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+- tony (2026): "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
-- spider-man: brand new day (2026): "spider-man: brand new day" available to buy (Fandango At Home)
+- coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Northpark 15 (2026-08-23)
+- coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+- teenage sex and death at camp miasma (2026): "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-13, 2026-08-14, 2026-08-15, 2026-08-16)
+- tony (2026): "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
@@ -46,19 +57,17 @@
 - ✅ `libby-fortworth`: 5 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `cinemark`: 3 observation(s)
-- ✅ `amc`: 9 observation(s)
-- ✅ `tmdb-streaming`: 1 observation(s)
+- ✅ `amc`: 19 observation(s)
 
 ## Never matched anywhere (possible typos?)
 These watchlist entries have not matched at any source, ever. Double-check the spelling, or use `tracker add` to pick the exact catalog record.
+- zzztest remove me 20260809
 - We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea
 - one leg on earth
-- coyote vs acme (2026)
 - dune part 3 (2026)
 - paper tiger (2026)
 - club kid (2026)
 - fjord (2026)
-- tony (2026)
 - wild horse nine (2026)
 
