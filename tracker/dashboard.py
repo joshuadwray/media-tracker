@@ -3,7 +3,8 @@
 Written to docs/index.html on every check run. Once the project has its
 own repo with GitHub Pages enabled ("deploy from branch", /docs folder),
 this page auto-updates after each scheduled run and is bookmarkable on a
-phone from anywhere. No JavaScript, inline CSS only, phone-first layout.
+phone from anywhere. Inline CSS only, phone-first layout. The only script
+is the remove button, which dispatches remove-item.yml.
 """
 from __future__ import annotations
 
@@ -22,11 +23,14 @@ _CSS = """
         padding: 10px 12px; margin-bottom: 8px; }
 .card.new { border-left: 5px solid var(--ok); }
 .card > summary { font-weight: 600; cursor: pointer;
-        list-style: none; }
+        list-style: none; display: flex; align-items: center; }
 .card > summary::-webkit-details-marker { display: none; }
-.card > summary::after { content: '\\25B8'; margin-left: 6px;
+/* The caret hangs off the title, not the summary, so the remove button
+   can sit at the far right without the arrow trailing after it. */
+.card > summary .ttl { flex: 1; }
+.card > summary .ttl::after { content: '\\25B8'; margin-left: 6px;
         font-size: .7rem; vertical-align: middle; color: var(--ink-mute); }
-.card[open] > summary::after { content: '\\25BE'; }
+.card[open] > summary .ttl::after { content: '\\25BE'; }
 .row { display: flex; justify-content: space-between; align-items: center;
        padding: 3px 0; font-size: .9rem; }
 .row + .row { border-top: 1px dashed var(--line); }
@@ -81,8 +85,9 @@ async function rmItem(btn, title, kind) {
       const e = await r.json().catch(() => ({}));
       throw new Error(e.message || ('HTTP ' + r.status));
     }
-    const li = btn.closest('li');
-    li.style.opacity = .45;
+    // A card in the main list, or a row in the Watching section.
+    const host = btn.closest('details.card') || btn.closest('li');
+    if (host) host.style.opacity = .45;
     btn.textContent = '\\u2713';
     btn.title = 'removing\\u2026 this page updates after the next check run';
   } catch(e) {
@@ -100,10 +105,17 @@ def build_dashboard(config: Config, results: list[SourceResult],
     current = [o for r in results for o in r.observations]
     new_fps = {o.fingerprint for o in new}
 
-    # Build item_key → label lookup from config.
+    # Build item_key → label lookup from config, plus the (kind, raw title)
+    # the remove button needs — the label carries author/year, which
+    # watchlist.yaml doesn't match on.
     item_labels: dict[str, str] = {}
-    for item in [*config.books, *config.movies]:
+    item_remove: dict[str, tuple[str, str]] = {}
+    for item in config.books:
         item_labels[item.key] = str(item)
+        item_remove[item.key] = ("book", item.title)
+    for item in config.movies:
+        item_labels[item.key] = str(item)
+        item_remove[item.key] = ("movie", item.title)
 
     e = html.escape
     parts = [
@@ -135,7 +147,8 @@ def build_dashboard(config: Config, results: list[SourceResult],
             label = item_labels.get(item_key, obs_list[0].item_label)
             parts.append(_grouped_card(label, obs_list, stale, new_fps,
                                        now_dt, is_new=True,
-                                       carried=carry))
+                                       carried=carry,
+                                       remove=item_remove.get(item_key)))
     else:
         parts.append("<div class='muted'>nothing new</div>")
     parts.append("</details>")
@@ -161,7 +174,8 @@ def build_dashboard(config: Config, results: list[SourceResult],
             carry = carried.get(key, [])
             label = item_labels[key]
             parts.append(_grouped_card(label, obs_list, stale, new_fps,
-                                       now_dt, carried=carry))
+                                       now_dt, carried=carry,
+                                       remove=item_remove.get(key)))
     else:
         parts.append("<div class='muted'>no watchlist titles are available "
                      "or playing anywhere right now</div>")
@@ -246,7 +260,8 @@ def _historical_by_item(state: State, current_fps: set[str],
 def _grouped_card(label: str, current_obs: list[Observation],
                   stale: list[dict], new_fps: set[str], now: datetime,
                   is_new: bool = False,
-                  carried: list[dict] | None = None) -> str:
+                  carried: list[dict] | None = None,
+                  remove: tuple[str, str] | None = None) -> str:
     e = html.escape
     cls = "card new" if is_new else "card"
 
@@ -280,8 +295,17 @@ def _grouped_card(label: str, current_obs: list[Observation],
                     f" <span class='muted'>{e(ago)}</span></span></div>")
 
     open_attr = " open" if is_new else ""
+    btn = ""
+    if remove:
+        kind, title = remove
+        # preventDefault stops the click from toggling the <details> it
+        # lives in; the confirm() in rmItem is the actual guard.
+        btn = (f"<button class='rm' title='Remove from watchlist' "
+               f"onclick='event.preventDefault();event.stopPropagation();"
+               f"rmItem(this,{_jsq(title)},{_jsq(kind)})'>&#x1F5D1;</button>")
     return (f"<details class='{cls}'{open_attr}>"
-            f"<summary class='item'>{e(label)}</summary>"
+            f"<summary class='item'><span class='ttl'>{e(label)}</span>"
+            f"{btn}</summary>"
             + "".join(rows) + "</details>")
 
 

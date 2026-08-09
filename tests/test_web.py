@@ -125,6 +125,10 @@ def test_dashboard_renders(wl, tmp_path):
     assert "The Substance" in html
     assert "boom" in html
     assert "Plain Book" in html  # never-matched warning includes it
+    # The card's remove button passes the RAW title, not the card's label
+    # (which carries the year) — watchlist.yaml has no year to match on.
+    assert "rmItem(this,&quot;The Substance&quot;,&quot;movie&quot;)" in html
+    assert "The Substance (2024)</span>" in html  # label still shows it
     # The remove button is the only script on the dashboard; everything else
     # is server-rendered. (This assertion used to be "no <script> at all",
     # which went stale when the 🗑 button landed.)
