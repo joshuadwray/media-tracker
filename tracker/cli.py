@@ -3,6 +3,7 @@
   python -m tracker check [--dry-run] [--no-notify] [--source ID]
   python -m tracker add book "title" [--yes]
   python -m tracker add movie "title" [--year 2026] [--yes]
+  python -m tracker remove book|movie "title"
   python -m tracker pin ID (--choice N | --keep | --remove) [--expect BIB/ISBN]
   python -m tracker probe [--source ID] [--query "..."]
   python -m tracker list
@@ -68,6 +69,14 @@ def main(argv: list[str] | None = None) -> int:
                             "record if unambiguous, else add as typed; "
                             "sends an ntfy confirmation")
 
+    p_remove = sub.add_parser("remove", help="drop a watchlist entry and the "
+                                             "state it accumulated")
+    p_remove.add_argument("kind", choices=["book", "movie"])
+    p_remove.add_argument("title")
+    p_remove.add_argument("--yes", action="store_true",
+                          help="accepted for symmetry with `add`; removal is "
+                               "never interactive")
+
     p_probe = sub.add_parser("probe", help="dump raw source responses for "
                                            "endpoint/selector debugging")
     p_probe.add_argument("--source", help="only probe this source id")
@@ -129,6 +138,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_check(config, args)
     if args.command == "add":
         return cmd_add(config, args)
+    if args.command == "remove":
+        return cmd_remove(config, args)
     if args.command == "pin":
         return cmd_pin(config, args)
     if args.command == "probe":
@@ -204,8 +215,7 @@ def cmd_add(config: Config, args: argparse.Namespace) -> int:
         _send_note("watchlist add", msg, tags="information_source")
         return 0
 
-    watchlist_path = Path(args.watchlist) if args.watchlist else \
-        Path(__file__).resolve().parent.parent / "watchlist.yaml"
+    watchlist_path = _watchlist_path(args)
     added = append_entry(watchlist_path, section, entry)
     print(f"added to {section}: {entry}")
     if args.auto:
@@ -227,6 +237,58 @@ def cmd_add(config: Config, args: argparse.Namespace) -> int:
             how = "watching by title"
         _send_note("watchlist add", f"added {args.kind}: {entry['title']} ({how})")
     return 0
+
+
+def cmd_remove(config: Config, args: argparse.Namespace) -> int:
+    msg = _remove_item(config, args, args.kind, args.title)
+    print(msg)
+    _send_note("watchlist remove", msg, tags="wastebasket")
+    return 0
+
+
+def _remove_item(config: Config, args: argparse.Namespace,
+                 kind: str, title: str) -> str:
+    """Drop an entry from watchlist.yaml and every bit of state keyed to
+    it. Shared by `tracker remove` and `tracker pin --remove` so there's
+    one removal path, not one per entry point. Returns a summary line."""
+    from .models import normalize_key
+    from .pending import remove_for_title
+    from .state import State
+    from .watchlist_io import remove_entry
+
+    section = "books" if kind == "book" else "movies"
+    watchlist_path = _watchlist_path(args)
+    gone = remove_entry(watchlist_path, section, title)
+
+    # Clean up regardless of whether the entry was still in the file: a
+    # hand-deleted entry leaves the same debris behind. Every path is
+    # derived from the config's state dir, so a --watchlist pointed
+    # somewhere else can't reach into the repo's real state files.
+    state_dir = config.state_path.parent
+    item_key = f"{kind}:{normalize_key(title)}"
+    state = State(config.state_path)
+    forgotten = state.forget_item(item_key)
+    if forgotten:
+        state.save()
+    queued = remove_for_title(title, state_dir / "pending-pins.json")
+    if kind == "movie":
+        from .sources.tmdb_streaming import forget as tmdb_forget
+        tmdb_forget(item_key, state_dir / "tmdb-cache.json")
+
+    if not gone:
+        return f"{title} was already gone from {section}"
+    extra = []
+    if forgotten:
+        extra.append(f"{forgotten} sighting(s) forgotten")
+    if queued:
+        extra.append("pending-pin card cleared")
+    return (f"removed {kind}: {title}"
+            + (f" ({', '.join(extra)})" if extra else ""))
+
+
+def _watchlist_path(args: argparse.Namespace) -> Path:
+    return Path(args.watchlist) if args.watchlist else \
+        Path(__file__).resolve().parent.parent / "watchlist.yaml"
 
 
 def _already_watched(config: Config, kind: str,
@@ -270,7 +332,7 @@ def _auto_pick_book(config: Config,
 def cmd_pin(config: Config, args: argparse.Namespace) -> int:
     """Resolve a queued pending-pin record (see tracker/pending.py)."""
     from . import pending
-    from .watchlist_io import remove_entry, update_entry
+    from .watchlist_io import update_entry
 
     record = pending.pop(pending.PENDING_PATH, args.id)
     if record is None:
@@ -279,14 +341,12 @@ def cmd_pin(config: Config, args: argparse.Namespace) -> int:
         return 0
 
     title = record["typed_title"]
-    watchlist_path = Path(args.watchlist) if args.watchlist else \
-        Path(__file__).resolve().parent.parent / "watchlist.yaml"
+    kind = record.get("kind", "book")
+    section = "books" if kind == "book" else "movies"
+    watchlist_path = _watchlist_path(args)
 
     if args.remove:
-        if remove_entry(watchlist_path, "books", title):
-            msg = f"removed from watchlist: {title}"
-        else:
-            msg = f"{title} already gone from watchlist"
+        msg = _remove_item(config, args, kind, title)
         print(msg)
         _send_note("watchlist pin", msg, tags="wastebasket")
         return 0
@@ -316,7 +376,7 @@ def cmd_pin(config: Config, args: argparse.Namespace) -> int:
     entry = candidate_to_entry(picked)
     if picked.get("bib_id"):
         entry.pop("isbn", None)
-    if update_entry(watchlist_path, "books", title, entry):
+    if update_entry(watchlist_path, section, title, entry):
         msg = f"pinned {title} -> {entry.get('bib_id') or entry.get('isbn')}"
     else:
         # Entry hand-deleted meanwhile — treat as resolved, don't fail.

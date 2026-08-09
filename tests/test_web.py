@@ -55,6 +55,51 @@ def test_remove_entry_not_found(wl):
     assert wl.read_text() == SAMPLE
 
 
+def test_remove_entry_normalized_fallback(wl):
+    """A caller holding a stale/differently-cased spelling still resolves —
+    the dashboard caches titles in a published page."""
+    assert remove_entry(wl, "books", "nickel boys a novel")
+    assert "Nickel Boys" not in wl.read_text()
+    assert "Plain Book" in wl.read_text()
+
+
+def test_cmd_remove_cleans_state(wl, tmp_path, monkeypatch):
+    """`tracker remove` drops the entry AND the state keyed to it, so a
+    re-add inside the 180-day prune window still notifies."""
+    import json
+
+    from tracker.cli import main
+
+    # cli.main loads the repo's .env, so without this the test would send a
+    # real push to the phone.
+    monkeypatch.setenv("NTFY_TOPIC", "")
+
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    (state_dir / "state.json").write_text(json.dumps({"meta": {}, "seen": {
+        "denton-library|book:plain-book|print book in catalog":
+            {"first": "2026-01-01T00:00:00+00:00", "last": "2026-01-02T00:00:00+00:00"},
+        "cloudlibrary|book:plain-book|ebook in catalog":
+            {"first": "2026-01-01T00:00:00+00:00", "last": "2026-01-02T00:00:00+00:00"},
+        "denton-library|book:nickel-boys-a-novel|print book in catalog":
+            {"first": "2026-01-01T00:00:00+00:00", "last": "2026-01-02T00:00:00+00:00"},
+    }}))
+    (state_dir / "pending-pins.json").write_text(json.dumps({"pending": [
+        {"id": "plain-book-20260101T000000Z", "kind": "book",
+         "typed_title": "Plain Book", "candidates": []},
+    ]}))
+
+    assert main(["--watchlist", str(wl), "remove", "book", "Plain Book"]) == 0
+
+    assert "Plain Book" not in wl.read_text()
+    seen = json.loads((state_dir / "state.json").read_text())["seen"]
+    assert list(seen) == ["denton-library|book:nickel-boys-a-novel|print book in catalog"]
+    assert json.loads((state_dir / "pending-pins.json").read_text())["pending"] == []
+
+    # Idempotent: a double-tap from the phone is not an error.
+    assert main(["--watchlist", str(wl), "remove", "book", "Plain Book"]) == 0
+
+
 def test_append_then_remove_round_trip(wl):
     append_entry(wl, "movies", {"title": "Eephus", "year": 2024})
     assert remove_entry(wl, "movies", "Eephus")

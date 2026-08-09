@@ -56,32 +56,39 @@ details[open] > summary::after { content: '\\25BE'; }
 
 _REMOVE_JS = """
 <script>
+// Removal is a workflow_dispatch, not a Contents-API write: the YAML edit
+// and the state cleanup both happen server-side in `tracker remove`. It
+// also means this button works with the Actions-only PAT that add.html
+// tells you to create (the old Contents-API version needed Contents:write
+// and silently 403'd).
 const REPO = 'joshuadwray/media-tracker';
-const WL_API = `https://api.github.com/repos/${REPO}/contents/watchlist.yaml`;
-function b64decode(s) { return decodeURIComponent(escape(atob(s))); }
+const WORKFLOW = 'remove-item.yml';
 async function rmItem(btn, title, kind) {
   if (!confirm(`Remove \\u201c${title}\\u201d from ${kind}s?`)) return;
   const token = localStorage.getItem('mt_pat');
   if (!token) { alert('Set your PAT on the + add page first.'); return; }
   btn.disabled = true; btn.textContent = '\\u22ef';
   try {
-    const r = await fetch(WL_API, { headers: { Authorization: 'token ' + token } });
-    if (!r.ok) throw new Error('fetch: ' + r.status);
-    const data = await r.json();
-    const sha = data.sha;
-    const text = b64decode(data.content);
-    const esc = title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');
-    const re = new RegExp(
-      '^[ \\t]*- title: (?:' + esc + '|"' + esc + '"|\\x27' + esc + '\\x27)\\n(?:[ \\t]+(?!- )[^\\n]*\\n)*', 'm');
-    const after = text.replace(re, '');
-    if (after === text) { throw new Error('entry not found in watchlist'); }
-    const put = await fetch(WL_API, { method: 'PUT',
-      headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: 'remove ' + kind + ': ' + title,
-        content: btoa(unescape(encodeURIComponent(after))), sha }) });
-    if (!put.ok) { const e = await put.json(); throw new Error(e.message || put.status); }
-    btn.closest('li').style.display = 'none';
-  } catch(e) { alert('Remove failed: ' + e.message); btn.disabled = false; btn.textContent = '\\u{1F5D1}'; }
+    const r = await fetch(
+      `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`,
+      { method: 'POST',
+        headers: { Authorization: 'token ' + token,
+                   Accept: 'application/vnd.github+json',
+                   'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: 'main', inputs: { kind, title } }) });
+    if (r.status === 401) throw new Error('token rejected (expired?)');
+    if (r.status !== 204) {
+      const e = await r.json().catch(() => ({}));
+      throw new Error(e.message || ('HTTP ' + r.status));
+    }
+    const li = btn.closest('li');
+    li.style.opacity = .45;
+    btn.textContent = '\\u2713';
+    btn.title = 'removing\\u2026 this page updates after the next check run';
+  } catch(e) {
+    alert('Remove failed: ' + e.message);
+    btn.disabled = false; btn.textContent = '\\u{1F5D1}';
+  }
 }
 </script>"""
 

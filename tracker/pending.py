@@ -62,6 +62,24 @@ def add_pending(typed_title: str, typed_author: str | None,
     return record
 
 
+def remove_for_title(typed_title: str, path: Path = PENDING_PATH) -> int:
+    """Drop any queued record for this title (same normalized key
+    add_pending dedups on). Without it, removing a book from the
+    watchlist leaves a "needs pinning" card on the add page pointing at
+    an entry that no longer exists."""
+    from .models import normalize_key
+
+    key = normalize_key(typed_title)
+    data = load(path)
+    keep = [r for r in data["pending"]
+            if normalize_key(r.get("typed_title", "")) != key]
+    dropped = len(data["pending"]) - len(keep)
+    if dropped:
+        data["pending"] = keep
+        save(data, path)
+    return dropped
+
+
 def pop(path: Path, id: str) -> dict | None:
     """Remove and return the record with this id; None if absent.
 

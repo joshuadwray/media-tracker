@@ -1,0 +1,97 @@
+# Mobile remove flow: triggered by the 🗑 button on docs/index.html via the
+# workflow_dispatch API. Mirrors add-item.yml. Removal happens server-side
+# (`tracker remove`) so watchlist.yaml is edited by the same splice code that
+# every other path uses, and so the state keyed to the entry gets cleaned —
+# a browser rewriting YAML by regex could do neither.
+
+name: remove-item
+run-name: "remove ${{ inputs.kind }}: ${{ inputs.title }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: what kind of item
+        required: true
+        type: choice
+        options: [book, movie]
+      title:
+        description: title as it appears on the watchlist
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+# Per-run concurrency, same reasoning as add-item.yml: each dispatch gets its
+# own slot so rapid taps don't cancel each other.
+concurrency:
+  group: media-tracker-remove-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    env:
+      KIND: ${{ inputs.kind }}
+      TITLE: ${{ inputs.title }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Remove item and commit
+        run: |
+          git config user.name "media-tracker bot"
+          git config user.email "actions@users.noreply.github.com"
+          python -m tracker remove "$KIND" "$TITLE" --yes
+
+          # Retry loop: parallel runs may conflict on watchlist.yaml.
+          # On conflict, reset to origin and re-run remove (it's idempotent —
+          # an already-gone entry just reports that and exits 0).
+          for attempt in 1 2 3 4 5; do
+            git add watchlist.yaml state/
+            git diff --cached --quiet || git commit -m "remove $KIND: $TITLE (mobile)"
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "::warning::Push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            git pull origin main
+            python -m tracker remove "$KIND" "$TITLE" --yes
+            sleep "$((attempt * 2))"
+          done
+
+      - name: Run immediate check and commit
+        env:
+          THEATER_LOOKAHEAD: "21"
+        run: |
+          # Regenerates the dashboard so the removed row disappears.
+          for attempt in 1 2 3 4 5; do
+            python -m tracker check
+            git add state/ docs/
+            git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "::warning::State push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            git pull origin main
+            sleep "$((attempt * 2))"
+          done
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s \
+            -H "Title: watchlist remove failed" -H "Tags: warning" \
+            -d "remove $KIND: $TITLE failed — check the Actions log" \
+            "https://ntfy.sh/$NTFY_TOPIC" > /dev/null

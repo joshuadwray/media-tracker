@@ -34,12 +34,28 @@ def append_entry(path: Path, section: str, entry: dict) -> bool:
 
 def _find_entry_span(lines: list[str], section: str,
                      title: str) -> tuple[int, int] | None:
-    """(start, end) line span of the entry with this exact title.
+    """(start, end) line span of the entry with this title.
 
     Finds the `- title: ...` line whose parsed value equals `title`
     (so quoting differences don't matter); the span covers it plus its
     following indented attribute lines. None if not found.
+
+    Falls back to a normalized comparison when nothing matches exactly,
+    so a caller holding a stale spelling still resolves — the dashboard
+    caches titles in a published page, and pinning renames an entry to
+    the catalog spelling underneath it.
     """
+    span = _scan(lines, section, title, exact=True)
+    if span is None:
+        span = _scan(lines, section, title, exact=False)
+    return span
+
+
+def _scan(lines: list[str], section: str, title: str,
+          *, exact: bool) -> tuple[int, int] | None:
+    from .models import normalize_key
+
+    want = title if exact else normalize_key(title)
     in_section = False
     for i, line in enumerate(lines):
         stripped = line.strip()
@@ -54,7 +70,8 @@ def _find_entry_span(lines: list[str], section: str,
             value = yaml.safe_load(stripped[len("- title:"):].strip())
         except yaml.YAMLError:
             continue
-        if str(value) != title:
+        found = str(value) if exact else normalize_key(str(value))
+        if found != want:
             continue
         end = i + 1
         entry_indent = len(line) - len(line.lstrip())
@@ -71,7 +88,8 @@ def _find_entry_span(lines: list[str], section: str,
 
 
 def remove_entry(path: Path, section: str, title: str) -> bool:
-    """Remove the entry with this exact title from a section.
+    """Remove the entry with this title from a section (see
+    _find_entry_span for how the title is matched).
     Returns False if not found."""
     lines = path.read_text().splitlines()
     span = _find_entry_span(lines, section, title)

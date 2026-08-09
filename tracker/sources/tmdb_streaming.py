@@ -46,6 +46,24 @@ def _save_cache(cache: dict[str, Any]) -> None:
     CACHE_FILE.write_text(json.dumps(cache, indent=2, sort_keys=True) + "\n")
 
 
+def forget(item_key: str, cache_file: Path = CACHE_FILE) -> bool:
+    """Drop one movie's cached TMDB id (called when it leaves the
+    watchlist). Nothing else prunes this file, so without it the cache
+    grows forever and a re-added movie inherits a stale id."""
+    if not cache_file.exists():
+        return False
+    try:
+        cache = json.loads(cache_file.read_text())
+    except (json.JSONDecodeError, OSError):
+        return False
+    if item_key not in cache:
+        return False
+    del cache[item_key]
+    cache_file.parent.mkdir(parents=True, exist_ok=True)
+    cache_file.write_text(json.dumps(cache, indent=2, sort_keys=True) + "\n")
+    return True
+
+
 def _cache_fresh(entry: dict[str, Any]) -> bool:
     searched = entry.get("searched", "")
     try:

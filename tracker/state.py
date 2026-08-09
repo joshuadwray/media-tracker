@@ -63,6 +63,22 @@ class State:
                 old = set(entry.get("dates") or [])
                 entry["dates"] = sorted(old | set(dates))
 
+    def forget_item(self, item_key: str) -> int:
+        """Drop every fingerprint belonging to one watchlist item.
+
+        Called when an item leaves the watchlist: without this its
+        fingerprints linger for PRUNE_DAYS, and re-adding the same title
+        within that window reuses the same item_key — so `is_new` would
+        suppress the very "it's in the catalog!" push you re-added it for.
+        """
+        doomed = [
+            fp for fp in self.seen
+            if len(fp.split("|", 2)) == 3 and fp.split("|", 2)[1] == item_key
+        ]
+        for fp in doomed:
+            del self.seen[fp]
+        return len(doomed)
+
     def prune(self, now: datetime | None = None) -> int:
         cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)
         stale = [
