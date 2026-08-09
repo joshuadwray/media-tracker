@@ -1,4 +1,4 @@
-# Media tracker report — 2026-08-09 13:54 UTC
+# Media tracker report — 2026-08-09 23:38 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -11,8 +11,8 @@
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait)
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
 - i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-10, 2026-08-11, 2026-08-12)
+- i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-10, 2026-08-11, 2026-08-12)
 
 ## Source status
 - ✅ `denton-library`: 1 observation(s)
