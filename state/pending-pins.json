@@ -1,3 +1,12 @@
 {
-  "pending": []
+  "pending": [
+    {
+      "id": "zzztest-remove-me-20260809-20260809T054657Z",
+      "kind": "book",
+      "typed_title": "zzztest remove me 20260809",
+      "typed_author": null,
+      "added": "2026-08-09T05:46:57Z",
+      "candidates": []
+    }
+  ]
 }
