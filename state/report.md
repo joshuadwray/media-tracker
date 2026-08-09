@@ -1,32 +1,52 @@
-# Media tracker report — 2026-08-08 23:36 UTC
+# Media tracker report — 2026-08-09 05:45 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (9)
+- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: ebook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=A%20Trade%20of%20Blood)
+- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: audiobook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=A%20Trade%20of%20Blood)
+- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: ebook in Libby catalog (Fort Worth) — 0/4 available, 39 holds (~140d wait) — [link](https://libbyapp.com/library/fwpl/media/12163338)
+- **A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson**: audiobook in Libby catalog (Fort Worth) — 0/4 available, 39 holds (~140d wait) — [link](https://libbyapp.com/library/fwpl/media/12162753)
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: audiobook in cloudLibrary catalog (Lewisville) — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Dead%20but%20Dreaming%20of%20Electric%20Sheep)
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait) — [link](https://libbyapp.com/library/fwpl/media/12371033)
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait) — [link](https://libbyapp.com/library/fwpl/media/12403739)
+- **Eradication — Miles, Jonathan**: audiobook in Libby catalog (Fort Worth) — 1/1 available — [link](https://libbyapp.com/library/fwpl/media/11941996)
 
-## All current sightings (16)
+## All current sightings (26)
 - A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: print book in denton library catalog
 - Eradication — Miles, Jonathan: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Denton)
+- A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: ebook in cloudLibrary catalog (Lewisville)
+- A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: audiobook in cloudLibrary catalog (Lewisville)
+- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Lewisville)
+- Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in cloudLibrary catalog (Lewisville)
+- A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: ebook in Libby catalog (Fort Worth) — 0/4 available, 39 holds (~140d wait)
+- A Trade of Blood (Ana and Din Mysteries) — Bennett, Robert Jackson: audiobook in Libby catalog (Fort Worth) — 0/4 available, 39 holds (~140d wait)
+- Eradication — Miles, Jonathan: audiobook in Libby catalog (Fort Worth) — 1/1 available
+- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait)
+- Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait)
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Stonebriar 24 (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Grapevine Mills 30 (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Grapevine Mills 30 (2026-08-08, 2026-08-09)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
-- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Northpark 15 (2026-08-08, 2026-08-09, 2026-08-10, 2026-08-11)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Denton 14 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark West Plano (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at Cinemark Dallas IMAX (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Stonebriar 24 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day: Sensory Friendly Screening" playing at AMC Stonebriar 24 (2026-08-12)
+- i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Grapevine Mills 30 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day: Private Theatre Rental" playing at AMC Grapevine Mills 30 (2026-08-09)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day: Sensory Friendly Screening" playing at AMC Grapevine Mills 30 (2026-08-12)
+- i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
+- spider-man: brand new day (2026): "Spider-Man: Brand New Day" playing at AMC Northpark 15 (2026-08-09, 2026-08-10, 2026-08-11, 2026-08-12)
 - spider-man: brand new day (2026): "spider-man: brand new day" available to buy (Fandango At Home)
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
-- ✅ `cloudlibrary`: 1 observation(s)
+- ✅ `cloudlibrary`: 0 observation(s)
+- ✅ `cloudlibrary-lewisville`: 4 observation(s)
+- ✅ `libby-fortworth`: 5 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `cinemark`: 3 observation(s)
-- ✅ `amc`: 7 observation(s)
+- ✅ `amc`: 9 observation(s)
 - ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Never matched anywhere (possible typos?)
