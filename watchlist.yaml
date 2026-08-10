@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Sunrise
+    author: Kingsbury, Karen
+    bib_id: S127C1206366
   - title: Dèy
     author: Danticat, Edwidge
     bib_id: S127C1983553
