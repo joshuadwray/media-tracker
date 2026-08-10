@@ -13,7 +13,6 @@ from collections import OrderedDict
 from datetime import datetime, timezone
 
 from . import site
-from .availability import describe
 from .config import Config
 from .models import Observation, SourceResult
 from .report import (STILL_LOOKING_BLURB, still_looking, sync_note,
@@ -300,7 +299,7 @@ def _grouped_card(label: str, current_obs: list[Observation],
         info = "" if o.positive else " <span class='muted'>(info)</span>"
         if o.track:
             wait_cls = "wait now" if o.bucket == "now" else "wait"
-            lbl = (f"<span class='{wait_cls}'>{e(describe(o.wait))}</span> · "
+            lbl = (f"<span class='{wait_cls}'>{e(o.wait_text)}</span> · "
                    f"{e(o.where)} <span class='muted'>({e(o.medium or '')})</span>")
         else:
             lbl = e(_short_label(o.source, o.event or o.summary))

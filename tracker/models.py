@@ -70,6 +70,10 @@ class Observation:
                                   # lending source (theatres, streaming).
     source_label: str = ""        # library as a human would name it. Pushes
                                   # used to print the source id.
+    provisional: bool = False     # the wait is a best guess, not a figure we
+                                  # stand behind (on-order titles, whose
+                                  # arrival date nobody publishes). Good
+                                  # enough to rank on, never to ratchet on.
 
     @property
     def where(self) -> str:
@@ -87,14 +91,34 @@ class Observation:
 
     @property
     def bucket(self) -> str:
-        return availability.bucket(self.wait, self.loan_days or 21)
+        b = availability.bucket(self.wait, self.loan_days or 21)
+        # An on-order title with an empty queue computes to a zero wait —
+        # zero turns *after it arrives*. It still isn't in the building, so
+        # it can never be "now", however short the queue.
+        if self.provisional and b == "now":
+            return "turn"
+        return b
+
+    @property
+    def wait_text(self) -> str:
+        """The wait as a person should read it.
+
+        Provisional waits never render as a duration: we know the queue but
+        not the arrival date, and "~3 wk" would be precise about the half
+        we're missing. The summary carries the queue position instead.
+        """
+        return "on order" if self.provisional else availability.describe(self.wait)
 
     @property
     def sort_key(self) -> tuple:
-        """Best option first. Out-of-range physical copies sink to the bottom
-        whatever their availability, then it's soonest-then-nearest."""
+        """Best option first: reachable, then soonest, then nearest.
+
+        Distance is the last tiebreak, not the first — proximity orders
+        equally-good options, but a copy two weeks sooner should still beat
+        one down the road.
+        """
         return (not self.reachable, availability.rank(self.bucket),
-                self.distance_mi, self.wait if self.wait is not None else 10**6)
+                self.wait if self.wait is not None else 10**6, self.distance_mi)
 
     @property
     def fingerprint(self) -> str:
@@ -183,8 +207,16 @@ class NotifyGroup:
 
     @property
     def best_bucket(self) -> Optional[str]:
-        head = self.headline
-        return head.bucket if head else None
+        """The bucket the watermark ratchets on.
+
+        Provisional options are skipped entirely: an on-order title's wait
+        is missing its arrival date, so promoting it to "the queue got
+        shorter" would be announcing a number we made up. It can still
+        headline the card — it just can't move the notification state.
+        """
+        firm = next((o for o in self.options if o.reachable and not o.provisional),
+                    None)
+        return firm.bucket if firm else None
 
     @property
     def sources(self) -> list[str]:

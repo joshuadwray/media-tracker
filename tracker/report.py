@@ -73,6 +73,10 @@ def sync_note(by_track: dict[str, list[Observation]]) -> str | None:
     listening = next(iter(by_track.get("listening") or []), None)
     if not reading or not listening:
         return None
+    if reading.provisional or listening.provisional:
+        # One side is on order, so its clock starts on a date nobody
+        # publishes. Any gap we computed would be arithmetic on a guess.
+        return None
     loan = min(reading.loan_days or 21, listening.loan_days or 21)
     result = overlap(reading.wait, listening.wait, loan)
     if result is None:

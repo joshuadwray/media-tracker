@@ -23,7 +23,6 @@ from __future__ import annotations
 
 import requests
 
-from .availability import describe
 from .config import env
 from .models import NotifyGroup
 
@@ -106,7 +105,7 @@ def body(group: NotifyGroup) -> str:
         best = min(obs_list, key=lambda o: o.sort_key)
         extra = len({o.where for o in obs_list}) - 1
         parts.append(
-            f"{track}: {describe(best.wait)} at {best.where}"
+            f"{track}: {best.wait_text} at {best.where}"
             f" ({best.medium})" + (f" +{extra} more" if extra > 0 else "")
         )
     return lead + " · ".join(parts)

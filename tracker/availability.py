@@ -70,6 +70,25 @@ def wait_days(available: Optional[int], owned: Optional[int],
     return math.ceil(((holds or 0) + 1) / owned * loan_days)
 
 
+def wait_after_arrival(holds: Optional[int], copies: Optional[int],
+                       loan_days: int) -> Optional[int]:
+    """Queue time for a title the library has ordered but not received.
+
+    Nothing is circulating yet, so the usual formula's assumption — that
+    you're waiting out a loan already in progress — doesn't hold. The
+    first `copies` holds are filled the day the box lands; you'd be hold
+    number holds+1, so you wait that many turns *after* arrival.
+
+    The arrival date itself is not published anywhere we can see, so this
+    is deliberately only half the answer. Callers mark it provisional:
+    good enough to rank against other options, never good enough to
+    print as a date or to move a notification watermark.
+    """
+    if not copies:
+        return None
+    return math.ceil((holds or 0) / copies) * loan_days
+
+
 def bucket(wait: Optional[int], loan_days: int) -> str:
     """Quantize a wait onto the ladder."""
     if wait is None:

@@ -17,6 +17,7 @@ import re
 from typing import Any, Iterator
 
 from .. import http
+from ..availability import wait_after_arrival, wait_days
 from ..config import Config
 from ..matching import author_matches, titles_match
 from ..models import Observation, medium_for
@@ -87,17 +88,23 @@ class BiblioCommonsSource(Source):
                     continue
                 status = (bib.get("status") or "unknown").upper()
                 friendly = FORMAT_NAMES.get(fmt, fmt.lower())
-                # No queue length in the search embed, so a shelf copy is a
-                # zero wait and anything else is "wait for the current loan".
-                # Coarse, but it puts print on the same ladder as digital.
-                available = bib.get("availableCopies")
-                wait = 0 if (available or 0) > 0 else self.loan_days
+                available = bib.get("availableCopies") or 0
+                holds = bib.get("heldCopies") or 0
+                copies = _true_copies(bib, status)
+                on_order = status == "ON_ORDER"
+                if available > 0:
+                    wait = 0
+                elif on_order:
+                    # Half an answer by construction — see wait_after_arrival.
+                    wait = wait_after_arrival(holds, copies, self.loan_days)
+                else:
+                    wait = wait_days(available, copies, holds, self.loan_days)
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
                     summary=(f"{friendly} in {self.subdomain} library catalog"
-                             f" — {_shelf_state(available, status)}"),
+                             f" — {_shelf_state(available, copies, holds, status)}"),
                     url=url,
                     # Presence in the catalog is the hit — the user is happy
                     # to join hold queues, so availability isn't the bar and
@@ -106,13 +113,16 @@ class BiblioCommonsSource(Source):
                     event=f"{friendly} in catalog",
                     medium=medium_for(fmt),
                     wait=wait,
+                    provisional=on_order,
                     distance_mi=self.distance_mi,
                     loan_days=self.loan_days,
                     source_label=self.label,
                     detail={"format": fmt, "status": status,
                             "author": _author_str(bib),
                             "available_copies": available,
-                            "held_copies": bib.get("heldCopies"),
+                            "held_copies": holds,
+                            "copies": copies,
+                            "raw_total_copies": bib.get("totalCopies"),
                             "found_title": title},
                 ))
         return observations
@@ -169,13 +179,48 @@ def _first_isbn(isbns: Any) -> str | None:
     return str(isbns) if isbns else None
 
 
-def _shelf_state(available: Any, status: str) -> str:
-    """Whether you could walk in and pick it up."""
-    try:
-        n = int(available)
-    except (TypeError, ValueError):
-        return status.lower().replace("_", " ")
-    return f"{n} on shelf" if n > 0 else "all copies out"
+def _true_copies(bib: dict, status: str) -> int | None:
+    """How many copies the library actually has.
+
+    On an ON_ORDER bib every ordered copy is listed twice — once as a
+    `biblio_onorder|<bib>|<branch>|<n>` placeholder and once as a real
+    (ordered, not yet received) item record — and `totalCopies` counts
+    both. Verified 2026-08-10 against the gateway availability API, whose
+    `onOrderCopies` is exactly half the search page's `totalCopies` on
+    every on-order record sampled (2, 6, 8 and 12 copies) and matches
+    what the item page renders.
+
+    Halving is a heuristic riding on an undocumented quirk; it would skew
+    on a partial receipt, where some copies have landed and some haven't.
+    The authoritative fix is one extra request per book to
+    gateway.bibliocommons.com/v2/libraries/<lib>/bibs/<bib>/availability
+    — worth doing if a second BiblioCommons library ever gets watched.
+    """
+    total = bib.get("totalCopies")
+    if not total:
+        return None
+    return max(1, int(total) // 2) if status == "ON_ORDER" else int(total)
+
+
+def _shelf_state(available: int, copies: int | None, holds: int,
+                 status: str) -> str:
+    """Whether you could walk in and pick it up.
+
+    On-order titles get their queue position rather than a duration: the
+    library hasn't said when the copies land, so any day count we printed
+    would be precise about the half of the answer we don't have.
+    """
+    if available > 0:
+        return f"{available} on shelf"
+    if status == "ON_ORDER":
+        n = f"{copies} on order" if copies else "on order"
+        if not holds:
+            return f"{n}, no holds yet"
+        return f"{n}, {holds} hold{'s' if holds != 1 else ''} ahead"
+    if copies:
+        return (f"all {copies} out" if copies > 1 else "checked out") + (
+            f", {holds} hold{'s' if holds != 1 else ''}" if holds else "")
+    return status.lower().replace("_", " ")
 
 
 def _author_str(bib: dict) -> str | None:
@@ -218,6 +263,7 @@ def _walk_for_bibs(node: Any) -> Iterator[dict[str, Any]]:
                 "status": avail.get("status") or avail.get("statusType"),
                 "availableCopies": avail.get("availableCopies"),
                 "heldCopies": avail.get("heldCopies"),
+                "totalCopies": avail.get("totalCopies"),
                 "bibId": node.get("id") or brief.get("id"),
                 # Kept for `tracker add`: publicationDate disambiguates
                 # same-title records (two "Sunrise"s, 2007 vs 2026) and

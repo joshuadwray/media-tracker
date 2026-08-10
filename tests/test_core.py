@@ -494,3 +494,94 @@ def test_track_seed_folds_retired_medium_keys(tmp_path):
     # Idempotent: a second load changes nothing.
     state.save()
     assert sorted(State(p).media) == ["book:x|listening", "book:x|reading"]
+
+
+# --- on-order titles -------------------------------------------------------
+
+def test_wait_after_arrival_counts_only_the_queue():
+    """The first `copies` holds are filled the day the box lands."""
+    from tracker.availability import wait_after_arrival
+
+    assert wait_after_arrival(0, 1, 21) == 0    # you'd be next
+    assert wait_after_arrival(1, 1, 21) == 21   # one ahead of you
+    assert wait_after_arrival(4, 1, 21) == 84   # Fruit Fly at Denton
+    assert wait_after_arrival(4, 2, 21) == 42
+    assert wait_after_arrival(3, None, 21) is None
+
+
+def test_on_order_is_never_now_and_never_ratchets(tmp_path):
+    """We know the queue but not the arrival date, so an on-order title can
+    rank but must not claim a duration or move a watermark."""
+    on_order = _book_obs("denton", "print", wait=0, loan_days=21)
+    on_order.provisional = True
+
+    # A zero queue is zero turns *after arrival*, not "on the shelf".
+    assert on_order.bucket == "turn"
+    assert on_order.wait_text == "on order"
+
+    state = State(tmp_path / "state.json")
+    groups = _run_groups(state, [on_order])
+    assert len(groups) == 1
+    # It can headline the card...
+    assert groups[0].headline is on_order
+    # ...but contributes no watermark, so nothing can "improve" on it later.
+    assert groups[0].best_bucket is None
+    assert state.media_best("book:x|reading") is None
+
+
+def test_firm_option_sets_the_watermark_over_a_provisional_headline(tmp_path):
+    """A guess can outrank a known wait for display without polluting state."""
+    state = State(tmp_path / "state.json")
+    on_order = _book_obs("denton", "print", wait=21, loan_days=21)
+    on_order.provisional = True
+    firm = _book_obs("houston", "ebook", wait=200, loan_days=14)
+
+    groups = _run_groups(state, [on_order, firm])
+    g = groups[0]
+    assert g.headline is on_order          # sorts first: 21d beats 200d
+    assert g.best_bucket == "someday"      # but the watermark is the firm one
+
+
+def test_true_copies_halves_only_on_order():
+    """Every ordered copy is listed twice on an ON_ORDER bib (placeholder +
+    real item), so totalCopies double-counts. Verified against the gateway
+    availability API on 2026-08-10."""
+    from tracker.sources.bibliocommons import _true_copies
+
+    assert _true_copies({"totalCopies": 2}, "ON_ORDER") == 1
+    assert _true_copies({"totalCopies": 12}, "ON_ORDER") == 6
+    assert _true_copies({"totalCopies": 3}, "UNAVAILABLE") == 3
+    assert _true_copies({"totalCopies": 1}, "ON_ORDER") == 1   # never zero
+    assert _true_copies({}, "ON_ORDER") is None
+
+
+def test_shelf_state_wording():
+    from tracker.sources.bibliocommons import _shelf_state
+
+    assert _shelf_state(2, 3, 0, "AVAILABLE") == "2 on shelf"
+    assert _shelf_state(0, 1, 0, "ON_ORDER") == "1 on order, no holds yet"
+    assert _shelf_state(0, 1, 4, "ON_ORDER") == "1 on order, 4 holds ahead"
+    assert _shelf_state(0, 3, 0, "UNAVAILABLE") == "all 3 out"
+    assert _shelf_state(0, 1, 2, "UNAVAILABLE") == "checked out, 2 holds"
+
+
+def test_sooner_beats_nearer_within_a_bucket():
+    """Proximity is the last tiebreak: a copy two weeks sooner should win
+    over one down the road, even though digital counts as distance 0."""
+    print_7d = _book_obs("denton", "print", wait=7, distance_mi=3, loan_days=21)
+    ebook_21d = _book_obs("lewisville", "ebook", wait=21, loan_days=21)
+    assert print_7d.bucket == ebook_21d.bucket == "turn"
+    assert sorted([ebook_21d, print_7d], key=lambda o: o.sort_key)[0] is print_7d
+
+
+def test_sync_note_stays_quiet_when_a_side_is_on_order():
+    """The gap is arithmetic on a guess if one clock hasn't started."""
+    from tracker.report import sync_note, tracks_for_item
+
+    reading = _book_obs("denton", "print", wait=84, loan_days=21)
+    reading.provisional = True
+    listening = _book_obs("denton-cl", "audiobook", wait=84, loan_days=21)
+    assert sync_note(tracks_for_item([reading, listening])) is None
+
+    reading.provisional = False
+    assert "gap 0d" in sync_note(tracks_for_item([reading, listening]))
