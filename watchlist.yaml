@@ -7,6 +7,11 @@
 # ============================================================
 
 books:
+  - title: American Hagwon
+    author: Min Jin Lee
+  - title: Exit Party
+    author: Mandel, Emily St. John
+    bib_id: S127C1983295
   - title: Sunrise
     author: Obreht, Téa
     bib_id: S127C1983671
