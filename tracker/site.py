@@ -30,6 +30,12 @@ DOCS = Path(__file__).resolve().parent.parent / "docs"
 ASSETS = DOCS / "assets"
 DATA = DOCS / "data"
 
+# Attributes for links that leave the site (catalogs, showtimes,
+# Letterboxd). Those are lookups alongside the page you're working
+# through, not somewhere to navigate to — opening them in a new tab
+# keeps the dashboard/diary (and its scroll position) put.
+EXT_LINK = " target='_blank' rel='noopener'"
+
 BASE_CSS = """
 :root {
   --bg: #F5F7F4; --surface: #FFFFFF; --surface-sunk: #E8ECE6;

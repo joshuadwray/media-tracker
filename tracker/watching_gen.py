@@ -78,8 +78,8 @@ def render_film(slug: str, viewings: list) -> str:
                 f"{_markers(latest)}</div>")
     if latest.get("letterboxd_uri"):
         bits.append(f"<div class='meta' style='margin-top:6px'>"
-                    f"<a href='{e(latest['letterboxd_uri'])}'>"
-                    "letterboxd \u2197</a></div>")
+                    f"<a href='{e(latest['letterboxd_uri'])}'"
+                    f"{site.EXT_LINK}>letterboxd \u2197</a></div>")
     parts.append(f"<div class='head'>{img}<div>{''.join(bits)}</div></div>")
 
     if latest.get("review"):

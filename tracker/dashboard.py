@@ -295,7 +295,8 @@ def _grouped_card(label: str, current_obs: list[Observation],
 
     def obs_row(o: Observation, alt: bool) -> str:
         badge = "🟢" if o.fingerprint in new_fps else "✅"
-        link = f" <a href='{e(o.url)}'>open&nbsp;↗</a>" if o.url else ""
+        link = (f" <a href='{e(o.url)}'{site.EXT_LINK}>open&nbsp;↗</a>"
+                if o.url else "")
         info = "" if o.positive else " <span class='muted'>(info)</span>"
         if o.track:
             wait_cls = "wait now" if o.bucket == "now" else "wait"
