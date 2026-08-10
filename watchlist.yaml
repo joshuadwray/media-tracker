@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Triage
+    author: Rankine, Claudia
+    bib_id: S127C1983791
   - title: Fruit Fly
     author: Silver, Josh
     bib_id: S127C1984311
