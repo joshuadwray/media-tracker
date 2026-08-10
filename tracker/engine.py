@@ -49,6 +49,9 @@ def run_check(config: Config, *, source_id: str | None = None,
                 state.touch(obs, dates=obs_dates)
     run.notify_groups = _notify_groups(run, state, ok_sources)
     state.prune()
+    # Before the report: it dates the "still looking" entries from this map,
+    # and an item added since the last run should read 0d, not blank.
+    state.note_watching([i.key for i in (*config.books, *config.movies)])
     run.report = build_report(config, run.results, run.new, state)
 
     if dry_run:

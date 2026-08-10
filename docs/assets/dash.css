@@ -30,6 +30,13 @@ ul.watch li span { flex: 1; }
 .rm:hover { opacity: .8; }
 .warn { background: var(--gold-tint); color: #8A6A16; border-radius: 8px;
         padding: 8px 12px; font-size: .9rem; }
+/* "Still looking" is a status, not a problem — plain rows, muted ages, and
+   the gold warning colour held back for the ones old enough to be typos. */
+.note { color: var(--ink-mute); font-size: .85rem; margin: 2px 0 8px; }
+.wrow { display: flex; justify-content: space-between; font-size: .9rem;
+        padding: 4px 2px; border-bottom: 1px dashed var(--line); }
+.wrow .age { color: var(--ink-mute); margin-left: 10px; white-space: nowrap; }
+.wrow.stale .age { color: #8A6A16; }
 details { margin-bottom: 4px; }
 details > summary { list-style: none; cursor: pointer; }
 details > summary::-webkit-details-marker { display: none; }

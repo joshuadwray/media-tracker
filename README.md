@@ -125,9 +125,12 @@ python -m tracker probe --source cloudlibrary   # raw responses, for debugging
 
 Each sighting notifies **once**: `state/state.json` remembers what
 you've been told (pruned after 180 days). `state/report.md` is the
-browsable record of the latest run, including watchlist entries that
-have never matched anywhere (likely typos — re-add them with
-`tracker add`).
+browsable record of the latest run, ending with **Still looking** —
+watchlist entries that have never matched anywhere, with how long
+they've been waiting. That list is a status, not an error: a book the
+libraries haven't bought and a forthcoming film both live there, and
+most entries leave it on their own. Only after 90 fruitless days does
+it suggest checking the spelling.
 
 ## First run: validate the scrapers
 

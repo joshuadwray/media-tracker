@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from . import site
 from .config import Config
 from .models import Observation, SourceResult
+from .report import STILL_LOOKING_BLURB, still_looking
 from .state import State
 
 _CSS = """
@@ -49,6 +50,13 @@ ul.watch li span { flex: 1; }
 .rm:hover { opacity: .8; }
 .warn { background: var(--gold-tint); color: #8A6A16; border-radius: 8px;
         padding: 8px 12px; font-size: .9rem; }
+/* "Still looking" is a status, not a problem — plain rows, muted ages, and
+   the gold warning colour held back for the ones old enough to be typos. */
+.note { color: var(--ink-mute); font-size: .85rem; margin: 2px 0 8px; }
+.wrow { display: flex; justify-content: space-between; font-size: .9rem;
+        padding: 4px 2px; border-bottom: 1px dashed var(--line); }
+.wrow .age { color: var(--ink-mute); margin-left: 10px; white-space: nowrap; }
+.wrow.stale .age { color: #8A6A16; }
 details { margin-bottom: 4px; }
 details > summary { list-style: none; cursor: pointer; }
 details > summary::-webkit-details-marker { display: none; }
@@ -195,12 +203,17 @@ def build_dashboard(config: Config, results: list[SourceResult],
                          "</span></div>")
     parts.append("</details>")
 
-    never = _never_seen(config, current, state)
-    if never:
-        parts.append("<details><summary><h2>Never matched anywhere</h2></summary>")
-        parts.append("<div class='warn'>These have never matched at any source "
-                     "— double-check the spelling: "
-                     + ", ".join(e(t) for t in never) + "</div>")
+    waiting = still_looking(config, current, state, now_dt)
+    if waiting:
+        parts.append(f"<details><summary><h2>Still looking ({len(waiting)})"
+                     "</h2></summary>")
+        parts.append(f"<div class='note'>{e(STILL_LOOKING_BLURB)}</div>")
+        for w in waiting:
+            cls = " stale" if w.suspect else ""
+            note = " · check the spelling?" if w.suspect else ""
+            age = f"{w.age}{note}" if w.days is not None else "&mdash;"
+            parts.append(f"<div class='wrow{cls}'><span>{e(w.label)}</span>"
+                         f"<span class='age'>{age}</span></div>")
         parts.append("</details>")
 
     parts.append("<details><summary><h2>Watching</h2></summary><ul class='watch'>")
@@ -340,16 +353,3 @@ def _jsq(s: str) -> str:
     """Quote a string for safe embedding in an HTML onclick attribute."""
     import json
     return html.escape(json.dumps(s), quote=True)
-
-
-def _never_seen(config: Config, current: list[Observation],
-                state: State) -> list[str]:
-    current_keys = {o.item_key for o in current}
-    out = []
-    for item in [*config.books, *config.movies]:
-        if item.key in current_keys:
-            continue
-        if any(f"|{item.key}|" in fp for fp in state.seen):
-            continue
-        out.append(str(item))
-    return out

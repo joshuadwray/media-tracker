@@ -8,6 +8,15 @@ Two maps, both mapping a key to {first, last} timestamps:
            a book carried by three libraries in one medium is one push,
            not three, and only when that medium goes unseen -> seen.
 
+Plus one flat map, item_key -> ISO timestamp:
+
+  watching — when each item joined the watchlist. Items that have never
+           matched anywhere are reported as "still looking", and how long
+           they've been looking is the difference between a title the
+           libraries haven't bought yet and one that's misspelled. Unlike
+           the other two, it survives an item leaving the list (see
+           note_watching) and is pruned by age alone.
+
 A key is "new" if unseen or if its last-seen timestamp is older than
 GAP_DAYS — this re-notifies when an item disappears and reappears (e.g.
 a library book's consortium copy returns from loan). For `media` that
@@ -37,16 +46,19 @@ class State:
         self.path = path
         self.seen: dict[str, dict[str, str]] = {}
         self.media: dict[str, dict[str, str]] = {}
+        self.watching: dict[str, str] = {}
         self.meta: dict = {}
         if path.exists():
             try:
                 data = json.loads(path.read_text())
                 self.seen = data.get("seen", {})
                 self.media = data.get("media", {})
+                self.watching = data.get("watching", {})
                 self.meta = data.get("meta", {})
             except (json.JSONDecodeError, OSError):
                 self.seen = {}
                 self.media = {}
+                self.watching = {}
                 self.meta = {}
         # Migrate old string values to {first, last} dicts.
         for fp, val in self.seen.items():
@@ -101,6 +113,38 @@ class State:
     def media_touch(self, key: str, now: datetime | None = None) -> None:
         _touch(self.media, key, now)
 
+    # --- how long an item has been on the watchlist -------------------
+
+    def note_watching(self, item_keys: list[str], now: datetime | None = None) -> None:
+        """Stamp new watchlist items and age out long-departed ones.
+
+        Called once per run, before the report is built. The stamp is the
+        first run that saw the item, not the moment it was added — close
+        enough at a 4x-daily cadence, and the only thing we can observe.
+        The existing entries were backfilled from watchlist.yaml's git
+        history; CI checks out shallow, so the code can't do that itself.
+
+        A departed item keeps its stamp until PRUNE_DAYS have passed. Fixing
+        an entry from the phone is a remove plus an add, and that shouldn't
+        rewrite how long you've been waiting for the book — but a title you
+        dropped half a year ago and picked up again is a fresh wait.
+        """
+        cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)
+        ts = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
+        keys = set(item_keys)
+        for key in keys:
+            self.watching.setdefault(key, ts)
+        for gone in [k for k, v in self.watching.items()
+                     if k not in keys and _parse(v) < cutoff]:
+            del self.watching[gone]
+
+    def waiting_days(self, item_key: str, now: datetime | None = None) -> int | None:
+        """Days since this item joined the watchlist, or None if unstamped."""
+        ts = self.watching.get(item_key)
+        if not ts:
+            return None
+        return max(0, ((now or datetime.now(timezone.utc)) - _parse(ts)).days)
+
     # --- maintenance --------------------------------------------------
 
     def forget_item(self, item_key: str) -> int:
@@ -120,6 +164,8 @@ class State:
         for key in [k for k in self.media if k.rsplit("|", 1)[0] == item_key]:
             del self.media[key]
             doomed.append(key)
+        # The `watching` stamp deliberately survives: this is called on
+        # removal, and half the removals here are an edit in disguise.
         return len(doomed)
 
     def prune(self, now: datetime | None = None) -> int:
@@ -138,7 +184,8 @@ class State:
         )
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(
-            json.dumps({"meta": self.meta, "seen": self.seen, "media": self.media},
+            json.dumps({"meta": self.meta, "seen": self.seen, "media": self.media,
+                        "watching": self.watching},
                        indent=2, sort_keys=True)
             + "\n"
         )

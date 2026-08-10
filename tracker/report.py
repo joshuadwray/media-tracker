@@ -1,11 +1,53 @@
 """Markdown run report — the browsable record next to the phone pushes."""
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import datetime, timezone
 
 from .config import Config
 from .models import Observation, SourceResult
 from .state import State
+
+# A title nobody carries isn't a bug — libraries buy on their own schedule,
+# and half the movie list is unreleased. Only after this long is "we've never
+# seen it anywhere" better explained by a typo than by the world.
+SPELLING_HINT_DAYS = 90
+
+STILL_LOOKING_BLURB = (
+    "On the watchlist, not matched at any source yet. This is the normal "
+    "resting place for a new or forthcoming title: it waits here until a "
+    "library buys a copy or a theater books a date."
+)
+
+
+@dataclass
+class Waiting:
+    """One watchlist item that has never matched anywhere."""
+    label: str
+    days: int | None          # days on the watchlist, None if unstamped
+
+    @property
+    def suspect(self) -> bool:
+        """Old enough that a spelling check is worth suggesting."""
+        return self.days is not None and self.days >= SPELLING_HINT_DAYS
+
+    @property
+    def age(self) -> str:
+        return f"{self.days}d" if self.days is not None else ""
+
+
+def still_looking(config: Config, current: list[Observation],
+                  state: State, now: datetime | None = None) -> list[Waiting]:
+    """Watchlist items with no sighting now and none ever, oldest first."""
+    current_keys = {o.item_key for o in current}
+    out = []
+    for item in [*config.books, *config.movies]:
+        if item.key in current_keys:
+            continue
+        if any(f"|{item.key}|" in fp for fp in state.seen):
+            continue
+        out.append(Waiting(str(item), state.waiting_days(item.key, now)))
+    return sorted(out, key=lambda w: (-(w.days or 0), w.label.lower()))
 
 
 def build_report(config: Config, results: list[SourceResult],
@@ -40,27 +82,15 @@ def build_report(config: Config, results: list[SourceResult],
             lines.append(f"- ✅ `{r.source}`: {len(r.observations)} observation(s)")
     lines.append("")
 
-    never_seen = _never_seen_items(config, current, state)
-    if never_seen:
-        lines.append("## Never matched anywhere (possible typos?)")
-        lines.append("These watchlist entries have not matched at any source, "
-                     "ever. Double-check the spelling, or use `tracker add` "
-                     "to pick the exact catalog record.")
-        for label in never_seen:
-            lines.append(f"- {label}")
+    waiting = still_looking(config, current, state)
+    if waiting:
+        lines.append(f"## Still looking ({len(waiting)})")
+        lines.append(STILL_LOOKING_BLURB)
+        for w in waiting:
+            suffix = f" — waiting {w.age}" if w.days is not None else ""
+            if w.suspect:
+                suffix += " · nothing this whole time, so check the spelling"
+            lines.append(f"- {w.label}{suffix}")
         lines.append("")
 
     return "\n".join(lines) + "\n"
-
-
-def _never_seen_items(config: Config, current: list[Observation],
-                      state: State) -> list[str]:
-    current_keys = {o.item_key for o in current}
-    out = []
-    for item in [*config.books, *config.movies]:
-        if item.key in current_keys:
-            continue
-        if any(f"|{item.key}|" in fp for fp in state.seen):
-            continue
-        out.append(str(item))
-    return out

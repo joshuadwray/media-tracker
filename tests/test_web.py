@@ -124,7 +124,7 @@ def test_dashboard_renders(wl, tmp_path):
     html = build_dashboard(cfg, results, [obs], State(tmp_path / "s.json"))
     assert "The Substance" in html
     assert "boom" in html
-    assert "Plain Book" in html  # never-matched warning includes it
+    assert "Plain Book" in html  # the still-looking list includes it
     # The card's remove button passes the RAW title, not the card's label
     # (which carries the year) — watchlist.yaml has no year to match on.
     assert "rmItem(this,&quot;The Substance&quot;,&quot;movie&quot;)" in html

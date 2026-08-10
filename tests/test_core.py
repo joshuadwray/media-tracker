@@ -193,6 +193,64 @@ def test_forget_item_clears_both_maps(tmp_path):
     assert not state.media and not state.seen
 
 
+def test_watching_stamps_are_kept_in_step_with_the_watchlist(tmp_path):
+    from datetime import datetime, timedelta, timezone
+
+    state = State(tmp_path / "state.json")
+    long_ago = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    state.note_watching(["book:x", "movie:y"], now=long_ago)
+    # A second run doesn't reset the clock on an item already being watched.
+    state.note_watching(["book:x", "movie:y"], now=long_ago + timedelta(days=30))
+    assert state.waiting_days("book:x", now=long_ago + timedelta(days=30)) == 30
+    assert state.waiting_days("book:never-added") is None
+
+    # Fixing an entry from the phone is a remove plus an add. The stamp has
+    # to ride that out, or every metadata edit resets the wait to zero.
+    state.forget_item("book:x")
+    state.note_watching(["movie:y"], now=long_ago + timedelta(days=31))
+    state.note_watching(["book:x", "movie:y"], now=long_ago + timedelta(days=31))
+    assert state.waiting_days("book:x", now=long_ago + timedelta(days=31)) == 31
+
+    # But a title dropped long enough ago is forgotten, and comes back new.
+    state.note_watching(["movie:y"], now=long_ago + timedelta(days=400))
+    assert "book:x" not in state.watching
+
+
+def test_still_looking_ranks_by_wait_and_flags_only_the_old(tmp_path):
+    """The section is a status, not an error list: a title no library has
+    bought yet is indistinguishable from a typo except by how long it's
+    been sitting there."""
+    from datetime import datetime, timedelta, timezone
+
+    from tracker.config import load_config
+    from tracker.report import SPELLING_HINT_DAYS, still_looking
+
+    wl = tmp_path / "watchlist.yaml"
+    wl.write_text(
+        "books:\n"
+        "  - title: Fresh Release\n"
+        "  - title: Teh Typpo\n"
+        "  - title: Already Found\n"
+        "sources: {}\n"
+    )
+    cfg = load_config(wl)
+    now = datetime(2026, 8, 9, tzinfo=timezone.utc)
+    state = State(tmp_path / "state.json")
+    state.note_watching([b.key for b in cfg.books],
+                        now=now - timedelta(days=10))
+    state.watching["book:teh-typpo"] = (
+        now - timedelta(days=SPELLING_HINT_DAYS + 1)).isoformat()
+    # Seen once, months ago, and absent today: that's a stale card, not a
+    # title we're still hunting for.
+    state.seen["denton|book:already-found|print book in catalog"] = {
+        "first": "2026-01-01T00:00:00+00:00", "last": "2026-01-02T00:00:00+00:00"}
+
+    waiting = still_looking(cfg, [], state, now)
+    assert [w.label for w in waiting] == ["Teh Typpo", "Fresh Release"]
+    assert waiting[0].suspect and waiting[0].age == "91d"
+    assert not waiting[1].suspect and waiting[1].age == "10d"
+
+
 def test_state_survives_corrupt_file(tmp_path):
     p = tmp_path / "state.json"
     p.write_text("{not json")

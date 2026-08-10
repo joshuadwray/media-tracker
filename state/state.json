@@ -342,5 +342,24 @@
       "first": "2026-08-06T00:05:40+00:00",
       "last": "2026-08-10T04:20:28+00:00"
     }
+  },
+  "watching": {
+    "book:attention-seeking-behavior-a-novel": "2026-07-19T13:08:52+00:00",
+    "book:dead-but-dreaming-of-electric-sheep": "2026-07-19T13:09:31+00:00",
+    "book:d\u00e8y": "2026-08-10T00:23:30+00:00",
+    "book:fruit-fly": "2026-08-10T00:25:01+00:00",
+    "book:one-leg-on-earth": "2026-07-19T04:54:25+00:00",
+    "book:the-hill": "2026-08-10T04:03:25+00:00",
+    "book:triage": "2026-08-10T00:25:14+00:00",
+    "book:we-were-forbidden": "2026-07-19T13:10:11+00:00",
+    "movie:club-kid": "2026-07-20T17:48:46+00:00",
+    "movie:coyote-vs-acme": "2026-07-20T18:02:31+00:00",
+    "movie:dune-part-3": "2026-07-20T18:01:36+00:00",
+    "movie:fjord": "2026-07-20T17:48:26+00:00",
+    "movie:i-want-your-sex": "2026-07-31T22:30:18+00:00",
+    "movie:paper-tiger": "2026-07-20T17:49:07+00:00",
+    "movie:teenage-sex-and-death-at-camp-miasma": "2026-07-20T18:01:57+00:00",
+    "movie:tony": "2026-07-18T00:46:56+00:00",
+    "movie:wild-horse-nine": "2026-07-20T17:25:49+00:00"
   }
 }
