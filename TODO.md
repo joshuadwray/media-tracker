@@ -52,7 +52,24 @@
   Contents PUT, then loads the empty list for item entry.
 - UI pass: done 2026-07-19 — shared BASE_CSS + pill-tab nav in
   tracker/site.py (generators dieted; nav pasted into the 3 hand-written
-  pages).
+  pages). CSS moved out to docs/assets/*.css on 2026-08-09.
+- ~~Diary/lists edits take ~2 min to show up.~~ Done 2026-08-09: they
+  render in the BROWSER now. Measured first — CI was only 13-24s, the
+  Pages deploy ~40s (a floor), and Pages' `cache-control: max-age=600`
+  plus no completion signal did the rest. The fix follows the real
+  boundary: MACHINE-authored data (scraper, Letterboxd — nobody waits)
+  stays server-rendered; HUMAN-authored data (reading log, lists) is
+  interactive CRUD and can't sit behind a build. CI now publishes only
+  what a browser can't compute — docs/data/{diary,lists}.json with covers
+  and page counts resolved — and docs/assets/diary.js draws the calendar,
+  flat list, book pages and lists grid. Python renderers deleted (one
+  renderer, not two: this would otherwise have become a fourth copy of
+  the log.html/edit.js/dump_log parity hazard). Saves go into
+  localStorage via mtSavePending and appear with zero network, then the
+  overlay retires itself when a build contains it.
+  Guard rail if you touch diary.js: a node harness diffs its output
+  against the old Python HTML recovered from git (it caught 3 real bugs);
+  see the memory note for how it was run.
 
 ## Reading-log follow-ups
 - ~~Re-reads: second pass through a book (`slug-2` convention).~~

@@ -5,11 +5,16 @@ catalogs for books and DFW-area theaters for movie showtimes, and sends
 a phone push (via [ntfy.sh](https://ntfy.sh)) exactly once per new
 sighting — a book appearing or becoming available, a showtime landing.
 
-Deliberately lean: a small Python CLI, a YAML watchlist you can edit by
-hand, a JSON state file, no database, no web app.
+It also keeps a diary: a reading log, a Letterboxd-synced film log, and
+ranked lists — all published to the same GitHub Pages site.
+
+Deliberately lean: a small Python CLI, flat files you can edit by hand
+(YAML watchlist, JSON logs), GitHub Actions as the runtime, no database
+and no server.
 
 ```
 watchlist.yaml → source adapters → observations → diff vs state.json → ntfy push + report.md
+reading/log.json, lists/*.yaml → covers + page counts → docs/data/*.json → rendered in the browser
 ```
 
 ## Sources
@@ -64,6 +69,46 @@ summary of new/current sightings, source health, and your watchlist.
 Enable **GitHub Pages** (Settings → Pages → "Deploy from a branch" →
 `/docs` folder) and that page gets a public URL that auto-updates after
 every scheduled run — bookmark it on your phone.
+
+### The diary (reading log, film log, lists)
+
+The same Pages site carries three more surfaces, all backed by flat
+files you can edit by hand:
+
+| surface | data | built by |
+|---|---|---|
+| reading diary — calendar, flat list, per-book pages | `reading/log.json` | `python -m tracker reading` |
+| film diary | `watching/log.json` (Letterboxd RSS sync) | `python -m tracker letterboxd` |
+| ranked lists | `lists/*.yaml` (file order = rank) | `python -m tracker lists` |
+
+Both logs can be written from the phone — `docs/reading/log.html` logs
+sessions, `docs/lists/edit.html` edits lists — via the GitHub Contents
+API with a fine-grained PAT kept in the browser's local storage.
+
+**How these pages render, and why it differs from the dashboard.** The
+watchlist dashboard is *machine*-authored: the scraper writes it on a
+cron, ntfy tells you when something happened, and nobody sits waiting on
+the page. Static generation is exactly right there.
+
+The diary and lists are *human*-authored — you type something and
+immediately want to see it — so a CI run plus a Pages deploy (~56s
+measured, plus Pages' ten-minute `cache-control`) is the wrong shape.
+Those surfaces are therefore split:
+
+- CI does only what a browser **cannot**: the iTunes / Open Library /
+  Apple Books lookups behind covers and page counts. It publishes
+  `docs/data/{diary,lists}.json` and ~1KB page shells.
+- `docs/assets/diary.js` renders the calendar, flat list, book pages and
+  lists grid in the browser, computing per-day deltas and streaks itself
+  — it has to, because it also folds in an edit you saved seconds ago
+  that no build has seen.
+- A save is stashed in local storage and shown immediately (marked
+  "syncing"); the overlay retires itself once a build contains it.
+
+If you change `diary.js`, note that it is the *only* renderer for those
+pages — deliberately, to avoid maintaining the same layout in two
+languages. `docs/404.html` covers the gap where a book logged seconds
+ago has no shell yet.
 
 ### The CLI
 
@@ -132,6 +177,6 @@ The workflow in `.github/workflows/media-tracker.yml` runs the check
 
 ## Deliberately not built (yet)
 
-Web UI, database, hold-placement/checkout automation, Goodreads or
-Letterboxd import, email digests, more chains/metros. The scrapers have
-to prove themselves before any of that earns its complexity.
+A database, hold-placement/checkout automation, email digests, more
+chains/metros. The scrapers had to prove themselves first; the diary,
+lists and imports (Bookmory, Letterboxd) landed once they had.
