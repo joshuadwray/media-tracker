@@ -1,10 +1,9 @@
-# Media tracker report — 2026-08-10 04:07 UTC
+# Media tracker report — 2026-08-10 04:11 UTC
 
-## New sightings (2)
-- **The Hill**: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~24d wait) — [link](https://libbyapp.com/library/fwpl/media/11842636)
-- **The Hill**: audiobook in Libby catalog (Fort Worth) — 0/1 available, 1 hold (~28d wait) — [link](https://libbyapp.com/library/fwpl/media/4668741)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (30)
+## All current sightings (31)
 - Triage — Rankine, Claudia: print book in denton library catalog
 - Fruit Fly — Silver, Josh: print book in denton library catalog
 - Dèy — Danticat, Edwidge: print book in denton library catalog
@@ -22,6 +21,7 @@
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait)
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
+- tony (2026): "Tony" playing at Cinemark West Plano (2026-08-22, 2026-08-23, 2026-08-24, 2026-08-25)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-10, 2026-08-11, 2026-08-12)
 - coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23)
 - coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
@@ -42,7 +42,7 @@
 - ✅ `cloudlibrary-lewisville`: 2 observation(s)
 - ✅ `libby-fortworth`: 9 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ❌ `cinemark`: RuntimeError: Cinemark Denton 14: HTTP 429; Cinemark West Plano: HTTP 429; Cinemark Dallas IMAX: HTTP 429
+- ✅ `cinemark`: 1 observation(s)
 - ✅ `amc`: 13 observation(s)
 
 ## Never matched anywhere (possible typos?)
