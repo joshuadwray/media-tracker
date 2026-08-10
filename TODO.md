@@ -99,6 +99,44 @@
   single one is kept purely as a fallback.
 
 ## Investigate
+
+- **Sync the actual library accounts (2026-08-10).** Everything the tracker
+  knows today is the *public* view of a catalog: how long the queue is, not
+  where in it you stand. The gap showed up concretely with holds on Fruit Fly
+  and Sunrise at Lewisville — both on-order, and Symphony reports queue place
+  `0` for them, because it sequences holds against item records and an
+  on-order title has none (the "Copy 1 / On Order" row is an order record, not
+  a circulating item). Public `holdCount` counts those holds (Sunrise showed
+  exactly 1, the user's own) but can never say which one is yours.
+  What logging in would buy, roughly in value order:
+  - **Real queue position**, so a title you are near the front of stops being
+    ranked as if you had just joined. Today `wait_after_arrival` answers "if I
+    joined now" — correct while deciding, wrong once you hold a spot, and it
+    gets *worse* over time as people queue up behind you.
+  - **Suppression.** A book you already have on hold, or already have checked
+    out, does not need to keep competing for a headline slot.
+  - **Due dates and auto-logging**, which could feed `reading/log.json`
+    instead of being typed in.
+  Per-stack notes: Enterprise has a patron login form in-page
+  (`detailnonmodal.template.patronloginform`) and the BLUEcloud Mobile app
+  (`sirsi.mobile.bcmobile_lewisville`) implies a JSON account backend worth
+  probing first — cleaner than scraping My Account. Denton is BiblioCommons,
+  cloudLibrary and Libby each have their own login. So this is four
+  integrations, not one.
+  **The real gate is credentials, not scraping.** This needs card numbers and
+  PINs in GitHub Secrets, and a compromise reaches an account that can place
+  holds and see borrowing history. Decide that before building anything; a
+  local-only mode (`tracker` run from the house, secrets in `.env`, never in
+  CI) may be the right shape, the same conclusion the README's escalation
+  ladder reaches for blocked scrapers.
+
+- **Enterprise publishes on-order copy counts; the source assumes 1
+  (2026-08-10).** `sirsi_enterprise._availability` discards the payload's
+  `zones.detailOnOrderDiv0`, which carries a per-library table with an
+  `SD_ORDER_COPIES` column. All seven on-order titles at Lewisville are
+  currently 1 copy, so nothing is miscomputed today, but a 4-copy order would
+  come out 4x too pessimistic in `wait_after_arrival(holds, 1, loan_days)`.
+  Parse the zone and pass the real count.
 - **Print catalogs for the non-Denton cards (2026-08).** Only Denton runs
   BiblioCommons, so every other card needs its own source:
   - ~~SirsiDynix Enterprise~~ **done 2026-08-10** for Lewisville
