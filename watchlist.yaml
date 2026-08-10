@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Dèy
+    author: Danticat, Edwidge
+    bib_id: S127C1983553
   - title: i made you up inside my head
   - title: We Were Forbidden
     author: Harpman, Jacqueline, Schwartz, Ros
