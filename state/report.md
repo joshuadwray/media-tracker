@@ -1,23 +1,11 @@
-# Media tracker report — 2026-08-10 19:40 UTC
+# Media tracker report — 2026-08-10 20:05 UTC
 
-## New sightings (13)
-- **American Hagwon — Min Jin Lee**: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=American%20Hagwon)
-- **American Hagwon — Min Jin Lee**: ebook in cloudLibrary catalog (Lewisville) — pre-release — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=American%20Hagwon)
-- **American Hagwon — Min Jin Lee**: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 12 holds — [link](https://libbyapp.com/library/fwpl/media/12700978)
-- **Exit Party — Mandel, Emily St. John**: print book in denton library catalog — 4 on order, 5 holds ahead — [link](https://denton.bibliocommons.com/v2/search?query=Exit%20Party%20Mandel%2C%20Emily%20St.%20John&searchType=smart)
-- **Exit Party — Mandel, Emily St. John**: print book in Lewisville library catalog — 2 on order, 1 hold ahead — [link](https://lewp.ent.sirsi.net/client/en_US/default/search/detailnonmodal/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:426322/one)
-- **Exit Party — Mandel, Emily St. John**: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 28 holds — [link](https://libbyapp.com/library/fwpl/media/12688024)
-- **Exit Party — Mandel, Emily St. John**: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 21 holds — [link](https://libbyapp.com/library/fwpl/media/12688475)
-- **Fruit Fly — Silver, Josh**: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Fruit%20Fly)
-- **Partita — Kingsolver**: print book in Lewisville library catalog — 3 on order, 1 hold ahead — [link](https://lewp.ent.sirsi.net/client/en_US/default/search/detailnonmodal/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:428449/one)
-- **Sunrise — Obreht, Téa**: print book in denton library catalog — 2 on order, 3 holds ahead — [link](https://denton.bibliocommons.com/v2/search?query=Sunrise%20Obreht%2C%20T%C3%A9a&searchType=smart)
-- **Sunrise — Obreht, Téa**: print book in Lewisville library catalog — 1 on order, 1 hold ahead — [link](https://lewp.ent.sirsi.net/client/en_US/default/search/detailnonmodal/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:425960/one)
-- **Sunrise — Obreht, Téa**: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-08-11, 2 holds — [link](https://libbyapp.com/library/fwpl/media/12548227)
-- **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**: print book in Lewisville library catalog — 1 on order, no holds yet — [link](https://lewp.ent.sirsi.net/client/en_US/default/search/detailnonmodal/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:428636/one)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (43)
 - **Exit Party — Mandel, Emily St. John**
-  - reading: print book in Lewisville library catalog — 2 on order, 1 hold ahead · Mandel, Emily St. John, 1979- author http://id.loc.gov/authorities/names/n2008082532
+  - reading: print book in Lewisville library catalog — 2 on order, 2 holds ahead · Mandel, Emily St. John, 1979- author http://id.loc.gov/authorities/names/n2008082532
     - also: print book in denton library catalog — 4 on order, 5 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 21 holds
   - listening: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 28 holds · Emily St. John Mandel
@@ -52,18 +40,18 @@
     - also: audiobook in Libby catalog (Houston) — 0/2 available, 53 holds (~1 yr)
   - sync: gap 35d > 21d loan — suspend the reading hold ~35d for listening
 - **American Hagwon — Min Jin Lee**
-  - reading: ebook in cloudLibrary catalog (Lewisville) — pre-release · Lee, Min Jin
+  - reading: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds · Lee, Min Jin
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 12 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds · Lee, Min Jin
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds · Lee, Min Jin
   - sync: gap 21d > 21d loan — suspend the reading hold ~21d for listening
 - **Partita — Kingsolver**
-  - reading: print book in Lewisville library catalog — 3 on order, 1 hold ahead · Kingsolver, Barbara, author.
+  - reading: print book in Lewisville library catalog — 3 on order, 2 holds ahead · Kingsolver, Barbara, author.
 - **The Hill — Clark, Harriet**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Clark, Harriet, author.
-    - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 3 holds (~3 wk)
+    - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~3 wk)
     - also: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~1.1 yr)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
-  - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Harpman, Jacqueline, author.
+  - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **one leg on earth — aguda**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · 'Pemi Aguda
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 10 holds (~5 mo) · 'Pemi Aguda
