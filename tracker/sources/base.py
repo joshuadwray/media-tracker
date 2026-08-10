@@ -19,10 +19,29 @@ from ..models import Observation, SourceResult
 class Source(ABC):
     #: registry key used in watchlist.yaml, e.g. "bibliocommons"
     kind: str = ""
+    #: lending period in days, used to turn a hold queue into a wait. Override
+    #: per kind; `loan_days` in watchlist.yaml wins over both.
+    default_loan_days: int = 21
 
     def __init__(self, source_id: str, cfg: dict[str, Any]):
         self.source_id = source_id
         self.cfg = cfg
+
+    @property
+    def label(self) -> str:
+        """The library as a human would name it. Source ids leak into pushes
+        otherwise ("ebook at libby-houston")."""
+        return self.cfg.get("label") or self.source_id
+
+    @property
+    def loan_days(self) -> int:
+        return int(self.cfg.get("loan_days") or self.default_loan_days)
+
+    @property
+    def distance_mi(self) -> float:
+        """How far the physical copies are. Digital stays 0 — it comes to you,
+        so it never loses a tiebreak to a branch down the road."""
+        return float(self.cfg.get("distance_mi") or 0.0)
 
     @abstractmethod
     def check(self, config: Config) -> list[Observation]:

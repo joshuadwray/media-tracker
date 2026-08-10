@@ -83,6 +83,15 @@
 - Cached page-count misses never self-retry; if that bites, add a
   retry-after-N-days rule (manual fix today: delete the cache entry or
   set the count on the card).
+- **cloudLibrary carries page counts.** Its search records have
+  `totalExtents` (ebooks only; audiobooks carry `duration` instead) —
+  verified 2026-08-10, e.g. Dead but Dreaming = 336. The library sources
+  already stash it on `Observation.detail["pages"]`, so it could become a
+  step in `reading_gen`'s page-count chain (covers-cache ISBN → OL →
+  iTunes → Apple Books). Attractive because it needs no extra request and
+  covers exactly the new releases OpenLibrary tends to miss — but it only
+  fires for books that are on the watchlist AND in a cloudLibrary we
+  watch, so it's a supplement, not a replacement.
 
 ## Pending cleanup
 - Retire `add-item.yml` once `add-items.yml` (batch) has a few real runs

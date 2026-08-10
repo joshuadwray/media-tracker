@@ -87,11 +87,17 @@ class BiblioCommonsSource(Source):
                     continue
                 status = (bib.get("status") or "unknown").upper()
                 friendly = FORMAT_NAMES.get(fmt, fmt.lower())
+                # No queue length in the search embed, so a shelf copy is a
+                # zero wait and anything else is "wait for the current loan".
+                # Coarse, but it puts print on the same ladder as digital.
+                available = bib.get("availableCopies")
+                wait = 0 if (available or 0) > 0 else self.loan_days
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
-                    summary=f"{friendly} in {self.subdomain} library catalog",
+                    summary=(f"{friendly} in {self.subdomain} library catalog"
+                             f" — {_shelf_state(available, status)}"),
                     url=url,
                     # Presence in the catalog is the hit — the user is happy
                     # to join hold queues, so availability isn't the bar and
@@ -99,8 +105,14 @@ class BiblioCommonsSource(Source):
                     positive=True,
                     event=f"{friendly} in catalog",
                     medium=medium_for(fmt),
+                    wait=wait,
+                    distance_mi=self.distance_mi,
+                    loan_days=self.loan_days,
+                    source_label=self.label,
                     detail={"format": fmt, "status": status,
-                            "available_copies": bib.get("availableCopies"),
+                            "author": _author_str(bib),
+                            "available_copies": available,
+                            "held_copies": bib.get("heldCopies"),
                             "found_title": title},
                 ))
         return observations
@@ -155,6 +167,15 @@ def _first_isbn(isbns: Any) -> str | None:
     if isinstance(isbns, list) and isbns:
         return str(isbns[0])
     return str(isbns) if isbns else None
+
+
+def _shelf_state(available: Any, status: str) -> str:
+    """Whether you could walk in and pick it up."""
+    try:
+        n = int(available)
+    except (TypeError, ValueError):
+        return status.lower().replace("_", " ")
+    return f"{n} on shelf" if n > 0 else "all copies out"
 
 
 def _author_str(bib: dict) -> str | None:

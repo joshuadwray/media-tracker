@@ -8,6 +8,12 @@ endpoint returned so a future move is a one-line fix.
 
 Find your library id in the URL you use to log in:
 https://ebook.yourcloudlibrary.com/library/<THIS PART>/...
+
+The records are richer than they look, and richer than Libby's: alongside
+`totalCopies` and `currentlyAvailable` the search returns
+`currentlyReserved` (the hold queue), `currentlyLoaned`, `isPreSale` and
+an explicit `format`. We read all of it, so cloudLibrary titles rank and
+ratchet on wait exactly like Libby ones.
 """
 from __future__ import annotations
 
@@ -15,6 +21,7 @@ import json
 from typing import Any
 
 from .. import http
+from ..availability import describe, wait_days
 from ..config import Config
 from ..matching import author_matches, search_query, titles_match
 from ..models import Observation, medium_for
@@ -24,6 +31,7 @@ from .base import Source, register
 @register
 class CloudLibrarySource(Source):
     kind = "cloudlibrary"
+    default_loan_days = 21  # cloudLibrary's standard loan
 
     @property
     def library_id(self) -> str:
@@ -90,20 +98,34 @@ class CloudLibrarySource(Source):
                 if not book.isbn and not titles_match(book.title, title):
                     continue
                 if not book.isbn and book.author and \
-                        not author_matches(book.author, _raw_authors(item)):
+                        not author_matches(book.author, item.get("authors")):
                     continue  # fuzzy title hit on the wrong author
                 fmt = item.get("format") or "ebook/audio"
+                wait = wait_days(item.get("available_copies"), item.get("owned"),
+                                 item.get("holds"), self.loan_days)
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
-                    summary=f"{fmt} in cloudLibrary catalog ({self.label})",
+                    summary=(f"{fmt} in cloudLibrary catalog ({self.label})"
+                             f" — {_describe_copies(item, wait)}"),
                     url=f"https://ebook.yourcloudlibrary.com/library/{self.library_id}"
                         f"/search?query={query.replace(' ', '%20')}",
                     positive=True,  # in catalog = hit; hold queues are fine
                     event=f"{fmt} in catalog",  # availability flips don't re-notify
                     medium=medium_for(fmt),
-                    detail={"found_title": title, "raw": item.get("raw", {})},
+                    wait=wait,
+                    distance_mi=self.distance_mi,
+                    loan_days=self.loan_days,
+                    source_label=self.label,
+                    detail={"found_title": title,
+                            "author": item.get("authors"),
+                            "owned_copies": item.get("owned"),
+                            "available_copies": item.get("available_copies"),
+                            "loaned": item.get("loaned"),
+                            "holds": item.get("holds"),
+                            "pre_release": item.get("pre_release"),
+                            "pages": item.get("pages")},
                 ))
         return observations
 
@@ -170,9 +192,9 @@ class CloudLibrarySource(Source):
         )
 
 
-def _raw_authors(item: dict) -> str | None:
-    raw = item.get("raw", {})
-    authors = raw.get("Authors") or raw.get("authors")
+def _raw_authors(node: dict) -> str | None:
+    """Author names off a raw catalog record, for the wrong-book guard."""
+    authors = node.get("Authors") or node.get("authors")
     if isinstance(authors, list):
         authors = ", ".join(str(a) for a in authors)
     return str(authors) if authors else None
@@ -188,21 +210,21 @@ def _parse_items(data: Any) -> list[dict[str, Any]]:
             if title and any(k in node for k in (
                 "Authors", "authors", "ISBN", "isbn", "MediaType", "mediaType", "Id", "id"
             )):
-                # Current API doesn't name the format, but audiobooks carry a
-                # duration and ebooks a nonzero epubFormat.
-                fmt = (node.get("productFormDescription")
-                       or node.get("MediaType") or node.get("mediaType"))
-                if not fmt:
-                    if node.get("duration"):
-                        fmt = "audiobook"
-                    elif node.get("epubFormat"):
-                        fmt = "ebook"
                 items.append({
                     "title": title,
-                    "format": fmt,
+                    "format": _format(node),
+                    "authors": _raw_authors(node),
                     "available": _availability(node),
                     "borrowable": _borrowable(node),
-                    "raw": {k: node[k] for k in list(node)[:12]},
+                    # The queue, which we used to throw away. `currentlyLoaned`
+                    # has no Libby equivalent: it separates "no copies free
+                    # because they're all out" from "no copies at all".
+                    "owned": node.get("totalCopies"),
+                    "available_copies": node.get("currentlyAvailable"),
+                    "loaned": node.get("currentlyLoaned"),
+                    "holds": node.get("currentlyReserved"),
+                    "pre_release": bool(node.get("isPreSale")),
+                    "pages": node.get("totalExtents"),
                 })
                 return
             for v in node.values():
@@ -213,6 +235,46 @@ def _parse_items(data: Any) -> list[dict[str, Any]]:
 
     walk(data)
     return items
+
+
+def _describe_copies(item: dict, wait: int | None) -> str:
+    """Copies and queue, in the same shape the Libby source uses."""
+    owned = item.get("owned") or 0
+    available = item.get("available_copies") or 0
+    holds = item.get("holds") or 0
+    if item.get("pre_release"):
+        return f"pre-release{f', {holds} holds' if holds else ''}"
+    text = f"{available}/{owned} available"
+    if holds:
+        text += f", {holds} hold{'s' if holds != 1 else ''}"
+    if wait is not None and wait > 0:
+        text += f" ({describe(wait)})"
+    return text
+
+
+def _format(node: dict) -> str | None:
+    """Which format a record is.
+
+    The search payload names it outright — `format` is "audio" or "digital"
+    on every live record. The older inference (audiobooks carry a duration,
+    ebooks a nonzero epubFormat) stays as a fallback for payload shapes we
+    haven't seen.
+    """
+    fmt = node.get("format")
+    if isinstance(fmt, str):
+        if fmt.lower() in ("audio", "audiobook"):
+            return "audiobook"
+        if fmt.lower() in ("digital", "ebook", "epub"):
+            return "ebook"
+    named = (node.get("productFormDescription")
+             or node.get("MediaType") or node.get("mediaType"))
+    if named:
+        return named
+    if node.get("duration"):
+        return "audiobook"
+    if node.get("epubFormat"):
+        return "ebook"
+    return None
 
 
 def _borrowable(node: dict) -> bool | None:

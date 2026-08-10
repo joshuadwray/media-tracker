@@ -13,9 +13,11 @@ from collections import OrderedDict
 from datetime import datetime, timezone
 
 from . import site
+from .availability import describe
 from .config import Config
 from .models import Observation, SourceResult
-from .report import STILL_LOOKING_BLURB, still_looking
+from .report import (STILL_LOOKING_BLURB, still_looking, sync_note,
+                     tracks_for_item)
 from .state import State
 
 _CSS = """
@@ -39,6 +41,17 @@ _CSS = """
 .row .st { margin-left: 8px; white-space: nowrap; }
 .row a { font-size: .85rem; margin-left: 6px; }
 .muted { opacity: .6; }
+/* Track sections: the headline option is the one you'd act on, so it reads
+   at full strength and the rest of the libraries recede under it. */
+.trk { font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--ink-mute); margin: 8px 0 2px; }
+.row.alt { padding-left: 12px; }
+.row.alt .lbl { opacity: .6; font-size: .85rem; }
+.row + .trk { border-top: 1px dashed var(--line); padding-top: 6px; }
+.wait { font-variant-numeric: tabular-nums; font-weight: 600; }
+.wait.now { color: var(--ok); }
+.sync { font-size: .8rem; color: var(--ink-mute); margin-top: 6px;
+        padding-top: 5px; border-top: 1px dashed var(--line); }
 .src { display: flex; justify-content: space-between; font-size: .9rem;
        padding: 4px 2px; border-bottom: 1px dashed var(--line); }
 .ok { color: var(--ok); } .err { color: var(--err); }
@@ -280,14 +293,31 @@ def _grouped_card(label: str, current_obs: list[Observation],
     cls = "card new" if is_new else "card"
 
     rows: list[str] = []
-    for o in current_obs:
-        is_fresh = o.fingerprint in new_fps
-        badge = "🟢" if is_fresh else "✅"
+
+    def obs_row(o: Observation, alt: bool) -> str:
+        badge = "🟢" if o.fingerprint in new_fps else "✅"
         link = f" <a href='{e(o.url)}'>open&nbsp;↗</a>" if o.url else ""
         info = "" if o.positive else " <span class='muted'>(info)</span>"
-        row_label = _short_label(o.source, o.event or o.summary)
-        rows.append(f"<div class='row'><span class='lbl'>{e(row_label)}{info}</span>"
-                    f"<span class='st'>{badge}{link}</span></div>")
+        if o.track:
+            wait_cls = "wait now" if o.bucket == "now" else "wait"
+            lbl = (f"<span class='{wait_cls}'>{e(describe(o.wait))}</span> · "
+                   f"{e(o.where)} <span class='muted'>({e(o.medium or '')})</span>")
+        else:
+            lbl = e(_short_label(o.source, o.event or o.summary))
+        return (f"<div class='row{' alt' if alt else ''}'>"
+                f"<span class='lbl'>{lbl}{info}</span>"
+                f"<span class='st'>{badge}{link}</span></div>")
+
+    # Books split into reading/listening with the best option leading each;
+    # everything else (showtimes, streaming) keeps the flat row.
+    by_track = tracks_for_item(current_obs)
+    for track, options in by_track.items():
+        rows.append(f"<div class='trk'>{e(track)}</div>")
+        rows.extend(obs_row(o, alt=i > 0) for i, o in enumerate(options))
+    rows.extend(obs_row(o, alt=False) for o in current_obs if not o.track)
+    note = sync_note(by_track)
+    if note:
+        rows.append(f"<div class='sync'>{e(note)}</div>")
 
     for c in (carried or []):
         today = now.strftime("%Y-%m-%d")

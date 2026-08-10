@@ -1,58 +1,52 @@
-# Media tracker report — 2026-08-10 15:44 UTC
+# Media tracker report — 2026-08-10 16:43 UTC
 
-## New sightings (9)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: ebook in Libby catalog (Houston) — 0/2 available, 49 holds (~350d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/12371033)
-- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**: audiobook in Libby catalog (Houston) — 0/2 available, 55 holds (~392d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/12403739)
-- **Fruit Fly — Silver, Josh**: ebook in Libby catalog (Houston) — 0/1 available, 96 holds (~1358d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/12546462)
-- **Fruit Fly — Silver, Josh**: audiobook in Libby catalog (Houston) — 0/1 available, 98 holds (~1386d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/13338759)
-- **one leg on earth — aguda**: audiobook in Libby catalog (Houston) — 0/1 available, 10 holds (~154d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/13002551)
-- **one leg on earth — aguda**: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~70d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/12480826)
-- **The Hill**: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~399d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/11842636)
-- **The Hill**: audiobook in Libby catalog (Houston) — 0/1 available — [link](https://libbyapp.com/library/houstonlibrary/media/10395261)
-- **Triage — Rankine, Claudia**: ebook in Libby catalog (Houston) — 0/1 available, 6 holds (~98d wait) — [link](https://libbyapp.com/library/houstonlibrary/media/12344305)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (34)
-- Triage — Rankine, Claudia: print book in denton library catalog
-- Fruit Fly — Silver, Josh: print book in denton library catalog
-- Dèy — Danticat, Edwidge: print book in denton library catalog
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
-- Fruit Fly — Silver, Josh: audiobook in cloudLibrary catalog (Denton)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Lewisville)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in cloudLibrary catalog (Lewisville)
-- The Hill: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~24d wait)
-- The Hill: audiobook in Libby catalog (Fort Worth) — 0/1 available, 1 hold (~28d wait)
-- The Hill: ebook in Libby catalog (Fort Worth) — 0/0 available, 2 holds
-- The Hill: audiobook in Libby catalog (Fort Worth) — 1/1 available
-- The Hill: ebook in Libby catalog (Fort Worth) — 0/0 available
-- Fruit Fly — Silver, Josh: ebook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~185d wait)
-- Fruit Fly — Silver, Josh: audiobook in Libby catalog (Fort Worth) — 0/3 available, 25 holds (~122d wait)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait)
-- The Hill: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~399d wait)
-- The Hill: ebook in Libby catalog (Houston) — 1/1 available
-- The Hill: audiobook in Libby catalog (Houston) — 0/1 available
-- The Hill: audiobook in Libby catalog (Houston) — 0/1 available
-- The Hill: audiobook in Libby catalog (Houston) — 3/3 available
-- The Hill: ebook in Libby catalog (Houston) — 1/1 available
-- one leg on earth — aguda: audiobook in Libby catalog (Houston) — 0/1 available, 10 holds (~154d wait)
-- one leg on earth — aguda: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~70d wait)
-- Triage — Rankine, Claudia: ebook in Libby catalog (Houston) — 0/1 available, 6 holds (~98d wait)
-- Fruit Fly — Silver, Josh: ebook in Libby catalog (Houston) — 0/1 available, 96 holds (~1358d wait)
-- Fruit Fly — Silver, Josh: audiobook in Libby catalog (Houston) — 0/1 available, 98 holds (~1386d wait)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in Libby catalog (Houston) — 0/2 available, 49 holds (~350d wait)
-- Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Houston) — 0/2 available, 55 holds (~392d wait)
-- teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
-- i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-10, 2026-08-11, 2026-08-12)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-10, 2026-08-11, 2026-08-12)
-- i want your sex (2026): "I Want Your Sex" playing at AMC Northpark 15 (2026-08-10, 2026-08-11, 2026-08-12)
-- teenage sex and death at camp miasma (2026): "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-13)
+## All current sightings (25)
+- **Triage — Rankine, Claudia**
+  - reading: print book in denton library catalog — all copies out · Rankine, Claudia
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 6 holds (~3 mo)
+- **Fruit Fly — Silver, Josh**
+  - reading: print book in denton library catalog — all copies out · Silver, Josh
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 96 holds (~3.7 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 3 holds (~3 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 25 holds (~4 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/1 available, 98 holds (~3.8 yr)
+  - sync: gap 63d > 21d loan — suspend the reading hold ~63d for listening
+- **Dèy — Danticat, Edwidge**
+  - reading: print book in denton library catalog — all copies out · Danticat, Edwidge
+- **Dead but Dreaming of Electric Sheep — Tremblay, Paul**
+  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Tremblay, Paul
+    - also: print book in denton library catalog — all copies out
+    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~4 mo)
+    - also: ebook in Libby catalog (Houston) — 0/2 available, 49 holds (~12 mo)
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Tremblay, Paul, Amoss, Sophie, Halstead, Graham, Pirhalla, John, Bittner, Dan
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~2 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/2 available, 55 holds (~1.1 yr)
+  - sync: gap 0d, fits in a 21d loan
+- **The Hill — Clark, Harriet**
+  - reading: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~3 wk) · Harriet Clark
+    - also: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~1.1 yr)
+- **one leg on earth — aguda**
+  - reading: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · 'Pemi Aguda
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 10 holds (~5 mo) · 'Pemi Aguda
+  - sync: gap 84d > 14d loan — suspend the reading hold ~84d for listening
+- **teenage sex and death at camp miasma (2026)**
+  - "teenage sex and death at camp miasma" mentioned on Texas Theatre
+  - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-13)
+- **i want your sex (2026)**
+  - "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-10, 2026-08-11, 2026-08-12)
+  - "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-10, 2026-08-11, 2026-08-12)
+  - "I Want Your Sex" playing at AMC Northpark 15 (2026-08-10, 2026-08-11, 2026-08-12)
 
 ## Source status
 - ✅ `denton-library`: 4 observation(s)
 - ✅ `cloudlibrary`: 1 observation(s)
 - ✅ `cloudlibrary-lewisville`: 2 observation(s)
-- ✅ `libby-fortworth`: 9 observation(s)
-- ✅ `libby-houston`: 13 observation(s)
+- ✅ `libby-fortworth`: 5 observation(s)
+- ✅ `libby-houston`: 8 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
 - ✅ `amc`: 4 observation(s)

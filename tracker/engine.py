@@ -85,30 +85,39 @@ def _notify_groups(run: CheckRun, state: State,
                    ok_sources: set[str]) -> list[NotifyGroup]:
     """Decide what to push about.
 
-    Observations carrying a `medium` are grouped per (item, medium) and
-    deduped against state.media — a book is announced once per medium,
-    however many libraries turn out to have it, and staying present at
-    one library keeps the medium quiet at the others. Everything else
-    (movies, showtimes) keeps its per-observation behavior: those are
-    already deduped per fingerprint, so their `new` list is the answer.
+    Observations carrying a `track` are grouped per (item, track) and deduped
+    against state.media. Two things can make a track worth a push:
+
+      found  — the track went unseen -> seen. A book is announced once per
+               track however many libraries turn out to have it, and staying
+               present at one library keeps the track quiet at the others.
+      sooner — the track was already known, but the shortest wait among its
+               options dropped a whole bucket (see availability). This is the
+               one that earns its keep at a Libby-sized library, where a title
+               can sit in the catalog for months behind a queue you'd never
+               join, and then suddenly not be.
+
+    Everything else (movies, showtimes) keeps its per-observation behavior:
+    those are already deduped per fingerprint, so their `new` list is the
+    answer.
     """
     grouped: OrderedDict[str, NotifyGroup] = OrderedDict()
     for r in run.results:
         for obs in r.observations:
-            if not obs.medium:
+            if not obs.track:
                 continue
-            key = f"{obs.item_key}|{obs.medium}"
+            key = f"{obs.item_key}|{obs.track}"
             group = grouped.get(key)
             if group is None:
                 group = grouped[key] = NotifyGroup(
                     item_key=obs.item_key, item_label=obs.item_label,
-                    medium=obs.medium,
+                    track=obs.track,
                 )
             group.observations.append(obs)
 
-    # A book we've never seen in any medium is a first discovery: say it once,
-    # listing everything found, rather than firing print/ebook/audiobook as
-    # three separate pushes for the same news. Later mediums still ping
+    # A book we've never seen in any track is a first discovery: say it once,
+    # listing everything found, rather than firing reading and listening as
+    # two separate pushes for the same news. Later tracks still ping
     # individually, because by then the book itself isn't the news.
     first_seen = {
         g.item_key for g in grouped.values()
@@ -118,17 +127,23 @@ def _notify_groups(run: CheckRun, state: State,
     out: list[NotifyGroup] = []
     debuts: OrderedDict[str, NotifyGroup] = OrderedDict()
     for key, group in grouped.items():
+        bucket = group.best_bucket
         if not state.media_is_new(key):
             if any(o.source in ok_sources for o in group.observations):
                 state.media_touch(key)
+            if state.media_improves(key, bucket):
+                group.reason = "sooner"
+                out.append(group)
+            state.media_set_best(key, bucket)
             continue
         state.media_record(key)
+        state.media_set_best(key, bucket)
         if group.item_key in first_seen:
             debut = debuts.get(group.item_key)
             if debut is None:
                 debut = debuts[group.item_key] = NotifyGroup(
                     item_key=group.item_key, item_label=group.item_label,
-                    medium=None,
+                    track=None,
                 )
             debut.observations.extend(group.observations)
         else:
@@ -137,7 +152,7 @@ def _notify_groups(run: CheckRun, state: State,
 
     out.extend(
         NotifyGroup(item_key=o.item_key, item_label=o.item_label,
-                    medium=None, observations=[o])
-        for o in run.new if not o.medium
+                    track=None, observations=[o])
+        for o in run.new if not o.track
     )
     return out

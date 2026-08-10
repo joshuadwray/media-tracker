@@ -8,6 +8,9 @@
 
 books:
   - title: The Hill
+    # Without an author the title guard runs alone, and "The Hill" fuzzy-matches
+    # Hill Women, Cobble Hill, The Sledding Hill and The Hill We Climb.
+    author: Clark, Harriet
     bib_id: S127C1817916
   - title: one leg on earth
     author: aguda
@@ -61,13 +64,21 @@ streaming:
   services: [Netflix, Hulu, HBO Max, Apple TV Plus, Disney Plus, Amazon Prime Video]
 
 sources:
+  # loan_days turns a hold queue into a wait, and distance_mi ranks physical
+  # copies against each other (digital is 0 — it comes to you). Beyond
+  # availability.MAX_DISTANCE_MI a physical copy is still reported but never
+  # headlines a book, so a shelf copy 200 miles away can't mark it "got it".
+
   denton-library:
     kind: bibliocommons
     library: denton              # https://denton.bibliocommons.com
+    label: Denton
     # EBOOK/AUDIOBOOK excluded — Denton's digital side is cloudLibrary,
     # which we watch separately, so those would be duplicate notifs.
     # AB = audiobook on CD (physical), which cloudLibrary doesn't cover.
     formats: [BK, AB]
+    loan_days: 21
+    distance_mi: 3               # the one physical collection we watch
 
   cloudlibrary:
     kind: cloudlibrary
@@ -75,6 +86,8 @@ sources:
     # https://ebook.yourcloudlibrary.com/library/<THIS PART>/...
     # Case-sensitive! Wrong case redirects to the marketing site.
     library: Denton
+    label: Denton
+    loan_days: 21             # cloudLibrary standard loan
 
   cloudlibrary-lewisville:
     kind: cloudlibrary
@@ -85,6 +98,7 @@ sources:
     # so print isn't watched yet (see TODO.md).
     library: lewisvillepubliclibrary
     label: Lewisville            # display name for pushes/report
+    loan_days: 21                # published: library.cityoflewisville.com FAQ
 
   libby-fortworth:
     kind: libby
@@ -93,6 +107,9 @@ sources:
     # Libby is its digital collection. Print is Polaris, not watched (TODO.md).
     library: fwpl
     label: Fort Worth
+    # Not published; patrons pick 7/14/21 in Libby where offered. 14 is
+    # OverDrive's default and what its own wait arithmetic assumes.
+    loan_days: 14
 
   libby-houston:
     kind: libby
@@ -105,6 +122,7 @@ sources:
     # Print is SirsiDynix Enterprise, not watched (TODO.md).
     library: houstonlibrary
     label: Houston               # display name for pushes/report
+    loan_days: 14                # published: houstonlibrary.org/download-stream
 
   texas-theatre:
     kind: pages

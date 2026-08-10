@@ -5,6 +5,8 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Optional
 
+from . import availability
+
 
 @dataclass
 class WatchBook:
@@ -55,10 +57,44 @@ class Observation:
                                  # detail (copy counts, statuses) that shouldn't
                                  # re-trigger a notification when it changes.
     medium: Optional[str] = None  # canonical format (see MEDIUM_BY_FORMAT).
-                                  # Notifications group by (item, medium), so a
+                                  # Notifications group by (item, track), so a
                                   # book carried by three libraries in one
-                                  # medium is one push, not three. None keeps
+                                  # track is one push, not three. None keeps
                                   # per-observation pushes (movies/showtimes).
+    wait: Optional[int] = None    # days until a copy could reach you, 0 if one
+                                  # is free now; None when copies are unknown.
+                                  # See availability.wait_days.
+    distance_mi: float = 0.0      # how far the copy is. Digital is 0 — it comes
+                                  # to you. Orders options within a track.
+    loan_days: int = 0            # this library's lending period; 0 = not a
+                                  # lending source (theatres, streaming).
+    source_label: str = ""        # library as a human would name it. Pushes
+                                  # used to print the source id.
+
+    @property
+    def where(self) -> str:
+        return self.source_label or self.source
+
+    @property
+    def track(self) -> Optional[str]:
+        return track_for(self.medium)
+
+    @property
+    def reachable(self) -> bool:
+        """Close enough to count. A far physical copy is still reported, but
+        it can't headline a track or satisfy its watermark."""
+        return self.distance_mi <= availability.MAX_DISTANCE_MI
+
+    @property
+    def bucket(self) -> str:
+        return availability.bucket(self.wait, self.loan_days or 21)
+
+    @property
+    def sort_key(self) -> tuple:
+        """Best option first. Out-of-range physical copies sink to the bottom
+        whatever their availability, then it's soonest-then-nearest."""
+        return (not self.reachable, availability.rank(self.bucket),
+                self.distance_mi, self.wait if self.wait is not None else 10**6)
 
     @property
     def fingerprint(self) -> str:
@@ -75,11 +111,30 @@ MEDIUM_BY_FORMAT = {
     "EBOOK": "ebook", "ebook": "ebook",
     "AUDIOBOOK": "audiobook", "audiobook": "audiobook",
     "AB": "audiobook-cd", "audiobook (CD)": "audiobook-cd",
-    # cloudLibrary's fallback when a record doesn't say which it is
+    # cloudLibrary's fallback when a record doesn't say which it is. Vestigial
+    # since we started reading its explicit `format` field, but kept so old
+    # state keys still resolve to a track during migration.
     "ebook/audio": "ebook-or-audiobook",
     "MUSIC_CD": "music-cd", "music CD": "music-cd",
     "DVD": "dvd", "BLURAY": "blu-ray", "Blu-ray": "blu-ray",
 }
+
+# Medium -> the thing you actually decide between. Print and ebook are one
+# choice, not two: either gets the book in front of your eyes, so they compete
+# for the same slot and only the better option is worth a notification. Audio
+# is a genuinely separate way to consume the book, and often a separate queue.
+#
+# These names are notification keys (state.media is keyed by item|track).
+TRACK_BY_MEDIUM = {
+    "print": "reading",
+    "large-print": "reading",
+    "ebook": "reading",
+    "ebook-or-audiobook": "reading",  # vestigial; see MEDIUM_BY_FORMAT
+    "audiobook": "listening",
+    "audiobook-cd": "listening",
+}
+
+TRACKS = ("reading", "listening")
 
 
 def medium_for(fmt: Optional[str]) -> Optional[str]:
@@ -90,19 +145,46 @@ def medium_for(fmt: Optional[str]) -> Optional[str]:
     return MEDIUM_BY_FORMAT.get(fmt) or MEDIUM_BY_FORMAT.get(fmt.lower())
 
 
+def track_for(medium: Optional[str]) -> Optional[str]:
+    """Which track a medium belongs to, or None for things that aren't a
+    book to read (DVDs, music) and for movies/showtimes."""
+    if not medium:
+        return None
+    return TRACK_BY_MEDIUM.get(medium)
+
+
 @dataclass
 class NotifyGroup:
-    """What one push is about: an item in one medium, plus every place it
-    was spotted. Movies and showtimes get a single-observation group so
-    their per-date notification behavior is unchanged."""
+    """What one push is about: an item in one track, plus every place it was
+    spotted. Movies and showtimes get a single-observation group so their
+    per-date notification behavior is unchanged."""
     item_key: str
     item_label: str
-    medium: Optional[str]
+    track: Optional[str]
     observations: list["Observation"] = field(default_factory=list)
+    reason: str = "found"  # "found" = the track is newly in a catalog;
+                           # "sooner" = it was already there and the wait
+                           # dropped a bucket. Shapes the push wording.
 
     @property
     def state_key(self) -> str:
-        return f"{self.item_key}|{self.medium}"
+        return f"{self.item_key}|{self.track}"
+
+    @property
+    def options(self) -> list["Observation"]:
+        """Every place it was spotted, best first."""
+        return sorted(self.observations, key=lambda o: o.sort_key)
+
+    @property
+    def headline(self) -> Optional["Observation"]:
+        """The one option worth acting on. Only reachable copies qualify —
+        a print copy three states away shouldn't declare the track solved."""
+        return next((o for o in self.options if o.reachable), None)
+
+    @property
+    def best_bucket(self) -> Optional[str]:
+        head = self.headline
+        return head.bucket if head else None
 
     @property
     def sources(self) -> list[str]:

@@ -4,9 +4,13 @@ Two maps, both mapping a key to {first, last} timestamps:
 
   seen   — one entry per observation fingerprint (source|item|event).
            Drives the dashboard and report: per-library detail.
-  media  — one entry per (item_key, medium). Drives *notifications*:
-           a book carried by three libraries in one medium is one push,
-           not three, and only when that medium goes unseen -> seen.
+  media  — one entry per (item_key, track). Drives *notifications*:
+           a book carried by three libraries in one track is one push,
+           not three, and only when that track goes unseen -> seen.
+           Also carries `best`, the shortest wait-bucket the track has
+           ever reached (see availability), so a queue that gets
+           materially shorter can speak up a second time without every
+           copy-count wobble doing the same.
 
 Plus one flat map, item_key -> ISO timestamp:
 
@@ -66,6 +70,7 @@ class State:
                 self.seen[fp] = {"first": val, "last": val}
         if not self.media and self.seen:
             self._seed_media_from_seen()
+        self._seed_tracks_from_media()
 
     def _seed_media_from_seen(self) -> None:
         """One-time backfill of the media map from per-source history."""
@@ -89,6 +94,32 @@ class State:
                 "last": max(entry["last"], old["last"]) if old else entry["last"],
             }
 
+    def _seed_tracks_from_media(self) -> None:
+        """Fold per-medium keys into per-track keys.
+
+        The media map used to be keyed by medium (print/ebook/audiobook);
+        it's now keyed by track (reading/listening). Without this the first
+        run after the upgrade would find every track unseen and push the
+        whole watchlist. Widest window wins, same as the legacy seed.
+
+        Idempotent: keys already ending in a track name are left alone, so
+        this is a no-op on every subsequent run.
+        """
+        from .models import TRACKS, track_for
+
+        for key in [k for k in self.media if k.rsplit("|", 1)[-1] not in TRACKS]:
+            entry = self.media.pop(key)
+            item_key, _, medium = key.rpartition("|")
+            track = track_for(medium)
+            if not track:
+                continue  # a medium with no track (dvd, music-cd): drop it
+            new_key = f"{item_key}|{track}"
+            old = self.media.get(new_key)
+            self.media[new_key] = {
+                "first": min(entry["first"], old["first"]) if old else entry["first"],
+                "last": max(entry["last"], old["last"]) if old else entry["last"],
+            }
+
     # --- per-observation (dashboard/report) ---------------------------
 
     def is_new(self, obs: Observation, now: datetime | None = None) -> bool:
@@ -102,7 +133,7 @@ class State:
               dates: list[str] | None = None) -> None:
         _touch(self.seen, obs.fingerprint, now, dates)
 
-    # --- per (item, medium) (notifications) ---------------------------
+    # --- per (item, track) (notifications) ----------------------------
 
     def media_is_new(self, key: str, now: datetime | None = None) -> bool:
         return _is_new(self.media, key, now)
@@ -112,6 +143,32 @@ class State:
 
     def media_touch(self, key: str, now: datetime | None = None) -> None:
         _touch(self.media, key, now)
+
+    def media_best(self, key: str) -> str | None:
+        entry = self.media.get(key)
+        return entry.get("best") if entry else None
+
+    def media_improves(self, key: str, bucket: str | None) -> bool:
+        """Is this wait better than the best we've ever recorded here?
+
+        False the first time we learn a track's wait — the discovery push
+        already covered the book, and "it's a 400-day queue" isn't a second
+        piece of news. From then on, only genuine improvements speak.
+        """
+        from .availability import improves
+        if bucket is None:
+            return False
+        return improves(bucket, self.media_best(key))
+
+    def media_set_best(self, key: str, bucket: str | None) -> None:
+        """Ratchet the watermark. Only ever moves toward a shorter wait, so
+        a title going back on hold doesn't re-arm the notification."""
+        from .availability import UNKNOWN, better
+        if bucket is None or bucket == UNKNOWN:
+            return
+        entry = self.media.get(key)
+        if entry is not None:
+            entry["best"] = better(bucket, entry.get("best"))
 
     # --- how long an item has been on the watchlist -------------------
 

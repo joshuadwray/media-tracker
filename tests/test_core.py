@@ -67,12 +67,19 @@ def test_state_notifies_once(tmp_path):
     assert state2.is_new(_obs("audiobook available"))
 
 
-def _book_obs(source, medium, item="book:x", label="X"):
+_LABELS = {"denton-cl": "Denton CL", "lewisville-cl": "Lewisville",
+           "fortworth": "Fort Worth"}
+
+
+def _book_obs(source, medium, item="book:x", label="X", wait=None,
+              distance_mi=0.0, loan_days=14):
     fmt = {"ebook": "ebook", "audiobook": "audiobook", "print": "print book",
            "audiobook-cd": "audiobook (CD)"}[medium]
     return Observation(source=source, item_key=item, item_label=label,
                        summary=f"{fmt} in {source} catalog",
-                       event=f"{fmt} in catalog", medium=medium)
+                       event=f"{fmt} in catalog", medium=medium, wait=wait,
+                       distance_mi=distance_mi, loan_days=loan_days,
+                       source_label=_LABELS.get(source, source))
 
 
 def _run_groups(state, observations, ok=None):
@@ -92,9 +99,10 @@ def _run_groups(state, observations, ok=None):
     return _notify_groups(run, state, sources)
 
 
-def test_notify_groups_one_push_per_medium(tmp_path):
-    """Once a book is known, each medium is announced once — however many
-    libraries carry it, and whichever library turns it up first."""
+def test_notify_groups_one_push_per_track(tmp_path):
+    """Once a book is known, each track is announced once — however many
+    libraries carry it, in whatever format. Print and ebook are the same
+    decision, so the ebook is silent once print has been announced."""
     state = State(tmp_path / "state.json")
     # Past its debut (that path is test_first_discovery_is_one_push).
     _run_groups(state, [_book_obs("denton-cl", "print")])
@@ -104,9 +112,8 @@ def test_notify_groups_one_push_per_medium(tmp_path):
         _book_obs("lewisville-cl", "ebook"),
         _book_obs("denton-cl", "audiobook"),
     ])
-    assert sorted(g.medium for g in groups) == ["audiobook", "ebook"]
-    assert next(g for g in groups if g.medium == "ebook").sources == \
-        ["denton-cl", "lewisville-cl"]
+    # print already covered "reading"; only listening is news.
+    assert [g.track for g in groups] == ["listening"]
 
     # Same run again (state persisted): nothing new.
     state.save()
@@ -119,43 +126,42 @@ def test_notify_groups_one_push_per_medium(tmp_path):
 
     # A third library turning up the same ebook is not news.
     assert _run_groups(state, [_book_obs("fortworth", "ebook")]) == []
-    # A medium nobody had yet is.
-    assert [g.medium for g in _run_groups(state, [_book_obs("fortworth", "audiobook-cd")])] \
-        == ["audiobook-cd"]
+    # Nor is audio on CD — same track as the audiobook we already have.
+    assert _run_groups(state, [_book_obs("fortworth", "audiobook-cd")]) == []
 
 
 def test_first_discovery_is_one_push(tmp_path):
-    """A book nobody has seen before is announced once, listing every medium
-    — not once per medium. Later mediums ping on their own."""
+    """A book nobody has seen before is announced once, listing every track
+    — not once per track. Later tracks ping on their own."""
     from tracker.notify import body
 
     state = State(tmp_path / "state.json")
     groups = _run_groups(state, [
-        _book_obs("denton-cl", "print"),
-        _book_obs("lewisville-cl", "ebook"),
-        _book_obs("fortworth", "ebook"),
+        _book_obs("denton-cl", "print", wait=0),
+        _book_obs("lewisville-cl", "ebook", wait=30),
+        _book_obs("fortworth", "audiobook", wait=30),
     ])
     assert len(groups) == 1
     debut = groups[0]
-    assert debut.medium is None
+    assert debut.track is None
     text = body(debut)
-    assert "print at denton-cl" in text
-    assert "ebook at lewisville-cl, fortworth" in text
+    # Best option per track, named the way a person would name the library.
+    assert "reading: now at Denton CL (print)" in text
+    assert "listening: ~4 wk at Fort Worth (audiobook)" in text
+    # The ebook loses to the on-shelf print copy and doesn't clutter the push.
+    assert "ebook" not in text
 
-    # Each medium was still recorded, so nothing re-announces...
-    assert _run_groups(state, [_book_obs("denton-cl", "print")]) == []
-    # ...and a medium that shows up later is its own push, not another debut.
-    later = _run_groups(state, [_book_obs("denton-cl", "audiobook")])
-    assert [g.medium for g in later] == ["audiobook"]
+    # Each track was still recorded, so nothing re-announces.
+    assert _run_groups(state, [_book_obs("denton-cl", "print", wait=0)]) == []
 
 
 def test_notify_groups_keep_per_observation_for_movies(tmp_path):
-    """Showtimes have no medium, so they keep firing per sighting/date."""
+    """Showtimes have no track, so they keep firing per sighting/date."""
     state = State(tmp_path / "state.json")
     showtime = Observation(source="amc", item_key="movie:dune", item_label="Dune",
                            summary='"Dune" playing at AMC Northpark 15')
     groups = _run_groups(state, [showtime])
-    assert len(groups) == 1 and groups[0].medium is None
+    assert len(groups) == 1 and groups[0].track is None
     assert _run_groups(state, [showtime]) == []
 
 
@@ -179,8 +185,9 @@ def test_media_map_seeded_from_legacy_state(tmp_path):
         "amc|movie:dune|playing at AMC": {"first": old, "last": recent},
     }}))
     state = State(p)
-    assert sorted(state.media) == ["book:x|ebook", "book:x|print"]
-    assert not state.media_is_new("book:x|print")
+    # Both formats are things you read, so they seed one "reading" track.
+    assert sorted(state.media) == ["book:x|reading"]
+    assert not state.media_is_new("book:x|reading")
     # Movies aren't seeded — they never grouped by medium.
     assert not any(k.startswith("movie:") for k in state.media)
 
@@ -334,3 +341,156 @@ def test_cli_add_appends_yaml(tmp_path):
     cfg = load_config(wl)
     assert [b.title for b in cfg.books] == ["New: Book"]
     assert [m.title for m in cfg.movies] == ["New Movie", "Old"]
+
+
+# --- wait model ------------------------------------------------------------
+
+def test_wait_days_matches_probed_records():
+    """Every (available, owned, holds, loan) tuple here came off a live
+    catalog. The 14-day rows double as a check that we reproduce OverDrive's
+    own arithmetic where it is meaningful, since estimatedWaitDays is exactly
+    ceil((holds+1)/copies * 14)."""
+    from tracker.availability import wait_days
+
+    probed = [
+        # available, owned, holds, loan_days, expected
+        (0, 2, 56, 14, 399), (0, 1, 96, 14, 1358), (0, 1, 98, 14, 1386),
+        (0, 2, 49, 14, 350), (0, 2, 55, 14, 392), (0, 1, 10, 14, 154),
+        (0, 1, 4, 14, 70), (0, 1, 6, 14, 98), (0, 3, 4, 14, 24),
+        (0, 3, 25, 14, 122), (0, 5, 65, 14, 185), (0, 1, 8, 14, 126),
+        (0, 3, 13, 14, 66), (0, 1, 1, 14, 28), (0, 1, 0, 14, 14),
+        # cloudLibrary, 21-day loans
+        (0, 1, 3, 21, 84), (0, 1, 0, 21, 21), (0, 2, 2, 21, 32),
+    ]
+    for available, owned, holds, loan, expected in probed:
+        assert wait_days(available, owned, holds, loan) == expected, \
+            (available, owned, holds, loan)
+
+
+def test_wait_days_zero_when_a_copy_is_free():
+    """The distinction both vendors' own numbers throw away: OverDrive
+    reports 14 days for a title sitting 3-of-3 on the shelf."""
+    from tracker.availability import wait_days
+
+    assert wait_days(3, 3, 0, 14) == 0
+    assert wait_days(1, 5, 40, 14) == 0
+    # No copies owned is not an infinite queue — it's a pre-release or a
+    # marketplace record, and we say so rather than inventing a number.
+    assert wait_days(0, 0, 5, 14) is None
+    assert wait_days(0, None, None, 14) is None
+
+
+def test_bucket_edges_scale_with_the_loan_period():
+    from tracker.availability import UNKNOWN, bucket
+
+    assert [bucket(w, 14) for w in (0, 1, 14, 15, 42, 43, 90, 91)] == [
+        "now", "turn", "turn", "plannable", "plannable", "horizon",
+        "horizon", "someday"]
+    # "front of the queue" is one loan, so 21 days is still `turn` at a
+    # 21-day library and already `plannable` at a 14-day one.
+    assert bucket(21, 21) == "turn"
+    assert bucket(21, 14) == "plannable"
+    assert bucket(None, 14) == UNKNOWN
+
+
+def test_ratchet_only_speaks_on_a_genuine_improvement(tmp_path):
+    state = State(tmp_path / "state.json")
+    key = "book:x|reading"
+    state.media_record(key)
+
+    # First known bucket is silent: the debut push already covered the book.
+    assert not state.media_improves(key, "someday")
+    state.media_set_best(key, "someday")
+
+    # Wobbling inside a bucket says nothing; dropping one speaks.
+    assert not state.media_improves(key, "someday")
+    assert state.media_improves(key, "plannable")
+    state.media_set_best(key, "plannable")
+
+    # Going back on hold is not news, and must not re-arm the watermark.
+    assert not state.media_improves(key, "someday")
+    state.media_set_best(key, "someday")
+    assert state.media_best(key) == "plannable"
+    assert not state.media_improves(key, "plannable")
+    assert state.media_improves(key, "now")
+
+    # An unknown wait can neither claim an improvement nor erase one.
+    assert not state.media_improves(key, "unknown")
+    state.media_set_best(key, "unknown")
+    assert state.media_best(key) == "plannable"
+
+
+def test_shorter_wait_pushes_once(tmp_path):
+    """The queue at one library collapsing is worth a push, and exactly one."""
+    state = State(tmp_path / "state.json")
+    _run_groups(state, [_book_obs("houston", "ebook", wait=400)])  # debut
+    assert _run_groups(state, [_book_obs("houston", "ebook", wait=380)]) == []
+
+    groups = _run_groups(state, [_book_obs("houston", "ebook", wait=30)])
+    assert [(g.track, g.reason) for g in groups] == [("reading", "sooner")]
+    # Same improved wait on the next run is old news.
+    assert _run_groups(state, [_book_obs("houston", "ebook", wait=30)]) == []
+    # And a *worse* wait never speaks.
+    assert _run_groups(state, [_book_obs("houston", "ebook", wait=400)]) == []
+
+
+def test_far_physical_copy_never_headlines(tmp_path):
+    """Order-only proximity: a shelf copy 240 miles away is still reported,
+    but it can't declare the track solved over a digital option."""
+    from tracker.availability import MAX_DISTANCE_MI
+
+    state = State(tmp_path / "state.json")
+    near_ebook = _book_obs("houston-cl", "ebook", wait=400)
+    far_print = _book_obs("houston-print", "print", wait=0,
+                          distance_mi=MAX_DISTANCE_MI + 180)
+    groups = _run_groups(state, [near_ebook, far_print])
+    group = groups[0]
+    assert group.headline is near_ebook
+    assert group.best_bucket == "someday"
+    # Still listed, just last.
+    assert group.options[-1] is far_print
+
+
+def test_sync_note_reflects_the_loan_period():
+    from tracker.report import sync_note, tracks_for_item
+
+    def note(reading_wait, listening_wait, loan):
+        return sync_note(tracks_for_item([
+            _book_obs("a", "ebook", wait=reading_wait, loan_days=loan),
+            _book_obs("a", "audiobook", wait=listening_wait, loan_days=loan),
+        ]))
+
+    # You read a book in a day or three, so the holds only have to overlap.
+    assert "fits in a 14d loan" in note(30, 40, 14)
+    assert "fits in a 21d loan" in note(30, 44, 21)
+    # A gap wider than the loan is the case worth acting on.
+    assert "suspend the reading hold ~60d" in note(30, 90, 14)
+    assert sync_note(tracks_for_item([_book_obs("a", "ebook", wait=30)])) is None
+
+
+def test_track_seed_folds_retired_medium_keys(tmp_path):
+    """cloudLibrary's old ebook-or-audiobook sentinel still has to land
+    somewhere, or the next run treats the book as never seen."""
+    import json
+    from datetime import datetime, timedelta, timezone
+
+    now = datetime.now(timezone.utc)
+    old = (now - timedelta(days=30)).isoformat(timespec="seconds")
+    recent = (now - timedelta(hours=6)).isoformat(timespec="seconds")
+    older = (now - timedelta(days=60)).isoformat(timespec="seconds")
+
+    p = tmp_path / "state.json"
+    p.write_text(json.dumps({"meta": {}, "seen": {}, "media": {
+        "book:x|ebook-or-audiobook": {"first": old, "last": recent},
+        "book:x|print": {"first": older, "last": old},
+        "book:x|audiobook": {"first": old, "last": recent},
+    }}))
+    state = State(p)
+    assert sorted(state.media) == ["book:x|listening", "book:x|reading"]
+    # Widest window wins, so nothing looks newly absent.
+    assert state.media["book:x|reading"]["first"] == older
+    assert state.media["book:x|reading"]["last"] == recent
+    assert not state.media_is_new("book:x|reading")
+    # Idempotent: a second load changes nothing.
+    state.save()
+    assert sorted(State(p).media) == ["book:x|listening", "book:x|reading"]

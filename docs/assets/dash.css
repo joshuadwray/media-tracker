@@ -19,6 +19,17 @@
 .row .st { margin-left: 8px; white-space: nowrap; }
 .row a { font-size: .85rem; margin-left: 6px; }
 .muted { opacity: .6; }
+/* Track sections: the headline option is the one you'd act on, so it reads
+   at full strength and the rest of the libraries recede under it. */
+.trk { font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--ink-mute); margin: 8px 0 2px; }
+.row.alt { padding-left: 12px; }
+.row.alt .lbl { opacity: .6; font-size: .85rem; }
+.row + .trk { border-top: 1px dashed var(--line); padding-top: 6px; }
+.wait { font-variant-numeric: tabular-nums; font-weight: 600; }
+.wait.now { color: var(--ok); }
+.sync { font-size: .8rem; color: var(--ink-mute); margin-top: 6px;
+        padding-top: 5px; border-top: 1px dashed var(--line); }
 .src { display: flex; justify-content: space-between; font-size: .9rem;
        padding: 4px 2px; border-bottom: 1px dashed var(--line); }
 .ok { color: var(--ok); } .err { color: var(--err); }

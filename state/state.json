@@ -1,88 +1,77 @@
 {
   "media": {
-    "book:dead-but-dreaming-of-electric-sheep|audiobook": {
+    "book:dead-but-dreaming-of-electric-sheep|listening": {
+      "best": "turn",
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:dead-but-dreaming-of-electric-sheep|ebook": {
-      "first": "2026-08-05T15:23:00+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
-    },
-    "book:dead-but-dreaming-of-electric-sheep|print": {
+    "book:dead-but-dreaming-of-electric-sheep|reading": {
+      "best": "turn",
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:d\u00e8y|print": {
+    "book:d\u00e8y|reading": {
+      "best": "turn",
       "first": "2026-08-10T00:27:51+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:fruit-fly|audiobook": {
+    "book:fruit-fly|listening": {
+      "best": "horizon",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:fruit-fly|ebook": {
+    "book:fruit-fly|reading": {
+      "best": "turn",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:fruit-fly|print": {
-      "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
-    },
-    "book:one-leg-on-earth|audiobook": {
+    "book:one-leg-on-earth|listening": {
+      "best": "someday",
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:one-leg-on-earth|ebook": {
+    "book:one-leg-on-earth|reading": {
+      "best": "horizon",
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:the-buffalo-hunter-hunter|audiobook": {
+    "book:the-buffalo-hunter-hunter|listening": {
       "first": "2026-07-18T00:57:09+00:00",
       "last": "2026-07-18T00:57:09+00:00"
     },
-    "book:the-buffalo-hunter-hunter|ebook": {
+    "book:the-buffalo-hunter-hunter|reading": {
       "first": "2026-07-18T00:51:48+00:00",
       "last": "2026-07-18T00:57:09+00:00"
     },
-    "book:the-buffalo-hunter-hunter|ebook-or-audiobook": {
-      "first": "2026-07-18T00:51:48+00:00",
-      "last": "2026-07-18T00:51:48+00:00"
-    },
-    "book:the-hill|audiobook": {
+    "book:the-hill|listening": {
       "first": "2026-08-10T04:07:38+00:00",
       "last": "2026-08-10T15:44:54+00:00"
     },
-    "book:the-hill|ebook": {
+    "book:the-hill|reading": {
+      "best": "plannable",
       "first": "2026-08-10T04:07:38+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:the-tainted-cup|print": {
+    "book:the-tainted-cup|reading": {
       "first": "2026-07-18T00:51:48+00:00",
       "last": "2026-07-18T00:57:09+00:00"
     },
-    "book:triage|ebook": {
-      "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
-    },
-    "book:triage|print": {
+    "book:triage|reading": {
+      "best": "turn",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
-    "book:yesteryear|audiobook": {
+    "book:yesteryear|listening": {
       "first": "2026-07-18T20:08:01+00:00",
       "last": "2026-07-18T20:08:01+00:00"
     },
-    "book:yesteryear|ebook": {
-      "first": "2026-07-18T20:08:01+00:00",
-      "last": "2026-07-18T20:08:01+00:00"
-    },
-    "book:yesteryear|print": {
+    "book:yesteryear|reading": {
       "first": "2026-07-18T20:08:01+00:00",
       "last": "2026-07-18T20:08:01+00:00"
     }
   },
   "meta": {
-    "last_run": "2026-08-10T15:44:54+00:00"
+    "last_run": "2026-08-10T16:43:41+00:00"
   },
   "seen": {
     "amc|movie:coyote-vs-acme|\"Coyote vs. Acme Early Access\" playing at AMC Grapevine Mills 30": {
@@ -149,7 +138,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "amc|movie:i-want-your-sex|\"I Want Your Sex\" playing at AMC Northpark 15": {
       "dates": [
@@ -161,7 +150,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "amc|movie:i-want-your-sex|\"I Want Your Sex\" playing at AMC Stonebriar 24": {
       "dates": [
@@ -173,7 +162,7 @@
         "2026-08-12"
       ],
       "first": "2026-08-07T01:44:16+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "amc|movie:teenage-sex-and-death-at-camp-miasma|\"Teenage Sex and Death at Camp Miasma\" playing at AMC Northpark 15": {
       "dates": [
@@ -186,7 +175,7 @@
         "2026-08-19"
       ],
       "first": "2026-08-09T05:51:02+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "amc|movie:tony|\"Tony\" playing at AMC Grapevine Mills 30": {
       "dates": [
@@ -256,11 +245,11 @@
     },
     "cloudlibrary-lewisville|book:dead-but-dreaming-of-electric-sheep|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "cloudlibrary-lewisville|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "cloudlibrary|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-05T15:23:00+00:00",
@@ -268,7 +257,7 @@
     },
     "cloudlibrary|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -292,15 +281,15 @@
     },
     "denton-library|book:dead-but-dreaming-of-electric-sheep|print book in catalog": {
       "first": "2026-07-25T14:29:46+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "denton-library|book:d\u00e8y|print book in catalog": {
       "first": "2026-08-10T00:27:51+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "denton-library|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
@@ -320,7 +309,7 @@
     },
     "denton-library|book:triage|print book in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "denton-library|book:yesteryear|print book in catalog": {
       "first": "2026-07-18T20:08:01+00:00",
@@ -328,19 +317,19 @@
     },
     "libby-fortworth|book:dead-but-dreaming-of-electric-sheep|audiobook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-fortworth|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-09T05:45:58+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-fortworth|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-fortworth|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-fortworth|book:the-hill|audiobook in catalog": {
       "first": "2026-08-10T04:07:38+00:00",
@@ -348,31 +337,31 @@
     },
     "libby-fortworth|book:the-hill|ebook in catalog": {
       "first": "2026-08-10T04:07:38+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:dead-but-dreaming-of-electric-sheep|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:dead-but-dreaming-of-electric-sheep|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:one-leg-on-earth|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:one-leg-on-earth|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:the-hill|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
@@ -380,15 +369,15 @@
     },
     "libby-houston|book:the-hill|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "libby-houston|book:triage|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     },
     "texas-theatre|movie:teenage-sex-and-death-at-camp-miasma|\"teenage sex and death at camp miasma\" mentioned on Texas Theatre": {
       "first": "2026-08-06T00:05:40+00:00",
-      "last": "2026-08-10T15:44:54+00:00"
+      "last": "2026-08-10T16:43:41+00:00"
     }
   },
   "watching": {

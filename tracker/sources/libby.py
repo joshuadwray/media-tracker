@@ -13,12 +13,16 @@ queryable and answers with real-looking media, so a dead library reads
 exactly like a live one (Denton dropped Libby but its key still
 responds — see TODO.md).
 
-Compared with cloudLibrary the records are richer: copies owned, copies
-free, hold count and estimated wait all come back with the search, so
-the notification can say how long the queue is. Presence in the catalog
-is still the hit — the user is happy to join a hold queue — so the event
-stays availability-independent and the volatile numbers live in the
-summary.
+Copies owned, copies free and the hold count all come back with the
+search, so the notification can say how long the queue is. We compute the
+wait ourselves rather than using `estimatedWaitDays`, which is not an
+estimate — see availability.py.
+
+Presence in the catalog is still the hit: the user is happy to join a
+hold queue, so the event stays availability-independent and the volatile
+numbers live in the summary. The queue is not *ignored*, though — the
+shortest wait across a book's libraries is ratcheted in state.media, so a
+months-long queue collapsing to days speaks up once.
 """
 from __future__ import annotations
 
@@ -26,6 +30,7 @@ import json
 from typing import Any, Optional
 
 from .. import http
+from ..availability import describe, wait_days
 from ..config import Config
 from ..matching import author_matches, search_query, titles_match
 from ..models import Observation, medium_for
@@ -39,6 +44,10 @@ PER_PAGE = 24
 @register
 class LibbySource(Source):
     kind = "libby"
+    # OverDrive's default, and what its own wait arithmetic assumes. Patrons
+    # can pick 7/14/21 in Libby where the library offers it, so set
+    # `loan_days` per source when you know better.
+    default_loan_days = 14
 
     @property
     def library_key(self) -> str:
@@ -80,23 +89,37 @@ class LibbySource(Source):
                 if not book.isbn and book.author and \
                         not author_matches(book.author, _authors(item)):
                     continue  # fuzzy title hit on the wrong author
+                wait = wait_days(item.get("availableCopies"),
+                                 item.get("ownedCopies"),
+                                 item.get("holdsCount"), self.loan_days)
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
                     summary=(f"{_friendly(item)} in Libby catalog ({self.label})"
-                             f" — {_availability(item)}"),
+                             f" — {_availability(item, wait)}"),
                     url=f"https://libbyapp.com/library/{self.library_key}"
                         f"/media/{item.get('id')}",
                     positive=True,  # in catalog = hit; hold queues are fine
                     event=f"{_friendly(item)} in catalog",  # copies/holds flip
                                                             # without re-notifying
                     medium=medium_for(fmt),
+                    wait=wait,
+                    distance_mi=self.distance_mi,
+                    loan_days=self.loan_days,
+                    source_label=self.label,
                     detail={"found_title": title,
+                            "author": item.get("firstCreatorName"),
                             "owned_copies": item.get("ownedCopies"),
                             "available_copies": item.get("availableCopies"),
                             "holds": item.get("holdsCount"),
+                            # Kept for comparison only: OverDrive's own number
+                            # is ceil((holds+1)/copies * 14) and ignores
+                            # available copies entirely. See availability.py.
                             "estimated_wait_days": item.get("estimatedWaitDays"),
+                            "pre_release": bool(item.get("isPreReleaseTitle")),
+                            "release_date": (item.get("estimatedReleaseDate")
+                                             or "")[:10] or None,
                             "isbn": _isbn(item)},
                 ))
         return observations
@@ -131,7 +154,8 @@ class LibbySource(Source):
         trimmed = [
             {k: item.get(k) for k in
              ("id", "title", "subtitle", "firstCreatorName", "type", "isOwned",
-              "ownedCopies", "availableCopies", "holdsCount", "estimatedWaitDays")}
+              "ownedCopies", "availableCopies", "holdsCount", "estimatedWaitDays",
+              "isPreReleaseTitle", "estimatedReleaseDate")}
             for item in items[:5]
         ]
         return (f"query: {q!r}\nGET {self.search_url(q)}\n"
@@ -153,16 +177,25 @@ def _friendly(item: dict) -> str:
     return name.lower()
 
 
-def _availability(item: dict) -> str:
+def _availability(item: dict, wait: Optional[int]) -> str:
+    """Copies, queue, and our own wait estimate.
+
+    A pre-release title is its own sentence: OverDrive lists it with zero
+    copies, so "0/0 available" reads like a dead record when it's actually
+    the best moment to join the queue.
+    """
     owned = item.get("ownedCopies") or 0
     available = item.get("availableCopies") or 0
     holds = item.get("holdsCount") or 0
+    if item.get("isPreReleaseTitle"):
+        when = (item.get("estimatedReleaseDate") or "")[:10]
+        text = f"pre-release{f', out {when}' if when else ''}"
+        return text + (f", {holds} hold{'s' if holds != 1 else ''}" if holds else "")
     text = f"{available}/{owned} available"
-    if not available and holds:
-        wait = item.get("estimatedWaitDays")
+    if holds:
         text += f", {holds} hold{'s' if holds != 1 else ''}"
-        if wait:
-            text += f" (~{wait}d wait)"
+    if wait is not None and wait > 0:
+        text += f" ({describe(wait)})"
     return text
 
 

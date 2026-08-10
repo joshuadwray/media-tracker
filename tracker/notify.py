@@ -10,18 +10,20 @@ Env:
   NTFY_SERVER   default https://ntfy.sh (set if self-hosting)
   NTFY_TOKEN    optional access token for protected topics
 
-Pushes are per (item, medium), not per sighting: a book carried by three
-libraries as an ebook is one "ebook" push, and only when that medium goes
-unseen -> seen. Which libraries have it lives in the message body and on
+Pushes are per (item, track), not per sighting: print and ebook are the
+same decision, so a book carried by three libraries in two formats you'd
+read is one "reading" push. It fires when the track goes unseen -> seen,
+or when its shortest wait drops a bucket. Which libraries have it lives on
 the dashboard.
 
-Few groups -> one push each (tappable, opens the source URL).
+Few groups -> one push each (tappable, opens the best option's URL).
 Many groups -> a single digest push so your phone doesn't melt.
 """
 from __future__ import annotations
 
 import requests
 
+from .availability import describe
 from .config import env
 from .models import NotifyGroup
 
@@ -60,7 +62,14 @@ def send_push(groups: list[NotifyGroup]) -> None:
             headers["Title"] = group.item_label.encode("ascii", "ignore").decode()
             headers["Tags"] = ("books" if group.item_key.startswith("book:")
                                else "movie_camera")
-            click = next((o.url for o in group.observations if o.url), None)
+            # Something borrowable this minute is worth a louder buzz than a
+            # place in a queue. Stop short of ntfy's urgent tier, which
+            # bypasses do-not-disturb.
+            if group.best_bucket == "now":
+                headers["Priority"] = "4"
+            head = group.headline
+            click = (head.url if head and head.url
+                     else next((o.url for o in group.observations if o.url), None))
             if click:
                 headers["Click"] = click
             requests.post(url, data=body(group).encode(), headers=headers,
@@ -78,19 +87,26 @@ def send_push(groups: list[NotifyGroup]) -> None:
 def body(group: NotifyGroup) -> str:
     """One line describing a group.
 
-    A lone sighting keeps the source's own wording, which already names the
-    library and any hold queue. Otherwise collapse to "<medium> at A, B" —
-    the medium is the news, the libraries are where to go get it. A debut
-    group (a book seen for the first time, in several mediums at once) lists
-    each medium in turn.
+    For a book this is the best option and where to get it, because that's
+    the only part you can act on: "reading: now at Denton (print)". A book
+    with copies at four libraries doesn't need all four in a push — the
+    dashboard has them. A debut group (first sighting, both tracks at once)
+    lists each track in turn. Movies keep the source's own wording.
     """
-    if len(group.observations) == 1:
-        return group.observations[0].summary
+    if not group.track and not any(o.track for o in group.observations):
+        return group.observations[0].summary if group.observations else ""
 
-    by_medium: dict[str, list[str]] = {}
+    lead = "sooner — " if group.reason == "sooner" else ""
+    by_track: dict[str, list] = {}
     for obs in group.observations:
-        sources = by_medium.setdefault(obs.medium or "found", [])
-        if obs.source not in sources:
-            sources.append(obs.source)
-    return " · ".join(f"{medium} at {', '.join(sources)}"
-                      for medium, sources in by_medium.items())
+        by_track.setdefault(obs.track or "found", []).append(obs)
+
+    parts = []
+    for track, obs_list in by_track.items():
+        best = min(obs_list, key=lambda o: o.sort_key)
+        extra = len({o.where for o in obs_list}) - 1
+        parts.append(
+            f"{track}: {describe(best.wait)} at {best.where}"
+            f" ({best.medium})" + (f" +{extra} more" if extra > 0 else "")
+        )
+    return lead + " · ".join(parts)
