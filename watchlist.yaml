@@ -7,9 +7,6 @@
 # ============================================================
 
 books:
-  - title: Sunrise
-    author: Obreht, Téa
-    bib_id: S127C1983671
   - title: Triage
     author: Rankine, Claudia
     bib_id: S127C1983791
