@@ -683,9 +683,11 @@ def test_enterprise_shelf_state_wording():
     from tracker.sources.sirsi_enterprise import _shelf_state
 
     assert _shelf_state(1, 2, 0, False) == "1 on shelf"
-    assert _shelf_state(0, 0, 0, True) == "on order, no holds yet"
+    assert _shelf_state(0, 0, 5, True, 1) == "1 on order, 5 holds ahead"
+    assert _shelf_state(0, 0, 0, True, 4) == "4 on order, no holds yet"
+    assert _shelf_state(0, 0, 1, True, 2) == "2 on order, 1 hold ahead"
+    # Enterprise didn't report a quantity: say so rather than invent one.
     assert _shelf_state(0, 0, 5, True) == "on order, 5 holds ahead"
-    assert _shelf_state(0, 0, 1, True) == "on order, 1 hold ahead"
     assert _shelf_state(0, 3, 2, False) == "all 3 out, 2 holds"
     assert _shelf_state(0, 1, 0, False) == "checked out"
     assert _shelf_state(None, None, None, False) == "availability unknown"
@@ -751,3 +753,42 @@ def test_enterprise_availability_unwraps_the_tapestry_zone_update():
     assert "371693" in captured["url"]
     # No token means no call worth making, and never an exception.
     assert _availability(_Sess(), "h", "default", "1", None) == {}
+
+
+def test_enterprise_reads_the_ordered_quantity_from_the_zone():
+    """An on-order record reports copyCount 0, so the queue has to be divided
+    by the number of copies coming — which Enterprise publishes in a separate
+    zone rather than in the counts. Markup trimmed from the live Fruit Fly
+    response, 2026-08-10."""
+    from tracker.sources.sirsi_enterprise import _on_order_copies
+
+    def payload(*rows):
+        body = "".join(
+            "<tr class='detailItemsTableRow '>"
+            "<td class='detailItemsTable_LIBRARY'>Lewisville Public Library</td>"
+            f"<td class='detailItemsTable_SD_ORDER_COPIES'>{n}</td>"
+            "<td class='detailItemsTable_SD_ITEM_STATUS'>On Order</td>"
+            "<td class='detailItemsTable_SD_ORDER_PARTS'></td></tr>"
+            for n in rows
+        )
+        return {"zones": {"detailOnOrderDiv0":
+                          f"<table class='detailItemTable'><tbody>{body}</tbody></table>"}}
+
+    assert _on_order_copies(payload(1)) == 1
+    assert _on_order_copies(payload(4)) == 4
+    # One row per library; the total is what's coming to the system.
+    assert _on_order_copies(payload(2, 3)) == 5
+    # Nothing to read: fall back rather than invent a divisor.
+    assert _on_order_copies({}) is None
+    assert _on_order_copies({"zones": {}}) is None
+    assert _on_order_copies({"zones": {"detailHoldingsDiv0": "<table/>"}}) is None
+    assert _on_order_copies({"zones": {"detailOnOrderDiv0": "<table/>"}}) is None
+
+
+def test_enterprise_ordered_quantity_shortens_the_queue():
+    """Four copies ordered against five holds is one turn, not five."""
+    from tracker.availability import wait_after_arrival
+
+    assert wait_after_arrival(5, 1, 21) == 105     # the old guess
+    assert wait_after_arrival(5, 4, 21) == 42
+    assert wait_after_arrival(0, 1, 21) == 0

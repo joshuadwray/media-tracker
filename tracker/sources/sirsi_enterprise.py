@@ -145,14 +145,15 @@ class SirsiEnterpriseSource(Source):
 
                 # Enterprise reports copyCount 0 for a record the library has
                 # ordered but not received — an honest zero, unlike
-                # BiblioCommons, which double-counts on-order items. How many
-                # copies are coming is not published, so assume one (the
-                # longest, least flattering read) and mark it provisional so
-                # it ranks without ever printing a duration or moving a
-                # notification watermark.
+                # BiblioCommons, which double-counts on-order items. The
+                # ordered quantity rides along in a separate zone; fall back
+                # to one copy (the longest, least flattering read) only when
+                # it's missing. Either way the result is provisional, so it
+                # ranks without printing a duration or moving a watermark.
                 on_order = copies == 0
+                ordered = _count(counts.get("onOrderCopies"))
                 if on_order:
-                    wait = wait_after_arrival(holds, 1, self.loan_days)
+                    wait = wait_after_arrival(holds, ordered or 1, self.loan_days)
                 else:
                     wait = wait_days(available, copies, holds, self.loan_days)
 
@@ -161,8 +162,8 @@ class SirsiEnterpriseSource(Source):
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
-                    summary=(f"{friendly} in {self.label} library catalog"
-                             f" — {_shelf_state(available, copies, holds, on_order)}"),
+                    summary=(f"{friendly} in {self.label} library catalog — "
+                             f"{_shelf_state(available, copies, holds, on_order, ordered)}"),
                     url=self.detail_url(rec["record_id"]),
                     # Presence in the catalog is the hit — the user is happy
                     # to join hold queues, so availability isn't the bar and
@@ -181,6 +182,7 @@ class SirsiEnterpriseSource(Source):
                             "held_copies": holds,
                             "copies": copies,
                             "on_order": on_order,
+                            "copies_on_order": ordered,
                             "call_number": rec.get("call_number"),
                             "year": rec.get("year"),
                             "found_title": title},
@@ -252,14 +254,21 @@ def _count(raw: Any) -> Optional[int]:
 
 
 def _shelf_state(available: Optional[int], copies: Optional[int],
-                 holds: Optional[int], on_order: bool) -> str:
-    """Whether you could walk in and pick it up."""
+                 holds: Optional[int], on_order: bool,
+                 ordered: Optional[int] = None) -> str:
+    """Whether you could walk in and pick it up.
+
+    On-order titles name the ordered quantity when Enterprise reports it,
+    matching how the BiblioCommons source words the same situation — the
+    queue only means something next to the number of copies coming.
+    """
     if available:
         return f"{available} on shelf"
     if on_order:
+        n = f"{ordered} on order" if ordered else "on order"
         if not holds:
-            return "on order, no holds yet"
-        return f"on order, {holds} hold{'s' if holds != 1 else ''} ahead"
+            return f"{n}, no holds yet"
+        return f"{n}, {holds} hold{'s' if holds != 1 else ''} ahead"
     if copies:
         return (f"all {copies} out" if copies > 1 else "checked out") + (
             f", {holds} hold{'s' if holds != 1 else ''}" if holds else "")
@@ -347,6 +356,9 @@ def _availability(sess: Any, host: str, profile: str, record_id: str,
                   token: Optional[str]) -> dict[str, Any]:
     """Copy/hold counts for one record.
 
+    On top of Enterprise's own fields this adds `onOrderCopies` — our name,
+    not theirs, derived from the zone table described in _on_order_copies.
+
     Returns {} rather than raising if anything goes wrong — a record with
     unknown availability still belongs on the dashboard, it just can't be
     given a wait.
@@ -363,14 +375,55 @@ def _availability(sess: Any, host: str, profile: str, record_id: str,
     if resp.status_code != 200:
         return {}
     try:
-        scripts = resp.json()["inits"][0]["evalScript"]
+        payload = resp.json()
+        scripts = payload["inits"][0]["evalScript"]
     except (ValueError, KeyError, IndexError, TypeError):
         return {}
     for script in scripts if isinstance(scripts, list) else [scripts]:
         m = _FIELDS_RE.search(str(script))
         if m:
             try:
-                return json.loads(m.group(1))
+                fields = json.loads(m.group(1))
             except ValueError:
                 return {}
+            ordered = _on_order_copies(payload)
+            if ordered is not None:
+                fields["onOrderCopies"] = ordered
+            return fields
     return {}
+
+
+# The on-order zone is a small table, one row per library, with the ordered
+# quantity under a column keyed by name rather than position:
+#   <td class='detailItemsTable_SD_ORDER_COPIES'>1</td>
+_ORDER_COPIES_RE = re.compile(
+    r"<td[^>]*\bdetailItemsTable_SD_ORDER_COPIES\b[^>]*>\s*(\d+)\s*</td>", re.I
+)
+
+
+def _on_order_copies(payload: dict[str, Any]) -> Optional[int]:
+    """How many copies the library has actually ordered.
+
+    Enterprise does publish this, in a `detailOnOrderDiv0` zone alongside the
+    counts — which matters because an on-order record reports copyCount 0, so
+    without this the queue has to be divided by a guess. Every on-order title
+    at Lewisville is a single copy today, but a four-copy order estimated at
+    one copy comes out four times too slow.
+
+    Rows are summed: the table is per-library, and for a single-library system
+    that total is the number of copies coming. Returns None when the zone is
+    missing or unparseable, so the caller can fall back rather than divide by
+    a zero it invented.
+    """
+    zones = payload.get("zones")
+    if not isinstance(zones, dict):
+        return None
+    total = 0
+    found = False
+    for name, markup in zones.items():
+        if "onorder" not in str(name).lower():
+            continue
+        for n in _ORDER_COPIES_RE.findall(str(markup)):
+            total += int(n)
+            found = True
+    return total if found else None
