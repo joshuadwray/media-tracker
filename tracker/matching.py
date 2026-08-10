@@ -81,17 +81,34 @@ def _sequel_suffix(remainder: str) -> bool:
 def author_matches(wanted: str, found: str | None) -> bool:
     """True if a found author plausibly is the watched author.
 
-    Surname check: the last token of the normalized wanted author must
-    appear (word boundary) in the normalized found author. Fails OPEN
-    when the source didn't report an author — presence checks shouldn't
-    drop records over missing metadata.
+    Any name token of the watched author has to turn up in the found
+    author. Fails OPEN when the source didn't report an author — presence
+    checks shouldn't drop records over missing metadata.
+
+    This used to test the *last* token only, described as a surname check.
+    It isn't one: watchlist authors are written "Surname, First", so the
+    last token is the given name, and it passed because the given name is
+    normally in the found string too. That works right up until the entry
+    names more than one contributor — "Harpman, Jacqueline, Schwartz, Ros"
+    (author plus translator) tested for "ros" against "Harpman, Jacqueline,
+    author." and rejected a correct match, hiding a book Lewisville holds.
+    Sources also hand us narrator lists, which have the same shape.
+
+    Matching on any token is deliberately a superset of the old rule, so
+    nothing that matched before stops matching. It stays a real guard
+    because it runs *after* titles_match: its job is only to catch a fuzzy
+    title landing on a different person, and a wrong author sharing no name
+    token with the right one is the overwhelmingly common case.
     """
     if not found:
         return True
-    surname = normalize_blob(wanted).split()[-1:]
-    if not surname:
+    # Bare initials and the year ranges catalogs staple on ("1963-") say
+    # nothing about identity and would match far too much.
+    names = {t for t in normalize_blob(wanted).split()
+             if len(t) > 1 and not t.isdigit()}
+    if not names:
         return True
-    return surname[0] in normalize_blob(found).split()
+    return bool(names & set(normalize_blob(found).split()))
 
 
 def text_contains_title(page_text: str, title: str) -> bool:

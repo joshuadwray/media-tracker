@@ -792,3 +792,39 @@ def test_enterprise_ordered_quantity_shortens_the_queue():
     assert wait_after_arrival(5, 1, 21) == 105     # the old guess
     assert wait_after_arrival(5, 4, 21) == 42
     assert wait_after_arrival(0, 1, 21) == 0
+
+
+def test_author_matches_handles_multiple_contributors():
+    """The guard runs after titles_match, to catch a fuzzy title landing on a
+    different person. It used to test only the LAST token of the watched
+    author — which for "Surname, First" is the given name, and which breaks
+    outright once an entry names a translator or narrators."""
+    from tracker.matching import author_matches
+
+    # The live miss: author plus translator, against the book's own record.
+    assert author_matches("Harpman, Jacqueline, Schwartz, Ros",
+                          "Harpman, Jacqueline, author.")
+    # Contributor lists in either direction — sources hand us narrators.
+    assert author_matches("Silver, Josh",
+                          "Silver, Josh, Watt, Will M, Mitchell, Fiona")
+    assert author_matches("Silver, Josh, Watt, Will M, Mitchell, Fiona",
+                          "Silver, Josh")
+    # Plain cases still pass, including catalog noise around the name.
+    assert author_matches("Clark, Harriet", "Clark, Harriet, author.")
+    assert author_matches("Rankine, Claudia",
+                          "Rankine, Claudia, 1963- author http://id.loc.gov/x")
+    assert author_matches("aguda", "'Pemi Aguda")
+
+    # A different person still gets rejected — that's the whole job.
+    assert not author_matches("Rankine, Claudia", "Scarrow, Simon, author.")
+    assert not author_matches("Tremblay, Paul", "Kingsolver, Barbara, author.")
+    assert not author_matches("Obreht, Tea", "Kingsbury, Karen")
+
+    # Fails open on missing metadata, and on an author with nothing to go on.
+    assert author_matches("Clark, Harriet", None)
+    assert author_matches("Clark, Harriet", "")
+    assert author_matches("J", "Kingsolver, Barbara")
+    # Catalogs staple birth years onto names. A shared year is not identity,
+    # so it must not be what carries a match between two different people.
+    assert not author_matches("Rankine, Claudia, 1963",
+                              "Kingsolver, Barbara, 1963- author")

@@ -27,7 +27,7 @@
   Remaining: retire `tracker web` once the pin queue proves out.
   Root cause this fixed: bare "yesteryear" add fired false-positive
   cloudLibrary notifications (fuzzy `titles_match`, no author check) —
-  now guarded by `author_matches` (surname, fail-open) in
+  now guarded by `author_matches` (any name token, fail-open) in
   cloudlibrary/bibliocommons checks + pinning.
 
 ## Diary follow-ups (2026-07-18)
@@ -158,16 +158,18 @@
   2026-08), Fort Worth + Houston = Libby/OverDrive (Houston added
   2026-08).
 
-- **`author_matches` breaks on multi-author watchlist entries (2026-08-10).**
-  The guard takes the *last* token of the wanted author string as "the
-  surname". For "Surname, First" that is the first name, which still
-  appears in the found record, so it works by luck. For an entry naming a
-  translator — "Harpman, Jacqueline, Schwartz, Ros" — it tests for "ros"
-  and rejects a correct match. Live consequence: Lewisville holds *We Were
-  Forbidden* (SD_ILS:428636, "Harpman, Jacqueline, author.") and the source
-  drops it. Affects bibliocommons and cloudLibrary identically, so this is a
-  shared-matching fix, not a per-source one — and loosening it re-runs every
-  unpinned title's guard, so it wants its own change with its own test.
+- ~~**`author_matches` breaks on multi-author watchlist entries**~~ fixed
+  2026-08-10. The guard tested the *last* token of the wanted author and
+  called it a surname check. It isn't one — watchlist authors are written
+  "Surname, First", so the last token is the given name, and it passed
+  because the given name is normally in the found string too. An entry
+  naming a translator ("Harpman, Jacqueline, Schwartz, Ros") tested for
+  "ros" against "Harpman, Jacqueline, author." and rejected a correct
+  match, hiding *We Were Forbidden* (SD_ILS:428636) at Lewisville. Now
+  matches on any name token, ignoring bare initials and the birth years
+  catalogs staple on. Deliberately a superset of the old rule, so nothing
+  that matched before can stop matching; a full dry run across all four
+  library sources changed exactly one row.
 - **OverDrive trap, found 2026-08**: thunder key `denton` still resolves
   AND serves media, but the record says `"status": "Terminated"` and
   denton.overdrive.com 302s to /terminated. Denton dropped Libby. Always
