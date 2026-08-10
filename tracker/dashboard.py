@@ -100,6 +100,7 @@ async function rmItem(btn, title, kind) {
 
 def build_dashboard(config: Config, results: list[SourceResult],
                     new: list[Observation], state: State) -> str:
+    site.write_sheets((("dash", _CSS),))
     now_dt = datetime.now(timezone.utc)
     now = now_dt.strftime("%Y-%m-%d %H:%M UTC")
     current = [o for r in results for o in r.observations]
@@ -122,8 +123,8 @@ def build_dashboard(config: Config, results: list[SourceResult],
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         "<title>media tracker</title>",
-        site.head_extra(0),
-        f"<style>{site.BASE_CSS}{_CSS}</style></head><body>",
+        site.head_extra(0, (("dash", _CSS),)),
+        "</head><body>",
         site.nav("tracker", 0),
         "<h1>media tracker</h1>",
         f"<div class='meta'>last checked {e(now)}</div>",

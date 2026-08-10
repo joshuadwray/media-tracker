@@ -67,7 +67,13 @@ async function putLog(sha, data) {
                  'Content-Type': 'application/json' },
       body: JSON.stringify({ message: 'reading log (edit)',
                              content: b64encode(serialize(data)), sha }) });
-    if (r.ok) return true;
+    if (r.ok) {
+      // Hand the just-saved log to the renderer so the diary shows it NOW
+      // instead of after the ~1 min CI + Pages round trip. diary.js drops
+      // this overlay once a build contains it.
+      if (window.mtSavePending) window.mtSavePending(data);
+      return true;
+    }
     if (r.status === 409 || r.status === 422)
       status('conflict: the log changed since loading \u2014 reload ' +
              'and redo the edit', 'err');
@@ -180,7 +186,7 @@ function buildBookEditor(b, data, sha, onDone) {
     save.disabled = delB.disabled = true;
     status('saving\u2026');
     if (await putLog(sha, data)) {
-      status('saved \u2014 this page rebuilds in ~2 min', 'ok');
+      status('saved', 'ok');
       ed.remove(); onDone();
     } else save.disabled = delB.disabled = false;
   };
@@ -262,7 +268,7 @@ window.mtBookPage = function () {
       started: today(), finished: null, sessions: [] });
     status('saving\u2026');
     if (await putLog(sha, data))
-      status('new read started \u2014 this page rebuilds in ~2 min', 'ok');
+      status('new read started', 'ok');
   };
 };
 
@@ -321,7 +327,7 @@ window.mtListPage = function () {
           dateSort(b.sessions);
         }
         if (await putLog(sha, data)) {
-          status('saved \u2014 the diary rebuilds in ~2 min', 'ok');
+          status('saved', 'ok');
           ed.remove(); open = null;
         } else save.disabled = del.disabled = false;
       };

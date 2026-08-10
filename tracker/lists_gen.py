@@ -1,11 +1,16 @@
-"""Static Letterboxd-style list pages, rendered from lists/*.yaml.
+"""Letterboxd-style list data, built from lists/*.yaml.
 
   python -m tracker lists
 
-Reads every YAML file in lists/, resolves book covers via Open Library
-(build-time, cached in lists/covers-cache.json), and writes
-docs/lists/<stem>.html plus docs/lists/index.html. File order IS the
-rank; a text editor is the ranking UX.
+Reads every YAML file in lists/, resolves book covers via iTunes/Open
+Library (build-time, cached in lists/covers-cache.json), and writes
+docs/data/lists.json plus ~1KB shells at docs/lists/<stem>.html and
+index.html. File order IS the rank; a text editor is the ranking UX.
+
+The grid itself is drawn by docs/assets/diary.js in the browser — lists
+are human-authored, so an edit has to show up immediately rather than
+after a CI run and a Pages deploy. What stays here is the part a page
+cannot do for itself: the cover lookups.
 
 Cover rules:
   - a manual `cover:` URL on an item always wins
@@ -228,82 +233,38 @@ def _tile_hue(title: str) -> int:
     return sum(ord(c) for c in title) % 360
 
 
-def render_list(blist: BookList, covers: list,
-                reading_links: dict | None = None) -> str:
-    """covers: one URL-or-None per item, same order as blist.items.
+def lists_bundle(blists: list, covers_by_stem: dict,
+                 reading_links: dict | None = None) -> dict:
+    """View-ready list data for docs/assets/diary.js.
 
-    reading_links: {'title|author': {'href': ..., 'rating': ...}} — items
-    with a reading-log entry get their tile wrapped in a link; finished
-    books with a rating get a star badge.
+    covers_by_stem: {stem: [url-or-None, ...]} in item order, as resolved
+    by the (network-bound, cached) cover chain — the one part of a list
+    page the browser cannot work out for itself.
     """
-    e = html.escape
     reading_links = reading_links or {}
-    parts = [
-        "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
-        "<meta name='viewport' content='width=device-width, initial-scale=1'>",
-        f"<title>{e(blist.title)}</title>",
-        site.head_extra(1),
-        f"<style>{site.BASE_CSS}{_CSS}</style></head>"
-        "<body style='--pagew:860px'>",
-        site.nav(None, 1),
-        "<a class='back' href='./'>&larr; all lists</a> &middot; "
-        f"<a class='back' href='edit.html?list={e(blist.stem)}'>edit</a>",
-        f"<h1>{e(blist.title)}</h1>",
-        f"<div class='meta'>{len(blist.items)} "
-        f"{'titles, ranked' if blist.ranked else 'titles'}</div>",
-        "<ol class='grid'>",
-    ]
-    for rank, (item, cover) in enumerate(zip(blist.items, covers), 1):
-        badge = f"<span class='rank'>{rank}</span>" if blist.ranked else ""
-        if cover:
-            img = (f"<img class='cov' src='{e(cover)}' loading='lazy' "
-                   f"alt='{e(item.title)} cover'>")
-        else:
-            hue = _tile_hue(item.title)
-            author = (f"<div class='na'>{e(item.author)}</div>"
-                      if item.author else "")
-            img = (f"<div class='noimg' style='background:"
-                   f"hsl({hue},35%,32%)'>"
-                   f"<div class='nt'>{e(item.title)}</div>{author}</div>")
-        author_cap = (f"<div class='a'>{e(item.author)}</div>"
-                      if item.author else "")
-        body = (f"{img}<div class='cap'><div class='t'>{e(item.title)}</div>"
-                f"{author_cap}</div>")
-        rate = ""
-        entry = reading_links.get(item.cache_key)
-        if entry:
-            rating = entry["rating"]
-            if rating is not None:
-                rate = (f"<span class='rate' title='{rating:g}/5'>"
-                        f"\u2605 {rating:g}</span>")
-            body = f"<a class='tl' href='{e(entry['href'])}'>{body}</a>"
-        parts.append(f"<li class='tile'>{badge}{rate}{body}</li>")
-    parts.append("</ol></body></html>")
-    return "".join(parts)
+    out = []
+    for blist in blists:
+        covers = covers_by_stem.get(blist.stem) or []
+        items = []
+        for item, cover in zip(blist.items, covers):
+            entry = reading_links.get(item.cache_key) or {}
+            items.append({
+                "title": item.title,
+                "author": item.author,
+                "cover": cover,
+                "hue": _tile_hue(item.title),
+                "href": entry.get("href"),
+                "rating": entry.get("rating"),
+            })
+        out.append({
+            "stem": blist.stem,
+            "title": blist.title,
+            "ranked": blist.ranked,
+            "kind": blist.kind,
+            "items": items,
+        })
+    return {"lists": out}
 
-
-def render_index(blists: list) -> str:
-    e = html.escape
-    parts = [
-        "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
-        "<meta name='viewport' content='width=device-width, initial-scale=1'>",
-        "<title>lists</title>",
-        site.head_extra(1),
-        f"<style>{site.BASE_CSS}{_CSS}</style></head>"
-        "<body style='--pagew:860px'>",
-        site.nav("lists", 1),
-        "<h1>Lists</h1>",
-        "<a class='back' href='edit.html?new=1'>+ new list</a>",
-        "<ul class='lists'>",
-    ]
-    for bl in blists:
-        parts.append(f"<li><a href='{e(bl.stem)}.html'>{e(bl.title)}</a> "
-                     f"<span class='meta'>({len(bl.items)}) &middot; "
-                     f"<a href='edit.html?list={e(bl.stem)}'>edit</a></span>"
-                     "</li>")
-    parts.append("</ul>")
-    parts.append("</body></html>")
-    return "".join(parts)
 
 
 # ----------------------------------------------------------------- build
@@ -324,8 +285,9 @@ def build_all(lists_dir: Path = LISTS_DIR, out_dir: Path = OUT_DIR,
     from .reading_gen import reading_links as _reading_links
     links = _reading_links()
 
-    written = []
+    written = list(site.write_sheets((("lists", _CSS),)))
     blists = []
+    covers_by_stem: dict = {}
     out_dir.mkdir(parents=True, exist_ok=True)
     for path in yaml_paths:
         blist = parse_list(path)
@@ -338,8 +300,13 @@ def build_all(lists_dir: Path = LISTS_DIR, out_dir: Path = OUT_DIR,
                 if log:
                     log(f"  cover lookup failed for {item.title!r}: {exc}")
                 covers.append(None)
+        covers_by_stem[blist.stem] = covers
         out = out_dir / f"{blist.stem}.html"
-        out.write_text(render_list(blist, covers, links), encoding="utf-8")
+        out.write_text(
+            site.shell(html.escape(blist.title), "list", 1,
+                       (("lists", _CSS),),
+                       attrs=f" data-stem='{html.escape(blist.stem)}'"),
+            encoding="utf-8")
         written.append(out)
         with_cover = sum(1 for c in covers if c)
         if log:
@@ -347,8 +314,15 @@ def build_all(lists_dir: Path = LISTS_DIR, out_dir: Path = OUT_DIR,
                 f"{with_cover} covers -> {out}")
 
     index = out_dir / "index.html"
-    index.write_text(render_index(blists), encoding="utf-8")
+    index.write_text(
+        site.shell("lists", "lists-index", 1, (("lists", _CSS),),
+                   nav_active="lists"),
+        encoding="utf-8")
     written.append(index)
+
+    bundle, _ = site.write_data(
+        "lists.json", lists_bundle(blists, covers_by_stem, links))
+    written.append(bundle)
 
     if len(cache) != known:
         save_cache(cache, cache_path)

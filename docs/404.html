@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>media tracker</title>
+<!--
+  HAND-WRITTEN; no generator touches this file.
+
+  Closes the one gap the shell architecture leaves: a book logged seconds
+  ago has no docs/reading/<slug>.html yet, because only a CI run creates
+  shells. Tapping it from the diary would 404 for about a minute — which
+  is precisely the lag this whole design removes everywhere else. GitHub
+  Pages serves this file for any missing path, so we work out which page
+  was WANTED from the URL and let docs/assets/diary.js render it from the
+  data bundle plus the localStorage overlay. The next CI run writes the
+  real shell and this file stops being involved.
+
+  Asset paths are resolved at runtime, not hard-coded: the browser
+  resolves relative URLs against the REQUESTED path rather than this
+  file's location, and the site root differs between project Pages
+  (/media-tracker/) and a local `python -m http.server` inside docs/.
+-->
+<script>
+window.__mt404 = (function () {
+  var p = location.pathname;
+  var m = p.match(/^(.*?)\/(reading|lists)\/([^\/]*?)(?:\.html)?$/);
+  var out = { base: m ? m[1] + '/' : p.replace(/[^\/]*$/, ''),
+              page: null, attr: null, value: null, sheet: 'reading' };
+  if (m && m[3] && m[3] !== 'index') {
+    out.value = m[3];
+    if (m[2] === 'reading') { out.page = 'book'; out.attr = 'data-slug'; }
+    else { out.page = 'list'; out.attr = 'data-stem'; out.sheet = 'lists'; }
+  } else if (m && m[2] === 'lists') { out.sheet = 'lists'; }
+  document.write(
+    "<link rel='stylesheet' href='" + out.base + "assets/base.css'>" +
+    "<link rel='stylesheet' href='" + out.base + "assets/" + out.sheet +
+    ".css'>");
+  return out;
+})();
+</script>
+</head>
+<body style='--pagew:860px'>
+<div class='sitenav'></div>
+<div id='mt-root'></div>
+<script>
+(function () {
+  var cfg = window.__mt404;
+  document.querySelector('.sitenav').innerHTML =
+    "<a href='" + cfg.base + "index.html'>tracker</a>" +
+    "<a href='" + cfg.base + "reading/'>diary</a>" +
+    "<a href='" + cfg.base + "lists/'>lists</a>" +
+    "<a href='" + cfg.base + "add.html'>+ add</a>";
+  if (!cfg.page) {
+    document.getElementById('mt-root').innerHTML =
+      "<h1>Not found</h1><div class='meta'>No page at <code>" +
+      location.pathname.replace(/[<>&]/g, '') + "</code>. <a href='" +
+      cfg.base + "reading/'>Go to the diary</a>.</div>";
+    return;
+  }
+  // Attributes FIRST, then load the renderer — diary.js reads data-page on
+  // boot, so the order matters. data-depth 1 makes its ../data/ lookups
+  // resolve against the requested /reading/<slug>.html URL.
+  document.body.setAttribute('data-page', cfg.page);
+  document.body.setAttribute('data-depth', '1');
+  document.body.setAttribute(cfg.attr, cfg.value);
+  var s = document.createElement('script');
+  s.src = cfg.base + 'assets/diary.js';
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>

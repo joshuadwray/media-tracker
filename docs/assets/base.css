@@ -1,0 +1,61 @@
+
+:root {
+  --bg: #F5F7F4; --surface: #FFFFFF; --surface-sunk: #E8ECE6;
+  --line: #CBD5C8; --line-strong: #A8B6A4;
+  --ink: #1A2118; --ink-soft: #4A5648; --ink-mute: #6E7E6B;
+  --gold: #E9B720; --gold-tint: #F0DCAA;
+  --teal: #3E8C7E; --teal-2: #2E6E62;
+  --teal-tint: #B0D8D0;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-pill: 999px;
+  --shadow-sm: 0 2px 6px -2px rgba(16,34,28,.18);
+  --shadow-md: 0 10px 24px -12px rgba(16,34,28,.30);
+  --ease: cubic-bezier(.2,.7,.2,1); --dur: 160ms;
+  /* legacy aliases — amber/terracotta map to new palette */
+  --amber: var(--gold); --amber-tint: var(--gold-tint);
+  --terracotta: var(--teal); --terracotta-2: var(--teal-2);
+  --terracotta-tint: var(--teal-tint);
+  --mut: var(--ink-mute); --accent: var(--teal);
+  --ok: var(--teal); --err: #B23A2E; }
+* { box-sizing: border-box; }
+body { font-family: var(--font-sans); background: var(--bg);
+       color: var(--ink); margin: 0 auto; max-width: var(--pagew, 640px);
+       padding: 16px; line-height: 1.45; }
+h1 { font-size: 1.3rem; margin: 0 0 2px; }
+h2 { font-family: var(--font-mono); font-size: .85rem; margin: 22px 0 8px;
+     text-transform: uppercase; letter-spacing: .12em;
+     color: var(--ink-mute); }
+.meta { font-size: .85rem; color: var(--ink-mute); }
+a { color: var(--terracotta); }
+a:hover { color: var(--terracotta-2); }
+button { font: inherit; padding: 8px 12px; border-radius: var(--r-pill);
+         border: 1px solid var(--line-strong); background: transparent;
+         color: inherit; cursor: pointer;
+         transition: background var(--dur) var(--ease); }
+button:hover { background: var(--surface-sunk); }
+.sitenav { display: flex; gap: 8px; flex-wrap: wrap; font-size: .85rem;
+           margin-bottom: 16px; }
+.sitenav a, .sitenav b { padding: 5px 12px; border-radius: 999px;
+           border: 1px solid var(--line-strong); text-decoration: none;
+           color: inherit; }
+.sitenav b { background: var(--terracotta); border-color: var(--terracotta);
+           color: var(--bg); font-weight: 600; }
+/* Rows/cards for edits saved but not yet in a build: shown immediately
+   from localStorage, marked so they read as in-flight rather than done. */
+.syncing { position: relative; }
+.syncing::after { content: ''; position: absolute; left: 0; top: 0;
+           bottom: 0; width: 3px; border-radius: 3px;
+           background: var(--gold); }
+/* z-index below .edstatus (9) so the editor's own save bar covers the
+   pill while it is showing, rather than the two fighting for the corner */
+.mt-fresh { position: fixed; right: 10px; bottom: 10px; z-index: 8;
+           font-size: .75rem; padding: 4px 10px; border-radius: 999px;
+           border: 1px solid var(--line-strong); background: var(--surface);
+           color: var(--ink-mute); box-shadow: var(--shadow-sm);
+           transition: opacity var(--dur) var(--ease); }
+.mt-fresh.pending { border-color: var(--gold); color: #8A6A16;
+           background: var(--gold-tint); }
+.mt-fresh.gone { opacity: 0; pointer-events: none; }
+#mt-root:empty::before { content: 'loading\2026'; color: var(--ink-mute);
+           font-size: .85rem; }

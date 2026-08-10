@@ -80,6 +80,10 @@ a { color: var(--accent); }
 .sitenav b { background: var(--accent); border-color: var(--accent);
   color: var(--bg); font-weight: 600; }
 </style>
+<!-- Loaded only for window.mtSavePending: this page has no data-page, so
+     diary.js renders nothing here. It lets a save show up instantly on the
+     diary pages instead of waiting out the CI + Pages rebuild. -->
+<script src='../assets/diary.js' defer></script>
 </head>
 <body>
 <div class='sitenav'><a href='../index.html'>tracker</a><a href='../reading/'>diary</a><a href='../lists/'>lists</a><a href='../add.html'>+ add</a></div>
@@ -447,7 +451,11 @@ async function save() {
       const resp = await r.json();
       sha = resp.content.sha;
       dirty = false;
-      status('saved \u2014 pages rebuilding, live in ~2 min', 'ok');
+      // Hand the saved log to the renderer so the diary shows this entry
+      // the moment you navigate there, instead of after the CI + Pages
+      // round trip. diary.js drops the overlay once a build includes it.
+      if (window.mtSavePending) window.mtSavePending(data);
+      status('saved', 'ok');
       return;
     } else if (r.status === 409 || r.status === 422) {
       status('conflict: the log changed since you loaded it \u2014 ' +

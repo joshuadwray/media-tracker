@@ -1,13 +1,23 @@
-"""Book reading log: calendar + per-book pages from reading/log.json.
+"""Book reading log: the diary's data bundle, from reading/log.json.
 
   python -m tracker reading
 
 Reads reading/log.json (written by docs/reading/log.html or by hand),
 resolves page counts (manual override > pagecount cache > ISBN bridge
 from the lists covers cache > iTunes lookup > Open Library median) and
-writes docs/reading/index.html (calendar) plus docs/reading/<slug>.html
-(one page per book). docs/reading/log.html is hand-written and is NEVER
-touched by this module.
+writes docs/data/diary.json plus ~1KB shells at docs/reading/index.html,
+list.html and <slug>.html. docs/reading/log.html is hand-written and is
+NEVER touched by this module.
+
+This module does NOT render the diary any more — docs/assets/diary.js
+does, in the browser. The diary is human-authored: you type a session and
+want to see it, and a CI run plus a Pages deploy (~56s measured) sat
+between those two moments. So CI now contributes only what a browser
+cannot do for itself — the network-bound cover and page-count lookups —
+and the page draws itself from that bundle plus anything still sitting in
+localStorage from a save seconds ago. Machine-authored pages (the film
+diary in watching_gen, the watchlist dashboard) are still rendered here,
+because nobody is sitting there waiting on them.
 
 Session lines are "YYYY-MM-DD <page reached>" (cumulative). Pages/day is
 the delta vs the previous session; a lower page than the previous one is
@@ -332,15 +342,6 @@ def group_reads(books: list) -> tuple:
     return groups, base_of
 
 
-def _streak(totals: dict, today: date) -> int:
-    day = today if totals.get(today, 0) > 0 else today - timedelta(days=1)
-    n = 0
-    while totals.get(day, 0) > 0:
-        n += 1
-        day -= timedelta(days=1)
-    return n
-
-
 # ------------------------------------------------------------------ html
 
 _CSS = """
@@ -467,7 +468,6 @@ td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
 
 """
 
-_DOWS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
 # Shared client-side editor for the generated diary pages. Written to
 # docs/reading/edit.js by build_all so the serializer (which must stay
@@ -546,7 +546,13 @@ async function putLog(sha, data) {
                  'Content-Type': 'application/json' },
       body: JSON.stringify({ message: 'reading log (edit)',
                              content: b64encode(serialize(data)), sha }) });
-    if (r.ok) return true;
+    if (r.ok) {
+      // Hand the just-saved log to the renderer so the diary shows it NOW
+      // instead of after the ~1 min CI + Pages round trip. diary.js drops
+      // this overlay once a build contains it.
+      if (window.mtSavePending) window.mtSavePending(data);
+      return true;
+    }
     if (r.status === 409 || r.status === 422)
       status('conflict: the log changed since loading \u2014 reload ' +
              'and redo the edit', 'err');
@@ -659,7 +665,7 @@ function buildBookEditor(b, data, sha, onDone) {
     save.disabled = delB.disabled = true;
     status('saving\u2026');
     if (await putLog(sha, data)) {
-      status('saved \u2014 this page rebuilds in ~2 min', 'ok');
+      status('saved', 'ok');
       ed.remove(); onDone();
     } else save.disabled = delB.disabled = false;
   };
@@ -741,7 +747,7 @@ window.mtBookPage = function () {
       started: today(), finished: null, sessions: [] });
     status('saving\u2026');
     if (await putLog(sha, data))
-      status('new read started \u2014 this page rebuilds in ~2 min', 'ok');
+      status('new read started', 'ok');
   };
 };
 
@@ -800,7 +806,7 @@ window.mtListPage = function () {
           dateSort(b.sessions);
         }
         if (await putLog(sha, data)) {
-          status('saved \u2014 the diary rebuilds in ~2 min', 'ok');
+          status('saved', 'ok');
           ed.remove(); open = null;
         } else save.disabled = del.disabled = false;
       };
@@ -823,9 +829,8 @@ def _page_head(title: str) -> list:
         "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
         "<meta name='viewport' content='width=device-width, initial-scale=1'>",
         f"<title>{e(title)}</title>",
-        site.head_extra(1),
-        f"<style>{site.BASE_CSS}{_CSS}</style></head>"
-        "<body style='--pagew:860px'>",
+        site.head_extra(1, (("reading", _CSS),)),
+        "</head><body style='--pagew:860px'>",
     ]
 
 
@@ -844,337 +849,59 @@ def _stars(rating: float) -> str:
     return f"<span class='stars' title='{rating:g}/5'>{out}</span>"
 
 
-def render_calendar(log: ReadingLog, page_counts: dict, covers_cache: dict,
-                    today: date | None = None, warn=None,
-                    films_by_day: dict | None = None,
-                    base_of: dict | None = None) -> str:
-    e = html.escape
-    today = today or date.today()
-    films_by_day = films_by_day or {}
-    base_of = base_of or {}
-    totals, readers = pages_by_date(log.books, page_counts, warn=warn)
-    goal = log.daily_goal
-    parts = _page_head("diary")
-    parts.append(site.nav("diary", 1))
-    parts.append("<a class='back' href='log.html'>log a session</a>")
-    parts.append("<h1>Diary</h1>")
-    parts.append("<div class='vt'><strong>calendar</strong> &middot; "
-                 "<a href='list.html'>list</a></div>")
+# ------------------------------------------------------------ data bundle
 
-    reading_now = [b for b in log.books if b.status == "reading"]
-    if reading_now:
-        parts.append("<h2>Currently reading</h2>")
-    for book in reading_now:
-        pc = page_counts.get(book.slug)
-        at = book.last_page()
-        pct = min(100, round(at * 100 / pc)) if pc else 0
-        cover = _cover_url(book, covers_cache)
-        img = (f"<img src='{e(cover)}' alt='' loading='lazy'>" if cover
-               else "<div class='noimg'></div>")
-        prog = f"p.{at} / {pc} &middot; {pct}%" if pc else f"p.{at}"
-        parts.append(
-            f"<a class='cur' style='text-decoration:none;color:inherit' "
-            f"href='{e(base_of.get(book.slug, book.slug))}.html'>"
-            f"{img}<div class='info'>"
-            f"<div class='t'>{e(book.title)}</div>"
-            f"<div class='meta'>{e(book.author)} &middot; {prog}</div>"
-            f"<div class='bar'><div style='width:{pct}%'></div></div>"
-            "</div></a>")
+def diary_bundle(rlog: ReadingLog, page_counts: dict, sources: dict,
+                 covers_cache: dict, films: list, base_of: dict) -> dict:
+    """View-ready diary data for docs/assets/diary.js.
 
-    week_start = today - timedelta(days=6)
-    week = sum(p for d, p in totals.items() if week_start <= d <= today)
-    parts.append("<div class='stats'>"
-                 f"<div class='stat'><div class='n'>{_streak(totals, today)}"
-                 "</div><div class='l'>day streak</div></div>"
-                 f"<div class='stat'><div class='n'>{totals.get(today, 0)}"
-                 f"</div><div class='l'>pages today (goal {goal})</div></div>"
-                 f"<div class='stat'><div class='n'>{week}</div>"
-                 f"<div class='l'>this week (goal {goal * 7})</div></div>"
-                 "</div>")
-
-    months = sorted({(d.year, d.month) for d in totals}
-                    | {(d.year, d.month) for d in films_by_day},
-                    reverse=True)
-    if months:
-        # one month shown at a time (newest first); JS-off shows all
-        opts = "".join(
-            f"<option value='{j}'>{_calendar.month_name[m]} {y}</option>"
-            for j, (y, m) in enumerate(months))
-        parts.append("<div class='mnav'>"
-                     "<button id='mold'>&larr; older</button>"
-                     f"<select id='mjump' hidden>{opts}</select>"
-                     "<button id='mnew'>newer &rarr;</button></div>")
-    cal = _calendar.Calendar(firstweekday=6)  # Sunday first
-    for year, month in months:
-        parts.append(f"<div class='month'><h3>"
-                     f"{_calendar.month_name[month]} {year}</h3>"
-                     "<div class='cal'>")
-        parts.extend(f"<div class='dow'>{d}</div>" for d in _DOWS)
-        for day in cal.itermonthdates(year, month):
-            if day.month != month:
-                parts.append("<div class='day blank'></div>")
-                continue
-            pages = totals.get(day, 0)
-            cls = "day goal" if goal and pages >= goal else "day"
-            day_films = films_by_day.get(day, [])
-            thumbs = ""
-            if pages > 0 or day_films:
-                tt = []
-                for book in readers.get(day, []):
-                    cover = _cover_url(book, covers_cache)
-                    th = (f"<img src='{e(cover)}' alt='' loading='lazy'>"
-                          if cover else "<div class='dot'></div>")
-                    chip = ""
-                    if (book.status == "finished"
-                            and book.finished == day.isoformat()
-                            and book.rating is not None):
-                        whole = int(book.rating)
-                        half = "\u00bd" if book.rating - whole else ""
-                        chip = (f"<span class='fchip' "
-                                f"title='{book.rating:g}/5'>"
-                                f"\u2605{whole}{half}</span>")
-                    tt.append(
-                        f"<a class='th' href='"
-                        f"{e(base_of.get(book.slug, book.slug))}.html'>"
-                        f"{th}{chip}</a>")
-                for film in day_films:
-                    poster = film.get("poster_url")
-                    th = (f"<img src='{e(poster)}' alt='' loading='lazy'>"
-                          if poster else "<div class='dot'></div>")
-                    chip = ""
-                    if film.get("rating") is not None:
-                        whole = int(film["rating"])
-                        half = "\u00bd" if film["rating"] - whole else ""
-                        chip = (f"<span class='fchip' "
-                                f"title='{film['rating']:g}/5'>"
-                                f"\u2605{whole}{half}</span>")
-                    tt.append(
-                        f"<a class='th film' href='../watching/"
-                        f"{e(film.get('slug') or '')}.html'>{th}{chip}</a>")
-                if len(tt) > 3:
-                    tt = tt[:2] + [f"<span class='more'>+{len(tt) - 2}"
-                                   "</span>"]
-                thumbs = f"<div class='thumbs'>{''.join(tt)}</div>"
-            parts.append(f"<div class='{cls}'>"
-                         f"<span class='dn'>{day.day}</span>{thumbs}"
-                         "</div>")
-        parts.append("</div></div>")
-    if not months:
-        parts.append("<div class='meta'>no sessions logged yet — "
-                     "<a href='log.html'>log one</a></div>")
-    else:
-        parts.append(
-            "<script>(function(){"
-            "var ms=[].slice.call(document.querySelectorAll('.month')),i=0;"
-            "var o=document.getElementById('mold'),"
-            "n=document.getElementById('mnew'),"
-            "j=document.getElementById('mjump');"
-            "j.hidden=false;"
-            "function show(){ms.forEach(function(m,k){"
-            "m.style.display=k===i?'':'none'});"
-            "o.disabled=i>=ms.length-1;n.disabled=i<=0;j.value=i;}"
-            "o.onclick=function(){if(i<ms.length-1){i++;show()}};"
-            "n.onclick=function(){if(i>0){i--;show()}};"
-            "j.onchange=function(){i=+j.value;show()};"
-            "show();})()</script>")
-    parts.append("</body></html>")
-    return "".join(parts)
-
-
-def render_flat_list(rlog: ReadingLog, page_counts: dict, covers_cache: dict,
-                     today: date | None = None, warn=None,
-                     films_by_day: dict | None = None,
-                     base_of: dict | None = None) -> str:
-    """Flat reverse-chronological diary: one row per reading session /
-    film viewing, grouped by day (books first, films after)."""
-    e = html.escape
-    today = today or date.today()
-    films_by_day = films_by_day or {}
-    base_of = base_of or {}
-
-    # {date: [html row, ...]} — book rows first (log order), films appended
-    rows: dict = {}
-    for book in rlog.books:
-        pc = page_counts.get(book.slug)
-        # per-day delta + page reached (same delta rules as daily_pages)
-        per_day: dict = {}
-        sess_page: dict = {}   # dates with a real session line -> its page
-        prev = 0
-        for day, page in book.parsed_sessions():
-            delta = max(0, page - prev)
-            prev = max(prev, page)
-            d, at = per_day.get(day, (0, 0))
-            per_day[day] = (d + delta, max(at, page))
-            sess_page[day] = page
-        if (book.status == "finished" and book.finished
-                and pc and prev < pc):
-            fin = date.fromisoformat(book.finished)
-            d, _ = per_day.get(fin, (0, 0))
-            per_day[fin] = (d + (pc - prev), pc)
-        cover = _cover_url(book, covers_cache)
-        th = (f"<img src='{e(cover)}' alt='' loading='lazy'>" if cover
-              else "<div class='dot'></div>")
-        for day, (delta, at) in per_day.items():
-            if delta <= 0:
-                continue  # corrections — no pages actually read
-            prog = f"p.{at} / {pc}" if pc else f"p.{at}"
-            right = [f"{prog} <b>+{delta}</b>"]
-            if book.status == "finished" and book.finished == day.isoformat():
-                right.append("finished")
-                if book.rating is not None:
-                    right.append(_stars(book.rating))
-            elif (book.status == "abandoned" and book.finished
-                    and book.finished == day.isoformat()):
-                right.append("abandoned")
-            by = (f" <span class='by'>&mdash; {e(book.author)}</span>"
-                  if book.author else "")
-            row = (
-                f"<a class='row' style='text-decoration:none;color:inherit' "
-                f"href='{e(base_of.get(book.slug, book.slug))}.html'>{th}"
-                f"<div class='rt'>{e(book.title)}{by}</div>"
-                f"<div class='rm'>{' &middot; '.join(right)}</div></a>")
-            # edit only where a real session line exists (finish-remainder
-            # rows are synthetic — nothing in log.json to point at)
-            btn = ""
-            if day in sess_page:
-                btn = (f"<button class='rowedit' title='edit session' "
-                       f"data-slug='{e(book.slug)}' "
-                       f"data-date='{day.isoformat()}' "
-                       f"data-page='{sess_page[day]}'>\u270e</button>")
-            rows.setdefault(day, []).append(
-                f"<div class='rowwrap'>{row}{btn}</div>")
-
-    for day, day_films in films_by_day.items():
-        for film in day_films:
-            poster = film.get("poster_url")
-            th = (f"<img src='{e(poster)}' alt='' loading='lazy'>"
-                  if poster else "<div class='dot'></div>")
-            title = film.get("title") or film.get("slug") or "?"
-            year = film.get("year")
-            heading = f"{title} ({year})" if year else str(title)
-            right = []
-            if film.get("rating") is not None:
-                right.append(_stars(film["rating"]))
-            if film.get("rewatch"):
-                right.append("\u21bb")
-            if film.get("liked"):
-                right.append("<span class='heart'>\u2665</span>")
-            rows.setdefault(day, []).append(
-                f"<a class='row film' "
-                f"style='text-decoration:none;color:inherit' "
-                f"href='../watching/{e(film.get('slug') or '')}.html'>{th}"
-                f"<div class='rt'>{e(heading)}</div>"
-                f"<div class='rm'>{' &middot; '.join(right)}</div></a>")
-
-    parts = _page_head("diary")
-    parts.append(site.nav("diary", 1))
-    parts.append("<a class='back' href='log.html'>log a session</a>")
-    parts.append("<h1>Diary</h1>")
-    parts.append("<div class='vt'><a href='index.html'>calendar</a> "
-                 "&middot; <strong>list</strong></div>")
-    parts.append("<div class='dl'>")
-    for day in sorted(rows, reverse=True):
-        label = f"{_calendar.month_name[day.month]} {day.day}"
-        if day.year != today.year:
-            label += f", {day.year}"
-        parts.append(f"<h3>{label}</h3>")
-        parts.extend(rows[day])
-    if not rows:
-        parts.append("<div class='meta'>no sessions logged yet &mdash; "
-                     "<a href='log.html'>log one</a></div>")
-    parts.append("</div><script src='edit.js'></script>"
-                 "<script>mtListPage()</script></body></html>")
-    return "".join(parts)
-
-
-def _status_line(book: Book) -> str:
-    e = html.escape
-    status = book.status
-    if book.started:
-        status += f" &middot; started {e(book.started)}"
-    if book.finished:
-        status += f" &middot; finished {e(book.finished)}"
-    return status
-
-
-def render_book_group(reads: list, page_counts: dict, sources: dict,
-                      covers_cache: dict, warn=None) -> str:
-    """One page per BOOK: re-reads (same title|author, slug <base>-N)
-    render as a section per read on the base read's page. Single-read
-    books keep the original single-column layout."""
-    e = html.escape
-    base = reads[0]
-    single = len(reads) == 1
-    parts = _page_head(base.title)
-    parts.append(site.nav(None, 1))
-    links = ["<a class='back' href='log.html'>log a session</a>"]
-    if single:
-        links.append(f"<a class='back mt-edit' href='#' "
-                     f"data-slug='{e(base.slug)}'>edit</a>")
-    links.append(f"<a class='back' href='#' id='mt-readagain' "
-                 f"data-slug='{e(base.slug)}'>read again</a>")
-    parts.append(" &middot; ".join(links))
-
-    cover = _cover_url(base, covers_cache)
-    hue = lists_gen._tile_hue(base.title)
-    img = (f"<img class='cover' src='{e(cover)}' alt='{e(base.title)} cover'>"
-           if cover else f"<div class='bignoimg' style='background:"
-                         f"hsl({hue},35%,32%)'>{e(base.title)}</div>")
-    bits = [f"<h1>{e(base.title)}</h1>"]
-    if base.author:
-        bits.append(f"<div class='meta'>{e(base.author)}</div>")
-    if single:
-        if base.rating is not None:
-            bits.append(
-                f"<div style='margin-top:6px'>{_stars(base.rating)}</div>")
-        bits.append(f"<div class='meta' style='margin-top:6px'>"
-                    f"{_status_line(base)}</div>")
-    else:
-        bits.append(f"<div class='meta' style='margin-top:6px'>"
-                    f"{len(reads)} reads</div>")
-    page_count = page_counts.get(base.slug)
-    if page_count:
-        bits.append(f"<div class='meta'>{page_count} pages "
-                    f"<span title='source'>"
-                    f"({e(sources.get(base.slug) or '')})</span></div>")
-    parts.append(f"<div class='head'>{img}<div>{''.join(bits)}</div></div>")
-
-    for n, read in enumerate(reads, 1):
-        if not single:
-            parts.append("<div class='readsec'>")
-            parts.append(f"<h2>Read {n} <a class='back mt-edit' href='#' "
-                         f"data-slug='{e(read.slug)}'>edit</a></h2>")
-            meta = _status_line(read)
-            if read.rating is not None:
-                meta += f" &middot; {_stars(read.rating)}"
-            parts.append(f"<div class='meta'>{meta}</div>")
-        per_day = daily_pages(read, page_counts.get(read.slug), warn=warn)
-        sessions = read.parsed_sessions()
-        if sessions:
-            if single:
-                parts.append("<h2>Sessions</h2>")
-            parts.append("<table>"
-                         "<tr><th>date</th><th>at page</th><th>pages</th></tr>")
-            prev = 0
-            for day, page in sessions:
-                delta = max(0, page - prev)
-                prev = max(prev, page)
-                parts.append(f"<tr><td>{day}</td><td>{page}</td>"
-                             f"<td>{delta}</td></tr>")
-            parts.append("</table>")
-            days = sorted(per_day)
-            peak = max(per_day.values()) or 1
-            bars = "".join(
-                f"<div class='b' style='height:{max(2, round(per_day[d] * 100 / peak))}%'"
-                f" title='{d}: {per_day[d]} pages'><span>{per_day[d]}</span></div>"
-                for d in days)
-            parts.append(f"<div class='chart'>{bars}</div>")
-        if not single:
-            parts.append("</div>")
-    parts.append("<script src='edit.js'></script>"
-                 "<script>mtBookPage()</script>"
-                 "</body></html>")
-    return "".join(parts)
+    Carries ENRICHMENT (covers, page counts) alongside RAW sessions rather
+    than precomputed totals: the client has to fold in edits saved to
+    localStorage that this build has never seen, so streaks, per-day
+    deltas and the calendar must stay computable in the browser. CI
+    contributes only what needs the network — the iTunes/OpenLibrary/Apple
+    Books lookups a page can't make itself.
+    """
+    books = []
+    for b in rlog.books:
+        books.append({
+            "slug": b.slug,
+            "base": base_of.get(b.slug, b.slug),
+            "key": b.cache_key,
+            "title": b.title,
+            "author": b.author,
+            "status": b.status,
+            "rating": b.rating,
+            "started": b.started,
+            "finished": b.finished,
+            "pageCount": page_counts.get(b.slug),
+            "pageSource": sources.get(b.slug),
+            "cover": _cover_url(b, covers_cache),
+            "hue": lists_gen._tile_hue(b.title),
+            "sessions": [[d.isoformat(), p] for d, p in b.parsed_sessions()],
+        })
+    out_films = []
+    for f in films:
+        if not f.get("watched"):
+            continue
+        out_films.append({
+            "slug": f.get("slug") or "",
+            "title": f.get("title") or f.get("slug") or "?",
+            "year": f.get("year"),
+            "watched": f["watched"],
+            "rating": f.get("rating"),
+            "rewatch": bool(f.get("rewatch")),
+            "liked": bool(f.get("liked")),
+            "poster": f.get("poster_url"),
+        })
+    # Deliberately NOT sorted: watching/log.json order is what decides the
+    # order of several films watched on one day, and the diary shows them
+    # that way. Sorting here silently reshuffled those days.
+    return {
+        "dailyGoal": rlog.daily_goal,
+        "books": books,
+        "films": out_films,
+    }
 
 
 # ----------------------------------------------------------------- build
@@ -1234,27 +961,37 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
     warn = (lambda msg: log(f"  WARNING: {msg}")) if log else None
     groups, base_of = group_reads(rlog.books)
     out_dir.mkdir(parents=True, exist_ok=True)
-    written = []
+    written = list(site.write_sheets((("reading", _CSS),)))
+    bundle, _ = site.write_data(
+        "diary.json",
+        diary_bundle(rlog, page_counts, sources, covers_cache, films, base_of))
+    written.append(bundle)
     edit_js = out_dir / "edit.js"
     edit_js.write_text(_EDIT_JS, encoding="utf-8")
     written.append(edit_js)
+    # Shells only — docs/assets/diary.js draws these from docs/data/diary.json
+    # plus any edit still sitting in localStorage. edit.js loads first so the
+    # renderer can hand off to mtListPage()/mtBookPage() once the DOM exists.
+    sheets = (("reading", _CSS),)
+    edit = ("<script src='edit.js' defer></script>",)
     index = out_dir / "index.html"
-    index.write_text(render_calendar(rlog, page_counts, covers_cache,
-                                     warn=warn, films_by_day=films_by_day,
-                                     base_of=base_of),
+    index.write_text(site.shell("diary", "calendar", 1, sheets,
+                                nav_active="diary", scripts=edit),
                      encoding="utf-8")
     written.append(index)
     flat = out_dir / "list.html"
-    flat.write_text(render_flat_list(rlog, page_counts, covers_cache,
-                                     warn=warn, films_by_day=films_by_day,
-                                     base_of=base_of),
+    flat.write_text(site.shell("diary", "flatlist", 1, sheets,
+                               nav_active="diary", scripts=edit),
                     encoding="utf-8")
     written.append(flat)
     for reads in groups.values():
-        out = out_dir / f"{reads[0].slug}.html"
-        out.write_text(render_book_group(reads, page_counts, sources,
-                                         covers_cache),
-                       encoding="utf-8")
+        base = reads[0]
+        out = out_dir / f"{base.slug}.html"
+        out.write_text(
+            site.shell(html.escape(base.title), "book", 1, sheets,
+                       scripts=edit,
+                       attrs=f" data-slug='{html.escape(base.slug)}'"),
+            encoding="utf-8")
         written.append(out)
 
     # prune pages for books deleted from the log (log/index/list are in

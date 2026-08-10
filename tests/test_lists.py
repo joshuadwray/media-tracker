@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from tracker.lists_gen import (  # noqa: E402
-    COVER_URL, ListItem, load_cache, parse_list, render_list, resolve_cover,
+    COVER_URL, ListItem, load_cache, lists_bundle, parse_list, resolve_cover,
     save_cache,
 )
 
@@ -79,12 +79,33 @@ def test_cache_roundtrip(tmp_path):
     assert load_cache(path) == cache
 
 
-def test_render_list_tiles(tmp_path):
+def test_lists_bundle_carries_tile_data(tmp_path):
+    """The grid is drawn by docs/assets/diary.js now, so the contract this
+    guards is the DATA the bundle hands it — covers resolved server-side
+    (the browser can't reach iTunes/OL), and a hue for every item so a
+    coverless one still gets a typographic tile rather than a gap."""
     bl = parse_list(_write_list(tmp_path))
-    html = render_list(bl, ["https://example.com/antidote.jpg",
-                            COVER_URL.format(14835467), None])
-    assert html.count("<li class='tile'>") == 3
-    assert "<span class='rank'>1</span>" in html
-    assert "https://example.com/antidote.jpg" in html
-    assert "noimg" in html  # coverless item gets a typographic tile
-    assert "Mystery Book" in html
+    covers = ["https://example.com/antidote.jpg",
+              COVER_URL.format(14835467), None]
+    bundle = lists_bundle([bl], {bl.stem: covers})
+    (entry,) = bundle["lists"]
+    assert entry["stem"] == bl.stem and entry["ranked"] is True
+    items = entry["items"]
+    assert len(items) == 3
+    assert items[0]["cover"] == "https://example.com/antidote.jpg"
+    assert items[2]["cover"] is None          # -> typographic tile
+    assert all(0 <= i["hue"] < 360 for i in items)
+    assert "Mystery Book" in [i["title"] for i in items]
+
+
+def test_lists_bundle_links_read_books(tmp_path):
+    """Tiles for books in the reading log link to their diary page and
+    carry the rating badge; unread ones carry neither."""
+    bl = parse_list(_write_list(tmp_path))
+    links = {bl.items[0].cache_key:
+             {"href": "../reading/antidote.html", "rating": 4.5}}
+    items = lists_bundle([bl], {bl.stem: [None, None, None]},
+                         links)["lists"][0]["items"]
+    assert items[0]["href"] == "../reading/antidote.html"
+    assert items[0]["rating"] == 4.5
+    assert items[1]["href"] is None and items[1]["rating"] is None

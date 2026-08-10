@@ -75,6 +75,9 @@ a { color: var(--accent); }
 .sitenav b { background: var(--accent); border-color: var(--accent);
   color: var(--bg); font-weight: 600; }
 </style>
+<!-- Loaded only for window.mtSaveListPending: no data-page here, so
+     diary.js renders nothing on this page. -->
+<script src='../assets/diary.js' defer></script>
 </head>
 <body>
 <div class='sitenav'><a href='../index.html'>tracker</a><a href='../reading/'>diary</a><a href='../lists/'>lists</a><a href='../add.html'>+ add</a></div>
@@ -464,7 +467,12 @@ async function save() {
     if (r.ok) {
       const data = await r.json();
       sha = data.content.sha;
-      status('saved \u2014 covers resolving, page live in ~2 min', 'ok');
+      // Show the new order/rows on the list page immediately; covers for
+      // rows added just now fill in when CI has resolved them.
+      if (window.mtSaveListPending)
+        window.mtSaveListPending(file.replace(/\.yaml$/, ''),
+          model.items.map(it => ({ title: it.title, author: it.author })));
+      status('saved \u2014 covers for new titles resolve in ~1 min', 'ok');
     } else if (r.status === 409 || r.status === 422) {
       status('conflict: the file changed since you loaded it \u2014 ' +
              'copy your edits, re-pick the list, redo', 'err');
