@@ -7,6 +7,12 @@
 # ============================================================
 
 books:
+  - title: Peck and Peck
+    author: Garmus
+  - title: Partita
+    author: Kingsolver
+  - title: Ply
+    author: Hernan Diaz
   - title: American Hagwon
     author: Min Jin Lee
   - title: Exit Party

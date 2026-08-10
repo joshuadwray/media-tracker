@@ -32,6 +32,39 @@
           "source": "libby-fortworth"
         }
       ]
+    },
+    {
+      "id": "ply-20260810T193030Z",
+      "kind": "book",
+      "typed_title": "Ply",
+      "typed_author": "Hernan Diaz",
+      "added": "2026-08-10T19:30:30Z",
+      "candidates": []
+    },
+    {
+      "id": "partita-20260810T193038Z",
+      "kind": "book",
+      "typed_title": "Partita",
+      "typed_author": "Kingsolver",
+      "added": "2026-08-10T19:30:38Z",
+      "candidates": [
+        {
+          "title": "Partita-a novel in linked short stories",
+          "author": null,
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": null,
+          "source": "cloudlibrary"
+        }
+      ]
+    },
+    {
+      "id": "peck-and-peck-20260810T193045Z",
+      "kind": "book",
+      "typed_title": "Peck and Peck",
+      "typed_author": "Garmus",
+      "added": "2026-08-10T19:30:45Z",
+      "candidates": []
     }
   ]
 }
