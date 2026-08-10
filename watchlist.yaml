@@ -7,6 +7,8 @@
 # ============================================================
 
 books:
+  - title: The Hill
+    bib_id: S127C1817916
   - title: one leg on earth
     author: aguda
   - title: Triage
