@@ -94,6 +94,18 @@ sources:
     library: fwpl
     label: Fort Worth
 
+  libby-houston:
+    kind: libby
+    # Houston Public Library. Free "MY Link" card for any Texas resident
+    # (houstonlibrary.org/mylink), so this collection costs nothing but a
+    # signup. Key verified 2026-08: status "Live", isConsortium false.
+    # Two near-miss keys to avoid — `houston` is the Houston Area Digital
+    # Media Catalog (a consortium that holds almost nothing we watch) and
+    # `hpl` is Hamilton Public Library in Ontario.
+    # Print is SirsiDynix Enterprise, not watched (TODO.md).
+    library: houstonlibrary
+    label: Houston               # display name for pushes/report
+
   texas-theatre:
     kind: pages
     pages:

@@ -21,8 +21,11 @@ reading/log.json, lists/*.yaml → covers + page counts → docs/data/*.json →
 
 | id | what | how |
 |---|---|---|
-| `denton-library` | Denton Public Library (BiblioCommons) | parses the JSON embedded in catalog search pages |
-| `cloudlibrary` | cloudLibrary ebooks/audiobooks | unauthenticated web-patron search API |
+| `denton-library` | Denton Public Library print (BiblioCommons) | parses the JSON embedded in catalog search pages |
+| `cloudlibrary` | Denton ebooks/audiobooks (cloudLibrary) | unauthenticated web-patron search API |
+| `cloudlibrary-lewisville` | Lewisville ebooks/audiobooks (cloudLibrary) | same, different library id |
+| `libby-fortworth` | Fort Worth ebooks/audiobooks (Libby/OverDrive) | OverDrive's unauthenticated "thunder" API |
+| `libby-houston` | Houston ebooks/audiobooks (Libby/OverDrive) | same, different library key |
 | `texas-theatre` | Texas Theatre | page watcher (title appears on the site) |
 | `cinemark` / `amc` | chain theaters (config per location) | schema.org ld+json on showtime pages, page-text fallback |
 | `alamo` (off by default) | every Alamo Drafthouse in DFW | their market-wide JSON schedule feed |
@@ -31,6 +34,12 @@ Sources are isolated: one failing never kills the run; failures show in
 the report. Add a source by editing `sources:` in `watchlist.yaml`; add
 a new *kind* by dropping a file in `tracker/sources/` (subclass
 `Source`, decorate with `@register`).
+
+Every library card is its own source, because no two of these cities run
+the same stack — there is no single "add a library" knob. Overlap is
+cheap, though: notifications are one push per (book, format), so a title
+carried by three libraries is announced once and the report still shows
+which libraries have it.
 
 ## Setup
 

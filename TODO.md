@@ -90,17 +90,21 @@
   single one is kept purely as a fallback.
 
 ## Investigate
-- **Print catalogs for the two new cards (2026-08).** Both cities run
-  something other than BiblioCommons, so each needs its own source:
-  - Lewisville — SirsiDynix Enterprise. **Highest value**: it's the
-    physically closest library, so print holds there are the ones
-    actually worth driving to. Enterprise search is session-heavy;
-    probe before promising anything.
+- **Print catalogs for the non-Denton cards (2026-08).** Only Denton runs
+  BiblioCommons, so every other card needs its own source:
+  - SirsiDynix Enterprise — covers **two** cards, so one adapter pays for
+    itself twice: Lewisville, and Houston at
+    `halan.sdp.sirsi.net/client/en_US/hou`. Lewisville is the case worth
+    building for (physically closest, so its print holds are the ones
+    actually worth driving to); Houston print is academic at a 4-hour
+    drive and just comes along for free. Enterprise search is
+    session-heavy; probe before promising anything.
   - Fort Worth — Polaris (fwmlc.polarislibrary.com), which has a fairly
     scrapable JSON search API. Theoretically nice, realistically of
     limited utility given the drive.
-  Digital is covered: Lewisville = cloudLibrary (added 2026-08),
-  Fort Worth = Libby/OverDrive.
+  Digital is covered everywhere: Lewisville = cloudLibrary (added
+  2026-08), Fort Worth + Houston = Libby/OverDrive (Houston added
+  2026-08).
 - **OverDrive trap, found 2026-08**: thunder key `denton` still resolves
   AND serves media, but the record says `"status": "Terminated"` and
   denton.overdrive.com 302s to /terminated. Denton dropped Libby. Always
