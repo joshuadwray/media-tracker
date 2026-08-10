@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Fruit Fly
+    author: Silver, Josh
+    bib_id: S127C1984311
   - title: Sunrise
     author: Kingsbury, Karen
     bib_id: S127C1206366
