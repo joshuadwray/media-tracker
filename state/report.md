@@ -1,17 +1,29 @@
-# Media tracker report — 2026-08-10 00:27 UTC
+# Media tracker report — 2026-08-10 00:32 UTC
 
-## New sightings (1)
-- **Dèy — Danticat, Edwidge**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=D%C3%A8y%20Danticat%2C%20Edwidge&searchType=smart)
+## New sightings (7)
+- **Fruit Fly — Silver, Josh**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Fruit%20Fly%20Silver%2C%20Josh&searchType=smart)
+- **Fruit Fly — Silver, Josh**: audiobook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Fruit%20Fly)
+- **Fruit Fly — Silver, Josh**: ebook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~185d wait) — [link](https://libbyapp.com/library/fwpl/media/12546462)
+- **Fruit Fly — Silver, Josh**: audiobook in Libby catalog (Fort Worth) — 0/3 available, 26 holds (~126d wait) — [link](https://libbyapp.com/library/fwpl/media/13338759)
+- **Sunrise — Kingsbury, Karen**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Sunrise%20Kingsbury%2C%20Karen&searchType=smart)
+- **Sunrise — Kingsbury, Karen**: ebook in Libby catalog (Fort Worth) — 1/1 available — [link](https://libbyapp.com/library/fwpl/media/140799)
+- **Triage — Rankine, Claudia**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Triage%20Rankine%2C%20Claudia&searchType=smart)
 
-## All current sightings (21)
+## All current sightings (27)
+- Triage — Rankine, Claudia: print book in denton library catalog
+- Fruit Fly — Silver, Josh: print book in denton library catalog
+- Sunrise — Kingsbury, Karen: print book in denton library catalog
 - Dèy — Danticat, Edwidge: print book in denton library catalog
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: print book in denton library catalog
+- Fruit Fly — Silver, Josh: audiobook in cloudLibrary catalog (Denton)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in cloudLibrary catalog (Lewisville)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in cloudLibrary catalog (Lewisville)
+- Fruit Fly — Silver, Josh: ebook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~185d wait)
+- Fruit Fly — Silver, Josh: audiobook in Libby catalog (Fort Worth) — 0/3 available, 26 holds (~126d wait)
+- Sunrise — Kingsbury, Karen: ebook in Libby catalog (Fort Worth) — 1/1 available
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: ebook in Libby catalog (Fort Worth) — 0/1 available, 8 holds (~126d wait)
 - Dead but Dreaming of Electric Sheep — Tremblay, Paul: audiobook in Libby catalog (Fort Worth) — 0/3 available, 13 holds (~66d wait)
 - teenage sex and death at camp miasma (2026): "teenage sex and death at camp miasma" mentioned on Texas Theatre
-- tony (2026): "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - i want your sex (2026): "I Want Your Sex" playing at AMC Stonebriar 24 (2026-08-10, 2026-08-11, 2026-08-12)
 - coyote vs acme (2026): "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23)
 - coyote vs acme (2026): "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
@@ -27,12 +39,12 @@
 - tony (2026): "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 
 ## Source status
-- ✅ `denton-library`: 2 observation(s)
-- ✅ `cloudlibrary`: 0 observation(s)
+- ✅ `denton-library`: 5 observation(s)
+- ✅ `cloudlibrary`: 1 observation(s)
 - ✅ `cloudlibrary-lewisville`: 2 observation(s)
-- ✅ `libby-fortworth`: 2 observation(s)
+- ✅ `libby-fortworth`: 5 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 1 observation(s)
+- ❌ `cinemark`: RuntimeError: Cinemark Denton 14: HTTP 429; Cinemark West Plano: HTTP 429; Cinemark Dallas IMAX: HTTP 429
 - ✅ `amc`: 13 observation(s)
 
 ## Never matched anywhere (possible typos?)
