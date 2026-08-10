@@ -23,11 +23,14 @@ on:
 permissions:
   contents: write
 
-# Per-run concurrency, same reasoning as add-item.yml: each dispatch gets its
-# own slot so rapid taps don't cancel each other.
+# One shared group, same reasoning as add-item.yml: rapid taps queue rather
+# than racing to commit watchlist.yaml. Three removes landed inside the same
+# minute on 2026-08-09 and got away with it; `queue: max` means they don't
+# have to. See pin-item.yml for why that property is load-bearing.
 concurrency:
-  group: media-tracker-remove-${{ github.run_id }}
+  group: media-tracker-remove
   cancel-in-progress: false
+  queue: max
 
 jobs:
   remove:

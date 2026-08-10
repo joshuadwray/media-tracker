@@ -25,12 +25,16 @@ on:
 permissions:
   contents: write
 
-# Per-run concurrency, as in add-item.yml: a dispatch must never cancel
-# another. Batching means these are rare now, but a second list started while
-# the first is running still gets its own slot.
+# One shared group so a second list started while the first is running
+# queues instead of racing it to commit watchlist.yaml — the way
+# rapid-fire pins did on 2026-08-10. `queue: max` is what makes a shared
+# group safe here: the default `queue: single` cancels an already-pending
+# run when a new one arrives, which would silently drop a batch. See
+# pin-item.yml for the full note.
 concurrency:
-  group: media-tracker-add-${{ github.run_id }}
+  group: media-tracker-add
   cancel-in-progress: false
+  queue: max
 
 jobs:
   add:

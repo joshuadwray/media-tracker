@@ -30,11 +30,21 @@ on:
 permissions:
   contents: write
 
-# Per-run concurrency so rapid-fire pins don't cancel each other.
-# Race with scheduled checks is handled by pull --rebase before push.
+# One shared group, so rapid-fire pins queue instead of racing: two runs
+# each rewriting state/pending-pins.json is a conflict `pull --rebase`
+# cannot resolve, and four Keep taps on 2026-08-10 produced three failed
+# runs and two cards stuck in the queue.
+#
+# `queue: max` is load-bearing. This was a per-run group precisely because
+# a shared one used to DROP taps — the default `queue: single` cancels any
+# already-pending run when a new one arrives, so a burst keeps only the
+# first and last. `queue: max` (GA May 2026) holds up to 100 pending runs
+# and processes them FIFO instead. Do not remove it without going back to
+# a per-run group.
 concurrency:
-  group: media-tracker-pin-${{ github.run_id }}
+  group: media-tracker-pin
   cancel-in-progress: false
+  queue: max
 
 jobs:
   pin:

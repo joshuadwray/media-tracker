@@ -828,3 +828,29 @@ def test_author_matches_handles_multiple_contributors():
     # so it must not be what carries a match between two different people.
     assert not author_matches("Rankine, Claudia, 1963",
                               "Kingsolver, Barbara, 1963- author")
+
+
+def test_pinnable_only_when_an_id_is_on_offer():
+    """A pin card is worth showing only if picking something could change the
+    entry, and an id is the only thing candidate_to_entry adds that title and
+    author matching doesn't already do. Queueing on the mere absence of a pin
+    meant nearly every forthcoming title got a card it could not act on."""
+    from tracker.cli import _pinnable
+
+    assert _pinnable([{"title": "X", "bib_id": "S127C1"}])
+    # The one case that genuinely helps: auto-pinning only looks at bib_id,
+    # so an isbn-only record still needs a human to choose it.
+    assert _pinnable([{"title": "X", "isbn": "9780063251922"}])
+    assert _pinnable([{"title": "X"}, {"title": "X", "bib_id": "S1"}])
+
+    # The live cases from 2026-08-10: digital records carrying neither id.
+    assert not _pinnable([
+        {"title": "American Hagwon", "format": "ebook",
+         "bib_id": None, "isbn": None, "source": "cloudlibrary-lewisville"},
+        {"title": "American Hagwon", "format": "audiobook",
+         "bib_id": None, "isbn": None, "source": "cloudlibrary-lewisville"},
+        {"title": "American Hagwon", "author": "Min Jin Lee", "format": "ebook",
+         "bib_id": None, "isbn": None, "source": "libby-fortworth"},
+    ])
+    # Matched nothing anywhere — there was never a decision to make.
+    assert not _pinnable([])

@@ -252,24 +252,42 @@ def _add_one(config: Config, args: argparse.Namespace) -> dict:
     if entry.get("bib_id") or entry.get("isbn"):
         how = f"pinned {_describe(entry, picked)}"
         status = "pinned"
-    elif args.kind == "book" and added:
-        # Ambiguous (0 or 2+ catalog matches): queue it so the add
-        # page can surface a "needs pinning" card. The entry still
+    elif args.kind == "book" and added and _pinnable(matches):
+        # A genuine choice between records that carry an id: queue it so
+        # the add page can surface a "needs pinning" card. The entry still
         # watches as typed in the meantime.
         from .pending import add_pending
         record = add_pending(args.title, args.author, matches,
                              path=config.state_path.parent / "pending-pins.json")
         print(f"queued for pinning: {record['id']}")
         status = "queued"
-        if matches:
-            how = (f"{len(matches)} candidates need pinning — "
-                   "open the add page")
-        else:
-            how = "not found in catalog — open the add page"
+        how = (f"{len(matches)} candidates need pinning — "
+               "open the add page")
     else:
         how = "watching by title"
         status = "added"
     return {"title": entry["title"], "how": how, "status": status}
+
+
+def _pinnable(matches: list[dict]) -> bool:
+    """Whether a pin card could actually change the entry.
+
+    Only an id makes an entry more precise — candidate_to_entry writes
+    nothing else that matching doesn't already do from the typed title and
+    author. So with no ids among the candidates there is no decision to
+    put in front of anyone, and the card is pure ceremony.
+
+    This used to queue on the mere absence of a pin, which meant almost
+    every forthcoming title got a card: _auto_pick_book pins whenever any
+    candidate carries a bib_id, so by the time we reach here none does, and
+    a new book that no library has cataloged yet has nothing else either.
+    Measured 2026-08-10 on four freshly added titles — American Hagwon,
+    Ply, Partita, Peck and Peck — every one produced a card offering a
+    choice that could not change anything, and two of them had matched
+    nothing anywhere. In practice this leaves the one case that does help:
+    a record carrying an isbn but no bib_id, which auto-pinning skips.
+    """
+    return any(c.get("bib_id") or c.get("isbn") for c in matches)
 
 
 def cmd_add_batch(config: Config, args: argparse.Namespace) -> int:

@@ -26,12 +26,15 @@ on:
 permissions:
   contents: write
 
-# Per-run concurrency: each dispatch gets its own slot so rapid-fire adds
-# don't cancel each other (GitHub's single-slot queue drops middle runs).
-# Race with scheduled checks is handled by pull --rebase before push.
+# Shares add-items.yml's group so the two can't race each other to commit
+# watchlist.yaml. `queue: max` replaces the per-run group this used to
+# need: the old comment here was right that GitHub's default single-slot
+# queue drops middle runs, which is why a shared group was unsafe before.
+# See pin-item.yml for the full note.
 concurrency:
-  group: media-tracker-add-${{ github.run_id }}
+  group: media-tracker-add
   cancel-in-progress: false
+  queue: max
 
 jobs:
   add:
