@@ -67,6 +67,11 @@
   retry-after-N-days rule (manual fix today: delete the cache entry or
   set the count on the card).
 
+## Pending cleanup
+- Retire `add-item.yml` once `add-items.yml` (batch) has a few real runs
+  behind it. docs/add.html dispatches only the batch workflow now; the
+  single one is kept purely as a fallback.
+
 ## Investigate
 - **Print catalogs for the two new cards (2026-08).** Both cities run
   something other than BiblioCommons, so each needs its own source:

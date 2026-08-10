@@ -103,13 +103,34 @@ def _notify_groups(run: CheckRun, state: State,
                 )
             group.observations.append(obs)
 
+    # A book we've never seen in any medium is a first discovery: say it once,
+    # listing everything found, rather than firing print/ebook/audiobook as
+    # three separate pushes for the same news. Later mediums still ping
+    # individually, because by then the book itself isn't the news.
+    first_seen = {
+        g.item_key for g in grouped.values()
+        if not any(k.rsplit("|", 1)[0] == g.item_key for k in state.media)
+    }
+
     out: list[NotifyGroup] = []
+    debuts: OrderedDict[str, NotifyGroup] = OrderedDict()
     for key, group in grouped.items():
-        if state.media_is_new(key):
-            state.media_record(key)
+        if not state.media_is_new(key):
+            if any(o.source in ok_sources for o in group.observations):
+                state.media_touch(key)
+            continue
+        state.media_record(key)
+        if group.item_key in first_seen:
+            debut = debuts.get(group.item_key)
+            if debut is None:
+                debut = debuts[group.item_key] = NotifyGroup(
+                    item_key=group.item_key, item_label=group.item_label,
+                    medium=None,
+                )
+            debut.observations.extend(group.observations)
+        else:
             out.append(group)
-        elif any(o.source in ok_sources for o in group.observations):
-            state.media_touch(key)
+    out.extend(debuts.values())
 
     out.extend(
         NotifyGroup(item_key=o.item_key, item_label=o.item_label,

@@ -3,6 +3,7 @@
   python -m tracker check [--dry-run] [--no-notify] [--source ID]
   python -m tracker add book "title" [--yes]
   python -m tracker add movie "title" [--year 2026] [--yes]
+  python -m tracker add-batch '[{"title": "...", "author": "..."}, ...]'
   python -m tracker remove book|movie "title"
   python -m tracker pin ID (--choice N | --keep | --remove) [--expect BIB/ISBN]
   python -m tracker probe [--source ID] [--query "..."]
@@ -64,10 +65,20 @@ def main(argv: list[str] | None = None) -> int:
     p_add.add_argument("--isbn")
     p_add.add_argument("--yes", action="store_true",
                        help="skip the interactive pick; add exactly as typed")
+    p_add.add_argument("--quiet", action="store_true",
+                       help="skip the ntfy confirmation (batch adds send "
+                            "one summary note instead)")
     p_add.add_argument("--auto", action="store_true",
                        help="non-interactive: pin the best matching catalog "
                             "record if unambiguous, else add as typed; "
                             "sends an ntfy confirmation")
+
+    p_batch = sub.add_parser("add-batch",
+                             help="add several entries in one pass: one "
+                                  "commit, one check, one confirmation")
+    p_batch.add_argument("items",
+                         help='JSON array (or a path to one) of '
+                              '{"title","author","kind","year","isbn"} objects')
 
     p_remove = sub.add_parser("remove", help="drop a watchlist entry and the "
                                              "state it accumulated")
@@ -138,6 +149,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_check(config, args)
     if args.command == "add":
         return cmd_add(config, args)
+    if args.command == "add-batch":
+        return cmd_add_batch(config, args)
     if args.command == "remove":
         return cmd_remove(config, args)
     if args.command == "pin":
@@ -195,10 +208,25 @@ def cmd_check(config: Config, args: argparse.Namespace) -> int:
 
 
 def cmd_add(config: Config, args: argparse.Namespace) -> int:
+    result = _add_one(config, args)
+    if args.auto and not getattr(args, "quiet", False):
+        _send_note("watchlist add",
+                   f"added {args.kind}: {result['title']} ({result['how']})")
+    return 0
+
+
+def _add_one(config: Config, args: argparse.Namespace) -> dict:
+    """Add one entry and report what happened.
+
+    Returns {title, how, pinned} — `how` is the human phrase the ntfy
+    confirmation uses, shared by the single and batch paths so they can't
+    describe the same outcome two different ways.
+    """
     matches: list[dict] = []
+    picked = None
     if args.kind == "book":
         if args.auto:
-            entry, matches = _auto_pick_book(config, args)
+            entry, matches, picked = _auto_pick_book(config, args)
         else:
             entry = _pick_book(config, args)
         section = "books"
@@ -212,30 +240,91 @@ def cmd_add(config: Config, args: argparse.Namespace) -> int:
                                       entry["title"], args.title):
         msg = f"already on the watchlist: {entry['title']}"
         print(msg)
-        _send_note("watchlist add", msg, tags="information_source")
-        return 0
+        return {"title": entry["title"], "how": "already on the watchlist",
+                "status": "duplicate"}
 
     watchlist_path = _watchlist_path(args)
     added = append_entry(watchlist_path, section, entry)
     print(f"added to {section}: {entry}")
-    if args.auto:
-        if entry.get("bib_id") or entry.get("isbn"):
-            how = "pinned to an exact catalog record"
-        elif args.kind == "book" and added:
-            # Ambiguous (0 or 2+ catalog matches): queue it so the add
-            # page can surface a "needs pinning" card. The entry still
-            # watches as typed in the meantime.
-            from .pending import add_pending
-            record = add_pending(args.title, args.author, matches)
-            print(f"queued for pinning: {record['id']}")
-            if matches:
-                how = (f"{len(matches)} candidates need pinning — "
-                       "open the add page")
-            else:
-                how = "not found in catalog — open the add page"
+    if not args.auto:
+        return {"title": entry["title"], "how": "added", "status": "added"}
+
+    if entry.get("bib_id") or entry.get("isbn"):
+        how = f"pinned {_describe(entry, picked)}"
+        status = "pinned"
+    elif args.kind == "book" and added:
+        # Ambiguous (0 or 2+ catalog matches): queue it so the add
+        # page can surface a "needs pinning" card. The entry still
+        # watches as typed in the meantime.
+        from .pending import add_pending
+        record = add_pending(args.title, args.author, matches,
+                             path=config.state_path.parent / "pending-pins.json")
+        print(f"queued for pinning: {record['id']}")
+        status = "queued"
+        if matches:
+            how = (f"{len(matches)} candidates need pinning — "
+                   "open the add page")
         else:
-            how = "watching by title"
-        _send_note("watchlist add", f"added {args.kind}: {entry['title']} ({how})")
+            how = "not found in catalog — open the add page"
+    else:
+        how = "watching by title"
+        status = "added"
+    return {"title": entry["title"], "how": how, "status": status}
+
+
+def cmd_add_batch(config: Config, args: argparse.Namespace) -> int:
+    """Add several entries in one pass — one commit, one check, one push.
+
+    Adding books one at a time from the phone fires a workflow (and a full
+    catalog check) per book; a list off an article or podcast would queue
+    several of those back to back, each notifying about the others' finds.
+    """
+    import json
+
+    raw = Path(args.items)
+    text = raw.read_text() if raw.is_file() else args.items
+    items = json.loads(text)
+    if isinstance(items, dict):
+        items = [items]
+
+    results: list[dict] = []
+    for item in items:
+        title = (item.get("title") or "").strip()
+        if not title:
+            continue
+        # Reload so the dup guard sees entries added earlier in this batch
+        # (a pasted list can name the same book twice).
+        current = load_config(args.watchlist)
+        one = argparse.Namespace(
+            watchlist=args.watchlist, kind=item.get("kind") or "book",
+            title=title, author=(item.get("author") or "").strip() or None,
+            year=item.get("year"), isbn=(item.get("isbn") or "").strip() or None,
+            auto=True, yes=False, quiet=True,
+        )
+        try:
+            results.append(_add_one(current, one))
+        except Exception as exc:  # noqa: BLE001 — one bad title mustn't sink the batch
+            print(f"failed to add {title!r}: {exc}", file=sys.stderr)
+            results.append({"title": title, "how": f"failed: {exc}",
+                            "status": "failed"})
+
+    if not results:
+        print("nothing to add")
+        return 0
+
+    def count(*statuses: str) -> int:
+        return sum(1 for r in results if r["status"] in statuses)
+
+    bits = [f"added {count('pinned', 'added', 'queued')}"]
+    for label, statuses in (("need pinning", ("queued",)),
+                            ("already watched", ("duplicate",)),
+                            ("failed", ("failed",))):
+        if count(*statuses):
+            bits.append(f"{count(*statuses)} {label}")
+    summary = ", ".join(bits)
+    lines = [f"• {r['title']} — {r['how']}" for r in results]
+    print(summary)
+    _send_note("watchlist add", summary + "\n" + "\n".join(lines))
     return 0
 
 
@@ -298,14 +387,15 @@ def _already_watched(config: Config, kind: str,
     return any(f"{kind}:{normalize_key(t)}" in existing for t in titles)
 
 
-def _auto_pick_book(config: Config,
-                    args: argparse.Namespace) -> tuple[dict, list[dict]]:
+def _auto_pick_book(config: Config, args: argparse.Namespace,
+                    ) -> tuple[dict, list[dict], dict | None]:
     """Non-interactive pick: pin a BiblioCommons record when the title
     matches unambiguously; otherwise add as typed (fuzzy title matching
     still catches it everywhere, including cloudLibrary). Returns
-    (entry, title-matched candidates) — the caller queues the candidate
-    list for async pinning when nothing was pinned."""
-    from .matching import titles_match
+    (entry, title-matched candidates, the pinned candidate or None) — the
+    caller queues the candidate list for async pinning when nothing was
+    pinned, and names the pinned record in its confirmation."""
+    from .matching import author_matches, titles_match
 
     as_typed = {"title": args.title}
     if args.author:
@@ -316,17 +406,49 @@ def _auto_pick_book(config: Config,
     candidates = search_book_candidates(config, args.title, log=print)
     matches = [c for c in candidates
                if c.get("title") and titles_match(args.title, c["title"])]
+    # An author narrows a title collision to one book. Without this, "Sunrise"
+    # pinned Karen Kingsbury's 2007 novel over Téa Obreht's 2026 one purely
+    # because it came first. author_matches fails open on records with no
+    # author, so this can only ever discard a wrong-author candidate.
+    if args.author:
+        by_author = [c for c in matches
+                     if author_matches(args.author, c.get("author"))]
+        if by_author:
+            matches = by_author
     # Prefer the print record's bib_id (the manual convention: bib_id pins
-    # the library record, no isbn so cloudLibrary title-matches every format).
-    pinned = next((c for c in matches if c.get("bib_id")
-                   and (c.get("format") or "").upper() in ("BK", "PAPERBACK")),
-                  None) or next((c for c in matches if c.get("bib_id")), None)
+    # the library record, no isbn so cloudLibrary title-matches every format),
+    # and among equals take the newest edition — a bare title almost always
+    # means the book people are talking about now, not a decades-old namesake.
+    pinnable = [c for c in matches if c.get("bib_id")]
+    print_records = [c for c in pinnable
+                     if (c.get("format") or "").upper() in ("BK", "PAPERBACK")]
+    pinned = _newest(print_records) or _newest(pinnable)
     if not pinned:
-        return as_typed, matches
+        return as_typed, matches, None
     entry = candidate_to_entry(pinned, isbn_override=args.isbn)
     if not args.isbn:
         entry.pop("isbn", None)
-    return entry, matches
+    return entry, matches, pinned
+
+
+def _newest(candidates: list[dict]) -> dict | None:
+    """Most recently published candidate; falls back to search order when
+    no record carries a year (only BiblioCommons reports one today)."""
+    if not candidates:
+        return None
+    return max(candidates, key=lambda c: c.get("year") or 0)
+
+
+def _describe(entry: dict, candidate: dict | None = None) -> str:
+    """'Sunrise — Obreht, Téa (2026)' — so a wrong pin is visible in the
+    confirmation push instead of hiding behind 'pinned to a catalog record'."""
+    text = entry["title"]
+    if entry.get("author"):
+        text += f" — {entry['author']}"
+    year = (candidate or {}).get("year")
+    if year:
+        text += f" ({year})"
+    return text
 
 
 def cmd_pin(config: Config, args: argparse.Namespace) -> int:
@@ -456,6 +578,11 @@ def search_book_candidates(config: Config, query: str, *, log=None,
         if key not in seen:
             seen.add(key)
             unique.append(c)
+    # Title matches first: a catalog search for a common word returns plenty
+    # of noise ("Sunrise" brings back "Sasuke's Story"), and truncating before
+    # sorting can drop the very record we came for.
+    from .matching import titles_match
+    unique.sort(key=lambda c: not titles_match(query, c.get("title") or ""))
     return unique[:limit]
 
 

@@ -125,6 +125,8 @@ class BiblioCommonsSource(Source):
                 "author": authors,
                 "format": bib.get("format"),
                 "bib_id": str(bib["bibId"]) if bib.get("bibId") else None,
+                "year": _year(bib.get("publicationDate")),
+                "isbn": _first_isbn(bib.get("isbns")),
             })
         return out
 
@@ -139,6 +141,20 @@ class BiblioCommonsSource(Source):
             f"extracted {len(bibs)} bib records:\n"
             + json.dumps(bibs[:5], indent=2)[:3000]
         )
+
+
+def _year(publication_date: Any) -> int | None:
+    """BiblioCommons gives a bare year string ("2026"); be liberal."""
+    if publication_date is None:
+        return None
+    m = re.search(r"(1[5-9]\d\d|20\d\d)", str(publication_date))
+    return int(m.group(1)) if m else None
+
+
+def _first_isbn(isbns: Any) -> str | None:
+    if isinstance(isbns, list) and isbns:
+        return str(isbns[0])
+    return str(isbns) if isbns else None
 
 
 def _author_str(bib: dict) -> str | None:
@@ -182,6 +198,11 @@ def _walk_for_bibs(node: Any) -> Iterator[dict[str, Any]]:
                 "availableCopies": avail.get("availableCopies"),
                 "heldCopies": avail.get("heldCopies"),
                 "bibId": node.get("id") or brief.get("id"),
+                # Kept for `tracker add`: publicationDate disambiguates
+                # same-title records (two "Sunrise"s, 2007 vs 2026) and
+                # isbns bridges to the other sources' pinning.
+                "publicationDate": brief.get("publicationDate"),
+                "isbns": brief.get("isbns"),
             }
         else:
             for v in node.values():

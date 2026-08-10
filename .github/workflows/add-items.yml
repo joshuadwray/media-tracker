@@ -1,0 +1,107 @@
+# Batch mobile add: triggered by docs/add.html via the workflow_dispatch API.
+# Supersedes add-item.yml — the phone queues however many books you're working
+# through and dispatches ONCE, so a list off an article costs one commit, one
+# catalog check and one confirmation instead of one of each per book.
+#
+# `items` is JSON rather than a delimited list: titles here routinely carry
+# commas, colons, dashes and parentheses ("A Trade of Blood (Ana and Din
+# Mysteries)"), and this repo has been bitten by delimiter parsing before.
+
+name: add-items
+run-name: "add ${{ inputs.count }} item(s)"
+
+on:
+  workflow_dispatch:
+    inputs:
+      items:
+        description: 'JSON array of {"title","author","kind","year"}'
+        required: true
+        type: string
+      count:
+        description: how many (display only)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+# Per-run concurrency, as in add-item.yml: a dispatch must never cancel
+# another. Batching means these are rare now, but a second list started while
+# the first is running still gets its own slot.
+concurrency:
+  group: media-tracker-add-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    env:
+      ITEMS: ${{ inputs.items }}
+      NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+      TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Add items and commit
+        run: |
+          git config user.name "media-tracker bot"
+          git config user.email "actions@users.noreply.github.com"
+          # Via a file, so no shell quoting touches the JSON.
+          printf '%s' "$ITEMS" > /tmp/items.json
+          python -m tracker add-batch /tmp/items.json
+
+          # Retry loop: a scheduled check may be committing at the same time.
+          # add-batch is idempotent — its dup guard skips anything that landed
+          # on the previous attempt.
+          for attempt in 1 2 3 4 5; do
+            git add watchlist.yaml
+            if [ -f state/pending-pins.json ]; then git add state/pending-pins.json; fi
+            git diff --cached --quiet || git commit -m "add $(jq length /tmp/items.json) item(s) (mobile)"
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "::warning::Push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            git pull origin main
+            python -m tracker add-batch /tmp/items.json
+            sleep "$((attempt * 2))"
+          done
+
+      - name: Run immediate check and commit
+        env:
+          THEATER_LOOKAHEAD: "21"
+        run: |
+          # One check for the whole batch. A retry must not re-notify: the
+          # reset below discards the state.json this run just wrote, so a
+          # second check would rediscover everything it already pushed about.
+          notify_flag=""
+          for attempt in 1 2 3 4 5; do
+            python -m tracker check $notify_flag
+            notify_flag="--no-notify"
+            git add state/ docs/
+            git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
+            if git pull --rebase origin main && git push; then
+              break
+            fi
+            echo "::warning::State push attempt $attempt failed, retrying..."
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            git pull origin main
+            sleep "$((attempt * 2))"
+          done
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          [ -n "$NTFY_TOPIC" ] && curl -s \
+            -H "Title: watchlist add failed" -H "Tags: warning" \
+            -d "batch add failed — check the Actions log" \
+            "https://ntfy.sh/$NTFY_TOPIC" > /dev/null

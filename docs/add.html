@@ -73,6 +73,13 @@ a { color: var(--accent); }
 .pcard button { display: block; width: 100%; text-align: left;
   margin-top: 8px; padding: 10px 12px; font-size: .92rem; }
 .pcard button.alt { color: var(--mut); }
+#queue { margin-bottom: 12px; }
+.qrow { display: flex; align-items: center; gap: 8px; padding: 7px 10px;
+  border: 1px solid var(--line); border-radius: 8px; margin-bottom: 6px;
+  font-size: .9rem; }
+.qrow span { flex: 1; }
+.qrow .qa { color: var(--mut); font-size: .82rem; }
+.qrow button { padding: 2px 8px; font-size: .8rem; width: auto; }
 </style>
 </head>
 <body>
@@ -83,16 +90,22 @@ a { color: var(--accent); }
   <button id="tab-book" class="active" onclick="setKind('book')">Book</button>
   <button id="tab-movie" onclick="setKind('movie')">Movie</button>
 </div>
+<div id="queue" style="display:none"></div>
 <input id="title" placeholder="title" autocomplete="off"
        onkeydown="if(event.key==='Enter')go()">
+<input id="author" placeholder="author (optional, but disambiguates)"
+       autocomplete="off" onkeydown="if(event.key==='Enter')go()">
 <input id="year" placeholder="year (optional)" inputmode="numeric"
        style="display:none">
 <button class="primary" id="goBtn" onclick="go()">Add</button>
+<button id="moreBtn" onclick="queueMore()">+ add another</button>
 <div id="status" class="muted"></div>
 <div class="muted" style="margin-top:6px">
-  Books are verified against the live library catalogs in the background;
-  you&rsquo;ll get an ntfy push in a minute or two confirming what was added
-  (and any immediate sightings).
+  Reading a list of recommendations? Hit <strong>+ add another</strong> after
+  each one &mdash; nothing is sent until you tap Add, so the whole list costs a
+  single catalog check and one confirmation push instead of one per book.
+  An author is worth typing: without one, a title like &ldquo;Sunrise&rdquo;
+  matches several different books and the newest one wins.
 </div>
 
 <div id="pending" style="display:none"></div>
@@ -116,7 +129,7 @@ a { color: var(--accent); }
 
 <script>
 const REPO = 'joshuadwray/media-tracker';
-const WORKFLOW = 'add-item.yml';
+const WORKFLOW = 'add-items.yml';
 let kind = 'book';
 const $ = id => document.getElementById(id);
 
@@ -125,7 +138,65 @@ function setKind(k) {
   $('tab-book').classList.toggle('active', k === 'book');
   $('tab-movie').classList.toggle('active', k === 'movie');
   $('year').style.display = k === 'movie' ? '' : 'none';
+  $('author').style.display = k === 'movie' ? 'none' : '';
 }
+
+// ---- pending batch (client-side, nothing sent until you tap Add) ----
+// Persisted, because building a list off an article means tab-switching and
+// losing a half-typed list to a reload would be worse than the problem this
+// is solving.
+let queue = [];
+try { queue = JSON.parse(localStorage.getItem('mt_queue') || '[]'); } catch (e) {}
+
+function saveQueue() {
+  localStorage.setItem('mt_queue', JSON.stringify(queue));
+  renderQueue();
+}
+
+function renderQueue() {
+  const box = $('queue');
+  box.style.display = queue.length ? '' : 'none';
+  box.innerHTML = queue.map((it, i) =>
+    `<div class="qrow"><span>${esc(it.title)}` +
+    (it.author ? ` <span class="qa">${esc(it.author)}</span>` : '') +
+    (it.year ? ` <span class="qa">${esc(it.year)}</span>` : '') +
+    `</span><button onclick="dropQueued(${i})" title="remove">&times;</button></div>`
+  ).join('');
+  $('goBtn').textContent = queue.length
+    ? `Add ${queue.length + (currentItem() ? 1 : 0)} items` : 'Add';
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+function currentItem() {
+  const title = $('title').value.trim();
+  if (!title) return null;
+  const item = { kind, title };
+  const author = $('author').value.trim();
+  const year = $('year').value.trim();
+  if (kind === 'book' && author) item.author = author;
+  if (kind === 'movie' && year) item.year = year;
+  return item;
+}
+
+function clearFields() {
+  $('title').value = ''; $('author').value = ''; $('year').value = '';
+}
+
+function queueMore() {
+  const item = currentItem();
+  if (!item) { $('title').focus(); return; }
+  queue.push(item);
+  clearFields();
+  saveQueue();
+  status(`${queue.length} queued — keep going, or tap Add to send`, 'ok');
+  $('title').focus();
+}
+
+function dropQueued(i) { queue.splice(i, 1); saveQueue(); }
 
 function saveTok() {
   const t = $('pat').value.trim();
@@ -140,21 +211,26 @@ function status(msg, cls) {
 }
 
 async function go() {
-  const title = $('title').value.trim();
-  if (!title) return;
+  const items = queue.slice();
+  const current = currentItem();
+  if (current) items.push(current);
+  if (!items.length) return;
   const token = localStorage.getItem('mt_pat');
   if (!token) { status('no token yet — open "token setup" below', 'err');
     $('setup').open = true; return; }
-  const inputs = { kind, title };
-  const year = $('year').value.trim();
-  if (kind === 'movie' && year) inputs.year = year;
 
   $('goBtn').disabled = true;
   status('sending\u2026');
-  const r = await dispatch(WORKFLOW, inputs);
+  const r = await dispatch(WORKFLOW, {
+    items: JSON.stringify(items), count: String(items.length),
+  });
   if (r && r.status === 204) {
-    status(`sent \u2014 "${title}" is being verified; watch for the ntfy push`, 'ok');
-    $('title').value = ''; $('year').value = '';
+    const what = items.length === 1
+      ? `"${items[0].title}"` : `${items.length} items`;
+    status(`sent \u2014 ${what} being verified; watch for the ntfy push`, 'ok');
+    queue = [];
+    clearFields();
+    saveQueue();
     setTimeout(loadPending, 5000);
   }
   $('goBtn').disabled = false;
@@ -276,6 +352,9 @@ function ago(iso) {
   return `${Math.round(mins / 1440)}d ago`;
 }
 
+renderQueue();
+// Keep the button's count honest while you're mid-type.
+$('title').addEventListener('input', renderQueue);
 loadPending();
 </script>
 </body>

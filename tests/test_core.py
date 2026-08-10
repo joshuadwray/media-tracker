@@ -68,7 +68,8 @@ def test_state_notifies_once(tmp_path):
 
 
 def _book_obs(source, medium, item="book:x", label="X"):
-    fmt = {"ebook": "ebook", "audiobook": "audiobook", "print": "print book"}[medium]
+    fmt = {"ebook": "ebook", "audiobook": "audiobook", "print": "print book",
+           "audiobook-cd": "audiobook (CD)"}[medium]
     return Observation(source=source, item_key=item, item_label=label,
                        summary=f"{fmt} in {source} catalog",
                        event=f"{fmt} in catalog", medium=medium)
@@ -92,9 +93,11 @@ def _run_groups(state, observations, ok=None):
 
 
 def test_notify_groups_one_push_per_medium(tmp_path):
-    """A book carried by several libraries is announced once per medium —
-    and a new library joining later doesn't re-announce it."""
+    """Once a book is known, each medium is announced once — however many
+    libraries carry it, and whichever library turns it up first."""
     state = State(tmp_path / "state.json")
+    # Past its debut (that path is test_first_discovery_is_one_push).
+    _run_groups(state, [_book_obs("denton-cl", "print")])
 
     groups = _run_groups(state, [
         _book_obs("denton-cl", "ebook"),
@@ -117,8 +120,33 @@ def test_notify_groups_one_push_per_medium(tmp_path):
     # A third library turning up the same ebook is not news.
     assert _run_groups(state, [_book_obs("fortworth", "ebook")]) == []
     # A medium nobody had yet is.
-    assert [g.medium for g in _run_groups(state, [_book_obs("fortworth", "print")])] \
-        == ["print"]
+    assert [g.medium for g in _run_groups(state, [_book_obs("fortworth", "audiobook-cd")])] \
+        == ["audiobook-cd"]
+
+
+def test_first_discovery_is_one_push(tmp_path):
+    """A book nobody has seen before is announced once, listing every medium
+    — not once per medium. Later mediums ping on their own."""
+    from tracker.notify import body
+
+    state = State(tmp_path / "state.json")
+    groups = _run_groups(state, [
+        _book_obs("denton-cl", "print"),
+        _book_obs("lewisville-cl", "ebook"),
+        _book_obs("fortworth", "ebook"),
+    ])
+    assert len(groups) == 1
+    debut = groups[0]
+    assert debut.medium is None
+    text = body(debut)
+    assert "print at denton-cl" in text
+    assert "ebook at lewisville-cl, fortworth" in text
+
+    # Each medium was still recorded, so nothing re-announces...
+    assert _run_groups(state, [_book_obs("denton-cl", "print")]) == []
+    # ...and a medium that shows up later is its own push, not another debut.
+    later = _run_groups(state, [_book_obs("denton-cl", "audiobook")])
+    assert [g.medium for g in later] == ["audiobook"]
 
 
 def test_notify_groups_keep_per_observation_for_movies(tmp_path):
@@ -135,16 +163,20 @@ def test_media_map_seeded_from_legacy_state(tmp_path):
     """Upgrading an existing state file must not re-push everything that is
     already sitting in a catalog."""
     import json
+    from datetime import datetime, timedelta, timezone
+
+    # Relative to now: a fixed date would silently age past GAP_DAYS and
+    # start asserting the opposite of what it means.
+    now = datetime.now(timezone.utc)
+    old = (now - timedelta(days=30)).isoformat(timespec="seconds")
+    recent = (now - timedelta(hours=6)).isoformat(timespec="seconds")
 
     p = tmp_path / "state.json"
     p.write_text(json.dumps({"meta": {}, "seen": {
         # both spellings the event string has had over time
-        "denton-library|book:x|BK in catalog":
-            {"first": "2026-07-01T00:00:00+00:00", "last": "2026-08-08T00:00:00+00:00"},
-        "cloudlibrary|book:x|ebook in catalog":
-            {"first": "2026-07-05T00:00:00+00:00", "last": "2026-08-08T00:00:00+00:00"},
-        "amc|movie:dune|playing at AMC":
-            {"first": "2026-08-01T00:00:00+00:00", "last": "2026-08-08T00:00:00+00:00"},
+        "denton-library|book:x|BK in catalog": {"first": old, "last": recent},
+        "cloudlibrary|book:x|ebook in catalog": {"first": old, "last": recent},
+        "amc|movie:dune|playing at AMC": {"first": old, "last": recent},
     }}))
     state = State(p)
     assert sorted(state.media) == ["book:x|ebook", "book:x|print"]
@@ -166,6 +198,39 @@ def test_state_survives_corrupt_file(tmp_path):
     p.write_text("{not json")
     state = State(p)
     assert state.is_new(_obs())
+
+
+def test_auto_pick_prefers_author_then_newest(monkeypatch, tmp_path):
+    """The live failure this came from: bare "Sunrise" pinned Karen
+    Kingsbury's 2007 novel over Téa Obreht's 2026 one, because the first
+    title match with a bib_id won."""
+    import argparse
+
+    from tracker import cli
+
+    catalog = [
+        {"title": "Sea Otter Sunrise", "author": "Osborne, Mary Pope",
+         "format": "BK", "bib_id": "S1", "year": 2025},
+        {"title": "Sunrise", "author": "Kingsbury, Karen",
+         "format": "BK", "bib_id": "S2", "year": 2007},
+        {"title": "Sunrise", "author": "Obreht, Téa",
+         "format": "BK", "bib_id": "S3", "year": 2026},
+        {"title": "Sunrise", "author": "Obreht, Téa",
+         "format": "EBOOK", "bib_id": "S4", "year": 2026},
+    ]
+    monkeypatch.setattr(cli, "search_book_candidates",
+                        lambda *a, **k: list(catalog))
+
+    def pick(author):
+        args = argparse.Namespace(title="Sunrise", author=author, isbn=None)
+        entry, _matches, picked = cli._auto_pick_book(None, args)
+        return entry.get("bib_id"), picked.get("year")
+
+    assert pick(None) == ("S3", 2026)            # newest wins a bare title
+    assert pick("Obreht") == ("S3", 2026)        # print preferred over ebook
+    assert pick("Kingsbury") == ("S2", 2007)     # an author still overrides
+    # An author nobody matches shouldn't strand the add — fall back to title.
+    assert pick("Nonexistent, Someone")[0] == "S3"
 
 
 def test_normalize_key():

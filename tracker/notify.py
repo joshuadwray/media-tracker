@@ -76,10 +76,21 @@ def send_push(groups: list[NotifyGroup]) -> None:
 
 
 def body(group: NotifyGroup) -> str:
-    """One line describing a group. A lone sighting keeps the source's own
-    wording (which already names the library); several libraries carrying
-    the same medium collapse to "ebook at A, B" — the medium is the news,
-    the libraries are where to go get it."""
+    """One line describing a group.
+
+    A lone sighting keeps the source's own wording, which already names the
+    library and any hold queue. Otherwise collapse to "<medium> at A, B" —
+    the medium is the news, the libraries are where to go get it. A debut
+    group (a book seen for the first time, in several mediums at once) lists
+    each medium in turn.
+    """
     if len(group.observations) == 1:
         return group.observations[0].summary
-    return f"{group.medium} at " + ", ".join(group.sources)
+
+    by_medium: dict[str, list[str]] = {}
+    for obs in group.observations:
+        sources = by_medium.setdefault(obs.medium or "found", [])
+        if obs.source not in sources:
+            sources.append(obs.source)
+    return " · ".join(f"{medium} at {', '.join(sources)}"
+                      for medium, sources in by_medium.items())
