@@ -82,9 +82,14 @@ jobs:
           THEATER_LOOKAHEAD: "21"
         run: |
           # Retry loop: parallel runs may conflict on state files.
-          # Re-running check on fresh state is safe/idempotent.
+          # Re-running check on fresh state is safe/idempotent — but it must
+          # not re-notify. `git reset --hard` below throws away the state.json
+          # this run just wrote, so a retry rediscovers everything it already
+          # pushed about. --no-notify still records state and rewrites docs.
+          notify_flag=""
           for attempt in 1 2 3 4 5; do
-            python -m tracker check
+            python -m tracker check $notify_flag
+            notify_flag="--no-notify"
             git add state/ docs/
             git diff --cached --quiet || git commit -m "state: $(date -u +%Y-%m-%dT%H:%M)"
             if git pull --rebase origin main && git push; then
