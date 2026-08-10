@@ -766,6 +766,21 @@
     if (snap && (snap.diary || snap.lists)) paint(snap);   // instant, no network
     else setStatus('pending', 'loading…');
     cycle().then(poll);
+
+    // Re-check whenever the phone comes BACK to this page. Without these
+    // two, a page can sit on stale data indefinitely:
+    //   - pageshow/persisted: iOS Safari restores a back-navigation from
+    //     the bfcache and re-runs NO script, so boot() never fires again
+    //     and the page shows exactly what it showed when you left it.
+    //   - visibilitychange: the save-then-switch-apps-then-come-back flow,
+    //     and any change that wasn't yours (Letterboxd sync, another
+    //     device) — the poll loop only runs while YOUR edit is outstanding.
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) { polls = 0; cycle().then(poll); }
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) { polls = 0; cycle().then(poll); }
+    });
   }
 
   if (document.readyState === 'loading')
