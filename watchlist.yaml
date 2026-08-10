@@ -94,11 +94,28 @@ sources:
     # Lewisville Public Library — id verified 2026-08 (lowercase here, unlike
     # Denton's; the id is whatever segment your login URL uses).
     # Lewisville has no Libby/OverDrive: cloudLibrary is its only digital
-    # vendor. Its print catalog is SirsiDynix Enterprise, not BiblioCommons,
-    # so print isn't watched yet (see TODO.md).
+    # vendor. Print is watched separately by lewisville-print, below.
     library: lewisvillepubliclibrary
     label: Lewisville            # display name for pushes/report
     loan_days: 21                # published: library.cityoflewisville.com FAQ
+
+  lewisville-print:
+    kind: sirsi-enterprise
+    # Lewisville Public Library, SirsiDynix Enterprise 5.1406. Enterprise
+    # hostnames follow no pattern — this one came from the library's
+    # BLUEcloud Mobile app id (sirsi.mobile.bcmobile_lewisville). Note the
+    # city's own library.cityoflewisville.com is behind Akamai and 403s
+    # datacenter IPs; this catalog host does not.
+    host: lewp.ent.sirsi.net
+    profile: default
+    label: Lewisville
+    # Books only. The digital side is cloudlibrary-lewisville, and the
+    # source already drops Enterprise's federated ERC_ records (cloudLibrary
+    # + Freegal) so the two can't double-notify. Large-print editions report
+    # "Books" too and are split out by title marker.
+    formats: [Books]
+    loan_days: 21                # same as Lewisville cloudLibrary
+    distance_mi: 20              # Denton -> Lewisville
 
   libby-fortworth:
     kind: libby

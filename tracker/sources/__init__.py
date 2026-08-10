@@ -6,6 +6,7 @@ from . import (  # noqa: F401
     drafthouse,
     generic_page,
     libby,
+    sirsi_enterprise,
     tmdb_streaming,
 )
 from .base import Source, build_sources  # noqa: F401

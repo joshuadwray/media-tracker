@@ -585,3 +585,169 @@ def test_sync_note_stays_quiet_when_a_side_is_on_order():
 
     reading.provisional = False
     assert "gap 0d" in sync_note(tracks_for_item([reading, listening]))
+
+
+# --- SirsiDynix Enterprise (Lewisville print) -------------------------------
+#
+# Fixtures are trimmed from live responses captured 2026-08-10: an on-order
+# record with a hold queue (Fruit Fly), a held record with a free copy plus a
+# large-print sibling (Demon Copperhead), and a federated cloudLibrary row.
+
+_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <title type="html">FRUIT FLY:  A NOVEL</title>
+    <id>ent://SD_ILS/0/SD_ILS:426678</id>
+    <content type="html">by&amp;#160;Silver, Josh, 1989- author.&lt;br/&gt;Publication Date&amp;#160;2026&lt;br/&gt;Format:&amp;#160;Books&lt;br/&gt;</content>
+  </entry>
+  <entry>
+    <title type="html">Demon Copperhead [large print] : a novel</title>
+    <id>ent://SD_ILS/0/SD_ILS:375685</id>
+    <content type="html">by&amp;#160;Kingsolver, Barbara, author.&lt;br/&gt;Publication Date&amp;#160;2022&lt;br/&gt;Format:&amp;#160;Books&lt;br/&gt;Call Number&amp;#160;LT F KIN&lt;br/&gt;</content>
+  </entry>
+  <entry>
+    <title type="html">Dead but Dreaming of Electric Sheep [electronic resource]</title>
+    <id>ent://ERC_8646_7703/0/8646_7703:THREE_M:a4scx9r9</id>
+    <content type="html">by&amp;#160;Tremblay, Paul.&lt;br/&gt;Format:&amp;#160;eBook&lt;br/&gt;Vendor&amp;#160;CloudLibrary&lt;br/&gt;</content>
+  </entry>
+</feed>"""
+
+
+def test_enterprise_feed_parse_keeps_only_the_library_catalog():
+    """ent://ERC_ rows are federated cloudLibrary/Freegal records, already
+    watched by cloudlibrary-lewisville, and they report no real counts."""
+    from tracker.sources.sirsi_enterprise import _parse_feed
+
+    records = _parse_feed(_FEED)
+    assert [r["record_id"] for r in records] == ["426678", "375685"]
+
+    fruit_fly, copperhead = records
+    assert fruit_fly["title"] == "FRUIT FLY: A NOVEL"
+    assert fruit_fly["author"] == "Silver, Josh, 1989- author."
+    assert fruit_fly["format"] == "Books"
+    assert fruit_fly["year"] == 2026
+    assert fruit_fly["call_number"] is None      # nothing shelved yet
+    assert copperhead["call_number"] == "LT F KIN"
+
+
+def test_enterprise_large_print_is_split_out_by_title_marker():
+    """Large-print editions report the format "Books" like any other print
+    copy; the only tell is the marker in the title."""
+    from tracker.sources.sirsi_enterprise import _friendly
+    from tracker.models import medium_for
+
+    assert _friendly("Books", "Demon Copperhead : a novel") == "print book"
+    assert _friendly("Books", "Demon Copperhead [large print] : a novel") == \
+        "large print book"
+    assert _friendly("Books", "Armored  [large type]") == "large print book"
+    assert _friendly("Audio disc", "Demon copperhead [sound recording]") == \
+        "audiobook (CD)"
+    # Both print flavours have to land in the reading track.
+    assert medium_for(_friendly("Books", "x")) == "print"
+    assert medium_for(_friendly("Books", "x [large print]")) == "large-print"
+
+
+def test_enterprise_counts_distinguish_unknown_from_zero():
+    from tracker.sources.sirsi_enterprise import _count
+
+    assert _count("3") == 3
+    assert _count("0") == 0
+    assert _count("Not Available") is None       # federated record
+    assert _count(None) is None
+
+
+def test_enterprise_on_order_is_provisional_and_never_now():
+    """copyCount 0 is Enterprise's honest "ordered, not received". The wait
+    ranks the queue but must never harden into a bucket that says go get it."""
+    from tracker.availability import bucket
+    from tracker.sources.sirsi_enterprise import _count
+    from tracker.availability import wait_after_arrival, wait_days
+
+    # Fruit Fly, live 2026-08-10: nothing owned yet, five people ahead.
+    available, copies, holds = _count("0"), _count("0"), _count("5")
+    assert copies == 0
+    wait = wait_after_arrival(holds, 1, 21)
+    assert wait == 5 * 21
+    obs = _book_obs("lewisville-print", "print", wait=wait, distance_mi=20,
+                    loan_days=21)
+    obs.provisional = True
+    assert obs.bucket != "now"
+    assert obs.wait_text == "on order"
+
+    # Demon Copperhead: a copy actually sitting on the shelf.
+    assert wait_days(_count("1"), _count("2"), _count("0"), 21) == 0
+    assert bucket(0, 21) == "now"
+
+
+def test_enterprise_shelf_state_wording():
+    from tracker.sources.sirsi_enterprise import _shelf_state
+
+    assert _shelf_state(1, 2, 0, False) == "1 on shelf"
+    assert _shelf_state(0, 0, 0, True) == "on order, no holds yet"
+    assert _shelf_state(0, 0, 5, True) == "on order, 5 holds ahead"
+    assert _shelf_state(0, 0, 1, True) == "on order, 1 hold ahead"
+    assert _shelf_state(0, 3, 2, False) == "all 3 out, 2 holds"
+    assert _shelf_state(0, 1, 0, False) == "checked out"
+    assert _shelf_state(None, None, None, False) == "availability unknown"
+
+
+def test_enterprise_query_folds_diacritics_and_adds_the_author():
+    """Enterprise does not fold accents: "Dèy" returns 300 unrelated Freegal
+    tracks and none of the book, "dey danticat" finds it. The author matters
+    too — the feed indexes summary text, so a bare title matches blurbs."""
+    from tracker.sources.sirsi_enterprise import _query_for
+
+    class _Book:
+        def __init__(self, title, author=None):
+            self.title, self.author = title, author
+
+    assert _query_for(_Book("Dèy", "Danticat, Edwidge")) == \
+        "Dey Danticat, Edwidge"
+    assert _query_for(_Book("Amélie")) == "Amelie"
+    # Parenthetical series suffixes still get stripped for the search box.
+    assert _query_for(_Book("A Trade of Blood (Ana and Din Mysteries)")) == \
+        "A Trade of Blood"
+
+
+def test_enterprise_availability_unwraps_the_tapestry_zone_update():
+    """The counts arrive buried in a JS call inside a Tapestry zone update."""
+    from tracker.sources.sirsi_enterprise import _availability
+
+    payload = {"inits": [{"evalScript": [
+        'updateWebServiceFields({"availableCount":"1","holdable":true,'
+        '"copyCount":"2","holdCount":"0","fields":[]});',
+        "$J('.detailAccordionHeader').show();",
+    ]}]}
+
+    class _Resp:
+        status_code = 200
+        def json(self):
+            return payload
+
+    class _Sess:
+        pass
+
+    import tracker.sources.sirsi_enterprise as se
+    real_get, captured = se.http.get, {}
+
+    def fake_get(sess, url, *, headers=None, **kw):
+        captured["url"], captured["headers"] = url, headers
+        return _Resp()
+
+    se.http.get = fake_get
+    try:
+        counts = _availability(_Sess(), "lewp.ent.sirsi.net", "default",
+                               "371693", "tok-123")
+    finally:
+        se.http.get = real_get
+
+    assert counts["availableCount"] == "1"
+    assert counts["copyCount"] == "2"
+    # The whole reason this source works: token as a header, not a query
+    # param, alongside the XHR marker that arms the CSRF check.
+    assert captured["headers"]["sdcsrf"] == "tok-123"
+    assert captured["headers"]["X-Requested-With"] == "XMLHttpRequest"
+    assert "sdcsrf=" not in captured["url"]
+    assert "371693" in captured["url"]
+    # No token means no call worth making, and never an exception.
+    assert _availability(_Sess(), "h", "default", "1", None) == {}

@@ -24,6 +24,7 @@ reading/log.json, lists/*.yaml → covers + page counts → docs/data/*.json →
 | `denton-library` | Denton Public Library print (BiblioCommons) | parses the JSON embedded in catalog search pages |
 | `cloudlibrary` | Denton ebooks/audiobooks (cloudLibrary) | unauthenticated web-patron search API |
 | `cloudlibrary-lewisville` | Lewisville ebooks/audiobooks (cloudLibrary) | same, different library id |
+| `lewisville-print` | Lewisville Public Library print (SirsiDynix Enterprise) | Atom feed for discovery, one AJAX call per record for copies/holds |
 | `libby-fortworth` | Fort Worth ebooks/audiobooks (Libby/OverDrive) | OverDrive's unauthenticated "thunder" API |
 | `libby-houston` | Houston ebooks/audiobooks (Libby/OverDrive) | same, different library key |
 | `texas-theatre` | Texas Theatre | page watcher (title appears on the site) |
@@ -37,9 +38,11 @@ a new *kind* by dropping a file in `tracker/sources/` (subclass
 
 Every library card is its own source, because no two of these cities run
 the same stack — there is no single "add a library" knob. Overlap is
-cheap, though: notifications are one push per (book, format), so a title
-carried by three libraries is announced once and the report still shows
-which libraries have it.
+cheap, though: notifications are one push per (book, track) — reading or
+listening — so a title carried by four libraries in two formats you'd
+read is announced once, and the report still shows which libraries have
+it. A newly added library can only speak up by beating the shortest wait
+a track has already reached.
 
 ## Setup
 

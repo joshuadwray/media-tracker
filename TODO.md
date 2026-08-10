@@ -101,19 +101,35 @@
 ## Investigate
 - **Print catalogs for the non-Denton cards (2026-08).** Only Denton runs
   BiblioCommons, so every other card needs its own source:
-  - SirsiDynix Enterprise — covers **two** cards, so one adapter pays for
-    itself twice: Lewisville, and Houston at
-    `halan.sdp.sirsi.net/client/en_US/hou`. Lewisville is the case worth
-    building for (physically closest, so its print holds are the ones
-    actually worth driving to); Houston print is academic at a 4-hour
-    drive and just comes along for free. Enterprise search is
-    session-heavy; probe before promising anything.
+  - ~~SirsiDynix Enterprise~~ **done 2026-08-10** for Lewisville
+    (`lewisville-print`, `tracker/sources/sirsi_enterprise.py`). The
+    "session-heavy" warning was half right: the availability call is
+    CSRF-gated, but the token is per *session* and travels as a request
+    **header** named `sdcsrf` — not as the `sdcsrf=` query param
+    Enterprise puts in its own markup, which 403s. See the module
+    docstring; the dead ends are written down there so nobody re-walks
+    them.
+    Houston print (`halan.sdp.sirsi.net`, profile `hou`) is now a
+    config-only add — same `kind`, different `host`/`profile` — but it
+    stays off: at ~240mi it is past `MAX_DISTANCE_MI`, so it could never
+    headline a book, and it would cost a request per book per run.
   - Fort Worth — Polaris (fwmlc.polarislibrary.com), which has a fairly
     scrapable JSON search API. Theoretically nice, realistically of
     limited utility given the drive.
   Digital is covered everywhere: Lewisville = cloudLibrary (added
   2026-08), Fort Worth + Houston = Libby/OverDrive (Houston added
   2026-08).
+
+- **`author_matches` breaks on multi-author watchlist entries (2026-08-10).**
+  The guard takes the *last* token of the wanted author string as "the
+  surname". For "Surname, First" that is the first name, which still
+  appears in the found record, so it works by luck. For an entry naming a
+  translator — "Harpman, Jacqueline, Schwartz, Ros" — it tests for "ros"
+  and rejects a correct match. Live consequence: Lewisville holds *We Were
+  Forbidden* (SD_ILS:428636, "Harpman, Jacqueline, author.") and the source
+  drops it. Affects bibliocommons and cloudLibrary identically, so this is a
+  shared-matching fix, not a per-source one — and loosening it re-runs every
+  unpinned title's guard, so it wants its own change with its own test.
 - **OverDrive trap, found 2026-08**: thunder key `denton` still resolves
   AND serves media, but the record says `"status": "Terminated"` and
   denton.overdrive.com 302s to /terminated. Denton dropped Libby. Always
