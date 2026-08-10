@@ -1,13 +1,7 @@
-# Media tracker report — 2026-08-10 00:32 UTC
+# Media tracker report — 2026-08-10 00:37 UTC
 
-## New sightings (7)
-- **Fruit Fly — Silver, Josh**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Fruit%20Fly%20Silver%2C%20Josh&searchType=smart)
-- **Fruit Fly — Silver, Josh**: audiobook in cloudLibrary catalog (Denton) — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Fruit%20Fly)
-- **Fruit Fly — Silver, Josh**: ebook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~185d wait) — [link](https://libbyapp.com/library/fwpl/media/12546462)
-- **Fruit Fly — Silver, Josh**: audiobook in Libby catalog (Fort Worth) — 0/3 available, 26 holds (~126d wait) — [link](https://libbyapp.com/library/fwpl/media/13338759)
-- **Sunrise — Kingsbury, Karen**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Sunrise%20Kingsbury%2C%20Karen&searchType=smart)
-- **Sunrise — Kingsbury, Karen**: ebook in Libby catalog (Fort Worth) — 1/1 available — [link](https://libbyapp.com/library/fwpl/media/140799)
-- **Triage — Rankine, Claudia**: print book in denton library catalog — [link](https://denton.bibliocommons.com/v2/search?query=Triage%20Rankine%2C%20Claudia&searchType=smart)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (27)
 - Triage — Rankine, Claudia: print book in denton library catalog
@@ -44,7 +38,7 @@
 - ✅ `cloudlibrary-lewisville`: 2 observation(s)
 - ✅ `libby-fortworth`: 5 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ❌ `cinemark`: RuntimeError: Cinemark Denton 14: HTTP 429; Cinemark West Plano: HTTP 429; Cinemark Dallas IMAX: HTTP 429
+- ✅ `cinemark`: 0 observation(s)
 - ✅ `amc`: 13 observation(s)
 
 ## Never matched anywhere (possible typos?)
