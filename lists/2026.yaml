@@ -4,6 +4,8 @@ ranked: true
 # File order IS the rank. Per-item optional fields:
 #   cover: https://...jpg   — manual cover URL, always wins over lookup
 items:
+  - title: john of john
+    author: douglas stuart
   - title: babylon, south dakota
     author: tom lin
   - title: a trade of blood
