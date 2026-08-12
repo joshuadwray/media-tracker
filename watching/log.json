@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "La La Land",
+      "year": 2016,
+      "slug": "la-la-land",
+      "watched": "2026-08-11",
+      "rating": 4.5,
+      "rewatch": false,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 313369,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/2/4/0/3/4/4/240344-la-la-land-0-600-0-900-crop.jpg?v=053670ff84",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/la-la-land/",
+      "guid": "letterboxd-watch-1446389922"
+    },
+    {
       "title": "Mile End Kicks",
       "year": 2025,
       "slug": "mile-end-kicks",
