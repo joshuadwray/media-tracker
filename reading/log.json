@@ -1906,7 +1906,9 @@
       "page_count": null,
       "started": "2026-08-12",
       "finished": null,
-      "sessions": []
+      "sessions": [
+        "2026-08-12 60"
+      ]
     }
   ]
 }
