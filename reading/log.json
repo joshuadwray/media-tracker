@@ -1909,6 +1909,19 @@
       "sessions": [
         "2026-08-12 60"
       ]
+    },
+    {
+      "title": "rosencrantz and guildenstern are dead",
+      "author": "tom stoppard",
+      "slug": "rosencrantz-and-guildenstern-are-dead",
+      "status": "finished",
+      "rating": 4.5,
+      "page_count": 92,
+      "started": "2026-08-13",
+      "finished": "2026-08-13",
+      "sessions": [
+        "2026-08-13 92"
+      ]
     }
   ]
 }
