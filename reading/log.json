@@ -1896,6 +1896,17 @@
         "2026-08-11 217",
         "2026-08-12 398"
       ]
+    },
+    {
+      "title": "earth 7",
+      "author": "deb unferth",
+      "slug": "earth-7",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-08-12",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
