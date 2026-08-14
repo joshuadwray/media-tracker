@@ -1922,6 +1922,28 @@
       "sessions": [
         "2026-08-13 92"
       ]
+    },
+    {
+      "title": "i made you up inside my head",
+      "author": "marta perez-carbonell",
+      "slug": "i-made-you-up-inside-my-head",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-08-13",
+      "finished": null,
+      "sessions": []
+    },
+    {
+      "title": "i made you up inside my head",
+      "author": "marta perez-carbonell",
+      "slug": "i-made-you-up-inside-my-head-2",
+      "status": "abandoned",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-08-13",
+      "finished": "2026-08-13",
+      "sessions": []
     }
   ]
 }
