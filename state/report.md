@@ -1,9 +1,10 @@
-# Media tracker report — 2026-08-14 22:09 UTC
+# Media tracker report — 2026-08-14 22:17 UTC
 
-## New sightings (1)
-- **big vegan flavor — nisha vora**: ebook in Libby catalog (Houston) — 0/1 available, 14 holds (~7 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/10317089)
+## New sightings (2)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
+- **teenage sex and death at camp miasma (2026)**: "Teenage Sex and Death at Camp Miasma" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
 
-## All current sightings (47)
+## All current sightings (61)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -67,9 +68,25 @@
   - sync: gap 70d > 14d loan — suspend the reading hold ~70d for listening
 - **teenage sex and death at camp miasma (2026)**
   - "teenage sex and death at camp miasma" mentioned on Texas Theatre
+  - "Teenage Sex and Death at Camp Miasma" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
   - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-14, 2026-08-15, 2026-08-16, 2026-08-17)
+- **coyote vs acme (2026)**
+  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23)
+  - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme Early Access" playing at AMC Grapevine Mills 30 (2026-08-23)
+  - "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme Early Access" playing at AMC Northpark 15 (2026-08-23)
+  - "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+- **tony (2026)**
+  - "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
+  - "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
+  - "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
+  - "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - **i want your sex (2026)**
-  - "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-15, 2026-08-16, 2026-08-17)
+  - "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-15, 2026-08-16, 2026-08-17, 2026-08-18)
+  - "i want your sex" digital release: 2026-09-01
 
 ## Source status
 - ✅ `denton-library`: 8 observation(s)
@@ -79,8 +96,9 @@
 - ✅ `libby-fortworth`: 9 observation(s)
 - ✅ `libby-houston`: 11 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 0 observation(s)
-- ✅ `amc`: 2 observation(s)
+- ✅ `cinemark`: 3 observation(s)
+- ✅ `amc`: 12 observation(s)
+- ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
