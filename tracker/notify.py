@@ -104,8 +104,13 @@ def body(group: NotifyGroup) -> str:
     for track, obs_list in by_track.items():
         best = min(obs_list, key=lambda o: o.sort_key)
         extra = len({o.where for o in obs_list}) - 1
+        # A no-hold copy is the difference between "join the queue" and "go
+        # get it", so it earns room in a push that was going out anyway. It
+        # never causes one: the shelf is not part of any dedup key.
+        shelf = (f" · {best.shelf} copy on shelf, no hold needed"
+                 if best.shelf and best.shelf_copies else "")
         parts.append(
             f"{track}: {best.wait_text} at {best.where}"
-            f" ({best.medium})" + (f" +{extra} more" if extra > 0 else "")
+            f" ({best.medium})" + (f" +{extra} more" if extra > 0 else "") + shelf
         )
     return lead + " · ".join(parts)

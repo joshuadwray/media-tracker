@@ -74,6 +74,18 @@ class Observation:
                                   # stand behind (on-order titles, whose
                                   # arrival date nobody publishes). Good
                                   # enough to rank on, never to ratchet on.
+    shelf: Optional[str] = None   # a no-hold shelf these copies sit in, named
+                                  # as the library names it ("Lucky Day").
+                                  # Nobody can queue ahead of you for one, so
+                                  # it says how to read the wait rather than
+                                  # changing it: a zero wait on a title with a
+                                  # deep queue means a copy is free *now*, and
+                                  # only a no-hold copy makes that zero
+                                  # something you can still act on tomorrow.
+    shelf_copies: int = 0         # how many of them are on that shelf this
+                                  # minute. 0 with `shelf` set = the title
+                                  # cycles through the collection but every
+                                  # such copy is currently out.
 
     @property
     def where(self) -> str:

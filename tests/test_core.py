@@ -794,6 +794,204 @@ def test_enterprise_ordered_quantity_shortens_the_queue():
     assert wait_after_arrival(0, 1, 21) == 0
 
 
+# --- Lucky Day (no-hold shelf) ----------------------------------------------
+#
+# Lewisville shelves extra copies of high-demand titles as "Lucky Day": they
+# can't be held, so they cycle first-come, first-served. Fixtures trimmed from
+# live responses captured 2026-08-14.
+
+_SHELF_FEED = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <title type="html">FRUIT FLY:  A NOVEL</title>
+    <id>ent://SD_ILS/0/SD_ILS:426678</id>
+    <content type="html">by&amp;#160;Silver, Josh, 1989- author.&lt;br/&gt;Format:&amp;#160;Books&lt;br/&gt;</content>
+  </entry>
+  <entry>
+    <title type="html">Demon Copperhead [large print] : a novel</title>
+    <id>ent://SD_ILS/0/SD_ILS:375685</id>
+    <content type="html">by&amp;#160;Kingsolver, Barbara, author.&lt;br/&gt;Format:&amp;#160;Books&lt;br/&gt;</content>
+  </entry>
+</feed>"""
+
+# Enterprise reports a copy's *location* as its status while it's in the
+# building, which is the only reason "on this shelf right now" is answerable.
+_ITEMS_ON_SHELF = {"childRecords": [
+    {"barcode": "ILPL001172915Q", "SD_ITEM_STATUS": "Due 8/27/26"},
+    {"barcode": "ILPL001172919U", "SD_ITEM_STATUS": "Lucky Day Display"},
+]}
+_ITEMS_ALL_OUT = {"childRecords": [
+    {"barcode": "ILPL003052593Q", "SD_ITEM_STATUS": "On Hold for Someone"},
+    {"barcode": "ILPL001172916R", "SD_ITEM_STATUS": "Due 9/3/26"},
+]}
+
+_SHELF_CFG = {
+    "host": "lewp.ent.sirsi.net", "profile": "default", "label": "Lewisville",
+    "formats": ["Books"], "loan_days": 21, "distance_mi": 20,
+    "shelves": [{"label": "Lucky Day", "status": "Lucky Day Display",
+                 "facet": "LOCATION\tShelf Location\t1:LUCKYDAY\tLucky Day Display"}],
+}
+
+
+def _run_enterprise(cfg, books, items=None, shelf_feed=_SHELF_FEED):
+    """Drive SirsiEnterpriseSource.check() against canned HTTP, returning
+    (observations, urls fetched)."""
+    import tracker.sources.sirsi_enterprise as se
+    from tracker.config import Config
+    from tracker.sources.sirsi_enterprise import SirsiEnterpriseSource
+
+    urls: list[str] = []
+
+    class _Resp:
+        def __init__(self, text="", payload=None):
+            self.status_code, self.text, self._payload = 200, text, payload
+        def json(self):
+            return self._payload
+
+    def fake_get(sess, url, *, headers=None, **kw):
+        urls.append(url)
+        if "lookuptitleinfo" in url:
+            return _Resp(payload=items or _ITEMS_ALL_OUT)
+        if "lookupavailability" in url:
+            return _Resp(payload={"inits": [{"evalScript": [
+                'updateWebServiceFields({"availableCount":"1","copyCount":"2",'
+                '"holdCount":"0","fields":[]});']}]})
+        if "qf=" in url:
+            return _Resp(text=shelf_feed)
+        if "/rss/hitlist/" in url:
+            return _Resp(text=_FEED)
+        return _Resp(text="sdcsrf=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
+
+    real_get, real_session = se.http.get, se.http.session
+    se.http.get, se.http.session = fake_get, lambda: object()
+    try:
+        source = SirsiEnterpriseSource("lewisville-print", cfg)
+        obs = source.check(Config(books=books))
+    finally:
+        se.http.get, se.http.session = real_get, real_session
+    return obs, urls
+
+
+def test_lucky_day_flags_a_copy_sitting_on_the_shelf():
+    """The payoff case: a watched book whose Lucky Day copy is in the
+    building. Nobody can hold one, so this is a walk-in past the queue."""
+    from tracker.models import WatchBook
+
+    obs, urls = _run_enterprise(
+        _SHELF_CFG, [WatchBook(title="Fruit Fly", author="Josh Silver")],
+        items=_ITEMS_ON_SHELF)
+
+    assert len(obs) == 1
+    assert obs[0].shelf == "Lucky Day"
+    assert obs[0].shelf_copies == 1
+    assert "a copy on the Lucky Day shelf, no hold needed" in obs[0].summary
+    # The flag rides along on the sighting rather than creating one: the dedup
+    # identity has to stay byte-identical or every watched book re-notifies.
+    assert obs[0].event == "print book in catalog"
+    # The shelf is one browse request (empty query + facet), fetched once.
+    assert sum(1 for u in urls if "qf=" in u) == 1
+    assert sum(1 for u in urls if "lookuptitleinfo" in u) == 1
+
+
+def test_lucky_day_label_without_a_copy_in_the_building():
+    """59 of 101 labelled titles had every Lucky Day copy out the day this was
+    written. Still worth flagging — a no-hold copy cycles through this title —
+    but it is not a copy you can go and collect."""
+    from tracker.models import WatchBook
+
+    obs, _ = _run_enterprise(
+        _SHELF_CFG, [WatchBook(title="Fruit Fly", author="Josh Silver")],
+        items=_ITEMS_ALL_OUT)
+
+    assert obs[0].shelf == "Lucky Day"
+    assert obs[0].shelf_copies == 0
+    assert "Lucky Day copy, currently out" in obs[0].summary
+
+
+def test_lucky_day_untouched_when_the_record_is_not_on_the_shelf():
+    """A book in the catalog but not the collection reads exactly as before."""
+    from tracker.models import WatchBook
+
+    obs, urls = _run_enterprise(
+        _SHELF_CFG, [WatchBook(title="Fruit Fly", author="Josh Silver")],
+        shelf_feed="<feed></feed>")
+
+    assert obs[0].shelf is None and obs[0].shelf_copies == 0
+    assert "Lucky Day" not in obs[0].summary
+    # Not in the collection means the per-copy call is never worth making.
+    assert not [u for u in urls if "lookuptitleinfo" in u]
+
+
+def test_no_shelves_configured_costs_nothing():
+    """Every other Enterprise library. The feature has to be free when unused."""
+    from tracker.models import WatchBook
+
+    cfg = {k: v for k, v in _SHELF_CFG.items() if k != "shelves"}
+    obs, urls = _run_enterprise(cfg, [WatchBook(title="Fruit Fly",
+                                                author="Josh Silver")])
+
+    assert obs[0].shelf is None and obs[0].shelf_copies == 0
+    assert not [u for u in urls if "qf=" in u or "lookuptitleinfo" in u]
+
+
+def test_shelf_readers_never_fail_a_check():
+    """A shelf we can't read means no flag, not a failed run — the flag is a
+    qualifier on a sighting that stands on its own."""
+    import tracker.sources.sirsi_enterprise as se
+    from tracker.sources.sirsi_enterprise import _item_statuses, _shelf_records
+
+    class _Boom:
+        status_code = 500
+        text = ""
+        def json(self):
+            raise ValueError("not json")
+
+    real_get = se.http.get
+    se.http.get = lambda *a, **kw: _Boom()
+    try:
+        assert _shelf_records(object(), "https://x/y") == {}
+        assert _item_statuses(object(), "h", "default", "1", "tok") == []
+    finally:
+        se.http.get = real_get
+
+    # No token means no call worth making, same contract as _availability.
+    assert _item_statuses(object(), "h", "default", "1", None) == []
+
+
+def test_shelf_note_wording():
+    from tracker.sources.sirsi_enterprise import _shelf_note
+
+    assert _shelf_note(None, 0) == ""
+    assert _shelf_note("Lucky Day", 1) == \
+        " · a copy on the Lucky Day shelf, no hold needed"
+    assert _shelf_note("Lucky Day", 3) == \
+        " · 3 copies on the Lucky Day shelf, no hold needed"
+    assert _shelf_note("Lucky Day", 0) == " · Lucky Day copy, currently out"
+
+
+def test_shelf_browse_url_uses_an_empty_query():
+    """`qu=` has to be present but blank — a non-empty query ANDs with the
+    facet and returns a search, not the collection."""
+    from tracker.sources.sirsi_enterprise import SirsiEnterpriseSource
+
+    source = SirsiEnterpriseSource("lewisville-print", _SHELF_CFG)
+    url = source.shelf_url(_SHELF_CFG["shelves"][0]["facet"])
+    assert "/client/rss/hitlist/default/qu=&qf=" in url
+    assert "LUCKYDAY" in url
+    # Tabs separate the facet's four fields and must survive encoding.
+    assert "%09" in url
+
+
+def test_enterprise_feed_title_is_unescaped_twice():
+    """Atom escapes it and Enterprise escapes it again, so one pass leaves
+    "Cross &amp; Sampson" — which titles_match hides but a page would not."""
+    from tracker.sources.sirsi_enterprise import _parse_feed
+
+    xml = ('<feed><entry><title type="html">Cross &amp;amp; Sampson</title>'
+           '<id>ent://SD_ILS/0/SD_ILS:415742</id></entry></feed>')
+    assert _parse_feed(xml)[0]["title"] == "Cross & Sampson"
+
+
 def test_author_matches_handles_multiple_contributors():
     """The guard runs after titles_match, to catch a fuzzy title landing on a
     different person. It used to test only the LAST token of the watched

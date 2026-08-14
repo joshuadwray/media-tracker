@@ -101,6 +101,24 @@ class SirsiEnterpriseSource(Source):
         return (f"https://{self.host}/client/rss/hitlist/{self.profile}"
                 f"/qu={quote(query)}")
 
+    def shelf_url(self, facet: str) -> str:
+        """Every record in one shelf collection, as a browse rather than a search.
+
+        The same hitlist feed, with an *empty* query and Enterprise's facet
+        parameter — `qu=` has to be present but blank, and the facet is four
+        tab-separated fields (index, its display name, `1:<code>`, the value's
+        display name). Both display names are part of the key, so a rename at
+        the library end changes this URL; that is why the whole string lives in
+        watchlist.yaml rather than here.
+        """
+        return (f"https://{self.host}/client/rss/hitlist/{self.profile}"
+                f"/qu=&qf={quote(facet)}")
+
+    @property
+    def shelves(self) -> list[dict[str, Any]]:
+        """No-hold collections to flag, e.g. Lewisville's Lucky Day display."""
+        return [s for s in (self.cfg.get("shelves") or []) if s.get("facet")]
+
     def detail_url(self, record_id: str) -> str:
         """Permalink for one catalog record, in Enterprise's escaped form."""
         return (f"{self.base_url}/search/detailnonmodal/"
@@ -111,6 +129,9 @@ class SirsiEnterpriseSource(Source):
         observations: list[Observation] = []
         wanted_formats = set(self.cfg.get("formats") or ["Books"])
         token: Optional[str] = None
+        # Fetched at most once per run, and only once a watched book has
+        # actually matched something — a run that finds nothing pays nothing.
+        shelf_maps: Optional[list[tuple[dict, dict]]] = None
 
         for book in config.books:
             query = _query_for(book)
@@ -157,13 +178,20 @@ class SirsiEnterpriseSource(Source):
                 else:
                     wait = wait_days(available, copies, holds, self.loan_days)
 
+                if shelf_maps is None:
+                    shelf_maps = [(s, _shelf_records(sess, self.shelf_url(s["facet"])))
+                                  for s in self.shelves]
+                shelf, shelf_copies = self._shelf_for(
+                    sess, shelf_maps, rec["record_id"], token)
+
                 friendly = _friendly(fmt, title)
                 observations.append(Observation(
                     source=self.source_id,
                     item_key=book.key,
                     item_label=str(book),
                     summary=(f"{friendly} in {self.label} library catalog — "
-                             f"{_shelf_state(available, copies, holds, on_order, ordered)}"),
+                             f"{_shelf_state(available, copies, holds, on_order, ordered)}"
+                             f"{_shelf_note(shelf, shelf_copies)}"),
                     url=self.detail_url(rec["record_id"]),
                     # Presence in the catalog is the hit — the user is happy
                     # to join hold queues, so availability isn't the bar and
@@ -173,6 +201,8 @@ class SirsiEnterpriseSource(Source):
                     medium=medium_for(friendly),
                     wait=wait,
                     provisional=on_order,
+                    shelf=shelf,
+                    shelf_copies=shelf_copies,
                     distance_mi=self.distance_mi,
                     loan_days=self.loan_days,
                     source_label=self.label,
@@ -189,6 +219,28 @@ class SirsiEnterpriseSource(Source):
                 ))
         return observations
 
+    def _shelf_for(self, sess: Any, shelf_maps: list[tuple[dict, dict]],
+                   record_id: str, token: Optional[str]) -> tuple[Optional[str], int]:
+        """Which no-hold shelf this record belongs to, and how many of its
+        copies are on that shelf right now.
+
+        The facet says only that the record *has* a copy whose home is the
+        shelf; it stays listed while every one of them is checked out (59 of
+        101 on Lewisville's Lucky Day list, the day this was written). So the
+        count costs one more request — but only for a watched book that is
+        actually in the collection, which is rare.
+        """
+        for cfg, records in shelf_maps:
+            if record_id not in records:
+                continue
+            label = str(cfg.get("label") or "shelf")
+            status = str(cfg.get("status") or "")
+            items = _item_statuses(sess, self.host, self.profile, record_id, token)
+            on_shelf = sum(1 for i in items
+                           if i.get("SD_ITEM_STATUS") == status) if status else 0
+            return label, on_shelf
+        return None, 0
+
     def probe(self, config: Config, query: str | None = None) -> str:
         sess = http.session()
         q = query or (_query_for(config.books[0]) if config.books else "the hobbit")
@@ -201,12 +253,31 @@ class SirsiEnterpriseSource(Source):
             for rec in records[:5]:
                 out.append(dict(rec, availability=_availability(
                     sess, self.host, self.profile, rec["record_id"], token)))
-        return (
+        lines = [
             f"GET {url}\nHTTP {resp.status_code}, {len(resp.text)} bytes\n"
             f"parsed {len(records)} physical (SD_ILS) records; "
             f"availability for the first {len(out)}:\n"
             + json.dumps(out, indent=2)[:3000]
-        )
+        ]
+        # Shelves get their own section: the facet strings are display labels,
+        # so a rename at the library end silently empties one, and a shelf that
+        # suddenly reads 0 records is the tell.
+        for cfg in self.shelves:
+            surl = self.shelf_url(cfg["facet"])
+            shelf = _shelf_records(sess, surl)
+            token = _mint_token(sess, self.base_url) if shelf else None
+            sample = []
+            for rec in list(shelf.values())[:3]:
+                sample.append(dict(
+                    rec, items=[i.get("SD_ITEM_STATUS") for i in _item_statuses(
+                        sess, self.host, self.profile, rec["record_id"], token)]))
+            lines.append(
+                f"\n\nGET {surl}\nshelf {cfg.get('label')!r}: {len(shelf)} records; "
+                f"item status for the first {len(sample)} "
+                f"(on-shelf status is {cfg.get('status')!r}):\n"
+                + json.dumps(sample, indent=2)[:2000]
+            )
+        return "".join(lines)
 
 
 def _query_for(book: Any) -> str:
@@ -275,6 +346,21 @@ def _shelf_state(available: Optional[int], copies: Optional[int],
     return "availability unknown"
 
 
+def _shelf_note(shelf: Optional[str], on_shelf: int) -> str:
+    """The no-hold shelf, as a clause for the summary line.
+
+    Worth saying even when every such copy is out: nobody can queue ahead of
+    you for one, so a title that cycles through the collection is worth
+    checking back on rather than only joining the hold list for.
+    """
+    if not shelf:
+        return ""
+    if on_shelf:
+        n = f"{on_shelf} copies" if on_shelf > 1 else "a copy"
+        return f" · {n} on the {shelf} shelf, no hold needed"
+    return f" · {shelf} copy, currently out"
+
+
 _ENTRY_RE = re.compile(r"<entry>(.*?)</entry>", re.S)
 # Only ent://SD_ILS ids are the library's own catalog. The ent://ERC_ rows are
 # federated e-resources — Lewisville's cloudLibrary and Freegal collections —
@@ -301,7 +387,10 @@ def _parse_feed(xml: str) -> list[dict[str, Any]]:
         fields = _fields(content.group(1)) if content else {}
         records.append({
             "record_id": rid.group(1),
-            "title": _text(title.group(1)),
+            # Escaped by Atom and again by Enterprise, like <content> below —
+            # one pass leaves "Cross &amp; Sampson". titles_match normalises
+            # that away, but the string is displayed too.
+            "title": _text(html.unescape(title.group(1))),
             "author": fields.get("by"),
             "format": fields.get("Format:"),
             "call_number": fields.get("Call Number"),
@@ -391,6 +480,56 @@ def _availability(sess: Any, host: str, profile: str, record_id: str,
                 fields["onOrderCopies"] = ordered
             return fields
     return {}
+
+
+def _shelf_records(sess: Any, url: str) -> dict[str, dict[str, Any]]:
+    """Every record in one shelf collection, keyed by record id.
+
+    The feed caps a result set well above any single shelf (Lewisville's Lucky
+    Day collection is ~100 records against a 300-entry cap), so this is one
+    request for the whole thing. An empty dict on any trouble: a shelf we
+    couldn't read means no flags, not a failed run.
+    """
+    try:
+        resp = http.get(sess, url)
+    except Exception:  # noqa: BLE001 — a flag is never worth failing a check
+        return {}
+    if resp.status_code != 200:
+        return {}
+    return {r["record_id"]: r for r in _parse_feed(resp.text)}
+
+
+def _item_statuses(sess: Any, host: str, profile: str, record_id: str,
+                   token: Optional[str]) -> list[dict[str, Any]]:
+    """Per-copy status for one record.
+
+    Enterprise renders the item table with every status reading "Searching..."
+    and fills it in from here, which is the only place copies are visible
+    individually. The status doubles as a location: a copy in the building
+    reports where it is ("Lucky Day Display", "Adult Mystery/Suspense
+    Fiction"), one that isn't reports why ("Due 8/17/26", "On Hold for
+    Someone"). That overload is what makes "on this shelf right now"
+    answerable at all.
+
+    Same header pair as _availability — both are required, see the module
+    docstring — and the same {}-on-anything-odd contract.
+    """
+    if not token:
+        return []
+    d = quote(f"ent://SD_ILS/0/SD_ILS:{record_id}~~0", safe="")
+    url = (f"https://{host}/client/en_US/{profile}/search/detailnonmodal.detail"
+           f".detailavailabilityaccordions:lookuptitleinfo/"
+           f"ent:$002f$002fSD_ILS$002f0$002fSD_ILS:{record_id}"
+           f"/ILS/0/false/true?d={d}")
+    try:
+        resp = http.get(sess, url, headers={"X-Requested-With": "XMLHttpRequest",
+                                            "sdcsrf": token})
+        if resp.status_code != 200:
+            return []
+        children = resp.json().get("childRecords")
+    except Exception:  # noqa: BLE001 — as above
+        return []
+    return [c for c in children if isinstance(c, dict)] if isinstance(children, list) else []
 
 
 # The on-order zone is a small table, one row per library, with the ordered

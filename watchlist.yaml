@@ -130,6 +130,19 @@ sources:
     formats: [Books]
     loan_days: 21                # same as Lewisville cloudLibrary
     distance_mi: 20              # Denton -> Lewisville
+    # Lucky Day: extra copies of high-demand titles that CANNOT be held, so
+    # they cycle first-come, first-served. Flagged on the dashboard because
+    # it changes the approach — a copy here is a way past a long queue.
+    # `facet` is four tab-separated fields (index, its display name,
+    # 1:<code>, the value's display name) and BOTH display names are part of
+    # the key, so a rename at the library end silently empties the shelf;
+    # `tracker probe lewisville-print` prints the record count to catch that.
+    # `status` is what Enterprise reports for a copy sitting on the shelf —
+    # item status doubles as location for anything in the building.
+    shelves:
+      - label: Lucky Day
+        facet: "LOCATION\tShelf Location\t1:LUCKYDAY\tLucky Day Display"
+        status: Lucky Day Display
 
   libby-fortworth:
     kind: libby

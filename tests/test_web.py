@@ -135,6 +135,44 @@ def test_dashboard_renders(wl, tmp_path):
     assert html.count("<script") == 1
 
 
+def test_dashboard_flags_a_no_hold_shelf_copy(wl, tmp_path):
+    """A Lucky Day copy is what makes a zero wait trustworthy on a title with
+    a queue, so it has to read on the collapsed card as well as on the row."""
+    from tracker.config import load_config
+    from tracker.dashboard import build_dashboard
+    from tracker.models import Observation, SourceResult
+    from tracker.state import State
+
+    cfg = load_config(wl)
+
+    def obs(shelf, copies):
+        return Observation(
+            source="lewisville-print", item_key="book:plain-book",
+            item_label="Plain Book", summary="print book in catalog",
+            event="print book in catalog", medium="print", wait=0,
+            loan_days=21, source_label="Lewisville",
+            shelf=shelf, shelf_copies=copies)
+
+    def render(o):
+        return build_dashboard(cfg, [SourceResult(source="lewisville-print",
+                                                  observations=[o])],
+                               [o], State(tmp_path / "s.json"))
+
+    on_shelf = render(obs("Lucky Day", 1))
+    # Inside the title span, so the caret still trails the whole thing, and
+    # visible while the card is shut.
+    assert "Plain Book <span class='lucky'>Lucky Day · on shelf</span></span>" \
+        in on_shelf
+
+    out = render(obs("Lucky Day", 0))
+    assert "<span class='lucky out'>Lucky Day copy · out</span>" in out
+    # "currently out" is context, not a prompt — it stays off the summary line.
+    assert "Plain Book <span class='lucky" not in out
+
+    plain = render(obs(None, 0))
+    assert "lucky" not in plain
+
+
 @pytest.fixture
 def client(wl, monkeypatch):
     flask = pytest.importorskip("flask")  # noqa: F841

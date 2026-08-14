@@ -49,6 +49,15 @@ _CSS = """
 .row + .trk { border-top: 1px dashed var(--line); padding-top: 6px; }
 .wait { font-variant-numeric: tabular-nums; font-weight: 600; }
 .wait.now { color: var(--ok); }
+/* A no-hold shelf copy. Teal because it is the same kind of news as
+   .wait.now — a copy you can act on — and because it is what makes that
+   zero trustworthy: nobody can queue ahead of you for one. The `out`
+   variant is the same fact minus the urgency, so it drops to an outline. */
+.lucky { font-size: .72rem; font-weight: 600; margin-left: 6px;
+         padding: 1px 8px; border-radius: var(--r-pill); white-space: nowrap;
+         border: 1px solid var(--ok); color: var(--ok); }
+.lucky.out { border-color: var(--line); color: var(--ink-mute);
+             font-weight: 400; }
 .sync { font-size: .8rem; color: var(--ink-mute); margin-top: 6px;
         padding-top: 5px; border-top: 1px dashed var(--line); }
 .src { display: flex; justify-content: space-between; font-size: .9rem;
@@ -304,6 +313,7 @@ def _grouped_card(label: str, current_obs: list[Observation],
                    f"{e(o.where)} <span class='muted'>({e(o.medium or '')})</span>")
         else:
             lbl = e(_short_label(o.source, o.event or o.summary))
+        lbl += _shelf_pill(o)
         return (f"<div class='row{' alt' if alt else ''}'>"
                 f"<span class='lbl'>{lbl}{info}</span>"
                 f"<span class='st'>{badge}{link}</span></div>")
@@ -347,10 +357,25 @@ def _grouped_card(label: str, current_obs: list[Observation],
         btn = (f"<button class='rm' title='Remove from watchlist' "
                f"onclick='event.preventDefault();event.stopPropagation();"
                f"rmItem(this,{_jsq(title)},{_jsq(kind)})'>&#x1F5D1;</button>")
+    # The card is collapsed by default, so a copy you could walk in and take
+    # today has to say so on the summary line or it goes unseen. Only the
+    # on-shelf state earns that: "cycles through the collection, currently
+    # out" is context, not a prompt to act, and stays inside on its own row.
+    on_shelf = next((o for o in current_obs if o.shelf and o.shelf_copies), None)
+    pill = _shelf_pill(on_shelf) if on_shelf else ""
     return (f"<details class='{cls}'{open_attr}>"
-            f"<summary class='item'><span class='ttl'>{e(label)}</span>"
+            f"<summary class='item'><span class='ttl'>{e(label)}{pill}</span>"
             f"{btn}</summary>"
             + "".join(rows) + "</details>")
+
+
+def _shelf_pill(o: Observation) -> str:
+    """No-hold shelf marker for a row or a card summary."""
+    if not o.shelf:
+        return ""
+    cls, txt = (("lucky", f"{o.shelf} · on shelf") if o.shelf_copies
+                else ("lucky out", f"{o.shelf} copy · out"))
+    return f" <span class='{cls}'>{html.escape(txt)}</span>"
 
 
 def _short_label(source: str, event: str) -> str:
