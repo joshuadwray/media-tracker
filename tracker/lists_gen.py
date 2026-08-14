@@ -36,6 +36,7 @@ import requests
 import yaml
 
 from . import site
+from .matching import fold
 
 ROOT = Path(__file__).resolve().parent.parent
 LISTS_DIR = ROOT / "lists"
@@ -132,11 +133,19 @@ def _entry_url(entry: dict) -> str | None:
 
 
 def _author_ok(author: str, *names: str) -> bool:
-    """Surname guard: never return a cover credited to a different author."""
+    """Surname guard: never return a cover credited to a different author.
+
+    Folded on both sides. The guard exists to reject a *different* author,
+    but an unfolded substring test also rejects the same one spelled
+    differently: a log typed "perez-carbonell" never matches Apple's
+    "Pérez-Carbonell", and the book silently renders as a blank tile with
+    no error anywhere. Folding costs nothing — an accent has never been
+    what distinguishes two authors.
+    """
     if not author:
         return True
-    surname = author.split()[-1].lower()
-    return any(surname in (n or "").lower() for n in names)
+    surname = fold(author.split()[-1]).lower()
+    return any(surname in fold(n or "").lower() for n in names)
 
 
 def _lookup(session, title: str, author: str, log=None) -> dict:

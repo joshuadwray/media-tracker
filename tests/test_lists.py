@@ -109,3 +109,18 @@ def test_lists_bundle_links_read_books(tmp_path):
     assert items[0]["href"] == "../reading/antidote.html"
     assert items[0]["rating"] == 4.5
     assert items[1]["href"] is None and items[1]["rating"] is None
+
+
+def test_author_guard_folds_diacritics():
+    """The guard rejects a cover credited to a *different* author. Unfolded,
+    it also rejected the same one spelled differently: a log typed
+    "perez-carbonell" never matched Apple's "Pérez-Carbonell", and the book
+    rendered as a blank tile with nothing logged anywhere."""
+    from tracker.lists_gen import _author_ok
+
+    assert _author_ok("marta perez-carbonell", "Marta Pérez-Carbonell")
+    assert _author_ok("Marta Pérez-Carbonell", "marta perez-carbonell")
+    assert _author_ok("Téa Obreht", "Tea Obreht")
+    # Still a guard: an accent was never what separated two people.
+    assert not _author_ok("marta perez-carbonell", "Rosa Montero")
+    assert _author_ok("", "anyone")           # no author to check against

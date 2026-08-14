@@ -17,9 +17,19 @@ _NOISE_RE = re.compile(
 )
 
 
-def normalize(text: str) -> str:
+def fold(text: str) -> str:
+    """Drop diacritics: "Pérez-Carbonell" -> "Perez-Carbonell".
+
+    Two sources rarely agree about accents on the same name — a log typed
+    without them, a store record with them — and an unfolded comparison
+    reads that as a different person entirely.
+    """
     text = unicodedata.normalize("NFKD", text)
-    text = "".join(c for c in text if not unicodedata.combining(c))
+    return "".join(c for c in text if not unicodedata.combining(c))
+
+
+def normalize(text: str) -> str:
+    text = fold(text)
     text = text.lower()
     text = _PAREN_RE.sub(" ", text)
     text = _NOISE_RE.sub(" ", text)
@@ -124,6 +134,4 @@ def text_contains_title(page_text: str, title: str) -> bool:
 
 
 def normalize_blob(text: str) -> str:
-    text = unicodedata.normalize("NFKD", text)
-    text = "".join(c for c in text if not unicodedata.combining(c))
-    return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    return re.sub(r"[^a-z0-9]+", " ", fold(text).lower()).strip()
