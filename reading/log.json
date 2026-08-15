@@ -1927,13 +1927,14 @@
       "title": "i made you up inside my head",
       "author": "marta perez-carbonell",
       "slug": "i-made-you-up-inside-my-head",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3.5,
       "page_count": 158,
       "started": "2026-08-13",
-      "finished": null,
+      "finished": "2026-08-14",
       "sessions": [
-        "2026-08-13 65"
+        "2026-08-13 65",
+        "2026-08-14 158"
       ]
     }
   ]
