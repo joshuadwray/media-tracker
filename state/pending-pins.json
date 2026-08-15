@@ -1,3 +1,29 @@
 {
-  "pending": []
+  "pending": [
+    {
+      "id": "the-age-of-calamities-20260815T010141Z",
+      "kind": "book",
+      "typed_title": "the age of calamities",
+      "typed_author": "senaa ahmad",
+      "added": "2026-08-15T01:01:41Z",
+      "candidates": [
+        {
+          "title": "The Age of Calamities",
+          "author": "Senaa Ahmad",
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": "9781250378484",
+          "source": "libby-houston"
+        },
+        {
+          "title": "The Age of Calamities",
+          "author": "Senaa Ahmad",
+          "format": "audiobook",
+          "bib_id": null,
+          "isbn": "9798228845169",
+          "source": "libby-houston"
+        }
+      ]
+    }
+  ]
 }
