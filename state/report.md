@@ -1,9 +1,10 @@
-# Media tracker report — 2026-08-15 01:06 UTC
+# Media tracker report — 2026-08-15 01:13 UTC
 
-## New sightings (1)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27, 2026-08-28, 2026-08-30, 2026-08-31) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
+## New sightings (2)
+- **the age of calamities — senaa ahmad**: ebook in Libby catalog (Houston) — 0/1 available, 8 holds (~4 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/11842580)
+- **the age of calamities — senaa ahmad**: audiobook in Libby catalog (Houston) — 0/1 available, 5 holds (~3 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/12909787)
 
-## All current sightings (58)
+## All current sightings (60)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -57,6 +58,10 @@
     - also: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~1.1 yr)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
+- **the age of calamities — senaa ahmad**
+  - reading: ebook in Libby catalog (Houston) — 0/1 available, 8 holds (~4 mo) · Senaa Ahmad
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 5 holds (~3 mo) · Senaa Ahmad
+  - sync: gap 42d > 14d loan — suspend the listening hold ~42d for reading
 - **one leg on earth — aguda**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · 'Pemi Aguda
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 9 holds (~5 mo) · 'Pemi Aguda
@@ -67,8 +72,7 @@
   - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-15, 2026-08-16, 2026-08-17, 2026-08-18)
 - **coyote vs acme (2026)**
   - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27, 2026-08-28, 2026-08-30, 2026-08-31)
-  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-31)
   - "Coyote vs. Acme Early Access" playing at AMC Stonebriar 24 (2026-08-23)
   - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
   - "Coyote vs. Acme Early Access" playing at AMC Grapevine Mills 30 (2026-08-23)
@@ -82,6 +86,7 @@
   - "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - **i want your sex (2026)**
   - "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-15, 2026-08-16, 2026-08-17, 2026-08-18)
+  - "i want your sex" digital release: 2026-09-01
 
 ## Source status
 - ✅ `denton-library`: 8 observation(s)
@@ -89,10 +94,11 @@
 - ✅ `cloudlibrary-lewisville`: 4 observation(s)
 - ✅ `lewisville-print`: 9 observation(s)
 - ✅ `libby-fortworth`: 9 observation(s)
-- ✅ `libby-houston`: 10 observation(s)
+- ✅ `libby-houston`: 12 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 4 observation(s)
+- ✅ `cinemark`: 3 observation(s)
 - ✅ `amc`: 12 observation(s)
+- ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
