@@ -1951,6 +1951,17 @@
         "2026-08-15 153",
         "2026-08-16 336"
       ]
+    },
+    {
+      "title": "the vegetarian",
+      "author": "han kang",
+      "slug": "the-vegetarian",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-08-16",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
