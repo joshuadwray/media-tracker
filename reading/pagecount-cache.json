@@ -167,6 +167,12 @@
   "page_count": 432,
   "source": "apple-books"
  },
+ "the vegetarian|han kang": {
+  "isbn13": "9780553448191",
+  "matched": "the vegetarian",
+  "page_count": 192,
+  "source": "apple-books"
+ },
  "the witch|marie ndiaye": {
   "isbn13": "9798217006816",
   "matched": "the witch",
