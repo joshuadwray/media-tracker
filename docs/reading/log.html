@@ -307,24 +307,39 @@ function finishBook(b, rating) {
   status(`finished \u2014 ${rating}\u2605 \u2014 don\u2019t forget Save`, 'ok');
 }
 
+/* Bounded fetch. Open Library goes down for hours at a time and stops
+   answering rather than erroring, so an unbounded fetch parks the UI on
+   "looking up page count" until the browser's own (very long) timeout.
+   Rejecting lets each caller's catch fall through to the next source. */
+function jfetch(url, deadline) {
+  const ms = Math.min(6000, deadline - Date.now());
+  if (ms <= 0) return Promise.reject(new Error('out of time'));
+  const ac = new AbortController();
+  const t = setTimeout(() => ac.abort(), ms);
+  return fetch(url, { signal: ac.signal }).finally(() => clearTimeout(t));
+}
+
 /* Same chain as tracker/reading_gen.py, run in the browser (both APIs
    send CORS headers): iTunes ebook search -> ISBN-13 in the artwork
    filename -> OL editions page count; fallback OL search median,
    fielded then loose q=. Surname guard against wrong-book matches. */
 async function lookupPages(title, author) {
+  const deadline = Date.now() + 12000;
   const surOk = a => !author.trim() || (a || '').toLowerCase()
     .includes(author.trim().split(/\s+/).pop().toLowerCase());
   try {
-    const r = await fetch('https://itunes.apple.com/search?' +
+    const r = await jfetch('https://itunes.apple.com/search?' +
       new URLSearchParams({ term: `${title} ${author}`.trim(),
-                            media: 'ebook', limit: 5, country: 'US' }));
+                            media: 'ebook', limit: 5, country: 'US' }),
+      deadline);
     for (const h of ((await r.json()).results || [])) {
       if (!h.artworkUrl100 || !surOk(h.artistName) ||
           !(h.trackName || '').toLowerCase().includes(title.toLowerCase()))
         continue;
       const m = h.artworkUrl100.match(/97[89]\d{10}/);
       if (m) {
-        const or = await fetch(`https://openlibrary.org/isbn/${m[0]}.json`);
+        const or = await jfetch(`https://openlibrary.org/isbn/${m[0]}.json`,
+                                deadline);
         if (or.ok) {
           const p = (await or.json()).number_of_pages;
           if (p) return p;
@@ -337,9 +352,9 @@ async function lookupPages(title, author) {
   if (author.trim()) fielded.author = author;
   for (const params of [fielded, { q: `${title} ${author}`.trim() }]) {
     try {
-      const r = await fetch('https://openlibrary.org/search.json?' +
+      const r = await jfetch('https://openlibrary.org/search.json?' +
         new URLSearchParams({ ...params, limit: 10,
-          fields: 'title,author_name,number_of_pages_median' }));
+          fields: 'title,author_name,number_of_pages_median' }), deadline);
       for (const d of ((await r.json()).docs || []))
         if (d.number_of_pages_median && (d.author_name || []).some(surOk))
           return d.number_of_pages_median;
@@ -351,8 +366,8 @@ async function lookupPages(title, author) {
   try {
     const q = `intitle:"${title}"` +
       (author.trim() ? `+inauthor:${author.trim().split(/\s+/).pop()}` : '');
-    const r = await fetch('https://www.googleapis.com/books/v1/volumes?q=' +
-      encodeURIComponent(q) + '&country=US&maxResults=10');
+    const r = await jfetch('https://www.googleapis.com/books/v1/volumes?q=' +
+      encodeURIComponent(q) + '&country=US&maxResults=10', deadline);
     if (r.ok)
       for (const it of ((await r.json()).items || [])) {
         const v = it.volumeInfo || {};
@@ -368,21 +383,26 @@ async function startBook() {
   const title = $('nt').value.trim();
   if (!title) { status('title needed', 'err'); return; }
   const author = $('na').value.trim();
-  let pages = parseInt($('np').value, 10);
-  if (isNaN(pages)) {
-    status('looking up page count\u2026');
-    pages = await lookupPages(title, author) || NaN;
-  }
-  data.books.push({
-    title, author, slug: uniqueSlug(title),
+  const pages = parseInt($('np').value, 10);
+  // Shelve the book before looking anything up: the count is optional
+  // (the card's find/set row and the CI rebuild both fill it in later),
+  // so a slow or dead source must never hold up starting a book.
+  const b = { title, author, slug: uniqueSlug(title),
     status: 'reading', rating: null,
     page_count: isNaN(pages) ? null : pages,
-    started: today(), finished: null, sessions: [] });
+    started: today(), finished: null, sessions: [] };
+  data.books.push(b);
   $('nt').value = $('na').value = $('np').value = '';
   markDirty(); render();
-  status(isNaN(pages) ? 'started \u2014 no count found from the browser; ' +
-         'Save anyway and the rebuild resolves it via Apple Books in ~2 min'
-         : `started \u2014 ${pages} pages`, 'ok');
+  if (!isNaN(pages)) { status(`started \u2014 ${pages} pages`, 'ok'); return; }
+  status('started \u2014 looking up page count\u2026', 'ok');
+  const found = await lookupPages(title, author);
+  // the book may have been set by hand, removed, or reloaded meanwhile
+  if (!data.books.includes(b) || b.page_count) return;
+  if (found) { b.page_count = found; markDirty(); render();
+    status(`started \u2014 ${found} pages`, 'ok'); }
+  else status('started \u2014 no count found from the browser; Save anyway ' +
+              'and the rebuild resolves it via Apple Books in ~2 min', 'ok');
 }
 
 function setGoal() {

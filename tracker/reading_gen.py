@@ -41,6 +41,8 @@ from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
+import requests
+
 from . import lists_gen, site
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -269,9 +271,24 @@ def resolve_page_count(book: Book, cache: dict, covers_cache: dict,
             # piggyback: a book we looked up now has a cover for free
             covers_cache.setdefault(book.cache_key, hit)
 
+    # Open Library goes down for hours at a time, and a raised timeout
+    # here would skip the Apple Books hop below — the one source that
+    # answers for the books OL is missing. Demote its failures to misses,
+    # but remember them so a source-outage miss is never cached as fact.
+    outages = []
+
+    def _soft(what, fn, *args):
+        try:
+            return fn(*args)
+        except requests.RequestException as exc:
+            outages.append(what)
+            if log:
+                log(f"  {what} unavailable for {book.title!r}: {exc}")
+            return None
+
     pages, source = None, None
     if isbn:
-        pages = _ol_pages_by_isbn(session, isbn)
+        pages = _soft("openlibrary", _ol_pages_by_isbn, session, isbn)
         if pages:
             source = "openlibrary-isbn"
         else:
@@ -279,14 +296,18 @@ def resolve_page_count(book: Book, cache: dict, covers_cache: dict,
             if pages:
                 source = "apple-books"
     if not pages:
-        pages = _ol_pages_by_search(session, book.title, book.author)
+        pages = _soft("openlibrary search", _ol_pages_by_search, session,
+                      book.title, book.author)
         if pages:
             source = "openlibrary-median"
-    cache[book.cache_key] = {"page_count": pages, "isbn13": isbn,
-                             "source": source, "matched": book.title}
+    if pages or not outages:
+        cache[book.cache_key] = {"page_count": pages, "isbn13": isbn,
+                                 "source": source, "matched": book.title}
     if log:
+        stale = (" — left uncached, sources were down"
+                 if not pages and outages else "")
         log(f"  page count: {book.title!r} -> {pages or 'not found'}"
-            f"{f' ({source})' if source else ''}")
+            f"{f' ({source})' if source else stale}")
     return pages, source or "unresolved"
 
 
@@ -936,7 +957,6 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
     known, covers_known = len(cache), len(covers_cache)
     session = None
     if fetch:
-        import requests
         session = requests.Session()
         session.headers["User-Agent"] = lists_gen.USER_AGENT
 
