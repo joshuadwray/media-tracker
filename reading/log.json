@@ -1956,12 +1956,14 @@
       "title": "the vegetarian",
       "author": "han kang",
       "slug": "the-vegetarian",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 5,
       "page_count": null,
       "started": "2026-08-16",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-08-16",
+      "sessions": [
+        "2026-08-16 192"
+      ]
     }
   ]
 }
