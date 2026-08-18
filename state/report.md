@@ -1,9 +1,9 @@
-# Media tracker report — 2026-08-18 13:51 UTC
+# Media tracker report — 2026-08-18 23:30 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **tony (2026)**: "Tony" playing at Cinemark Denton 14 (2026-08-20, 2026-08-21) — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
 
-## All current sightings (44)
+## All current sightings (39)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -15,26 +15,26 @@
   - reading: print book in Lewisville library catalog — 2 on order, 2 holds ahead · Mandel, Emily St. John, 1979- author http://id.loc.gov/authorities/names/n2008082532
     - also: print book in denton library catalog — 4 on order, 5 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 23 holds
-  - listening: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 33 holds · Emily St. John Mandel
+  - listening: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 34 holds · Emily St. John Mandel
 - **Sunrise — Obreht, Téa**
   - reading: print book in denton library catalog — all 4 out, 3 holds · Obreht, Téa
     - also: print book in Lewisville library catalog — 1 on order, 2 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 10 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 26 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 26 holds (~1 yr) · Téa Obreht
-  - sync: gap 357d > 14d loan — suspend the reading hold ~357d for listening
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 28 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 27 holds (~1.1 yr) · Téa Obreht
+  - sync: gap 371d > 14d loan — suspend the reading hold ~371d for listening
 - **Triage — Rankine, Claudia**
   - reading: print book in denton library catalog — 1 on order, no holds yet · Rankine, Claudia
     - also: print book in Lewisville library catalog — 1 on order, no holds yet
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 6 holds (~3 mo)
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 5 holds (~3 mo)
 - **Fruit Fly — Silver, Josh**
   - reading: print book in denton library catalog — all 3 out, 4 holds · Silver, Josh
     - also: print book in Lewisville library catalog — 1 on order, 5 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 71 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 148 holds (~2.9 yr)
+    - also: ebook in Libby catalog (Houston) — 0/6 available, 146 holds (~11 mo)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 5 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 34 holds (~5 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/3 available, 147 holds (~1.9 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 35 holds (~6 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 150 holds (~12 mo)
   - sync: gap 91d > 21d loan — suspend the reading hold ~91d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
@@ -42,30 +42,25 @@
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **The Hill — Clark, Harriet**
-  - reading: print book in Lewisville library catalog — 1 on shelf · Clark, Harriet, author.
+  - reading: print book in Lewisville library catalog — 1 on shelf · Clark, Harriet, 1980- author.
     - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~3 wk)
     - also: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~1.1 yr)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **the age of calamities — senaa ahmad**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 9 holds (~5 mo) · Senaa Ahmad
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 6 holds (~3 mo) · Senaa Ahmad
-  - sync: gap 42d > 14d loan — suspend the listening hold ~42d for reading
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 7 holds (~4 mo) · Senaa Ahmad
+  - sync: gap 28d > 14d loan — suspend the listening hold ~28d for reading
 - **one leg on earth — aguda**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · 'Pemi Aguda
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 9 holds (~5 mo) · 'Pemi Aguda
   - sync: gap 70d > 14d loan — suspend the reading hold ~70d for listening
 - **teenage sex and death at camp miasma (2026)**
   - "teenage sex and death at camp miasma" mentioned on Texas Theatre
-  - "Teenage Sex and Death at Camp Miasma" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21)
-  - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-18, 2026-08-19)
 - **tony (2026)**
+  - "Tony" playing at Cinemark Denton 14 (2026-08-20, 2026-08-21)
   - "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21)
-  - "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21)
-  - "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21)
-  - "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21)
 - **i want your sex (2026)**
-  - "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-18, 2026-08-19)
   - "i want your sex" digital release: 2026-09-01
 
 ## Source status
@@ -76,17 +71,17 @@
 - ✅ `libby-fortworth`: 7 observation(s)
 - ✅ `libby-houston`: 10 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 1 observation(s)
-- ✅ `amc`: 6 observation(s)
+- ✅ `cinemark`: 2 observation(s)
+- ✅ `amc`: 0 observation(s)
 - ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 30d
-- club kid (2026) — waiting 28d
-- dune part 3 (2026) — waiting 28d
-- fjord (2026) — waiting 28d
-- paper tiger (2026) — waiting 28d
-- wild horse nine (2026) — waiting 28d
-- Peck and Peck — Garmus — waiting 7d
+- club kid (2026) — waiting 29d
+- dune part 3 (2026) — waiting 29d
+- fjord (2026) — waiting 29d
+- paper tiger (2026) — waiting 29d
+- wild horse nine (2026) — waiting 29d
+- Peck and Peck — Garmus — waiting 8d
 
