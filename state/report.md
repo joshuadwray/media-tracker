@@ -1,4 +1,4 @@
-# Media tracker report — 2026-08-17 23:31 UTC
+# Media tracker report — 2026-08-18 13:51 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -20,9 +20,9 @@
   - reading: print book in denton library catalog — all 4 out, 3 holds · Obreht, Téa
     - also: print book in Lewisville library catalog — 1 on order, 2 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 10 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 27 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 23 holds (~11 mo) · Téa Obreht
-  - sync: gap 315d > 14d loan — suspend the reading hold ~315d for listening
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 26 holds (~1 yr)
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 26 holds (~1 yr) · Téa Obreht
+  - sync: gap 357d > 14d loan — suspend the reading hold ~357d for listening
 - **Triage — Rankine, Claudia**
   - reading: print book in denton library catalog — 1 on order, no holds yet · Rankine, Claudia
     - also: print book in Lewisville library catalog — 1 on order, no holds yet
@@ -30,19 +30,19 @@
 - **Fruit Fly — Silver, Josh**
   - reading: print book in denton library catalog — all 3 out, 4 holds · Silver, Josh
     - also: print book in Lewisville library catalog — 1 on order, 5 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 73 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 145 holds (~2.8 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 71 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/2 available, 148 holds (~2.9 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 5 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 36 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/3 available, 141 holds (~1.8 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 34 holds (~5 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/3 available, 147 holds (~1.9 yr)
   - sync: gap 91d > 21d loan — suspend the reading hold ~91d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
     - also: print book in denton library catalog — 1 on order, 1 hold ahead
 - **Partita — Kingsolver**
-  - reading: print book in Lewisville library catalog — 3 on order, 3 holds ahead · Kingsolver, Barbara, author.
+  - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **The Hill — Clark, Harriet**
-  - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Clark, Harriet, author.
+  - reading: print book in Lewisville library catalog — 1 on shelf · Clark, Harriet, author.
     - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~3 wk)
     - also: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~1.1 yr)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
@@ -57,13 +57,13 @@
   - sync: gap 70d > 14d loan — suspend the reading hold ~70d for listening
 - **teenage sex and death at camp miasma (2026)**
   - "teenage sex and death at camp miasma" mentioned on Texas Theatre
-  - "Teenage Sex and Death at Camp Miasma" playing at AMC Stonebriar 24 (2026-08-20)
-  - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-17, 2026-08-18, 2026-08-19)
+  - "Teenage Sex and Death at Camp Miasma" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21)
+  - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-18, 2026-08-19)
 - **tony (2026)**
-  - "Tony" playing at Cinemark West Plano (2026-08-20)
-  - "Tony" playing at AMC Stonebriar 24 (2026-08-20)
-  - "Tony" playing at AMC Grapevine Mills 30 (2026-08-20)
-  - "Tony" playing at AMC Northpark 15 (2026-08-20)
+  - "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21)
+  - "Tony" playing at AMC Stonebriar 24 (2026-08-20, 2026-08-21)
+  - "Tony" playing at AMC Grapevine Mills 30 (2026-08-20, 2026-08-21)
+  - "Tony" playing at AMC Northpark 15 (2026-08-20, 2026-08-21)
 - **i want your sex (2026)**
   - "I Want Your Sex" playing at AMC Grapevine Mills 30 (2026-08-18, 2026-08-19)
   - "i want your sex" digital release: 2026-09-01
@@ -82,7 +82,7 @@
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 29d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 30d
 - club kid (2026) — waiting 28d
 - dune part 3 (2026) — waiting 28d
 - fjord (2026) — waiting 28d
