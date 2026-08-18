@@ -1964,6 +1964,17 @@
       "sessions": [
         "2026-08-16 192"
       ]
+    },
+    {
+      "title": "beginning middle end",
+      "author": "valeria luiselli",
+      "slug": "beginning-middle-end",
+      "status": "reading",
+      "rating": null,
+      "page_count": 552,
+      "started": "2026-08-17",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
