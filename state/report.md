@@ -1,16 +1,17 @@
-# Media tracker report — 2026-08-18 23:30 UTC
+# Media tracker report — 2026-08-19 13:54 UTC
 
-## New sightings (1)
-- **tony (2026)**: "Tony" playing at Cinemark Denton 14 (2026-08-20, 2026-08-21) — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
+## New sightings (2)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
 
-## All current sightings (39)
+## All current sightings (41)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 2 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 13 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 3 holds · Lee, Min Jin
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in Lewisville library catalog — 2 on order, 2 holds ahead · Mandel, Emily St. John, 1979- author http://id.loc.gov/authorities/names/n2008082532
     - also: print book in denton library catalog — 4 on order, 5 holds ahead
@@ -20,7 +21,7 @@
   - reading: print book in denton library catalog — all 4 out, 3 holds · Obreht, Téa
     - also: print book in Lewisville library catalog — 1 on order, 2 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 10 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 28 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 27 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 27 holds (~1.1 yr) · Téa Obreht
   - sync: gap 371d > 14d loan — suspend the reading hold ~371d for listening
 - **Triage — Rankine, Claudia**
@@ -30,12 +31,12 @@
 - **Fruit Fly — Silver, Josh**
   - reading: print book in denton library catalog — all 3 out, 4 holds · Silver, Josh
     - also: print book in Lewisville library catalog — 1 on order, 5 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 71 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/6 available, 146 holds (~11 mo)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 5 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 35 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 150 holds (~12 mo)
-  - sync: gap 91d > 21d loan — suspend the reading hold ~91d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 72 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/6 available, 147 holds (~12 mo)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 6 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 36 holds (~6 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 155 holds (~12 mo)
+  - sync: gap 112d > 21d loan — suspend the reading hold ~112d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
     - also: print book in denton library catalog — 1 on order, 1 hold ahead
@@ -48,18 +49,21 @@
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **the age of calamities — senaa ahmad**
-  - reading: ebook in Libby catalog (Houston) — 0/1 available, 9 holds (~5 mo) · Senaa Ahmad
+  - reading: ebook in Libby catalog (Houston) — 0/1 available, 8 holds (~4 mo) · Senaa Ahmad
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 7 holds (~4 mo) · Senaa Ahmad
-  - sync: gap 28d > 14d loan — suspend the listening hold ~28d for reading
+  - sync: gap 14d > 14d loan — suspend the listening hold ~14d for reading
 - **one leg on earth — aguda**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · 'Pemi Aguda
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 9 holds (~5 mo) · 'Pemi Aguda
   - sync: gap 70d > 14d loan — suspend the reading hold ~70d for listening
 - **teenage sex and death at camp miasma (2026)**
   - "teenage sex and death at camp miasma" mentioned on Texas Theatre
+- **coyote vs acme (2026)**
+  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
 - **tony (2026)**
-  - "Tony" playing at Cinemark Denton 14 (2026-08-20, 2026-08-21)
-  - "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21)
+  - "Tony" playing at Cinemark Denton 14 (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
+  - "Tony" playing at Cinemark West Plano (2026-08-20, 2026-08-21, 2026-08-22, 2026-08-23)
 - **i want your sex (2026)**
   - "i want your sex" digital release: 2026-09-01
 
@@ -71,13 +75,13 @@
 - ✅ `libby-fortworth`: 7 observation(s)
 - ✅ `libby-houston`: 10 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 2 observation(s)
+- ✅ `cinemark`: 4 observation(s)
 - ✅ `amc`: 0 observation(s)
 - ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 30d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 31d
 - club kid (2026) — waiting 29d
 - dune part 3 (2026) — waiting 29d
 - fjord (2026) — waiting 29d
