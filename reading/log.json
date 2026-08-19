@@ -1969,13 +1969,14 @@
       "title": "beginning middle end",
       "author": "valeria luiselli",
       "slug": "beginning-middle-end",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4.5,
       "page_count": 350,
       "started": "2026-08-17",
-      "finished": null,
+      "finished": "2026-08-18",
       "sessions": [
-        "2026-08-17 39"
+        "2026-08-17 39",
+        "2026-08-18 350"
       ]
     }
   ]
