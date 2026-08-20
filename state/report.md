@@ -1,4 +1,4 @@
-# Media tracker report — 2026-08-20 13:54 UTC
+# Media tracker report — 2026-08-20 23:34 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -15,12 +15,12 @@
   - reading: print book in Lewisville library catalog — 2 on order, 2 holds ahead · Mandel, Emily St. John, 1979- author http://id.loc.gov/authorities/names/n2008082532
     - also: print book in denton library catalog — 4 on order, 5 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 24 holds
-  - listening: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 35 holds · Emily St. John Mandel
+  - listening: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 36 holds · Emily St. John Mandel
 - **Sunrise — Obreht, Téa**
   - reading: print book in denton library catalog — all 4 out, 3 holds · Obreht, Téa
     - also: print book in Lewisville library catalog — 1 on order, 2 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 11 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 27 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 28 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 27 holds (~1.1 yr) · Téa Obreht
   - sync: gap 371d > 14d loan — suspend the reading hold ~371d for listening
 - **Triage — Rankine, Claudia**
@@ -28,14 +28,14 @@
     - also: print book in Lewisville library catalog — 1 on order, no holds yet
     - also: ebook in Libby catalog (Houston) — 0/1 available, 5 holds (~3 mo)
 - **Fruit Fly — Silver, Josh**
-  - reading: print book in denton library catalog — all 3 out, 3 holds · Silver, Josh
+  - reading: print book in denton library catalog — all 3 out, 1 hold · Silver, Josh
     - also: print book in Lewisville library catalog — 1 on order, 5 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 71 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/6 available, 152 holds (~12 mo)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 7 holds (~6 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 38 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 159 holds (~1 yr)
-  - sync: gap 140d > 21d loan — suspend the reading hold ~140d for listening
+    - also: ebook in Libby catalog (Houston) — 0/6 available, 154 holds (~12 mo)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 8 holds (~6 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 40 holds (~6 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 164 holds (~1.1 yr)
+  - sync: gap 175d > 21d loan — suspend the reading hold ~175d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
     - also: print book in denton library catalog — 1 on order, 1 hold ahead
@@ -43,7 +43,7 @@
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **The Hill — Clark, Harriet**
   - reading: print book in Lewisville library catalog — 1 on shelf · Clark, Harriet, 1980- author.
-    - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 4 holds (~3 wk)
+    - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 2 holds (~2 wk)
     - also: ebook in Libby catalog (Houston) — 0/2 available, 56 holds (~1.1 yr)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
@@ -78,10 +78,10 @@
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 32d
-- club kid (2026) — waiting 30d
-- dune part 3 (2026) — waiting 30d
-- fjord (2026) — waiting 30d
-- paper tiger (2026) — waiting 30d
-- wild horse nine (2026) — waiting 30d
-- Peck and Peck — Garmus — waiting 9d
+- club kid (2026) — waiting 31d
+- dune part 3 (2026) — waiting 31d
+- fjord (2026) — waiting 31d
+- paper tiger (2026) — waiting 31d
+- wild horse nine (2026) — waiting 31d
+- Peck and Peck — Garmus — waiting 10d
 
