@@ -1,7 +1,7 @@
-# Media tracker report — 2026-08-22 13:39 UTC
+# Media tracker report — 2026-08-22 23:29 UTC
 
-## New sightings (1)
-- **tony (2026)**: "tony" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1329016)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (49)
 - **Ply — Hernan Diaz**
@@ -19,8 +19,8 @@
 - **Sunrise — Obreht, Téa**
   - reading: print book in denton library catalog — all 4 out, 3 holds · Obreht, Téa
     - also: print book in Lewisville library catalog — 1 on order, 2 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 12 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 29 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 13 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 30 holds (~1.2 yr)
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 29 holds (~1.2 yr) · Téa Obreht
   - sync: gap 399d > 14d loan — suspend the reading hold ~399d for listening
 - **Triage — Rankine, Claudia**
@@ -31,10 +31,10 @@
   - reading: print book in denton library catalog — all 2 out, 2 holds · Silver, Josh
     - also: print book in Lewisville library catalog — 1 on order, 4 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 73 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/6 available, 163 holds (~1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/6 available, 168 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/3 available, 40 holds (~6 mo) · Josh Silver
     - also: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 10 holds (~8 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 168 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 173 holds (~1.1 yr)
   - sync: gap 160d > 14d loan — suspend the reading hold ~160d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
@@ -89,10 +89,10 @@
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 34d
-- club kid (2026) — waiting 32d
-- dune part 3 (2026) — waiting 32d
-- fjord (2026) — waiting 32d
-- paper tiger (2026) — waiting 32d
-- wild horse nine (2026) — waiting 32d
-- Peck and Peck — Garmus — waiting 11d
+- club kid (2026) — waiting 33d
+- dune part 3 (2026) — waiting 33d
+- fjord (2026) — waiting 33d
+- paper tiger (2026) — waiting 33d
+- wild horse nine (2026) — waiting 33d
+- Peck and Peck — Garmus — waiting 12d
 
