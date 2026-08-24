@@ -2010,13 +2010,14 @@
       "title": "seek immediate shelter",
       "author": "vincent yu",
       "slug": "seek-immediate-shelter",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3.5,
       "page_count": null,
       "started": "2026-08-21",
-      "finished": null,
+      "finished": "2026-08-23",
       "sessions": [
-        "2026-08-21 30"
+        "2026-08-21 30",
+        "2026-08-23 304"
       ]
     }
   ]
