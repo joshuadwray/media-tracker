@@ -64,6 +64,7 @@ class GenericPageSource(Source):
                         summary=f'"{movie.title}" mentioned on {page["name"]}',
                         url=page["url"],
                         positive=True,
+                        venue=page["name"],
                         detail={"page": page["name"]},
                     ))
         if errors and not observations:

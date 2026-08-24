@@ -155,14 +155,95 @@ def test_first_discovery_is_one_push(tmp_path):
     assert _run_groups(state, [_book_obs("denton-cl", "print", wait=0)]) == []
 
 
-def test_notify_groups_keep_per_observation_for_movies(tmp_path):
-    """Showtimes have no track, so they keep firing per sighting/date."""
+def _showtime(theatre, summary, source="amc"):
+    """A theatre listing, the way chain_theaters builds one."""
+    return Observation(source=source, item_key="movie:dune", item_label="Dune",
+                       summary=summary, event=summary, venue=theatre)
+
+
+def test_notify_groups_one_push_per_venue(tmp_path):
+    """A theatre speaks once. Not once per title variant, not again when the
+    listing's wording changes, not again for each new day of showtimes."""
     state = State(tmp_path / "state.json")
-    showtime = Observation(source="amc", item_key="movie:dune", item_label="Dune",
-                           summary='"Dune" playing at AMC Northpark 15')
-    groups = _run_groups(state, [showtime])
+    north = '"Dune" playing at AMC Northpark 15'
+    assert len(_run_groups(state, [_showtime("AMC Northpark 15", north)])) == 1
+
+    # Same theatre, everything else different: an early-access listing under
+    # its own title, and the advance-tickets wording becoming now-playing.
+    assert _run_groups(state, [
+        _showtime("AMC Northpark 15", '"Dune Early Access" playing at AMC Northpark 15'),
+        _showtime("AMC Northpark 15", '"Dune" advance tickets on sale at AMC Northpark 15'),
+        _showtime("AMC Northpark 15", north),
+    ]) == []
+
+    # A theatre that didn't have it before is news.
+    groups = _run_groups(state, [
+        _showtime("AMC Northpark 15", north),
+        _showtime("AMC Stonebriar 24", '"Dune" playing at AMC Stonebriar 24'),
+    ])
+    assert len(groups) == 1
+    assert [o.venue for o in groups[0].observations] == ["AMC Stonebriar 24"]
+
+    # Persisted across runs, not just within one.
+    state.save()
+    state = State(tmp_path / "state.json")
+    assert _run_groups(state, [_showtime("AMC Stonebriar 24",
+                                         '"Dune" playing at AMC Stonebriar 24')]) == []
+
+
+def test_notify_groups_one_push_per_film_per_run(tmp_path):
+    """A film opening at three theatres at once is one push naming all
+    three, not three pushes."""
+    from tracker.notify import body
+
+    state = State(tmp_path / "state.json")
+    groups = _run_groups(state, [
+        _showtime("AMC Northpark 15", '"Dune" playing at AMC Northpark 15 (2026-08-15)'),
+        _showtime("AMC Stonebriar 24", '"Dune" playing at AMC Stonebriar 24'),
+        _showtime("Cinemark Denton 14", '"Dune" playing at Cinemark Denton 14',
+                  source="cinemark"),
+    ])
     assert len(groups) == 1 and groups[0].track is None
-    assert _run_groups(state, [showtime]) == []
+    text = body(groups[0])
+    # The first theatre keeps the source's own wording, dates and all.
+    assert text.startswith('"Dune" playing at AMC Northpark 15 (2026-08-15)')
+    assert "also at AMC Stonebriar 24, Cinemark Denton 14" in text
+
+
+def test_venue_upgrade_is_silent(tmp_path):
+    """Adding venues to a state file full of movie sightings must not
+    re-announce every theatre already playing them."""
+    import json
+    from datetime import datetime, timedelta, timezone
+
+    now = datetime.now(timezone.utc)
+    old = (now - timedelta(days=30)).isoformat(timespec="seconds")
+    recent = (now - timedelta(hours=6)).isoformat(timespec="seconds")
+    summary = '"Dune" playing at AMC Northpark 15'
+
+    p = tmp_path / "state.json"
+    p.write_text(json.dumps({"meta": {}, "seen": {
+        f"amc|movie:dune|{summary}": {"first": old, "last": recent},
+    }}))
+    state = State(p)
+    assert not state.venues
+    # Seen recently under this exact wording, so nothing is new -> no push,
+    # but the venue is now on record.
+    assert _run_groups(state, [_showtime("AMC Northpark 15", summary)]) == []
+    assert not state.venue_is_new("movie:dune|AMC Northpark 15")
+
+
+def test_notify_groups_keep_per_observation_without_a_venue(tmp_path):
+    """A streaming service or a VOD date isn't a place, so it keeps the old
+    per-sighting behavior."""
+    state = State(tmp_path / "state.json")
+    streaming = Observation(source="tmdb-streaming", item_key="movie:dune",
+                            item_label="Dune",
+                            summary='"Dune" now streaming on Max',
+                            event="dune streaming on Max")
+    groups = _run_groups(state, [streaming])
+    assert len(groups) == 1 and groups[0].track is None
+    assert _run_groups(state, [streaming]) == []
 
 
 def test_media_map_seeded_from_legacy_state(tmp_path):
@@ -192,12 +273,20 @@ def test_media_map_seeded_from_legacy_state(tmp_path):
     assert not any(k.startswith("movie:") for k in state.media)
 
 
-def test_forget_item_clears_both_maps(tmp_path):
+def test_forget_item_clears_every_map(tmp_path):
     state = State(tmp_path / "state.json")
     _run_groups(state, [_book_obs("denton-cl", "ebook")])
     assert state.media and state.seen
     assert state.forget_item("book:x") == 2
     assert not state.media and not state.seen
+
+    # Same for a film's theatres: without this, re-adding a film inside
+    # PRUNE_DAYS would be silent at every theatre already on record.
+    _run_groups(state, [_showtime("AMC Northpark 15",
+                                  '"Dune" playing at AMC Northpark 15')])
+    assert state.venues and state.seen
+    assert state.forget_item("movie:dune") == 2
+    assert not state.venues and not state.seen
 
 
 def test_watching_stamps_are_kept_in_step_with_the_watchlist(tmp_path):

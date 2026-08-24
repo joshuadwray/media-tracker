@@ -10,11 +10,18 @@ Env:
   NTFY_SERVER   default https://ntfy.sh (set if self-hosting)
   NTFY_TOKEN    optional access token for protected topics
 
-Pushes are per (item, track), not per sighting: print and ebook are the
-same decision, so a book carried by three libraries in two formats you'd
-read is one "reading" push. It fires when the track goes unseen -> seen,
-or when its shortest wait drops a bucket. Which libraries have it lives on
-the dashboard.
+Pushes are per decision, not per sighting.
+
+For a book that means per (item, track): print and ebook are the same
+decision, so a book carried by three libraries in two formats you'd read
+is one "reading" push. It fires when the track goes unseen -> seen, or
+when its shortest wait drops a bucket.
+
+For a film it means per (item, venue), collapsed to one push per film per
+run: a theatre speaks the first time it has the film and then stays
+quiet, however its listing is worded and however many days of showtimes
+go on sale later. Which libraries and which theatres, in what detail,
+lives on the dashboard.
 
 Few groups -> one push each (tappable, opens the best option's URL).
 Many groups -> a single digest push so your phone doesn't melt.
@@ -90,10 +97,19 @@ def body(group: NotifyGroup) -> str:
     the only part you can act on: "reading: now at Denton (print)". A book
     with copies at four libraries doesn't need all four in a push — the
     dashboard has them. A debut group (first sighting, both tracks at once)
-    lists each track in turn. Movies keep the source's own wording.
+    lists each track in turn.
+
+    A film keeps the source's own wording, which already carries the dates,
+    and names any other theatre found in the same run after it — those are
+    the ones you'd otherwise never hear about, since each venue only ever
+    gets one push.
     """
     if not group.track and not any(o.track for o in group.observations):
-        return group.observations[0].summary if group.observations else ""
+        if not group.observations:
+            return ""
+        lead = group.observations[0]
+        others = [o.venue for o in group.observations[1:] if o.venue]
+        return lead.summary + (f" · also at {', '.join(others)}" if others else "")
 
     lead = "sooner — " if group.reason == "sooner" else ""
     by_track: dict[str, list] = {}

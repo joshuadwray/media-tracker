@@ -97,9 +97,16 @@ def _notify_groups(run: CheckRun, state: State,
                can sit in the catalog for months behind a queue you'd never
                join, and then suddenly not be.
 
-    Everything else (movies, showtimes) keeps its per-observation behavior:
-    those are already deduped per fingerprint, so their `new` list is the
-    answer.
+    Observations carrying a `venue` are the movie half of the same idea,
+    grouped per (item, venue) and deduped against state.venues: a theatre is
+    announced the first time it has the film and then stays quiet. Without
+    it, one film generated a push per title variant ("... Early Access"),
+    another when "advance tickets on sale" became "playing", and another for
+    every new day of showtimes at a source that lists them per date.
+
+    Everything else — streaming services, VOD release dates, a book in a
+    medium with no track — keeps its per-observation behavior: those are
+    already deduped per fingerprint, so their `new` list is the answer.
     """
     grouped: OrderedDict[str, NotifyGroup] = OrderedDict()
     for r in run.results:
@@ -150,9 +157,55 @@ def _notify_groups(run: CheckRun, state: State,
             out.append(group)
     out.extend(debuts.values())
 
+    out.extend(_venue_groups(run, state, ok_sources))
+
     out.extend(
         NotifyGroup(item_key=o.item_key, item_label=o.item_label,
                     track=None, observations=[o])
-        for o in run.new if not o.track
+        for o in run.new if not o.track and not o.venue
     )
     return out
+
+
+def _venue_groups(run: CheckRun, state: State,
+                  ok_sources: set[str]) -> list[NotifyGroup]:
+    """One push per film per run, naming every theatre newly found in it.
+
+    A venue speaks once. The decision needs two things to be true: the
+    (item, venue) key is new to state.venues, AND at least one of that
+    venue's observations is in run.new.
+
+    The second clause is what let this ship without a migration. On the
+    first run after it landed, every theatre already playing a watched film
+    had its fingerprint in `seen`, so nothing was in run.new, so those venue
+    keys were recorded silently instead of re-announcing the watchlist. It
+    stays right afterwards, too: a theatre that genuinely just picked up a
+    film always has a new fingerprint, and a venue key ages out on exactly
+    the same timestamps as the fingerprints that feed it.
+    """
+    by_venue: OrderedDict[str, list[Observation]] = OrderedDict()
+    for r in run.results:
+        for obs in r.observations:
+            if not obs.venue or obs.track:
+                continue
+            by_venue.setdefault(f"{obs.item_key}|{obs.venue}", []).append(obs)
+
+    fresh = {o.fingerprint for o in run.new}
+    films: OrderedDict[str, NotifyGroup] = OrderedDict()
+    for key, obs_list in by_venue.items():
+        if not state.venue_is_new(key):
+            if any(o.source in ok_sources for o in obs_list):
+                state.venue_touch(key)
+            continue
+        state.venue_record(key)
+        if not any(o.fingerprint in fresh for o in obs_list):
+            continue  # already known under some other wording — seed only
+        first = obs_list[0]
+        group = films.get(first.item_key)
+        if group is None:
+            group = films[first.item_key] = NotifyGroup(
+                item_key=first.item_key, item_label=first.item_label,
+                track=None,
+            )
+        group.observations.append(first)
+    return list(films.values())

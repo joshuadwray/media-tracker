@@ -2,8 +2,8 @@
 
 Watches your watchlist so you don't have to: periodically checks library
 catalogs for books and DFW-area theaters for movie showtimes, and sends
-a phone push (via [ntfy.sh](https://ntfy.sh)) exactly once per new
-sighting — a book appearing or becoming available, a showtime landing.
+a phone push (via [ntfy.sh](https://ntfy.sh)) once per thing worth
+knowing — a book becoming readable, a theatre picking up a film.
 
 It also keeps a diary: a reading log, a Letterboxd-synced film log, and
 ranked lists — all published to the same GitHub Pages site.
@@ -43,6 +43,11 @@ listening — so a title carried by four libraries in two formats you'd
 read is announced once, and the report still shows which libraries have
 it. A newly added library can only speak up by beating the shortest wait
 a track has already reached.
+
+Films work the same way, per (film, theatre): a theatre speaks the first
+time it has the film and then stays quiet, however its listing is worded
+and however many days of showtimes go on sale afterwards. Theatres found
+in the same run share one push.
 
 ## Setup
 
@@ -135,8 +140,10 @@ python -m tracker check --dry-run           # look, don't touch
 python -m tracker probe --source cloudlibrary   # raw responses, for debugging
 ```
 
-Each sighting notifies **once**: `state/state.json` remembers what
-you've been told (pruned after 180 days). `state/report.md` is the
+Each *decision* notifies **once**: `state/state.json` remembers what
+you've been told (pruned after 180 days) — every sighting in `seen` for
+the report and dashboard, and the coarser keys that actually drive
+pushes in `media` (book, track) and `venues` (film, theatre). `state/report.md` is the
 browsable record of the latest run, ending with **Still looking** —
 watchlist entries that have never matched anywhere, with how long
 they've been waiting. That list is a status, not an error: a book the

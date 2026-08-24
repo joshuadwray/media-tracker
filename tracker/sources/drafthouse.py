@@ -60,6 +60,7 @@ class DrafthouseSource(Source):
                                 "(no sessions on sale yet)",
                         url=f"https://drafthouse.com/{self.market}",
                         positive=True,
+                        venue=f"Alamo {self.market.upper()}",
                     ))
                 for (cinema_id, date), count in sorted(by_cinema_date.items()):
                     cinema = cinemas.get(cinema_id, cinema_id)
@@ -71,6 +72,10 @@ class DrafthouseSource(Source):
                                 f"({count} showtime{'s' if count != 1 else ''})",
                         url=f"https://drafthouse.com/{self.market}/show/{slug}",
                         positive=True,
+                        # One observation per (film, cinema, DATE), so the
+                        # venue is what collapses a whole run's worth of
+                        # showtime dates into a single push.
+                        venue=f"Alamo {cinema}",
                         detail={"cinema": cinema, "date": date, "sessions": count},
                     ))
         return observations

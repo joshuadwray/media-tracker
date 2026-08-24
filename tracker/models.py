@@ -60,7 +60,17 @@ class Observation:
                                   # Notifications group by (item, track), so a
                                   # book carried by three libraries in one
                                   # track is one push, not three. None keeps
-                                  # per-observation pushes (movies/showtimes).
+                                  # per-observation pushes.
+    venue: Optional[str] = None   # a place you'd go to see this — a theatre,
+                                  # named as it is on the dashboard. The
+                                  # movie half of the same idea: pushes group
+                                  # by (item, venue), so a film's title
+                                  # variants ("... Early Access"), its
+                                  # advance-tickets -> now-playing flip and
+                                  # each new day of showtimes are one ping
+                                  # per theatre, not one per listing. None
+                                  # keeps per-observation pushes (streaming
+                                  # services and VOD dates aren't places).
     wait: Optional[int] = None    # days until a copy could reach you, 0 if one
                                   # is free now; None when copies are unknown.
                                   # See availability.wait_days.
@@ -192,8 +202,8 @@ def track_for(medium: Optional[str]) -> Optional[str]:
 @dataclass
 class NotifyGroup:
     """What one push is about: an item in one track, plus every place it was
-    spotted. Movies and showtimes get a single-observation group so their
-    per-date notification behavior is unchanged."""
+    spotted. Movies group the same way with `track` left None — one group per
+    film per run, carrying every theatre newly found in it."""
     item_key: str
     item_label: str
     track: Optional[str]

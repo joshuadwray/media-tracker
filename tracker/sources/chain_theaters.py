@@ -147,6 +147,7 @@ class ChainTheaterSource(Source):
                         url=theatre["url"],
                         positive=True,
                         event=f'"{title}" {verb} {theatre["name"]}',
+                        venue=theatre["name"],
                         detail={"theatre": theatre["name"],
                                 "dates": sorted(dates or [])},
                     ))
@@ -160,6 +161,7 @@ class ChainTheaterSource(Source):
                         url=theatre["url"],
                         positive=True,
                         event=f'"{movie.title}" mentioned on {theatre["name"]}',
+                        venue=theatre["name"],
                         detail={"theatre": theatre["name"], "matched": "page-text"},
                     ))
         if errors and len(errors) == len(self.theatres()):

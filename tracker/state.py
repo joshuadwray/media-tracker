@@ -1,16 +1,21 @@
 """Seen-event state: what we've already notified about.
 
-Two maps, both mapping a key to {first, last} timestamps:
+Three maps, all mapping a key to {first, last} timestamps:
 
   seen   — one entry per observation fingerprint (source|item|event).
-           Drives the dashboard and report: per-library detail.
-  media  — one entry per (item_key, track). Drives *notifications*:
+           Drives the dashboard and report: per-library, per-theatre,
+           per-showtime-date detail, all of it still visible there.
+  media  — one entry per (item_key, track). Drives book *notifications*:
            a book carried by three libraries in one track is one push,
            not three, and only when that track goes unseen -> seen.
            Also carries `best`, the shortest wait-bucket the track has
            ever reached (see availability), so a queue that gets
            materially shorter can speak up a second time without every
            copy-count wobble doing the same.
+  venues — one entry per (item_key, venue). The same idea for films:
+           a theatre is announced the first time it has the film and
+           then stays quiet, however the listing is worded and however
+           many days of showtimes go on sale afterwards.
 
 Plus one flat map, item_key -> ISO timestamp:
 
@@ -50,6 +55,7 @@ class State:
         self.path = path
         self.seen: dict[str, dict[str, str]] = {}
         self.media: dict[str, dict[str, str]] = {}
+        self.venues: dict[str, dict[str, str]] = {}
         self.watching: dict[str, str] = {}
         self.meta: dict = {}
         if path.exists():
@@ -57,11 +63,13 @@ class State:
                 data = json.loads(path.read_text())
                 self.seen = data.get("seen", {})
                 self.media = data.get("media", {})
+                self.venues = data.get("venues", {})
                 self.watching = data.get("watching", {})
                 self.meta = data.get("meta", {})
             except (json.JSONDecodeError, OSError):
                 self.seen = {}
                 self.media = {}
+                self.venues = {}
                 self.watching = {}
                 self.meta = {}
         # Migrate old string values to {first, last} dicts.
@@ -170,6 +178,22 @@ class State:
         if entry is not None:
             entry["best"] = better(bucket, entry.get("best"))
 
+    # --- per (item, venue) (notifications) ----------------------------
+
+    # No migration seeds this map, unlike media: the engine only pushes a
+    # newly-recorded venue when one of its observations is itself new, so
+    # the first run after this shipped recorded every theatre already
+    # playing a film silently. See engine._notify_groups.
+
+    def venue_is_new(self, key: str, now: datetime | None = None) -> bool:
+        return _is_new(self.venues, key, now)
+
+    def venue_record(self, key: str, now: datetime | None = None) -> None:
+        _record(self.venues, key, now)
+
+    def venue_touch(self, key: str, now: datetime | None = None) -> None:
+        _touch(self.venues, key, now)
+
     # --- how long an item has been on the watchlist -------------------
 
     def note_watching(self, item_keys: list[str], now: datetime | None = None) -> None:
@@ -218,9 +242,10 @@ class State:
         ]
         for fp in doomed:
             del self.seen[fp]
-        for key in [k for k in self.media if k.rsplit("|", 1)[0] == item_key]:
-            del self.media[key]
-            doomed.append(key)
+        for table in (self.media, self.venues):
+            for key in [k for k in table if k.rsplit("|", 1)[0] == item_key]:
+                del table[key]
+                doomed.append(key)
         # The `watching` stamp deliberately survives: this is called on
         # removal, and half the removals here are an edit in disguise.
         return len(doomed)
@@ -228,7 +253,7 @@ class State:
     def prune(self, now: datetime | None = None) -> int:
         cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)
         pruned = 0
-        for table in (self.seen, self.media):
+        for table in (self.seen, self.media, self.venues):
             stale = [k for k, entry in table.items() if _parse(entry["last"]) < cutoff]
             for k in stale:
                 del table[k]
@@ -242,7 +267,7 @@ class State:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(
             json.dumps({"meta": self.meta, "seen": self.seen, "media": self.media,
-                        "watching": self.watching},
+                        "venues": self.venues, "watching": self.watching},
                        indent=2, sort_keys=True)
             + "\n"
         )
