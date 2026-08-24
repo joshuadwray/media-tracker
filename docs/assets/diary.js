@@ -116,6 +116,46 @@
     return n;
   }
 
+  // Calendar-year totals (not rolling), per year -> {books, films}.
+  //   books  — entries FINISHED in that year. Abandoned doesn't count as
+  //            read; a re-read is its own entry, so finishing the same book
+  //            twice in one year counts twice.
+  //   films  — DISTINCT films, so rewatching something inside the same year
+  //            doesn't increment. Identity is the Letterboxd slug, which
+  //            every synced viewing carries; title|year is the fallback for
+  //            a hand-added entry that has none.
+  function yearTotals(books, films) {
+    var out = {};
+    function slot(y) {
+      return out[y] || (out[y] = { books: 0, films: 0, seen: {} });
+    }
+    books.forEach(function (b) {
+      if (b.status !== 'finished' || !b.finished) return;
+      slot(b.finished.slice(0, 4)).books++;
+    });
+    films.forEach(function (f) {
+      if (!f.watched) return;
+      var s = slot(f.watched.slice(0, 4));
+      var id = f.slug || (f.title + '|' + (f.year == null ? '' : f.year));
+      if (s.seen[id]) return;
+      s.seen[id] = 1;
+      s.films++;
+    });
+    return out;
+  }
+
+  // The year row itself: two tiles reusing .stat, rewritten in place by the
+  // month nav as you page back through the calendar.
+  function yearRow(years, y) {
+    var t = years[y] || { books: 0, films: 0 };
+    return "<div class='stats' id='yrstats'>"
+      + "<div class='stat'><div class='n'>" + t.books
+      + "</div><div class='l'>books " + y + '</div></div>'
+      + "<div class='stat'><div class='n'>" + t.films
+      + "</div><div class='l'>films " + y + '</div></div>'
+      + '</div>';
+  }
+
   // reading_gen.group_reads: re-reads are separate entries sharing
   // title|author; the first in file order owns the shared page slug.
   function regroup(books) {
@@ -352,6 +392,14 @@
     for (var f in filmsByDay) monthSet[ym(f)] = 1;
     var months = Object.keys(monthSet).sort().reverse();
 
+    // Year to date, under the day/week row. The calendar shows one month at
+    // a time, so this counts the year of the month you're LOOKING at (the
+    // newest to begin with) — a 2025 month above a 2026 total would just be
+    // two numbers that disagree. wireMonthNav rewrites it as you page.
+    var years = yearTotals(books, films);
+    out.push(yearRow(years, months.length ? months[0].slice(0, 4)
+                                          : today.slice(0, 4)));
+
     if (months.length) {
       var opts = months.map(function (m, i) {
         return "<option value='" + i + "'>" + MONTHS[+m.slice(5, 7) - 1]
@@ -364,8 +412,8 @@
 
     months.forEach(function (mk) {
       var y = +mk.slice(0, 4), mo = +mk.slice(5, 7);
-      out.push("<div class='month'><h3>" + MONTHS[mo - 1] + ' ' + y
-        + "</h3><div class='cal'>");
+      out.push("<div class='month' data-ym='" + mk + "'><h3>"
+        + MONTHS[mo - 1] + ' ' + y + "</h3><div class='cal'>");
       DOWS.forEach(function (n) { out.push("<div class='dow'>" + n + '</div>'); });
       // Sunday-first grid over whole weeks, matching calendar.Calendar(6)
       var first = new Date(Date.UTC(y, mo - 1, 1));
@@ -406,19 +454,29 @@
     if (!months.length)
       out.push("<div class='meta'>no sessions logged yet &mdash; "
         + "<a href='log.html'>log one</a></div>");
-    return { html: out.join(''), months: months.length };
+    return { html: out.join(''), months: months.length, years: years };
   }
 
-  function wireMonthNav() {
+  function wireMonthNav(years) {
     var ms = [].slice.call(document.querySelectorAll('.month'));
     if (!ms.length) return;
     var i = 0, o = document.getElementById('mold'),
       n = document.getElementById('mnew'), j = document.getElementById('mjump');
     if (!o || !n || !j) return;
     j.hidden = false;
+    // Keep the year row on the year you're looking at. Re-read by id every
+    // time: outerHTML swaps the node out, so a held reference goes stale
+    // after the first page.
+    function paintYear() {
+      var yr = document.getElementById('yrstats');
+      if (yr && years)
+        yr.outerHTML = yearRow(years,
+          (ms[i].getAttribute('data-ym') || '').slice(0, 4));
+    }
     function show() {
       ms.forEach(function (m, k) { m.style.display = k === i ? '' : 'none'; });
       o.disabled = i >= ms.length - 1; n.disabled = i <= 0; j.value = i;
+      paintYear();
     }
     o.onclick = function () { if (i < ms.length - 1) { i++; show(); } };
     n.onclick = function () { if (i > 0) { i--; show(); } };
@@ -493,6 +551,9 @@
     out.push('<h1>Diary</h1>');
     out.push("<div class='vt'><a href='index.html'>calendar</a> &middot; "
       + '<strong>list</strong></div>');
+    // Fixed to the current year here — this view is one long scroll, so
+    // there is no "month you're looking at" to follow.
+    out.push(yearRow(yearTotals(d.books, d.films), today.slice(0, 4)));
     out.push("<div class='dl'>");
     var days = Object.keys(rows).sort().reverse();
     days.forEach(function (day) {
@@ -711,8 +772,9 @@
       var view = { books: books, films: diary.films || [],
                    dailyGoal: diary.dailyGoal || 0 };
       if (page === 'calendar') {
-        root.innerHTML = renderCalendar(view).html;
-        wireMonthNav();
+        var cal = renderCalendar(view);
+        root.innerHTML = cal.html;
+        wireMonthNav(cal.years);
       } else if (page === 'flatlist') {
         root.innerHTML = renderFlatList(view);
         if (window.mtListPage) window.mtListPage();
