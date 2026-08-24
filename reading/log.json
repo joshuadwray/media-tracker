@@ -2019,6 +2019,19 @@
         "2026-08-21 30",
         "2026-08-23 304"
       ]
+    },
+    {
+      "title": "east of eden",
+      "author": "john steinbeck",
+      "slug": "east-of-eden",
+      "status": "reading",
+      "rating": null,
+      "page_count": 613,
+      "started": "2026-08-23",
+      "finished": null,
+      "sessions": [
+        "2026-08-23 20"
+      ]
     }
   ]
 }
