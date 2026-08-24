@@ -1,9 +1,9 @@
-# Media tracker report — 2026-08-24 04:02 UTC
+# Media tracker report — 2026-08-24 13:58 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-27) — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
 
-## All current sightings (42)
+## All current sightings (43)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -32,10 +32,10 @@
     - also: print book in Lewisville library catalog — 1 on order, 4 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 72 holds (~7 mo)
     - also: ebook in Libby catalog (Houston) — 0/6 available, 175 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/3 available, 42 holds (~7 mo) · Josh Silver
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/3 available, 43 holds (~7 mo) · Josh Silver
     - also: audiobook in cloudLibrary catalog (Denton) — 0/1 available, 10 holds (~8 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 179 holds (~1.2 yr)
-  - sync: gap 169d > 14d loan — suspend the reading hold ~169d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 180 holds (~1.2 yr)
+  - sync: gap 174d > 14d loan — suspend the reading hold ~174d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
     - also: print book in denton library catalog — 1 on order, 1 hold ahead
@@ -44,7 +44,7 @@
 - **The Hill — Clark, Harriet**
   - reading: print book in Lewisville library catalog — 1 on shelf · Clark, Harriet, 1980- author.
     - also: ebook in Libby catalog (Fort Worth) — 0/3 available, 1 hold (~10d)
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 55 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/2 available, 54 holds (~1.1 yr)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **the age of calamities — senaa ahmad**
@@ -57,11 +57,12 @@
   - "Teenage Sex and Death at Camp Miasma" playing at AMC Grapevine Mills 30 (2026-08-26)
   - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-24, 2026-08-25, 2026-08-26)
 - **coyote vs acme (2026)**
-  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-  - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-  - "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-  - "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
+  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27)
+  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27)
+  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-27)
+  - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27)
+  - "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27)
+  - "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27)
 
 ## Source status
 - ✅ `denton-library`: 7 observation(s)
@@ -71,12 +72,13 @@
 - ✅ `libby-fortworth`: 7 observation(s)
 - ✅ `libby-houston`: 8 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 2 observation(s)
+- ✅ `cinemark`: 3 observation(s)
 - ✅ `amc`: 6 observation(s)
+- ✅ `tmdb-streaming`: 0 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 35d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 36d
 - club kid (2026) — waiting 34d
 - dune part 3 (2026) — waiting 34d
 - fjord (2026) — waiting 34d
