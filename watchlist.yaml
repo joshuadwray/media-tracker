@@ -49,8 +49,6 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
-  - title: i want your sex
-    year: 2026
   - title: coyote vs acme
     year: 2026
   - title: teenage sex and death at camp miasma
