@@ -1,13 +1,9 @@
-# Media tracker report — 2026-08-24 03:52 UTC
+# Media tracker report — 2026-08-24 03:57 UTC
 
-## New sightings (5)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes)
-- **coyote vs acme (2026)**: "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30) — [link](https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (47)
+## All current sightings (42)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -66,12 +62,6 @@
   - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
   - "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
   - "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-27, 2026-08-28, 2026-08-29, 2026-08-30)
-- **tony (2026)**
-  - "Tony" playing at Cinemark Denton 14 (2026-08-24, 2026-08-25, 2026-08-26)
-  - "Tony" playing at Cinemark West Plano (2026-08-24, 2026-08-25, 2026-08-26)
-  - "Tony" playing at AMC Stonebriar 24 (2026-08-24, 2026-08-25, 2026-08-26, 2026-08-27)
-  - "Tony" playing at AMC Grapevine Mills 30 (2026-08-24, 2026-08-25, 2026-08-26)
-  - "Tony" playing at AMC Northpark 15 (2026-08-24, 2026-08-25, 2026-08-26, 2026-08-27)
 
 ## Source status
 - ✅ `denton-library`: 7 observation(s)
@@ -81,8 +71,8 @@
 - ✅ `libby-fortworth`: 7 observation(s)
 - ✅ `libby-houston`: 8 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 4 observation(s)
-- ✅ `amc`: 9 observation(s)
+- ✅ `cinemark`: 2 observation(s)
+- ✅ `amc`: 6 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
