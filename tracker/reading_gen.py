@@ -112,6 +112,14 @@ class ReadingLog:
     def daily_goal(self) -> int:
         return int(self.settings.get("daily_goal_pages") or 0)
 
+    @property
+    def weekly_goal(self) -> int:
+        """Pages a week. Its own number, not seven daily goals: a week has
+        days you don't read at all and days you finish something, and a
+        target that only works by averaging perfectly isn't one. Falls back
+        to daily x 7 for a log that predates the setting."""
+        return int(self.settings.get("weekly_goal_pages") or 0) or self.daily_goal * 7
+
 
 def slugify(title: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "-", title.strip().lower()).strip("-")
@@ -373,6 +381,16 @@ a.back { font-size: .85rem; }
         text-align: center; }
 .stat .n { font-size: 1.25rem; font-weight: 700; }
 .stat .l { font-size: .75rem; opacity: .65; }
+.stat .gl { white-space: nowrap; }
+/* Phones: share the row evenly instead of dropping one tile onto a line of
+   its own. flex-wrap sizes items at max-content BEFORE it shrinks them, so
+   a label as long as "pages today (goal 75)" pushed the third tile down; a
+   zero basis takes the label out of the sizing and lets it wrap in place. */
+@media (max-width: 519px) {
+  .stats { gap: 6px; }
+  .stat { flex: 1 1 0; min-width: 0; padding: 8px 6px; }
+  .stat .l { font-size: .7rem; }
+}
 .cur { display: flex; gap: 12px; align-items: center; margin: 10px 0;
        border: 1px solid var(--line); border-radius: 10px;
        background: var(--surface); padding: 10px; }
@@ -920,6 +938,7 @@ def diary_bundle(rlog: ReadingLog, page_counts: dict, sources: dict,
     # that way. Sorting here silently reshuffled those days.
     return {
         "dailyGoal": rlog.daily_goal,
+        "weeklyGoal": rlog.weekly_goal,
         "books": books,
         "films": out_films,
     }

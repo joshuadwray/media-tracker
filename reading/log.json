@@ -1,6 +1,7 @@
 {
   "settings": {
-    "daily_goal_pages": 30
+    "daily_goal_pages": 75,
+    "weekly_goal_pages": 500
   },
   "books": [
     {

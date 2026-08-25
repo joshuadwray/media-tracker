@@ -345,6 +345,8 @@
     var books = d.books, films = d.films, today = todayISO();
     var pd = pagesByDate(books), totals = pd.totals, readers = pd.readers;
     var goal = d.dailyGoal || 0;
+    // Its own number, not seven daily goals — see ReadingLog.weekly_goal.
+    var wgoal = d.weeklyGoal || goal * 7;
     var filmsByDay = {};
     films.forEach(function (f) {
       (filmsByDay[f.watched] = filmsByDay[f.watched] || []).push(f);
@@ -381,10 +383,14 @@
     out.push("<div class='stats'>"
       + "<div class='stat'><div class='n'>" + streak(totals, today)
       + "</div><div class='l'>day streak</div></div>"
+      // The goal rides in its own nowrap span so a narrow tile breaks the
+      // label as "pages today" / "(goal 75)" and never orphans the "75)".
       + "<div class='stat'><div class='n'>" + (totals[today] || 0)
-      + "</div><div class='l'>pages today (goal " + goal + ')</div></div>'
+      + "</div><div class='l'>pages today <span class='gl'>(goal " + goal
+      + ')</span></div></div>'
       + "<div class='stat'><div class='n'>" + week
-      + "</div><div class='l'>this week (goal " + (goal * 7) + ')</div></div>'
+      + "</div><div class='l'>this week <span class='gl'>(goal " + wgoal
+      + ')</span></div></div>'
       + '</div>');
 
     var monthSet = {};
@@ -770,7 +776,8 @@
       var books = mergeBooks(diary, pend);
       regroup(books);
       var view = { books: books, films: diary.films || [],
-                   dailyGoal: diary.dailyGoal || 0 };
+                   dailyGoal: diary.dailyGoal || 0,
+                   weeklyGoal: diary.weeklyGoal || 0 };
       if (page === 'calendar') {
         var cal = renderCalendar(view);
         root.innerHTML = cal.html;
