@@ -2037,6 +2037,17 @@
         "2026-08-26 360",
         "2026-08-29 613"
       ]
+    },
+    {
+      "title": "sunrise",
+      "author": "tea obreht",
+      "slug": "sunrise",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-08-29",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
