@@ -2042,13 +2042,14 @@
       "title": "sunrise",
       "author": "tea obreht",
       "slug": "sunrise",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3,
       "page_count": null,
       "started": "2026-08-29",
-      "finished": null,
+      "finished": "2026-08-30",
       "sessions": [
-        "2026-08-29 110"
+        "2026-08-29 110",
+        "2026-08-30 336"
       ]
     }
   ]
