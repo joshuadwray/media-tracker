@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "Coyote vs. Acme",
+      "year": 2026,
+      "slug": "coyote-vs-acme",
+      "watched": "2026-08-30",
+      "rating": 3.5,
+      "rewatch": false,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 1204680,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/1/0/8/9/0/8/8/1089088-coyote-vs-acme-0-600-0-900-crop.jpg?v=735eb10cc7",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/coyote-vs-acme/",
+      "guid": "letterboxd-watch-1476185336"
+    },
+    {
       "title": "Mary Beth Barone: Galaxy Brain",
       "year": 2026,
       "slug": "mary-beth-barone-galaxy-brain",
