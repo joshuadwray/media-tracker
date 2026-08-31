@@ -4,12 +4,12 @@ ranked: true
 # File order IS the rank. Per-item optional fields:
 #   cover: https://...jpg   — manual cover URL, always wins over lookup
 items:
+  - title: beginning middle end
+    author: valeria luiselli
   - title: john of john
     author: douglas stuart
   - title: a trade of blood
     author: robert jackson bennett
-  - title: beginning middle end
-    author: valeria luiselli
   - title: transcription
     author: ben lerner
   - title: babylon, south dakota
