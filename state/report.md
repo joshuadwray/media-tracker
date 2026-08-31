@@ -1,4 +1,4 @@
-# Media tracker report — 2026-08-30 17:20 UTC
+# Media tracker report — 2026-08-31 01:21 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -35,12 +35,12 @@
 - **Fruit Fly — Silver, Josh**
   - reading: print book in denton library catalog — all 2 out, 6 holds · Silver, Josh
     - also: print book in Lewisville library catalog — 1 on order, 5 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 71 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 191 holds (~1.1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 7 holds (~3 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 47 holds (~7 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/7 available, 184 holds (~1 yr)
-  - sync: gap 10d, fits in a 21d loan
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 72 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 193 holds (~1.1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 8 holds (~3 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 48 holds (~8 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/7 available, 187 holds (~1 yr)
+  - sync: gap 21d > 21d loan — suspend the reading hold ~21d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Danticat, Edwidge, 1969- author http://id.loc.gov/authorities/names/n93100617
     - also: print book in denton library catalog — all 2 out
@@ -61,15 +61,15 @@
 - **teenage sex and death at camp miasma (2026)**
   - "teenage sex and death at camp miasma" mentioned on Texas Theatre
   - "Teenage Sex and Death at Camp Miasma" playing at AMC Stonebriar 24 (2026-08-31, 2026-09-01, 2026-09-02)
-  - "Teenage Sex and Death at Camp Miasma" playing at AMC Grapevine Mills 30 (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
-  - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
+  - "Teenage Sex and Death at Camp Miasma" playing at AMC Grapevine Mills 30 (2026-08-31, 2026-09-01, 2026-09-02)
+  - "Teenage Sex and Death at Camp Miasma" playing at AMC Northpark 15 (2026-08-31, 2026-09-01, 2026-09-02)
 - **coyote vs acme (2026)**
-  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
-  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
-  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
-  - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
-  - "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
-  - "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-30, 2026-08-31, 2026-09-01, 2026-09-02)
+  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-08-31, 2026-09-01, 2026-09-02)
+  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-08-31, 2026-09-01, 2026-09-02)
+  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-08-31, 2026-09-01, 2026-09-02)
+  - "Coyote vs. Acme" playing at AMC Stonebriar 24 (2026-08-31, 2026-09-01, 2026-09-02, 2026-09-03)
+  - "Coyote vs. Acme" playing at AMC Grapevine Mills 30 (2026-08-31, 2026-09-01, 2026-09-02, 2026-09-03)
+  - "Coyote vs. Acme" playing at AMC Northpark 15 (2026-08-31, 2026-09-01, 2026-09-02, 2026-09-03)
   - "coyote vs acme" available to buy (Fandango At Home)
 
 ## Source status
@@ -87,10 +87,10 @@
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 42d
-- club kid (2026) — waiting 40d
-- dune part 3 (2026) — waiting 40d
-- fjord (2026) — waiting 40d
-- paper tiger (2026) — waiting 40d
-- wild horse nine (2026) — waiting 40d
-- Peck and Peck — Garmus — waiting 19d
+- club kid (2026) — waiting 41d
+- dune part 3 (2026) — waiting 41d
+- fjord (2026) — waiting 41d
+- paper tiger (2026) — waiting 41d
+- wild horse nine (2026) — waiting 41d
+- Peck and Peck — Garmus — waiting 20d
 
