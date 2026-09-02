@@ -2056,13 +2056,14 @@
       "title": "the corrections",
       "author": "jonathan franzen",
       "slug": "the-corrections",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": 576,
       "started": "2026-08-31",
-      "finished": null,
+      "finished": "2026-09-01",
       "sessions": [
-        "2026-08-31 300"
+        "2026-08-31 300",
+        "2026-09-01 576"
       ]
     }
   ]
