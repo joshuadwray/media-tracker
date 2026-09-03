@@ -2070,13 +2070,14 @@
       "title": "it will come back to you",
       "author": "sigrid nunez",
       "slug": "it-will-come-back-to-you",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3,
       "page_count": null,
       "started": "2026-09-01",
-      "finished": null,
+      "finished": "2026-09-02",
       "sessions": [
-        "2026-09-01 78"
+        "2026-09-01 78",
+        "2026-09-02 224"
       ]
     }
   ]
