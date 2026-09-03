@@ -325,8 +325,14 @@ function jfetch(url, deadline) {
    fielded then loose q=. Surname guard against wrong-book matches. */
 async function lookupPages(title, author) {
   const deadline = Date.now() + 12000;
-  const surOk = a => !author.trim() || (a || '').toLowerCase()
-    .includes(author.trim().split(/\s+/).pop().toLowerCase());
+  // Mirrors lists_gen._squash: accents folded, punctuation dropped. A
+  // phone types "O\u2019Farrell" where Apple stores "O'Farrell", and a raw
+  // substring test reads that as a different person — no count, no cover,
+  // no error. Same for "Perez-Carbonell" vs "P\u00e9rez-Carbonell".
+  const squash = t => (t || '').normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const sur = squash(author.trim().split(/\s+/).pop());
+  const surOk = a => !author.trim() || (!!sur && squash(a).includes(sur));
   try {
     const r = await jfetch('https://itunes.apple.com/search?' +
       new URLSearchParams({ term: `${title} ${author}`.trim(),

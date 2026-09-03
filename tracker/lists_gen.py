@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -132,20 +133,34 @@ def _entry_url(entry: dict) -> str | None:
     return COVER_URL.format(cover_id) if cover_id else None
 
 
+def _squash(text: str) -> str:
+    """Fold accents, lowercase, drop everything that isn't a letter/digit.
+
+    Punctuation is the other way the same name gets spelled two ways.
+    Phone keyboards produce a curly apostrophe, so a log typed on the
+    phone says "O\u2019Farrell" where Apple says "O'Farrell"; catalogs
+    also write "O Farrell" and "OFarrell". None of those distinguish two
+    people, and all of them defeated a raw substring test.
+    """
+    return re.sub(r"[^a-z0-9]+", "", fold(text).lower())
+
+
 def _author_ok(author: str, *names: str) -> bool:
     """Surname guard: never return a cover credited to a different author.
 
-    Folded on both sides. The guard exists to reject a *different* author,
-    but an unfolded substring test also rejects the same one spelled
+    Squashed on both sides. The guard exists to reject a *different*
+    author, but a literal substring test also rejects the same one spelled
     differently: a log typed "perez-carbonell" never matches Apple's
-    "Pérez-Carbonell", and the book silently renders as a blank tile with
-    no error anywhere. Folding costs nothing — an accent has never been
-    what distinguishes two authors.
+    "Pérez-Carbonell", and "Maggie O\u2019Farrell" (curly apostrophe, as an
+    iPhone types it) never matches Apple's "Maggie O'Farrell". Either way
+    the book silently renders as a blank tile with no page count and no
+    error anywhere. Normalizing costs nothing — an accent or an apostrophe
+    has never been what distinguishes two authors.
     """
     if not author:
         return True
-    surname = fold(author.split()[-1]).lower()
-    return any(surname in fold(n or "").lower() for n in names)
+    surname = _squash(author.split()[-1])
+    return bool(surname) and any(surname in _squash(n or "") for n in names)
 
 
 def _lookup(session, title: str, author: str, log=None) -> dict:
@@ -159,9 +174,30 @@ def _lookup(session, title: str, author: str, log=None) -> dict:
 
 
 def _itunes_lookup(session, title: str, author: str) -> dict | None:
+    """Search title+author, then title alone if that found nothing.
+
+    Normalizing the *comparison* can't rescue a misspelled author, because
+    the misspelling also goes into the query: Apple's search does not read
+    "maggie ofarrell" as "Maggie O'Farrell", so a log typed without the
+    apostrophe got back Hamnet and nothing else — Land was never in the
+    result set to be compared against. Dropping the author widens the
+    search to the title, and _author_ok still has to accept whatever comes
+    back, so a wrong author is rejected exactly as before.
+    """
+    terms = [f"{title} {author}".strip()]
+    if author.strip():
+        terms.append(title.strip())
+    for term in terms:
+        hit = _itunes_search(session, term, title, author)
+        if hit:
+            return hit
+    return None
+
+
+def _itunes_search(session, term: str, title: str, author: str) -> dict | None:
     resp = session.get(ITUNES_URL,
-                       params={"term": f"{title} {author}".strip(),
-                               "media": "ebook", "limit": 5, "country": "US"},
+                       params={"term": term,
+                               "media": "ebook", "limit": 25, "country": "US"},
                        timeout=30)
     resp.raise_for_status()
     results = resp.json().get("results") or []

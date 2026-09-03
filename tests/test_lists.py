@@ -124,3 +124,21 @@ def test_author_guard_folds_diacritics():
     # Still a guard: an accent was never what separated two people.
     assert not _author_ok("marta perez-carbonell", "Rosa Montero")
     assert _author_ok("", "anyone")           # no author to check against
+
+
+def test_author_guard_folds_punctuation():
+    """Phone keyboards type a curly apostrophe. "Maggie O’Farrell" in the
+    log never matched Apple's "Maggie O'Farrell", so the iTunes hit was
+    dropped, no ISBN reached the Apple Books page-count hop, and Land came
+    back with no count and no cover — silently, from both the browser and
+    the CI rebuild."""
+    from tracker.lists_gen import _author_ok
+
+    assert _author_ok("Maggie O’Farrell", "Maggie O'Farrell")
+    assert _author_ok("Maggie O'Farrell", "Maggie O’Farrell")
+    assert _author_ok("Roisin O’Donnell", "Roisín O'Donnell")
+    # Catalogs drop the apostrophe entirely, or space it out.
+    assert _author_ok("Joseph O'Neill", "Joseph O Neill")
+    assert _author_ok("Joseph O'Neill", "Joseph ONeill")
+    # Still a guard: punctuation was never what separated two people.
+    assert not _author_ok("Maggie O’Farrell", "Joseph O'Neill")
