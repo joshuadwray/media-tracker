@@ -1,9 +1,9 @@
-# Media tracker report — 2026-09-03 12:52 UTC
+# Media tracker report — 2026-09-03 12:56 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (29)
+## All current sightings (25)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -29,12 +29,6 @@
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 56 holds (~9 mo)
     - also: audiobook in Libby catalog (Houston) — 0/8 available, 212 holds (~1 yr)
   - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
-- **Dèy — Danticat, Edwidge**
-  - reading: print book in Lewisville library catalog — 1 on shelf · Danticat, Edwidge, 1969- author.
-    - also: print book in denton library catalog — all 2 out
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 11 holds (~6 mo)
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 14 holds (~7 mo) · Edwidge Danticat
-  - sync: gap 210d > 14d loan — suspend the reading hold ~210d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
@@ -48,12 +42,12 @@
   - "Coyote vs. Acme" playing at Cinemark West Plano (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
 
 ## Source status
-- ✅ `denton-library`: 5 observation(s)
+- ✅ `denton-library`: 4 observation(s)
 - ✅ `cloudlibrary`: 2 observation(s)
 - ✅ `cloudlibrary-lewisville`: 4 observation(s)
-- ✅ `lewisville-print`: 5 observation(s)
+- ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 5 observation(s)
-- ✅ `libby-houston`: 6 observation(s)
+- ✅ `libby-houston`: 4 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 2 observation(s)
 - ❌ `amc`: RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
