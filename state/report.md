@@ -1,9 +1,9 @@
-# Media tracker report — 2026-09-03 12:48 UTC
+# Media tracker report — 2026-09-03 12:52 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (36)
+## All current sightings (29)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -19,15 +19,6 @@
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
     - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 43 holds
   - sync: gap 84d > 21d loan — suspend the reading hold ~84d for listening
-- **Sunrise — Obreht, Téa**
-  - reading: ebook in cloudLibrary catalog (Denton) — 4/4 available · Obreht , Téa
-    - also: ebook in cloudLibrary catalog (Lewisville) — 4/4 available
-    - also: print book in denton library catalog — all 2 out, 3 holds
-    - also: print book in Lewisville library catalog — 1 on order, 2 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 14 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 37 holds (~9 mo)
-  - listening: audiobook in Libby catalog (Houston) — 0/2 available, 30 holds (~7 mo) · Téa Obreht
-  - sync: gap 217d > 14d loan — suspend the reading hold ~217d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: print book in Lewisville library catalog — 1 on shelf · Silver, Josh, 1989- author.
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
@@ -57,12 +48,12 @@
   - "Coyote vs. Acme" playing at Cinemark West Plano (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
 
 ## Source status
-- ✅ `denton-library`: 6 observation(s)
-- ✅ `cloudlibrary`: 3 observation(s)
-- ✅ `cloudlibrary-lewisville`: 5 observation(s)
-- ✅ `lewisville-print`: 6 observation(s)
-- ✅ `libby-fortworth`: 6 observation(s)
-- ✅ `libby-houston`: 8 observation(s)
+- ✅ `denton-library`: 5 observation(s)
+- ✅ `cloudlibrary`: 2 observation(s)
+- ✅ `cloudlibrary-lewisville`: 4 observation(s)
+- ✅ `lewisville-print`: 5 observation(s)
+- ✅ `libby-fortworth`: 5 observation(s)
+- ✅ `libby-houston`: 6 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 2 observation(s)
 - ❌ `amc`: RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
