@@ -1,9 +1,9 @@
-# Media tracker report — 2026-09-03 12:56 UTC
+# Media tracker report — 2026-09-03 13:00 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (25)
+## All current sightings (23)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -37,9 +37,6 @@
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 7 holds (~4 mo) · Senaa Ahmad
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 5 holds (~3 mo) · Senaa Ahmad
   - sync: gap 28d > 14d loan — suspend the listening hold ~28d for reading
-- **coyote vs acme (2026)**
-  - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
-  - "Coyote vs. Acme" playing at Cinemark West Plano (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
 
 ## Source status
 - ✅ `denton-library`: 4 observation(s)
@@ -49,7 +46,7 @@
 - ✅ `libby-fortworth`: 5 observation(s)
 - ✅ `libby-houston`: 4 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
-- ✅ `cinemark`: 2 observation(s)
+- ✅ `cinemark`: 0 observation(s)
 - ❌ `amc`: RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 
 ## Still looking (7)
