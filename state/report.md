@@ -1,9 +1,9 @@
-# Media tracker report — 2026-09-03 12:43 UTC
+# Media tracker report — 2026-09-03 12:48 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (39)
+## All current sightings (36)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
@@ -28,10 +28,6 @@
     - also: ebook in Libby catalog (Houston) — 0/2 available, 37 holds (~9 mo)
   - listening: audiobook in Libby catalog (Houston) — 0/2 available, 30 holds (~7 mo) · Téa Obreht
   - sync: gap 217d > 14d loan — suspend the reading hold ~217d for listening
-- **Triage — Rankine, Claudia**
-  - reading: print book in Lewisville library catalog — 1 on order, no holds yet · Rankine, Claudia, 1963- author http://id.loc.gov/authorities/names/n95080152
-    - also: print book in denton library catalog — checked out
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk)
 - **Fruit Fly — Silver, Josh**
   - reading: print book in Lewisville library catalog — 1 on shelf · Silver, Josh, 1989- author.
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
@@ -61,12 +57,12 @@
   - "Coyote vs. Acme" playing at Cinemark West Plano (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
 
 ## Source status
-- ✅ `denton-library`: 7 observation(s)
+- ✅ `denton-library`: 6 observation(s)
 - ✅ `cloudlibrary`: 3 observation(s)
 - ✅ `cloudlibrary-lewisville`: 5 observation(s)
-- ✅ `lewisville-print`: 7 observation(s)
+- ✅ `lewisville-print`: 6 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
-- ✅ `libby-houston`: 9 observation(s)
+- ✅ `libby-houston`: 8 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `cinemark`: 2 observation(s)
 - ❌ `amc`: RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
