@@ -1,21 +1,21 @@
-# Media tracker report — 2026-09-03 01:05 UTC
+# Media tracker report — 2026-09-03 12:43 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (45)
+## All current sightings (39)
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 4 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 26 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 27 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 6 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — pre-release · Mandel, Emily St. John
     - also: print book in denton library catalog — 4 on order, 6 holds ahead
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 42 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 43 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
     - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 43 holds
   - sync: gap 84d > 21d loan — suspend the reading hold ~84d for listening
@@ -39,8 +39,8 @@
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 77 holds (~7 mo)
     - also: ebook in Libby catalog (Houston) — 0/8 available, 210 holds (~1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 9 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 55 holds (~9 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 211 holds (~1 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 56 holds (~9 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 212 holds (~1 yr)
   - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
 - **Dèy — Danticat, Edwidge**
   - reading: print book in Lewisville library catalog — 1 on shelf · Danticat, Edwidge, 1969- author.
@@ -50,35 +50,26 @@
   - sync: gap 210d > 14d loan — suspend the reading hold ~210d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
-- **The Hill — Clark, Harriet**
-  - reading: ebook in Libby catalog (Fort Worth) — 0/3 available, 2 holds (~2 wk) · Harriet Clark
-    - also: print book in Lewisville library catalog — checked out
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 51 holds (~12 mo)
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **the age of calamities — senaa ahmad**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 7 holds (~4 mo) · Senaa Ahmad
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 5 holds (~3 mo) · Senaa Ahmad
   - sync: gap 28d > 14d loan — suspend the listening hold ~28d for reading
-- **teenage sex and death at camp miasma (2026)**
-  - "teenage sex and death at camp miasma" mentioned on Texas Theatre
 - **coyote vs acme (2026)**
   - "Coyote vs. Acme" playing at Cinemark Denton 14 (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
   - "Coyote vs. Acme" playing at Cinemark West Plano (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
-  - "Coyote vs. Acme" playing at Cinemark Dallas IMAX (2026-09-03, 2026-09-04, 2026-09-05, 2026-09-06)
-  - "coyote vs acme" available to buy (Fandango At Home)
 
 ## Source status
 - ✅ `denton-library`: 7 observation(s)
 - ✅ `cloudlibrary`: 3 observation(s)
 - ✅ `cloudlibrary-lewisville`: 5 observation(s)
-- ✅ `lewisville-print`: 8 observation(s)
-- ✅ `libby-fortworth`: 7 observation(s)
-- ✅ `libby-houston`: 10 observation(s)
-- ✅ `texas-theatre`: 1 observation(s)
-- ✅ `cinemark`: 3 observation(s)
+- ✅ `lewisville-print`: 7 observation(s)
+- ✅ `libby-fortworth`: 6 observation(s)
+- ✅ `libby-houston`: 9 observation(s)
+- ✅ `texas-theatre`: 0 observation(s)
+- ✅ `cinemark`: 2 observation(s)
 - ❌ `amc`: RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 1 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
