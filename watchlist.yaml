@@ -23,11 +23,6 @@ books:
   - title: Sunrise
     author: Obreht, Téa
     bib_id: S127C1983671
-  - title: The Hill
-    # Without an author the title guard runs alone, and "The Hill" fuzzy-matches
-    # Hill Women, Cobble Hill, The Sledding Hill and The Hill We Climb.
-    author: Clark, Harriet
-    bib_id: S127C1817916
   - title: Triage
     author: Rankine, Claudia
     bib_id: S127C1983791
