@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-03 17:02 UTC
+# Media tracker report — 2026-09-04 00:55 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -24,11 +24,11 @@
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
     - also: print book in denton library catalog — all 2 out, 6 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 77 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 211 holds (~1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 9 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 213 holds (~1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 8 holds (~3 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 56 holds (~9 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 213 holds (~1 yr)
-  - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 217 holds (~1 yr)
+  - sync: gap 95d > 21d loan — suspend the reading hold ~95d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
@@ -53,10 +53,10 @@
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 46d
-- club kid (2026) — waiting 44d
-- dune part 3 (2026) — waiting 44d
-- fjord (2026) — waiting 44d
-- paper tiger (2026) — waiting 44d
-- wild horse nine (2026) — waiting 44d
-- Peck and Peck — Garmus — waiting 23d
+- club kid (2026) — waiting 45d
+- dune part 3 (2026) — waiting 45d
+- fjord (2026) — waiting 45d
+- paper tiger (2026) — waiting 45d
+- wild horse nine (2026) — waiting 45d
+- Peck and Peck — Garmus — waiting 24d
 
