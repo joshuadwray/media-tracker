@@ -2089,6 +2089,19 @@
       "page_count": null,
       "started": "2026-09-02",
       "finished": null,
+      "sessions": [
+        "2026-09-03 33"
+      ]
+    },
+    {
+      "title": "dey",
+      "author": "edwidge danticat",
+      "slug": "dey",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-09-03",
+      "finished": null,
       "sessions": []
     }
   ]
