@@ -202,11 +202,15 @@ def _itunes_search(session, term: str, title: str, author: str) -> dict | None:
     resp.raise_for_status()
     results = resp.json().get("results") or []
     time.sleep(ITUNES_SPACING)
+    wanted = _squash(title)
     for hit in results:
         track = hit.get("trackName") or ""
         artist = hit.get("artistName") or ""
         art = hit.get("artworkUrl100")
-        if (art and title.lower() in track.lower()
+        # Squashed on both sides for the same reason as the author: a log
+        # typed "dey" never matched Apple's "Dèy", and the correct hit —
+        # sitting at position 0 — was rejected along with everything else.
+        if (art and wanted and wanted in _squash(track)
                 and _author_ok(author, artist)):
             return {"cover_url": art.replace("100x100bb", ARTWORK_SIZE),
                     "source": "itunes",

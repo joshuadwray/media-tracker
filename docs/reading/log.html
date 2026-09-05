@@ -333,6 +333,9 @@ async function lookupPages(title, author) {
     .replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '');
   const sur = squash(author.trim().split(/\s+/).pop());
   const surOk = a => !author.trim() || (!!sur && squash(a).includes(sur));
+  // Titles too: "dey" typed here vs "D\u00e8y" in the store.
+  const want = squash(title);
+  const titOk = t => !!want && squash(t).includes(want);
   try {
     const r = await jfetch('https://itunes.apple.com/search?' +
       new URLSearchParams({ term: `${title} ${author}`.trim(),
@@ -340,7 +343,7 @@ async function lookupPages(title, author) {
       deadline);
     for (const h of ((await r.json()).results || [])) {
       if (!h.artworkUrl100 || !surOk(h.artistName) ||
-          !(h.trackName || '').toLowerCase().includes(title.toLowerCase()))
+          !titOk(h.trackName || ''))
         continue;
       const m = h.artworkUrl100.match(/97[89]\d{10}/);
       if (m) {
@@ -378,7 +381,7 @@ async function lookupPages(title, author) {
       for (const it of ((await r.json()).items || [])) {
         const v = it.volumeInfo || {};
         if (v.pageCount > 0 && (v.authors || []).some(surOk) &&
-            (v.title || '').toLowerCase().includes(title.toLowerCase()))
+            titOk(v.title || ''))
           return v.pageCount;
       }
   } catch (e) { /* give up */ }

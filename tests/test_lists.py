@@ -142,3 +142,23 @@ def test_author_guard_folds_punctuation():
     assert _author_ok("Joseph O'Neill", "Joseph ONeill")
     # Still a guard: punctuation was never what separated two people.
     assert not _author_ok("Maggie O’Farrell", "Joseph O'Neill")
+
+
+def test_title_guard_folds_diacritics():
+    """The title half of the match had the same flaw as the author half: a
+    log typed "dey" never matched Apple's "Dèy", so the correct hit — first
+    in the result list — was rejected along with everything else, and the
+    book got no page count and no cover."""
+    from tracker.lists_gen import _squash
+
+    def title_ok(wanted, track):
+        w = _squash(wanted)
+        return bool(w) and w in _squash(track)
+
+    assert title_ok("dey", "Dèy")
+    assert title_ok("Dèy", "dey")
+    assert title_ok("swamplandia", "Swamplandia!")
+    assert title_ok("Land", "Land")
+    # Still a guard: a different book is still a different book.
+    assert not title_ok("dey", "Daughter")
+    assert not title_ok("Land", "Hamnet")
