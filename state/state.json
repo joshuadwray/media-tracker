@@ -3,50 +3,50 @@
     "book:american-hagwon|listening": {
       "best": "plannable",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:american-hagwon|reading": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:exit-party|listening": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:exit-party|reading": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:fruit-fly|listening": {
       "best": "now",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:fruit-fly|reading": {
       "best": "now",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:partita|reading": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:ply|reading": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:the-age-of-calamities|listening": {
       "best": "horizon",
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:the-age-of-calamities|reading": {
       "best": "someday",
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:the-buffalo-hunter-hunter|listening": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -62,7 +62,7 @@
     },
     "book:we-were-forbidden|reading": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "book:yesteryear|listening": {
       "first": "2026-07-18T20:08:01+00:00",
@@ -74,7 +74,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-09-04T16:50:17+00:00"
+    "last_run": "2026-09-05T00:50:45+00:00"
   },
   "seen": {
     "amc|movie:teenage-sex-and-death-at-camp-miasma|\"Teenage Sex and Death at Camp Miasma\" playing at AMC Grapevine Mills 30": {
@@ -145,31 +145,35 @@
     },
     "cloudlibrary-lewisville|book:american-hagwon|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "cloudlibrary-lewisville|book:american-hagwon|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "cloudlibrary-lewisville|book:exit-party|audiobook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "cloudlibrary-lewisville|book:exit-party|ebook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "cloudlibrary-lewisville|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
       "last": "2026-08-10T21:25:50+00:00"
     },
+    "cloudlibrary-lewisville|book:fruit-fly|ebook in catalog": {
+      "first": "2026-09-05T00:50:45+00:00",
+      "last": "2026-09-05T00:50:45+00:00"
+    },
     "cloudlibrary|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "cloudlibrary|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-31T19:30:50+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -193,19 +197,19 @@
     },
     "denton-library|book:american-hagwon|print book in catalog": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "denton-library|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "denton-library|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "denton-library|book:ply|print book in catalog": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
@@ -229,55 +233,55 @@
     },
     "lewisville-print|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "lewisville-print|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T18:29:49+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "lewisville-print|book:partita|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "lewisville-print|book:we-were-forbidden|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-fortworth|book:american-hagwon|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-fortworth|book:exit-party|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-fortworth|book:exit-party|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-fortworth|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-fortworth|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-houston|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-houston|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-houston|book:the-age-of-calamities|audiobook in catalog": {
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "libby-houston|book:the-age-of-calamities|ebook in catalog": {
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-04T16:50:17+00:00"
+      "last": "2026-09-05T00:50:45+00:00"
     },
     "texas-theatre|movie:teenage-sex-and-death-at-camp-miasma|\"teenage sex and death at camp miasma\" mentioned on Texas Theatre": {
       "first": "2026-08-06T00:05:40+00:00",
