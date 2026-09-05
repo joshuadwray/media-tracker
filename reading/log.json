@@ -2097,13 +2097,14 @@
       "title": "dey",
       "author": "edwidge danticat",
       "slug": "dey",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3,
       "page_count": null,
       "started": "2026-09-03",
-      "finished": null,
+      "finished": "2026-09-05",
       "sessions": [
-        "2026-09-03 85"
+        "2026-09-03 85",
+        "2026-09-05 256"
       ]
     }
   ]
