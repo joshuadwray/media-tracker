@@ -2106,6 +2106,17 @@
         "2026-09-03 85",
         "2026-09-04 256"
       ]
+    },
+    {
+      "title": "the disappearers",
+      "author": "marlon james",
+      "slug": "the-disappearers",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-09-05",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
