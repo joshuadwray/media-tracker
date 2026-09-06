@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-06 00:48 UTC
+# Media tracker report — 2026-09-06 16:09 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -9,7 +9,7 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 4 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 27 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 28 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 5 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds · Mandel, Emily St. John
@@ -23,11 +23,11 @@
   - reading: print book in Lewisville library catalog — 1 on shelf · Silver, Josh, 1989- author.
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
     - also: print book in denton library catalog — all 2 out, 6 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 80 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 216 holds (~1 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 82 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 215 holds (~1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 10 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 59 holds (~9 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 223 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 220 holds (~1.1 yr)
   - sync: gap 116d > 21d loan — suspend the reading hold ~116d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
@@ -52,7 +52,7 @@
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 48d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 49d
 - club kid (2026) — waiting 47d
 - dune part 3 (2026) — waiting 47d
 - fjord (2026) — waiting 47d
