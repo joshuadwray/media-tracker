@@ -282,9 +282,18 @@ function addItem() {
   expanded = true;
   model.items.push({ title: '', author: '', pre: [], extra: [] });
   render();
-  const rows = $('rows').children;
-  rows[rows.length - 1].querySelector('input').focus();
-  rows[rows.length - 1].scrollIntoView({ block: 'center' });
+  // Two things this used to get wrong, and both left the new row blank
+  // and off-screen: #rows ends with the expand/collapse button once the
+  // list is longer than COLLAPSED_ROWS, so the last *child* is that
+  // button and querySelector('input') on it threw — and a row leads with
+  // the rank box, so even on a short list the focus went to the rank
+  // instead of the title.
+  const rows = $('rows').querySelectorAll('.row');
+  const row = rows[rows.length - 1];
+  if (!row) return;
+  const title = row.querySelector('.fields input');
+  if (title) title.focus();
+  row.scrollIntoView({ block: 'center' });
 }
 
 function setMode(raw) {
