@@ -4,6 +4,8 @@ ranked: true
 # File order IS the rank. Per-item optional fields:
 #   cover: https://...jpg   — manual cover URL, always wins over lookup
 items:
+  - title: the disappearers
+    author: marlon james
   - title: beginning middle end
     author: valeria luiselli
   - title: john of john
@@ -42,4 +44,3 @@ items:
     author: paul tremblay
   - title: eating ashes
     author: brenda navarro
-  - title: the disappearers
