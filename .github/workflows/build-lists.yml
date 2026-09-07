@@ -37,19 +37,52 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Render list pages (covers cached)
-        run: python -m tracker lists
-
-      # after lists so listed books' covers are already cached — the
-      # ISBN bridge then needs zero iTunes calls for them
-      - name: Render reading pages (page counts cached)
-        run: python -m tracker reading
-
-      - name: Commit rendered pages + caches
+      # Build and push in one step, because recovering from a lost race
+      # means redoing the *whole* thing, not merging two builds together.
+      #
+      # Two saves seconds apart queue two runs here. Each checkout is
+      # pinned to its own commit, so the second one builds a tree that
+      # predates the first one's push — and every output is a whole-file
+      # rewrite, so rebasing it conflicted in docs/data/ and the run died
+      # with the newer, correct build in its hand. That is how the 2026
+      # list published one edit stale.
+      #
+      # These files are pure functions of lists/*.yaml, reading/log.json
+      # and watching/log.json, so there is never anything to merge: sync
+      # to the tip, regenerate, push. If the tip moved under us, the same
+      # loop just runs again on the newer tip. A run whose inputs someone
+      # else already built for finds nothing staged and exits happy.
+      - name: Render pages and commit
         run: |
+          set -euo pipefail
           git config user.name "media-tracker bot"
           git config user.email "actions@users.noreply.github.com"
-          git add docs/lists/ docs/reading/ docs/watching/ docs/data/ docs/assets/ lists/covers-cache.json reading/pagecount-cache.json
-          git diff --cached --quiet || git commit -m "lists: rebuild $(date -u +%Y-%m-%dT%H:%M)"
-          git pull --rebase origin main
-          git push
+
+          outputs="docs/lists/ docs/reading/ docs/watching/ docs/data/ \
+                   docs/assets/ lists/covers-cache.json \
+                   reading/pagecount-cache.json"
+
+          for attempt in 1 2 3; do
+            git fetch --quiet origin main
+            git reset --quiet --hard FETCH_HEAD
+
+            python -m tracker lists
+            # after lists so listed books' covers are already cached — the
+            # ISBN bridge then needs zero iTunes calls for them
+            python -m tracker reading
+
+            git add $outputs
+            if git diff --cached --quiet; then
+              echo "attempt $attempt: nothing to commit — main is already current"
+              exit 0
+            fi
+            git commit --quiet -m "lists: rebuild $(date -u +%Y-%m-%dT%H:%M)"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "attempt $attempt: main moved mid-build, rebuilding on the new tip"
+          done
+
+          echo "::error::main kept moving after 3 rebuilds; docs/ is stale"
+          exit 1

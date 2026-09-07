@@ -666,6 +666,11 @@
   // A list edited seconds ago: the saved rows are the truth, and covers are
   // pulled across from the build by title|author. A row added just now has
   // no cover yet and tiles, exactly as it did under the static build.
+  //
+  // Filling in a missing author is an edit too, though, and it moves the
+  // row's key — which used to blank a cover the build was already holding
+  // under the old key. So a title the list names exactly once can claim
+  // its build row on the title alone.
   function mergeList(blist, stem) {
     var all = lsGet(PENDL) || {};
     var pend = all[stem];
@@ -673,12 +678,18 @@
     if (Date.now() - (pend.savedAt || 0) > PEND_TTL_MS) {
       delete all[stem]; lsSet(PENDL, all); return { list: blist, syncing: false };
     }
-    var known = {}, i;
-    for (i = 0; blist && i < blist.items.length; i++)
+    var known = {}, byTitle = {}, i, t;
+    for (i = 0; blist && i < blist.items.length; i++) {
       known[cacheKey(blist.items[i].title, blist.items[i].author)] = blist.items[i];
+      t = cacheKey(blist.items[i].title, '');
+      byTitle[t] = Object.prototype.hasOwnProperty.call(byTitle, t)
+        ? null                                  // titled twice — too vague
+        : blist.items[i];
+    }
     var same = blist && blist.items.length === pend.items.length;
     var items = pend.items.map(function (it, idx) {
-      var k = cacheKey(it.title, it.author), e = known[k] || {};
+      var k = cacheKey(it.title, it.author);
+      var e = known[k] || byTitle[cacheKey(it.title, '')] || {};
       if (same && blist.items[idx]
           && cacheKey(blist.items[idx].title, blist.items[idx].author) !== k)
         same = false;
