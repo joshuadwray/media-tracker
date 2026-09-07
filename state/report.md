@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-07 00:51 UTC
+# Media tracker report — 2026-09-07 18:13 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -15,20 +15,20 @@
   - reading: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds · Mandel, Emily St. John
     - also: print book in denton library catalog — 4 on order, 6 holds ahead
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 51 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 46 holds
-  - sync: gap 63d > 21d loan — suspend the reading hold ~63d for listening
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 52 holds
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 6 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
+    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 48 holds
+  - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: print book in Lewisville library catalog — 1 on shelf · Silver, Josh, 1989- author.
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
     - also: print book in denton library catalog — all 2 out, 6 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 83 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 214 holds (~1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 10 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 213 holds (~1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 59 holds (~9 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 221 holds (~1.1 yr)
-  - sync: gap 116d > 21d loan — suspend the reading hold ~116d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 222 holds (~1.1 yr)
+  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
@@ -52,11 +52,11 @@
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 49d
-- club kid (2026) — waiting 48d
-- dune part 3 (2026) — waiting 48d
-- fjord (2026) — waiting 48d
-- paper tiger (2026) — waiting 48d
-- wild horse nine (2026) — waiting 48d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 50d
+- club kid (2026) — waiting 49d
+- dune part 3 (2026) — waiting 49d
+- fjord (2026) — waiting 49d
+- paper tiger (2026) — waiting 49d
+- wild horse nine (2026) — waiting 49d
 - Peck and Peck — Garmus — waiting 27d
 
