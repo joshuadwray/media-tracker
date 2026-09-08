@@ -28,6 +28,15 @@ ROOT = Path(__file__).resolve().parent.parent
 LOG_PATH = ROOT / "watching" / "log.json"
 
 FEED_URL = "https://letterboxd.com/{}/rss/"
+FILM_URL = "https://letterboxd.com/film/{}/"
+
+# Director is bot-derived enrichment, so it lives in a cache beside the log
+# rather than in FILM_KEYS: year/poster/tmdb_id are in watching/log.json
+# because the RSS response hands them over for free, but a director costs
+# its own request per film — which puts it in the same category as
+# reading/pagecount-cache.json, not user data.
+DIRECTOR_CACHE_PATH = ROOT / "watching" / "director-cache.json"
+DIRECTOR_BUDGET = 150   # requests per run; ~107 films backfill in one go
 
 NS = {
     "letterboxd": "https://letterboxd.com",
@@ -44,6 +53,11 @@ FILM_KEYS = ("title", "year", "slug", "watched", "rating", "rewatch",
              "guid")
 
 GUID_ID_RE = re.compile(r"(\d+)$")
+TMDB_RE = re.compile(r'data-tmdb-id="(\d+)"')
+# Letterboxd wraps its JSON-LD in /* */ comments (verified by probe).
+LD_RE = re.compile(r'<script type="application/ld\+json">\s*'
+                   r"(?:/\*.*?\*/)?\s*(\{.*?\})\s*(?:/\*.*?\*/)?\s*"
+                   r"</script>", re.S)
 IMG_RE = re.compile(r'<img[^>]+src="([^"]+)"')
 P_RE = re.compile(r"<p>(.*?)</p>", re.S)
 TAG_RE = re.compile(r"<[^>]+>")
@@ -74,6 +88,75 @@ def fetch_feed(user):
     resp = http.get(sess, FEED_URL.format(user))
     resp.raise_for_status()
     return resp.text
+
+
+def film_details(sess, slug):
+    """{tmdb_id, poster, director} from one film page.
+
+    All three ride the same request: tmdb_id is a data attribute, poster and
+    director both come out of the JSON-LD block. Shared with
+    letterboxd_import, which needs the first two.
+    """
+    resp = http.get(sess, FILM_URL.format(slug))
+    resp.raise_for_status()
+    page = resp.text
+    m = TMDB_RE.search(page)
+    out = {"tmdb_id": int(m.group(1)) if m else None,
+           "poster": None, "director": []}
+    m = LD_RE.search(page)
+    if m:
+        try:
+            ld = json.loads(m.group(1))
+        except json.JSONDecodeError:
+            return out
+        out["poster"] = ld.get("image")
+        # A film can have several ("no-country-for-old-men" -> both Coens).
+        out["director"] = [p.get("name") for p in (ld.get("director") or [])
+                           if isinstance(p, dict) and p.get("name")]
+    return out
+
+
+def load_directors(path=DIRECTOR_CACHE_PATH):
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return {}
+
+
+def dump_directors(cache):
+    return json.dumps(cache, indent=2, ensure_ascii=False,
+                      sort_keys=True) + "\n"
+
+
+def fill_directors(films, cache, sess=None, budget=DIRECTOR_BUDGET, log=None):
+    """Fetch the director for every slug not already cached.
+
+    Misses are cached as [] so a film Letterboxd has no director for isn't
+    re-fetched every run; a fetch that FAILED is left uncached, so a bad
+    network day never hardens into "this film has no director".
+    """
+    want = []
+    for f in films:
+        slug = f.get("slug")
+        if slug and slug not in cache and slug not in want:
+            want.append(slug)
+    if not want:
+        return 0
+    if sess is None:
+        sess = http.session()
+    fetched = 0
+    for slug in want[:budget]:
+        try:
+            cache[slug] = {"director": film_details(sess, slug)["director"]}
+        except Exception as exc:  # noqa: BLE001 — the viewing still stands
+            if log:
+                log(f"  ! {slug}: film page failed "
+                    f"({type(exc).__name__}: {exc}) — director left uncached")
+            continue
+        fetched += 1
+    if log and len(want) > budget:
+        log(f"  {len(want) - budget} film(s) left for the next run "
+            f"(budget {budget})")
+    return fetched
 
 
 def _text(item, tag):
@@ -194,7 +277,20 @@ def sync():
     if out != old:
         LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
         LOG_PATH.write_text(out, encoding="utf-8")
+
+    # Separate pass, separate file: the log above must stay byte-stable on an
+    # unchanged sync, and the director fetch is the slow part.
+    dcache = load_directors()
+    fetched = fill_directors(films, dcache, log=print)
+    if fetched:
+        dtext = dump_directors(dcache)
+        if dtext != (DIRECTOR_CACHE_PATH.read_text(encoding="utf-8")
+                     if DIRECTOR_CACHE_PATH.exists() else None):
+            DIRECTOR_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+            DIRECTOR_CACHE_PATH.write_text(dtext, encoding="utf-8")
+
     print(f"letterboxd ({user}): added {added}, updated {updated}, "
           f"unchanged {unchanged}, skipped-before-since {skipped}, "
-          f"list-items-ignored {ignored} — {len(films)} film(s) on file")
+          f"list-items-ignored {ignored} — {len(films)} film(s) on file"
+          f"{f', {fetched} director(s) fetched' if fetched else ''}")
     return 0

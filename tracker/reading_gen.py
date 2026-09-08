@@ -43,12 +43,13 @@ from pathlib import Path
 
 import requests
 
-from . import lists_gen, site
+from . import lists_gen, matching, site
 
 ROOT = Path(__file__).resolve().parent.parent
 READING_DIR = ROOT / "reading"
 LOG_PATH = READING_DIR / "log.json"
 PAGECACHE_PATH = READING_DIR / "pagecount-cache.json"
+PUBYEAR_CACHE_PATH = READING_DIR / "pubyear-cache.json"
 OUT_DIR = ROOT / "docs" / "reading"
 
 OL_ISBN_URL = "https://openlibrary.org/isbn/{}.json"
@@ -182,6 +183,18 @@ def save_pagecache(cache: dict, path: Path = PAGECACHE_PATH) -> None:
                                sort_keys=True) + "\n", encoding="utf-8")
 
 
+def load_pubyearcache(path: Path = PUBYEAR_CACHE_PATH) -> dict:
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return {}
+
+
+def save_pubyearcache(cache: dict, path: Path = PUBYEAR_CACHE_PATH) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(cache, indent=1, ensure_ascii=False,
+                               sort_keys=True) + "\n", encoding="utf-8")
+
+
 def isbn_from_cover_url(url: str) -> str | None:
     m = ISBN13_RE.search(url or "")
     return m.group(1) if m else None
@@ -248,6 +261,115 @@ def _ol_pages_by_search(session, title: str, author: str) -> int | None:
                     author, *(doc.get("author_name") or [])):
                 return int(median)
     return None
+
+
+def _sane_year(value) -> int | None:
+    """Reject anything that isn't a plausible publication year."""
+    try:
+        year = int(value)
+    except (TypeError, ValueError):
+        return None
+    return year if 1000 <= year <= date.today().year + 1 else None
+
+
+def _ol_first_published(session, title: str, author: str) -> int | None:
+    """Original publication year, not an edition's.
+
+    Fielded search first, then the looser q= for the same reason as
+    _ol_pages_by_search (OL indexes some titles without their leading
+    article). The title gate matters more here than it does for a page
+    count: a loose q= for "land" / Maggie O'Farrell returns Hamnet, and its
+    2020 would look perfectly plausible sitting in the filter bar.
+    """
+    fields = "title,author_name,first_publish_year"
+    fielded = {"title": title, "limit": 10, "fields": fields}
+    if author:
+        fielded["author"] = author
+    loose = {"q": f"{title} {author}".strip(), "limit": 10, "fields": fields}
+    for params in (fielded, loose):
+        resp = session.get(lists_gen.SEARCH_URL, params=params, timeout=30)
+        resp.raise_for_status()
+        time.sleep(lists_gen.OL_SPACING)
+        for doc in resp.json().get("docs") or []:
+            year = _sane_year(doc.get("first_publish_year"))
+            if (year
+                    and matching.titles_match(title, doc.get("title") or "")
+                    and lists_gen._author_ok(
+                        author, *(doc.get("author_name") or []))):
+                return year
+    return None
+
+
+def _itunes_year(session, title: str, author: str, covers_cache: dict,
+                 cache_key: str) -> int | None:
+    """The ebook edition's date — a fallback, and a narrow one.
+
+    It is the WRONG answer for a backlist title (Apple dates East of Eden's
+    ebook to 2002, not 1952) and the right one for a book published this
+    year, where the ebook ships with the hardback. It is only ever reached
+    when Open Library has no work for the book, which in practice means a
+    release too new for OL to have indexed.
+    """
+    hit = lists_gen._itunes_lookup(session, title, author)
+    if not hit:
+        return None
+    covers_cache.setdefault(cache_key, hit)   # the cover comes free
+    if not matching.titles_match(title, hit.get("track") or ""):
+        return None
+    return _sane_year((hit.get("release_date") or "")[:4])
+
+
+def resolve_pub_year(book: Book, cache: dict, covers_cache: dict,
+                     session=None, log=None) -> tuple:
+    """-> (year or None, source str). Caches lookups incl. misses.
+
+    Open Library first: first_publish_year is the ORIGINAL publication year,
+    which is the thing worth filtering a diary by — east of eden is a 1952
+    novel however new the copy you read. Measured 136 of 157 books here; the
+    misses are almost all this year's releases, which is exactly where an
+    edition date happens to be right, hence the iTunes fallback below.
+
+    A hand-written {"year": N, "source": "manual"} entry is just a cache hit,
+    so the file stays the override mechanism (delete an entry to re-look-up).
+    """
+    entry = cache.get(book.cache_key)
+    if entry is not None:
+        return entry.get("year"), entry.get("source") or "cache"
+    if session is None:
+        return None, "unresolved"
+
+    # Same contract as resolve_page_count: a source being DOWN must never be
+    # cached as "this book has no publication year".
+    outages = []
+
+    def _soft(what, fn, *args):
+        try:
+            return fn(*args)
+        except requests.RequestException as exc:
+            outages.append(what)
+            if log:
+                log(f"  {what} unavailable for {book.title!r}: {exc}")
+            return None
+
+    source = None
+    year = _soft("openlibrary", _ol_first_published, session, book.title,
+                 book.author)
+    if year:
+        source = "openlibrary-search"
+    else:
+        year = _soft("itunes", _itunes_year, session, book.title, book.author,
+                     covers_cache, book.cache_key)
+        if year:
+            source = "itunes-edition"
+    if year or not outages:
+        cache[book.cache_key] = {"year": year, "source": source,
+                                 "matched": book.title}
+    if log:
+        stale = (" — left uncached, sources were down"
+                 if not year and outages else "")
+        log(f"  pub year: {book.title!r} -> {year or 'not found'}"
+            f"{f' ({source})' if source else stale}")
+    return year, source or "unresolved"
 
 
 def resolve_page_count(book: Book, cache: dict, covers_cache: dict,
@@ -911,7 +1033,9 @@ def _stars(rating: float) -> str:
 # ------------------------------------------------------------ data bundle
 
 def diary_bundle(rlog: ReadingLog, page_counts: dict, sources: dict,
-                 covers_cache: dict, films: list, base_of: dict) -> dict:
+                 covers_cache: dict, films: list, base_of: dict,
+                 pub_years: dict | None = None,
+                 directors: dict | None = None) -> dict:
     """View-ready diary data for docs/assets/diary.js.
 
     Carries ENRICHMENT (covers, page counts) alongside RAW sessions rather
@@ -921,6 +1045,8 @@ def diary_bundle(rlog: ReadingLog, page_counts: dict, sources: dict,
     contributes only what needs the network — the iTunes/OpenLibrary/Apple
     Books lookups a page can't make itself.
     """
+    pub_years = pub_years or {}
+    directors = directors or {}
     books = []
     for b in rlog.books:
         books.append({
@@ -936,6 +1062,7 @@ def diary_bundle(rlog: ReadingLog, page_counts: dict, sources: dict,
             "pageCount": page_counts.get(b.slug),
             "pageSource": sources.get(b.slug),
             "cover": _cover_url(b, covers_cache),
+            "year": pub_years.get(b.slug),
             "hue": lists_gen._tile_hue(b.title),
             "sessions": [[d.isoformat(), p] for d, p in b.parsed_sessions()],
         })
@@ -952,6 +1079,9 @@ def diary_bundle(rlog: ReadingLog, page_counts: dict, sources: dict,
             "rewatch": bool(f.get("rewatch")),
             "liked": bool(f.get("liked")),
             "poster": f.get("poster_url"),
+            # Several films have two (both Coens); the client joins them.
+            "director": (directors.get(f.get("slug")) or {}).get("director")
+                        or [],
         })
     # Deliberately NOT sorted: watching/log.json order is what decides the
     # order of several films watched on one day, and the diary shows them
@@ -992,8 +1122,10 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
               log=print) -> list:
     rlog = load_log(log_path)
     cache = load_pagecache(cache_path)
+    pubyears_cache = load_pubyearcache()
     covers_cache = lists_gen.load_cache()
     known, covers_known = len(cache), len(covers_cache)
+    pubyears_known = len(pubyears_cache)
     session = None
     if fetch:
         session = requests.Session()
@@ -1011,7 +1143,18 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
         page_counts[book.slug] = pages
         sources[book.slug] = source
 
-    from . import watching_gen  # late import: watching_gen uses our helpers
+    pub_years = {}
+    for book in rlog.books:
+        try:
+            year, _src = resolve_pub_year(book, pubyears_cache, covers_cache,
+                                          session, log=log)
+        except Exception as exc:  # noqa: BLE001 — leave uncached, retry later
+            if log:
+                log(f"  pub-year lookup failed for {book.title!r}: {exc}")
+            year = None
+        pub_years[book.slug] = year
+
+    from . import letterboxd_sync, watching_gen  # late: they use our helpers
     films = []
     if watching_gen.LOG_PATH.exists():
         _, films = watching_gen.load_log()
@@ -1023,7 +1166,8 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
     written = list(site.write_sheets((("reading", _CSS),)))
     bundle, _ = site.write_data(
         "diary.json",
-        diary_bundle(rlog, page_counts, sources, covers_cache, films, base_of))
+        diary_bundle(rlog, page_counts, sources, covers_cache, films, base_of,
+                     pub_years, letterboxd_sync.load_directors()))
     written.append(bundle)
     edit_js = out_dir / "edit.js"
     edit_js.write_text(_EDIT_JS, encoding="utf-8")
@@ -1068,6 +1212,11 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
         if log:
             log(f"cached {len(cache) - known} page-count lookup(s) "
                 f"-> {cache_path}")
+    if len(pubyears_cache) != pubyears_known:
+        save_pubyearcache(pubyears_cache)
+        if log:
+            log(f"cached {len(pubyears_cache) - pubyears_known} publication-"
+                f"year lookup(s) -> {PUBYEAR_CACHE_PATH}")
     if len(covers_cache) != covers_known:
         lists_gen.save_cache(covers_cache)
     if log:

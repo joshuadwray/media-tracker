@@ -8,6 +8,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from tracker import reading_gen  # noqa: E402
 from tracker.reading_gen import (  # noqa: E402
     Book, ReadingLog, _pages_from_ldjson, daily_pages, dump_log,
     isbn_from_cover_url, load_log, pages_by_date, slugify,
@@ -117,3 +118,120 @@ def test_dump_log_shape_and_key_order():
     assert list(data["books"][0]) == ["title", "author", "slug", "status",
                                       "rating", "page_count", "started",
                                       "finished", "sessions"]
+
+
+# ---------------------------------------------------- publication year
+
+
+class _FakeResp:
+    def __init__(self, payload):
+        self._payload = payload
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self._payload
+
+
+class _FakeOL:
+    """Stands in for an Open Library session; records the queries made."""
+
+    def __init__(self, *pages):
+        self.pages = list(pages)
+        self.calls = []
+
+    def get(self, url, params=None, timeout=None):
+        self.calls.append(params)
+        docs = self.pages.pop(0) if self.pages else []
+        return _FakeResp({"docs": docs})
+
+
+def _doc(title, author, year):
+    return {"title": title, "author_name": [author],
+            "first_publish_year": year}
+
+
+def test_pub_year_prefers_original_publication(monkeypatch):
+    monkeypatch.setattr(reading_gen.time, "sleep", lambda *_: None)
+    sess = _FakeOL([_doc("East of Eden", "John Steinbeck", 1952)])
+    cache, covers = {}, {}
+    year, source = reading_gen.resolve_pub_year(
+        _book(title="east of eden", author="john steinbeck",
+              slug="east-of-eden"), cache, covers, sess)
+    assert (year, source) == (1952, "openlibrary-search")
+    assert cache["east of eden|john steinbeck"]["year"] == 1952
+
+
+def test_pub_year_rejects_right_author_wrong_book(monkeypatch):
+    """The Hamnet trap: a loose q= for "land" returns Maggie O'Farrell's
+    other novel, whose 2020 would look perfectly plausible in the filter."""
+    monkeypatch.setattr(reading_gen.time, "sleep", lambda *_: None)
+    monkeypatch.setattr(reading_gen.lists_gen, "_itunes_lookup",
+                        lambda *a, **k: None)
+    sess = _FakeOL([_doc("Hamnet", "Maggie O'Farrell", 2020)],
+                   [_doc("Hamnet", "Maggie O'Farrell", 2020)])
+    year, source = reading_gen.resolve_pub_year(
+        _book(title="land", author="maggie ofarrell", slug="land"),
+        {}, {}, sess)
+    assert year is None and source == "unresolved"
+
+
+def test_pub_year_falls_back_to_itunes_for_a_new_release(monkeypatch):
+    monkeypatch.setattr(reading_gen.time, "sleep", lambda *_: None)
+    monkeypatch.setattr(
+        reading_gen.lists_gen, "_itunes_lookup",
+        lambda *a, **k: {"track": "Dèy", "release_date": "2026-08-25T07:00:00Z",
+                         "cover_url": "https://example.com/c.jpg",
+                         "source": "itunes"})
+    sess = _FakeOL([], [])           # OL knows nothing about it yet
+    covers = {}
+    year, source = reading_gen.resolve_pub_year(
+        _book(title="dey", author="edwidge danticat", slug="dey"),
+        {}, covers, sess)
+    assert (year, source) == (2026, "itunes-edition")
+    # the cover rides along for free, exactly as resolve_page_count does
+    assert covers["dey|edwidge danticat"]["source"] == "itunes"
+
+
+def test_pub_year_itunes_fallback_still_checks_the_title(monkeypatch):
+    monkeypatch.setattr(reading_gen.time, "sleep", lambda *_: None)
+    monkeypatch.setattr(
+        reading_gen.lists_gen, "_itunes_lookup",
+        lambda *a, **k: {"track": "Study Guide: The Bad Guys: Episode 10",
+                         "release_date": "2025-05-09T07:00:00Z",
+                         "source": "itunes"})
+    sess = _FakeOL([], [])
+    year, _ = reading_gen.resolve_pub_year(
+        _book(title="The Bad Guys Episode 10", author="Aaron Blabey",
+              slug="bad-guys-10"), {}, {}, sess)
+    assert year is None
+
+
+def test_pub_year_cache_hit_makes_no_request():
+    cache = {"a book|an author": {"year": 1999, "source": "manual"}}
+    year, source = reading_gen.resolve_pub_year(_book(), cache, {}, None)
+    assert (year, source) == (1999, "manual")
+
+
+def test_pub_year_outage_is_not_cached_as_a_miss(monkeypatch):
+    monkeypatch.setattr(reading_gen.time, "sleep", lambda *_: None)
+
+    def _down(*a, **k):
+        raise reading_gen.requests.ConnectionError("openlibrary is down")
+
+    monkeypatch.setattr(reading_gen, "_ol_first_published", _down)
+    monkeypatch.setattr(reading_gen, "_itunes_year", _down)
+    cache = {}
+    year, _ = reading_gen.resolve_pub_year(_book(), cache, {}, object())
+    assert year is None
+    assert cache == {}, "a source outage must never harden into a fact"
+
+
+def test_sane_year_bounds():
+    assert reading_gen._sane_year(1952) == 1952
+    assert reading_gen._sane_year("2026") == 2026
+    assert reading_gen._sane_year(0) is None
+    assert reading_gen._sane_year(date.today().year + 5) is None
+    assert reading_gen._sane_year(None) is None
+    assert reading_gen._sane_year("not a year") is None

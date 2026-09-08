@@ -14,7 +14,7 @@ from datetime import date
 from pathlib import Path
 
 from . import site
-from .letterboxd_sync import load_log, LOG_PATH
+from .letterboxd_sync import load_directors, load_log, LOG_PATH
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "docs" / "watching"
@@ -57,7 +57,7 @@ def _review_paras(review: str) -> str:
     return "".join(f"<p>{e(p)}</p>" for p in review.split("\n\n") if p.strip())
 
 
-def render_film(slug: str, viewings: list) -> str:
+def render_film(slug: str, viewings: list, directors: dict | None = None) -> str:
     from .reading_gen import _page_head, _stars
     e = html.escape
     latest = viewings[-1]
@@ -71,6 +71,10 @@ def render_film(slug: str, viewings: list) -> str:
     img = (f"<img class='cover' src='{e(poster)}' alt='{e(title)} poster'>"
            if poster else f"<div class='bignoimg'>{e(title)}</div>")
     bits = [f"<h1>{e(heading)}</h1>"]
+    named = ((directors or {}).get(slug) or {}).get("director") or []
+    if named:
+        bits.append(f"<div class='meta' style='margin-top:4px'>"
+                    f"{e(', '.join(named))}</div>")
     if latest.get("rating") is not None:
         bits.append(
             f"<div style='margin-top:6px'>{_stars(latest['rating'])}</div>")
@@ -106,6 +110,7 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
     _, films = load_log(log_path) if log_path.exists() else (None, [])
     by_slug = films_by_slug(films)
     written = []
+    directors = load_directors()
     if by_slug:
         out_dir.mkdir(parents=True, exist_ok=True)
     for slug, viewings in by_slug.items():
@@ -114,7 +119,8 @@ def build_all(log_path: Path = LOG_PATH, out_dir: Path = OUT_DIR,
                 log(f"  WARNING: skipping film slug 'index' (reserved)")
             continue
         out = out_dir / f"{slug}.html"
-        out.write_text(render_film(slug, viewings), encoding="utf-8")
+        out.write_text(render_film(slug, viewings, directors),
+                       encoding="utf-8")
         written.append(out)
     if log:
         log(f"watching: {len(films)} viewing(s), "

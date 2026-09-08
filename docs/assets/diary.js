@@ -576,6 +576,10 @@
     return d;
   }
 
+  // Films can have two (both Coens). A director reads as the film's
+  // "author", which is exactly where it is rendered — the same .by slot.
+  function directorOf(f) { return (f.director || []).join(', '); }
+
   function thumb(src) {
     return src ? "<img src='" + esc(src) + "' alt='' loading='lazy'>"
       : "<div class='dot'></div>";
@@ -587,12 +591,13 @@
     d.books.forEach(function (b) {
       out.push({ kind: 'book', src: b, title: b.title, sub: b.author || '',
                  date: b.finished || lastDay(b) || b.started || '',
-                 rating: b.rating, year: null, cover: b.cover,
+                 rating: b.rating, year: b.year == null ? null : b.year,
+                 cover: b.cover,
                  href: esc(b.base) + '.html',
                  dedup: b.key || cacheKey(b.title, b.author) });
     });
     d.films.forEach(function (f) {
-      out.push({ kind: 'film', src: f, title: f.title, sub: '',
+      out.push({ kind: 'film', src: f, title: f.title, sub: directorOf(f),
                  date: f.watched || '', rating: f.rating, year: f.year,
                  cover: f.poster,
                  href: '../watching/' + esc(f.slug) + '.html',
@@ -617,7 +622,7 @@
         // A release filter can only mean films today — books carry no
         // publication year anywhere in the repo yet.
         if (relOn) {
-          if (it.year == null) return false;
+          if (it.year == null) return false;   // a few books still lack one
           if (String(Math.floor(it.year / 10) * 10) !== lopts.rel) return false;
         }
         if (min === 'unrated') { if (it.rating != null) return false; }
@@ -692,11 +697,13 @@
     });
 
     d.films.forEach(function (f) {
-      if (!p.metaOk({ kind: 'film', title: f.title, sub: '',
+      var dir = directorOf(f);
+      if (!p.metaOk({ kind: 'film', title: f.title, sub: dir,
                       rating: f.rating, year: f.year })) return;
       if (!p.dateOk(f.watched)) return;
       var th = thumb(f.poster);
       var heading = f.year ? f.title + ' (' + f.year + ')' : f.title;
+      var byd = dir ? " <span class='by'>&mdash; " + esc(dir) + '</span>' : '';
       var right = [];
       if (f.rating != null) right.push(stars(f.rating));
       if (f.rewatch) right.push('↻');
@@ -704,7 +711,7 @@
       (rows[f.watched] = rows[f.watched] || []).push(
         "<a class='row film' style='text-decoration:none;color:inherit' href='"
         + '../watching/' + esc(f.slug) + ".html'>" + th
-        + "<div class='rt'>" + esc(heading) + '</div>'
+        + "<div class='rt'>" + esc(heading) + byd + '</div>'
         + "<div class='rm'>" + right.join(' &middot; ') + '</div></a>');
       films++;
     });
@@ -787,10 +794,7 @@
         ? 'nothing matches these filters.'
         : 'no sessions logged yet &mdash; <a href="log.html">log one</a>')
         + '</div>';
-    var note = r.empty ? '' : r.count;
-    if (note && p.relOn && lopts.type !== 'film')
-      note += " <span class='meta'>· books have no publication year yet</span>";
-    r.note = note;
+    r.note = r.empty ? '' : r.count;
     return r;
   }
 
@@ -807,6 +811,7 @@
     d.books.forEach(function (b) {
       for (var day in dailyPages(b)) years[day.slice(0, 4)] = 1;
       if (b.started) years[b.started.slice(0, 4)] = 1;
+      if (b.year != null) decades[Math.floor(b.year / 10) * 10] = 1;
     });
     d.films.forEach(function (f) {
       if (f.watched) years[f.watched.slice(0, 4)] = 1;
@@ -956,7 +961,9 @@
       : "<div class='bignoimg' style='background:hsl(" + base.hue
         + ",35%,32%)'>" + esc(base.title) + '</div>';
     var bits = ['<h1>' + esc(base.title) + '</h1>'];
-    if (base.author) bits.push("<div class='meta'>" + esc(base.author) + '</div>');
+    var byline = base.author ? esc(base.author) : '';
+    if (base.year) byline += (byline ? ' &middot; ' : '') + base.year;
+    if (byline) bits.push("<div class='meta'>" + byline + '</div>');
     if (single) {
       if (base.rating != null)
         bits.push("<div style='margin-top:6px'>" + stars(base.rating) + '</div>');

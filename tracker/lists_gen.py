@@ -214,6 +214,12 @@ def _itunes_search(session, term: str, title: str, author: str) -> dict | None:
                 and _author_ok(author, artist)):
             return {"cover_url": art.replace("100x100bb", ARTWORK_SIZE),
                     "source": "itunes",
+                    # track + releaseDate ride along for reading_gen's
+                    # publication-year fallback: the same response already
+                    # carries them, and the raw track lets that caller apply
+                    # a stricter title gate than the substring test above.
+                    "track": track,
+                    "release_date": hit.get("releaseDate"),
                     "matched": f"{track} — {artist}"}
     return None
 

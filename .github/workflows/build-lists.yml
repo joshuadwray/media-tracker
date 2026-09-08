@@ -60,7 +60,8 @@ jobs:
 
           outputs="docs/lists/ docs/reading/ docs/watching/ docs/data/ \
                    docs/assets/ lists/covers-cache.json \
-                   reading/pagecount-cache.json"
+                   reading/pagecount-cache.json reading/pubyear-cache.json \
+                   watching/director-cache.json"
 
           for attempt in 1 2 3; do
             git fetch --quiet origin main

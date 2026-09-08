@@ -1,0 +1,782 @@
+{
+ "a drop of corruption|robert jackson bennett": {
+  "matched": "A Drop of Corruption",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "a guardian and a thief|megha majumdar": {
+  "matched": "A Guardian and a Thief",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "a tale of two kitties|dav pilkey": {
+  "matched": "A Tale of Two Kitties",
+  "source": null,
+  "year": null
+ },
+ "a trade of blood|robert jackson bennett": {
+  "matched": "a trade of blood",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "a/s/l|jeanne thornton": {
+  "matched": "A/S/L",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "all systems red|martha wells": {
+  "matched": "All Systems Red",
+  "source": "openlibrary-search",
+  "year": 2017
+ },
+ "annihilation|jeff vandermeer": {
+  "matched": "Annihilation",
+  "source": "openlibrary-search",
+  "year": 2014
+ },
+ "archive of unknown universes|ruben reyes jr.": {
+  "matched": "Archive of Unknown Universes",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "artificial condition|martha wells": {
+  "matched": "Artificial Condition",
+  "source": "openlibrary-search",
+  "year": 2018
+ },
+ "audition|katie kitamura": {
+  "matched": "Audition",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "babel|r.f. kuang": {
+  "matched": "Babel",
+  "source": "openlibrary-search",
+  "year": 2022
+ },
+ "babylon, south dakota|tom lin": {
+  "matched": "Babylon, South Dakota",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "back after this|linda holmes": {
+  "matched": "Back After This",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "bad bad girl|gish jen": {
+  "matched": "Bad Bad Girl",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "beautyland|marie-helene bertino": {
+  "matched": "Beautyland",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "beginning middle end|valeria luiselli": {
+  "matched": "beginning middle end",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "big chief|jon hickey": {
+  "matched": "Big Chief",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "bitter texas honey|ashley whitaker": {
+  "matched": "Bitter Texas Honey",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "brawl of the wild|dav pilkey": {
+  "matched": "Brawl of the Wild",
+  "source": null,
+  "year": null
+ },
+ "bring the house down|charlotte runcie": {
+  "matched": "Bring the House Down",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "bury our bones in the midnight soil|v.e. schwab": {
+  "matched": "Bury Our Bones in the Midnight Soil",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "canon|paige lewis": {
+  "matched": "Canon",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "cleavage: men, women, and the space between us|jennifer finney boylan": {
+  "matched": "Cleavage: Men, Women, and the Space Between Us",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "colored television|danzy senna": {
+  "matched": "Colored Television",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "country people|daniel mason": {
+  "matched": "country people",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "creation lake|rachel kushner": {
+  "matched": "Creation Lake",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "darkmotherland|samrat upadhyay": {
+  "matched": "Darkmotherland",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "dead but dreaming of electric sheep|paul tremblay": {
+  "matched": "dead but dreaming of electric sheep",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "death of the author|nnedi okorafor": {
+  "matched": "Death of the Author",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "death takes me|cristina rivera garza": {
+  "matched": "Death Takes Me",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "deep cuts|holly brickley": {
+  "matched": "Deep Cuts",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "demon copperhead|barbara kingsolver": {
+  "matched": "Demon Copperhead",
+  "source": "openlibrary-search",
+  "year": 2022
+ },
+ "dey|edwidge danticat": {
+  "matched": "dey",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "disappoint me|nicola dinan": {
+  "matched": "Disappoint Me",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "discontent|beatriz serrano": {
+  "matched": "Discontent",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "dog man and cat kid|dav pilkey": {
+  "matched": "Dog Man and Cat Kid",
+  "source": "openlibrary-search",
+  "year": 2017
+ },
+ "dog man unleashed|dav pilkey": {
+  "matched": "Dog Man Unleashed",
+  "source": "openlibrary-search",
+  "year": 2016
+ },
+ "dog man: mothering heights|dav pilkey": {
+  "matched": "Dog Man: Mothering Heights",
+  "source": "openlibrary-search",
+  "year": 2021
+ },
+ "dog man|dav pilkey": {
+  "matched": "Dog Man",
+  "source": "openlibrary-search",
+  "year": 2015
+ },
+ "dream count|chimamanda ngozi adichie": {
+  "matched": "Dream Count",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "earth 7|deb unferth": {
+  "matched": "earth 7",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "east of eden|john steinbeck": {
+  "matched": "east of eden",
+  "source": "openlibrary-search",
+  "year": 1952
+ },
+ "eating ashes|brenda navarro": {
+  "matched": "Eating Ashes",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "eradication|jonathan miles": {
+  "matched": "eradication",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "everyone who is gone is here: the united states, central america, and the making of a crisis|jonathan blitzer": {
+  "matched": "Everyone Who Is Gone Is Here: The United States, Central America, and the Making of a Crisis",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "exit zero|marie-helene bertino": {
+  "matched": "Exit Zero",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "fetch-22|dav pilkey": {
+  "matched": "Fetch-22",
+  "source": null,
+  "year": null
+ },
+ "flesh|david szalay": {
+  "matched": "Flesh",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "for whom the ball rolls|dav pilkey": {
+  "matched": "For Whom the Ball Rolls",
+  "source": null,
+  "year": null
+ },
+ "funny story|emily henry": {
+  "matched": "Funny Story",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "ghostroots|‘pemi aguda": {
+  "matched": "Ghostroots",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "gliff|ali smith": {
+  "matched": "Gliff",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "go gentle|maria semple": {
+  "matched": "Go Gentle",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "goddess complex|sanjena sathian": {
+  "matched": "Goddess Complex",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "godwin|joseph o'neill": {
+  "matched": "Godwin",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "good girl|aria aber": {
+  "matched": "Good Girl",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "good material|dolly alderton": {
+  "matched": "Good Material",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "great expectations|vinson cunningham": {
+  "matched": "Great Expectations",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "grime and punishment|dav pilkey": {
+  "matched": "Grime and Punishment",
+  "source": null,
+  "year": null
+ },
+ "harmattan season|tochi onyebuchi": {
+  "matched": "Harmattan Season",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "havoc|christopher bollen": {
+  "matched": "Havoc",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "headshot|rita bullwinkel": {
+  "matched": "Headshot",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "heart the lover|lily king": {
+  "matched": "Heart the Lover",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "heartwood|amity gaige": {
+  "matched": "Heartwood",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "helm|sarah hall": {
+  "matched": "Helm",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "house of day, house of night|olga tokarczuk": {
+  "matched": "House of Day, House of Night",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "hum|helen phillips": {
+  "matched": "Hum",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "hunchback|saou ichikawa": {
+  "matched": "Hunchback",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "i made you up inside my head|marta perez-carbonell": {
+  "matched": "i made you up inside my head",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "it will come back to you|sigrid nunez": {
+  "matched": "it will come back to you",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "james|percival everett": {
+  "matched": "James",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "john of john|douglas stuart": {
+  "matched": "john of john",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "land|maggie ofarrell": {
+  "matched": "land",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "lazarus man|richard price": {
+  "matched": "Lazarus Man",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "life in three dimensions: how curiosity, exploration, and exp...|shigehiro oishi": {
+  "matched": "Life in Three Dimensions: How Curiosity, Exploration, and Exp...",
+  "source": null,
+  "year": null
+ },
+ "lord of the fleas|dav pilkey": {
+  "matched": "Lord of the Fleas",
+  "source": null,
+  "year": null
+ },
+ "maggie; or, a man and a woman walk into a bar|katie yee": {
+  "matched": "Maggie; or, A Man and a Woman Walk Into a Bar",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "martyr!|kaveh akbar": {
+  "matched": "Martyr!",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "midnight in soap lake|matthew j. sullivan": {
+  "matched": "Midnight in Soap Lake",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "moby-dick or, the whale|herman melville": {
+  "matched": "Moby-Dick or, The Whale",
+  "source": "openlibrary-search",
+  "year": 2014
+ },
+ "mothers and sons|adam haslett": {
+  "matched": "Mothers and Sons",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "my brilliant friend|elena ferrante": {
+  "matched": "My Brilliant Friend",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "nesting|roisín o’donnell": {
+  "matched": "Nesting",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "no one is talking about this|patricia lockwood": {
+  "matched": "No One Is Talking About This",
+  "source": "openlibrary-search",
+  "year": 2021
+ },
+ "notes from a regicide|isaac fellman": {
+  "matched": "Notes from a Regicide",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "of mice and men|john steinbeck": {
+  "matched": "of mice and men",
+  "source": "openlibrary-search",
+  "year": 1937
+ },
+ "orbital|samantha harvey": {
+  "matched": "Orbital",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "owls and other fantasies: poems and essays|mary oliver": {
+  "matched": "Owls and Other Fantasies: Poems and Essays",
+  "source": "openlibrary-search",
+  "year": 2003
+ },
+ "palaver|bryan washington": {
+  "matched": "Palaver",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "rejection|tony tulathimutte": {
+  "matched": "Rejection",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "rental house|weike wang": {
+  "matched": "Rental House",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "rosencrantz and guildenstern are dead|tom stoppard": {
+  "matched": "rosencrantz and guildenstern are dead",
+  "source": "openlibrary-search",
+  "year": 1968
+ },
+ "run for the hills|kevin wilson": {
+  "matched": "Run for the Hills",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "seascraper|benjamin wood": {
+  "matched": "Seascraper",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "seek immediate shelter|vincent yu": {
+  "matched": "seek immediate shelter",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "sky daddy|kate folk": {
+  "matched": "Sky Daddy",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "splinters: a memoir|leslie jamison": {
+  "matched": "Splinters: A Memoir",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "stag dance|torrey peters": {
+  "matched": "Stag Dance",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "station eleven|emily st. john mandel": {
+  "matched": "Station Eleven",
+  "source": "openlibrary-search",
+  "year": 2014
+ },
+ "stone yard devotional|charlotte wood": {
+  "matched": "Stone Yard Devotional",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "stop me if you've heard this one|kristen arnett": {
+  "matched": "Stop Me If You've Heard This One",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "sunrise|tea obreht": {
+  "matched": "sunrise",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "swallow the ghost|eugenie montague": {
+  "matched": "Swallow the Ghost",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "swamplandia!|karen russell": {
+  "matched": "Swamplandia!",
+  "source": "openlibrary-search",
+  "year": 2000
+ },
+ "the antidote|karen russell": {
+  "matched": "The Antidote",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the art of vanishing|morgan pager": {
+  "matched": "The Art of Vanishing",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the bad guys episode 10|aaron blabey": {
+  "matched": "The Bad Guys Episode 10",
+  "source": null,
+  "year": null
+ },
+ "the bee sting|paul murray": {
+  "matched": "The Bee Sting",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "the book of belonging|mariko clark": {
+  "matched": "the book of belonging",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "the buffalo hunter hunter|stephen graham jones": {
+  "matched": "The Buffalo Hunter Hunter",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the corrections|jonathan franzen": {
+  "matched": "the corrections",
+  "source": "openlibrary-search",
+  "year": 2001
+ },
+ "the disappearers|marlon james": {
+  "matched": "the disappearers",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "the dream hotel|laila lalami": {
+  "matched": "The Dream Hotel",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the echoes|evie wyld": {
+  "matched": "The Echoes",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "the emperor of gladness|ocean vuong": {
+  "matched": "The Emperor of Gladness",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the ferryman and his wife|frode grytten": {
+  "matched": "The Ferryman and His Wife",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "the god of the woods|liz moore": {
+  "matched": "The God of the Woods",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "the heaven & earth grocery store|james mcbride": {
+  "matched": "The Heaven & Earth Grocery Store",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "the lion, the witch and the wardrobe|c.s. lewis": {
+  "matched": "The Lion, the Witch and the Wardrobe",
+  "source": "openlibrary-search",
+  "year": 1950
+ },
+ "the loneliness of sonia and sunny|kiran desai": {
+  "matched": "The Loneliness of Sonia and Sunny",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the masque of the red death|edgar allan poe": {
+  "matched": "The Masque of the Red Death",
+  "source": "openlibrary-search",
+  "year": 1922
+ },
+ "the ministry of time|kaliane bradley": {
+  "matched": "The Ministry of Time",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "the names|florence knapp": {
+  "matched": "The Names",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the natural way of things|charlotte wood": {
+  "matched": "The Natural Way of Things",
+  "source": "openlibrary-search",
+  "year": 2015
+ },
+ "the nickel boys|colson whitehead": {
+  "matched": "The Nickel Boys",
+  "source": "openlibrary-search",
+  "year": 2019
+ },
+ "the river has roots|amal el-mohtar": {
+  "matched": "The River Has Roots",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the scarlet shedder|dav pilkey": {
+  "matched": "The Scarlet Shedder",
+  "source": "openlibrary-search",
+  "year": 2020
+ },
+ "the slip|lucas schaefer": {
+  "matched": "The Slip",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "the tainted cup|robert jackson bennett": {
+  "matched": "The Tainted Cup",
+  "source": "openlibrary-search",
+  "year": 2024
+ },
+ "the usual desire to kill|camilla barnes": {
+  "matched": "The Usual Desire to Kill",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "the vaster wilds|lauren groff": {
+  "matched": "The Vaster Wilds",
+  "source": "openlibrary-search",
+  "year": 2023
+ },
+ "the vegetarian|han kang": {
+  "matched": "the vegetarian",
+  "source": "itunes-edition",
+  "year": 2016
+ },
+ "the white hot|quiara alegría hudes": {
+  "matched": "The White Hot",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "the witch|marie ndiaye": {
+  "matched": "the witch",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "theft|abdulrazak gurnah": {
+  "matched": "Theft",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "theory & practice|michelle de kretser": {
+  "matched": "Theory & Practice",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "there is no antimemetics division|qntm": {
+  "matched": "there is no antimemetics division",
+  "source": "openlibrary-search",
+  "year": 2008
+ },
+ "this is how you lose the time war|max gladstone, amal el-mohtar": {
+  "matched": "This Is How You Lose the Time War",
+  "source": "openlibrary-search",
+  "year": 2019
+ },
+ "this is where the serpent lives|daniyal mueenuddin": {
+  "matched": "This Is Where the Serpent Lives",
+  "source": "itunes-edition",
+  "year": 2026
+ },
+ "tilt|emma pattee": {
+  "matched": "Tilt",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "too soon|betty shamieh": {
+  "matched": "Too Soon",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "transcription|ben lerner": {
+  "matched": "transcription",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "trust|hernán díaz": {
+  "matched": "Trust",
+  "source": "openlibrary-search",
+  "year": 2022
+ },
+ "twist|colum mccann": {
+  "matched": "Twist",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "ultramarine|mariette navarro": {
+  "matched": "Ultramarine",
+  "source": "openlibrary-search",
+  "year": 2021
+ },
+ "vanishing world|sayaka murata": {
+  "matched": "Vanishing World",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "vantage point|sara sligar": {
+  "matched": "Vantage Point",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "vera, or faith|gary shteyngart": {
+  "matched": "Vera, or Faith",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "victorian psycho|virginia feito": {
+  "matched": "Victorian Psycho",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "vigil|george saunders": {
+  "matched": "Vigil",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "we do not part|han kang": {
+  "matched": "We Do Not Part",
+  "source": "itunes-edition",
+  "year": 2025
+ },
+ "where the axe is buried|ray nayler": {
+  "matched": "Where the Axe Is Buried",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "wild dark shore|charlotte mcconaghy": {
+  "matched": "Wild Dark Shore",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "will there ever be another you|patricia lockwood": {
+  "matched": "Will There Ever Be Another You",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
+ "winnie-the-pooh|a.a. milne": {
+  "matched": "Winnie-the-Pooh",
+  "source": "openlibrary-search",
+  "year": 2002
+ },
+ "you dreamed of empires|álvaro enrigue": {
+  "matched": "You Dreamed of Empires",
+  "source": "openlibrary-search",
+  "year": 2023
+ }
+}

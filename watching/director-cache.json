@@ -1,0 +1,549 @@
+{
+  "28-years-later": {
+    "director": [
+      "Danny Boyle"
+    ]
+  },
+  "a-big-bold-beautiful-journey": {
+    "director": [
+      "Kogonada"
+    ]
+  },
+  "a-bugs-life": {
+    "director": [
+      "John Lasseter"
+    ]
+  },
+  "a-house-of-dynamite": {
+    "director": [
+      "Kathryn Bigelow"
+    ]
+  },
+  "a-minecraft-movie": {
+    "director": [
+      "Jared Hess"
+    ]
+  },
+  "ad-astra-2019": {
+    "director": [
+      "James Gray"
+    ]
+  },
+  "aladdin": {
+    "director": [
+      "John Musker",
+      "Ron Clements"
+    ]
+  },
+  "avatar": {
+    "director": [
+      "James Cameron"
+    ]
+  },
+  "avatar-aang-the-last-airbender": {
+    "director": [
+      "Lauren Montgomery"
+    ]
+  },
+  "barbie": {
+    "director": [
+      "Greta Gerwig"
+    ]
+  },
+  "before-sunset": {
+    "director": [
+      "Richard Linklater"
+    ]
+  },
+  "black-bag-2025": {
+    "director": [
+      "Steven Soderbergh"
+    ]
+  },
+  "blue-moon-2025": {
+    "director": [
+      "Richard Linklater"
+    ]
+  },
+  "bugonia": {
+    "director": [
+      "Yorgos Lanthimos"
+    ]
+  },
+  "caught-by-the-tides": {
+    "director": [
+      "Jia Zhangke"
+    ]
+  },
+  "chip-n-dale-rescue-rangers": {
+    "director": [
+      "Akiva Schaffer"
+    ]
+  },
+  "conclave": {
+    "director": [
+      "Edward Berger"
+    ]
+  },
+  "coyote-vs-acme": {
+    "director": [
+      "Dave Green"
+    ]
+  },
+  "disclosure-day": {
+    "director": [
+      "Steven Spielberg"
+    ]
+  },
+  "dog-man": {
+    "director": [
+      "Peter Hastings"
+    ]
+  },
+  "eddington": {
+    "director": [
+      "Ari Aster"
+    ]
+  },
+  "eephus": {
+    "director": [
+      "Carson Lund"
+    ]
+  },
+  "f1": {
+    "director": [
+      "Joseph Kosinski"
+    ]
+  },
+  "fahrenheit-451-2018": {
+    "director": [
+      "Ramin Bahrani"
+    ]
+  },
+  "flow-2024": {
+    "director": [
+      "Gints Zilbalodis"
+    ]
+  },
+  "friendship-2024": {
+    "director": [
+      "Andrew DeYoung"
+    ]
+  },
+  "goat-2026": {
+    "director": [
+      "Tyree Dillihay"
+    ]
+  },
+  "gullivers-travels-2010": {
+    "director": [
+      "Rob Letterman"
+    ]
+  },
+  "hadestown-the-musical": {
+    "director": [
+      "Brett Sullivan"
+    ]
+  },
+  "hamnet": {
+    "director": [
+      "Chloé Zhao"
+    ]
+  },
+  "high-school-musical": {
+    "director": [
+      "Kenny Ortega"
+    ]
+  },
+  "highest-2-lowest": {
+    "director": [
+      "Spike Lee"
+    ]
+  },
+  "his-girl-friday": {
+    "director": [
+      "Howard Hawks"
+    ]
+  },
+  "home-alone": {
+    "director": [
+      "Chris Columbus"
+    ]
+  },
+  "if-i-had-legs-id-kick-you": {
+    "director": [
+      "Mary Bronstein"
+    ]
+  },
+  "in-the-mood-for-love": {
+    "director": [
+      "Wong Kar-Wai"
+    ]
+  },
+  "jay-kelly": {
+    "director": [
+      "Noah Baumbach"
+    ]
+  },
+  "kpop-demon-hunters": {
+    "director": [
+      "Chris Appelhans",
+      "Maggie Kang"
+    ]
+  },
+  "la-la-land": {
+    "director": [
+      "Damien Chazelle"
+    ]
+  },
+  "lilo-stitch-2025": {
+    "director": [
+      "Dean Fleischer Camp"
+    ]
+  },
+  "maddies-secret": {
+    "director": [
+      "John Early"
+    ]
+  },
+  "marty-supreme": {
+    "director": [
+      "Josh Safdie"
+    ]
+  },
+  "mary-beth-barone-galaxy-brain": {
+    "director": [
+      "Ky Newman"
+    ]
+  },
+  "materialists": {
+    "director": [
+      "Celine Song"
+    ]
+  },
+  "merrily-we-roll-along-2025": {
+    "director": [
+      "Maria Friedman"
+    ]
+  },
+  "mickey-17": {
+    "director": [
+      "Bong Joon Ho"
+    ]
+  },
+  "mile-end-kicks": {
+    "director": [
+      "Chandler Levack"
+    ]
+  },
+  "minions-monsters-2026": {
+    "director": [
+      "Pierre Coffin"
+    ]
+  },
+  "mission-impossible-the-final-reckoning": {
+    "director": [
+      "Christopher McQuarrie"
+    ]
+  },
+  "mother-mary-2026": {
+    "director": [
+      "David Lowery"
+    ]
+  },
+  "national-lampoons-christmas-vacation": {
+    "director": [
+      "Jeremiah S. Chechik"
+    ]
+  },
+  "next-to-normal": {
+    "director": [
+      "Michael Longhurst",
+      "Austin Shaw"
+    ]
+  },
+  "nickel-boys": {
+    "director": [
+      "RaMell Ross"
+    ]
+  },
+  "nirvanna-the-band-the-show-the-movie": {
+    "director": [
+      "Matt Johnson"
+    ]
+  },
+  "no-country-for-old-men": {
+    "director": [
+      "Joel Coen",
+      "Ethan Coen"
+    ]
+  },
+  "no-other-choice-2025": {
+    "director": [
+      "Park Chan-wook"
+    ]
+  },
+  "o-brother-where-art-thou": {
+    "director": [
+      "Joel Coen"
+    ]
+  },
+  "on-becoming-a-guinea-fowl": {
+    "director": [
+      "Rungano Nyoni"
+    ]
+  },
+  "one-battle-after-another": {
+    "director": [
+      "Paul Thomas Anderson"
+    ]
+  },
+  "paddington-in-peru": {
+    "director": [
+      "Dougal Wilson"
+    ]
+  },
+  "ponyo": {
+    "director": [
+      "Hayao Miyazaki"
+    ]
+  },
+  "project-hail-mary": {
+    "director": [
+      "Phil Lord",
+      "Christopher Miller"
+    ]
+  },
+  "robot-dreams": {
+    "director": [
+      "Pablo Berger"
+    ]
+  },
+  "roofman": {
+    "director": [
+      "Derek Cianfrance"
+    ]
+  },
+  "sentimental-value-2025": {
+    "director": [
+      "Joachim Trier"
+    ]
+  },
+  "sing-sing-2023": {
+    "director": [
+      "Greg Kwedar"
+    ]
+  },
+  "sinners-2025": {
+    "director": [
+      "Ryan Coogler"
+    ]
+  },
+  "snow-day": {
+    "director": [
+      "Chris Koch"
+    ]
+  },
+  "sorry-baby-2025": {
+    "director": [
+      "Eva Victor"
+    ]
+  },
+  "soul-2020": {
+    "director": [
+      "Pete Docter"
+    ]
+  },
+  "soundtrack-to-a-coup-detat": {
+    "director": [
+      "Johan Grimonprez"
+    ]
+  },
+  "splitsville": {
+    "director": [
+      "Michael Angelo Covino"
+    ]
+  },
+  "star-wars-episode-i-the-phantom-menace": {
+    "director": [
+      "George Lucas"
+    ]
+  },
+  "superman-2025": {
+    "director": [
+      "James Gunn"
+    ]
+  },
+  "the-bad-guys-2": {
+    "director": [
+      "Pierre Perifel"
+    ]
+  },
+  "the-bad-guys-2022": {
+    "director": [
+      "Pierre Perifel"
+    ]
+  },
+  "the-boy-and-the-heron": {
+    "director": [
+      "Hayao Miyazaki"
+    ]
+  },
+  "the-brutalist": {
+    "director": [
+      "Brady Corbet"
+    ]
+  },
+  "the-drama": {
+    "director": [
+      "Kristoffer Borgli"
+    ]
+  },
+  "the-greatest-showman": {
+    "director": [
+      "Michael Gracey"
+    ]
+  },
+  "the-green-knight": {
+    "director": [
+      "David Lowery"
+    ]
+  },
+  "the-history-of-sound": {
+    "director": [
+      "Oliver Hermanus"
+    ]
+  },
+  "the-invite-2026": {
+    "director": [
+      "Olivia Wilde"
+    ]
+  },
+  "the-lego-ninjago-movie": {
+    "director": [
+      "Charlie Bean",
+      "Bob Logan",
+      "Paul Fisher"
+    ]
+  },
+  "the-lost-city-of-z": {
+    "director": [
+      "James Gray"
+    ]
+  },
+  "the-many-adventures-of-winnie-the-pooh": {
+    "director": [
+      "John Lounsbery",
+      "Wolfgang Reitherman"
+    ]
+  },
+  "the-mastermind-2025": {
+    "director": [
+      "Kelly Reichardt"
+    ]
+  },
+  "the-naked-gun": {
+    "director": [
+      "Akiva Schaffer"
+    ]
+  },
+  "the-notebook": {
+    "director": [
+      "Nick Cassavetes"
+    ]
+  },
+  "the-odyssey-2026": {
+    "director": [
+      "Christopher Nolan"
+    ]
+  },
+  "the-personal-history-of-david-copperfield": {
+    "director": [
+      "Armando Iannucci"
+    ]
+  },
+  "the-phoenician-scheme": {
+    "director": [
+      "Wes Anderson"
+    ]
+  },
+  "the-princess-bride": {
+    "director": [
+      "Rob Reiner"
+    ]
+  },
+  "the-secret-agent-2025": {
+    "director": [
+      "Kleber Mendonça Filho"
+    ]
+  },
+  "the-smashing-machine-2025": {
+    "director": [
+      "Benny Safdie"
+    ]
+  },
+  "the-substance": {
+    "director": [
+      "Coralie Fargeat"
+    ]
+  },
+  "the-super-mario-galaxy-movie": {
+    "director": [
+      "Aaron Horvath",
+      "Michael Jelenic"
+    ]
+  },
+  "the-testament-of-ann-lee": {
+    "director": [
+      "Mona Fastvold"
+    ]
+  },
+  "tony-2026": {
+    "director": [
+      "Matt Johnson"
+    ]
+  },
+  "train-dreams": {
+    "director": [
+      "Clint Bentley"
+    ]
+  },
+  "wake-up-dead-man": {
+    "director": [
+      "Rian Johnson"
+    ]
+  },
+  "wallace-gromit-vengeance-most-fowl": {
+    "director": [
+      "Nick Park",
+      "Merlin Crossingham"
+    ]
+  },
+  "warfare": {
+    "director": [
+      "Ray Mendoza",
+      "Alex Garland"
+    ]
+  },
+  "wicked-for-good": {
+    "director": [
+      "Jon M. Chu"
+    ]
+  },
+  "widows-2018": {
+    "director": [
+      "Steve McQueen"
+    ]
+  },
+  "wuthering-heights-2026": {
+    "director": [
+      "Emerald Fennell"
+    ]
+  },
+  "zootopia-2": {
+    "director": [
+      "Jared Bush",
+      "Byron Howard"
+    ]
+  }
+}

@@ -23,21 +23,16 @@ from __future__ import annotations
 import csv
 import hashlib
 import io
-import json
 import re
 import time
 import zipfile
 from pathlib import Path
 
 from . import http
-from .letterboxd_sync import LOG_PATH, dump_log, entry_key, load_log
+from .letterboxd_sync import (LOG_PATH, dump_log, entry_key,
+                              film_details, load_log)
 
-FILM_URL = "https://letterboxd.com/film/{}/"
 SLUG_RE = re.compile(r"/film/([^/]+)")
-TMDB_RE = re.compile(r'data-tmdb-id="(\d+)"')
-LD_RE = re.compile(r'<script type="application/ld\+json">\s*'
-                   r"(?:/\*.*?\*/)?\s*(\{.*?\})\s*(?:/\*.*?\*/)?\s*"
-                   r"</script>", re.S)
 DELAY = 1.0  # be polite; ~2 requests per film
 
 
@@ -52,20 +47,13 @@ def _read_csv(zf: zipfile.ZipFile, name: str) -> list[dict]:
 
 
 def _film_details(sess, slug: str) -> tuple[int | None, str | None]:
-    """(tmdb_id, poster_url) from the film page."""
-    resp = http.get(sess, FILM_URL.format(slug))
-    resp.raise_for_status()
-    html = resp.text
-    m = TMDB_RE.search(html)
-    tmdb_id = int(m.group(1)) if m else None
-    poster = None
-    m = LD_RE.search(html)
-    if m:
-        try:
-            poster = json.loads(m.group(1)).get("image")
-        except json.JSONDecodeError:
-            pass
-    return tmdb_id, poster
+    """(tmdb_id, poster_url) from the film page.
+
+    Thin wrapper over the shared reader in letterboxd_sync, which pulls the
+    director out of the same JSON-LD block for the director cache.
+    """
+    d = film_details(sess, slug)
+    return d["tmdb_id"], d["poster"]
 
 
 def run(path: Path, since: str = "2025-01-01", log=print) -> int:
