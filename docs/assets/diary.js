@@ -27,6 +27,7 @@
   var SNAP = 'mt_snapshot';   // {stamp, diary, lists}
   var PEND = 'mt_pending';    // {savedAt, log} — the whole log, as PUT
   var PENDL = 'mt_pending_lists';  // {stem: {savedAt, items}} — as PUT
+  var LOPT = 'mt_listopts';   // list-view sort/filter controls
   var PEND_TTL_MS = 7 * 24 * 3600 * 1000;
   var DOWS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -490,10 +491,161 @@
     show();
   }
 
-  function renderFlatList(d) {
-    var today = todayISO(), rows = {};
+  // ------------------------------------------- list view: sort + filters
+  //
+  // All of it runs over the bundle already in memory — 156 book entries and
+  // 120 viewings is a couple of array passes, not a build step. The Sort
+  // control picks the SHAPE of the view: 'diary' keeps the day-by-day
+  // session log this page has always been, anything else collapses to one
+  // row per work. Filters apply to both shapes.
+
+  var SORTS = [['diary', 'diary'], ['logged', 'date logged'],
+               ['rating', 'rating'], ['title', 'title'],
+               ['release', 'release year']];
+  var MINS = [['', 'any'], ['5', '★ 5'], ['4.5', '★ 4½+'],
+              ['4', '★ 4+'], ['3.5', '★ 3½+'],
+              ['3', '★ 3+'], ['2', '★ 2+'],
+              ['unrated', 'unrated']];
+
+  function defOpts() {
+    return { sort: 'diary', type: 'all', min: '', yr: 'all',
+             from: '', to: '', rel: 'all', q: '' };
+  }
+  var lopts = null;   // read from hash/localStorage on the first render
+
+  function parseHash(h) {
+    var out = {};
+    String(h || '').replace(/^#/, '').split('&').forEach(function (kv) {
+      if (!kv) return;
+      var i = kv.indexOf('='), k = i < 0 ? kv : kv.slice(0, i),
+        v = i < 0 ? '' : kv.slice(i + 1);
+      try { out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' ')); }
+      catch (e) { /* malformed escape — drop the pair, keep the rest */ }
+    });
+    return out;
+  }
+
+  // A hash wins outright (that is what makes a view linkable); otherwise the
+  // last-used controls come back, so the phone reopens where you left it.
+  function readOpts() {
+    var o = defOpts(), hash = parseHash(location.hash), stored = lsGet(LOPT);
+    var src = Object.keys(hash).length ? hash : (stored || {});
+    for (var k in o) if (src[k] != null) o[k] = String(src[k]);
+    var ok = false;
+    for (var i = 0; i < SORTS.length; i++) if (SORTS[i][0] === o.sort) ok = true;
+    if (!ok) o.sort = 'diary';
+    if (o.type !== 'book' && o.type !== 'film') o.type = 'all';
+    return o;
+  }
+
+  function optsDirty() {
+    var d = defOpts();
+    for (var k in d) if (lopts[k] !== d[k]) return true;
+    return false;
+  }
+
+  function writeOpts() {
+    lsSet(LOPT, lopts);
+    var d = defOpts(), parts = [];
+    for (var k in d)
+      if (lopts[k] !== d[k]) parts.push(k + '=' + encodeURIComponent(lopts[k]));
+    // replaceState, not a hash assignment: the URL stays copy-pasteable
+    // without every keystroke becoming a back-button stop.
+    try {
+      history.replaceState(null, '',
+        parts.length ? '#' + parts.join('&')
+                     : location.pathname + location.search);
+    } catch (e) { /* file:// and friends */ }
+  }
+
+  // Accent- and punctuation-blind, same spirit as matching._author_ok on the
+  // Python side: a phone's curly apostrophe or a dropped accent still matches.
+  function fold(s) {
+    s = String(s == null ? '' : s).toLowerCase();
+    try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    catch (e) { /* no Unicode normalize: fall back to the raw string */ }
+    return s.replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function sortTitle(t) { return fold(t).replace(/^(the|a|an) /, ''); }
+
+  function lastDay(b) {
+    var d = '';
+    for (var i = 0; i < b.sessions.length; i++)
+      if (b.sessions[i][0] > d) d = b.sessions[i][0];
+    return d;
+  }
+
+  function thumb(src) {
+    return src ? "<img src='" + esc(src) + "' alt='' loading='lazy'>"
+      : "<div class='dot'></div>";
+  }
+
+  // One shape for books and films so the predicates below are written once.
+  function itemsOf(d) {
+    var out = [];
     d.books.forEach(function (b) {
-      var perDay = {}, sessPage = {}, prev = 0;
+      out.push({ kind: 'book', src: b, title: b.title, sub: b.author || '',
+                 date: b.finished || lastDay(b) || b.started || '',
+                 rating: b.rating, year: null, cover: b.cover,
+                 href: esc(b.base) + '.html',
+                 dedup: b.key || cacheKey(b.title, b.author) });
+    });
+    d.films.forEach(function (f) {
+      out.push({ kind: 'film', src: f, title: f.title, sub: '',
+                 date: f.watched || '', rating: f.rating, year: f.year,
+                 cover: f.poster,
+                 href: '../watching/' + esc(f.slug) + '.html',
+                 dedup: 'f:' + (f.slug || cacheKey(f.title, f.year)) });
+    });
+    return out;
+  }
+
+  function predicates() {
+    var terms = fold(lopts.q) ? fold(lopts.q).split(' ') : [];
+    var min = lopts.min, relOn = lopts.rel !== 'all', lo = '', hi = '';
+    if (lopts.yr === 'custom') { lo = lopts.from || ''; hi = lopts.to || ''; }
+    else if (lopts.yr !== 'all') { lo = lopts.yr + '-01-01'; hi = lopts.yr + '-12-31'; }
+    return {
+      relOn: relOn,
+      dateOk: function (day) {
+        if (!day) return !(lo || hi);
+        return !(lo && day < lo) && !(hi && day > hi);
+      },
+      metaOk: function (it) {
+        if (lopts.type !== 'all' && lopts.type !== it.kind) return false;
+        // A release filter can only mean films today — books carry no
+        // publication year anywhere in the repo yet.
+        if (relOn) {
+          if (it.year == null) return false;
+          if (String(Math.floor(it.year / 10) * 10) !== lopts.rel) return false;
+        }
+        if (min === 'unrated') { if (it.rating != null) return false; }
+        else if (min && (it.rating == null || it.rating < +min)) return false;
+        if (terms.length) {
+          // Match against the spaced form AND the squashed one, so a query
+          // typed without the apostrophe ("odonnell") still finds
+          // "O’Donnell" — the punctuation half of matching._author_ok.
+          var hay = fold(it.title + ' ' + it.sub), tight = hay.replace(/ /g, '');
+          for (var i = 0; i < terms.length; i++)
+            if (hay.indexOf(terms[i]) < 0 && tight.indexOf(terms[i]) < 0)
+              return false;
+        }
+        return true;
+      }
+    };
+  }
+
+  // --------------------------------------------------- list view: rows
+
+  // The diary proper: one row per session / per viewing, under day headings.
+  // This is the original renderFlatList body, with the two filter gates added.
+  function sessionRows(d, p) {
+    var today = todayISO(), rows = {}, books = 0, films = 0, sessions = 0;
+    d.books.forEach(function (b) {
+      if (!p.metaOk({ kind: 'book', title: b.title, sub: b.author || '',
+                      rating: b.rating, year: null })) return;
+      var perDay = {}, sessPage = {}, prev = 0, shown = false;
       b.sessions.forEach(function (s) {
         var day = s[0], page = s[1];
         var delta = Math.max(0, page - prev);
@@ -506,11 +658,11 @@
         var c = perDay[b.finished] || [0, 0];
         perDay[b.finished] = [c[0] + (b.pageCount - prev), b.pageCount];
       }
-      var th = b.cover ? "<img src='" + esc(b.cover) + "' alt='' loading='lazy'>"
-        : "<div class='dot'></div>";
+      var th = thumb(b.cover);
       for (var day in perDay) {
         var delta = perDay[day][0], at = perDay[day][1];
         if (delta <= 0) continue;   // corrections read no pages
+        if (!p.dateOk(day)) continue;
         var prog = b.pageCount ? 'p.' + at + ' / ' + b.pageCount : 'p.' + at;
         var right = [prog + ' <b>+' + delta + '</b>'];
         if (b.status === 'finished' && b.finished === day) {
@@ -534,12 +686,16 @@
           : '';
         (rows[day] = rows[day] || []).push(
           "<div class='rowwrap'>" + row + btn + '</div>');
+        sessions++; shown = true;
       }
+      if (shown) books++;
     });
 
     d.films.forEach(function (f) {
-      var th = f.poster ? "<img src='" + esc(f.poster) + "' alt='' loading='lazy'>"
-        : "<div class='dot'></div>";
+      if (!p.metaOk({ kind: 'film', title: f.title, sub: '',
+                      rating: f.rating, year: f.year })) return;
+      if (!p.dateOk(f.watched)) return;
+      var th = thumb(f.poster);
       var heading = f.year ? f.title + ' (' + f.year + ')' : f.title;
       var right = [];
       if (f.rating != null) right.push(stars(f.rating));
@@ -550,29 +706,218 @@
         + '../watching/' + esc(f.slug) + ".html'>" + th
         + "<div class='rt'>" + esc(heading) + '</div>'
         + "<div class='rm'>" + right.join(' &middot; ') + '</div></a>');
+      films++;
     });
 
-    var out = [];
-    out.push("<a class='back' href='log.html'>log a session</a>");
-    out.push('<h1>Diary</h1>');
-    out.push("<div class='vt'><a href='index.html'>calendar</a> &middot; "
-      + '<strong>list</strong></div>');
-    // Fixed to the current year here — this view is one long scroll, so
-    // there is no "month you're looking at" to follow.
-    out.push(yearRow(yearTotals(d.books, d.films), today.slice(0, 4)));
-    out.push("<div class='dl'>");
-    var days = Object.keys(rows).sort().reverse();
+    var out = [], days = Object.keys(rows).sort().reverse();
     days.forEach(function (day) {
       var label = MONTHS[+day.slice(5, 7) - 1] + ' ' + (+day.slice(8, 10));
       if (day.slice(0, 4) !== today.slice(0, 4)) label += ', ' + day.slice(0, 4);
       out.push('<h3>' + label + '</h3>');
       out.push(rows[day].join(''));
     });
-    if (!days.length)
-      out.push("<div class='meta'>no sessions logged yet &mdash; "
-        + "<a href='log.html'>log one</a></div>");
-    out.push('</div>');
-    return out.join('');
+    return { html: out.join(''), empty: !days.length,
+             count: plural(sessions, 'session') + ' · '
+                    + plural(films, 'viewing') };
+  }
+
+  // Everything else: one row per work, deduped across re-reads and rewatches
+  // the way the shared book page is (latest read owns the rating).
+  function itemRows(d, p) {
+    var seen = {}, keep = [];
+    itemsOf(d).forEach(function (it) {
+      if (!p.metaOk(it) || !p.dateOk(it.date)) return;
+      var prev = seen[it.dedup];
+      if (prev) {
+        prev.n++;
+        if ((it.date || '') >= (prev.date || '')) {
+          prev.date = it.date; prev.rating = it.rating;
+          prev.src = it.src; prev.cover = it.cover || prev.cover;
+        }
+        return;
+      }
+      it.n = 1; seen[it.dedup] = it; keep.push(it);
+    });
+
+    var s = lopts.sort;
+    keep.sort(function (a, b) {
+      if (s === 'title') return sortTitle(a.title) < sortTitle(b.title) ? -1 : 1;
+      if (s === 'rating') {
+        var ar = a.rating == null ? -1 : a.rating, br = b.rating == null ? -1 : b.rating;
+        if (ar !== br) return br - ar;
+      } else if (s === 'release') {
+        var ay = a.year == null ? -1 : a.year, by = b.year == null ? -1 : b.year;
+        if (ay !== by) return by - ay;
+      }
+      if ((a.date || '') !== (b.date || '')) return (a.date || '') < (b.date || '') ? 1 : -1;
+      return sortTitle(a.title) < sortTitle(b.title) ? -1 : 1;
+    });
+
+    var out = [], books = 0, films = 0;
+    keep.forEach(function (it) {
+      if (it.kind === 'book') books++; else films++;
+      var heading = it.kind === 'film' && it.year
+        ? it.title + ' (' + it.year + ')' : it.title;
+      var by = it.sub ? " <span class='by'>&mdash; " + esc(it.sub) + '</span>' : '';
+      var right = [];
+      if (it.rating != null) right.push(stars(it.rating));
+      if (it.n > 1) right.push('×' + it.n);
+      if (it.kind === 'book' && it.src.status === 'reading') right.push('reading');
+      else if (it.kind === 'book' && it.src.status === 'abandoned') right.push('abandoned');
+      if (it.date) right.push(it.date);
+      out.push("<a class='row"
+        + (it.kind === 'film' ? ' film' : '')
+        + (it.src.syncing ? ' syncing' : '')
+        + "' style='text-decoration:none;color:inherit' href='" + it.href + "'>"
+        + thumb(it.cover)
+        + "<div class='rt'>" + esc(heading) + by + '</div>'
+        + "<div class='rm'>" + right.join(' &middot; ') + '</div></a>');
+    });
+    return { html: out.join(''), empty: !keep.length,
+             count: plural(books, 'book') + ' · ' + plural(films, 'film') };
+  }
+
+  function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+
+  function buildRows(d) {
+    var p = predicates();
+    var r = lopts.sort === 'diary' ? sessionRows(d, p) : itemRows(d, p);
+    if (r.empty)
+      r.html = "<div class='meta'>" + (optsDirty()
+        ? 'nothing matches these filters.'
+        : 'no sessions logged yet &mdash; <a href="log.html">log one</a>')
+        + '</div>';
+    var note = r.empty ? '' : r.count;
+    if (note && p.relOn && lopts.type !== 'film')
+      note += " <span class='meta'>· books have no publication year yet</span>";
+    r.note = note;
+    return r;
+  }
+
+  // ------------------------------------------------ list view: the bar
+
+  function opt(v, label, cur) {
+    return "<option value='" + esc(v) + "'"
+      + (String(cur) === String(v) ? ' selected' : '') + '>' + esc(label)
+      + '</option>';
+  }
+
+  function filterBar(d) {
+    var years = {}, decades = {};
+    d.books.forEach(function (b) {
+      for (var day in dailyPages(b)) years[day.slice(0, 4)] = 1;
+      if (b.started) years[b.started.slice(0, 4)] = 1;
+    });
+    d.films.forEach(function (f) {
+      if (f.watched) years[f.watched.slice(0, 4)] = 1;
+      if (f.year != null) decades[Math.floor(f.year / 10) * 10] = 1;
+    });
+    var ys = Object.keys(years).sort().reverse();
+    var ds = Object.keys(decades).sort(function (a, b) { return b - a; });
+
+    var sort = [], min = [], yr = [], rel = [];
+    SORTS.forEach(function (s) { sort.push(opt(s[0], s[1], lopts.sort)); });
+    MINS.forEach(function (m) { min.push(opt(m[0], m[1], lopts.min)); });
+    yr.push(opt('all', 'any year', lopts.yr));
+    ys.forEach(function (y) { yr.push(opt(y, y, lopts.yr)); });
+    yr.push(opt('custom', 'custom…', lopts.yr));
+    rel.push(opt('all', 'any release', lopts.rel));
+    ds.forEach(function (x) { rel.push(opt(x, x + 's', lopts.rel)); });
+
+    var on = function (kind) {
+      return lopts.type === 'all' || lopts.type === kind ? ' on' : '';
+    };
+    return "<div class='dfilt'>"
+      + "<input id='fq' type='search' placeholder='search title or author' "
+      + "value='" + esc(lopts.q) + "'>"
+      + "<div class='frow'>"
+      + "<select id='fsort' title='sort'>" + sort.join('') + '</select>'
+      + "<button class='chip" + on('book') + "' id='fbook'>books</button>"
+      + "<button class='chip" + on('film') + "' id='ffilm'>films</button>"
+      + "<select id='fmin' title='minimum rating'>" + min.join('') + '</select>'
+      + "<select id='fyr' title='year logged'>" + yr.join('') + '</select>'
+      + (ds.length ? "<select id='frel' title='release decade'>" + rel.join('')
+                     + '</select>' : '')
+      + "<button class='chip clear' id='fclear'"
+      + (optsDirty() ? '' : ' hidden') + '>clear</button>'
+      + '</div>'
+      + "<div class='frow rng'" + (lopts.yr === 'custom' ? '' : ' hidden') + '>'
+      + "<input type='date' id='ffrom' value='" + esc(lopts.from) + "'>"
+      + "<span class='meta'>to</span>"
+      + "<input type='date' id='fto' value='" + esc(lopts.to) + "'>"
+      + '</div></div>';
+  }
+
+  function renderFlatList(d) {
+    if (!lopts) lopts = readOpts();
+    var r = buildRows(d);
+    return "<a class='back' href='log.html'>log a session</a>"
+      + '<h1>Diary</h1>'
+      + "<div class='vt'><a href='index.html'>calendar</a> &middot; "
+      + '<strong>list</strong></div>'
+      // Fixed to the current year here — this view is one long scroll, so
+      // there is no "month you're looking at" to follow.
+      + yearRow(yearTotals(d.books, d.films), todayISO().slice(0, 4))
+      + filterBar(d)
+      + "<div class='dcount' id='mt-count'>" + r.note + '</div>'
+      + "<div class='dl' id='mt-rows'>" + r.html + '</div>';
+  }
+
+  // Only the rows are swapped on a control change — re-rendering the whole
+  // root would blow away the caret in the search box mid-word.
+  function wireDiaryFilters(view) {
+    var bar = document.querySelector('.dfilt');
+    if (!bar) return;
+    var q = document.getElementById('fq'), timer = null;
+
+    function repaint() {
+      var rowsEl = document.getElementById('mt-rows'),
+        cntEl = document.getElementById('mt-count');
+      if (!rowsEl) return;
+      var r = buildRows(view);
+      rowsEl.innerHTML = r.html;
+      if (cntEl) cntEl.innerHTML = r.note;
+      var cl = document.getElementById('fclear');
+      if (cl) cl.hidden = !optsDirty();
+      var rng = bar.querySelector('.rng');
+      if (rng) rng.hidden = lopts.yr !== 'custom';
+      document.getElementById('fbook').className =
+        'chip' + (lopts.type === 'all' || lopts.type === 'book' ? ' on' : '');
+      document.getElementById('ffilm').className =
+        'chip' + (lopts.type === 'all' || lopts.type === 'film' ? ' on' : '');
+      if (window.mtListPage) window.mtListPage();   // rebind the ✎ buttons
+    }
+    function apply() { writeOpts(); repaint(); }
+
+    function sel(id, key) {
+      var el = document.getElementById(id);
+      if (el) el.onchange = function () { lopts[key] = el.value; apply(); };
+    }
+    sel('fsort', 'sort'); sel('fmin', 'min'); sel('fyr', 'yr');
+    sel('frel', 'rel'); sel('ffrom', 'from'); sel('fto', 'to');
+
+    // Checkbox metaphor: turning one kind off leaves the other; turning the
+    // last one off would show nothing, so it is refused.
+    function toggle(kind) {
+      var other = kind === 'book' ? 'film' : 'book';
+      lopts.type = lopts.type === 'all' ? other : 'all';
+      apply();
+    }
+    document.getElementById('fbook').onclick = function () { toggle('book'); };
+    document.getElementById('ffilm').onclick = function () { toggle('film'); };
+
+    if (q) q.oninput = function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { lopts.q = q.value; apply(); }, 150);
+    };
+    var cl = document.getElementById('fclear');
+    if (cl) cl.onclick = function () {
+      lopts = defOpts(); writeOpts();
+      var root = document.getElementById('mt-root');
+      root.innerHTML = renderFlatList(view);
+      if (window.mtListPage) window.mtListPage();
+      wireDiaryFilters(view);
+    };
   }
 
   function statusLine(b) {
@@ -796,6 +1141,7 @@
       } else if (page === 'flatlist') {
         root.innerHTML = renderFlatList(view);
         if (window.mtListPage) window.mtListPage();
+        wireDiaryFilters(view);
       } else {
         var res = renderBook(view, document.body.getAttribute('data-slug'));
         root.innerHTML = res.html;

@@ -130,3 +130,23 @@ td, th { padding: 4px 12px 4px 0; text-align: left; font-size: .9rem;
        border: 1px solid var(--line); border-radius: 8px;
        background: transparent; color: inherit; cursor: pointer; }
 
+/* list-view sort/filter bar */
+.dfilt { margin: 14px 0 4px; }
+.dfilt input[type=search] { font: inherit; font-size: .9rem; padding: 8px 10px;
+       width: 100%; box-sizing: border-box; border: 1px solid var(--line);
+       border-radius: 8px; background: transparent; color: inherit; }
+.dfilt .frow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+       margin-top: 6px; }
+.dfilt select, .dfilt input[type=date] { font: inherit; font-size: .85rem;
+       padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px;
+       background: transparent; color: inherit; cursor: pointer; }
+.dfilt .rng[hidden] { display: none; }
+.chip { font: inherit; font-size: .85rem; padding: 6px 12px; cursor: pointer;
+       border: 1px solid var(--line); border-radius: 999px;
+       background: transparent; color: var(--mut); }
+.chip.on { border-color: var(--accent); color: var(--accent);
+       background: var(--surface); }
+.chip.clear { border-style: dashed; margin-left: auto; }
+.chip[hidden] { display: none; }
+.dcount { font-size: .8rem; color: var(--mut); margin-top: 8px; }
+
