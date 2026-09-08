@@ -2084,14 +2084,15 @@
       "title": "land",
       "author": "maggie ofarrell",
       "slug": "land",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3.5,
       "page_count": null,
       "started": "2026-09-02",
-      "finished": null,
+      "finished": "2026-09-08",
       "sessions": [
         "2026-09-03 33",
-        "2026-09-07 249"
+        "2026-09-07 249",
+        "2026-09-08 400"
       ]
     },
     {
