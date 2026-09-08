@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-07 18:13 UTC
+# Media tracker report — 2026-09-08 01:06 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -16,9 +16,9 @@
     - also: print book in denton library catalog — 4 on order, 6 holds ahead
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 52 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 6 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
     - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 48 holds
-  - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
+  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: print book in Lewisville library catalog — 1 on shelf · Silver, Josh, 1989- author.
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
@@ -26,7 +26,7 @@
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 83 holds (~8 mo)
     - also: ebook in Libby catalog (Houston) — 0/8 available, 213 holds (~1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 59 holds (~9 mo)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 60 holds (~10 mo)
     - also: audiobook in Libby catalog (Houston) — 0/8 available, 222 holds (~1.1 yr)
   - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
@@ -35,8 +35,8 @@
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **the age of calamities — senaa ahmad**
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 7 holds (~4 mo) · Senaa Ahmad
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · Senaa Ahmad
-  - sync: gap 42d > 14d loan — suspend the listening hold ~42d for reading
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk) · Senaa Ahmad
+  - sync: gap 56d > 14d loan — suspend the listening hold ~56d for reading
 
 ## Source status
 - ✅ `denton-library`: 4 observation(s)
@@ -58,5 +58,5 @@ On the watchlist, not matched at any source yet. This is the normal resting plac
 - fjord (2026) — waiting 49d
 - paper tiger (2026) — waiting 49d
 - wild horse nine (2026) — waiting 49d
-- Peck and Peck — Garmus — waiting 27d
+- Peck and Peck — Garmus — waiting 28d
 
