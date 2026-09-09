@@ -28,6 +28,29 @@ def fold(text: str) -> str:
     return "".join(c for c in text if not unicodedata.combining(c))
 
 
+# Sequels are the one place a title reliably gets respelled between the
+# watchlist and a marquee: "dune part 3" typed by hand vs "Dune: Part
+# Three" as the studio bills it scored 0.769 against the 0.88 threshold,
+# so a season's biggest film went unseen at every source at once
+# (verified 2026-09-09 against live Cinemark and Alamo feeds). Both sides
+# run through normalize(), so folding the words to digits only ever
+# merges two spellings of the same number. Roman numerals stay alone on
+# purpose: "X" and "V" are real film titles, not part numbers.
+_NUMBER_WORDS = {
+    "one": "1", "two": "2", "three": "3", "four": "4", "five": "5",
+    "six": "6", "seven": "7", "eight": "8", "nine": "9", "ten": "10",
+    "eleven": "11", "twelve": "12", "thirteen": "13", "fourteen": "14",
+    "fifteen": "15", "sixteen": "16", "seventeen": "17", "eighteen": "18",
+    "nineteen": "19", "twenty": "20",
+}
+
+
+def _fold_numbers(text: str) -> str:
+    if not text:
+        return text
+    return " ".join(_NUMBER_WORDS.get(t, t) for t in text.split())
+
+
 def normalize(text: str) -> str:
     text = fold(text)
     text = text.lower()
@@ -42,7 +65,7 @@ def normalize(text: str) -> str:
         if text.startswith(art):
             text = text[len(art):]
             break
-    return text
+    return _fold_numbers(text)
 
 
 def search_query(title: str) -> str:
@@ -74,7 +97,19 @@ def titles_match(wanted: str, found: str, threshold: float = 0.88) -> bool:
             longer[len(shorter) + 1:]
         ):
             return True
+    # Sequel numbers are one character in a long string, so the fuzzy
+    # ratio cannot see them: "dune part 3" scores 0.909 against "dune
+    # part 2" and sails past the threshold. Any number a title carries is
+    # load-bearing, so the ratio only gets to decide among titles that
+    # already agree on their numbers. The prefix rule above is exempt --
+    # it is what lets "cars" match "cars 20th anniversary".
+    if _numbers(a) != _numbers(b):
+        return False
     return SequenceMatcher(None, a, b).ratio() >= threshold
+
+
+def _numbers(normalized: str) -> list[str]:
+    return [t for t in normalized.split() if t.isdigit()]
 
 
 _SEQUEL_WORDS = {
@@ -134,4 +169,12 @@ def text_contains_title(page_text: str, title: str) -> bool:
 
 
 def normalize_blob(text: str) -> str:
-    return re.sub(r"[^a-z0-9]+", " ", fold(text).lower()).strip()
+    """Loose normalization for haystacks: page text and author strings.
+
+    Folds number words exactly like normalize() does. It has to: a
+    watched title becomes the needle via normalize() and the page becomes
+    the haystack via this, so folding on only one side would mean a
+    marquee reading "Dune: Part Three" no longer contains its own title.
+    """
+    blob = re.sub(r"[^a-z0-9]+", " ", fold(text).lower()).strip()
+    return _fold_numbers(blob)

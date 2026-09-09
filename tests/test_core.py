@@ -24,6 +24,40 @@ def test_titles_match_fuzzy():
     assert not titles_match("The Substance", "The Subtle Art of Not")
 
 
+def test_titles_match_spelled_out_sequel_numbers():
+    """A watchlist typed with digits has to meet a marquee spelled out.
+
+    "dune part 3" vs "Dune: Part Three" scored 0.769 against the 0.88
+    threshold, so the film was invisible at Cinemark AND Alamo at once
+    while advance tickets were on sale (2026-09-09).
+    """
+    assert titles_match("dune part 3", "Dune: Part Three")
+    assert titles_match("john wick chapter 4", "John Wick: Chapter Four")
+    assert titles_match("Ocean's 11", "Ocean's Eleven")
+
+
+def test_titles_match_rejects_the_wrong_sequel():
+    """The fuzzy ratio cannot see a sequel number: one character in
+    "dune part 3" vs "dune part 2" still scores 0.909."""
+    assert not titles_match("dune part 3", "Dune: Part Two")
+    assert not titles_match("dune part 3", "Dune: Part One")
+    assert not titles_match("Practical Magic", "Practical Magic 2")
+
+
+def test_titles_match_number_guard_spares_prefix_matches():
+    """The guard is on the fuzzy branch only, so an anniversary or
+    edition suffix still matches the plain title."""
+    assert titles_match("Cars", "Cars 20th Anniversary")
+    assert titles_match("Nickel Boys", "Nickel Boys: A Novel")
+
+
+def test_number_words_do_not_break_ordinary_titles():
+    assert titles_match("X", "X")
+    assert titles_match("V for Vendetta", "V for Vendetta")
+    assert titles_match("Three Billboards Outside Ebbing, Missouri",
+                        "Three Billboards Outside Ebbing Missouri")
+
+
 def test_text_contains_title_word_boundaries():
     page = "NOW PLAYING: The Substance — Fri 7:30pm | Coming soon: Eephus"
     assert text_contains_title(page, "The Substance")
@@ -1141,3 +1175,59 @@ def test_pinnable_only_when_an_id_is_on_offer():
     ])
     # Matched nothing anywhere — there was never a decision to make.
     assert not _pinnable([])
+
+
+def _health_state(tmp_path):
+    from tracker.state import State
+    return State(tmp_path / "state.json")
+
+
+def test_source_health_stays_quiet_for_a_flaky_run(tmp_path):
+    """Sites flake constantly; one bad run must not push anything."""
+    st = _health_state(tmp_path)
+    assert st.note_source_result("amc", "HTTP 403") is None
+    assert st.note_source_result("amc", None) is None
+
+
+def test_source_health_reports_a_dead_source_once(tmp_path):
+    """AMC failed every run for seven days and told nobody (2026-09-02)."""
+    from tracker.state import DEAD_AFTER_RUNS
+    st = _health_state(tmp_path)
+    alarms = [st.note_source_result("amc", "HTTP 403")
+              for _ in range(DEAD_AFTER_RUNS + 4)]
+    assert alarms.count("died") == 1
+    assert alarms[DEAD_AFTER_RUNS - 1] == "died"
+    assert alarms[DEAD_AFTER_RUNS:] == [None] * 4
+
+
+def test_source_health_reports_recovery_only_if_it_complained(tmp_path):
+    from tracker.state import DEAD_AFTER_RUNS
+    st = _health_state(tmp_path)
+    for _ in range(DEAD_AFTER_RUNS):
+        st.note_source_result("amc", "HTTP 403")
+    assert st.note_source_result("amc", None) == "recovered"
+    # Recovery clears the record, so the next good run says nothing.
+    assert st.note_source_result("amc", None) is None
+    assert st.failing_since("amc") is None
+
+
+def test_source_health_survives_a_save_reload(tmp_path):
+    """The counter only works if it spans runs -- CI is a fresh process."""
+    from tracker.state import DEAD_AFTER_RUNS, State
+    path = tmp_path / "state.json"
+    for _ in range(DEAD_AFTER_RUNS - 1):
+        st = State(path)
+        assert st.note_source_result("amc", "HTTP 403") is None
+        st.save()
+    st = State(path)
+    assert st.note_source_result("amc", "HTTP 403") == "died"
+
+
+def test_page_text_and_title_fold_numbers_the_same_way():
+    """normalize() makes the needle and normalize_blob() the haystack, so
+    folding number words on one side only would hide a title from a page
+    that plainly lists it."""
+    page = "Now playing: Dune: Part Three, plus Tony and Dreamgirls."
+    assert text_contains_title(page, "dune part 3")
+    assert text_contains_title(page, "Dune Part Three")
+    assert not text_contains_title(page, "dune part 2")
