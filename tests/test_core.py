@@ -1231,3 +1231,67 @@ def test_page_text_and_title_fold_numbers_the_same_way():
     assert text_contains_title(page, "dune part 3")
     assert text_contains_title(page, "Dune Part Three")
     assert not text_contains_title(page, "dune part 2")
+
+
+# --- webedia (Landmark Inwood) -----------------------------------------
+
+_WEBEDIA_NODES = [
+    # Dated at Inwood -> a sighting.
+    {"title": "Onslaught", "theaters": [
+        {"th": "X02KC", "firstShowtimeDate": "2026-09-09"},
+        {"th": "X00D9", "firstShowtimeDate": "2026-09-09"},
+    ]},
+    # On Inwood's roster but never scheduled. The roster mixes
+    # announced-but-undated films with bookings that ended months ago, so
+    # treating it as "playing" would fire on films long gone.
+    {"title": "Asteroid City", "theaters": [
+        {"th": "X02KC", "firstShowtimeDate": None},
+    ]},
+    # Dated, but at a different Landmark.
+    {"title": "Some LA Thing", "theaters": [
+        {"th": "X00D9", "firstShowtimeDate": "2026-09-09"},
+    ]},
+    # Two rows for the same theatre: earliest date wins.
+    {"title": "Double Booked", "theaters": [
+        {"th": "X02KC", "firstShowtimeDate": "2026-10-30"},
+        {"th": "X02KC", "firstShowtimeDate": "2026-10-02"},
+    ]},
+    {"title": None, "theaters": [{"th": "X02KC", "firstShowtimeDate": "2026-09-09"}]},
+]
+
+
+def test_webedia_films_for_theatre():
+    from tracker.sources.webedia import _films_for
+    films = _films_for(_WEBEDIA_NODES, "X02KC")
+    assert films == {"Onslaught": "2026-09-09", "Double Booked": "2026-10-02"}
+
+
+def test_webedia_ignores_undated_roster_entries():
+    """The undated roster is not a now-playing list."""
+    from tracker.sources.webedia import _films_for, _booked_count
+    assert "Asteroid City" not in _films_for(_WEBEDIA_NODES, "X02KC")
+    # ...but it still counts as booked, which is what tells a wrong
+    # theater_id (roster 0) from a quiet week (roster >0, dated 0).
+    assert _booked_count(_WEBEDIA_NODES, "X02KC") == 4
+
+
+def test_webedia_theatre_code_is_case_insensitive():
+    from tracker.sources.webedia import _films_for
+    assert _films_for([{"title": "X", "theaters": [
+        {"th": "x02kc", "firstShowtimeDate": "2026-09-09"}]}], "X02KC") == {
+        "X": "2026-09-09"}
+
+
+def test_webedia_wrong_theatre_yields_nothing_not_everything():
+    from tracker.sources.webedia import _films_for, _booked_count
+    assert _films_for(_WEBEDIA_NODES, "ZZZZZ") == {}
+    assert _booked_count(_WEBEDIA_NODES, "ZZZZZ") == 0
+
+
+def test_webedia_survives_junk_nodes():
+    """Schema drift must degrade to 'found nothing', never to a crash."""
+    from tracker.sources.webedia import _films_for
+    junk = [{}, {"title": "A"}, {"title": "B", "theaters": None},
+            {"title": "C", "theaters": [{}]},
+            {"title": "D", "theaters": [{"th": "X02KC"}]}]
+    assert _films_for(junk, "X02KC") == {}

@@ -171,6 +171,21 @@ sources:
   #     - name: Angelika Dallas
   #       url: https://angelikafilmcenter.com/dallas
 
+  inwood:
+    kind: webedia
+    # Landmark Inwood, Oak Cliff-adjacent Dallas arthouse — Landmark's only
+    # DFW location (26 nationwide, one in Texas). Worth watching because it
+    # takes single-house-per-market Netflix limited runs, which nothing else
+    # in the metro carries.
+    #
+    # No showtime data reaches the server HTML, but the site is Gatsby and
+    # its static-query JSON is public: one blob holds the whole circuit's
+    # films with the theatre codes each is booked at. See webedia.py.
+    # theater_id is case-insensitive here but canonically upper.
+    site: https://www.landmarktheatres.com
+    theater_id: X02KC
+    label: Landmark Inwood
+
   cinemark:
     kind: cinemark
     theatres:

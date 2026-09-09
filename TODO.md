@@ -231,14 +231,56 @@ crossing DEAD_AFTER_RUNS (3, ~1.5 days at two runs/day) pushes one
 nothing repeats in between. The report's status line carries the
 outage age and run count so a flake reads differently from a wall.
 
+## Advance / promo screenings across the metroplex (idea, unshaped)
+Not the chains' "advance tickets on sale" — the studio-driven, lightly
+publicized press and word-of-mouth screenings held before release to
+seed buzz. Different sourcing problem from everything the tracker does
+today, which is why it's parked as an idea rather than a task.
+
+What already exists: `chain_theaters.py` matches
+`card__movie--advanced-tickets` and sets an `advance` flag, so Cinemark
+and AMC already say "advance tickets on sale at ...". `drafthouse.py`
+has no advance detection at all despite its feed carrying
+`advance-screening-*` presentation slugs — so the chain-side signal is
+real but uneven, and evening it out is the cheap half of this.
+
+Where the actual promo screenings live (probed 2026-09-09):
+- **Gofobo** — the big one, and Dallas-based. Homepage is up and
+  server-renders upcoming titles (two of which, Heart of the Beast and
+  Forgotten Island, also show in Cinemark's advance list). No
+  `__NEXT_DATA__`, no `/api/` paths, no graphql in the markup;
+  `/screenings` 500s. Per-city listings are very likely login-gated.
+  Best lead by far.
+- **SeeItFirst**, **Film Metro** — DNS failed from here; may be dead.
+- **allianceco.com** — now an engineering firm. Dead lead, don't
+  re-probe it.
+- **Central Track** (Dallas alt-weekly) is alive and sometimes lists
+  these; the `pages` source would cover it for nearly nothing.
+
+Why it's a different beast:
+- It's **discovery, not matching**. Every Observation hangs off a
+  watchlist item_key; a metro-wide screening feed has no item to hang
+  on, so it needs its own output surface.
+- These screenings are **RSVP/code-gated and fill in hours**. A
+  twice-daily cron is the wrong cadence for "an RSVP just opened",
+  which is the only moment that matters.
+- Titles are often withheld — "Secret Movie Series September 14" and
+  "$5 Secret Movie 9/14/26" are already in the Cinemark and Landmark
+  feeds — so title matching, the tracker's whole spine, degrades.
+
+Open question before any of this gets built: the output surface. A push
+per screening doesn't fit a non-watchlist firehose; a docs/ page or a
+digest probably does.
+
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a
   reCAPTCHA-gated bearer token.
-- Landmark Inwood (Dallas arthouse) — candidate, not built. The site is
-  a Webedia front end (cms-assets.webediamovies.pro); showtimes come
-  from its API, so it needs the same reverse-engineering as Angelika
-  but without the reCAPTCHA. Best remaining lead if more arthouse
-  coverage is ever wanted.
+- ~~Landmark Inwood (Dallas arthouse).~~ Done 2026-09-09 —
+  `tracker/sources/webedia.py`. It turned out not to need the API at
+  all: the site is Gatsby, and Gatsby publishes its static query
+  results as public JSON (`/page-data/sq/d/<hash>.json`). One blob is
+  the whole circuit's film list with the theatre codes each is booked
+  at. No auth anywhere in the path.
 - Alamo Drafthouse — source exists and works, deliberately left
   disabled; see the rationale in watchlist.yaml before reopening it.
 - ISBN → bib_id bridge — demoted 2026-07-19: cached ISBNs mostly

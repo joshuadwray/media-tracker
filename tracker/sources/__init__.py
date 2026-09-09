@@ -8,5 +8,6 @@ from . import (  # noqa: F401
     libby,
     sirsi_enterprise,
     tmdb_streaming,
+    webedia,
 )
 from .base import Source, build_sources  # noqa: F401
