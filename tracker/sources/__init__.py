@@ -6,6 +6,7 @@ from . import (  # noqa: F401
     drafthouse,
     generic_page,
     libby,
+    readingcinemas,
     sirsi_enterprise,
     tmdb_streaming,
     webedia,

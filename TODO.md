@@ -273,8 +273,20 @@ per screening doesn't fit a non-watchlist firehose; a docs/ page or a
 digest probably does.
 
 ## Older / ambient
-- Angelika Dallas showtimes — parked: CSR React app, backend needs a
-  reCAPTCHA-gated bearer token.
+- ~~Angelika Dallas showtimes.~~ Done 2026-09-09 —
+  `tracker/sources/readingcinemas.py`. The two-month "parked: needs a
+  reCAPTCHA-gated bearer token" note was simply wrong. reCAPTCHA is in
+  the bundle but only on login/signup/payment; the catalog path never
+  touches it. The token is handed out unauthenticated by
+  `GET /settings/<country_id>` (`data.settings.token`), and
+  `/films?...&status=nowShowing` with it returns 61 dated films with
+  full showdates. Two requests, no credentials.
+  Worth remembering *how* that was found, since the static analysis all
+  came up empty (no Cognito SDK, no oauth2/token, no embedded secret,
+  no token route among the app's 99 endpoint constants): a same-origin
+  iframe, with its `contentWindow` XHR/fetch re-patched every 3ms while
+  the 2.8MB bundle downloaded, caught the cold-boot sequence and showed
+  the first call was already authenticated.
 - ~~Landmark Inwood (Dallas arthouse).~~ Done 2026-09-09 —
   `tracker/sources/webedia.py`. It turned out not to need the API at
   all: the site is Gatsby, and Gatsby publishes its static query

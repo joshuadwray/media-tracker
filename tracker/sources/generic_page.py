@@ -16,12 +16,15 @@ Config:
       url: https://www.themodern.org/films
 
 A page only qualifies if the titles are in the SERVER-rendered HTML.
-Checked 2026-09-09 and rejected: Angelika Dallas, Landmark Inwood (both
-client-rendered — Inwood is a Webedia webediamovies.pro front end whose
-showtimes come from an API worth a look if it's ever wanted), Studio
-Movie Grill and Cinepolis (Cloudflare 403), Movie Tavern (Incapsula),
-LOOK and the DMA (empty shells). Grand Berry's domain lapsed and now
-serves SEO spam — it was in this list as an example; don't re-add it.
+Checked 2026-09-09 and rejected: Studio Movie Grill and Cinepolis
+(Cloudflare 403), Movie Tavern (Incapsula), LOOK and the DMA (empty
+shells). Grand Berry's domain lapsed and now serves SEO spam — it was in
+this list as an example; don't re-add it.
+
+Angelika and Landmark Inwood were rejected here too, then turned out to
+have clean data paths that don't involve page text at all — see
+readingcinemas.py and webedia.py. Worth the reflex: when a theatre page
+renders client-side, look for what feeds it before giving up on it.
 """
 from __future__ import annotations
 

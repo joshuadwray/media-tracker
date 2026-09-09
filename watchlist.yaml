@@ -161,15 +161,20 @@ sources:
       - name: The Modern (Magnolia at the Modern)
         url: https://www.themodern.org/films
 
-  # Angelika Dallas: parked. The site is a client-rendered React app (page
-  # text is just "Movie Information | Tickets | Showtimes") and its backend
-  # (production-api.readingcinemas.com) requires a bearer token behind a
-  # reCAPTCHA flow — no clean, polite way to watch it as of 2026-07.
-  # angelika:
-  #   kind: pages
-  #   pages:
-  #     - name: Angelika Dallas
-  #       url: https://angelikafilmcenter.com/dallas
+  angelika:
+    kind: readingcinemas
+    # Angelika Dallas — the metro's main arthouse house. Parked from
+    # 2026-07 on a wrong reading: the bearer token its API wants is NOT
+    # behind the reCAPTCHA (that's only on login/signup/payment), it's
+    # handed out unauthenticated by /settings/<country_id>. See
+    # readingcinemas.py. Unparked 2026-09-09.
+    #
+    # cinema_id is quoted because the leading zeros are part of the id.
+    # No Angelika Plano: it closed, and its stale sitemap entries carry
+    # zero sessions — don't add it back off the sitemap alone.
+    cinema_id: "0000000009"
+    country_id: 6
+    label: Angelika Dallas
 
   inwood:
     kind: webedia

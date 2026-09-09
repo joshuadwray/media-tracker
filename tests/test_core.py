@@ -1295,3 +1295,55 @@ def test_webedia_survives_junk_nodes():
             {"title": "C", "theaters": [{}]},
             {"title": "D", "theaters": [{"th": "X02KC"}]}]
     assert _films_for(junk, "X02KC") == {}
+
+
+# --- readingcinemas (Angelika Dallas) -----------------------------------
+
+_RC_PAYLOAD = [
+    {"name": "DUNE: PART THREE", "theater": "0000000009", "showdates": [
+        {"date": "2026-12-18"}, {"date": "2026-12-17"}]},
+    # Undated: the API's announcement rows carry no showdates.
+    {"name": "SOME ANNOUNCEMENT", "theater": "0000000009", "showdates": []},
+    # Echoed back for a different cinema — scoping failed upstream.
+    {"name": "OTHER HOUSE", "theater": "0000000123", "showdates": [
+        {"date": "2026-09-09"}]},
+    {"name": "   ", "theater": "0000000009", "showdates": [{"date": "2026-09-09"}]},
+]
+
+
+def test_readingcinemas_parses_dated_films():
+    from tracker.sources.readingcinemas import _parse_films
+    assert _parse_films(_RC_PAYLOAD, "0000000009") == {
+        "DUNE: PART THREE": ["2026-12-17", "2026-12-18"]}
+
+
+def test_readingcinemas_skips_other_cinemas_and_undated():
+    from tracker.sources.readingcinemas import _parse_films
+    films = _parse_films(_RC_PAYLOAD, "0000000009")
+    assert "OTHER HOUSE" not in films      # wrong theater echoed back
+    assert "SOME ANNOUNCEMENT" not in films  # no showdates == can't go
+
+
+def test_readingcinemas_error_body_raises_instead_of_reading_empty():
+    """The API answers 200 with a raw Lambda error for a bad parameter
+    combination. Parsed quietly that becomes a permanent, confident zero."""
+    import pytest
+    from tracker.sources.readingcinemas import _parse_films
+    with pytest.raises(RuntimeError, match="API error"):
+        _parse_films({"errorType": "TypeError",
+                      "errorMessage": "Cannot read property 'x'",
+                      "trace": []}, "0000000009")
+
+
+def test_readingcinemas_unwraps_data_envelope():
+    from tracker.sources.readingcinemas import _parse_films
+    assert _parse_films({"statusCode": 200, "data": _RC_PAYLOAD},
+                        "0000000009") == {
+        "DUNE: PART THREE": ["2026-12-17", "2026-12-18"]}
+
+
+def test_readingcinemas_survives_junk_nodes():
+    from tracker.sources.readingcinemas import _parse_films
+    junk = [None, {}, {"name": "A"}, {"name": "B", "showdates": None},
+            {"name": "C", "showdates": [{}]}, "nonsense"]
+    assert _parse_films(junk, "0000000009") == {}
