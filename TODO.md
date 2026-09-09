@@ -205,9 +205,42 @@
   (incomplete, laggy) marker of Denton ownership. Tracker coverage is
   the union of both sources, which is what we want.
 
+## AMC blocked by Cloudflare (2026-09-02, still down)
+Every AMC theatre page returns a hard 403 ("Sorry, you have been
+blocked" — a WAF block, not a JS challenge, so no cookie or wait
+clears it). Not header-fixable: verified 2026-09-09 that a current
+Chrome UA, full sec-ch-ua/Sec-Fetch set and Accept-Encoding all get
+the identical 5486-byte block page, which points at TLS/JA3
+fingerprinting rather than anything we send. Fails from a home IP too,
+so it isn't GitHub's runners being blocklisted.
+The one open door: `api.amctheatres.com` is NOT blocked — it answers
+400 `{"errors":[{"code":1,"message":"The request requires vendor
+authentication"}]}`, i.e. it wants an `X-AMC-Vendor-Key`. Keys come
+from developers.amctheatres.com (itself 403 to us — register from a
+real browser). That's a user action, so AMC stays dark until someone
+decides: get a key and write an `amc-api` source, or drop the three
+theatres. Meanwhile the outage is at least *visible* now (see below).
+
+## Silent scraper death — FIXED 2026-09-09
+AMC died on 2026-09-02 and nothing said so for seven days: partial
+source failures don't fail the run (correctly — sites flake), and the
+error only ever landed in state/report.md, which nobody reads on a
+phone. Now `state.health` counts consecutive failed runs per source;
+crossing DEAD_AFTER_RUNS (3, ~1.5 days at two runs/day) pushes one
+"scraper down" note, recovery pushes one "scraper recovered", and
+nothing repeats in between. The report's status line carries the
+outage age and run count so a flake reads differently from a wall.
+
 ## Older / ambient
 - Angelika Dallas showtimes — parked: CSR React app, backend needs a
   reCAPTCHA-gated bearer token.
+- Landmark Inwood (Dallas arthouse) — candidate, not built. The site is
+  a Webedia front end (cms-assets.webediamovies.pro); showtimes come
+  from its API, so it needs the same reverse-engineering as Angelika
+  but without the reCAPTCHA. Best remaining lead if more arthouse
+  coverage is ever wanted.
+- Alamo Drafthouse — source exists and works, deliberately left
+  disabled; see the rationale in watchlist.yaml before reopening it.
 - ISBN → bib_id bridge — demoted 2026-07-19: cached ISBNs mostly
   cover already-read books, not watchlist adds; author_matches + the
   pin queue already fixed the false-positive problem. Revisit only if

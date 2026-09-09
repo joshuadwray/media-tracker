@@ -26,6 +26,16 @@ Plus one flat map, item_key -> ISO timestamp:
            the other two, it survives an item leaving the list (see
            note_watching) and is pruned by age alone.
 
+One more map, source_id -> failure record:
+
+  health — how many consecutive runs a source has errored on, and
+           whether we've already said so. A source that dies stays
+           silent otherwise: partial failures don't fail the run (sites
+           flake constantly) and errors only ever reached state/report.md,
+           which nobody reads on a phone. AMC went dark behind Cloudflare
+           on 2026-09-02 and was still dark seven days later, found only
+           because someone thought to ask.
+
 A key is "new" if unseen or if its last-seen timestamp is older than
 GAP_DAYS — this re-notifies when an item disappears and reappears (e.g.
 a library book's consortium copy returns from loan). For `media` that
@@ -44,6 +54,11 @@ from .models import Observation
 PRUNE_DAYS = 180
 GAP_DAYS = 2
 
+# Consecutive failed runs before a source is called dead. Two runs a day,
+# so this is roughly a day and a half — long enough to ride out a flaky
+# afternoon, short enough that a season's openings aren't missed.
+DEAD_AFTER_RUNS = 3
+
 # Legacy `seen` events (f"{format} in catalog") -> medium, used once to seed
 # the media map on upgrade. Without this the first run after the upgrade
 # would push every book/medium already sitting in a catalog.
@@ -57,6 +72,7 @@ class State:
         self.media: dict[str, dict[str, str]] = {}
         self.venues: dict[str, dict[str, str]] = {}
         self.watching: dict[str, str] = {}
+        self.health: dict[str, dict] = {}
         self.meta: dict = {}
         if path.exists():
             try:
@@ -65,12 +81,14 @@ class State:
                 self.media = data.get("media", {})
                 self.venues = data.get("venues", {})
                 self.watching = data.get("watching", {})
+                self.health = data.get("health", {})
                 self.meta = data.get("meta", {})
             except (json.JSONDecodeError, OSError):
                 self.seen = {}
                 self.media = {}
                 self.venues = {}
                 self.watching = {}
+                self.health = {}
                 self.meta = {}
         # Migrate old string values to {first, last} dicts.
         for fp, val in self.seen.items():
@@ -250,6 +268,35 @@ class State:
         # removal, and half the removals here are an edit in disguise.
         return len(doomed)
 
+    def note_source_result(self, source_id: str, error: str | None,
+                           now: datetime | None = None) -> str | None:
+        """Record one run's outcome for a source; return an alarm to push.
+
+        Returns "died" the run a source crosses DEAD_AFTER_RUNS (once per
+        outage, never again while it stays down), "recovered" the run it
+        comes back after having been reported dead, and None otherwise --
+        which is the answer for a single flaky run, the normal case.
+        """
+        stamp = (now or datetime.now(timezone.utc)).isoformat(timespec="seconds")
+        rec = self.health.get(source_id) or {}
+        if error is None:
+            self.health.pop(source_id, None)
+            return "recovered" if rec.get("alerted") else None
+        runs = int(rec.get("runs", 0)) + 1
+        self.health[source_id] = {
+            "runs": runs,
+            "since": rec.get("since") or stamp,
+            "last_error": error,
+            "alerted": bool(rec.get("alerted")) or runs >= DEAD_AFTER_RUNS,
+        }
+        if runs >= DEAD_AFTER_RUNS and not rec.get("alerted"):
+            return "died"
+        return None
+
+    def failing_since(self, source_id: str) -> str | None:
+        rec = self.health.get(source_id)
+        return rec.get("since") if rec else None
+
     def prune(self, now: datetime | None = None) -> int:
         cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)
         pruned = 0
@@ -267,7 +314,8 @@ class State:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(
             json.dumps({"meta": self.meta, "seen": self.seen, "media": self.media,
-                        "venues": self.venues, "watching": self.watching},
+                        "venues": self.venues, "watching": self.watching,
+                        "health": self.health},
                        indent=2, sort_keys=True)
             + "\n"
         )

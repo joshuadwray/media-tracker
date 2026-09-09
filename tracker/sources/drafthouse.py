@@ -118,12 +118,22 @@ def _parse_feed(data: Any) -> tuple[dict[str, str], dict[str, list[dict]], dict[
         if slug and title:
             films[slug] = title
 
+    # Cinemas hang off the market object, not the root -- the root has no
+    # "cinemas" key at all, so the old root-level lookup always came back
+    # empty and every notification said "Alamo 0707" instead of "Alamo
+    # Denton". Root is still checked first in case the feed ever hoists
+    # them up. `tracker probe --source alamo` prints the count: 5 for DFW.
+    cinema_sources = [root.get("cinemas")]
+    for m in _as_list(root.get("market")):
+        cinema_sources.append(m.get("cinemas"))
+
     cinemas: dict[str, str] = {}
-    for c in _as_list(root.get("cinemas")):
-        cid = str(c.get("id") or c.get("cinemaId") or "")
-        name = c.get("name") or c.get("title")
-        if cid and name:
-            cinemas[cid] = name
+    for group in cinema_sources:
+        for c in _as_list(group):
+            cid = str(c.get("id") or c.get("cinemaId") or "")
+            name = c.get("name") or c.get("title")
+            if cid and name:
+                cinemas.setdefault(cid, name)
 
     sessions_by_film: dict[str, list[dict]] = defaultdict(list)
     for s in _as_list(root.get("sessions")):

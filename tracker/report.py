@@ -150,7 +150,14 @@ def build_report(config: Config, results: list[SourceResult],
     for r in results:
         if r.error:
             first_line = r.error.strip().splitlines()[0]
-            lines.append(f"- ❌ `{r.source}`: {first_line}")
+            # How long it's been broken is the part that decides whether to
+            # act: one flaky run reads the same as a week of Cloudflare 403s
+            # without it.
+            runs = (state.health.get(r.source) or {}).get("runs")
+            age = _failing_age(state.failing_since(r.source))
+            plural = "" if runs == 1 else "s"
+            since = f" (failing {age}, {runs} run{plural})" if age and runs else ""
+            lines.append(f"- ❌ `{r.source}`{since}: {first_line}")
         else:
             lines.append(f"- ✅ `{r.source}`: {len(r.observations)} observation(s)")
     lines.append("")
@@ -167,3 +174,18 @@ def build_report(config: Config, results: list[SourceResult],
         lines.append("")
 
     return "\n".join(lines) + "\n"
+
+
+def _failing_age(since: str | None) -> str | None:
+    """"3d" / "5h" since a source first errored, for the status line."""
+    if not since:
+        return None
+    try:
+        started = datetime.fromisoformat(since)
+    except ValueError:
+        return None
+    if started.tzinfo is None:
+        started = started.replace(tzinfo=timezone.utc)
+    delta = datetime.now(timezone.utc) - started
+    hours = int(delta.total_seconds() // 3600)
+    return f"{delta.days}d" if delta.days else f"{hours}h"

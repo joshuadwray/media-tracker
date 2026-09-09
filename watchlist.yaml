@@ -153,6 +153,13 @@ sources:
     pages:
       - name: Texas Theatre
         url: https://thetexastheatre.com/
+      # Magnolia at the Modern — the Fort Worth arthouse run, plus the
+      # museum's repertory series. The /films page server-renders a real
+      # calendar (title + weekday + date + time per screening), so the
+      # plain text scan finds titles; verified 2026-09-09. This is where
+      # a limited release lands in the metro if it isn't at the Angelika.
+      - name: The Modern (Magnolia at the Modern)
+        url: https://www.themodern.org/films
 
   # Angelika Dallas: parked. The site is a client-rendered React app (page
   # text is just "Movie Information | Tickets | Showtimes") and its backend
@@ -187,7 +194,17 @@ sources:
         url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes
 
   # Alamo has the cleanest showtime feed in the metro (one JSON request
-  # covers every DFW location) — flip enabled to true to include it.
+  # covers all five DFW locations) — flip enabled to true to include it.
+  # Left OFF deliberately. Measured 2026-09-09: 20 titles were playing
+  # that no Cinemark carried, but the overwhelming majority were
+  # repertory (First Blood, The Nutty Professor, Twilight, Basic
+  # Instinct, Angel Heart, A Chinese Ghost Story) — unique, but not what
+  # the watchlist is for. The one watchlist hit, Camp Miasma at Cedars,
+  # was Alamo carrying a title LATE in its run, not first: no marginal
+  # warning value. Cost side: it produced 27 of 32 sightings in that dry
+  # run, 24 of them Dune Part Three repeated per cinema per date.
+  # Re-measure with this same comparison before flipping it, don't
+  # re-argue it from the feed's tidiness.
   alamo:
     kind: drafthouse
     market: dfw

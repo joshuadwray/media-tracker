@@ -1,8 +1,8 @@
 """Generic theater-page watcher.
 
-Most single-screen indie theaters (Texas Theatre, The Modern, Grand
-Berry, ...) have no API worth reverse-engineering — but their "now
-playing / coming soon" page is one URL, and all we need to know is
+Most single-screen indie theaters (Texas Theatre, The Modern, ...) have
+no API worth reverse-engineering — but their "now playing / coming
+soon" page is one URL, and all we need to know is
 "does a watched title now appear on it?". This source fetches each
 configured page, strips it to text, and looks for watched movie titles
 as normalized phrases. When a title appears, that's the signal to go
@@ -14,6 +14,14 @@ Config:
       url: https://thetexastheatre.com/
     - name: The Modern (Magnolia at the Modern)
       url: https://www.themodern.org/films
+
+A page only qualifies if the titles are in the SERVER-rendered HTML.
+Checked 2026-09-09 and rejected: Angelika Dallas, Landmark Inwood (both
+client-rendered — Inwood is a Webedia webediamovies.pro front end whose
+showtimes come from an API worth a look if it's ever wanted), Studio
+Movie Grill and Cinepolis (Cloudflare 403), Movie Tavern (Incapsula),
+LOOK and the DMA (empty shells). Grand Berry's domain lapsed and now
+serves SEO spam — it was in this list as an example; don't re-add it.
 """
 from __future__ import annotations
 

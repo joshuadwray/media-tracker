@@ -11,7 +11,7 @@ from .dashboard import build_dashboard
 from .models import NotifyGroup, Observation, SourceResult
 from .report import build_report
 from .sources import build_sources
-from .state import State
+from .state import DEAD_AFTER_RUNS, State
 
 
 @dataclass
@@ -22,6 +22,8 @@ class CheckRun:
     report: str = ""
     pushed: bool = False
     push_error: str | None = None
+    # (source_id, "died"|"recovered", message) for this run's health changes.
+    health_alarms: list[tuple[str, str, str]] = field(default_factory=list)
 
     @property
     def all_failed(self) -> bool:
@@ -48,6 +50,23 @@ def run_check(config: Config, *, source_id: str | None = None,
             elif r.source in ok_sources:
                 state.touch(obs, dates=obs_dates)
     run.notify_groups = _notify_groups(run, state, ok_sources)
+    # A scraper that dies is the one failure the watchlist can't show you:
+    # there's nothing missing from the report, just a source that stopped
+    # having opinions. Tracked across runs so one flaky afternoon stays
+    # quiet and a real outage speaks up exactly twice -- once when it's
+    # confirmed dead, once when it comes back.
+    for r in run.results:
+        alarm = state.note_source_result(r.source, r.error)
+        if alarm == "died":
+            run.health_alarms.append(
+                (r.source, alarm,
+                 f"{r.source} has failed {DEAD_AFTER_RUNS} runs in a row: "
+                 f"{r.error}")
+            )
+        elif alarm == "recovered":
+            run.health_alarms.append(
+                (r.source, alarm, f"{r.source} is scraping again")
+            )
     state.prune()
     # Before the report: it dates the "still looking" entries from this map,
     # and an item added since the last run should read 0d, not blank.
@@ -78,6 +97,19 @@ def run_check(config: Config, *, source_id: str | None = None,
                 print(f"WARNING: ntfy push failed: {exc}", file=sys.stderr)
         else:
             run.push_error = "NTFY_TOPIC not set"
+
+    if run.health_alarms and not no_notify and notify.push_configured():
+        for source_id, kind, message in run.health_alarms:
+            recovered = kind == "recovered"
+            try:
+                notify.send_note(
+                    "scraper recovered" if recovered else "scraper down",
+                    message,
+                    tags="white_check_mark" if recovered else "warning",
+                )
+            except Exception as exc:  # noqa: BLE001 — same: never fail the run
+                print(f"WARNING: health push failed for {source_id}: {exc}",
+                      file=sys.stderr)
     return run
 
 
