@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-08 17:13 UTC
+# Media tracker report — 2026-09-09 01:12 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -20,15 +20,15 @@
     - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 50 holds
   - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Fruit Fly — Silver, Josh**
-  - reading: print book in Lewisville library catalog — 1 on shelf · Silver, Josh, 1989- author.
-    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
+  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 83 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 217 holds (~1 yr)
+    - also: print book in Lewisville library catalog — checked out, 2 holds
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 84 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 219 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 60 holds (~10 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 225 holds (~1.1 yr)
-  - sync: gap 137d > 21d loan — suspend the reading hold ~137d for listening
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 59 holds (~9 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 227 holds (~1.1 yr)
+  - sync: gap 116d > 21d loan — suspend the reading hold ~116d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
@@ -53,10 +53,10 @@
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 51d
-- club kid (2026) — waiting 49d
-- dune part 3 (2026) — waiting 49d
-- fjord (2026) — waiting 49d
-- paper tiger (2026) — waiting 49d
-- wild horse nine (2026) — waiting 49d
-- Peck and Peck — Garmus — waiting 28d
+- club kid (2026) — waiting 50d
+- dune part 3 (2026) — waiting 50d
+- fjord (2026) — waiting 50d
+- paper tiger (2026) — waiting 50d
+- wild horse nine (2026) — waiting 50d
+- Peck and Peck — Garmus — waiting 29d
 
