@@ -7,6 +7,9 @@
 # ============================================================
 
 books:
+  - title: Look What You Made Me Do
+    author: Lanchester, John
+    bib_id: S127C1981416
   - title: the age of calamities
     author: senaa ahmad
   - title: Peck and Peck
