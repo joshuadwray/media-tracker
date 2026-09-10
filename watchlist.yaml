@@ -38,6 +38,42 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
+  - title: The History of Concrete
+    year: 2026
+  - title: Rose of Nevada
+    year: 2026
+  - title: You Can See Everything
+    year: 2026
+  - title: Tender Loving Care
+    year: 2026
+  - title: Possible Love
+    year: 2026
+  - title: "Oasis: Don't Look Back in Anger"
+    year: 2026
+  - title: Artificial
+    year: 2026
+  - title: Behemoth!
+    year: 2026
+  - title: Once Upon a Time in Harlem
+    year: 2026
+  - title: Digger
+    year: 2026
+  - title: Fatherland
+    year: 2026
+  - title: The Debut
+    year: 2026
+  - title: All of a Sudden
+    year: 2026
+  - title: Primetime
+    year: 2026
+  - title: The Further Mis-Adventures of Cliff Booth
+    year: 2026
+  - title: Elsinore
+    year: 2026
+  - title: Ink
+    year: 2026
+  - title: Whalefall
+    year: 2026
   - title: teenage sex and death at camp miasma
     year: 2026
   - title: dune part 3
