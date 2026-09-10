@@ -1,18 +1,7 @@
-# Media tracker report — 2026-09-10 14:25 UTC
+# Media tracker report — 2026-09-10 16:59 UTC
 
-## New sightings (12)
-- **Ink (2026)**: "Ink" digital release: 2027-01-08 — [link](https://www.themoviedb.org/movie/1532610)
-- **Look What You Made Me Do — Lanchester, John**: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Look%20What%20You%20Made%20Me%20Do)
-- **Oasis: Don't Look Back in Anger (2026)**: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-10, 2026-09-11, 2026-09-12, 2026-09-13) — [link](https://angelikafilmcenter.com/dallas/now-playing)
-- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" advance tickets on sale at Cinemark West Plano — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
-- **Possible Love (2026)**: "Possible Love" digital release: 2026-11-06 — [link](https://www.themoviedb.org/movie/1483525)
-- **Primetime (2026)**: "PRIMETIME" playing at Angelika Dallas (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27) — [link](https://angelikafilmcenter.com/dallas/now-playing)
-- **Primetime (2026)**: "Primetime" advance tickets on sale at Cinemark Denton 14 — [link](https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14)
-- **Primetime (2026)**: "Primetime" advance tickets on sale at Cinemark West Plano — [link](https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd)
-- **Primetime (2026)**: "Primetime" advance tickets on sale at Cinemark Dallas IMAX — [link](https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax)
-- **Rose of Nevada (2026)**: "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home) — [link](https://www.themoviedb.org/movie/1399525)
-- **Rose of Nevada (2026)**: "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home) — [link](https://www.themoviedb.org/movie/1399525)
-- **The Further Mis-Adventures of Cliff Booth (2026)**: "The Further Mis-Adventures of Cliff Booth" digital release: 2026-12-23 — [link](https://www.themoviedb.org/movie/1457866)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (48)
 - **Look What You Made Me Do — Lanchester, John**
@@ -37,13 +26,13 @@
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 57 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 54 holds
+    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 55 holds
   - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
     - also: print book in Lewisville library catalog — checked out, 2 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 88 holds (~8 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 87 holds (~8 mo)
     - also: ebook in Libby catalog (Houston) — 0/8 available, 229 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 61 holds (~10 mo)
@@ -94,7 +83,7 @@
 - ✅ `angelika`: 4 observation(s)
 - ✅ `inwood`: 0 observation(s)
 - ✅ `cinemark`: 9 observation(s)
-- ❌ `amc` (failing 13h, 2 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 16h, 3 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
