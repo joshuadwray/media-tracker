@@ -11,7 +11,7 @@ from .dashboard import build_dashboard
 from .models import NotifyGroup, Observation, SourceResult
 from .report import build_report
 from .sources import build_sources
-from .state import DEAD_AFTER_RUNS, State
+from .state import DEAD_AFTER_RUNS, State, first_line
 
 
 @dataclass
@@ -61,7 +61,7 @@ def run_check(config: Config, *, source_id: str | None = None,
             run.health_alarms.append(
                 (r.source, alarm,
                  f"{r.source} has failed {DEAD_AFTER_RUNS} runs in a row: "
-                 f"{r.error}")
+                 f"{first_line(r.error or '')}")
             )
         elif alarm == "recovered":
             run.health_alarms.append(

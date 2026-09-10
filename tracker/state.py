@@ -286,12 +286,20 @@ class State:
         self.health[source_id] = {
             "runs": runs,
             "since": rec.get("since") or stamp,
-            "last_error": error,
+            # First line only. Source errors carry a traceback, and this
+            # file is committed by CI on every run — the full frame stack
+            # bloats the diff and tells a reader nothing the first line
+            # doesn't. It's also what the phone push quotes.
+            "last_error": first_line(error),
             "alerted": bool(rec.get("alerted")) or runs >= DEAD_AFTER_RUNS,
         }
         if runs >= DEAD_AFTER_RUNS and not rec.get("alerted"):
             return "died"
         return None
+
+    def last_error(self, source_id: str) -> str | None:
+        rec = self.health.get(source_id)
+        return rec.get("last_error") if rec else None
 
     def failing_since(self, source_id: str) -> str | None:
         rec = self.health.get(source_id)
@@ -319,6 +327,12 @@ class State:
                        indent=2, sort_keys=True)
             + "\n"
         )
+
+
+def first_line(text: str) -> str:
+    """The headline of a multi-line error, for state and notifications."""
+    stripped = (text or "").strip()
+    return stripped.splitlines()[0] if stripped else ""
 
 
 def _is_new(table: dict, key: str, now: datetime | None = None) -> bool:

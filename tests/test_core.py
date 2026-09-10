@@ -1347,3 +1347,20 @@ def test_readingcinemas_survives_junk_nodes():
     junk = [None, {}, {"name": "A"}, {"name": "B", "showdates": None},
             {"name": "C", "showdates": [{}]}, "nonsense"]
     assert _parse_films(junk, "0000000009") == {}
+
+
+def test_health_records_and_pushes_only_the_error_headline(tmp_path):
+    """Source errors carry a traceback. state.json is committed by CI on
+    every run, and the same text is quoted to the phone — neither wants
+    a frame stack."""
+    from tracker.state import State, first_line
+    tb = ('RuntimeError: AMC Stonebriar 24: HTTP 403\n'
+          'Traceback (most recent call last):\n'
+          '  File "/x/base.py", line 56, in run\n'
+          '    return SourceResult(...)\n')
+    st = State(tmp_path / "state.json")
+    st.note_source_result("amc", tb)
+    assert st.last_error("amc") == "RuntimeError: AMC Stonebriar 24: HTTP 403"
+    assert "Traceback" not in st.last_error("amc")
+    assert first_line("") == ""
+    assert first_line("single line") == "single line"

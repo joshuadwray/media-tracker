@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from .availability import overlap
 from .config import Config
 from .models import TRACKS, Observation, SourceResult
-from .state import State
+from .state import State, first_line
 
 # A title nobody carries isn't a bug — libraries buy on their own schedule,
 # and half the movie list is unreleased. Only after this long is "we've never
@@ -149,7 +149,7 @@ def build_report(config: Config, results: list[SourceResult],
     lines.append("## Source status")
     for r in results:
         if r.error:
-            first_line = r.error.strip().splitlines()[0]
+            headline = first_line(r.error)
             # How long it's been broken is the part that decides whether to
             # act: one flaky run reads the same as a week of Cloudflare 403s
             # without it.
@@ -157,7 +157,7 @@ def build_report(config: Config, results: list[SourceResult],
             age = _failing_age(state.failing_since(r.source))
             plural = "" if runs == 1 else "s"
             since = f" (failing {age}, {runs} run{plural})" if age and runs else ""
-            lines.append(f"- ❌ `{r.source}`{since}: {first_line}")
+            lines.append(f"- ❌ `{r.source}`{since}: {headline}")
         else:
             lines.append(f"- ✅ `{r.source}`: {len(r.observations)} observation(s)")
     lines.append("")
