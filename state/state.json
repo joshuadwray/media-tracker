@@ -1,62 +1,70 @@
 {
+  "health": {
+    "amc": {
+      "alerted": false,
+      "last_error": "RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403\nTraceback (most recent call last):\n  File \"/home/runner/work/media-tracker/media-tracker/tracker/sources/base.py\", line 56, in run\n    return SourceResult(source=self.source_id, observations=self.check(config))\n                                                            ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/media-tracker/media-tracker/tracker/sources/chain_theaters.py\", line 168, in check\n    raise RuntimeError(\"; \".join(errors))\nRuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403\n",
+      "runs": 1,
+      "since": "2026-09-10T00:59:25+00:00"
+    }
+  },
   "media": {
     "book:american-hagwon|listening": {
       "best": "plannable",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:american-hagwon|reading": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:exit-party|listening": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:exit-party|reading": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:fruit-fly|listening": {
       "best": "now",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:fruit-fly|reading": {
       "best": "now",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:look-what-you-made-me-do|listening": {
       "best": "now",
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:look-what-you-made-me-do|reading": {
       "best": "turn",
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:partita|reading": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:ply|reading": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:the-age-of-calamities|listening": {
       "best": "plannable",
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:the-age-of-calamities|reading": {
       "best": "someday",
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:the-buffalo-hunter-hunter|listening": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -72,7 +80,7 @@
     },
     "book:we-were-forbidden|reading": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "book:yesteryear|listening": {
       "first": "2026-07-18T20:08:01+00:00",
@@ -84,7 +92,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-09-09T17:09:51+00:00"
+    "last_run": "2026-09-10T00:59:25+00:00"
   },
   "seen": {
     "amc|movie:teenage-sex-and-death-at-camp-miasma|\"Teenage Sex and Death at Camp Miasma\" playing at AMC Grapevine Mills 30": {
@@ -141,6 +149,54 @@
       "first": "2026-08-21T23:32:59+00:00",
       "last": "2026-09-01T17:18:55+00:00"
     },
+    "angelika|movie:dune-part-3|\"DUNE: PART THREE INSIDER SCREENING\" playing at Angelika Dallas": {
+      "dates": [
+        "2026-12-15"
+      ],
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "angelika|movie:dune-part-3|\"DUNE: PART THREE\" playing at Angelika Dallas": {
+      "dates": [
+        "2026-12-17",
+        "2026-12-18",
+        "2026-12-19",
+        "2026-12-20",
+        "2026-12-21",
+        "2026-12-22",
+        "2026-12-23",
+        "2026-12-24",
+        "2026-12-25",
+        "2026-12-26",
+        "2026-12-27",
+        "2026-12-28",
+        "2026-12-29",
+        "2026-12-30",
+        "2026-12-31"
+      ],
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "cinemark|movie:dune-part-3|\"Dune: Part Three - IMAX 70mm\" advance tickets on sale at Cinemark Dallas IMAX": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "cinemark|movie:dune-part-3|\"Dune: Part Three Insider Screenings in IMAX 70MM\" advance tickets on sale at Cinemark Dallas IMAX": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "cinemark|movie:dune-part-3|\"Dune: Part Three Insider Screenings\" advance tickets on sale at Cinemark Dallas IMAX": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "cinemark|movie:dune-part-3|\"Dune: Part Three Insider Screenings\" advance tickets on sale at Cinemark West Plano": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "cinemark|movie:dune-part-3|\"Dune: Part Three\" advance tickets on sale at Cinemark West Plano": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
     "cinemark|movie:hadestown|\"Hadestown: The Musical\" advance tickets on sale at Cinemark Dallas IMAX": {
       "first": "2026-07-18T19:37:12+00:00",
       "last": "2026-07-18T19:37:12+00:00"
@@ -155,19 +211,19 @@
     },
     "cloudlibrary-lewisville|book:american-hagwon|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary-lewisville|book:american-hagwon|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary-lewisville|book:exit-party|audiobook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary-lewisville|book:exit-party|ebook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary-lewisville|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
@@ -179,19 +235,19 @@
     },
     "cloudlibrary-lewisville|book:look-what-you-made-me-do|ebook in catalog": {
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-31T19:30:50+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary|book:look-what-you-made-me-do|audiobook in catalog": {
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -215,23 +271,23 @@
     },
     "denton-library|book:american-hagwon|print book in catalog": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "denton-library|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "denton-library|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "denton-library|book:look-what-you-made-me-do|audiobook (CD) in catalog": {
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "denton-library|book:ply|print book in catalog": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
@@ -255,67 +311,67 @@
     },
     "lewisville-print|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "lewisville-print|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T18:29:49+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "lewisville-print|book:look-what-you-made-me-do|print book in catalog": {
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "lewisville-print|book:partita|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "lewisville-print|book:we-were-forbidden|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-fortworth|book:american-hagwon|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-fortworth|book:exit-party|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-fortworth|book:exit-party|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-fortworth|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-fortworth|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-fortworth|book:look-what-you-made-me-do|audiobook in catalog": {
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-houston|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-houston|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-houston|book:look-what-you-made-me-do|ebook in catalog": {
       "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-houston|book:the-age-of-calamities|audiobook in catalog": {
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "libby-houston|book:the-age-of-calamities|ebook in catalog": {
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-09-09T17:09:51+00:00"
+      "last": "2026-09-10T00:59:25+00:00"
     },
     "texas-theatre|movie:teenage-sex-and-death-at-camp-miasma|\"teenage sex and death at camp miasma\" mentioned on Texas Theatre": {
       "first": "2026-08-06T00:05:40+00:00",
@@ -323,6 +379,18 @@
     }
   },
   "venues": {
+    "movie:dune-part-3|Angelika Dallas": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "movie:dune-part-3|Cinemark Dallas IMAX": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
+    "movie:dune-part-3|Cinemark West Plano": {
+      "first": "2026-09-10T00:59:25+00:00",
+      "last": "2026-09-10T00:59:25+00:00"
+    },
     "movie:teenage-sex-and-death-at-camp-miasma|AMC Grapevine Mills 30": {
       "first": "2026-08-25T13:57:59+00:00",
       "last": "2026-09-01T17:18:55+00:00"
