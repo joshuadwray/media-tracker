@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from . import notify
 from .config import Config
 from .dashboard import build_dashboard
-from .models import NotifyGroup, Observation, SourceResult
+from .models import NotifyGroup, Observation, SourceResult, venue_rank
 from .report import build_report
 from .sources import build_sources
 from .state import DEAD_AFTER_RUNS, State, first_line
@@ -201,29 +201,46 @@ def _notify_groups(run: CheckRun, state: State,
 
 def _venue_groups(run: CheckRun, state: State,
                   ok_sources: set[str]) -> list[NotifyGroup]:
-    """One push per film per run, naming every theatre newly found in it.
+    """One push per film per run, and only when it's a better theatre.
 
-    A venue speaks once. The decision needs two things to be true: the
-    (item, venue) key is new to state.venues, AND at least one of that
-    venue's observations is in run.new.
+    Two gates, and a candidate theatre has to clear both.
 
-    The second clause is what let this ship without a migration. On the
-    first run after it landed, every theatre already playing a watched film
-    had its fingerprint in `seen`, so nothing was in run.new, so those venue
-    keys were recorded silently instead of re-announcing the watchlist. It
-    stays right afterwards, too: a theatre that genuinely just picked up a
-    film always has a new fingerprint, and a venue key ages out on exactly
-    the same timestamps as the fingerprints that feed it.
+    **The venue gate** is what makes a theatre speak at most once: the
+    (item, venue) key must be new to state.venues, AND at least one of that
+    venue's observations must be in run.new. The second clause is what let
+    this ship without a migration. On the first run after it landed, every
+    theatre already playing a watched film had its fingerprint in `seen`, so
+    nothing was in run.new, so those venue keys were recorded silently
+    instead of re-announcing the watchlist. It stays right afterwards, too:
+    a theatre that genuinely just picked up a film always has a new
+    fingerprint, and a venue key ages out on exactly the same timestamps as
+    the fingerprints that feed it.
+
+    **The tier gate** is what stops a wide release drip-feeding a push a day
+    as it works across the metroplex. A film speaks only if it has never
+    spoken (the debut) or if the best tier it is now playing at beats the
+    tier already on record. Angelika then Northpark a week later is the same
+    decision twice and you hear it once; Angelika then Cinemark Denton is
+    two decisions and you hear both. This one seeds itself the same way: a
+    film records its watermark on any run it's seen, but only *pushes* on a
+    run with fresh candidates, so the upgrade run wrote everyone's tier in
+    silence.
+
+    Whichever gate a theatre fails, its venue key is still recorded — the
+    dashboard and the report keep every theatre, in full detail. This
+    decides pushes, nothing else.
     """
     by_venue: OrderedDict[str, list[Observation]] = OrderedDict()
+    playing: OrderedDict[str, list[Observation]] = OrderedDict()
     for r in run.results:
         for obs in r.observations:
             if not obs.venue or obs.track:
                 continue
             by_venue.setdefault(f"{obs.item_key}|{obs.venue}", []).append(obs)
+            playing.setdefault(obs.item_key, []).append(obs)
 
     fresh = {o.fingerprint for o in run.new}
-    films: OrderedDict[str, NotifyGroup] = OrderedDict()
+    candidates: OrderedDict[str, list[Observation]] = OrderedDict()
     for key, obs_list in by_venue.items():
         if not state.venue_is_new(key):
             if any(o.source in ok_sources for o in obs_list):
@@ -232,12 +249,38 @@ def _venue_groups(run: CheckRun, state: State,
         state.venue_record(key)
         if not any(o.fingerprint in fresh for o in obs_list):
             continue  # already known under some other wording — seed only
-        first = obs_list[0]
-        group = films.get(first.item_key)
-        if group is None:
-            group = films[first.item_key] = NotifyGroup(
-                item_key=first.item_key, item_label=first.item_label,
-                track=None,
+        candidates.setdefault(obs_list[0].item_key, []).append(obs_list[0])
+
+    films: OrderedDict[str, NotifyGroup] = OrderedDict()
+    for item_key, showing in playing.items():
+        found = candidates.get(item_key) or []
+        # Best first, so the push's lead is the theatre you'd drive to.
+        found.sort(key=lambda o: o.sort_key)
+
+        # The watermark reads *every* theatre the film is playing at, not
+        # just the ones that cleared the venue gate. A film already on
+        # record at a theatre has no candidates at all, and reading only
+        # those would leave its tier unset — which is exactly the state of
+        # every film on the upgrade run, and would have let the next rung up
+        # be swallowed instead of announced.
+        best_tier = min((o.venue_tier for o in showing), key=venue_rank)
+
+        # Same shape as the media branch above, and for the same reasons.
+        # `record` rewrites the entry, so it is reached only when the film is
+        # genuinely new — which includes a film that dropped off every screen
+        # for GAP_DAYS and came back, and that is meant to start over: a
+        # re-release shouldn't be held to the tier of its first run.
+        if not state.film_is_new(item_key):
+            state.film_touch(item_key)
+            speaks = bool(found) and state.film_improves(item_key, best_tier)
+        else:
+            state.film_record(item_key)
+            speaks = bool(found)
+        state.film_set_best(item_key, best_tier)
+
+        if speaks:
+            films[item_key] = NotifyGroup(
+                item_key=item_key, item_label=showing[0].item_label,
+                track=None, observations=found,
             )
-        group.observations.append(first)
     return list(films.values())

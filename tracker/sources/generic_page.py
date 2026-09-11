@@ -66,6 +66,7 @@ class GenericPageSource(Source):
             except http.requests.RequestException as exc:
                 errors.append(f"{page['name']}: {type(exc).__name__}: {exc}")
                 continue
+            tier, distance = self.venue_meta(page)
             for movie in config.movies:
                 if text_contains_title(text, movie.title):
                     observations.append(Observation(
@@ -76,6 +77,9 @@ class GenericPageSource(Source):
                         url=page["url"],
                         positive=True,
                         venue=page["name"],
+                        venue_tier=tier,
+                        distance_mi=distance,
+                        source_label=self.label,
                         detail={"page": page["name"]},
                     ))
         if errors and not observations:

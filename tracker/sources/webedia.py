@@ -95,6 +95,8 @@ class WebediaSource(Source):
                     event=f'"{title}" {verb} {venue}',
                     venue=venue,
                     source_label=self.label,
+                    venue_tier=self.tier,
+                    distance_mi=self.distance_mi,
                     detail={"theatre": venue, "theater_id": self.theater_id,
                             "first_showtime": first_date},
                 ))

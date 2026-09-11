@@ -61,6 +61,9 @@ class DrafthouseSource(Source):
                         url=f"https://drafthouse.com/{self.market}",
                         positive=True,
                         venue=f"Alamo {self.market.upper()}",
+                        venue_tier=self.tier,
+                        distance_mi=self.distance_mi,
+                        source_label=self.label,
                     ))
                 for (cinema_id, date), count in sorted(by_cinema_date.items()):
                     cinema = cinemas.get(cinema_id, cinema_id)
@@ -76,6 +79,9 @@ class DrafthouseSource(Source):
                         # venue is what collapses a whole run's worth of
                         # showtime dates into a single push.
                         venue=f"Alamo {cinema}",
+                        venue_tier=self.tier,
+                        distance_mi=self.distance_mi,
+                        source_label=self.label,
                         detail={"cinema": cinema, "date": date, "sessions": count},
                     ))
         return observations

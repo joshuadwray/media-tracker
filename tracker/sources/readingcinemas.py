@@ -102,6 +102,8 @@ class ReadingCinemasSource(Source):
                     event=f'"{title}" playing at {venue}',
                     venue=venue,
                     source_label=self.label,
+                    venue_tier=self.tier,
+                    distance_mi=self.distance_mi,
                     detail={"theatre": venue, "cinema_id": self.cinema_id,
                             "dates": dates},
                 ))

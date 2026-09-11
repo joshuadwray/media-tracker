@@ -189,10 +189,22 @@ def test_first_discovery_is_one_push(tmp_path):
     assert _run_groups(state, [_book_obs("denton-cl", "print", wait=0)]) == []
 
 
+#: The real tiers of the theatres these tests name, so the fixtures rank the
+#: way watchlist.yaml does. Everything unlisted is "other", like the config.
+_TIERS = {"Cinemark Denton 14": ("home", 3.0),
+          "Cinemark West Plano": ("preferred", 35.0),
+          "AMC Grapevine Mills 30": ("nearby", 32.0),
+          "AMC Stonebriar 24": ("other", 28.0),
+          "AMC Northpark 15": ("other", 44.0),
+          "Texas Theatre": ("other", 50.0)}
+
+
 def _showtime(theatre, summary, source="amc"):
     """A theatre listing, the way chain_theaters builds one."""
+    tier, distance = _TIERS.get(theatre, ("other", 40.0))
     return Observation(source=source, item_key="movie:dune", item_label="Dune",
-                       summary=summary, event=summary, venue=theatre)
+                       summary=summary, event=summary, venue=theatre,
+                       venue_tier=tier, distance_mi=distance)
 
 
 def test_notify_groups_one_push_per_venue(tmp_path):
@@ -210,24 +222,32 @@ def test_notify_groups_one_push_per_venue(tmp_path):
         _showtime("AMC Northpark 15", north),
     ]) == []
 
-    # A theatre that didn't have it before is news.
+    # A theatre that didn't have it before, at the same tier, is the same
+    # decision twice — recorded, but not worth a second push. Stonebriar is
+    # even nearer than Northpark; distance orders rows, it never speaks.
+    stone = '"Dune" playing at AMC Stonebriar 24'
+    assert _run_groups(state, [_showtime("AMC Northpark 15", north),
+                               _showtime("AMC Stonebriar 24", stone)]) == []
+    assert not state.venue_is_new("movie:dune|AMC Stonebriar 24")
+
+    # A better theatre is news, and says so once.
     groups = _run_groups(state, [
         _showtime("AMC Northpark 15", north),
-        _showtime("AMC Stonebriar 24", '"Dune" playing at AMC Stonebriar 24'),
+        _showtime("AMC Grapevine Mills 30", '"Dune" playing at AMC Grapevine Mills 30'),
     ])
     assert len(groups) == 1
-    assert [o.venue for o in groups[0].observations] == ["AMC Stonebriar 24"]
+    assert [o.venue for o in groups[0].observations] == ["AMC Grapevine Mills 30"]
 
     # Persisted across runs, not just within one.
     state.save()
     state = State(tmp_path / "state.json")
-    assert _run_groups(state, [_showtime("AMC Stonebriar 24",
-                                         '"Dune" playing at AMC Stonebriar 24')]) == []
+    assert _run_groups(state, [_showtime("AMC Grapevine Mills 30",
+                                         '"Dune" playing at AMC Grapevine Mills 30')]) == []
 
 
 def test_notify_groups_one_push_per_film_per_run(tmp_path):
     """A film opening at three theatres at once is one push naming all
-    three, not three pushes."""
+    three, best first, not three pushes."""
     from tracker.notify import body
 
     state = State(tmp_path / "state.json")
@@ -239,9 +259,105 @@ def test_notify_groups_one_push_per_film_per_run(tmp_path):
     ])
     assert len(groups) == 1 and groups[0].track is None
     text = body(groups[0])
-    # The first theatre keeps the source's own wording, dates and all.
-    assert text.startswith('"Dune" playing at AMC Northpark 15 (2026-08-15)')
-    assert "also at AMC Stonebriar 24, Cinemark Denton 14" in text
+    # The theatre you'd actually drive to leads, whichever scraper ran first,
+    # and keeps that source's own wording. The rest follow by tier then
+    # distance — Stonebriar at 28 mi ahead of Northpark at 44.
+    assert text == ('"Dune" playing at Cinemark Denton 14'
+                    ' · also at AMC Stonebriar 24, AMC Northpark 15')
+
+
+def test_venue_order_is_tier_then_distance(tmp_path):
+    """Theatres sort by how much you'd rather go, then by how far.
+
+    The load-bearing pair is Stonebriar (28 mi, other) against Grapevine
+    Mills (32 mi, nearby): the nearer one sorts *later*, which is the whole
+    reason tiers exist rather than a mileage column. Stonebriar is Frisco.
+    """
+    scrambled = [_showtime(t, f'"Dune" playing at {t}') for t in (
+        "Texas Theatre", "AMC Stonebriar 24", "Cinemark Denton 14",
+        "AMC Grapevine Mills 30", "Cinemark West Plano", "AMC Northpark 15")]
+    assert [o.venue for o in sorted(scrambled, key=lambda o: o.sort_key)] == [
+        "Cinemark Denton 14",       # home, 3
+        "Cinemark West Plano",      # preferred, 35
+        "AMC Grapevine Mills 30",   # nearby, 32
+        "AMC Stonebriar 24",        # other, 28 — nearer, and still last-ish
+        "AMC Northpark 15",         # other, 44
+        "Texas Theatre",            # other, 50
+    ]
+
+
+def test_venue_tier_leaves_book_order_alone(tmp_path):
+    """Books all carry the default tier, so the element added to sort_key for
+    theatres can't reorder a shelf against a queue."""
+    print_far = _book_obs("lewisville-print", "print", wait=2, distance_mi=20,
+                          loan_days=21)
+    ebook_near = _book_obs("denton-cl", "ebook", wait=30, loan_days=21)
+    assert sorted([ebook_near, print_far], key=lambda o: o.sort_key)[0] is print_far
+    assert print_far.venue_tier == ebook_near.venue_tier == "other"
+
+
+def test_venue_watermark_climbs_the_ladder_once_each(tmp_path):
+    """A film speaks once per rung, not once per theatre.
+
+    Seven sightings across seven runs, four pushes: the debut, and then each
+    genuine step up. Everything that only moves sideways — or nearer, within
+    a tier — is recorded and stays quiet.
+    """
+    state = State(tmp_path / "state.json")
+
+    def run(theatre):
+        return _run_groups(state, [_showtime(theatre, f'"Dune" playing at {theatre}')])
+
+    assert len(run("AMC Northpark 15")) == 1        # debut, at `other`
+    assert run("Texas Theatre") == []               # other -> other
+    assert run("AMC Stonebriar 24") == []           # other, and 16 mi nearer
+    assert state.film_best("movie:dune") == "other"
+
+    groups = run("AMC Grapevine Mills 30")          # other -> nearby
+    assert len(groups) == 1
+    assert [o.venue for o in groups[0].observations] == ["AMC Grapevine Mills 30"]
+    assert state.film_best("movie:dune") == "nearby"
+
+    assert len(run("Cinemark West Plano")) == 1     # nearby -> preferred
+    assert len(run("Cinemark Denton 14")) == 1      # preferred -> home
+    assert state.film_best("movie:dune") == "home"
+
+    # Nothing beats home, so the ladder is finished and the film goes quiet
+    # however many more theatres pick it up.
+    assert run("Cinemark Dallas IMAX") == []
+    assert state.film_best("movie:dune") == "home"
+
+    # Every theatre is still on record for the dashboard — the watermark
+    # decides pushes and nothing else.
+    assert len([k for k in state.venues if k.startswith("movie:dune|")]) == 7
+
+
+def test_film_watermark_upgrade_is_silent(tmp_path):
+    """Adding the films map to a state file full of movie sightings must not
+    re-announce films already playing, the way the venues map didn't."""
+    import json
+    from datetime import datetime, timedelta, timezone
+
+    now = datetime.now(timezone.utc)
+    old = (now - timedelta(days=30)).isoformat(timespec="seconds")
+    recent = (now - timedelta(hours=6)).isoformat(timespec="seconds")
+    summary = '"Dune" playing at AMC Northpark 15'
+
+    p = tmp_path / "state.json"
+    p.write_text(json.dumps({"meta": {}, "seen": {
+        f"amc|movie:dune|{summary}": {"first": old, "last": recent},
+    }, "venues": {
+        "movie:dune|AMC Northpark 15": {"first": old, "last": recent},
+    }}))
+    state = State(p)
+    assert not state.films
+    assert _run_groups(state, [_showtime("AMC Northpark 15", summary)]) == []
+    # Recorded at the tier it is actually playing at, so the next rung up
+    # still speaks and this one never does.
+    assert state.film_best("movie:dune") == "other"
+    assert len(_run_groups(state, [
+        _showtime("Cinemark Denton 14", '"Dune" playing at Cinemark Denton 14',
+                  source="cinemark")])) == 1
 
 
 def test_venue_upgrade_is_silent(tmp_path):
@@ -318,9 +434,10 @@ def test_forget_item_clears_every_map(tmp_path):
     # PRUNE_DAYS would be silent at every theatre already on record.
     _run_groups(state, [_showtime("AMC Northpark 15",
                                   '"Dune" playing at AMC Northpark 15')])
-    assert state.venues and state.seen
-    assert state.forget_item("movie:dune") == 2
-    assert not state.venues and not state.seen
+    assert state.venues and state.seen and state.films
+    # seen + venues + films, the last keyed by the bare item_key.
+    assert state.forget_item("movie:dune") == 3
+    assert not state.venues and not state.seen and not state.films
 
 
 def test_watching_stamps_are_kept_in_step_with_the_watchlist(tmp_path):

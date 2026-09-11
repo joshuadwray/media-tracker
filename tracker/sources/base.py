@@ -43,6 +43,26 @@ class Source(ABC):
         so it never loses a tiebreak to a branch down the road."""
         return float(self.cfg.get("distance_mi") or 0.0)
 
+    @property
+    def tier(self) -> str:
+        """How much you'd rather this venue than another (see VENUE_TIERS).
+
+        Libraries leave it at the default and rank on the wait instead. For a
+        chain this is the whole chain's standing, which each theatre may
+        override — see venue_meta.
+        """
+        return self.cfg.get("tier") or "other"
+
+    def venue_meta(self, entry: dict) -> tuple[str, float]:
+        """Tier and distance for one theatre in a `theatres:`/`pages:` list.
+
+        The entry's own values win over the source's, so a chain declares its
+        standing once and the one house in town corrects it.
+        """
+        distance = entry.get("distance_mi")
+        return (entry.get("tier") or self.tier,
+                float(self.distance_mi if distance is None else distance))
+
     @abstractmethod
     def check(self, config: Config) -> list[Observation]:
         """Query the upstream system for everything relevant on the watchlist."""

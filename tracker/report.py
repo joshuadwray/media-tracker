@@ -62,6 +62,29 @@ def tracks_for_item(observations: list[Observation]) -> dict[str, list[Observati
             for t, obs in sorted(out.items(), key=lambda kv: TRACKS.index(kv[0]))}
 
 
+def venues_for_item(observations: list[Observation]) -> dict[str, list[Observation]]:
+    """Split one film's sightings by theatre, best theatre first.
+
+    The films twin of tracks_for_item. Theatres order on sort_key, which for
+    a showtime means tier then miles; the listings inside one theatre order
+    alphabetically, because a chain's title variants ("Dune: Part Three",
+    "... Insider Screenings", "... Insider Screenings in IMAX 70MM") are one
+    showing described three ways and shuffling them run to run makes a
+    diffable page unreadable.
+
+    Observations with no venue are left out — streaming and VOD dates aren't
+    places, and they keep their flat rows.
+    """
+    out: dict[str, list[Observation]] = {}
+    for obs in observations:
+        if obs.venue and not obs.track:
+            out.setdefault(obs.venue, []).append(obs)
+    ordered = sorted(out.items(),
+                     key=lambda kv: (min(o.sort_key for o in kv[1]), kv[0]))
+    return {venue: sorted(obs, key=lambda o: o.summary)
+            for venue, obs in ordered}
+
+
 def sync_note(by_track: dict[str, list[Observation]]) -> str | None:
     """Whether the two formats can be in your hands at the same time.
 
@@ -120,8 +143,13 @@ def _sightings(current: list[Observation]) -> list[str]:
         note = sync_note(by_track)
         if note:
             lines.append(f"  - {note}")
+        for venue, listings in venues_for_item(obs_list).items():
+            for i, obs in enumerate(listings):
+                marker = "" if obs.positive else " _(informational)_"
+                prefix = f"  - {venue}: " if i == 0 else "    - also: "
+                lines.append(f"{prefix}{obs.summary}{marker}")
         for obs in obs_list:
-            if not obs.track:
+            if not obs.track and not obs.venue:
                 marker = "" if obs.positive else " _(informational)_"
                 lines.append(f"  - {obs.summary}{marker}")
     return lines

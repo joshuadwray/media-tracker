@@ -16,6 +16,14 @@ Three maps, all mapping a key to {first, last} timestamps:
            a theatre is announced the first time it has the film and
            then stays quiet, however the listing is worded and however
            many days of showtimes go on sale afterwards.
+  films  — one entry per item_key, carrying `best`: the best venue tier
+           the film has ever been found at (see models.VENUE_TIERS).
+           Venues alone said every theatre was equally worth hearing
+           about, so a wide release drip-fed a push a day as it worked
+           across the metroplex. This is the venue half of media's
+           `best`: a theatre only speaks if it beats the tier already on
+           record, so Angelika then Northpark is one push and Angelika
+           then Cinemark Denton is two.
 
 Plus one flat map, item_key -> ISO timestamp:
 
@@ -71,6 +79,7 @@ class State:
         self.seen: dict[str, dict[str, str]] = {}
         self.media: dict[str, dict[str, str]] = {}
         self.venues: dict[str, dict[str, str]] = {}
+        self.films: dict[str, dict[str, str]] = {}
         self.watching: dict[str, str] = {}
         self.health: dict[str, dict] = {}
         self.meta: dict = {}
@@ -80,6 +89,7 @@ class State:
                 self.seen = data.get("seen", {})
                 self.media = data.get("media", {})
                 self.venues = data.get("venues", {})
+                self.films = data.get("films", {})
                 self.watching = data.get("watching", {})
                 self.health = data.get("health", {})
                 self.meta = data.get("meta", {})
@@ -87,6 +97,7 @@ class State:
                 self.seen = {}
                 self.media = {}
                 self.venues = {}
+                self.films = {}
                 self.watching = {}
                 self.health = {}
                 self.meta = {}
@@ -212,6 +223,46 @@ class State:
     def venue_touch(self, key: str, now: datetime | None = None) -> None:
         _touch(self.venues, key, now)
 
+    # --- per item, best venue tier reached (notifications) ------------
+
+    # Seeded by the same trick as venues, and for the same reason: the
+    # engine only pushes a film whose candidate theatres are themselves
+    # new, so the first run after this shipped recorded every film already
+    # playing at its current tier without announcing any of them.
+
+    def film_is_new(self, item_key: str, now: datetime | None = None) -> bool:
+        return _is_new(self.films, item_key, now)
+
+    def film_record(self, item_key: str, now: datetime | None = None) -> None:
+        _record(self.films, item_key, now)
+
+    def film_touch(self, item_key: str, now: datetime | None = None) -> None:
+        _touch(self.films, item_key, now)
+
+    def film_best(self, item_key: str) -> str | None:
+        entry = self.films.get(item_key)
+        return entry.get("best") if entry else None
+
+    def film_improves(self, item_key: str, tier: str | None) -> bool:
+        """Is this theatre better than the best we've ever recorded here?
+
+        False the first time we learn where a film is playing — the debut
+        push already covered the film, and naming its tier isn't a second
+        piece of news.
+        """
+        from .models import venue_improves
+        return venue_improves(tier, self.film_best(item_key))
+
+    def film_set_best(self, item_key: str, tier: str | None) -> None:
+        """Ratchet the watermark. Only ever moves toward a better tier, so a
+        film leaving Denton and playing on in Dallas doesn't re-arm it."""
+        from .models import better_venue
+        if not tier:
+            return
+        entry = self.films.get(item_key)
+        if entry is not None:
+            entry["best"] = better_venue(tier, entry.get("best"))
+
     # --- how long an item has been on the watchlist -------------------
 
     def note_watching(self, item_keys: list[str], now: datetime | None = None) -> None:
@@ -264,6 +315,9 @@ class State:
             for key in [k for k in table if k.rsplit("|", 1)[0] == item_key]:
                 del table[key]
                 doomed.append(key)
+        # films is keyed by the bare item_key, so the rsplit above misses it.
+        if self.films.pop(item_key, None) is not None:
+            doomed.append(item_key)
         # The `watching` stamp deliberately survives: this is called on
         # removal, and half the removals here are an edit in disguise.
         return len(doomed)
@@ -308,7 +362,7 @@ class State:
     def prune(self, now: datetime | None = None) -> int:
         cutoff = (now or datetime.now(timezone.utc)) - timedelta(days=PRUNE_DAYS)
         pruned = 0
-        for table in (self.seen, self.media, self.venues):
+        for table in (self.seen, self.media, self.venues, self.films):
             stale = [k for k, entry in table.items() if _parse(entry["last"]) < cutoff]
             for k in stale:
                 del table[k]
@@ -322,8 +376,8 @@ class State:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(
             json.dumps({"meta": self.meta, "seen": self.seen, "media": self.media,
-                        "venues": self.venues, "watching": self.watching,
-                        "health": self.health},
+                        "venues": self.venues, "films": self.films,
+                        "watching": self.watching, "health": self.health},
                        indent=2, sort_keys=True)
             + "\n"
         )

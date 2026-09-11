@@ -269,13 +269,25 @@ Re-check first — one request tells you everything:
    no network, one Observation per (film, venue), and a `probe()` that
    prints counts so a wrong id reads differently from a quiet week.
 3. **Swap the config.** Replace the `amc:` block in `watchlist.yaml`
-   (kind `amc`, three `theatres:` URLs) with the new kind. **Keep the
-   theatre names byte-identical.** `state.venues` embeds them in the key —
-   verified, the live state holds
+   (kind `amc`, three `theatres:` URLs) with the new kind. **Carry the
+   `tier`/`distance_mi` keys across** — Grapevine Mills is the only
+   `nearby` venue there is, so dropping them silently demotes it to the
+   same standing as Northpark.
+   **Keep the theatre names byte-identical.** `state.venues` embeds them
+   in the key — verified, the live state holds
    `movie:teenage-sex-and-death-at-camp-miasma|AMC Grapevine Mills 30` —
    so "AMC Grapevine Mills 30" becoming "Grapevine Mills 30" would look
    like a brand-new venue and re-notify every film already seen at those
    three houses.
+
+   **Add a fourth house while you're in there: AMC Highland Village 12**,
+   `tier: nearby`, `distance_mi: 13`. It's the closest screen outside
+   Denton and is currently unwatched — deliberately left out of the venue
+   tier work (2026-09-10) because there was no point hand-writing a
+   `theatres:` URL this swap would delete. Get its id from `/v2/theatres`
+   like the others. The byte-identical rule above does NOT apply to it:
+   its name has never been in `state.venues`, so take whatever AMC calls
+   it rather than inventing a spelling to match the other three.
 4. **Add `AMC_VENDOR_KEY: ${{ secrets.AMC_VENDOR_KEY }}`** to the `env:`
    block in `.github/workflows/media-tracker.yml` (beside `TMDB_API_KEY`),
    in the same commit.

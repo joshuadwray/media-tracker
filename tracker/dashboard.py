@@ -16,7 +16,7 @@ from . import site
 from .config import Config
 from .models import Observation, SourceResult
 from .report import (STILL_LOOKING_BLURB, still_looking, sync_note,
-                     tracks_for_item)
+                     tracks_for_item, venues_for_item)
 from .state import State
 
 _CSS = """
@@ -331,7 +331,7 @@ def _grouped_card(label: str, current_obs: list[Observation],
 
     rows: list[str] = []
 
-    def obs_row(o: Observation, alt: bool) -> str:
+    def obs_row(o: Observation, alt: bool, venue: str | None = None) -> str:
         badge = "🟢" if o.fingerprint in new_fps else "✅"
         link = (f" <a href='{e(o.url)}'{site.EXT_LINK}>open&nbsp;↗</a>"
                 if o.url else "")
@@ -341,19 +341,25 @@ def _grouped_card(label: str, current_obs: list[Observation],
             lbl = (f"<span class='{wait_cls}'>{e(o.wait_text)}</span> · "
                    f"{e(o.where)} <span class='muted'>({e(o.medium or '')})</span>")
         else:
-            lbl = e(_short_label(o.source, o.event or o.summary))
+            lbl = e(_short_label(o.source, o.event or o.summary, venue))
         lbl += _shelf_pill(o)
         return (f"<div class='row{' alt' if alt else ''}'>"
                 f"<span class='lbl'>{lbl}{info}</span>"
                 f"<span class='st'>{badge}{link}</span></div>")
 
-    # Books split into reading/listening with the best option leading each;
-    # everything else (showtimes, streaming) keeps the flat row.
+    # Books split into reading/listening, films into theatres, each section
+    # led by the option you'd act on. Streaming and VOD dates aren't places
+    # and aren't queues, so they keep the flat row.
     by_track = tracks_for_item(current_obs)
     for track, options in by_track.items():
         rows.append(f"<div class='trk'>{e(track)}</div>")
         rows.extend(obs_row(o, alt=i > 0) for i, o in enumerate(options))
-    rows.extend(obs_row(o, alt=False) for o in current_obs if not o.track)
+    for venue, listings in venues_for_item(current_obs).items():
+        rows.append(f"<div class='trk'>{e(venue)}</div>")
+        rows.extend(obs_row(o, alt=i > 0, venue=venue)
+                    for i, o in enumerate(listings))
+    rows.extend(obs_row(o, alt=False) for o in current_obs
+                if not o.track and not o.venue)
     note = sync_note(by_track)
     if note:
         rows.append(f"<div class='sync'>{e(note)}</div>")
@@ -410,10 +416,22 @@ def _shelf_pill(o: Observation) -> str:
     return f" <span class='{cls}'>{html.escape(txt)}</span>"
 
 
-def _short_label(source: str, event: str) -> str:
+def _short_label(source: str, event: str, venue: str | None = None) -> str:
     """Compact row label: format · library for catalog items, source · event
     otherwise. Several libraries are watched per format now, so the source has
-    to stay visible — otherwise two libraries both render as a bare "ebook"."""
+    to stay visible — otherwise two libraries both render as a bare "ebook".
+
+    Under a theatre heading the source is dropped and the theatre's own name
+    trimmed off the end of the event, which every showtime source spells into
+    it ('"Primetime" advance tickets on sale at Cinemark Denton 14'). The
+    heading already says where; repeating it costs the row the width it needs
+    for what's actually different between listings.
+    """
+    if venue:
+        for tail in (f" at {venue}", f" on {venue}", f" on {venue} page", venue):
+            if event.endswith(tail):
+                return event[: -len(tail)].rstrip() or event
+        return event
     if event.endswith(" in catalog"):
         return f"{event[: -len(' in catalog')]} · {source}"
     return f"{source} · {event}"

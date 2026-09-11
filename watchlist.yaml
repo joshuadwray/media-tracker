@@ -98,6 +98,22 @@ sources:
   # copies against each other (digital is 0 — it comes to you). Beyond
   # availability.MAX_DISTANCE_MI a physical copy is still reported but never
   # headlines a book, so a shelf copy 200 miles away can't mark it "got it".
+  #
+  # Theatres use the same two ideas, with `tier` standing in for the wait:
+  #   home       in Denton, no drive at all
+  #   preferred  any other Cinemark
+  #   nearby     a short hop that stays out of the metroplex
+  #   other      properly in Dallas / Frisco / Fort Worth  (the default)
+  # A step between tiers is a different decision, not a shorter drive, so
+  # that — and only that — is what re-notifies a film you've already heard
+  # about. distance_mi orders theatres *within* one tier and is eyeballed
+  # driving miles from Denton; a few either way changes nothing.
+  #
+  # Tiers exist rather than raw miles because miles lie: Stonebriar is
+  # nearer than Grapevine Mills and the worse drive, because it's Frisco.
+  # `tier` set on a chain applies to all its theatres, and any one theatre
+  # can override it. Every theatre below is inside MAX_DISTANCE_MI; one
+  # past it would still be listed but could never headline a film.
 
   denton-library:
     kind: bibliocommons
@@ -189,6 +205,7 @@ sources:
     pages:
       - name: Texas Theatre
         url: https://thetexastheatre.com/
+        distance_mi: 50            # Oak Cliff
       # Magnolia at the Modern — the Fort Worth arthouse run, plus the
       # museum's repertory series. The /films page server-renders a real
       # calendar (title + weekday + date + time per screening), so the
@@ -196,6 +213,7 @@ sources:
       # a limited release lands in the metro if it isn't at the Angelika.
       - name: The Modern (Magnolia at the Modern)
         url: https://www.themodern.org/films
+        distance_mi: 45            # Fort Worth
 
   angelika:
     kind: readingcinemas
@@ -211,6 +229,7 @@ sources:
     cinema_id: "0000000009"
     country_id: 6
     label: Angelika Dallas
+    distance_mi: 42              # Mockingbird Station
 
   inwood:
     kind: webedia
@@ -226,28 +245,43 @@ sources:
     site: https://www.landmarktheatres.com
     theater_id: X02KC
     label: Landmark Inwood
+    distance_mi: 40              # Inwood Village, Dallas
 
   cinemark:
     kind: cinemark
+    tier: preferred              # inherited by every theatre below
     theatres:
       # Verify each URL by loading it in a browser, then run:
       #   python -m tracker probe --source cinemark
       - name: Cinemark Denton 14
         url: https://www.cinemark.com/theatres/tx-denton/cinemark-denton-14
+        tier: home               # the only screen in town
+        distance_mi: 3
       - name: Cinemark West Plano
         url: https://www.cinemark.com/theatres/tx-plano/cinemark-west-plano-and-xd
+        distance_mi: 35
       - name: Cinemark Dallas IMAX
         url: https://www.cinemark.com/theatres/tx-dallas/cinemark-dallas-xd-and-imax
+        distance_mi: 40
 
   amc:
     kind: amc
+    # Dark behind Cloudflare since 2026-09-02; the replacement is the
+    # official API (TODO.md). The tiers below land ready for that swap —
+    # and AMC Highland Village 12, the closest screen outside Denton, is
+    # queued to join as a fourth house there (tier nearby, ~13 mi). No
+    # point writing a theatres: URL the API swap would delete.
     theatres:
       - name: AMC Stonebriar 24
         url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-dine-in-stonebriar-24/showtimes
+        distance_mi: 28          # nearer than Grapevine, but it's Frisco
       - name: AMC Grapevine Mills 30
         url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-grapevine-mills-30/showtimes
+        tier: nearby             # straight down 35E, no metroplex traffic
+        distance_mi: 32
       - name: AMC Northpark 15
         url: https://www.amctheatres.com/movie-theatres/dallas-ft-worth/amc-northpark-15/showtimes
+        distance_mi: 44
 
   # Alamo has the cleanest showtime feed in the metro (one JSON request
   # covers all five DFW locations) — flip enabled to true to include it.
@@ -265,5 +299,9 @@ sources:
     kind: drafthouse
     market: dfw
     enabled: false
+    # One distance for all five DFW houses, which this source names from its
+    # own feed rather than from config. Ranking them individually is part of
+    # switching it on, not of leaving it off.
+    distance_mi: 40
 
 state_file: state/state.json

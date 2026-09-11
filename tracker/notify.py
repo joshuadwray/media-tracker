@@ -17,11 +17,13 @@ decision, so a book carried by three libraries in two formats you'd read
 is one "reading" push. It fires when the track goes unseen -> seen, or
 when its shortest wait drops a bucket.
 
-For a film it means per (item, venue), collapsed to one push per film per
-run: a theatre speaks the first time it has the film and then stays
-quiet, however its listing is worded and however many days of showtimes
-go on sale later. Which libraries and which theatres, in what detail,
-lives on the dashboard.
+For a film it means per (item, venue-tier), collapsed to one push per film
+per run: a theatre speaks the first time it has the film, and afterwards
+only a theatre you'd rather go to speaks again. A film that opens at the
+Angelika and reaches Northpark a week later is the same decision twice, so
+you hear it once; the same film turning up at Cinemark Denton is a
+different decision and says so. Which libraries and which theatres, in
+what detail, lives on the dashboard.
 
 Few groups -> one push each (tappable, opens the best option's URL).
 Many groups -> a single digest push so your phone doesn't melt.
@@ -99,16 +101,19 @@ def body(group: NotifyGroup) -> str:
     dashboard has them. A debut group (first sighting, both tracks at once)
     lists each track in turn.
 
-    A film keeps the source's own wording, which already carries the dates,
-    and names any other theatre found in the same run after it — those are
-    the ones you'd otherwise never hear about, since each venue only ever
-    gets one push.
+    A film leads with the theatre you'd rather go to — sort_key ranks
+    showtimes by venue tier, then by miles — and keeps that source's own
+    wording, which already carries the dates. Every other theatre found in
+    the same run is named after it: they're simultaneous news, and the
+    watermark only silences the ones that arrive on later runs.
     """
     if not group.track and not any(o.track for o in group.observations):
         if not group.observations:
             return ""
-        lead = group.observations[0]
-        others = [o.venue for o in group.observations[1:] if o.venue]
+        options = sorted(group.observations, key=lambda o: o.sort_key)
+        lead = options[0]
+        others = list(dict.fromkeys(
+            o.venue for o in options[1:] if o.venue and o.venue != lead.venue))
         return lead.summary + (f" · also at {', '.join(others)}" if others else "")
 
     lead = "sooner — " if group.reason == "sooner" else ""

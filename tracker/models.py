@@ -71,6 +71,11 @@ class Observation:
                                   # per theatre, not one per listing. None
                                   # keeps per-observation pushes (streaming
                                   # services and VOD dates aren't places).
+    venue_tier: str = "other"     # how much you'd rather this venue than
+                                  # another (see VENUE_TIERS). Books leave it
+                                  # alone — they rank on wait, not on where,
+                                  # so they all tie here and their order is
+                                  # decided by the elements around it.
     wait: Optional[int] = None    # days until a copy could reach you, 0 if one
                                   # is free now; None when copies are unknown.
                                   # See availability.wait_days.
@@ -133,14 +138,21 @@ class Observation:
 
     @property
     def sort_key(self) -> tuple:
-        """Best option first: reachable, then soonest, then nearest.
+        """Best option first: reachable, then soonest, then preferred, then
+        nearest.
 
         Distance is the last tiebreak, not the first — proximity orders
         equally-good options, but a copy two weeks sooner should still beat
         one down the road.
+
+        The two middle elements are the coarse step for each kind of item and
+        only one of them ever varies: books rank on the wait bucket and all
+        carry the default tier, theatres rank on the tier and carry no wait.
+        One key orders both because neither half can disturb the other.
         """
         return (not self.reachable, availability.rank(self.bucket),
-                self.wait if self.wait is not None else 10**6, self.distance_mi)
+                self.wait if self.wait is not None else 10**6,
+                venue_rank(self.venue_tier), self.distance_mi)
 
     @property
     def fingerprint(self) -> str:
@@ -181,6 +193,52 @@ TRACK_BY_MEDIUM = {
 }
 
 TRACKS = ("reading", "listening")
+
+# Venue preference, best first. The films half of the wait ladder in
+# availability, and quantized for the same reason: a step here is a different
+# decision, not a shorter drive. Two theatres both in Dallas are the same
+# decision however many miles apart they are, so only a change of tier is
+# worth hearing about a second time.
+#
+# `nearby` sits below `preferred` on purpose — a closer screen doesn't beat
+# the chain you'd rather give the money to, but it does beat driving into the
+# metroplex. And tiers exist rather than raw miles because miles lie:
+# Stonebriar is nearer than Grapevine Mills and a worse drive, because it's
+# Frisco.
+#
+# These names are notification keys (state.films ratchets on them), so
+# renaming one re-announces every film sitting at that tier.
+VENUE_TIERS = ("home", "preferred", "nearby", "other")
+
+_VENUE_RANK = {name: i for i, name in enumerate(VENUE_TIERS)}
+
+
+def venue_rank(tier: Optional[str]) -> int:
+    """Lower is better. An unknown tier sorts last, so a typo in the config
+    demotes one theatre instead of silently promoting it above Denton."""
+    return _VENUE_RANK.get(tier or "", len(VENUE_TIERS))
+
+
+def venue_improves(tier: Optional[str], best: Optional[str]) -> bool:
+    """Should a film we've already announced speak up about a new theatre?
+
+    Only for a real step up the ladder over a watermark we already hold.
+    Setting the watermark for the first time is silent: the debut push
+    already said the film was playing, and naming its tier is not a second
+    piece of news. Mirrors availability.improves.
+    """
+    if not tier or best is None:
+        return False
+    return venue_rank(tier) < venue_rank(best)
+
+
+def better_venue(a: Optional[str], b: Optional[str]) -> Optional[str]:
+    """The better of two tiers, tolerating None. Mirrors availability.better."""
+    if a is None:
+        return b
+    if b is None:
+        return a
+    return a if venue_rank(a) <= venue_rank(b) else b
 
 
 def medium_for(fmt: Optional[str]) -> Optional[str]:

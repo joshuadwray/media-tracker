@@ -128,6 +128,7 @@ class ChainTheaterSource(Source):
                     page_text = _html_to_text(resp.text)
             if not theatre_ok:
                 continue
+            tier, distance = self.venue_meta(theatre)
             for movie in config.movies:
                 matched = False
                 for title, info in merged.items():
@@ -148,6 +149,9 @@ class ChainTheaterSource(Source):
                         positive=True,
                         event=f'"{title}" {verb} {theatre["name"]}',
                         venue=theatre["name"],
+                        venue_tier=tier,
+                        distance_mi=distance,
+                        source_label=self.label,
                         detail={"theatre": theatre["name"],
                                 "dates": sorted(dates or [])},
                     ))
@@ -162,6 +166,9 @@ class ChainTheaterSource(Source):
                         positive=True,
                         event=f'"{movie.title}" mentioned on {theatre["name"]}',
                         venue=theatre["name"],
+                        venue_tier=tier,
+                        distance_mi=distance,
+                        source_label=self.label,
                         detail={"theatre": theatre["name"], "matched": "page-text"},
                     ))
         if errors and len(errors) == len(self.theatres()):
