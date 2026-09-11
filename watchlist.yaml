@@ -295,6 +295,13 @@ sources:
   # run, 24 of them Dune Part Three repeated per cinema per date.
   # Re-measure with this same comparison before flipping it, don't
   # re-argue it from the feed's tidiness.
+  #
+  # One input to that has changed since: venue tiers (2026-09-10) mean
+  # every Alamo is `other`, so a film already sighted at that tier or
+  # better stays silent however many Alamo sightings it generates. The
+  # sighting-volume half of the cost is largely gone; the "unique titles
+  # are repertory, not new releases" half is untouched, and that was
+  # always the deciding one.
   alamo:
     kind: drafthouse
     market: dfw

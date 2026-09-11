@@ -27,7 +27,9 @@ reading/log.json, lists/*.yaml → covers + page counts → docs/data/*.json →
 | `lewisville-print` | Lewisville Public Library print (SirsiDynix Enterprise) | Atom feed for discovery, one AJAX call per record for copies/holds |
 | `libby-fortworth` | Fort Worth ebooks/audiobooks (Libby/OverDrive) | OverDrive's unauthenticated "thunder" API |
 | `libby-houston` | Houston ebooks/audiobooks (Libby/OverDrive) | same, different library key |
-| `texas-theatre` | Texas Theatre | page watcher (title appears on the site) |
+| `texas-theatre` | Texas Theatre, The Modern (Fort Worth) | page watcher (title appears on the site) |
+| `angelika` | Angelika Dallas | Reading Cinemas API; its bearer token is handed out unauthenticated |
+| `inwood` | Landmark Inwood | the site is Gatsby, and its static-query JSON is public |
 | `cinemark` / `amc` | chain theaters (config per location) | schema.org ld+json on showtime pages, page-text fallback |
 | `alamo` (off by default) | every Alamo Drafthouse in DFW | their market-wide JSON schedule feed |
 
@@ -44,10 +46,18 @@ read is announced once, and the report still shows which libraries have
 it. A newly added library can only speak up by beating the shortest wait
 a track has already reached.
 
-Films work the same way, per (film, theatre): a theatre speaks the first
-time it has the film and then stays quiet, however its listing is worded
-and however many days of showtimes go on sale afterwards. Theatres found
-in the same run share one push.
+Films work the same way, ranked on *where* instead of on a wait. Each
+theatre has a `tier` in `watchlist.yaml` — `home` (Cinemark Denton 14),
+`preferred` (any other Cinemark), `nearby` (a hop that stays out of the
+metroplex), `other` (Dallas, Frisco, Fort Worth) — and a `distance_mi`
+that orders theatres *within* one tier. A film speaks the first time
+it's playing anywhere and afterwards only when it reaches a better tier,
+so a wide release doesn't drip-feed a push a day as it works across the
+metro. Theatres found in the same run share one push, best first.
+
+Tiers rather than a mileage column because miles lie: Stonebriar is
+nearer than Grapevine Mills and the worse drive, because it's Frisco. A
+step between tiers is a different decision; a few miles isn't.
 
 ## Setup
 
@@ -163,8 +173,11 @@ python -m tracker probe
 per source. Expected outcomes: `denton-library` and `alamo` should just
 work; `cloudlibrary` may need its endpoint chain re-pointed (the adapter
 is built so that's a one-line fix — send me the probe output);
-`cinemark`/`amc` will tell you whether structured data or only the text
-fallback is available, and whether your theater URLs are right.
+`cinemark` will tell you whether structured data or only the text
+fallback is available, and whether your theater URLs are right. `amc`
+is expected to fail — every theatre page has returned a hard Cloudflare
+403 since 2026-09-02, and the replacement is AMC's official API (see
+TODO.md), not anything fixable in the page scraper.
 
 ## If the Cinemark/AMC probes fail
 

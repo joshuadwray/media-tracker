@@ -1,6 +1,15 @@
 # TODO / pins / ideas
 
 ## Pinned
+- ~~Rank theatres so listings sort and pushes stop drip-feeding.~~
+  Done 2026-09-10: theatres carry `tier` (home / preferred / nearby /
+  other) + `distance_mi` in watchlist.yaml, folded into
+  `Observation.sort_key`; a fourth state map `films` holds a per-film
+  watermark so a theatre only speaks if it beats the tier on record.
+  Tiers, not miles, because Stonebriar is nearer than Grapevine Mills
+  and the worse drive (Frisco). Shipped with no migration — the upgrade
+  run seeds every tier in silence. AMC Highland Village 12 is queued to
+  join at tier `nearby` with the API swap, below.
 - ~~Bookmory history import.~~ Done 2026-07-19:
   `tracker reading --import-bookmory backup.zip` (tracker/
   bookmory_import.py reads new_bookmory.db, a sembast_sqflite store).
