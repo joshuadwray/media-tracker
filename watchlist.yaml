@@ -247,6 +247,32 @@ sources:
     label: Landmark Inwood
     distance_mi: 40              # Inwood Village, Dallas
 
+  advance-screenings:
+    kind: advance-screenings
+    label: Advance screenings
+    # The studio-driven promo screenings — free RSVP/code/contest passes
+    # handed out before release — as opposed to the chains' "advance
+    # tickets on sale", which chain_theaters already flags.
+    #
+    # advancescreenings.com aggregates ~10 outlets (Gofobo, Alamo, Mind on
+    # Movies, Irish Film Critic, Red Carpet Crash, Dallas Observer, ...).
+    # Each market page is a RADIUS around that city, not a fixed market: a
+    # Waxahachie-centred page drops Denton while a Denton-centred one keeps
+    # it. Two centres cover the metroplex's spread; rows carry a #code
+    # anchor, so the overlap dedups itself.
+    markets: [us/tx/denton, us/tx/dallas]
+    # A free screening is worth the same drive as any other non-Denton
+    # house — you'd always rather see it in town, but whether you drive to
+    # a Cinemark or to a free screening is moot.
+    tier: preferred
+    distance_mi: 40
+    city_tiers:
+      Denton: {tier: home, distance_mi: 3}
+    # Free, studio-driven screenings only. "Purchase Tickets" is early
+    # tickets on sale — Cinemark/AMC already report that as an advance
+    # flag, and it is what every Alamo row in this feed is.
+    types: [RSVP, Redeem Link or Code, Contest, Studio Screening]
+
   cinemark:
     kind: cinemark
     tier: preferred              # inherited by every theatre below

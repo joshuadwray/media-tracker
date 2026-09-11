@@ -1,5 +1,6 @@
 """Source adapters. Importing this package registers all built-in kinds."""
 from . import (  # noqa: F401
+    advance_screenings,
     bibliocommons,
     chain_theaters,
     cloudlibrary,

@@ -315,46 +315,65 @@ crossing DEAD_AFTER_RUNS (3, ~1.5 days at two runs/day) pushes one
 nothing repeats in between. The report's status line carries the
 outage age and run count so a flake reads differently from a wall.
 
-## Advance / promo screenings across the metroplex (idea, unshaped)
-Not the chains' "advance tickets on sale" — the studio-driven, lightly
-publicized press and word-of-mouth screenings held before release to
-seed buzz. Different sourcing problem from everything the tracker does
-today, which is why it's parked as an idea rather than a task.
+## Advance / promo screenings — DONE 2026-09-10
+`tracker/sources/advance_screenings.py`, source id `advance-screenings`.
+The studio-driven word-of-mouth screenings, not the chains' "advance
+tickets on sale".
 
-What already exists: `chain_theaters.py` matches
-`card__movie--advanced-tickets` and sets an `advance` flag, so Cinemark
-and AMC already say "advance tickets on sale at ...". `drafthouse.py`
-has no advance detection at all despite its feed carrying
-`advance-screening-*` presentation slugs — so the chain-side signal is
-real but uneven, and evening it out is the cheap half of this.
+This was parked as "discovery, not matching — needs its own output
+surface". That was wrong, and so was the sourcing: **advancescreenings.com**
+(Fong LLC) aggregates ~10 outlets — Gofobo, Alamo, Mind on Movies, Irish
+Film Critic, Red Carpet Crash, Dallas Observer, Countdown City Geekcast,
+Pop Culture Pros, Alamo City Movie Talk, eKKL — server-renders everything,
+needs no login, and its robots.txt is `User-agent: * / Disallow:`. Driven
+from the watchlist it is ordinary matching: an Observation with a `venue`,
+straight into the existing film push/report/dashboard path. Nothing else
+changed.
 
-Where the actual promo screenings live (probed 2026-09-09):
-- **Gofobo** — the big one, and Dallas-based. Homepage is up and
-  server-renders upcoming titles (two of which, Heart of the Beast and
-  Forgotten Island, also show in Cinemark's advance list). No
-  `__NEXT_DATA__`, no `/api/` paths, no graphql in the markup;
-  `/screenings` 500s. Per-city listings are very likely login-gated.
-  Best lead by far.
-- **SeeItFirst**, **Film Metro** — DNS failed from here; may be dead.
-- **allianceco.com** — now an engineering firm. Dead lead, don't
-  re-probe it.
-- **Central Track** (Dallas alt-weekly) is alive and sometimes lists
-  these; the `pages` source would cover it for nearly nothing.
+Three things worth knowing before touching it:
+- **`/city/us/<st>/<city>` is a RADIUS, not a market.** Every DFW slug
+  tried returned the same page, which made it look market-shaped — but
+  `/city/us/tx/waxahachie` drops Denton while `/city/us/tx/denton` keeps
+  it, and Houston/SF pages share nothing. Hence `markets:` takes a list;
+  we fetch Denton- and Dallas-centred pages and dedup on the `#code`
+  anchor each row carries.
+- **City-page rows are per-OUTLET, not per-screening.** Five Forgotten
+  Island rows in Dallas were five pass-code sources for the one AMC
+  NorthPark show. Cards collapse on (theatre, date, time); the outlets
+  ride along as alternative ways in. Detail pages also render every card
+  twice (desktop + mobile), so dedup by id too.
+- **The dates carry no year**, only "September 22nd (Tuesday)". Next
+  occurrence is wrong for half of December every January, so the weekday
+  decides and an unreconcilable date is dropped rather than invented.
 
-Why it's a different beast:
-- It's **discovery, not matching**. Every Observation hangs off a
-  watchlist item_key; a metro-wide screening feed has no item to hang
-  on, so it needs its own output surface.
-- These screenings are **RSVP/code-gated and fill in hours**. A
-  twice-daily cron is the wrong cadence for "an RSVP just opened",
-  which is the only moment that matters.
-- Titles are often withheld — "Secret Movie Series September 14" and
-  "$5 Secret Movie 9/14/26" are already in the Cinemark and Landmark
-  feeds — so title matching, the tracker's whole spine, degrades.
+Free promo only (`RSVP`, `Redeem Link or Code`, `Contest`, `Studio
+Screening`). `Purchase Tickets` is early tickets on sale, which
+chain_theaters already flags — and is what every Alamo row in this feed
+is today. Tier is `preferred`, Denton `home`: you'd always rather see it
+in town, but driving to a Cinemark and driving to a free screening are
+the same decision. A consequence to expect, not a bug: a film already
+sighted at Cinemark Denton 14 will not push again for a free Dallas
+screening — the tier gate swallows it, and the dashboard still lists it.
 
-Open question before any of this gets built: the output surface. A push
-per screening doesn't fit a non-watchlist firehose; a docs/ page or a
-digest probably does.
+Leads closed, don't re-probe:
+- **Gofobo direct** — workable but strictly poorer.
+  `/main/local_movie_screenings/<id>` is public (the old "login-gated"
+  note was wrong; it's the *zip filter* that's gated, silently returning
+  zero rows for films that do have Dallas screenings). But there is no
+  search and no sitemap, so title -> id means crawling ~700 ids
+  (6200-6930 live as of 2026-09-10), and for Heart of the Beast it listed
+  FEWER Dallas screenings than the aggregator did.
+- **Film Metro** — now redirects to gofobo.com. Merged, not dead.
+- **SeeItFirst** — DNS still fails.
+- `gofobo.com/main/events` 500s; its "Gofobo Local" regional pages are
+  dead 2021 blog content; `allianceco.com` is still an engineering firm.
+
+## Alamo advance flag (small, left out of the above)
+`drafthouse.py` sets no `advance` flag despite its feed carrying
+`advance-screening-*` presentation slugs, unlike Cinemark and AMC which
+match `card__movie--advanced-tickets`. Evening that out is cheap. Moot
+while the alamo source stays disabled, so it waits on that decision.
+
 
 ## Older / ambient
 - ~~Angelika Dallas showtimes.~~ Done 2026-09-09 —

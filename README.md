@@ -32,6 +32,7 @@ reading/log.json, lists/*.yaml → covers + page counts → docs/data/*.json →
 | `inwood` | Landmark Inwood | the site is Gatsby, and its static-query JSON is public |
 | `cinemark` / `amc` | chain theaters (config per location) | schema.org ld+json on showtime pages, page-text fallback |
 | `alamo` (off by default) | every Alamo Drafthouse in DFW | their market-wide JSON schedule feed |
+| `advance-screenings` | free studio promo screenings across DFW | advancescreenings.com, which aggregates ~10 outlets incl. Gofobo |
 
 Sources are isolated: one failing never kills the run; failures show in
 the report. Add a source by editing `sources:` in `watchlist.yaml`; add

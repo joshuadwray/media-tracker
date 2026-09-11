@@ -1481,3 +1481,165 @@ def test_health_records_and_pushes_only_the_error_headline(tmp_path):
     assert "Traceback" not in st.last_error("amc")
     assert first_line("") == ""
     assert first_line("single line") == "single line"
+
+
+# --- Advance / promo screenings (advancescreenings.com) ---------------------
+#
+# Fixtures trimmed from live pages captured 2026-09-10. The city page's
+# trap is that rows are per-OUTLET: the five Forgotten Island rows below
+# are five pass-code sources for the ONE AMC NorthPark show, and the Verity
+# rows are paid early access, which the chain sources already report.
+
+_AS_CITY = """
+<h5 class="date">September 22nd <small>(Tuesday)</small></h5><hr/>
+<div class="row row-screenings">
+  <h4 class="movie_title hidden-xs">Forgotten Island</h4>
+  <table><tbody>
+    <tr><td><a href="/screening/forgotten_island/us/tx/dallas#Jd48PjX6">
+      Redeem Link or Code</a></td>
+      <td><a href="/city/us/tx/dallas">Dallas, TX</a></td>
+      <td><a href="/outlet/alamo_city_movie_talk">Alamo City Movie Talk</a></td>
+      <td>6 hours ago</td></tr>
+    <tr><td><a href="/screening/forgotten_island/us/tx/dallas#9IruE5HR">
+      Redeem Link or Code</a></td>
+      <td><a href="/city/us/tx/dallas">Dallas, TX</a></td>
+      <td><a href="/outlet/mind_on_movies">Mind on Movies</a></td>
+      <td>15 hours ago</td></tr>
+  </tbody></table>
+</div>
+<h5 class="date">September 30th <small>(Wednesday)</small></h5><hr/>
+<div class="row row-screenings">
+  <h4 class="movie_title hidden-xs">Verity</h4>
+  <table><tbody>
+    <tr><td><a href="/screening/verity/us/tx/denton#filvj85C">
+      Purchase Tickets</a></td>
+      <td><a href="/city/us/tx/denton">Denton, TX</a></td>
+      <td><a href="/outlet/alamo_drafthouse_cinema">Alamo Drafthouse Cinema</a></td>
+      <td>5 days ago</td></tr>
+  </tbody></table>
+</div>
+"""
+
+
+def _as_card(code, outlet, theatre="AMC NorthPark 15"):
+    return f"""
+<div id="{code}" class="row screening_source">
+  <h4>Redeem Link or Code from <a href="/outlet/x">{outlet}</a></h4>
+  <ul class="list-unstyled">
+    <li><i class="fa fa-calendar-o"></i> September 22nd (Tuesday)
+        <i class="fa fa-clock-o"></i> 7:00 pm </li>
+    <li><i class="fa fa-map-marker"></i>
+        <a class="tip" href="http://maps.google.com/?q=x">{theatre}</a>
+        - 8687 North Central Expressway Dallas, TX, 75225</li>
+  </ul>
+  <div class="golink"><a href="/go/{code}">Grab Passes</a></div>
+</div>"""
+
+
+# The real page renders every card twice (desktop + mobile), so the
+# fixture does too — dedup by id is not optional.
+_AS_DETAIL = "".join(
+    _as_card(code, outlet)
+    for code, outlet in (("Jd48PjX6", "Alamo City Movie Talk"),
+                         ("9IruE5HR", "Mind on Movies"),
+                         ("7p76udj6", "Red Carpet Crash"),
+                         ("t3Est6xa", "Countdown City Geekcast"),
+                         ("j0AfXAwN", "Irish Film Critic"))
+) * 2
+
+
+def test_advance_city_page_rows_are_per_outlet():
+    from datetime import date
+
+    from tracker.sources.advance_screenings import parse_city_page
+
+    rows = parse_city_page(_AS_CITY, today=date(2026, 9, 10))
+    assert len(rows) == 3
+    forgotten = [r for r in rows if r["film"] == "Forgotten Island"]
+    assert len(forgotten) == 2                      # two outlets, one show
+    assert {r["code"] for r in forgotten} == {"Jd48PjX6", "9IruE5HR"}
+    assert forgotten[0]["day"] == date(2026, 9, 22)
+    assert forgotten[0]["city"] == "Dallas"
+    assert forgotten[0]["slug"] == "forgotten_island"
+    assert rows[-1]["type"] == "Purchase Tickets"   # kept here, filtered later
+
+
+def test_advance_five_outlets_collapse_to_one_screening():
+    """The dedup unit is (theatre, date, time). Five pass-code sources for
+    one AMC NorthPark show must not become five pushes."""
+    from datetime import date
+
+    from tracker.sources.advance_screenings import (
+        DEFAULT_TYPES, _collapse_cards, _parse_cards)
+
+    cards = _parse_cards(_AS_DETAIL, today=date(2026, 9, 10))
+    assert len(cards) == 5                          # deduped from 10
+    shows = _collapse_cards(cards, {t.lower() for t in DEFAULT_TYPES})
+    assert len(shows) == 1
+    show = shows[0]
+    assert show["theatre"] == "AMC NorthPark 15"
+    assert show["day"] == date(2026, 9, 22)
+    assert show["time"] == "7:00 pm"
+    assert len(show["outlets"]) == 5
+    assert len(show["passes"]) == 5
+
+
+def test_advance_paid_early_access_is_dropped():
+    """"Purchase Tickets" is early tickets on sale, which chain_theaters
+    already reports as an advance flag."""
+    from tracker.sources.advance_screenings import DEFAULT_TYPES, _collapse_cards
+
+    paid = [{"theatre": "Alamo Denton", "date_text": "September 30 (Wednesday)",
+             "time": "7:00 pm", "type": "Purchase Tickets", "code": "a",
+             "outlet": "Alamo", "pass": "/go/a"}]
+    assert _collapse_cards(paid, {t.lower() for t in DEFAULT_TYPES}) == []
+    assert len(_collapse_cards(paid, {"purchase tickets"})) == 1
+
+
+def test_advance_year_comes_from_the_weekday_not_the_guess():
+    """The feed prints no year. "next occurrence" is wrong for half of
+    December every January, so the weekday it also prints decides."""
+    from datetime import date
+
+    from tracker.sources.advance_screenings import resolve_date
+
+    sep = date(2026, 9, 10)
+    assert resolve_date("September", 22, "Tuesday", today=sep) == date(2026, 9, 22)
+    # Dec 15 2026 is a Tuesday; Dec 15 2027 is a Wednesday. Asked from
+    # January, the weekday is the only thing separating them.
+    jan = date(2027, 1, 5)
+    assert resolve_date("December", 15, "Wednesday", today=jan) == date(2027, 12, 15)
+    # A weekday that matches no nearby year is dropped, not invented.
+    assert resolve_date("September", 22, "Sunday", today=sep) is None
+    assert resolve_date("Smarch", 3, "Monday", today=sep) is None
+
+
+def test_advance_denton_outranks_the_metroplex():
+    """A free screening is worth the same drive as any other non-Denton
+    house, but never beats the screen in town."""
+    from tracker.sources.advance_screenings import AdvanceScreeningsSource
+
+    src = AdvanceScreeningsSource("advance-screenings", {
+        "kind": "advance-screenings", "markets": ["us/tx/denton"],
+        "tier": "preferred", "distance_mi": 40,
+        "city_tiers": {"Denton": {"tier": "home", "distance_mi": 3}},
+    })
+    assert src.city_meta("Denton") == ("home", 3.0)
+    assert src.city_meta("denton") == ("home", 3.0)   # feed casing varies
+    assert src.city_meta("Richardson") == ("preferred", 40.0)
+
+
+def test_advance_venue_name_folds_onto_the_configured_spelling():
+    """The feed writes "AMC NorthPark 15" and watchlist.yaml "AMC Northpark
+    15"; left alone that is two dashboard headings for one theatre."""
+    from tracker.config import Config
+    from tracker.sources.advance_screenings import (
+        _canonical_venue, _configured_venues)
+
+    cfg = Config(sources={"amc": {"theatres": [{"name": "AMC Northpark 15"}]},
+                          "pages": {"pages": [{"name": "Texas Theatre"}]}})
+    names = _configured_venues(cfg)
+    assert _canonical_venue("AMC NorthPark 15", names) == "AMC Northpark 15"
+    assert _canonical_venue("the texas theatre", names) == "Texas Theatre"
+    # An unknown house keeps the feed's own spelling.
+    assert _canonical_venue("Cinemark 17 and IMAX", names) == "Cinemark 17 and IMAX"
