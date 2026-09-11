@@ -205,21 +205,84 @@
   (incomplete, laggy) marker of Denton ownership. Tracker coverage is
   the union of both sources, which is what we want.
 
-## AMC blocked by Cloudflare (2026-09-02, still down)
-Every AMC theatre page returns a hard 403 ("Sorry, you have been
-blocked" — a WAF block, not a JS challenge, so no cookie or wait
-clears it). Not header-fixable: verified 2026-09-09 that a current
-Chrome UA, full sec-ch-ua/Sec-Fetch set and Accept-Encoding all get
-the identical 5486-byte block page, which points at TLS/JA3
-fingerprinting rather than anything we send. Fails from a home IP too,
-so it isn't GitHub's runners being blocklisted.
-The one open door: `api.amctheatres.com` is NOT blocked — it answers
-400 `{"errors":[{"code":1,"message":"The request requires vendor
-authentication"}]}`, i.e. it wants an `X-AMC-Vendor-Key`. Keys come
-from developers.amctheatres.com (itself 403 to us — register from a
-real browser). That's a user action, so AMC stays dark until someone
-decides: get a key and write an `amc-api` source, or drop the three
-theatres. Meanwhile the outage is at least *visible* now (see below).
+## AMC — key issued, not yet authorized (blocked on AMC, 2026-09-10)
+
+**State: everything on our side is done. Waiting on AMC to provision the
+key. Resume steps at the bottom.**
+
+The page scraper is permanently dead. Every AMC theatre page returns a
+hard Cloudflare WAF 403 ("Sorry, you have been blocked" — not a JS
+challenge, so no cookie or wait clears it). Not header-fixable: verified
+2026-09-09 that a current Chrome UA, the full sec-ch-ua/Sec-Fetch set and
+Accept-Encoding all get the identical 5486-byte block page, which points
+at TLS/JA3 fingerprinting rather than anything we send. It fails from a
+home IP too, so it isn't GitHub's runners being blocklisted. Don't spend
+time trying to revive it — the replacement is the official API.
+
+`api.amctheatres.com` is NOT Cloudflare-blocked. Applied via
+developers.amctheatres.com/GettingStarted/NewVendorRequest on 2026-09-09
+(non-commercial catalog tier: Person, Movie, Showtime, Attribute,
+Location, Theatre, Market — ecommerce/seating is a separate restricted
+track they don't accept requests for through that form). A key was issued
+immediately.
+
+**The key is in place and being read correctly:**
+- `AMC_VENDOR_KEY` in `.env` (36 chars, GUID-shaped)
+- `AMC_VENDOR_KEY` as a GitHub Actions secret (set 2026-09-09 18:06 UTC)
+- NOT yet referenced in `.github/workflows/media-tracker.yml` — the
+  `env:` line lands with the source, so CI can't half-work in the interim
+
+**It is not authorized yet.** Every request returns 403
+`{"code":12005,"exceptionMessage":"Unauthorized VendorKey."}`. That's
+distinct from the keyless 400 `{"code":1,"...requires vendor
+authentication"}`, which is how we know the header name and request shape
+are right. Confirmed identical on `/v2/theatres`,
+`/v2/movies/views/now-playing` and `/v1/theatres`, with both
+`X-AMC-Vendor-Key` and `Authorization`. Checked four times across
+2026-09-10 (07:48, 12:59, 17:20, 22:07 CDT) — unchanged all day, so it
+missed that Thursday's deploy. AMC said access deploys weekly on
+Thursdays; the open question is whether this key is queued for
+2026-09-17 or needs a human. An email to developers@amctheatres.com
+asking which deploy it's scheduled for was drafted 2026-09-10.
+
+### Resume steps, once the key authenticates
+
+Re-check first — one request tells you everything:
+
+    python -c "import sys;sys.path.insert(0,'.');\
+    from tracker.cli import _load_dotenv;from tracker.config import env;\
+    from tracker import http;_load_dotenv();\
+    print(http.get(http.session(),'https://api.amctheatres.com/v2/theatres',\
+    headers={'X-AMC-Vendor-Key':env('AMC_VENDOR_KEY')}).status_code)"
+
+200 means go. Then:
+
+1. **Probe before writing anything.** Get the three DFW theatre ids from
+   `/v2/theatres`, then pull one real showtimes response. Build the
+   parser against that payload, not against the docs — the reference
+   pages at developers.amctheatres.com are JS-rendered stubs, and
+   guessing a schema you can't run is exactly how media-diary's scrapers
+   failed silently.
+2. **Write `tracker/sources/amc_api.py`**, kind `amc-api`. Follow
+   `readingcinemas.py` and `webedia.py`: config-driven ids, a pure parse
+   function taking decoded JSON so it's testable against a fixture with
+   no network, one Observation per (film, venue), and a `probe()` that
+   prints counts so a wrong id reads differently from a quiet week.
+3. **Swap the config.** Replace the `amc:` block in `watchlist.yaml`
+   (kind `amc`, three `theatres:` URLs) with the new kind. **Keep the
+   theatre names byte-identical.** `state.venues` embeds them in the key —
+   verified, the live state holds
+   `movie:teenage-sex-and-death-at-camp-miasma|AMC Grapevine Mills 30` —
+   so "AMC Grapevine Mills 30" becoming "Grapevine Mills 30" would look
+   like a brand-new venue and re-notify every film already seen at those
+   three houses.
+4. **Add `AMC_VENDOR_KEY: ${{ secrets.AMC_VENDOR_KEY }}`** to the `env:`
+   block in `.github/workflows/media-tracker.yml` (beside `TMDB_API_KEY`),
+   in the same commit.
+5. The health counter clears itself: the first successful run pushes one
+   "scraper recovered" note. Note it will NOT recover on its own before
+   then — `state.health.amc` has been counting since 2026-09-10T00:59 and
+   alerted at 3 runs, which is expected, not a second fault.
 
 ## Silent scraper death — FIXED 2026-09-09
 AMC died on 2026-09-02 and nothing said so for seven days: partial
