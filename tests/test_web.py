@@ -135,6 +135,42 @@ def test_dashboard_renders(wl, tmp_path):
     assert html.count("<script") == 1
 
 
+def test_dashboard_cards_carry_their_kind(wl, tmp_path):
+    """Books and films get different card classes so the tint can tell
+    them apart, plus the glyph — colour alone is a weak channel."""
+    from tracker.config import load_config
+    from tracker.dashboard import build_dashboard
+    from tracker.models import Observation, SourceResult
+    from tracker.state import State
+
+    cfg = load_config(wl)
+    film = Observation(source="texas-theatre", item_key="movie:the-substance",
+                       item_label="The Substance (2024)",
+                       summary='"The Substance" mentioned on Texas Theatre')
+    book = Observation(source="denton-library", item_key="book:plain-book",
+                       item_label="Plain Book",
+                       summary="print book in denton library catalog")
+    results = [SourceResult(source="texas-theatre", observations=[film]),
+               SourceResult(source="denton-library", observations=[book])]
+    html = build_dashboard(cfg, results, [], State(tmp_path / "s.json"))
+    assert "class='card movie'" in html
+    assert "class='card book'" in html
+    assert html.count("<span class='kind'>") >= 2
+
+
+def test_dashboard_card_without_a_kind_renders_untinted(tmp_path):
+    """A card can outlive its watchlist entry when an item is removed
+    mid-run. Those render plain rather than crashing or guessing a kind."""
+    from datetime import datetime, timezone
+    from tracker.dashboard import _grouped_card
+
+    html = _grouped_card("Gone (2024)", [], [], set(),
+                         datetime.now(timezone.utc), kind=None)
+    assert "class='card'" in html
+    assert "<span class='kind'>" not in html
+    assert "Gone (2024)" in html
+
+
 def test_dashboard_flags_a_no_hold_shelf_copy(wl, tmp_path):
     """A Lucky Day copy is what makes a zero wait trustworthy on a title with
     a queue, so it has to read on the collapsed card as well as on the row."""

@@ -3,6 +3,18 @@
         background: var(--surface); box-shadow: var(--shadow-sm);
         padding: 10px 12px; margin-bottom: 8px; }
 .card.new { border-left: 5px solid var(--ok); }
+/* Category tints. Deliberately NOT gold or teal: both are status colours
+   here (teal is --ok, the .new bar and .wait.now; gold is .warn and a
+   stale age), so tinting a card with either would say "good news" or
+   "problem" rather than "this is a film". These two are cool siblings
+   from outside that palette, light enough that .card.new's teal bar
+   still reads as the louder signal on top of them. */
+:root { --tint-book: #F6F2FA; --tint-movie: #EDF4FA; }
+.card.book { background: var(--tint-book); }
+.card.movie { background: var(--tint-movie); }
+/* Own element rather than a literal space before the emoji: glyph advance
+   widths vary by platform font, so a plain space sets differently on each. */
+.card > summary .kind { margin-right: 7px; font-size: .95em; }
 .card > summary { font-weight: 600; cursor: pointer;
         list-style: none; display: flex; align-items: center; }
 .card > summary::-webkit-details-marker { display: none; }

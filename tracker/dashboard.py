@@ -24,6 +24,18 @@ _CSS = """
         background: var(--surface); box-shadow: var(--shadow-sm);
         padding: 10px 12px; margin-bottom: 8px; }
 .card.new { border-left: 5px solid var(--ok); }
+/* Category tints. Deliberately NOT gold or teal: both are status colours
+   here (teal is --ok, the .new bar and .wait.now; gold is .warn and a
+   stale age), so tinting a card with either would say "good news" or
+   "problem" rather than "this is a film". These two are cool siblings
+   from outside that palette, light enough that .card.new's teal bar
+   still reads as the louder signal on top of them. */
+:root { --tint-book: #F6F2FA; --tint-movie: #EDF4FA; }
+.card.book { background: var(--tint-book); }
+.card.movie { background: var(--tint-movie); }
+/* Own element rather than a literal space before the emoji: glyph advance
+   widths vary by platform font, so a plain space sets differently on each. */
+.card > summary .kind { margin-right: 7px; font-size: .95em; }
 .card > summary { font-weight: 600; cursor: pointer;
         list-style: none; display: flex; align-items: center; }
 .card > summary::-webkit-details-marker { display: none; }
@@ -140,12 +152,18 @@ def build_dashboard(config: Config, results: list[SourceResult],
     # watchlist.yaml doesn't match on.
     item_labels: dict[str, str] = {}
     item_remove: dict[str, tuple[str, str]] = {}
+    # Kind drives the card tint. Kept as its own map rather than read off
+    # item_remove, which is None for a card that outlived its watchlist
+    # entry — those should render untinted, not crash on the unpack.
+    item_kind: dict[str, str] = {}
     for item in config.books:
         item_labels[item.key] = str(item)
         item_remove[item.key] = ("book", item.title)
+        item_kind[item.key] = "book"
     for item in config.movies:
         item_labels[item.key] = str(item)
         item_remove[item.key] = ("movie", item.title)
+        item_kind[item.key] = "movie"
 
     e = html.escape
     parts = [
@@ -178,7 +196,8 @@ def build_dashboard(config: Config, results: list[SourceResult],
             parts.append(_grouped_card(label, obs_list, stale, new_fps,
                                        now_dt, is_new=True,
                                        carried=carry,
-                                       remove=item_remove.get(item_key)))
+                                       remove=item_remove.get(item_key),
+                                       kind=item_kind.get(item_key)))
     else:
         parts.append("<div class='muted'>nothing new</div>")
     parts.append("</details>")
@@ -205,7 +224,8 @@ def build_dashboard(config: Config, results: list[SourceResult],
             label = item_labels[key]
             parts.append(_grouped_card(label, obs_list, stale, new_fps,
                                        now_dt, carried=carry,
-                                       remove=item_remove.get(key)))
+                                       remove=item_remove.get(key),
+                                       kind=item_kind.get(key)))
     else:
         parts.append("<div class='muted'>no watchlist titles are available "
                      "or playing anywhere right now</div>")
@@ -292,13 +312,22 @@ def _historical_by_item(state: State, current_fps: set[str],
     return stale_items, carried_items
 
 
+#: Card glyph per kind. The same two the Watching list has always used —
+#: colour alone is a weak channel, and this keeps one visual language for
+#: the distinction instead of two.
+_KIND_GLYPH = {"book": "\U0001F4D6", "movie": "\U0001F3AC"}
+
+
 def _grouped_card(label: str, current_obs: list[Observation],
                   stale: list[dict], new_fps: set[str], now: datetime,
                   is_new: bool = False,
                   carried: list[dict] | None = None,
-                  remove: tuple[str, str] | None = None) -> str:
+                  remove: tuple[str, str] | None = None,
+                  kind: str | None = None) -> str:
     e = html.escape
     cls = "card new" if is_new else "card"
+    if kind:
+        cls += f" {kind}"
 
     rows: list[str] = []
 
@@ -363,8 +392,11 @@ def _grouped_card(label: str, current_obs: list[Observation],
     # out" is context, not a prompt to act, and stays inside on its own row.
     on_shelf = next((o for o in current_obs if o.shelf and o.shelf_copies), None)
     pill = _shelf_pill(on_shelf) if on_shelf else ""
+    icon = _KIND_GLYPH.get(kind or "", "")
+    glyph = f"<span class='kind'>{icon}</span>" if icon else ""
     return (f"<details class='{cls}'{open_attr}>"
-            f"<summary class='item'><span class='ttl'>{e(label)}{pill}</span>"
+            f"<summary class='item'>"
+            f"<span class='ttl'>{glyph}{e(label)}{pill}</span>"
             f"{btn}</summary>"
             + "".join(rows) + "</details>")
 
