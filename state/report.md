@@ -1,8 +1,7 @@
-# Media tracker report — 2026-09-11 00:56 UTC
+# Media tracker report — 2026-09-11 03:05 UTC
 
-## New sightings (2)
-- **the age of calamities — senaa ahmad**: ebook in cloudLibrary catalog (Denton) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=the%20age%20of%20calamities)
-- **the age of calamities — senaa ahmad**: ebook in cloudLibrary catalog (Lewisville) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=the%20age%20of%20calamities)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (49)
 - **Look What You Made Me Do — Lanchester, John**
@@ -22,23 +21,22 @@
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 29 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
-  - reading: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds · Mandel, Emily St. John
-    - also: print book in denton library catalog — 4 on order, 8 holds ahead
+  - reading: print book in denton library catalog — 4 on order, 8 holds ahead · Mandel, Emily St. John
+    - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 58 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
     - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 54 holds
-  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Fruit Fly — Silver, Josh**
-  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
+  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 1 hold (~6 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
     - also: print book in Lewisville library catalog — checked out, 3 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 87 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 231 holds (~1.1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 10 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 230 holds (~1.1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 61 holds (~10 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 237 holds (~1.1 yr)
-  - sync: gap 95d > 21d loan — suspend the reading hold ~95d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 239 holds (~1.2 yr)
+  - sync: gap 84d > 21d loan — suspend the reading hold ~84d for listening
 - **the age of calamities — senaa ahmad**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Ahmad, Senaa
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
@@ -85,7 +83,7 @@
 - ✅ `angelika`: 4 observation(s)
 - ✅ `inwood`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 23h, 4 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 1d, 5 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
