@@ -1,20 +1,25 @@
-# Media tracker report — 2026-09-11 03:05 UTC
+# Media tracker report — 2026-09-11 17:01 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (3)
+- **Look What You Made Me Do — Lanchester, John**: ebook in cloudLibrary catalog (Denton) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Look%20What%20You%20Made%20Me%20Do)
+- **Ply — Hernan Diaz**: audiobook in cloudLibrary catalog (Lewisville) — pre-release — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Ply)
+- **Ply — Hernan Diaz**: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Ply)
 
-## All current sightings (49)
+## All current sightings (50)
 - **Look What You Made Me Do — Lanchester, John**
-  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
+  - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
+    - also: ebook in cloudLibrary catalog (Lewisville) — 1/2 available
     - also: print book in Lewisville library catalog — checked out, 1 hold
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 80 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 81 holds (~10 mo)
   - listening: audiobook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
     - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
     - also: audiobook (CD) in denton library catalog — 1 on shelf
-  - sync: gap 21d > 21d loan — suspend the listening hold ~21d for reading
+  - sync: gap 0d, fits in a 21d loan
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
+    - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release · Diaz, Hernan, Powers, Imani Jade
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 6 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
@@ -28,40 +33,38 @@
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
     - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 54 holds
 - **Fruit Fly — Silver, Josh**
-  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 1 hold (~6 wk) · Silver, Josh
+  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
     - also: print book in Lewisville library catalog — checked out, 3 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 87 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 230 holds (~1.1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 61 holds (~10 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 239 holds (~1.2 yr)
-  - sync: gap 84d > 21d loan — suspend the reading hold ~84d for listening
-- **the age of calamities — senaa ahmad**
-  - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Ahmad, Senaa
-    - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 6 holds (~3 mo)
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 1 hold (~4 wk) · Senaa Ahmad
-  - sync: gap 28d > 14d loan — suspend the reading hold ~28d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 86 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 232 holds (~1.1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 65 holds (~10 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 240 holds (~1.2 yr)
+  - sync: gap 74d > 21d loan — suspend the reading hold ~74d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
+- **the age of calamities — senaa ahmad**
+  - reading: ebook in Libby catalog (Houston) — 0/1 available, 6 holds (~3 mo) · Senaa Ahmad
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
+  - sync: gap 56d > 14d loan — suspend the listening hold ~56d for reading
 - **Oasis: Don't Look Back in Anger (2026)**
-  - "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-11, 2026-09-12, 2026-09-13, 2026-09-14)
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-11, 2026-09-12, 2026-09-13, 2026-09-14)
 - **Primetime (2026)**
-  - "PRIMETIME" playing at Angelika Dallas (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
-  - "Primetime" advance tickets on sale at Cinemark Denton 14
-  - "Primetime" advance tickets on sale at Cinemark West Plano
-  - "Primetime" advance tickets on sale at Cinemark Dallas IMAX
+  - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14
+  - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano
+  - Cinemark Dallas IMAX: "Primetime" advance tickets on sale at Cinemark Dallas IMAX
+  - Angelika Dallas: "PRIMETIME" playing at Angelika Dallas (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
 - **dune part 3 (2026)**
-  - "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
-  - "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
-  - "Dune: Part Three" advance tickets on sale at Cinemark West Plano
-  - "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark West Plano
-  - "Dune: Part Three - IMAX 70mm" advance tickets on sale at Cinemark Dallas IMAX
-  - "Dune: Part Three Insider Screenings in IMAX 70MM" advance tickets on sale at Cinemark Dallas IMAX
-  - "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark Dallas IMAX
+  - Cinemark West Plano: "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark West Plano
+    - also: "Dune: Part Three" advance tickets on sale at Cinemark West Plano
+  - Cinemark Dallas IMAX: "Dune: Part Three - IMAX 70mm" advance tickets on sale at Cinemark Dallas IMAX
+    - also: "Dune: Part Three Insider Screenings in IMAX 70MM" advance tickets on sale at Cinemark Dallas IMAX
+    - also: "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark Dallas IMAX
+  - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
+    - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **Rose of Nevada (2026)**
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
   - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -75,35 +78,36 @@
 ## Source status
 - ✅ `denton-library`: 5 observation(s)
 - ✅ `cloudlibrary`: 4 observation(s)
-- ✅ `cloudlibrary-lewisville`: 7 observation(s)
+- ✅ `cloudlibrary-lewisville`: 8 observation(s)
 - ✅ `lewisville-print`: 5 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
 - ✅ `libby-houston`: 5 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
 - ✅ `angelika`: 4 observation(s)
 - ✅ `inwood`: 0 observation(s)
+- ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 1d, 5 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 1d, 6 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 53d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 54d
 - club kid (2026) — waiting 52d
 - fjord (2026) — waiting 52d
 - paper tiger (2026) — waiting 52d
 - wild horse nine (2026) — waiting 52d
 - Peck and Peck — Garmus — waiting 31d
-- All of a Sudden (2026) — waiting 0d
-- Artificial (2026) — waiting 0d
-- Behemoth! (2026) — waiting 0d
-- Digger (2026) — waiting 0d
-- Elsinore (2026) — waiting 0d
-- Fatherland (2026) — waiting 0d
-- Once Upon a Time in Harlem (2026) — waiting 0d
-- Tender Loving Care (2026) — waiting 0d
-- The Debut (2026) — waiting 0d
-- The History of Concrete (2026) — waiting 0d
-- Whalefall (2026) — waiting 0d
-- You Can See Everything (2026) — waiting 0d
+- All of a Sudden (2026) — waiting 1d
+- Artificial (2026) — waiting 1d
+- Behemoth! (2026) — waiting 1d
+- Digger (2026) — waiting 1d
+- Elsinore (2026) — waiting 1d
+- Fatherland (2026) — waiting 1d
+- Once Upon a Time in Harlem (2026) — waiting 1d
+- Tender Loving Care (2026) — waiting 1d
+- The Debut (2026) — waiting 1d
+- The History of Concrete (2026) — waiting 1d
+- Whalefall (2026) — waiting 1d
+- You Can See Everything (2026) — waiting 1d
 
