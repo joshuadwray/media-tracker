@@ -1,25 +1,22 @@
-# Media tracker report — 2026-09-11 17:01 UTC
+# Media tracker report — 2026-09-12 01:02 UTC
 
-## New sightings (3)
-- **Look What You Made Me Do — Lanchester, John**: ebook in cloudLibrary catalog (Denton) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=Look%20What%20You%20Made%20Me%20Do)
-- **Ply — Hernan Diaz**: audiobook in cloudLibrary catalog (Lewisville) — pre-release — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Ply)
-- **Ply — Hernan Diaz**: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Ply)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (50)
+## All current sightings (49)
 - **Look What You Made Me Do — Lanchester, John**
-  - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
-    - also: ebook in cloudLibrary catalog (Lewisville) — 1/2 available
+  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out, 1 hold
     - also: ebook in Libby catalog (Houston) — 0/4 available, 81 holds (~10 mo)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
-    - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
+  - listening: audiobook in cloudLibrary catalog (Denton) — 2/2 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
+    - also: audiobook in cloudLibrary catalog (Lewisville) — 2/2 available
     - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
     - also: audiobook (CD) in denton library catalog — 1 on shelf
-  - sync: gap 0d, fits in a 21d loan
+  - sync: gap 21d > 21d loan — suspend the listening hold ~21d for reading
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release · Diaz, Hernan, Powers, Imani Jade
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds · Diaz, Hernan, Powers, Imani Jade
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 6 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
@@ -29,15 +26,15 @@
   - reading: print book in denton library catalog — 4 on order, 8 holds ahead · Mandel, Emily St. John
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 58 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 61 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 54 holds
+    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 55 holds
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
     - also: print book in Lewisville library catalog — checked out, 3 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 86 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 232 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 233 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 65 holds (~10 mo)
     - also: audiobook in Libby catalog (Houston) — 0/8 available, 240 holds (~1.2 yr)
@@ -77,7 +74,7 @@
 
 ## Source status
 - ✅ `denton-library`: 5 observation(s)
-- ✅ `cloudlibrary`: 4 observation(s)
+- ✅ `cloudlibrary`: 3 observation(s)
 - ✅ `cloudlibrary-lewisville`: 8 observation(s)
 - ✅ `lewisville-print`: 5 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
@@ -87,17 +84,17 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 1d, 6 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 2d, 7 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 54d
-- club kid (2026) — waiting 52d
-- fjord (2026) — waiting 52d
-- paper tiger (2026) — waiting 52d
-- wild horse nine (2026) — waiting 52d
-- Peck and Peck — Garmus — waiting 31d
+- club kid (2026) — waiting 53d
+- fjord (2026) — waiting 53d
+- paper tiger (2026) — waiting 53d
+- wild horse nine (2026) — waiting 53d
+- Peck and Peck — Garmus — waiting 32d
 - All of a Sudden (2026) — waiting 1d
 - Artificial (2026) — waiting 1d
 - Behemoth! (2026) — waiting 1d
