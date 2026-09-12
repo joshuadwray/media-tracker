@@ -2137,6 +2137,17 @@
         "2026-09-08 66",
         "2026-09-10 352"
       ]
+    },
+    {
+      "title": "the hill",
+      "author": "harriet clark",
+      "slug": "the-hill",
+      "status": "reading",
+      "rating": null,
+      "page_count": 30,
+      "started": "2026-09-12",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
