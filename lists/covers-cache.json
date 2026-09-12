@@ -631,6 +631,13 @@
   "matched": "The Heaven & Earth Grocery Store — James McBride",
   "source": "bookmory"
  },
+ "the hill|harriet clark": {
+  "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/d5/f4/78/d5f47884-f01f-4545-f74f-84db9040ef5a/9780374614553.jpg/600x600bb.jpg",
+  "matched": "The Hill — Harriet Clark",
+  "release_date": "2026-05-05T07:00:00Z",
+  "source": "itunes",
+  "track": "The Hill"
+ },
  "the lion, the witch and the wardrobe|c.s. lewis": {
   "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1697079942i/132080146.jpg",
   "matched": "The Lion, the Witch and the Wardrobe — C.S. Lewis",
