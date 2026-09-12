@@ -2142,12 +2142,14 @@
       "title": "the hill",
       "author": "harriet clark",
       "slug": "the-hill",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3,
       "page_count": 30,
       "started": "2026-09-12",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-09-12",
+      "sessions": [
+        "2026-09-12 30"
+      ]
     }
   ]
 }
