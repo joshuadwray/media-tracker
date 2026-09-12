@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-12 01:02 UTC
+# Media tracker report — 2026-09-12 16:11 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -8,8 +8,8 @@
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out, 1 hold
     - also: ebook in Libby catalog (Houston) — 0/4 available, 81 holds (~10 mo)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 2/2 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
-    - also: audiobook in cloudLibrary catalog (Lewisville) — 2/2 available
+  - listening: audiobook in cloudLibrary catalog (Denton) — 1/2 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
+    - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
     - also: audiobook (CD) in denton library catalog — 1 on shelf
   - sync: gap 21d > 21d loan — suspend the listening hold ~21d for reading
@@ -23,22 +23,22 @@
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 29 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
-  - reading: print book in denton library catalog — 4 on order, 8 holds ahead · Mandel, Emily St. John
+  - reading: print book in denton library catalog — 4 on order, 7 holds ahead · Mandel, Emily St. John
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
     - also: print book in Lewisville library catalog — 2 on order, 6 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 61 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 55 holds
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 6 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
+    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 57 holds
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
     - also: print book in Lewisville library catalog — checked out, 3 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 86 holds (~8 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 87 holds (~8 mo)
     - also: ebook in Libby catalog (Houston) — 0/8 available, 233 holds (~1.1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 65 holds (~10 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 240 holds (~1.2 yr)
-  - sync: gap 74d > 21d loan — suspend the reading hold ~74d for listening
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 68 holds (~11 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 246 holds (~1.2 yr)
+  - sync: gap 63d > 21d loan — suspend the reading hold ~63d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
@@ -48,7 +48,7 @@
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
   - sync: gap 56d > 14d loan — suspend the listening hold ~56d for reading
 - **Oasis: Don't Look Back in Anger (2026)**
-  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-11, 2026-09-12, 2026-09-13, 2026-09-14)
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-12, 2026-09-13, 2026-09-14, 2026-09-15)
 - **Primetime (2026)**
   - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14
   - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano
@@ -84,27 +84,27 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 2d, 7 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 2d, 8 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 54d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 55d
 - club kid (2026) — waiting 53d
 - fjord (2026) — waiting 53d
 - paper tiger (2026) — waiting 53d
 - wild horse nine (2026) — waiting 53d
 - Peck and Peck — Garmus — waiting 32d
-- All of a Sudden (2026) — waiting 1d
-- Artificial (2026) — waiting 1d
-- Behemoth! (2026) — waiting 1d
-- Digger (2026) — waiting 1d
-- Elsinore (2026) — waiting 1d
-- Fatherland (2026) — waiting 1d
-- Once Upon a Time in Harlem (2026) — waiting 1d
-- Tender Loving Care (2026) — waiting 1d
-- The Debut (2026) — waiting 1d
-- The History of Concrete (2026) — waiting 1d
-- Whalefall (2026) — waiting 1d
-- You Can See Everything (2026) — waiting 1d
+- All of a Sudden (2026) — waiting 2d
+- Artificial (2026) — waiting 2d
+- Behemoth! (2026) — waiting 2d
+- Digger (2026) — waiting 2d
+- Elsinore (2026) — waiting 2d
+- Fatherland (2026) — waiting 2d
+- Once Upon a Time in Harlem (2026) — waiting 2d
+- Tender Loving Care (2026) — waiting 2d
+- The Debut (2026) — waiting 2d
+- The History of Concrete (2026) — waiting 2d
+- Whalefall (2026) — waiting 2d
+- You Can See Everything (2026) — waiting 2d
 
