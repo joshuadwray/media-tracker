@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-13 00:48 UTC
+# Media tracker report — 2026-09-13 16:58 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -7,7 +7,7 @@
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out, 1 hold
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 81 holds (~10 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 83 holds (~10 mo)
   - listening: audiobook in cloudLibrary catalog (Denton) — 1/2 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
     - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
@@ -20,24 +20,24 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 6 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 29 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 30 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in denton library catalog — 4 on order, 8 holds ahead · Mandel, Emily St. John
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
     - also: print book in Lewisville library catalog — 2 on order, 7 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 62 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 6 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 57 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 67 holds
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 5 holds · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
+    - also: audiobook in Libby catalog (Fort Worth) — pre-release, out 2026-09-15, 60 holds
 - **Fruit Fly — Silver, Josh**
   - reading: print book in denton library catalog — all 2 out, 5 holds · Silver, Josh
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 3 holds (~3 mo)
     - also: print book in Lewisville library catalog — checked out, 3 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 87 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 234 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 232 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 69 holds (~11 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 244 holds (~1.2 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 70 holds (~11 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 246 holds (~1.2 yr)
   - sync: gap 74d > 21d loan — suspend the reading hold ~74d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
@@ -48,7 +48,7 @@
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
   - sync: gap 56d > 14d loan — suspend the listening hold ~56d for reading
 - **Oasis: Don't Look Back in Anger (2026)**
-  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-12, 2026-09-13, 2026-09-14, 2026-09-15)
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-13, 2026-09-14, 2026-09-15, 2026-09-16)
 - **Primetime (2026)**
   - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14
   - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano
@@ -84,27 +84,27 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 2d, 9 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 3d, 10 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 55d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 56d
 - club kid (2026) — waiting 54d
 - fjord (2026) — waiting 54d
 - paper tiger (2026) — waiting 54d
 - wild horse nine (2026) — waiting 54d
 - Peck and Peck — Garmus — waiting 33d
-- All of a Sudden (2026) — waiting 2d
-- Artificial (2026) — waiting 2d
-- Behemoth! (2026) — waiting 2d
-- Digger (2026) — waiting 2d
-- Elsinore (2026) — waiting 2d
-- Fatherland (2026) — waiting 2d
-- Once Upon a Time in Harlem (2026) — waiting 2d
-- Tender Loving Care (2026) — waiting 2d
-- The Debut (2026) — waiting 2d
-- The History of Concrete (2026) — waiting 2d
-- Whalefall (2026) — waiting 2d
-- You Can See Everything (2026) — waiting 2d
+- All of a Sudden (2026) — waiting 3d
+- Artificial (2026) — waiting 3d
+- Behemoth! (2026) — waiting 3d
+- Digger (2026) — waiting 3d
+- Elsinore (2026) — waiting 3d
+- Fatherland (2026) — waiting 3d
+- Once Upon a Time in Harlem (2026) — waiting 3d
+- Tender Loving Care (2026) — waiting 3d
+- The Debut (2026) — waiting 3d
+- The History of Concrete (2026) — waiting 3d
+- Whalefall (2026) — waiting 3d
+- You Can See Everything (2026) — waiting 3d
 
