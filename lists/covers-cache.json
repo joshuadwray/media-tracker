@@ -685,6 +685,13 @@
   "matched": "The River Has Roots — Amal El-Mohtar",
   "source": "itunes"
  },
+ "the road|cormac mccarthy": {
+  "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication118/v4/b4/1c/35/b41c35f8-ed9a-aa67-8bf2-9504cdcfaed3/9780307267450.jpg/600x600bb.jpg",
+  "matched": "The Road — Cormac McCarthy",
+  "release_date": "2006-09-26T07:00:00Z",
+  "source": "itunes",
+  "track": "The Road"
+ },
  "the scarlet shedder|dav pilkey": {
   "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1707750291i/196037552.jpg",
   "matched": "The Scarlet Shedder — Dav Pilkey",
