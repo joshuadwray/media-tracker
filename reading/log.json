@@ -2155,13 +2155,14 @@
       "title": "earth 7",
       "author": "deb olin unferth",
       "slug": "earth-7-2",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3,
       "page_count": null,
       "started": "2026-09-13",
-      "finished": null,
+      "finished": "2026-09-13",
       "sessions": [
-        "2026-09-12 48"
+        "2026-09-12 48",
+        "2026-09-13 248"
       ]
     }
   ]
