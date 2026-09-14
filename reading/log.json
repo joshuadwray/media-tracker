@@ -2150,6 +2150,17 @@
       "sessions": [
         "2026-09-11 295"
       ]
+    },
+    {
+      "title": "earth 7",
+      "author": "deb olin unferth",
+      "slug": "earth-7-2",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-09-13",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
