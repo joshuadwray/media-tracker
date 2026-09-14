@@ -2165,6 +2165,17 @@
         "2026-09-12 48",
         "2026-09-13 248"
       ]
+    },
+    {
+      "title": "the road",
+      "author": "cormac mccarthy",
+      "slug": "the-road",
+      "status": "reading",
+      "rating": null,
+      "page_count": 256,
+      "started": "2026-09-14",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
