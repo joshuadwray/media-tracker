@@ -4,10 +4,10 @@ ranked: true
 # File order IS the rank. Per-item optional fields:
 #   cover: https://...jpg   — manual cover URL, always wins over lookup
 items:
-  - title: The Antidote
-    author: Karen Russell
   - title: The Loneliness of Sonia and Sunny
     author: Kiran Desai
+  - title: The Antidote
+    author: Karen Russell
   - title: We Do Not Part
     author: Han Kang
   - title: The Buffalo Hunter Hunter
