@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-14 18:31 UTC
+# Media tracker report — 2026-09-15 01:21 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -20,7 +20,7 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 6 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 30 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 31 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in denton library catalog — 4 on order, 8 holds ahead · Mandel, Emily St. John
@@ -32,12 +32,12 @@
 - **Fruit Fly — Silver, Josh**
   - reading: print book in denton library catalog — all 2 out, 5 holds · Silver, Josh
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 3 holds (~3 mo)
-    - also: print book in Lewisville library catalog — checked out, 3 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 89 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 234 holds (~1.1 yr)
+    - also: print book in Lewisville library catalog — checked out, 4 holds
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 91 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/8 available, 237 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 70 holds (~11 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 247 holds (~1.2 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 72 holds (~11 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 249 holds (~1.2 yr)
   - sync: gap 74d > 21d loan — suspend the reading hold ~74d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
@@ -84,7 +84,7 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 4d, 12 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 5d, 13 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (18)
@@ -94,7 +94,7 @@ On the watchlist, not matched at any source yet. This is the normal resting plac
 - fjord (2026) — waiting 56d
 - paper tiger (2026) — waiting 56d
 - wild horse nine (2026) — waiting 56d
-- Peck and Peck — Garmus — waiting 34d
+- Peck and Peck — Garmus — waiting 35d
 - All of a Sudden (2026) — waiting 4d
 - Artificial (2026) — waiting 4d
 - Behemoth! (2026) — waiting 4d
