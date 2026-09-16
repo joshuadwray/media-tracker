@@ -2170,13 +2170,14 @@
       "title": "the road",
       "author": "cormac mccarthy",
       "slug": "the-road",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": 256,
       "started": "2026-09-14",
-      "finished": null,
+      "finished": "2026-09-15",
       "sessions": [
-        "2026-09-14 128"
+        "2026-09-14 128",
+        "2026-09-15 256"
       ]
     }
   ]
