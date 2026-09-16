@@ -1,15 +1,13 @@
-# Media tracker report — 2026-09-16 01:20 UTC
+# Media tracker report — 2026-09-16 17:39 UTC
 
-## New sightings (3)
-- **Digger (2026)**: "DIGGER" playing at Angelika Dallas (2026-10-30, 2026-10-31) — [link](https://angelikafilmcenter.com/dallas/now-playing)
-- **Exit Party — Mandel, Emily St. John**: ebook in Libby catalog (Houston) — 0/7 available, 87 holds (~6 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/12688475)
-- **Exit Party — Mandel, Emily St. John**: audiobook in Libby catalog (Houston) — 0/6 available, 82 holds (~6 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/12688024)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (52)
+## All current sightings (48)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out, 1 hold
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 82 holds (~10 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 84 holds (~10 mo)
   - listening: audiobook in cloudLibrary catalog (Denton) — 1/2 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
     - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
@@ -22,28 +20,28 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 6 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 31 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 33 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
-  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Mandel, Emily St. John
-    - also: print book in denton library catalog — 4 on order, 10 holds ahead
+  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Mandel, Emily St. John
+    - also: print book in denton library catalog — 4 on order, 11 holds ahead
     - also: print book in Lewisville library catalog — 2 on order, 9 holds ahead
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 87 holds (~6 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 72 holds (~2.8 yr)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo) · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 82 holds (~6 mo)
-    - also: audiobook in Libby catalog (Fort Worth) — 0/1 available, 65 holds (~2.5 yr)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 120 holds (~8 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 74 holds (~2.9 yr)
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo) · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 114 holds (~9 mo)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/1 available, 66 holds (~2.6 yr)
   - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
 - **Fruit Fly — Silver, Josh**
-  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Silver, Josh
-    - also: print book in denton library catalog — all 2 out, 5 holds
+  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 1 hold (~6 wk) · Silver, Josh
+    - also: print book in denton library catalog — all 2 out, 6 holds
     - also: print book in Lewisville library catalog — checked out, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 91 holds (~9 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 238 holds (~1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 14 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 74 holds (~12 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/9 available, 248 holds (~1.1 yr)
-  - sync: gap 95d > 21d loan — suspend the reading hold ~95d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 95 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 243 holds (~1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 15 holds (~6 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 76 holds (~12 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 253 holds (~1.1 yr)
+  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **the age of calamities — senaa ahmad**
@@ -57,14 +55,10 @@
 - **Primetime (2026)**
   - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14 (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
   - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
-  - Cinemark Dallas IMAX: "Primetime" advance tickets on sale at Cinemark Dallas IMAX (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
   - Angelika Dallas: "PRIMETIME" playing at Angelika Dallas (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
 - **dune part 3 (2026)**
   - Cinemark West Plano: "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark West Plano
     - also: "Dune: Part Three" advance tickets on sale at Cinemark West Plano
-  - Cinemark Dallas IMAX: "Dune: Part Three - IMAX 70mm" advance tickets on sale at Cinemark Dallas IMAX
-    - also: "Dune: Part Three Insider Screenings in IMAX 70MM" advance tickets on sale at Cinemark Dallas IMAX
-    - also: "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark Dallas IMAX
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **Rose of Nevada (2026)**
@@ -90,27 +84,27 @@
 - ✅ `angelika`: 5 observation(s)
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
-- ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 6d, 15 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `cinemark`: 4 observation(s)
+- ❌ `amc` (failing 6d, 16 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 6 observation(s)
 
 ## Still looking (17)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 58d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 59d
+- wild horse nine (2026) — waiting 58d
 - club kid (2026) — waiting 57d
 - fjord (2026) — waiting 57d
 - paper tiger (2026) — waiting 57d
-- wild horse nine (2026) — waiting 57d
 - Peck and Peck — Garmus — waiting 36d
-- All of a Sudden (2026) — waiting 5d
-- Artificial (2026) — waiting 5d
-- Behemoth! (2026) — waiting 5d
-- Elsinore (2026) — waiting 5d
-- Fatherland (2026) — waiting 5d
-- Once Upon a Time in Harlem (2026) — waiting 5d
-- Tender Loving Care (2026) — waiting 5d
-- The Debut (2026) — waiting 5d
-- The History of Concrete (2026) — waiting 5d
-- Whalefall (2026) — waiting 5d
-- You Can See Everything (2026) — waiting 5d
+- All of a Sudden (2026) — waiting 6d
+- Artificial (2026) — waiting 6d
+- Behemoth! (2026) — waiting 6d
+- Elsinore (2026) — waiting 6d
+- Fatherland (2026) — waiting 6d
+- Once Upon a Time in Harlem (2026) — waiting 6d
+- Tender Loving Care (2026) — waiting 6d
+- The Debut (2026) — waiting 6d
+- The History of Concrete (2026) — waiting 6d
+- Whalefall (2026) — waiting 6d
+- You Can See Everything (2026) — waiting 6d
 
