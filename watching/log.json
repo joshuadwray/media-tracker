@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "Wolfwalkers",
+      "year": 2020,
+      "slug": "wolfwalkers",
+      "watched": "2026-09-15",
+      "rating": 4.5,
+      "rewatch": true,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 441130,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/3/7/3/8/0/8/373808-wolfwalkers-0-600-0-900-crop.jpg?v=bd5ffe55b4",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/wolfwalkers/4/",
+      "guid": "letterboxd-watch-1497912450"
+    },
+    {
       "title": "Forgotten Island",
       "year": 2026,
       "slug": "forgotten-island-2026",
