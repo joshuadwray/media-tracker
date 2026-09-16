@@ -2179,6 +2179,17 @@
         "2026-09-14 128",
         "2026-09-15 256"
       ]
+    },
+    {
+      "title": "the left hand of darkness",
+      "author": "ursula k. le guin",
+      "slug": "the-left-hand-of-darkness",
+      "status": "reading",
+      "rating": null,
+      "page_count": 367,
+      "started": "2026-09-15",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
