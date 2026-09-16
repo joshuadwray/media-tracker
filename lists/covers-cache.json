@@ -645,6 +645,13 @@
   "source": "itunes",
   "track": "The Hill"
  },
+ "the left hand of darkness|ursula k. le guin": {
+  "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/33/13/9c/33139cdd-1a27-94a4-1d8e-29c3bbf39b38/9781101665398.d.jpg/600x600bb.jpg",
+  "matched": "The Left Hand of Darkness — Ursula K. Le Guin & Charlie Jane Anders",
+  "release_date": "1976-01-01T08:00:00Z",
+  "source": "itunes",
+  "track": "The Left Hand of Darkness"
+ },
  "the lion, the witch and the wardrobe|c.s. lewis": {
   "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1697079942i/132080146.jpg",
   "matched": "The Lion, the Witch and the Wardrobe — C.S. Lewis",

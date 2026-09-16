@@ -604,6 +604,11 @@
   "source": "itunes-edition",
   "year": 2026
  },
+ "the left hand of darkness|ursula k. le guin": {
+  "matched": "the left hand of darkness",
+  "source": "openlibrary-search",
+  "year": 1969
+ },
  "the lion, the witch and the wardrobe|c.s. lewis": {
   "matched": "The Lion, the Witch and the Wardrobe",
   "source": "openlibrary-search",
