@@ -1,9 +1,11 @@
-# Media tracker report — 2026-09-15 17:39 UTC
+# Media tracker report — 2026-09-16 01:20 UTC
 
-## New sightings (1)
-- **teenage sex and death at camp miasma (2026)**: "teenage sex and death at camp miasma" digital release: 2026-09-22 — [link](https://www.themoviedb.org/movie/1240889)
+## New sightings (3)
+- **Digger (2026)**: "DIGGER" playing at Angelika Dallas (2026-10-30, 2026-10-31) — [link](https://angelikafilmcenter.com/dallas/now-playing)
+- **Exit Party — Mandel, Emily St. John**: ebook in Libby catalog (Houston) — 0/7 available, 87 holds (~6 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/12688475)
+- **Exit Party — Mandel, Emily St. John**: audiobook in Libby catalog (Houston) — 0/6 available, 82 holds (~6 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/12688024)
 
-## All current sightings (49)
+## All current sightings (52)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out, 1 hold
@@ -21,25 +23,27 @@
   - reading: print book in denton library catalog — 3 on order, 6 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 31 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Mandel, Emily St. John
     - also: print book in denton library catalog — 4 on order, 10 holds ahead
-    - also: print book in Lewisville library catalog — 2 on order, 8 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 71 holds (~2.8 yr)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo) · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Fort Worth) — 0/1 available, 64 holds (~2.5 yr)
-  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
+    - also: print book in Lewisville library catalog — 2 on order, 9 holds ahead
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 87 holds (~6 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 72 holds (~2.8 yr)
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo) · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 82 holds (~6 mo)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/1 available, 65 holds (~2.5 yr)
+  - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 5 holds
-    - also: print book in Lewisville library catalog — checked out, 4 holds
+    - also: print book in Lewisville library catalog — checked out, 5 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 91 holds (~9 mo)
-    - also: ebook in Libby catalog (Houston) — 0/8 available, 238 holds (~1.1 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 73 holds (~12 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 248 holds (~1.2 yr)
-  - sync: gap 84d > 21d loan — suspend the reading hold ~84d for listening
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 238 holds (~1 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 14 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 74 holds (~12 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 248 holds (~1.1 yr)
+  - sync: gap 95d > 21d loan — suspend the reading hold ~95d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **the age of calamities — senaa ahmad**
@@ -47,11 +51,13 @@
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
   - sync: gap 28d > 14d loan — suspend the listening hold ~28d for reading
 - **Oasis: Don't Look Back in Anger (2026)**
-  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-15, 2026-09-16, 2026-09-17, 2026-09-18)
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-16, 2026-09-17, 2026-09-18, 2026-09-19)
+- **Digger (2026)**
+  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-30, 2026-10-31)
 - **Primetime (2026)**
-  - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14
-  - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano
-  - Cinemark Dallas IMAX: "Primetime" advance tickets on sale at Cinemark Dallas IMAX
+  - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14 (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
+  - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
+  - Cinemark Dallas IMAX: "Primetime" advance tickets on sale at Cinemark Dallas IMAX (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
   - Angelika Dallas: "PRIMETIME" playing at Angelika Dallas (2026-09-24, 2026-09-25, 2026-09-26, 2026-09-27)
 - **dune part 3 (2026)**
   - Cinemark West Plano: "Dune: Part Three Insider Screenings" advance tickets on sale at Cinemark West Plano
@@ -79,27 +85,26 @@
 - ✅ `cloudlibrary-lewisville`: 8 observation(s)
 - ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
-- ✅ `libby-houston`: 5 observation(s)
+- ✅ `libby-houston`: 7 observation(s)
 - ✅ `texas-theatre`: 0 observation(s)
-- ✅ `angelika`: 4 observation(s)
+- ✅ `angelika`: 5 observation(s)
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 5d, 14 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 6d, 15 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 6 observation(s)
 
-## Still looking (18)
+## Still looking (17)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 58d
+- club kid (2026) — waiting 57d
+- fjord (2026) — waiting 57d
+- paper tiger (2026) — waiting 57d
 - wild horse nine (2026) — waiting 57d
-- club kid (2026) — waiting 56d
-- fjord (2026) — waiting 56d
-- paper tiger (2026) — waiting 56d
-- Peck and Peck — Garmus — waiting 35d
+- Peck and Peck — Garmus — waiting 36d
 - All of a Sudden (2026) — waiting 5d
 - Artificial (2026) — waiting 5d
 - Behemoth! (2026) — waiting 5d
-- Digger (2026) — waiting 5d
 - Elsinore (2026) — waiting 5d
 - Fatherland (2026) — waiting 5d
 - Once Upon a Time in Harlem (2026) — waiting 5d
