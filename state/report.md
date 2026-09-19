@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-18 17:03 UTC
+# Media tracker report — 2026-09-19 01:07 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -19,22 +19,22 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 7 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 33 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 34 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in denton library catalog — 4 on order, 12 holds ahead · Mandel, Emily St. John
-    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 4 holds (~4 mo)
     - also: print book in Lewisville library catalog — 2 on order, 9 holds ahead
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 160 holds (~11 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 77 holds (~3 yr)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo) · Mandel, Emily St. John, Potter, Kirsten, Farr, Kimberly, Ganim, Peter, Ho, Catherine, Oh, James Aaron
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 142 holds (~11 mo)
-    - also: audiobook in Libby catalog (Fort Worth) — 0/1 available, 72 holds (~2.8 yr)
+    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 78 holds (~5 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 161 holds (~11 mo)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 69 holds (~3 mo) · Emily St. John Mandel
+    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 145 holds (~11 mo)
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 6 holds
     - also: print book in Lewisville library catalog — checked out, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/5 available, 98 holds (~9 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 97 holds (~8 mo)
     - also: ebook in Libby catalog (Houston) — 0/9 available, 258 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 15 holds (~6 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 80 holds (~1 yr)
@@ -43,11 +43,11 @@
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
 - **the age of calamities — senaa ahmad**
-  - reading: ebook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · Senaa Ahmad
+  - reading: ebook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk) · Senaa Ahmad
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
-  - sync: gap 28d > 14d loan — suspend the listening hold ~28d for reading
+  - sync: gap 14d > 14d loan — suspend the listening hold ~14d for reading
 - **Oasis: Don't Look Back in Anger (2026)**
-  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-18, 2026-09-19, 2026-09-20, 2026-09-21)
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-19, 2026-09-20, 2026-09-21, 2026-09-22)
 - **Digger (2026)**
   - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-02, 2026-10-03, 2026-10-04, 2026-10-05)
 - **Primetime (2026)**
@@ -85,17 +85,17 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 8d, 20 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 9d, 21 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 5 observation(s)
 
 ## Still looking (17)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 61d
-- club kid (2026) — waiting 59d
-- fjord (2026) — waiting 59d
-- paper tiger (2026) — waiting 59d
-- wild horse nine (2026) — waiting 59d
-- Peck and Peck — Garmus — waiting 38d
+- club kid (2026) — waiting 60d
+- fjord (2026) — waiting 60d
+- paper tiger (2026) — waiting 60d
+- wild horse nine (2026) — waiting 60d
+- Peck and Peck — Garmus — waiting 39d
 - All of a Sudden (2026) — waiting 8d
 - Artificial (2026) — waiting 8d
 - Behemoth! (2026) — waiting 8d
