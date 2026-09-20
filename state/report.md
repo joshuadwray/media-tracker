@@ -1,14 +1,13 @@
-# Media tracker report — 2026-09-19 16:23 UTC
+# Media tracker report — 2026-09-20 00:57 UTC
 
-## New sightings (2)
-- **teenage sex and death at camp miasma (2026)**: "teenage sex and death at camp miasma" available to rent (Amazon Video, Apple TV Store, Fandango At Home) — [link](https://www.themoviedb.org/movie/1240889)
-- **teenage sex and death at camp miasma (2026)**: "teenage sex and death at camp miasma" available to buy (Amazon Video, Apple TV Store, Fandango At Home) — [link](https://www.themoviedb.org/movie/1240889)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (53)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 83 holds (~10 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 82 holds (~10 mo)
   - listening: audiobook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
     - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
@@ -27,19 +26,19 @@
   - reading: print book in denton library catalog — 4 on order, 12 holds ahead · Mandel, Emily St. John
     - also: print book in Lewisville library catalog — 2 on order, 9 holds ahead
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 73 holds (~4 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 171 holds (~11 mo)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 68 holds (~3 mo) · Emily St. John Mandel
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 78 holds (~5 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 174 holds (~12 mo)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 72 holds (~3 mo) · Emily St. John Mandel
     - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 155 holds (~12 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 162 holds (~1 yr)
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
-    - also: print book in denton library catalog — all 2 out, 6 holds
+    - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 95 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 259 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 96 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 258 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 15 holds (~6 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 80 holds (~1 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 81 holds (~1 yr)
     - also: audiobook in Libby catalog (Houston) — 0/9 available, 274 holds (~1.2 yr)
   - sync: gap 147d > 21d loan — suspend the reading hold ~147d for listening
 - **Partita — Kingsolver**
@@ -49,7 +48,7 @@
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
   - sync: gap 14d > 14d loan — suspend the listening hold ~14d for reading
 - **Oasis: Don't Look Back in Anger (2026)**
-  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-19, 2026-09-20, 2026-09-21, 2026-09-22)
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-20, 2026-09-21, 2026-09-22, 2026-09-23)
 - **Digger (2026)**
   - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-02, 2026-10-03, 2026-10-04, 2026-10-05)
 - **Primetime (2026)**
@@ -90,17 +89,17 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 9d, 22 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 9d, 23 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 7 observation(s)
 
 ## Still looking (17)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 62d
-- club kid (2026) — waiting 60d
-- fjord (2026) — waiting 60d
-- paper tiger (2026) — waiting 60d
-- wild horse nine (2026) — waiting 60d
-- Peck and Peck — Garmus — waiting 39d
+- club kid (2026) — waiting 61d
+- fjord (2026) — waiting 61d
+- paper tiger (2026) — waiting 61d
+- wild horse nine (2026) — waiting 61d
+- Peck and Peck — Garmus — waiting 40d
 - All of a Sudden (2026) — waiting 9d
 - Artificial (2026) — waiting 9d
 - Behemoth! (2026) — waiting 9d
