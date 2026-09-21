@@ -1,9 +1,10 @@
-# Media tracker report — 2026-09-21 01:00 UTC
+# Media tracker report — 2026-09-21 18:37 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (2)
+- **Digger (2026)**: "Digger" mentioned on Texas Theatre — [link](https://thetexastheatre.com/)
+- **The History of Concrete (2026)**: "The History of Concrete" mentioned on Texas Theatre — [link](https://thetexastheatre.com/)
 
-## All current sightings (53)
+## All current sightings (55)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Lanchester, John
     - also: print book in Lewisville library catalog — checked out
@@ -20,26 +21,27 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 7 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 35 holds
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 8 holds · Lee, Min Jin
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 36 holds
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 7 holds · Lee, Min Jin
 - **Exit Party — Mandel, Emily St. John**
-  - reading: print book in denton library catalog — 4 on order, 12 holds ahead · Mandel, Emily St. John
+  - reading: print book in denton library catalog — all 8 out, 9 holds · Mandel, Emily St. John
     - also: print book in Lewisville library catalog — 2 on order, 9 holds ahead
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 82 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 185 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 72 holds (~3 mo) · Emily St. John Mandel
-    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 171 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 83 holds (~5 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 196 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 73 holds (~3 mo) · Emily St. John Mandel
+    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 180 holds (~1.2 yr)
+  - sync: gap 68d > 14d loan — suspend the reading hold ~68d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 96 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 260 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 94 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 264 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 14 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 84 holds (~1.1 yr)
-    - also: audiobook in Libby catalog (Houston) — 0/9 available, 277 holds (~1.2 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 285 holds (~1.2 yr)
   - sync: gap 137d > 21d loan — suspend the reading hold ~137d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 4 holds ahead · Kingsolver, Barbara, author.
@@ -47,10 +49,13 @@
   - reading: ebook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk) · Senaa Ahmad
   - listening: audiobook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk) · Senaa Ahmad
   - sync: gap 14d > 14d loan — suspend the listening hold ~14d for reading
-- **Oasis: Don't Look Back in Anger (2026)**
-  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-20, 2026-09-21, 2026-09-22, 2026-09-23)
+- **The History of Concrete (2026)**
+  - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Digger (2026)**
   - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-02, 2026-10-03, 2026-10-04, 2026-10-05)
+  - Texas Theatre: "Digger" mentioned on Texas Theatre
+- **Oasis: Don't Look Back in Anger (2026)**
+  - Angelika Dallas: "OASIS: DON'T LOOK BACK IN ANGER" playing at Angelika Dallas (2026-09-22, 2026-09-23, 2026-09-24)
 - **Primetime (2026)**
   - Cinemark Denton 14: "Primetime" advance tickets on sale at Cinemark Denton 14 (2026-09-24)
   - Cinemark West Plano: "Primetime" advance tickets on sale at Cinemark West Plano (2026-09-24)
@@ -84,31 +89,30 @@
 - ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
 - ✅ `libby-houston`: 7 observation(s)
-- ✅ `texas-theatre`: 0 observation(s)
+- ✅ `texas-theatre`: 2 observation(s)
 - ✅ `angelika`: 5 observation(s)
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 8 observation(s)
-- ❌ `amc` (failing 11d, 25 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 11d, 26 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 7 observation(s)
 
-## Still looking (17)
+## Still looking (16)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 63d
-- club kid (2026) — waiting 62d
-- fjord (2026) — waiting 62d
-- paper tiger (2026) — waiting 62d
-- wild horse nine (2026) — waiting 62d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 64d
+- club kid (2026) — waiting 63d
+- fjord (2026) — waiting 63d
+- paper tiger (2026) — waiting 63d
+- wild horse nine (2026) — waiting 63d
 - Peck and Peck — Garmus — waiting 41d
-- All of a Sudden (2026) — waiting 10d
-- Artificial (2026) — waiting 10d
-- Behemoth! (2026) — waiting 10d
-- Elsinore (2026) — waiting 10d
-- Fatherland (2026) — waiting 10d
-- Once Upon a Time in Harlem (2026) — waiting 10d
-- Tender Loving Care (2026) — waiting 10d
-- The Debut (2026) — waiting 10d
-- The History of Concrete (2026) — waiting 10d
-- Whalefall (2026) — waiting 10d
-- You Can See Everything (2026) — waiting 10d
+- All of a Sudden (2026) — waiting 11d
+- Artificial (2026) — waiting 11d
+- Behemoth! (2026) — waiting 11d
+- Elsinore (2026) — waiting 11d
+- Fatherland (2026) — waiting 11d
+- Once Upon a Time in Harlem (2026) — waiting 11d
+- Tender Loving Care (2026) — waiting 11d
+- The Debut (2026) — waiting 11d
+- Whalefall (2026) — waiting 11d
+- You Can See Everything (2026) — waiting 11d
 
