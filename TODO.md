@@ -214,7 +214,7 @@
   (incomplete, laggy) marker of Denton ownership. Tracker coverage is
   the union of both sources, which is what we want.
 
-## AMC — key issued, not yet authorized (blocked on AMC, 2026-09-10)
+## AMC — key issued, not yet authorized (blocked on AMC, re-checked 2026-09-22)
 
 **State: everything on our side is done. Waiting on AMC to provision the
 key. Resume steps at the bottom.**
@@ -235,6 +235,29 @@ Location, Theatre, Market — ecommerce/seating is a separate restricted
 track they don't accept requests for through that form). A key was issued
 immediately.
 
+**Provenance of the key — reconstructed 2026-09-22, because none of it
+was written down at the time and it took an hour to recover:**
+- `.env` written **2026-09-09 12:11:32 CDT** (17:11 UTC) — the moment the
+  key first existed on this machine.
+- `AMC_VENDOR_KEY` Actions secret created **2026-09-09 18:06:53 UTC**
+  (13:06 CDT), 55 min later. From `gh api repos/.../actions/secrets`.
+- First committed to TODO.md 2026-09-10 22:10 CDT (9646d09).
+- **AMC never emailed it.** No mail from any amctheatres.com address
+  exists in the Sep 8-10 window, and the key's leading segment appears
+  nowhere in the mailbox. It was shown on screen once at the end of the
+  application form and pasted straight into `.env`. Shell history has no
+  trace either — the work ran through tool calls.
+- The value itself is a canonical RFC-4122 **v4** GUID, uppercase,
+  correct variant bits — a server-generated value, not a placeholder.
+
+**So there is no application reference number to cite**, and no evidence
+the vendor record behind the key was ever created beyond the key itself.
+Combined with 12005 in production *and* sandbox, the most economical
+explanation is that the form issues a key immediately but the vendor
+record needs the human approval the access page describes, and ours
+never got it. Any email to AMC has to identify the request by the key
+value and the 2026-09-09 application date, because that is all we have.
+
 **The key is in place and being read correctly:**
 - `AMC_VENDOR_KEY` in `.env` (36 chars, GUID-shaped)
 - `AMC_VENDOR_KEY` as a GitHub Actions secret (set 2026-09-09 18:06 UTC)
@@ -253,6 +276,48 @@ missed that Thursday's deploy. AMC said access deploys weekly on
 Thursdays; the open question is whether this key is queued for
 2026-09-17 or needs a human. An email to developers@amctheatres.com
 asking which deploy it's scheduled for was drafted 2026-09-10.
+
+**Re-checked 2026-09-22: still 403 / 12005, unchanged.** The 2026-09-17
+deploy came and went without it, so the key is NOT sitting in a queue —
+it needs a human. And the drafted email was **never sent**: no thread to
+or from developers@amctheatres.com exists in the mailbox, and no such
+draft survives, so the twelve days of waiting were spent waiting on
+nothing. **A replacement was written and sent 2026-09-22** — it leads
+with the sandbox result, cites the key and one production request id
+(`d11b2fa7-e097-454a-9f09-f71f90edb37b`), and offers to resubmit rather
+than silently creating a duplicate vendor record. Awaiting a reply; if
+one doesn't come, resubmitting the application is the fallback.
+`state.health.amc` is at 28 runs / 12 days, which is the one alert
+working as designed, not a second fault.
+
+**Internal options are exhausted — checked 2026-09-22 before escalating:**
+- **Auth format is right.** `/GettingStarted/Authentication` documents
+  exactly `X-AMC-Vendor-Key: <guid>`, which is what we send.
+- **There is a SANDBOX**, `https://api.sandbox-amctheatres.com/`
+  (`/GettingStarted/Sandbox`, with five test theatre ids). Our key
+  returns the *identical* 12005 there. That kills the "waiting on a
+  Thursday production deploy" theory outright: an unprovisioned key is
+  unprovisioned in both environments.
+- **No sample or demo key exists.** No GUID appears anywhere in the
+  portal's markup, and there is no interactive try-it console that
+  authenticates.
+- **No self-service activation step was missed.** The access page says
+  keys come "upon approval of the following application" — approval is a
+  human gate. Ours was issued *immediately*, which fits an auto-issued
+  placeholder that nobody ever approved.
+- **12005 is not in the public `/Errors` table** — an internal code, so
+  there is nothing to self-diagnose against.
+- **No hidden OpenAPI spec.** `/js/site.js` makes zero fetches and every
+  swagger/openapi path 404s.
+
+Correction to the note below: the Getting Started pages are NOT
+JS-rendered stubs — they are ordinary server-rendered pages that read
+fine **in a browser**. Cloudflare 403s curl on `developers.amctheatres.com`
+exactly as it does the theatre pages, which is probably what produced
+that note, and it cost us the sandbox for twelve days. The *API
+Reference* pages (`/ApiReference/showtime-api-v2` et al) genuinely are
+empty — 684 chars of nav, no schema, no examples — so step 1 below
+still stands: build the parser against a real payload.
 
 ### Resume steps, once the key authenticates
 
