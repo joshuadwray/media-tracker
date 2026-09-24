@@ -1,19 +1,18 @@
-# Media tracker report — 2026-09-24 01:19 UTC
+# Media tracker report — 2026-09-24 17:51 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (49)
+## All current sightings (48)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: print book in Lewisville library catalog — checked out
     - also: ebook in Libby catalog (Houston) — 0/4 available, 80 holds (~9 mo)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 1/2 available · Lanchester, John, Brealey, Louise, Gaunt, Genevieve
-    - also: audiobook in cloudLibrary catalog (Lewisville) — 1/1 available
-    - also: audiobook in Libby catalog (Fort Worth) — 54/54 available
+  - listening: audiobook in Libby catalog (Fort Worth) — 54/54 available · John Lanchester
     - also: audiobook (CD) in denton library catalog — all 2 out
-  - sync: gap 0d, fits in a 21d loan
+    - also: audiobook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
+  - sync: gap 0d, fits in a 14d loan
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 1 hold ahead · Diaz, Hernan
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds
@@ -24,23 +23,23 @@
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 36 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 9 holds · Lee, Min Jin, Ha, Yerin
 - **Exit Party — Mandel, Emily St. John**
-  - reading: print book in denton library catalog — all 8 out, 9 holds · Mandel, Emily St. John
+  - reading: print book in denton library catalog — all 4 out, 10 holds · Mandel, Emily St. John
     - also: print book in Lewisville library catalog — 2 on order, 9 holds ahead
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 90 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 215 holds (~1.2 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 78 holds (~3 mo) · Emily St. John Mandel
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 92 holds (~5 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 221 holds (~1.2 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 76 holds (~3 mo) · Emily St. John Mandel
     - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 197 holds (~1.3 yr)
-  - sync: gap 74d > 14d loan — suspend the reading hold ~74d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 200 holds (~1.3 yr)
+  - sync: gap 40d > 14d loan — suspend the reading hold ~40d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 91 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 274 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 90 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 276 holds (~1.2 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 89 holds (~1.2 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 90 holds (~1.2 yr)
     - also: audiobook in Libby catalog (Houston) — 0/9 available, 292 holds (~1.2 yr)
   - sync: gap 116d > 21d loan — suspend the reading hold ~116d for listening
 - **Partita — Kingsolver**
@@ -79,7 +78,7 @@
 ## Source status
 - ✅ `denton-library`: 5 observation(s)
 - ✅ `cloudlibrary`: 4 observation(s)
-- ✅ `cloudlibrary-lewisville`: 8 observation(s)
+- ✅ `cloudlibrary-lewisville`: 7 observation(s)
 - ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
 - ✅ `libby-houston`: 7 observation(s)
@@ -88,24 +87,24 @@
 - ✅ `inwood`: 0 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 14d, 31 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 14d, 32 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 7 observation(s)
 
 ## Still looking (15)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 66d
-- club kid (2026) — waiting 65d
-- fjord (2026) — waiting 65d
-- paper tiger (2026) — waiting 65d
-- wild horse nine (2026) — waiting 65d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 67d
+- club kid (2026) — waiting 66d
+- fjord (2026) — waiting 66d
+- paper tiger (2026) — waiting 66d
+- wild horse nine (2026) — waiting 66d
 - Peck and Peck — Garmus — waiting 44d
-- All of a Sudden (2026) — waiting 13d
-- Artificial (2026) — waiting 13d
-- Behemoth! (2026) — waiting 13d
-- Elsinore (2026) — waiting 13d
-- Fatherland (2026) — waiting 13d
-- Once Upon a Time in Harlem (2026) — waiting 13d
-- Tender Loving Care (2026) — waiting 13d
-- The Debut (2026) — waiting 13d
-- Whalefall (2026) — waiting 13d
+- All of a Sudden (2026) — waiting 14d
+- Artificial (2026) — waiting 14d
+- Behemoth! (2026) — waiting 14d
+- Elsinore (2026) — waiting 14d
+- Fatherland (2026) — waiting 14d
+- Once Upon a Time in Harlem (2026) — waiting 14d
+- Tender Loving Care (2026) — waiting 14d
+- The Debut (2026) — waiting 14d
+- Whalefall (2026) — waiting 14d
 
