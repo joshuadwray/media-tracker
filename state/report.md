@@ -1,14 +1,14 @@
-# Media tracker report — 2026-09-25 03:27 UTC
+# Media tracker report — 2026-09-25 17:55 UTC
 
 ## New sightings (1)
-- **la bola negra**: "la bola negra" digital release: 2026-12-02 — [link](https://www.themoviedb.org/movie/1422041)
+- **la bola negra**: "La Bola Negra" booked at Landmark Inwood Theatre, Dallas from 2026-11-06 — [link](https://www.landmarktheatres.com/our-locations/)
 
-## All current sightings (48)
+## All current sightings (49)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: print book in Lewisville library catalog — checked out
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 79 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 77 holds (~9 mo)
   - listening: audiobook in Libby catalog (Fort Worth) — 54/54 available · John Lanchester
     - also: audiobook (CD) in denton library catalog — all 2 out
     - also: audiobook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
@@ -23,25 +23,25 @@
     - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 36 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 10 holds · Lee, Min Jin, Ha, Yerin
 - **Exit Party — Mandel, Emily St. John**
-  - reading: print book in denton library catalog — all 4 out, 10 holds · Mandel, Emily St. John
+  - reading: print book in Lewisville library catalog — 2 on shelf · Mandel, Emily St. John, 1979- author.
+    - also: print book in denton library catalog — all 4 out, 10 holds
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: print book in Lewisville library catalog — 2 on order, 11 holds ahead
     - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 93 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 224 holds (~1.2 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 76 holds (~3 mo) · Emily St. John Mandel
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 226 holds (~1.2 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 79 holds (~3 mo) · Emily St. John Mandel
     - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 202 holds (~1.3 yr)
-  - sync: gap 40d > 14d loan — suspend the reading hold ~40d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 203 holds (~1.3 yr)
+  - sync: gap 102d > 14d loan — suspend the reading hold ~102d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 5 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 92 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 271 holds (~1.2 yr)
-  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 275 holds (~1.2 yr)
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 90 holds (~1.2 yr)
     - also: audiobook in Libby catalog (Houston) — 0/9 available, 295 holds (~1.3 yr)
-  - sync: gap 116d > 21d loan — suspend the reading hold ~116d for listening
+  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 5 holds ahead · Kingsolver, Barbara, author.
 - **the age of calamities — senaa ahmad**
@@ -61,6 +61,7 @@
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **la bola negra**
+  - Landmark Inwood Theatre, Dallas: "La Bola Negra" booked at Landmark Inwood Theatre, Dallas from 2026-11-06
   - "la bola negra" digital release: 2026-12-02
 - **Rose of Nevada (2026)**
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -84,27 +85,27 @@
 - ✅ `libby-houston`: 7 observation(s)
 - ✅ `texas-theatre`: 2 observation(s)
 - ✅ `angelika`: 5 observation(s)
-- ✅ `inwood`: 0 observation(s)
+- ✅ `inwood`: 1 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 15d, 34 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 15d, 35 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 8 observation(s)
 
 ## Still looking (15)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 67d
-- club kid (2026) — waiting 66d
-- fjord (2026) — waiting 66d
-- paper tiger (2026) — waiting 66d
-- wild horse nine (2026) — waiting 66d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 68d
+- club kid (2026) — waiting 67d
+- fjord (2026) — waiting 67d
+- paper tiger (2026) — waiting 67d
+- wild horse nine (2026) — waiting 67d
 - Peck and Peck — Garmus — waiting 45d
-- All of a Sudden (2026) — waiting 14d
-- Artificial (2026) — waiting 14d
-- Behemoth! (2026) — waiting 14d
-- Elsinore (2026) — waiting 14d
-- Fatherland (2026) — waiting 14d
-- Once Upon a Time in Harlem (2026) — waiting 14d
-- Tender Loving Care (2026) — waiting 14d
-- The Debut (2026) — waiting 14d
-- Whalefall (2026) — waiting 14d
+- All of a Sudden (2026) — waiting 15d
+- Artificial (2026) — waiting 15d
+- Behemoth! (2026) — waiting 15d
+- Elsinore (2026) — waiting 15d
+- Fatherland (2026) — waiting 15d
+- Once Upon a Time in Harlem (2026) — waiting 15d
+- Tender Loving Care (2026) — waiting 15d
+- The Debut (2026) — waiting 15d
+- Whalefall (2026) — waiting 15d
 
