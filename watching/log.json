@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "Primetime",
+      "year": 2026,
+      "slug": "primetime-2026",
+      "watched": "2026-09-24",
+      "rating": 4.0,
+      "rewatch": false,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 1375441,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/1/2/6/2/0/1/9/1262019-primetime-2026-0-600-0-900-crop.jpg?v=41640d6988",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/primetime-2026/",
+      "guid": "letterboxd-watch-1509581776"
+    },
+    {
       "title": "Wolfwalkers",
       "year": 2020,
       "slug": "wolfwalkers",
