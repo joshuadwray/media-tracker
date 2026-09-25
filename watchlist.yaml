@@ -38,6 +38,7 @@ books:
   #   bib_id: "S1234567"        # optional: exact BiblioCommons record (set by `tracker add`)
 
 movies:
+  - title: la bola negra
   - title: The History of Concrete
     year: 2026
   - title: Rose of Nevada
