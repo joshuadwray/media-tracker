@@ -2210,14 +2210,15 @@
       "title": "exit party",
       "author": "emily st john mandel",
       "slug": "exit-party",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": null,
       "started": "2026-09-23",
-      "finished": null,
+      "finished": "2026-09-25",
       "sessions": [
         "2026-09-23 67",
-        "2026-09-24 137"
+        "2026-09-24 137",
+        "2026-09-25 320"
       ]
     }
   ]
