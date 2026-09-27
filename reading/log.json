@@ -2225,13 +2225,14 @@
       "title": "black bag",
       "author": "luke kennard",
       "slug": "black-bag",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": 347,
       "started": "2026-09-27",
-      "finished": null,
+      "finished": "2026-09-27",
       "sessions": [
-        "2026-09-26 115"
+        "2026-09-26 115",
+        "2026-09-27 347"
       ]
     }
   ]
