@@ -1,9 +1,9 @@
-# Media tracker report — 2026-09-26 17:03 UTC
+# Media tracker report — 2026-09-27 01:19 UTC
 
-## New sightings (1)
-- **Fruit Fly — Silver, Josh**: ebook in cloudLibrary catalog (Lewisville) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=Fruit%20Fly)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (50)
+## All current sightings (49)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
@@ -25,24 +25,23 @@
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in Lewisville library catalog — 2 on shelf · Mandel, Emily St. John, 1979- author.
     - also: print book in denton library catalog — all 4 out, 10 holds
-    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 5 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 92 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 229 holds (~1.3 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 79 holds (~3 mo) · Emily St. John Mandel
-    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 7 holds (~6 mo)
+    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 93 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 232 holds (~1.3 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 80 holds (~3 mo) · Emily St. John Mandel
+    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 8 holds (~6 mo)
     - also: audiobook in Libby catalog (Houston) — 0/6 available, 208 holds (~1.3 yr)
-  - sync: gap 102d > 14d loan — suspend the reading hold ~102d for listening
+  - sync: gap 104d > 14d loan — suspend the reading hold ~104d for listening
 - **Fruit Fly — Silver, Josh**
-  - reading: ebook in cloudLibrary catalog (Denton) — 1/2 available · Silver, Josh
-    - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
+  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 94 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 272 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 95 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 273 holds (~1.2 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 89 holds (~1.2 yr)
-    - also: audiobook in Libby catalog (Houston) — 0/9 available, 297 holds (~1.3 yr)
-  - sync: gap 147d > 21d loan — suspend the reading hold ~147d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 298 holds (~1.3 yr)
+  - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 5 holds ahead · Kingsolver, Barbara, author.
 - **the age of calamities — senaa ahmad**
@@ -80,7 +79,7 @@
 ## Source status
 - ✅ `denton-library`: 5 observation(s)
 - ✅ `cloudlibrary`: 4 observation(s)
-- ✅ `cloudlibrary-lewisville`: 8 observation(s)
+- ✅ `cloudlibrary-lewisville`: 7 observation(s)
 - ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
 - ✅ `libby-houston`: 7 observation(s)
@@ -89,17 +88,17 @@
 - ✅ `inwood`: 1 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 16d, 37 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 17d, 38 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 8 observation(s)
 
 ## Still looking (15)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 69d
-- club kid (2026) — waiting 67d
-- fjord (2026) — waiting 67d
-- paper tiger (2026) — waiting 67d
-- wild horse nine (2026) — waiting 67d
-- Peck and Peck — Garmus — waiting 46d
+- club kid (2026) — waiting 68d
+- fjord (2026) — waiting 68d
+- paper tiger (2026) — waiting 68d
+- wild horse nine (2026) — waiting 68d
+- Peck and Peck — Garmus — waiting 47d
 - All of a Sudden (2026) — waiting 16d
 - Artificial (2026) — waiting 16d
 - Behemoth! (2026) — waiting 16d
