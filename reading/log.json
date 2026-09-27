@@ -2220,6 +2220,19 @@
         "2026-09-24 137",
         "2026-09-25 320"
       ]
+    },
+    {
+      "title": "black bag",
+      "author": "luke kennard",
+      "slug": "black-bag",
+      "status": "reading",
+      "rating": null,
+      "page_count": 347,
+      "started": "2026-09-27",
+      "finished": null,
+      "sessions": [
+        "2026-09-26 115"
+      ]
     }
   ]
 }
