@@ -89,6 +89,11 @@
   "source": "itunes-edition",
   "year": 2025
  },
+ "black bag|luke kennard": {
+  "matched": "black bag",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
  "brawl of the wild|dav pilkey": {
   "matched": "Brawl of the Wild",
   "source": null,
