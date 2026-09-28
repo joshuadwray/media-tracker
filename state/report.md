@@ -1,14 +1,14 @@
-# Media tracker report — 2026-09-28 15:35 UTC
+# Media tracker report — 2026-09-28 20:07 UTC
 
 ## New sightings (1)
-- **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**: print book in Lewisville library catalog — 1 on order, 1 hold ahead — [link](https://lewp.ent.sirsi.net/client/en_US/default/search/detailnonmodal/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:429340/one)
+- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" digital release: 2026-10-09 — [link](https://www.themoviedb.org/movie/1447853)
 
-## All current sightings (41)
+## All current sightings (50)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: print book in Lewisville library catalog — 1 on shelf
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 74 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 73 holds (~9 mo)
   - listening: audiobook in Libby catalog (Fort Worth) — 54/54 available · John Lanchester
     - also: audiobook (CD) in denton library catalog — all 2 out
     - also: audiobook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
@@ -27,20 +27,20 @@
     - also: print book in denton library catalog — all 4 out, 12 holds
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
     - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 96 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 247 holds (~1.4 yr)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 246 holds (~1.4 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 86 holds (~4 mo) · Emily St. John Mandel
     - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 8 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 212 holds (~1.4 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 213 holds (~1.4 yr)
   - sync: gap 111d > 14d loan — suspend the reading hold ~111d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 96 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 271 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 97 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 272 holds (~1.2 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 89 holds (~1.2 yr)
-    - also: audiobook in Libby catalog (Houston) — 0/9 available, 299 holds (~1.3 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 301 holds (~1.3 yr)
   - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 5 holds ahead · Kingsolver, Barbara, author.
@@ -62,6 +62,21 @@
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" booked at Landmark Inwood Theatre, Dallas from 2026-11-06
+  - "la bola negra" digital release: 2026-12-02
+- **Rose of Nevada (2026)**
+  - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
+  - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
+- **Possible Love (2026)**
+  - "Possible Love" digital release: 2026-11-06
+- **Oasis: Don't Look Back in Anger (2026)**
+  - "Oasis: Don't Look Back in Anger" digital release: 2026-10-09
+- **The Further Mis-Adventures of Cliff Booth (2026)**
+  - "The Further Mis-Adventures of Cliff Booth" digital release: 2026-12-23
+- **Ink (2026)**
+  - "Ink" digital release: 2027-01-08
+- **teenage sex and death at camp miasma (2026)**
+  - "teenage sex and death at camp miasma" available to rent (Amazon Video, Apple TV Store, Fandango At Home)
+  - "teenage sex and death at camp miasma" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
 
 ## Source status
 - ✅ `denton-library`: 5 observation(s)
@@ -75,16 +90,17 @@
 - ✅ `inwood`: 1 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 18d, 41 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 18d, 42 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (15)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 71d
-- club kid (2026) — waiting 69d
-- fjord (2026) — waiting 69d
-- paper tiger (2026) — waiting 69d
-- wild horse nine (2026) — waiting 69d
-- Peck and Peck — Garmus — waiting 48d
+- club kid (2026) — waiting 70d
+- fjord (2026) — waiting 70d
+- paper tiger (2026) — waiting 70d
+- wild horse nine (2026) — waiting 70d
+- Peck and Peck — Garmus — waiting 49d
 - All of a Sudden (2026) — waiting 18d
 - Artificial (2026) — waiting 18d
 - Behemoth! (2026) — waiting 18d
