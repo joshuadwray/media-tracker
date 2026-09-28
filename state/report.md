@@ -1,4 +1,4 @@
-# Media tracker report — 2026-09-27 17:40 UTC
+# Media tracker report — 2026-09-28 01:32 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -20,24 +20,24 @@
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 7 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 37 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 39 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 10 holds · Lee, Min Jin, Ha, Yerin
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in Lewisville library catalog — 2 on shelf · Mandel, Emily St. John, 1979- author.
-    - also: print book in denton library catalog — all 4 out, 11 holds
-    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 94 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 237 holds (~1.3 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 85 holds (~4 mo) · Emily St. John Mandel
+    - also: print book in denton library catalog — all 4 out, 12 holds
+    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 7 holds (~6 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 96 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 242 holds (~1.3 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 86 holds (~4 mo) · Emily St. John Mandel
     - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 8 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 206 holds (~1.3 yr)
-  - sync: gap 110d > 14d loan — suspend the reading hold ~110d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 211 holds (~1.4 yr)
+  - sync: gap 111d > 14d loan — suspend the reading hold ~111d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 95 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 273 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 96 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 274 holds (~1.2 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 89 holds (~1.2 yr)
     - also: audiobook in Libby catalog (Houston) — 0/9 available, 300 holds (~1.3 yr)
@@ -88,17 +88,17 @@
 - ✅ `inwood`: 1 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 17d, 39 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 18d, 40 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 8 observation(s)
 
 ## Still looking (15)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 70d
+- club kid (2026) — waiting 69d
+- fjord (2026) — waiting 69d
+- paper tiger (2026) — waiting 69d
 - wild horse nine (2026) — waiting 69d
-- club kid (2026) — waiting 68d
-- fjord (2026) — waiting 68d
-- paper tiger (2026) — waiting 68d
-- Peck and Peck — Garmus — waiting 47d
+- Peck and Peck — Garmus — waiting 48d
 - All of a Sudden (2026) — waiting 17d
 - Artificial (2026) — waiting 17d
 - Behemoth! (2026) — waiting 17d
