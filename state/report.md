@@ -1,46 +1,46 @@
-# Media tracker report — 2026-09-28 20:07 UTC
+# Media tracker report — 2026-09-29 02:34 UTC
 
-## New sightings (1)
-- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" digital release: 2026-10-09 — [link](https://www.themoviedb.org/movie/1447853)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (50)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
     - also: print book in Lewisville library catalog — 1 on shelf
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 73 holds (~9 mo)
-  - listening: audiobook in Libby catalog (Fort Worth) — 54/54 available · John Lanchester
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 74 holds (~9 mo)
+  - listening: audiobook in Libby catalog (Fort Worth) — 53/53 available · John Lanchester
     - also: audiobook (CD) in denton library catalog — all 2 out
     - also: audiobook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk)
   - sync: gap 0d, fits in a 14d loan
 - **Ply — Hernan Diaz**
   - reading: print book in denton library catalog — 2 on order, 2 holds ahead · Diaz, Hernan
-    - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 1 holds
+    - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 2 holds · Diaz, Hernan, Powers, Imani Jade
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — 3 on order, 7 holds ahead · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Lewisville) — pre-release, 5 holds
-    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 39 holds
+    - also: ebook in Libby catalog (Fort Worth) — pre-release, out 2026-09-29, 40 holds
   - listening: audiobook in cloudLibrary catalog (Lewisville) — pre-release, 10 holds · Lee, Min Jin, Ha, Yerin
 - **Exit Party — Mandel, Emily St. John**
   - reading: print book in Lewisville library catalog — 2 on shelf · Mandel, Emily St. John, 1979- author.
     - also: print book in denton library catalog — all 4 out, 12 holds
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 96 holds (~6 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 100 holds (~6 mo)
     - also: ebook in Libby catalog (Houston) — 0/7 available, 246 holds (~1.4 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 86 holds (~4 mo) · Emily St. John Mandel
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 88 holds (~4 mo) · Emily St. John Mandel
     - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 8 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/6 available, 213 holds (~1.4 yr)
-  - sync: gap 111d > 14d loan — suspend the reading hold ~111d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/6 available, 212 holds (~1.4 yr)
+  - sync: gap 114d > 14d loan — suspend the reading hold ~114d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 4 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 97 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 272 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 99 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 276 holds (~1.2 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
-    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 89 holds (~1.2 yr)
-    - also: audiobook in Libby catalog (Houston) — 0/9 available, 301 holds (~1.3 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 88 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 302 holds (~1.3 yr)
   - sync: gap 126d > 21d loan — suspend the reading hold ~126d for listening
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on order, 5 holds ahead · Kingsolver, Barbara, author.
@@ -90,7 +90,7 @@
 - ✅ `inwood`: 1 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 18d, 42 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 19d, 43 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (15)
