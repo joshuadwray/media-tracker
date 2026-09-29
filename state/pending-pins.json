@@ -24,6 +24,97 @@
           "source": "libby-houston"
         }
       ]
+    },
+    {
+      "id": "one-leg-on-earth-20260929T202830Z",
+      "kind": "book",
+      "typed_title": "One Leg on Earth",
+      "typed_author": null,
+      "added": "2026-09-29T20:28:30Z",
+      "candidates": [
+        {
+          "title": "One Leg on Earth",
+          "author": "'Pemi Aguda",
+          "format": "audiobook",
+          "bib_id": null,
+          "isbn": "9798349166433",
+          "source": "libby-houston"
+        },
+        {
+          "title": "One Leg on Earth",
+          "author": "'Pemi Aguda",
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": "9781324065883",
+          "source": "libby-houston"
+        }
+      ]
+    },
+    {
+      "id": "palaces-of-the-crow-20260929T202903Z",
+      "kind": "book",
+      "typed_title": "Palaces of the Crow",
+      "typed_author": null,
+      "added": "2026-09-29T20:29:03Z",
+      "candidates": [
+        {
+          "title": "Palaces of the Crow",
+          "author": "Ray Nayler",
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": "9780374620769",
+          "source": "libby-houston"
+        },
+        {
+          "title": "Palaces of the Crow",
+          "author": "Ray Nayler",
+          "format": "audiobook",
+          "bib_id": null,
+          "isbn": "9781250453976",
+          "source": "libby-houston"
+        }
+      ]
+    },
+    {
+      "id": "nonesuch-20260929T202911Z",
+      "kind": "book",
+      "typed_title": "Nonesuch",
+      "typed_author": null,
+      "added": "2026-09-29T20:29:11Z",
+      "candidates": [
+        {
+          "title": "The Nonesuch",
+          "author": null,
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": null,
+          "source": "cloudlibrary"
+        },
+        {
+          "title": "Nonesuch",
+          "author": "Francis Spufford",
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": "9781668214381",
+          "source": "libby-fortworth"
+        },
+        {
+          "title": "The Nonesuch",
+          "author": "Georgette Heyer",
+          "format": "ebook",
+          "bib_id": null,
+          "isbn": "9781402227035",
+          "source": "libby-fortworth"
+        },
+        {
+          "title": "Nonesuch",
+          "author": "Francis Spufford",
+          "format": "audiobook",
+          "bib_id": null,
+          "isbn": "9781668151099",
+          "source": "libby-houston"
+        }
+      ]
     }
   ]
 }
