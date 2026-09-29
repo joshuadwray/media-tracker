@@ -7,32 +7,6 @@
 # ============================================================
 
 books:
-  - title: All the Hidden Places
-    author: Turnbull, Cadwell
-    bib_id: S127C1985122
-  - title: The Slantwise Histories
-  - title: The Language of Liars
-    author: Huang, S. L.
-    bib_id: S127C1979875
-  - title: Nonesuch
-  - title: Palaces of the Crow
-  - title: The Vivisectors
-    author: Williams, Missouri
-    bib_id: S127C1979864
-  - title: "Python's Kiss"
-    author: Erdrich, Louise
-    bib_id: S127C1975802
-  - title: Triage
-    author: Rankine, Claudia
-    bib_id: S127C1983791
-  - title: One Leg on Earth
-  - title: Off the Reservation
-  - title: Music Against the Night
-  - title: The End of Everything
-    author: Hanson, Victor Davis
-    bib_id: S127C1835071
-  - title: American Crow
-  - title: Public Access Afterlife
   - title: Look What You Made Me Do
     author: Lanchester, John
     bib_id: S127C1981416
