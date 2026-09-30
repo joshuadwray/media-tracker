@@ -2239,12 +2239,14 @@
       "title": "may we feed the king",
       "author": "rebecca perry",
       "slug": "may-we-feed-the-king",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4.5,
       "page_count": null,
       "started": "2026-09-29",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-09-30",
+      "sessions": [
+        "2026-09-30 288"
+      ]
     }
   ]
 }
