@@ -1,0 +1,34 @@
+{
+ "book:exit-party": {
+  "author": "Mandel, Emily St. John",
+  "catalog_author": "Mandel, Emily St. John",
+  "found_title": "Exit Party",
+  "pages": 320,
+  "source": "cloudlibrary-lewisville",
+  "title": "Exit Party"
+ },
+ "book:fruit-fly": {
+  "author": "Silver, Josh",
+  "catalog_author": "Silver, Josh",
+  "found_title": "Fruit Fly",
+  "pages": 384,
+  "source": "cloudlibrary",
+  "title": "Fruit Fly"
+ },
+ "book:look-what-you-made-me-do": {
+  "author": "Lanchester, John",
+  "catalog_author": "Lanchester, John",
+  "found_title": "Look What You Made Me Do",
+  "pages": 304,
+  "source": "cloudlibrary-lewisville",
+  "title": "Look What You Made Me Do"
+ },
+ "book:ply": {
+  "author": "Hernan Diaz",
+  "catalog_author": "Diaz, Hernan",
+  "found_title": "Ply",
+  "pages": 464,
+  "source": "cloudlibrary-lewisville",
+  "title": "Ply"
+ }
+}
