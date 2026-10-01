@@ -9,3 +9,6 @@ __pycache__/
 # Hermes relay delivery state (local-only; the scheduled workflow's
 # `git add state/` would otherwise commit it)
 state/hermes-sent.json
+
+# Claude Code local permission allowlist (per-machine, not shared)
+.claude/settings.local.json

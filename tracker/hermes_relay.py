@@ -43,9 +43,16 @@ import requests
 
 from .config import env
 
-REPO = Path(__file__).resolve().parent.parent
-LOG_PATH = REPO / "reading" / "log.json"
-PUBYEAR_CACHE_PATH = REPO / "reading" / "pubyear-cache.json"
+from .book_finished import (            # noqa: F401  (re-exported)
+    LOG_PATH,
+    PUBYEAR_CACHE_PATH,
+    REPO,
+    _slug_of,
+    load_pubyear_cache,
+    newly_finished,
+    read_log_snapshot as _read_log_snapshot,
+)
+
 SENT_PATH = REPO / "state" / "hermes-sent.json"
 
 DEFAULT_SERVER = "https://ntfy.sh"
@@ -57,45 +64,11 @@ READ_TIMEOUT = 120      # stream: ntfy keepalives arrive every ~45s, so a
                         # silent connection is dead after ~3 missed ones
 
 
-# ---------------------------------------------------------------- diff
-
-def newly_finished(old_log: dict, new_log: dict) -> list[dict]:
-    """Books whose status newly became "finished" between two log snapshots.
-
-    Keyed by slug: the phone/web log editor preserves `slug` on title and
-    author edits, so a rename is not a new finish, and a rating change or
-    re-serialization isn't either. A re-read is a separate log entry with a
-    suffixed slug (hum, hum-2, ...), so finishing one fires — one critique
-    per read, by design.
-    """
-    old_slugs = _finished_slugs(old_log)
-    out = []
-    for book in (new_log or {}).get("books") or []:
-        if not isinstance(book, dict) or book.get("status") != "finished":
-            continue
-        if _slug_of(book) not in old_slugs:
-            out.append(book)
-    return out
-
-
-def _finished_slugs(log: dict) -> set:
-    slugs = set()
-    for book in (log or {}).get("books") or []:
-        if isinstance(book, dict) and book.get("status") == "finished":
-            slugs.add(_slug_of(book))
-    return slugs
-
-
-def _slug_of(book: dict) -> str:
-    slug = book.get("slug")
-    if slug:
-        return str(slug)
-    # Hand-edited entries can lack a stored slug; re-derive it exactly the
-    # way the log loader does. If the derivation has drifted from the
-    # stored slug of the "same" book, the finish re-fires — rare, accepted.
-    from .reading_gen import slugify
-    return slugify(str(book.get("title") or ""))
-
+# ------------------------------------------------- payload (relay-only)
+#
+# The diff itself (newly_finished / slug keying / the pubyear cache) now
+# lives in tracker/book_finished.py and is imported above, so this module
+# is only the ntfy+webhook transport to a local agent.
 
 def build_payload(book: dict, pubyear_cache: dict) -> dict:
     """The webhook payload: {"type", "title", "author", "year", "slug"}.
@@ -124,13 +97,6 @@ def payload_body(payload: dict) -> str:
     """Canonical JSON body. Serialized once and reused for both signing and
     the request body — never re-serialized, so the two can never diverge."""
     return json.dumps(payload, separators=(",", ":"), ensure_ascii=False)
-
-
-def load_pubyear_cache(path: Path = PUBYEAR_CACHE_PATH) -> dict:
-    try:
-        return json.loads(path.read_text())
-    except (OSError, ValueError):
-        return {}   # every year just misses -> null; Hermes fills it in
 
 
 # ---------------------------------------------------------------- sign/send
@@ -551,33 +517,3 @@ def _run_diff(args, topic: str, server: str) -> int:
         return 1
     print(f"published {count} message(s) to the relay topic")
     return 0
-
-
-def _read_log_snapshot(path_string: str) -> tuple[dict, bool]:
-    """Load the old-log snapshot. Returns (log, was_empty). Missing/empty
-    means empty-old (the workflow's dispatch-without-before_sha and
-    deleted-path cases write exactly that); anything non-dict or invalid
-    is refused rather than silently mass-published."""
-    path = Path(path_string)
-    try:
-        text = path.read_text() if path.exists() else ""
-    except OSError as exc:
-        print(f"hermes-relay: could not read old snapshot {path} ({exc})",
-              file=sys.stderr)
-        raise SystemExit(1)
-    if not text.strip():
-        print(f"(old snapshot {path} is "
-              f"{'missing' if not path.exists() else 'empty'}; treated as "
-              "empty — every finished book in reading/log.json counts as "
-              "newly finished)")
-        return {}, True
-    try:
-        data = json.loads(text)
-    except ValueError as exc:
-        print(f"hermes-relay: old snapshot {path} is not valid JSON ({exc}); "
-              "refusing to diff against a garbage base", file=sys.stderr)
-        raise SystemExit(1)
-    if not isinstance(data, dict):
-        print(f"(old snapshot {path} is not a reading log; treated as empty)")
-        return {}, True
-    return data, False

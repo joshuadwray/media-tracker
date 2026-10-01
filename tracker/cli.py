@@ -14,6 +14,7 @@
   python -m tracker web [--port 8765] [--no-browser]
   python -m tracker hermes-relay [--once] [--dry-run]
   python -m tracker hermes-relay --diff-before OLD.json [--publish] [--dry-run]
+  python -m tracker book-finished --diff-before OLD.json [--limit N]
 """
 from __future__ import annotations
 
@@ -28,6 +29,8 @@ from .sources import build_sources
 from .watchlist_io import append_entry
 
 DEFAULT_WEB_PORT = 8765
+BOOK_FINISHED_LIMIT = 2   # tracker/book_finished.DEFAULT_LIMIT, duplicated so the parser
+                          # doesn't import the module at startup
 
 
 def _load_dotenv() -> None:
@@ -165,6 +168,24 @@ def main(argv: list[str] | None = None) -> int:
                               "topic (off by default — without it the diff "
                               "only prints)")
 
+    p_bf = sub.add_parser(
+        "book-finished",
+        help="list the newly-finished books that still need a consensus "
+             "report, as the book-finished workflow's job matrix "
+             "(see tracker/book_finished.py)")
+    p_bf.add_argument("--diff-before", metavar="OLD.json", required=True,
+                      help="old reading/log.json snapshot to diff against; "
+                           "missing or empty means every finished book "
+                           "counts as newly finished (the recovery path)")
+    p_bf.add_argument("--limit", type=int, default=BOOK_FINISHED_LIMIT,
+                      help=f"report at most N books this run "
+                           f"(default {BOOK_FINISHED_LIMIT}, 0 = uncapped — "
+                           f"an uncapped recovery run would report every "
+                           f"finished book in the log)")
+    p_bf.add_argument("--github-output", action="store_true",
+                      help="append books=<json> and count=<n> to "
+                           "$GITHUB_OUTPUT instead of printing the JSON")
+
     args = parser.parse_args(argv)
     config = load_config(args.watchlist)
 
@@ -209,6 +230,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "hermes-relay":
         from .hermes_relay import run as run_relay
         return run_relay(args)
+    if args.command == "book-finished":
+        from .book_finished import run as run_book_finished
+        return run_book_finished(args)
     return 2
 
 

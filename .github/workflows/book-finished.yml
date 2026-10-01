@@ -1,18 +1,30 @@
-# Fires a signed book-finished webhook through the local Hermes relay
-# whenever a phone edit to reading/log.json marks a book finished.
+# When a phone edit to reading/log.json marks a book finished, research its
+# critical consensus and commit the report.
 #
-# Pipeline: this workflow diffs the before/after commits and publishes one
-# JSON message per newly-finished book to a dedicated ntfy topic; the
-# launchd daemon on the laptop (tracker/hermes_relay.py) streams that
-# topic, dedupes by slug, signs, and POSTs to Hermes at localhost:8644 —
-# which Actions cannot reach, hence the ntfy hop.
+# detect -> report is the live path: `tracker book-finished` diffs the
+# before/after commits, drops books that already have reports/<slug>.md,
+# caps the rest, and emits a job matrix; one claude-code-action run per
+# book executes .claude/skills/book-consensus and writes the markdown,
+# which the job commits back.
 #
-# Requires the HERMES_NTFY_TOPIC repository secret (Settings -> Secrets ->
-# Actions). The topic is unguessable by the same convention as NTFY_TOPIC:
-# anyone who learns it can trigger a critique, so it never appears here.
+# Dedupe is the committed file, not a state file. So the recovery path for
+# "the run failed" or "the laptop was off" is just a workflow_dispatch with
+# no before_sha: every finished book is re-offered and everything already
+# reported drops out. --limit is what keeps that bounded (150+ books in the
+# log are already finished).
 #
-# Writes nothing back to the repo, so it cannot loop with itself or with
-# the scheduled media-tracker workflow.
+# Needs the CLAUDE_CODE_OAUTH_TOKEN repository secret (`claude setup-token`
+# locally, then `gh secret set`), which bills runs to the Claude
+# subscription rather than API credits.
+#
+# The `relay` job below is the superseded Hermes leg (ntfy -> launchd ->
+# localhost webhook), kept until it is deliberately retired. It and
+# `detect` repeat the snapshot step rather than share it, because jobs
+# don't share a working tree.
+#
+# Its own commits use GITHUB_TOKEN, which by GitHub's rule triggers no
+# further workflows, and the push trigger here is scoped to
+# reading/log.json anyway — so committing a report cannot loop.
 
 name: book-finished
 
@@ -28,6 +40,10 @@ on:
         default: false
       before_sha:
         description: "Optional diff base (full SHA); omit to treat old as empty"
+        type: string
+        required: false
+      limit:
+        description: "Max books to report this run (blank = 2, 0 = uncapped)"
         type: string
         required: false
 
@@ -85,3 +101,124 @@ jobs:
           else
             python -m tracker hermes-relay --diff-before /tmp/log-old.json --publish
           fi
+
+  # ---------------------------------------------------------------- detect
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      books: ${{ steps.diff.outputs.books }}
+      count: ${{ steps.diff.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the diff needs the before SHA, not just HEAD
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Compute the old log snapshot
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          INPUT_SHA: ${{ inputs.before_sha }}
+        run: |
+          set -eu
+          : > /tmp/log-old.json   # empty unless filled below — an empty old
+          # log means every currently-finished book counts as newly
+          # finished (safe: books with a report already drop out, and
+          # --limit caps what is left)
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+              git show "$BEFORE_SHA":reading/log.json > /tmp/log-old.json 2>/dev/null \
+                || : > /tmp/log-old.json   # path absent in the before
+                # commit (e.g. a deletion): diff against nothing
+            fi
+          elif [ -n "$INPUT_SHA" ]; then
+            git show "$INPUT_SHA":reading/log.json > /tmp/log-old.json 2>/dev/null \
+              || : > /tmp/log-old.json
+          else
+            echo "::notice::workflow_dispatch without before_sha: diffing every currently-finished book against nothing. Books with a report in reports/ drop out, so this is the recovery path — it picks up whatever was missed, --limit at a time."
+          fi
+
+      - name: Which books need a report
+        id: diff
+        env:
+          LIMIT: ${{ inputs.limit }}
+        run: |
+          set -eu
+          python -m tracker book-finished \
+            --diff-before /tmp/log-old.json \
+            --limit "${LIMIT:-2}" \
+            --github-output
+
+  # ---------------------------------------------------------------- report
+  report:
+    needs: detect
+    if: needs.detect.outputs.count != '0' && needs.detect.outputs.count != '' && inputs.dry_run != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write   # commits reports/<slug>.md
+      id-token: write   # claude-code-action's GitHub App auth
+    strategy:
+      fail-fast: false   # one book's failure must not cancel the others
+      max-parallel: 1    # they all push to main; serialize instead of racing
+      matrix:
+        book: ${{ fromJSON(needs.detect.outputs.books) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Research the critical consensus
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Title and author come from a hand-edited log, so they are
+          # sanitized to a safe charset in tracker/book_finished.sanitize
+          # before they ever reach this interpolation.
+          prompt: "/book-consensus ${{ matrix.book.title }} | ${{ matrix.book.author }} | ${{ matrix.book.year }} | slug ${{ matrix.book.slug }}"
+          claude_args: |
+            --max-turns 40
+            --model claude-sonnet-5
+            --allowedTools "WebSearch,WebFetch,Write,Read"
+
+      - name: Commit the report
+        env:
+          SLUG: ${{ matrix.book.slug }}
+          TITLE: ${{ matrix.book.title }}
+        run: |
+          set -eu
+          if [ ! -s "reports/$SLUG.md" ]; then
+            echo "::error::the run produced no reports/$SLUG.md — see the step above"
+            exit 1
+          fi
+          # Copy aside, then rebase by reset: unlike the generated pages in
+          # build-lists.yml this file cannot be rebuilt after a reset, so it
+          # is re-applied rather than regenerated.
+          cp "reports/$SLUG.md" "$RUNNER_TEMP/report.md"
+          git config user.name "media-tracker bot"
+          git config user.email "actions@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+            mkdir -p reports
+            cp "$RUNNER_TEMP/report.md" "reports/$SLUG.md"
+            git add "reports/$SLUG.md"
+            if git diff --cached --quiet; then
+              echo "report is already committed and unchanged; nothing to do"
+              exit 0
+            fi
+            git commit -m "consensus: $TITLE"
+            if git push origin HEAD:main; then
+              echo "pushed reports/$SLUG.md"
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt); refetching"
+          done
+          echo "::error::could not push reports/$SLUG.md after 3 attempts"
+          exit 1

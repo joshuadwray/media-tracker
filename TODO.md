@@ -110,6 +110,40 @@
 - Retire `add-item.yml` once `add-items.yml` (batch) has a few real runs
   behind it. docs/add.html dispatches only the batch workflow now; the
   single one is kept purely as a fallback.
+- Retire the Hermes relay once detect→report has a few real runs behind
+  it (2026-10-01). The diff moved to `tracker/book_finished.py`, so this
+  is a pure deletion: `tracker/hermes_relay.py`, the workflow's `relay`
+  job, `tests/test_hermes_relay.py`, the `HERMES_*` block in
+  `.env.example`, `state/hermes-sent.json` + its .gitignore line, and
+  `launchctl bootout gui/$UID ~/Library/LaunchAgents/dev.media-tracker.hermes-relay.plist`
+  (otherwise the daemon retries a dead localhost endpoint forever). Both
+  legs fire on one finish until then.
+
+## Consensus reports — where they surface (open, 2026-10-01)
+Reports land in `reports/<slug>.md` and nothing reads them yet. Three
+options, all still live:
+- **A leaf page on the book's diary page** — `docs/reading/<slug>-consensus.html`,
+  linked only from that book's page, never in the nav. Needs no
+  publishing session: CI renders and commits it like every other
+  generated page. Port `convert()` from
+  `.claude/skills/book-consensus/reference/render_report.py`.
+- **One shelf artifact** — a single pinned page in the Claude app, book
+  shelf on top, each report an anchored section. One stable URL,
+  republished as reports accumulate.
+- **One artifact per book** — publish the `.md` straight through (it
+  renders as a styled document page); the artifact gallery is the shelf.
+
+Blocker for both artifact routes: **artifacts can't be published from a
+GitHub Action** (off by default in Agent SDK / GitHub Action / MCP
+contexts, and publishing needs a claude.ai-signed-in session). So an
+artifact route needs a publisher — a cloud routine fired by the push
+(unverified whether cloud sessions can publish; probe first), an
+on-demand `/consensus` skill, or a local launchd job running `claude -p`.
+
+Also open: the legacy review tier (Guardian, NYT, TLS, New Yorker) blocks
+the fetcher's user agent, so reports are thinner than the browser-driven
+Hermes runs in `reference/calibration/`. Not a prompting problem — a
+decision about how we present ourselves, deliberately unmade.
 
 ## Investigate
 

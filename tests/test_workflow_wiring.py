@@ -2,6 +2,7 @@
 trigger/dispatch behavior can't be unit-tested, so its wiring is asserted
 here with PyYAML and the manual smoke test covers the rest. Note that
 PyYAML parses the YAML 1.1 boolean-ish key `on:` as boolean `True`."""
+import json
 import sys
 from pathlib import Path
 
@@ -107,10 +108,109 @@ def test_diff_command_wired():
     assert "inputs.dry_run" in script
 
 
-def test_no_repo_writeback():
-    """The workflow writes nothing back — no commit/push steps — so it
-    can't loop with itself or the scheduled media-tracker run."""
-    text = WF.read_text()
-    assert "git push" not in text and "git commit" not in text
-    # read-only at the workflow level, so no step can gain write later
+def test_the_only_writeback_is_the_report_job():
+    """The report job commits reports/<slug>.md; nothing else writes. The
+    loop stays closed for two independent reasons — its commits use
+    GITHUB_TOKEN, which triggers no workflows, and the push trigger is
+    scoped to reading/log.json, which a report commit never touches."""
+    jobs = _wf()["jobs"]
+    for name in ("relay", "detect"):
+        text = json.dumps(jobs[name])
+        assert "git push" not in text and "git commit" not in text
+    assert "git push" in json.dumps(jobs["report"])
+    assert _wf()[True]["push"]["paths"] == ["reading/log.json"]
+    # read-only at the workflow level, so a job must opt in explicitly
     assert _wf()["permissions"] == {"contents": "read"}
+
+
+# --------------------------------------------- detect -> report (live path)
+
+def test_detect_exposes_the_matrix_as_job_outputs():
+    job = _wf()["jobs"]["detect"]
+    assert job["outputs"]["books"].startswith("${{ steps.diff.outputs.books")
+    assert job["outputs"]["count"].startswith("${{ steps.diff.outputs.count")
+    checkout = next(s for s in job["steps"] if "checkout" in str(s.get("uses", "")))
+    assert checkout["with"]["fetch-depth"] == 0   # the diff needs the before SHA
+
+
+def test_detect_passes_the_limit_through_env_with_a_default():
+    """Repo convention: event/input values arrive via env:, quoted — never
+    interpolated into the shell body. The default keeps a push (where the
+    input is absent) bounded."""
+    step = next(s for s in _wf()["jobs"]["detect"]["steps"]
+                if s.get("id") == "diff")
+    assert step["env"]["LIMIT"] == "${{ inputs.limit }}"
+    assert '"${LIMIT:-2}"' in step["run"]
+    assert "--github-output" in step["run"]
+
+
+def test_report_job_is_gated_and_serialized():
+    job = _wf()["jobs"]["report"]
+    assert job["needs"] == "detect"
+    assert "needs.detect.outputs.count != '0'" in job["if"]
+    assert "inputs.dry_run != true" in job["if"]
+    assert job["strategy"]["fail-fast"] is False   # one book must not cancel others
+    assert job["strategy"]["max-parallel"] == 1    # they all push to main
+    assert job["strategy"]["matrix"]["book"] == \
+        "${{ fromJSON(needs.detect.outputs.books) }}"
+
+
+def test_report_job_permissions_are_scoped():
+    job = _wf()["jobs"]["report"]
+    assert job["permissions"]["contents"] == "write"   # commits the report
+    assert job["permissions"]["id-token"] == "write"   # action's App auth
+    # the workflow default stays read-only, so only this job can write
+    assert _wf()["permissions"]["contents"] == "read"
+
+
+def test_action_is_pinned_and_uses_the_subscription_token():
+    """A subscription OAuth token, not an API key: runs bill to the plan.
+    Pinned to @v1 rather than @beta or a floating ref."""
+    step = next(s for s in _wf()["jobs"]["report"]["steps"]
+                if "claude-code-action" in str(s.get("uses", "")))
+    assert step["uses"] == "anthropics/claude-code-action@v1"
+    assert step["with"]["claude_code_oauth_token"] == \
+        "${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}"
+    assert "anthropic_api_key" not in step["with"]
+
+
+def test_prompt_invokes_the_repo_skill_with_the_matrix_book():
+    step = next(s for s in _wf()["jobs"]["report"]["steps"]
+                if "claude-code-action" in str(s.get("uses", "")))
+    prompt = step["with"]["prompt"]
+    assert prompt.startswith("/book-consensus ")
+    for field in ("title", "author", "year", "slug"):
+        assert f"matrix.book.{field}" in prompt
+    args = step["with"]["claude_args"]
+    assert "--max-turns" in args       # bounded run
+    assert "WebSearch" in args and "WebFetch" in args and "Write" in args
+
+
+def test_repo_skill_exists_for_that_prompt():
+    """The prompt is a repo skill, so checkout must actually carry it."""
+    skill = (WF.parent.parent.parent
+             / ".claude/skills/book-consensus/SKILL.md")
+    assert skill.exists()
+    assert "name: book-consensus" in skill.read_text()
+
+
+def test_commit_step_reapplies_the_report_after_the_reset():
+    """build-lists.yml can reset and regenerate; a researched report
+    cannot be regenerated, so it must be copied aside and restored —
+    otherwise the rebase-by-reset silently discards the run's only output."""
+    step = next(s for s in _wf()["jobs"]["report"]["steps"]
+                if "commit" in (s.get("name") or "").lower())
+    run = step["run"]
+    assert run.index('cp "reports/$SLUG.md"') < run.index("git reset --hard")
+    assert run.index("git reset --hard") < run.index('cp "$RUNNER_TEMP/report.md"')
+    assert "for attempt in 1 2 3" in run      # push races with other workflows
+    assert 'if [ ! -s "reports/$SLUG.md" ]' in run   # empty output is an error
+    assert step["env"]["SLUG"] == "${{ matrix.book.slug }}"
+
+
+def test_nothing_in_the_live_path_depends_on_the_hermes_secret():
+    """detect/report must stand alone, so retiring the relay job is a pure
+    deletion."""
+    wf = _wf()
+    for name in ("detect", "report"):
+        assert "HERMES" not in json.dumps(wf["jobs"][name])

@@ -138,63 +138,82 @@ pages — deliberately, to avoid maintaining the same layout in two
 languages. `docs/404.html` covers the gap where a book logged seconds
 ago has no shell yet.
 
-### Hermes book-finished webhook
+### Book-finished consensus reports
 
-Marking a book finished from the phone fires a critique automatically —
-one per read, fully event-driven (nothing polls, and no agent sits
-watching the topic):
+Marking a book finished from the phone researches its critical consensus
+and commits the report — one per read, fully event-driven:
 
 ```
 phone edit → GitHub commit to reading/log.json
-  → .github/workflows/book-finished.yml (paths filter, before/after diff)
-  → one JSON payload per newly-finished book → dedicated ntfy topic
-  → launchd daemon (tracker/hermes_relay.py) on this Mac:
-     dedupes by slug, signs (timestamp + HMAC-SHA256), POSTs to
-     http://localhost:8644/webhooks/book-finished
-  → Hermes runs its book-consensus critique skill
+  → .github/workflows/book-finished.yml
+     detect: before/after diff → newly-finished books, minus any that
+             already have a report, capped → one job-matrix entry each
+     report: claude-code-action runs .claude/skills/book-consensus,
+             writes reports/<slug>.md, commits it back
 ```
 
-Actions can't reach a localhost endpoint, hence the ntfy hop; the relay
-daemon streams the topic, so delivery survives the laptop being off
-(ntfy's message cache is replayed at startup, and slug dedupe in
-`state/hermes-sent.json` makes replay harmless). Delivery is
-**at-least-once, not exactly-once**: a slug is recorded only after a 2xx,
-so a crash between a successful POST and the state write can double-send
-once (sub-second window, accepted).
+**Dedupe is the committed file**, not a state file: a book has been
+reported iff `reports/<slug>.md` exists and is non-empty. That makes every
+run idempotent and the recovery path trivial — a `workflow_dispatch` with
+no `before_sha` diffs every finished book against nothing, and everything
+already reported drops out. An empty file counts as absent, so a run that
+died mid-write doesn't permanently block the book.
 
-Setup:
+Because that recovery path re-offers ~150 already-finished books, `--limit`
+(default 2) is what keeps it bounded; deferred books are named in a
+workflow annotation and picked up by the next run, `--limit` at a time.
 
-1. Pick an unguessable topic name (same convention as `NTFY_TOPIC` —
-   anyone who learns it can trigger a critique, so treat it like a
-   password) and set it both as the `HERMES_NTFY_TOPIC` Actions secret
-   and in the repo-root `.env`.
-2. The signing secret is read from the local Hermes install
-   (`~/.hermes/webhook_subscriptions.json`); set `HERMES_WEBHOOK_SECRET`
-   in `.env` only to override.
-3. Install the launchd daemon:
-
-   ```bash
-   launchctl load ~/Library/LaunchAgents/dev.media-tracker.hermes-relay.plist
-   ```
-
-   (unload with `launchctl unload` first if reloading).
+Setup: the `CLAUDE_CODE_OAUTH_TOKEN` repository secret, from
+`claude setup-token` — a subscription token, so runs bill to the Claude
+plan rather than API credits.
 
 Debugging entry points:
 
-- `python -m tracker hermes-relay --once --dry-run` — poll ntfy's cached
-  messages once and print what would be sent.
-- Manual `workflow_dispatch` of *book-finished* with `dry_run=true` — note
-  that a dispatch without `before_sha` diffs against an **empty** old log,
-  so it lists every currently-finished book with a warning banner; relay
-  dedupe drops already-delivered slugs, so this is also the recovery path
-  for a finish missed while the laptop was off longer than ntfy's cache
-  window (~12h). An *empty* payload list there means broken wiring, not
-  a no-op.
-- The daemon log lives at `~/Library/Logs/hermes-relay.err.log`.
+- `python -m tracker book-finished --diff-before OLD.json` — print the job
+  matrix as JSON without touching Actions. Get a real base with
+  `git show <sha>:reading/log.json > OLD.json`.
+- Manual `workflow_dispatch` with `dry_run=true` — runs `detect` only, so
+  it lists what *would* be reported and skips the research entirely.
+- An *empty* list when the old snapshot was empty means broken wiring, not
+  a no-op, and the command exits 1 saying so.
 
-Known limitation: local (non-phone) edits to `reading/log.json` don't
-trigger the pipeline — the event source is GitHub, and almost all edits
-are phone-based.
+Two known limits:
+
+- **Local (non-phone) edits to `reading/log.json` don't trigger it** — the
+  event source is GitHub, and almost all edits are phone-based.
+- **The legacy review tier is mostly unreachable.** theguardian.com,
+  nytimes.com, the TLS and the New Yorker refuse the fetcher's user agent,
+  and thebookerprizes.com and Foreword Reviews return 403. The skill is
+  built to privilege exactly that tier, so reports lean on independent
+  critics, trade reviews and whatever the publisher's page carries as
+  blurbs. `.claude/skills/book-consensus/reference/calibration/` holds two
+  earlier runs on the same book made through a real browser, for contrast.
+
+Nothing downstream reads `reports/` yet — whether a report surfaces as a
+page on the book's diary entry or as an artifact in the Claude app is
+undecided (see TODO.md).
+
+#### The superseded Hermes relay
+
+`tracker/hermes_relay.py` and the workflow's `relay` job are the previous
+consumer: the same diff published one signed JSON payload per book to a
+dedicated ntfy topic, which a launchd daemon on this Mac streamed and
+POSTed to Hermes at `localhost:8644`. Actions can't reach a localhost
+endpoint, which is the only reason the ntfy hop and the HMAC signing
+existed.
+
+It is kept until deliberately retired, so both legs currently fire on one
+finish. The diff itself now lives in `tracker/book_finished.py` and is
+re-exported here, so retiring the relay is a pure deletion: this module,
+the `relay` job, the `HERMES_*` entries in `.env.example`,
+`state/hermes-sent.json`, `tests/test_hermes_relay.py`, and
+
+```bash
+launchctl bootout gui/$UID ~/Library/LaunchAgents/dev.media-tracker.hermes-relay.plist
+```
+
+(without which the daemon keeps retrying a dead endpoint into
+`~/Library/Logs/hermes-relay.err.log`).
 
 ### The CLI
 
@@ -207,6 +226,8 @@ python -m tracker add movie "the substance" --year 2024
 python -m tracker check                     # full run: report + state + push
 python -m tracker check --dry-run           # look, don't touch
 python -m tracker probe --source cloudlibrary   # raw responses, for debugging
+python -m tracker book-finished --diff-before OLD.json   # which finished books
+                                            # still need a consensus report
 ```
 
 Each *decision* notifies **once**: `state/state.json` remembers what
