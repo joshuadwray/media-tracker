@@ -1,0 +1,87 @@
+# Fires a signed book-finished webhook through the local Hermes relay
+# whenever a phone edit to reading/log.json marks a book finished.
+#
+# Pipeline: this workflow diffs the before/after commits and publishes one
+# JSON message per newly-finished book to a dedicated ntfy topic; the
+# launchd daemon on the laptop (tracker/hermes_relay.py) streams that
+# topic, dedupes by slug, signs, and POSTs to Hermes at localhost:8644 —
+# which Actions cannot reach, hence the ntfy hop.
+#
+# Requires the HERMES_NTFY_TOPIC repository secret (Settings -> Secrets ->
+# Actions). The topic is unguessable by the same convention as NTFY_TOPIC:
+# anyone who learns it can trigger a critique, so it never appears here.
+#
+# Writes nothing back to the repo, so it cannot loop with itself or with
+# the scheduled media-tracker workflow.
+
+name: book-finished
+
+on:
+  push:
+    branches: [main]
+    paths: ["reading/log.json"]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print would-publish payloads instead of publishing"
+        type: boolean
+        default: false
+      before_sha:
+        description: "Optional diff base (full SHA); omit to treat old as empty"
+        type: string
+        required: false
+
+permissions:
+  contents: read   # nothing is committed back
+
+concurrency:
+  group: book-finished   # serialize overlapping runs; never cancel a diff
+  cancel-in-progress: false
+
+jobs:
+  relay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the diff needs the before SHA, not just HEAD
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Compute the old log snapshot
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          INPUT_SHA: ${{ inputs.before_sha }}
+        run: |
+          set -eu
+          : > /tmp/log-old.json   # empty unless filled below — an empty old
+          # log means every currently-finished book counts as newly
+          # finished (safe: the relay dedupes by slug)
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ -n "$BEFORE_SHA" ] && [ "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]; then
+              git show "$BEFORE_SHA":reading/log.json > /tmp/log-old.json 2>/dev/null \
+                || : > /tmp/log-old.json   # path absent in the before
+                # commit (e.g. a deletion): diff against nothing
+            fi
+          elif [ -n "$INPUT_SHA" ]; then
+            git show "$INPUT_SHA":reading/log.json > /tmp/log-old.json 2>/dev/null \
+              || : > /tmp/log-old.json
+          else
+            echo "::warning::workflow_dispatch without before_sha: the old log is EMPTY, so this run diffs every currently-finished book against nothing. Relay-side dedupe drops already-delivered slugs, so only books never yet delivered survive to Hermes — this is the laptop-was-off recovery path, not a normal diff."
+          fi
+
+      - name: Diff and publish newly-finished books
+        env:
+          HERMES_NTFY_TOPIC: ${{ secrets.HERMES_NTFY_TOPIC }}
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            python -m tracker hermes-relay --diff-before /tmp/log-old.json --dry-run
+          else
+            python -m tracker hermes-relay --diff-before /tmp/log-old.json --publish
+          fi

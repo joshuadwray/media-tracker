@@ -138,6 +138,64 @@ pages — deliberately, to avoid maintaining the same layout in two
 languages. `docs/404.html` covers the gap where a book logged seconds
 ago has no shell yet.
 
+### Hermes book-finished webhook
+
+Marking a book finished from the phone fires a critique automatically —
+one per read, fully event-driven (nothing polls, and no agent sits
+watching the topic):
+
+```
+phone edit → GitHub commit to reading/log.json
+  → .github/workflows/book-finished.yml (paths filter, before/after diff)
+  → one JSON payload per newly-finished book → dedicated ntfy topic
+  → launchd daemon (tracker/hermes_relay.py) on this Mac:
+     dedupes by slug, signs (timestamp + HMAC-SHA256), POSTs to
+     http://localhost:8644/webhooks/book-finished
+  → Hermes runs its book-consensus critique skill
+```
+
+Actions can't reach a localhost endpoint, hence the ntfy hop; the relay
+daemon streams the topic, so delivery survives the laptop being off
+(ntfy's message cache is replayed at startup, and slug dedupe in
+`state/hermes-sent.json` makes replay harmless). Delivery is
+**at-least-once, not exactly-once**: a slug is recorded only after a 2xx,
+so a crash between a successful POST and the state write can double-send
+once (sub-second window, accepted).
+
+Setup:
+
+1. Pick an unguessable topic name (same convention as `NTFY_TOPIC` —
+   anyone who learns it can trigger a critique, so treat it like a
+   password) and set it both as the `HERMES_NTFY_TOPIC` Actions secret
+   and in the repo-root `.env`.
+2. The signing secret is read from the local Hermes install
+   (`~/.hermes/webhook_subscriptions.json`); set `HERMES_WEBHOOK_SECRET`
+   in `.env` only to override.
+3. Install the launchd daemon:
+
+   ```bash
+   launchctl load ~/Library/LaunchAgents/dev.media-tracker.hermes-relay.plist
+   ```
+
+   (unload with `launchctl unload` first if reloading).
+
+Debugging entry points:
+
+- `python -m tracker hermes-relay --once --dry-run` — poll ntfy's cached
+  messages once and print what would be sent.
+- Manual `workflow_dispatch` of *book-finished* with `dry_run=true` — note
+  that a dispatch without `before_sha` diffs against an **empty** old log,
+  so it lists every currently-finished book with a warning banner; relay
+  dedupe drops already-delivered slugs, so this is also the recovery path
+  for a finish missed while the laptop was off longer than ntfy's cache
+  window (~12h). An *empty* payload list there means broken wiring, not
+  a no-op.
+- The daemon log lives at `~/Library/Logs/hermes-relay.err.log`.
+
+Known limitation: local (non-phone) edits to `reading/log.json` don't
+trigger the pipeline — the event source is GitHub, and almost all edits
+are phone-based.
+
 ### The CLI
 
 ```bash

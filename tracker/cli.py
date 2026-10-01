@@ -12,6 +12,8 @@
   python -m tracker reading [--no-fetch]
   python -m tracker letterboxd
   python -m tracker web [--port 8765] [--no-browser]
+  python -m tracker hermes-relay [--once] [--dry-run]
+  python -m tracker hermes-relay --diff-before OLD.json [--publish] [--dry-run]
 """
 from __future__ import annotations
 
@@ -142,6 +144,27 @@ def main(argv: list[str] | None = None) -> int:
     p_web.add_argument("--no-browser", action="store_true",
                        help="don't auto-open the browser")
 
+    p_relay = sub.add_parser(
+        "hermes-relay",
+        help="stream the Hermes book-finished ntfy topic and relay each "
+             "message to the local Hermes webhook (launchd runs this; "
+             "see tracker/hermes_relay.py)")
+    p_relay.add_argument("--once", action="store_true",
+                          help="poll ntfy's cached messages once and exit "
+                               "(debug; the daemon mode streams forever)")
+    p_relay.add_argument("--dry-run", action="store_true",
+                          help="print what would be sent; don't POST and "
+                               "don't record sent-state")
+    p_relay.add_argument("--diff-before", metavar="OLD.json",
+                         help="diff this old log snapshot against "
+                              "reading/log.json and publish one message per "
+                              "newly-finished book (the Actions workflow's "
+                              "mode); use --publish to actually send")
+    p_relay.add_argument("--publish", action="store_true",
+                         help="with --diff-before: publish to the relay "
+                              "topic (off by default — without it the diff "
+                              "only prints)")
+
     args = parser.parse_args(argv)
     config = load_config(args.watchlist)
 
@@ -183,6 +206,9 @@ def main(argv: list[str] | None = None) -> int:
         from .web import run_web
         return run_web(config_path=args.watchlist, port=args.port,
                        open_browser=not args.no_browser)
+    if args.command == "hermes-relay":
+        from .hermes_relay import run as run_relay
+        return run_relay(args)
     return 2
 
 

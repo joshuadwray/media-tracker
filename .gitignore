@@ -5,3 +5,7 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 .polytoken/
+
+# Hermes relay delivery state (local-only; the scheduled workflow's
+# `git add state/` would otherwise commit it)
+state/hermes-sent.json
