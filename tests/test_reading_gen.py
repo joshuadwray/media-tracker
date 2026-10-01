@@ -235,3 +235,76 @@ def test_sane_year_bounds():
     assert reading_gen._sane_year(date.today().year + 5) is None
     assert reading_gen._sane_year(None) is None
     assert reading_gen._sane_year("not a year") is None
+
+
+# ------------------------------------------- cloudLibrary pages sidecar
+
+def test_cl_pages_lookup_exact_key_and_fuzzy(tmp_path, monkeypatch):
+    """The sidecar is keyed by watchlist keys; the reading log's titles
+    don't have to match them byte for byte."""
+    monkeypatch.setattr(reading_gen, "load_cl_pages", lambda *a: {
+        "book:dead-but-dreaming-of-electric-sheep": {
+            "title": "Dead but Dreaming of Electric Sheep",
+            "author": "Tremblay, Paul", "pages": 336},
+        "book:a-trade-of-blood-ana-and-din-mysteries": {
+            "title": "A Trade of Blood (Ana and Din Mysteries)",
+            "author": "Bennett, Robert Jackson", "pages": 400},
+    })
+    b = _book(title="Dead but Dreaming of Electric Sheep",
+              author="Tremblay, Paul", slug="d")
+    assert reading_gen.cl_pages_lookup(b) == 336
+    # watchlist spelled the subtitle; the log dropped it
+    b2 = _book(title="A Trade of Blood", author="Robert Jackson Bennett",
+               slug="t")
+    assert reading_gen.cl_pages_lookup(b2) == 400
+
+
+def test_cl_pages_lookup_author_guard(tmp_path, monkeypatch):
+    """A slug collision — same title, different author — must not leak
+    the other book's count through the exact-key hit."""
+    monkeypatch.setattr(reading_gen, "load_cl_pages", lambda *a: {
+        "book:heat": {"title": "Heat", "author": "Child, Lee", "pages": 400}})
+    assert reading_gen.cl_pages_lookup(
+        _book(title="Heat", author="Joyce, Megan")) is None
+
+
+def test_cl_pages_lookup_bad_entries_are_misses(monkeypatch):
+    monkeypatch.setattr(reading_gen, "load_cl_pages", lambda *a: {
+        "book:x": {"title": "X", "author": "A"},          # no pages
+        "book:y": {"title": "Y", "author": "B", "pages": "junk"},
+        "book:z": {"title": "Z", "author": "C", "pages": 0},
+    })
+    for slug in ("x", "y", "z"):
+        assert reading_gen.cl_pages_lookup(
+            _book(title=slug.upper(), author=slug)) is None
+
+
+def test_resolve_page_count_uses_cloudlibrary_before_network(monkeypatch):
+    """A sidecar hit resolves with no network and lands in the pagecount
+    cache, so later builds don't even read the sidecar for that book."""
+    monkeypatch.setattr(reading_gen, "load_cl_pages", lambda *a: {
+        "book:a-book": {"title": "A Book", "author": "An Author",
+                        "pages": 288}})
+    cache = {}
+    pages, source = reading_gen.resolve_page_count(_book(), cache, {},
+                                                   session=object())
+    assert (pages, source) == (288, "cloudlibrary")
+    assert cache["a book|an author"]["source"] == "cloudlibrary"
+    # and the cached value answers a second call without re-reading the
+    # sidecar — `_boom` fires if the lookup runs at all
+    def _boom(*a, **k):
+        raise AssertionError("sidecar must not be re-read for a cached book")
+    monkeypatch.setattr(reading_gen, "cl_pages_lookup", _boom)
+    pages, source = reading_gen.resolve_page_count(_book(), cache, {},
+                                                   session=None)
+    assert (pages, source) == (288, "cloudlibrary")
+
+
+def test_resolve_page_count_sidecar_miss_falls_through(monkeypatch):
+    """Empty sidecar + no session: unresolved, nothing cached."""
+    monkeypatch.setattr(reading_gen, "load_cl_pages", lambda *a: {})
+    cache = {}
+    pages, source = reading_gen.resolve_page_count(_book(), cache, {},
+                                                   session=None)
+    assert (pages, source) == (None, "unresolved")
+    assert cache == {}

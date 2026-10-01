@@ -3,8 +3,9 @@
   python -m tracker reading
 
 Reads reading/log.json (written by docs/reading/log.html or by hand),
-resolves page counts (manual override > pagecount cache > ISBN bridge
-from the lists covers cache > iTunes lookup > Open Library median) and
+resolves page counts (manual override > pagecount cache > cloudLibrary
+sidecar > ISBN bridge from the lists covers cache > iTunes lookup >
+Open Library median) and
 writes docs/data/diary.json plus ~1KB shells at docs/reading/index.html,
 list.html and <slug>.html. docs/reading/log.html is hand-written and is
 NEVER touched by this module.
@@ -44,6 +45,7 @@ from pathlib import Path
 import requests
 
 from . import lists_gen, matching, site
+from .models import normalize_key
 
 ROOT = Path(__file__).resolve().parent.parent
 READING_DIR = ROOT / "reading"
@@ -198,6 +200,56 @@ def save_pubyearcache(cache: dict, path: Path = PUBYEAR_CACHE_PATH) -> None:
 def isbn_from_cover_url(url: str) -> str | None:
     m = ISBN13_RE.search(url or "")
     return m.group(1) if m else None
+
+
+CL_PAGES_PATH = ROOT / "state" / "cloudlibrary-pages.json"
+
+
+def cl_pages_lookup(book: Book, sidecar: dict | None = None) -> int | None:
+    """Page count from the cloudLibrary sidecar the check run writes.
+
+    The sidecar (state/cloudlibrary-pages.json, written by engine.save_cl_pages
+    after every check) carries `totalExtents` for watchlist books a
+    cloudLibrary we watch holds — exactly the new releases OpenLibrary
+    tends to miss, at zero extra requests. Its keys are watchlist item
+    keys ("book:<slug>"), which don't have to agree with the reading
+    log's titles: fall back to a fuzzy title+author match, guarded the
+    same way the library sources guard theirs, so a watchlist hit on a
+    different book never leaks a count in.
+
+    Supplement, not replacement: it only fires for books on the
+    watchlist AND in a cloudLibrary catalog, so a miss here falls
+    through to the ISBN bridge untouched.
+    """
+    if sidecar is None:
+        sidecar = load_cl_pages()
+    if not sidecar:
+        return None
+    # Exact key hit first, then a fuzzy sweep — both behind the same
+    # title+author guard, because a slug collision ("Heat" by two
+    # different authors) would otherwise leak the wrong book's count.
+    candidates = []
+    exact = sidecar.get(f"book:{normalize_key(book.title)}")
+    if exact is not None:
+        candidates.append(exact)
+    candidates.extend(sidecar.values())
+    entry = next((c for c in candidates
+                  if matching.titles_match(book.title, c.get("title") or "")
+                  and matching.author_matches(book.author or "",
+                                               c.get("author"))), None)
+    if entry is None:
+        return None
+    try:
+        return int(entry["pages"]) or None
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def load_cl_pages(path: Path = CL_PAGES_PATH) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
 
 
 def _ol_pages_by_isbn(session, isbn: str) -> int | None:
@@ -387,6 +439,11 @@ def resolve_page_count(book: Book, cache: dict, covers_cache: dict,
     entry = cache.get(book.cache_key)
     if entry is not None:
         return entry.get("page_count"), entry.get("source") or "cache"
+    pages = cl_pages_lookup(book)
+    if pages:
+        cache[book.cache_key] = {"page_count": pages, "isbn13": None,
+                                  "source": "cloudlibrary", "matched": book.title}
+        return pages, "cloudlibrary"
     if session is None:
         return None, "unresolved"
 

@@ -1,4 +1,5 @@
 """Unit tests for the pure logic: matching, state dedupe, config parsing."""
+import json
 import sys
 from pathlib import Path
 
@@ -1643,3 +1644,89 @@ def test_advance_venue_name_folds_onto_the_configured_spelling():
     assert _canonical_venue("the texas theatre", names) == "Texas Theatre"
     # An unknown house keeps the feed's own spelling.
     assert _canonical_venue("Cinemark 17 and IMAX", names) == "Cinemark 17 and IMAX"
+
+
+# ------------------------------------------- cloudLibrary pages sidecar
+
+def _cl_obs(medium, pages, item="book:x", author=None):
+    detail = {} if pages is None else {"pages": pages,
+                                       "author": author}
+    return Observation(source="cloudlibrary-lewisville", item_key=item,
+                       item_label="X", summary="ebook in catalog",
+                       medium=medium, detail=detail)
+
+
+def _cl_config(tmp_path, books):
+    from tracker.config import Config
+    return Config(books=books, state_path=tmp_path / "state.json")
+
+
+def test_cl_pages_collects_reading_track_only(tmp_path):
+    """Audiobook extents are durations in minutes, so only the reading
+    track's observations may contribute page counts."""
+    from tracker.engine import CheckRun, cl_pages_from_run
+    from tracker.models import WatchBook, SourceResult
+    cfg = _cl_config(tmp_path, [WatchBook(title="X", author="A")])
+    run = CheckRun(results=[SourceResult(source="cl", observations=[
+        _cl_obs("ebook", 336),
+        _cl_obs("audiobook", 480),           # a duration, not pages
+        _cl_obs("print", None),              # no extent reported
+    ])])
+    entries = cl_pages_from_run(cfg, run)
+    assert entries == {"book:x": {
+        "title": "X", "author": "A", "found_title": None,
+        "catalog_author": None, "pages": 336,
+        "source": "cloudlibrary-lewisville"}}
+
+
+def test_cl_pages_skips_unwatched_and_bad_values(tmp_path):
+    from tracker.engine import CheckRun, cl_pages_from_run
+    from tracker.models import WatchBook, SourceResult
+    cfg = _cl_config(tmp_path, [WatchBook(title="X", author="A")])
+    run = CheckRun(results=[SourceResult(source="cl", observations=[
+        _cl_obs("ebook", "not a number"),   # junk extent
+        _cl_obs("ebook", 0),                # zero is nothing
+        _cl_obs("ebook", 240, item="book:gone"),  # not on the watchlist
+    ])])
+    assert cl_pages_from_run(cfg, run) == {}
+
+
+def test_cl_pages_sidecar_merge_and_prune(tmp_path):
+    """A quiet source keeps its old entries (a catalog being down must
+    not erase what the build already has); a removed book's entry is
+    pruned; an unchanged sidecar is not rewritten."""
+    from tracker.engine import CheckRun, save_cl_pages, CL_PAGES_SIDECAR
+    from tracker.models import WatchBook, SourceResult
+    cfg = _cl_config(tmp_path, [WatchBook(title="X", author="A"),
+                                WatchBook(title="Y", author="B")])
+    sidecar = tmp_path / CL_PAGES_SIDECAR
+    sidecar.write_text(json.dumps({
+        "book:x": {"title": "X", "author": "A", "pages": 300},
+        "book:dropped": {"title": "Dropped", "author": "C", "pages": 100},
+    }), encoding="utf-8")
+
+    # run sees nothing new: old X survives, dropped book prunes, Y unlisted
+    assert save_cl_pages(cfg, CheckRun()) is True
+    data = json.loads(sidecar.read_text(encoding="utf-8"))
+    assert list(data) == ["book:x"]
+
+    # a run that sees Y adds it; a second identical run writes nothing
+    run = CheckRun(results=[SourceResult(source="cl", observations=[
+        _cl_obs("ebook", 250, item="book:y")])])
+    assert save_cl_pages(cfg, run) is True
+    data = json.loads(sidecar.read_text(encoding="utf-8"))
+    assert set(data) == {"book:x", "book:y"}
+    assert save_cl_pages(cfg, run) is False
+
+
+def test_cl_pages_sidecar_corrupt_file_is_a_miss(tmp_path):
+    from tracker.engine import CheckRun, save_cl_pages, CL_PAGES_SIDECAR
+    from tracker.models import WatchBook, SourceResult
+    cfg = _cl_config(tmp_path, [WatchBook(title="X", author="A")])
+    sidecar = tmp_path / CL_PAGES_SIDECAR
+    sidecar.write_text("{not json", encoding="utf-8")
+    run = CheckRun(results=[SourceResult(source="cl", observations=[
+        _cl_obs("ebook", 336)])])
+    assert save_cl_pages(cfg, run) is True
+    data = json.loads(sidecar.read_text(encoding="utf-8"))
+    assert data["book:x"]["pages"] == 336

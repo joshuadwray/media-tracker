@@ -1,6 +1,7 @@
 """The check run, callable from both the CLI and the web app."""
 from __future__ import annotations
 
+import json
 import sys
 from collections import OrderedDict
 from dataclasses import dataclass, field
@@ -87,6 +88,15 @@ def run_check(config: Config, *, source_id: str | None = None,
     )
     state.save()
 
+    # Sidecar of page counts the reading build reads later (a separate CI
+    # workflow): dead with the run today otherwise. Never fatal — the
+    # supplement must not be able to fail the check that feeds it.
+    try:
+        save_cl_pages(config, run)
+    except OSError as exc:
+        print(f"WARNING: could not save {CL_PAGES_SIDECAR}: {exc}",
+              file=sys.stderr)
+
     if run.notify_groups and not no_notify:
         if notify.push_configured():
             try:
@@ -111,6 +121,82 @@ def run_check(config: Config, *, source_id: str | None = None,
                 print(f"WARNING: health push failed for {source_id}: {exc}",
                       file=sys.stderr)
     return run
+
+
+CL_PAGES_SIDECAR = "cloudlibrary-pages.json"
+
+
+def cl_pages_from_run(config: Config, run: CheckRun) -> dict:
+    """Page counts seen this run, per watchlist book.
+
+    The cloudLibrary search already reports `totalExtents` — the ebook's
+    page count, which its audiobook records carry as a duration instead.
+    That data dies with the run today: the observations exist in memory,
+    state.json keeps only watermarks, and the reading build (a separate
+    CI workflow, later on the same repo) could never see it. This
+    collects it onto a sidecar the build reads instead.
+
+    Gate is the observation's *track*, not the source id: anything a book
+    you'd read was sighted with `detail["pages"]` counts, which keeps the
+    function right if another library source starts reporting extents.
+    The watchlist item's own title/author anchor the entry — the reading
+    log was typed by the same person as the watchlist, so those strings
+    are what fuzzy matching at build time should test against.
+    """
+    entries: dict = {}
+    for r in run.results:
+        for obs in r.observations:
+            if obs.track != "reading":
+                continue  # audiobook extents are durations in minutes
+            raw = (obs.detail or {}).get("pages")
+            if raw is None:
+                continue
+            try:
+                pages = int(raw)
+            except (TypeError, ValueError):
+                continue
+            if pages <= 0:
+                continue
+            item = next((b for b in config.books if b.key == obs.item_key),
+                        None)
+            if item is None:
+                continue
+            entries[obs.item_key] = {
+                "title": item.title,
+                "author": item.author,
+                "found_title": (obs.detail or {}).get("found_title"),
+                "catalog_author": (obs.detail or {}).get("author"),
+                "pages": pages,
+                "source": obs.source,
+            }
+    return entries
+
+
+def save_cl_pages(config: Config, run: CheckRun) -> bool:
+    """Merge this run's page counts into the sidecar. -> True if written.
+
+    Prunes entries for watchlist books that no longer exist (a removed
+    book's entry is dead weight), but keeps entries for books that merely
+    went unobserved this run — a source being down must not erase data
+    the build already has. The read is wrapped: the sidecar is a
+    supplement, and a corrupt file should never fail a check.
+    """
+    watching = {b.key for b in config.books}
+    path = config.state_path.parent / CL_PAGES_SIDECAR
+    existing: dict = {}
+    if path.exists():
+        try:
+            existing = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            existing = {}
+    entries = {k: v for k, v in existing.items() if k in watching}
+    entries.update(cl_pages_from_run(config, run))
+    if entries == existing:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(entries, indent=1, ensure_ascii=False,
+                               sort_keys=True) + "\n", encoding="utf-8")
+    return True
 
 
 def _notify_groups(run: CheckRun, state: State,

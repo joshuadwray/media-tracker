@@ -92,15 +92,19 @@
 - Cached page-count misses never self-retry; if that bites, add a
   retry-after-N-days rule (manual fix today: delete the cache entry or
   set the count on the card).
-- **cloudLibrary carries page counts.** Its search records have
-  `totalExtents` (ebooks only; audiobooks carry `duration` instead) —
-  verified 2026-08-10, e.g. Dead but Dreaming = 336. The library sources
-  already stash it on `Observation.detail["pages"]`, so it could become a
-  step in `reading_gen`'s page-count chain (covers-cache ISBN → OL →
-  iTunes → Apple Books). Attractive because it needs no extra request and
-  covers exactly the new releases OpenLibrary tends to miss — but it only
-  fires for books that are on the watchlist AND in a cloudLibrary we
-  watch, so it's a supplement, not a replacement.
+- ~~**cloudLibrary carries page counts.**~~ Done 2026-10-01: the check run
+  now saves `Observation.detail["pages"]` (cloudLibrary's `totalExtents`,
+  ebooks only — audiobook extents are durations and are excluded via the
+  reading-track gate) to `state/cloudlibrary-pages.json` (engine's
+  `save_cl_pages` — never fatal, prunes removed books, keeps entries for
+  books a quiet source missed), and `reading_gen.resolve_page_count`
+  consults that sidecar between the pagecount cache and the ISBN bridge,
+  caching hits as `source: cloudlibrary`. Lookup is exact-key with a
+  fuzzy title+author fallback (same `titles_match`/`author_matches`
+  guards the library sources use — a slug collision must not leak the
+  other book's count). Tests in `test_core.py` (sidecar collection,
+  merge/prune, corrupt-file tolerance) and `test_reading_gen.py`
+  (lookup, author guard, chain position, fall-through).
 
 ## Pending cleanup
 - Retire `add-item.yml` once `add-items.yml` (batch) has a few real runs
@@ -277,8 +281,9 @@ Thursdays; the open question is whether this key is queued for
 2026-09-17 or needs a human. An email to developers@amctheatres.com
 asking which deploy it's scheduled for was drafted 2026-09-10.
 
-**Re-checked 2026-09-22: still 403 / 12005, unchanged.** The 2026-09-17
-deploy came and went without it, so the key is NOT sitting in a queue —
+**Re-checked 2026-09-30: still 403 / 12005, both prod and sandbox, via
+the TODO resume one-liner.** No reply to the 09-22 email after 8 days.
+The 2026-09-17 deploy came and went without it, so the key is NOT sitting in a queue —
 it needs a human. And the drafted email was **never sent**: no thread to
 or from developers@amctheatres.com exists in the mailbox, and no such
 draft survives, so the twelve days of waiting were spent waiting on
