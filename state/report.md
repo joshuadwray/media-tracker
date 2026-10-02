@@ -1,9 +1,10 @@
-# Media tracker report — 2026-10-01 18:49 UTC
+# Media tracker report — 2026-10-02 02:10 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (2)
+- **the age of calamities — senaa ahmad**: ebook in cloudLibrary catalog (Denton) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/Denton/search?query=the%20age%20of%20calamities)
+- **the age of calamities — senaa ahmad**: ebook in cloudLibrary catalog (Lewisville) — 1/1 available — [link](https://ebook.yourcloudlibrary.com/library/lewisvillepubliclibrary/search?query=the%20age%20of%20calamities)
 
-## All current sightings (56)
+## All current sightings (54)
 - **Look What You Made Me Do — Lanchester, John**
   - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Lanchester, John
     - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
@@ -15,52 +16,49 @@
     - also: audiobook (CD) in denton library catalog — 1 on shelf
   - sync: gap 0d, fits in a 21d loan
 - **Ply — Hernan Diaz**
-  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Diaz, Hernan
-    - also: print book in denton library catalog — 2 on order, 3 holds ahead
+  - reading: print book in denton library catalog — 2 on order, 3 holds ahead · Diaz, Hernan
     - also: ebook in Libby catalog (Houston) — 0/2 available, 33 holds (~8 mo)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Diaz, Hernan, Powers, Imani Jade
-    - also: audiobook in Libby catalog (Houston) — 0/2 available, 31 holds (~7 mo)
-  - sync: gap 21d > 21d loan — suspend the reading hold ~21d for listening
+  - listening: audiobook in Libby catalog (Houston) — 0/2 available, 31 holds (~7 mo) · Hernan Diaz
 - **American Hagwon — Min Jin Lee**
-  - reading: print book in denton library catalog — 3 on order, 9 holds ahead · Lee, Min Jin
-    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 6 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 94 holds (~1.8 yr)
-    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 52 holds (~2 yr)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 7 holds (~6 mo) · Lee, Min Jin, Ha, Yerin
-    - also: audiobook in Libby catalog (Houston) — 0/2 available, 97 holds (~1.9 yr)
+  - reading: print book in denton library catalog — 3 on order, 11 holds ahead · Lee, Min Jin
+    - also: ebook in Libby catalog (Houston) — 0/2 available, 102 holds (~2 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/1 available, 53 holds (~2.1 yr)
+  - listening: audiobook in Libby catalog (Houston) — 0/2 available, 106 holds (~2.1 yr) · Min Jin Lee
 - **Exit Party — Mandel, Emily St. John**
-  - reading: print book in denton library catalog — all 4 out, 11 holds · Mandel, Emily St. John
+  - reading: print book in denton library catalog — all 4 out, 10 holds · Mandel, Emily St. John
     - also: print book in Lewisville library catalog — all 2 out, 13 holds
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 7 holds (~6 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 104 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 249 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 86 holds (~4 mo) · Emily St. John Mandel
-    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 8 holds (~6 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 216 holds (~1 yr)
-  - sync: gap 48d > 14d loan — suspend the reading hold ~48d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/8 available, 106 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 244 holds (~1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 85 holds (~4 mo) · Emily St. John Mandel
+    - also: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 9 holds (~7 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 221 holds (~1.1 yr)
+  - sync: gap 52d > 14d loan — suspend the reading hold ~52d for listening
 - **Fruit Fly — Silver, Josh**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
     - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 4 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 95 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/9 available, 279 holds (~1.2 yr)
+    - also: ebook in Libby catalog (Houston) — 0/9 available, 280 holds (~1.2 yr)
   - listening: audiobook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
     - also: audiobook in Libby catalog (Fort Worth) — 0/3 available, 86 holds (~1.1 yr)
-    - also: audiobook in Libby catalog (Houston) — 0/9 available, 304 holds (~1.3 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/9 available, 302 holds (~1.3 yr)
   - sync: gap 105d > 21d loan — suspend the reading hold ~105d for listening
+- **the age of calamities — senaa ahmad**
+  - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Ahmad, Senaa
+    - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
+    - also: ebook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk)
+  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk) · Senaa Ahmad
+  - sync: gap 56d > 14d loan — suspend the reading hold ~56d for listening
 - **Partita — Kingsolver**
-  - reading: print book in Lewisville library catalog — 3 on order, 6 holds ahead · Kingsolver, Barbara, author.
+  - reading: print book in Lewisville library catalog — 3 on order, 7 holds ahead · Kingsolver, Barbara, author.
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
-- **the age of calamities — senaa ahmad**
-  - reading: ebook in Libby catalog (Houston) — 0/1 available, 3 holds (~8 wk) · Senaa Ahmad
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · Senaa Ahmad
-  - sync: gap 14d > 14d loan — suspend the reading hold ~14d for listening
 - **The History of Concrete (2026)**
   - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-01, 2026-10-02, 2026-10-03, 2026-10-04)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Digger (2026)**
-  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-01, 2026-10-02, 2026-10-03, 2026-10-04)
+  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-02, 2026-10-03, 2026-10-04, 2026-10-05)
   - Texas Theatre: "Digger" mentioned on Texas Theatre
 - **You Can See Everything (2026)**
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-15, 2026-10-16, 2026-10-17, 2026-10-18)
@@ -87,8 +85,8 @@
 
 ## Source status
 - ✅ `denton-library`: 5 observation(s)
-- ✅ `cloudlibrary`: 4 observation(s)
-- ✅ `cloudlibrary-lewisville`: 8 observation(s)
+- ✅ `cloudlibrary`: 5 observation(s)
+- ✅ `cloudlibrary-lewisville`: 5 observation(s)
 - ✅ `lewisville-print`: 5 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
 - ✅ `libby-houston`: 11 observation(s)
@@ -97,7 +95,7 @@
 - ✅ `inwood`: 1 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 21d, 48 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 22d, 49 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (15)
@@ -107,7 +105,7 @@ On the watchlist, not matched at any source yet. This is the normal resting plac
 - fjord (2026) — waiting 73d
 - paper tiger (2026) — waiting 73d
 - wild horse nine (2026) — waiting 73d
-- Peck and Peck — Garmus — waiting 51d
+- Peck and Peck — Garmus — waiting 52d
 - All of a Sudden (2026) — waiting 21d
 - Artificial (2026) — waiting 21d
 - Behemoth! (2026) — waiting 21d
