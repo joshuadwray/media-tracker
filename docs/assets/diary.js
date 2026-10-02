@@ -397,6 +397,10 @@
     var monthSet = {};
     for (var t in totals) monthSet[ym(t)] = 1;
     for (var f in filmsByDay) monthSet[ym(f)] = 1;
+    var logged = Object.keys(monthSet).length;
+    // The current month always renders, even with nothing in it yet: on the
+    // 1st the calendar would otherwise open on last month and look stuck.
+    monthSet[ym(today)] = 1;
     var months = Object.keys(monthSet).sort().reverse();
 
     // Year to date, under the day/week row. The calendar shows one month at
@@ -458,7 +462,7 @@
       out.push('</div></div>');
     });
 
-    if (!months.length)
+    if (!logged)
       out.push("<div class='meta'>no sessions logged yet &mdash; "
         + "<a href='log.html'>log one</a></div>");
     return { html: out.join(''), months: months.length, years: years };
