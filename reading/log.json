@@ -2247,6 +2247,17 @@
       "sessions": [
         "2026-09-30 288"
       ]
+    },
+    {
+      "title": "the living realm",
+      "author": "jordan tannahill",
+      "slug": "the-living-realm",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-10-01",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
