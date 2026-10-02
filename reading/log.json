@@ -2265,12 +2265,14 @@
       "title": "mestra",
       "author": "madeline miller",
       "slug": "mestra",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3.5,
       "page_count": null,
       "started": "2026-10-01",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-10-01",
+      "sessions": [
+        "2026-10-01 80"
+      ]
     }
   ]
 }
