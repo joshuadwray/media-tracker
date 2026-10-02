@@ -149,6 +149,12 @@
   "page_count": 288,
   "source": "apple-books"
  },
+ "mestra|madeline miller": {
+  "isbn13": "9780063566293",
+  "matched": "mestra",
+  "page_count": 80,
+  "source": "apple-books"
+ },
  "my brilliant friend|elena ferrante": {
   "isbn13": "9781609458638",
   "matched": "My Brilliant Friend",
