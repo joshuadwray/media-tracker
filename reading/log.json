@@ -2252,12 +2252,14 @@
       "title": "the living realm",
       "author": "jordan tannahill",
       "slug": "the-living-realm",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 3,
       "page_count": null,
       "started": "2026-10-01",
-      "finished": null,
-      "sessions": []
+      "finished": "2026-10-01",
+      "sessions": [
+        "2026-10-01 160"
+      ]
     }
   ]
 }
