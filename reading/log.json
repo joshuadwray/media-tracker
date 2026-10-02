@@ -2260,6 +2260,17 @@
       "sessions": [
         "2026-10-01 160"
       ]
+    },
+    {
+      "title": "mestra",
+      "author": "madeline miller",
+      "slug": "mestra",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-10-01",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
