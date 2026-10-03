@@ -722,6 +722,13 @@
   "matched": "The Nickel Boys — Colson Whitehead",
   "source": "bookmory"
  },
+ "the radiance|ayad akhtar": {
+  "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/07/5c/74/075c7453-614d-4201-1da7-14a085c47d02/9781668078655.jpg/600x600bb.jpg",
+  "matched": "The Radiance — Ayad Akhtar",
+  "release_date": "2026-09-29T07:00:00Z",
+  "source": "itunes",
+  "track": "The Radiance"
+ },
  "the river has roots|amal el-mohtar": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/d6/24/f1/d624f1f3-73df-e5aa-aeed-69691d4609e4/9781250341099.jpg/600x600bb.jpg",
   "matched": "The River Has Roots — Amal El-Mohtar",
@@ -860,6 +867,13 @@
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/2b/3f/4c/2b3f4c30-e6d0-e662-6725-1ff2747b3fb1/9780525509639.d.jpg/600x600bb.jpg",
   "matched": "Vigil — George Saunders",
   "source": "itunes"
+ },
+ "we burned so bright|tj klune": {
+  "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/8b/1e/d5/8b1ed5d7-64ea-6459-7da6-eebe31d42af1/9781250881243.jpg/600x600bb.jpg",
+  "matched": "We Burned So Bright — TJ Klune",
+  "release_date": "2026-04-28T07:00:00Z",
+  "source": "itunes",
+  "track": "We Burned So Bright"
  },
  "we do not part|han kang": {
   "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Publication211/v4/3f/54/1d/3f541d75-f0cc-0f81-37ef-bbe115b507c7/9780593595473.d.jpg/600x600bb.jpg",

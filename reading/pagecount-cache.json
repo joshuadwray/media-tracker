@@ -239,6 +239,12 @@
   "page_count": 224,
   "source": "apple-books"
  },
+ "the radiance|ayad akhtar": {
+  "isbn13": "9781668078655",
+  "matched": "the radiance",
+  "page_count": 304,
+  "source": "apple-books"
+ },
  "the tainted cup|robert jackson bennett": {
   "isbn13": "9781984820723",
   "matched": "The Tainted Cup",
@@ -285,6 +291,12 @@
   "isbn13": "9780593420331",
   "matched": "Trust",
   "page_count": 416,
+  "source": "apple-books"
+ },
+ "we burned so bright|tj klune": {
+  "isbn13": "9781250881243",
+  "matched": "we burned so bright",
+  "page_count": 400,
   "source": "apple-books"
  },
  "winnie-the-pooh|a.a. milne": {

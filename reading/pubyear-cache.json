@@ -674,6 +674,11 @@
   "source": "openlibrary-search",
   "year": 2019
  },
+ "the radiance|ayad akhtar": {
+  "matched": "the radiance",
+  "source": "itunes-edition",
+  "year": 2026
+ },
  "the river has roots|amal el-mohtar": {
   "matched": "The River Has Roots",
   "source": "openlibrary-search",
@@ -806,6 +811,11 @@
  },
  "vigil|george saunders": {
   "matched": "Vigil",
+  "source": "openlibrary-search",
+  "year": 2026
+ },
+ "we burned so bright|tj klune": {
+  "matched": "we burned so bright",
   "source": "openlibrary-search",
   "year": 2026
  },
