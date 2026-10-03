@@ -379,6 +379,11 @@
   "source": "itunes-edition",
   "year": 2026
  },
+ "language machines|leif weatherby": {
+  "matched": "language machines",
+  "source": "openlibrary-search",
+  "year": 2025
+ },
  "lazarus man|richard price": {
   "matched": "Lazarus Man",
   "source": "openlibrary-search",
