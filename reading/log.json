@@ -2292,13 +2292,14 @@
       "title": "the radiance",
       "author": "ayad akhtar",
       "slug": "the-radiance",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": null,
       "started": "2026-10-02",
-      "finished": null,
+      "finished": "2026-10-06",
       "sessions": [
-        "2026-10-02 141"
+        "2026-10-02 141",
+        "2026-10-06 304"
       ]
     },
     {
