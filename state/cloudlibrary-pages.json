@@ -12,7 +12,7 @@
   "catalog_author": "Silver, Josh",
   "found_title": "Fruit Fly",
   "pages": 384,
-  "source": "cloudlibrary",
+  "source": "cloudlibrary-lewisville",
   "title": "Fruit Fly"
  },
  "book:look-what-you-made-me-do": {
@@ -22,6 +22,14 @@
   "pages": 304,
   "source": "cloudlibrary-lewisville",
   "title": "Look What You Made Me Do"
+ },
+ "book:partita": {
+  "author": "Kingsolver",
+  "catalog_author": "Kingsolver, Barbara",
+  "found_title": "Partita",
+  "pages": 352,
+  "source": "cloudlibrary",
+  "title": "Partita"
  },
  "book:ply": {
   "author": "Hernan Diaz",
