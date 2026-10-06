@@ -2278,13 +2278,14 @@
       "title": "language machines",
       "author": "leif weatherby",
       "slug": "language-machines",
-      "status": "reading",
-      "rating": null,
+      "status": "finished",
+      "rating": 4,
       "page_count": 264,
       "started": "2026-10-02",
-      "finished": null,
+      "finished": "2026-10-05",
       "sessions": [
-        "2026-10-02 50"
+        "2026-10-02 50",
+        "2026-10-05 264"
       ]
     },
     {
