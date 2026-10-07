@@ -2314,6 +2314,17 @@
       "sessions": [
         "2026-10-02 400"
       ]
+    },
+    {
+      "title": "american hagwon",
+      "author": "min jin lee",
+      "slug": "american-hagwon",
+      "status": "reading",
+      "rating": null,
+      "page_count": null,
+      "started": "2026-10-06",
+      "finished": null,
+      "sessions": []
     }
   ]
 }
