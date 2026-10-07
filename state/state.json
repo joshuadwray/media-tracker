@@ -85,16 +85,6 @@
       "first": "2026-08-10T19:40:34+00:00",
       "last": "2026-10-07T01:22:31+00:00"
     },
-    "book:the-age-of-calamities|listening": {
-      "best": "plannable",
-      "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-07T01:22:31+00:00"
-    },
-    "book:the-age-of-calamities|reading": {
-      "best": "now",
-      "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-07T01:22:31+00:00"
-    },
     "book:the-buffalo-hunter-hunter|listening": {
       "first": "2026-07-18T00:57:09+00:00",
       "last": "2026-07-18T00:57:09+00:00"
@@ -121,7 +111,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-10-07T01:22:31+00:00"
+    "last_run": "2026-10-07T01:22:43+00:00"
   },
   "seen": {
     "advance-screenings|movie:whalefall|\"Whalefall\" advance screening at AMC Northpark 15 on 2026-10-13": {
@@ -402,10 +392,6 @@
       "first": "2026-10-06T02:53:14+00:00",
       "last": "2026-10-06T02:53:14+00:00"
     },
-    "cloudlibrary-lewisville|book:the-age-of-calamities|ebook in catalog": {
-      "first": "2026-10-02T02:10:29+00:00",
-      "last": "2026-10-07T01:22:31+00:00"
-    },
     "cloudlibrary|book:exit-party|audiobook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
       "last": "2026-10-07T01:22:31+00:00"
@@ -420,10 +406,6 @@
     },
     "cloudlibrary|book:partita|ebook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-07T01:22:31+00:00"
-    },
-    "cloudlibrary|book:the-age-of-calamities|ebook in catalog": {
-      "first": "2026-10-02T02:10:29+00:00",
       "last": "2026-10-07T01:22:31+00:00"
     },
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": {
@@ -548,14 +530,6 @@
     },
     "libby-houston|book:partita|ebook in catalog": {
       "first": "2026-10-07T01:13:49+00:00",
-      "last": "2026-10-07T01:22:31+00:00"
-    },
-    "libby-houston|book:the-age-of-calamities|audiobook in catalog": {
-      "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-07T01:22:31+00:00"
-    },
-    "libby-houston|book:the-age-of-calamities|ebook in catalog": {
-      "first": "2026-08-15T01:13:26+00:00",
       "last": "2026-10-07T01:22:31+00:00"
     },
     "texas-theatre|movie:digger|\"Digger\" mentioned on Texas Theatre": {
