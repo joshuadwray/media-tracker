@@ -55,16 +55,6 @@
     }
   },
   "media": {
-    "book:american-hagwon|listening": {
-      "best": "plannable",
-      "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
-    "book:american-hagwon|reading": {
-      "best": "turn",
-      "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
     "book:exit-party|listening": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
@@ -131,7 +121,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-10-07T01:18:02+00:00"
+    "last_run": "2026-10-07T01:18:19+00:00"
   },
   "seen": {
     "advance-screenings|movie:whalefall|\"Whalefall\" advance screening at AMC Northpark 15 on 2026-10-13": {
@@ -396,14 +386,6 @@
       "first": "2026-09-10T14:25:06+00:00",
       "last": "2026-09-10T16:59:46+00:00"
     },
-    "cloudlibrary-lewisville|book:american-hagwon|audiobook in catalog": {
-      "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
-    "cloudlibrary-lewisville|book:american-hagwon|ebook in catalog": {
-      "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
     "cloudlibrary-lewisville|book:exit-party|audiobook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
       "last": "2026-10-07T01:18:02+00:00"
@@ -422,10 +404,6 @@
     },
     "cloudlibrary-lewisville|book:the-age-of-calamities|ebook in catalog": {
       "first": "2026-10-02T02:10:29+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
-    "cloudlibrary|book:american-hagwon|ebook in catalog": {
-      "first": "2026-10-06T02:53:14+00:00",
       "last": "2026-10-07T01:18:02+00:00"
     },
     "cloudlibrary|book:exit-party|audiobook in catalog": {
@@ -467,10 +445,6 @@
     "cloudlibrary|book:yesteryear|ebook in catalog": {
       "first": "2026-07-18T20:08:01+00:00",
       "last": "2026-07-18T20:08:01+00:00"
-    },
-    "denton-library|book:american-hagwon|print book in catalog": {
-      "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
     },
     "denton-library|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
@@ -528,10 +502,6 @@
       "first": "2026-09-28T15:35:06+00:00",
       "last": "2026-10-07T01:18:02+00:00"
     },
-    "libby-fortworth|book:american-hagwon|ebook in catalog": {
-      "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
     "libby-fortworth|book:exit-party|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
       "last": "2026-10-07T01:18:02+00:00"
@@ -554,14 +524,6 @@
     },
     "libby-fortworth|book:partita|ebook in catalog": {
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
-    "libby-houston|book:american-hagwon|audiobook in catalog": {
-      "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-07T01:18:02+00:00"
-    },
-    "libby-houston|book:american-hagwon|ebook in catalog": {
-      "first": "2026-09-30T02:00:59+00:00",
       "last": "2026-10-07T01:18:02+00:00"
     },
     "libby-houston|book:exit-party|audiobook in catalog": {
