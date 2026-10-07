@@ -3,22 +3,22 @@
     "movie:digger": {
       "best": "home",
       "first": "2026-09-16T01:20:13+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:dune-part-3": {
       "best": "preferred",
       "first": "2026-09-11T17:01:40+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:fjord": {
       "best": "other",
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:la-bola-negra": {
       "best": "other",
       "first": "2026-09-25T17:55:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:oasis-don-t-look-back-in-anger": {
       "best": "other",
@@ -28,29 +28,29 @@
     "movie:possible-love": {
       "best": "other",
       "first": "2026-10-05T01:49:54+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:the-history-of-concrete": {
       "best": "other",
       "first": "2026-09-21T18:37:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:whalefall": {
       "best": "preferred",
       "first": "2026-10-06T18:54:09+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:you-can-see-everything": {
       "best": "other",
       "first": "2026-09-23T17:52:36+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     }
   },
   "health": {
     "amc": {
       "alerted": true,
       "last_error": "RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403",
-      "runs": 57,
+      "runs": 58,
       "since": "2026-09-10T00:59:25+00:00"
     }
   },
@@ -58,62 +58,62 @@
     "book:american-hagwon|listening": {
       "best": "plannable",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:american-hagwon|reading": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:exit-party|listening": {
       "best": "turn",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:exit-party|reading": {
       "best": "now",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:fruit-fly|listening": {
       "best": "now",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:fruit-fly|reading": {
       "best": "now",
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:partita|listening": {
       "best": "horizon",
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:partita|reading": {
       "best": "horizon",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:ply|listening": {
       "best": "turn",
       "first": "2026-09-11T17:01:40+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:ply|reading": {
       "best": "now",
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:the-age-of-calamities|listening": {
       "best": "plannable",
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:the-age-of-calamities|reading": {
       "best": "now",
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:the-buffalo-hunter-hunter|listening": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -129,7 +129,7 @@
     },
     "book:we-were-forbidden|reading": {
       "first": "2026-09-28T15:35:06+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "book:yesteryear|listening": {
       "first": "2026-07-18T20:08:01+00:00",
@@ -141,12 +141,12 @@
     }
   },
   "meta": {
-    "last_run": "2026-10-07T01:09:36+00:00"
+    "last_run": "2026-10-07T01:13:49+00:00"
   },
   "seen": {
     "advance-screenings|movie:whalefall|\"Whalefall\" advance screening at AMC Northpark 15 on 2026-10-13": {
       "first": "2026-10-06T18:54:09+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "amc|movie:teenage-sex-and-death-at-camp-miasma|\"Teenage Sex and Death at Camp Miasma\" playing at AMC Grapevine Mills 30": {
       "dates": [
@@ -212,18 +212,25 @@
         "2026-10-06",
         "2026-10-07",
         "2026-10-08",
+        "2026-10-09",
+        "2026-10-10",
+        "2026-10-11",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14",
+        "2026-10-15",
         "2026-10-30",
         "2026-10-31"
       ],
       "first": "2026-09-16T01:20:13+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "angelika|movie:dune-part-3|\"DUNE: PART THREE INSIDER SCREENING\" playing at Angelika Dallas": {
       "dates": [
         "2026-12-15"
       ],
       "first": "2026-09-10T00:59:25+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "angelika|movie:dune-part-3|\"DUNE: PART THREE\" playing at Angelika Dallas": {
       "dates": [
@@ -244,7 +251,7 @@
         "2026-12-31"
       ],
       "first": "2026-09-10T00:59:25+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "angelika|movie:fjord|\"FJORD\" playing at Angelika Dallas": {
       "dates": [
@@ -258,7 +265,7 @@
         "2026-10-29"
       ],
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "angelika|movie:oasis-don-t-look-back-in-anger|\"OASIS: DON'T LOOK BACK IN ANGER\" playing at Angelika Dallas": {
       "dates": [
@@ -293,7 +300,7 @@
         "2026-10-29"
       ],
       "first": "2026-10-05T01:49:54+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "angelika|movie:the-history-of-concrete|\"THE HISTORY OF CONCRETE\" playing at Angelika Dallas": {
       "dates": [
@@ -304,10 +311,17 @@
         "2026-10-05",
         "2026-10-06",
         "2026-10-07",
-        "2026-10-08"
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-10",
+        "2026-10-11",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14",
+        "2026-10-15"
       ],
       "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "angelika|movie:you-can-see-everything|\"YOU CAN SEE EVERYTHING\" playing at Angelika Dallas": {
       "dates": [
@@ -321,7 +335,7 @@
         "2026-10-22"
       ],
       "first": "2026-09-23T17:52:36+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cinemark|movie:digger|\"Digger\" advance tickets on sale at Cinemark Dallas IMAX": {
       "dates": [
@@ -394,19 +408,19 @@
     },
     "cloudlibrary-lewisville|book:american-hagwon|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary-lewisville|book:american-hagwon|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary-lewisville|book:exit-party|audiobook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary-lewisville|book:exit-party|ebook in catalog": {
       "first": "2026-08-27T22:56:48+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary-lewisville|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
@@ -418,35 +432,35 @@
     },
     "cloudlibrary-lewisville|book:ply|audiobook in catalog": {
       "first": "2026-09-11T17:01:40+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary-lewisville|book:ply|ebook in catalog": {
       "first": "2026-09-11T17:01:40+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary-lewisville|book:the-age-of-calamities|ebook in catalog": {
       "first": "2026-10-02T02:10:29+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:american-hagwon|ebook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:exit-party|audiobook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-31T19:30:50+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:partita|ebook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:ply|ebook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
@@ -454,7 +468,7 @@
     },
     "cloudlibrary|book:the-age-of-calamities|ebook in catalog": {
       "first": "2026-10-02T02:10:29+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -478,23 +492,23 @@
     },
     "denton-library|book:american-hagwon|print book in catalog": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "denton-library|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "denton-library|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "denton-library|book:partita|print book in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "denton-library|book:ply|print book in catalog": {
       "first": "2026-08-13T23:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
@@ -518,99 +532,107 @@
     },
     "inwood|movie:la-bola-negra|\"La Bola Negra\" booked at Landmark Inwood Theatre, Dallas": {
       "first": "2026-09-25T17:55:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "inwood|movie:whalefall|\"Whalefall\" booked at Landmark Inwood Theatre, Dallas": {
       "first": "2026-10-06T18:54:09+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "lewisville-print|book:exit-party|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "lewisville-print|book:fruit-fly|print book in catalog": {
       "first": "2026-08-10T18:29:49+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "lewisville-print|book:partita|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "lewisville-print|book:we-were-forbidden|print book in catalog": {
       "first": "2026-09-28T15:35:06+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:american-hagwon|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:exit-party|audiobook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:exit-party|ebook in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:partita|audiobook in catalog": {
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-fortworth|book:partita|ebook in catalog": {
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:american-hagwon|audiobook in catalog": {
       "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:american-hagwon|ebook in catalog": {
       "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:exit-party|audiobook in catalog": {
       "first": "2026-09-16T01:20:13+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:exit-party|ebook in catalog": {
       "first": "2026-09-16T01:20:13+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:fruit-fly|audiobook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
+    },
+    "libby-houston|book:partita|audiobook in catalog": {
+      "first": "2026-10-07T01:13:49+00:00",
+      "last": "2026-10-07T01:13:49+00:00"
+    },
+    "libby-houston|book:partita|ebook in catalog": {
+      "first": "2026-10-07T01:13:49+00:00",
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:ply|audiobook in catalog": {
       "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:ply|ebook in catalog": {
       "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:the-age-of-calamities|audiobook in catalog": {
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "libby-houston|book:the-age-of-calamities|ebook in catalog": {
       "first": "2026-08-15T01:13:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "texas-theatre|movie:digger|\"Digger\" mentioned on Texas Theatre": {
       "first": "2026-09-21T18:37:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "texas-theatre|movie:teenage-sex-and-death-at-camp-miasma|\"teenage sex and death at camp miasma\" mentioned on Texas Theatre": {
       "first": "2026-08-06T00:05:40+00:00",
@@ -618,7 +640,7 @@
     },
     "texas-theatre|movie:the-history-of-concrete|\"The History of Concrete\" mentioned on Texas Theatre": {
       "first": "2026-09-21T18:37:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "tmdb-streaming|movie:ink|Ink digital 2027-01-08": {
       "first": "2026-09-10T14:25:06+00:00",
@@ -664,7 +686,7 @@
   "venues": {
     "movie:digger|Angelika Dallas": {
       "first": "2026-09-16T01:20:13+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:digger|Cinemark Dallas IMAX": {
       "first": "2026-09-22T17:38:28+00:00",
@@ -680,11 +702,11 @@
     },
     "movie:digger|Texas Theatre": {
       "first": "2026-09-21T18:37:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:dune-part-3|Angelika Dallas": {
       "first": "2026-09-10T00:59:25+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:dune-part-3|Cinemark Dallas IMAX": {
       "first": "2026-09-10T00:59:25+00:00",
@@ -696,11 +718,11 @@
     },
     "movie:fjord|Angelika Dallas": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:la-bola-negra|Landmark Inwood Theatre, Dallas": {
       "first": "2026-09-25T17:55:26+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:oasis-don-t-look-back-in-anger|Angelika Dallas": {
       "first": "2026-09-10T14:25:06+00:00",
@@ -712,7 +734,7 @@
     },
     "movie:possible-love|Angelika Dallas": {
       "first": "2026-10-05T01:49:54+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:teenage-sex-and-death-at-camp-miasma|AMC Grapevine Mills 30": {
       "first": "2026-08-25T13:57:59+00:00",
@@ -732,23 +754,23 @@
     },
     "movie:the-history-of-concrete|Angelika Dallas": {
       "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:the-history-of-concrete|Texas Theatre": {
       "first": "2026-09-21T18:37:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:whalefall|AMC Northpark 15": {
       "first": "2026-10-06T18:54:09+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:whalefall|Landmark Inwood Theatre, Dallas": {
       "first": "2026-10-06T18:54:09+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     },
     "movie:you-can-see-everything|Angelika Dallas": {
       "first": "2026-09-23T17:52:36+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
+      "last": "2026-10-07T01:13:49+00:00"
     }
   },
   "watching": {
