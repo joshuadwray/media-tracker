@@ -85,16 +85,6 @@
       "first": "2026-08-10T00:32:20+00:00",
       "last": "2026-10-06T18:54:09+00:00"
     },
-    "book:look-what-you-made-me-do|listening": {
-      "best": "now",
-      "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
-    "book:look-what-you-made-me-do|reading": {
-      "best": "now",
-      "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
     "book:partita|listening": {
       "best": "horizon",
       "first": "2026-10-03T01:53:24+00:00",
@@ -151,7 +141,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-10-06T18:54:09+00:00"
+    "last_run": "2026-10-07T01:09:36+00:00"
   },
   "seen": {
     "advance-screenings|movie:whalefall|\"Whalefall\" advance screening at AMC Northpark 15 on 2026-10-13": {
@@ -426,14 +416,6 @@
       "first": "2026-10-06T02:53:14+00:00",
       "last": "2026-10-06T02:53:14+00:00"
     },
-    "cloudlibrary-lewisville|book:look-what-you-made-me-do|audiobook in catalog": {
-      "first": "2026-09-30T02:00:59+00:00",
-      "last": "2026-10-05T01:49:54+00:00"
-    },
-    "cloudlibrary-lewisville|book:look-what-you-made-me-do|ebook in catalog": {
-      "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
     "cloudlibrary-lewisville|book:ply|audiobook in catalog": {
       "first": "2026-09-11T17:01:40+00:00",
       "last": "2026-10-06T18:54:09+00:00"
@@ -460,14 +442,6 @@
     },
     "cloudlibrary|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-31T19:30:50+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
-    "cloudlibrary|book:look-what-you-made-me-do|audiobook in catalog": {
-      "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
-    "cloudlibrary|book:look-what-you-made-me-do|ebook in catalog": {
-      "first": "2026-09-22T17:38:28+00:00",
       "last": "2026-10-06T18:54:09+00:00"
     },
     "cloudlibrary|book:partita|ebook in catalog": {
@@ -514,10 +488,6 @@
       "first": "2026-08-10T00:32:20+00:00",
       "last": "2026-10-06T18:54:09+00:00"
     },
-    "denton-library|book:look-what-you-made-me-do|audiobook (CD) in catalog": {
-      "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
     "denton-library|book:partita|print book in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
       "last": "2026-10-06T18:54:09+00:00"
@@ -562,10 +532,6 @@
       "first": "2026-08-10T18:29:49+00:00",
       "last": "2026-10-06T18:54:09+00:00"
     },
-    "lewisville-print|book:look-what-you-made-me-do|print book in catalog": {
-      "first": "2026-09-09T01:59:53+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
     "lewisville-print|book:partita|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
       "last": "2026-10-06T18:54:09+00:00"
@@ -592,10 +558,6 @@
     },
     "libby-fortworth|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T00:32:20+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
-    "libby-fortworth|book:look-what-you-made-me-do|audiobook in catalog": {
-      "first": "2026-09-09T01:59:53+00:00",
       "last": "2026-10-06T18:54:09+00:00"
     },
     "libby-fortworth|book:partita|audiobook in catalog": {
@@ -628,10 +590,6 @@
     },
     "libby-houston|book:fruit-fly|ebook in catalog": {
       "first": "2026-08-10T15:44:54+00:00",
-      "last": "2026-10-06T18:54:09+00:00"
-    },
-    "libby-houston|book:look-what-you-made-me-do|ebook in catalog": {
-      "first": "2026-09-09T01:59:53+00:00",
       "last": "2026-10-06T18:54:09+00:00"
     },
     "libby-houston|book:ply|audiobook in catalog": {
