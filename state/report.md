@@ -1,10 +1,9 @@
-# Media tracker report — 2026-10-07 01:13 UTC
+# Media tracker report — 2026-10-07 01:18 UTC
 
-## New sightings (2)
-- **Partita — Kingsolver**: ebook in Libby catalog (Houston) — 0/4 available, 56 holds (~7 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/13146720)
-- **Partita — Kingsolver**: audiobook in Libby catalog (Houston) — 0/4 available, 73 holds (~9 mo) — [link](https://libbyapp.com/library/houstonlibrary/media/12891995)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (53)
+## All current sightings (48)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — 5 on order, 10 holds ahead · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo)
@@ -13,13 +12,6 @@
     - also: ebook in Libby catalog (Houston) — 0/4 available, 56 holds (~7 mo)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 45 holds (~4 mo) · Barbara Kingsolver
     - also: audiobook in Libby catalog (Houston) — 0/4 available, 73 holds (~9 mo)
-- **Ply — Hernan Diaz**
-  - reading: print book in denton library catalog — all 4 out, 1 hold · Diaz, Hernan
-    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk)
-    - also: ebook in Libby catalog (Houston) — 0/2 available, 37 holds (~9 mo)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Diaz, Hernan, Powers, Imani Jade
-    - also: audiobook in Libby catalog (Houston) — 0/2 available, 40 holds (~10 mo)
-  - sync: gap 10d, fits in a 21d loan
 - **American Hagwon — Min Jin Lee**
   - reading: print book in denton library catalog — all 6 out, 8 holds · Lee, Min Jin
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo)
@@ -80,18 +72,18 @@
   - Landmark Inwood Theatre, Dallas: "Whalefall" booked at Landmark Inwood Theatre, Dallas from 2026-10-15
 
 ## Source status
-- ✅ `denton-library`: 5 observation(s)
+- ✅ `denton-library`: 4 observation(s)
 - ✅ `cloudlibrary`: 6 observation(s)
-- ✅ `cloudlibrary-lewisville`: 7 observation(s)
+- ✅ `cloudlibrary-lewisville`: 5 observation(s)
 - ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 7 observation(s)
-- ✅ `libby-houston`: 12 observation(s)
+- ✅ `libby-houston`: 10 observation(s)
 - ✅ `texas-theatre`: 2 observation(s)
 - ✅ `angelika`: 7 observation(s)
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 27d, 58 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 27d, 59 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
