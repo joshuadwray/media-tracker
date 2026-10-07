@@ -1,9 +1,9 @@
-# Media tracker report — 2026-10-07 01:22 UTC
+# Media tracker report — 2026-10-07 01:27 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (39)
+## All current sightings (37)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — 5 on order, 10 holds ahead · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo)
@@ -24,19 +24,15 @@
     - also: audiobook in Libby catalog (Houston) — 0/9 available, 239 holds (~1 yr)
   - sync: gap 36d > 21d loan — suspend the reading hold ~36d for listening
 - **Fruit Fly — Silver, Josh**
-  - reading: print book in denton library catalog — all 2 out, 7 holds · Silver, Josh
+  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available (~3 wk) · Silver, Josh
+    - also: print book in denton library catalog — all 2 out, 7 holds
     - also: print book in Lewisville library catalog — checked out, 6 holds
     - also: ebook in Libby catalog (Fort Worth) — 0/6 available, 93 holds (~7 mo)
     - also: ebook in Libby catalog (Houston) — 0/11 available, 280 holds (~12 mo)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/10 available, 81 holds (~4 mo) · Josh Silver
+  - listening: audiobook in cloudLibrary catalog (Denton) — 0/3 available, 15 holds (~4 mo) · Silver, Josh, Watt, Will M, Mitchell, Fiona
+    - also: audiobook in Libby catalog (Fort Worth) — 0/10 available, 81 holds (~4 mo)
     - also: audiobook in Libby catalog (Houston) — 0/11 available, 308 holds (~1.1 yr)
-  - sync: gap 31d > 14d loan — suspend the reading hold ~31d for listening
-- **the age of calamities — senaa ahmad**
-  - reading: ebook in cloudLibrary catalog (Denton) — 1/1 available · Ahmad, Senaa
-    - also: ebook in cloudLibrary catalog (Lewisville) — 1/1 available
-    - also: ebook in Libby catalog (Houston) — 0/1 available, 2 holds (~6 wk)
-  - listening: audiobook in Libby catalog (Houston) — 0/1 available, 4 holds (~2 mo) · Senaa Ahmad
-  - sync: gap 70d > 14d loan — suspend the reading hold ~70d for listening
+  - sync: gap 91d > 21d loan — suspend the reading hold ~91d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -62,17 +58,17 @@
 
 ## Source status
 - ✅ `denton-library`: 3 observation(s)
-- ✅ `cloudlibrary`: 3 observation(s)
-- ✅ `cloudlibrary-lewisville`: 3 observation(s)
+- ✅ `cloudlibrary`: 4 observation(s)
+- ✅ `cloudlibrary-lewisville`: 2 observation(s)
 - ✅ `lewisville-print`: 4 observation(s)
 - ✅ `libby-fortworth`: 6 observation(s)
-- ✅ `libby-houston`: 8 observation(s)
+- ✅ `libby-houston`: 6 observation(s)
 - ✅ `texas-theatre`: 2 observation(s)
 - ✅ `angelika`: 7 observation(s)
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 27d, 60 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 27d, 61 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
