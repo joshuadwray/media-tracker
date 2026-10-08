@@ -1,4 +1,4 @@
-# Media tracker report — 2026-10-07 19:20 UTC
+# Media tracker report — 2026-10-08 02:39 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -7,19 +7,19 @@
 - **Partita — Kingsolver**
   - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Kingsolver, Barbara
     - also: print book in denton library catalog — 5 on order, 12 holds ahead
-    - also: print book in Lewisville library catalog — 3 on order, 11 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 76 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 93 holds (~11 mo)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 51 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 121 holds (~1.2 yr)
-  - sync: gap 83d > 14d loan — suspend the reading hold ~83d for listening
+    - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 80 holds (~5 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 103 holds (~12 mo)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 52 holds (~5 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 131 holds (~1.3 yr)
+  - sync: gap 86d > 14d loan — suspend the reading hold ~86d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
-  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-07, 2026-10-08, 2026-10-09, 2026-10-10)
+  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-08, 2026-10-09, 2026-10-10, 2026-10-11)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Digger (2026)**
-  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-07, 2026-10-08, 2026-10-09, 2026-10-10)
+  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-08, 2026-10-09, 2026-10-10, 2026-10-11)
   - Texas Theatre: "Digger" mentioned on Texas Theatre
 - **You Can See Everything (2026)**
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-15, 2026-10-16, 2026-10-17, 2026-10-18)
@@ -62,7 +62,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 27d, 65 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 28d, 66 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (13)
@@ -71,7 +71,7 @@ On the watchlist, not matched at any source yet. This is the normal resting plac
 - club kid (2026) — waiting 79d
 - paper tiger (2026) — waiting 79d
 - wild horse nine (2026) — waiting 79d
-- Peck and Peck — Garmus — waiting 57d
+- Peck and Peck — Garmus — waiting 58d
 - All of a Sudden (2026) — waiting 27d
 - Artificial (2026) — waiting 27d
 - Behemoth! (2026) — waiting 27d
