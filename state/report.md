@@ -1,18 +1,18 @@
-# Media tracker report — 2026-10-08 02:39 UTC
+# Media tracker report — 2026-10-08 19:15 UTC
 
 ## New sightings (0)
 - nothing new this run
 
 ## All current sightings (29)
 - **Partita — Kingsolver**
-  - reading: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo) · Kingsolver, Barbara
-    - also: print book in denton library catalog — 5 on order, 12 holds ahead
+  - reading: print book in denton library catalog — all 10 out, 8 holds · Kingsolver, Barbara
+    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 2 holds (~2 mo)
     - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 80 holds (~5 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 103 holds (~12 mo)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 52 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 131 holds (~1.3 yr)
-  - sync: gap 86d > 14d loan — suspend the reading hold ~86d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 81 holds (~5 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 118 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 53 holds (~5 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 154 holds (~1.5 yr)
+  - sync: gap 133d > 14d loan — suspend the reading hold ~133d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -62,22 +62,22 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 28d, 66 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 28d, 67 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 80d
-- club kid (2026) — waiting 79d
-- paper tiger (2026) — waiting 79d
-- wild horse nine (2026) — waiting 79d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 81d
+- club kid (2026) — waiting 80d
+- paper tiger (2026) — waiting 80d
+- wild horse nine (2026) — waiting 80d
 - Peck and Peck — Garmus — waiting 58d
-- All of a Sudden (2026) — waiting 27d
-- Artificial (2026) — waiting 27d
-- Behemoth! (2026) — waiting 27d
-- Elsinore (2026) — waiting 27d
-- Fatherland (2026) — waiting 27d
-- Once Upon a Time in Harlem (2026) — waiting 27d
-- Tender Loving Care (2026) — waiting 27d
-- The Debut (2026) — waiting 27d
+- All of a Sudden (2026) — waiting 28d
+- Artificial (2026) — waiting 28d
+- Behemoth! (2026) — waiting 28d
+- Elsinore (2026) — waiting 28d
+- Fatherland (2026) — waiting 28d
+- Once Upon a Time in Harlem (2026) — waiting 28d
+- Tender Loving Care (2026) — waiting 28d
+- The Debut (2026) — waiting 28d
 
