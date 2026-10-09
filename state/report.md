@@ -1,4 +1,4 @@
-# Media tracker report — 2026-10-09 02:54 UTC
+# Media tracker report — 2026-10-09 18:45 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -8,11 +8,11 @@
   - reading: print book in denton library catalog — all 10 out, 8 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 3 holds (~3 mo)
     - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 83 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 122 holds (~1.2 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 54 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 163 holds (~1.6 yr)
-  - sync: gap 135d > 14d loan — suspend the reading hold ~135d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 86 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 125 holds (~1.2 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 58 holds (~6 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 168 holds (~1.6 yr)
+  - sync: gap 147d > 14d loan — suspend the reading hold ~147d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -45,7 +45,7 @@
 - **Ink (2026)**
   - "Ink" digital release: 2027-01-08
 - **teenage sex and death at camp miasma (2026)**
-  - "teenage sex and death at camp miasma" available to rent (Apple TV Store, Fandango At Home)
+  - "teenage sex and death at camp miasma" available to rent (Fandango At Home)
   - "teenage sex and death at camp miasma" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
 
 ## Source status
@@ -60,22 +60,22 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 29d, 68 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 29d, 69 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 8 observation(s)
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 81d
-- club kid (2026) — waiting 80d
-- paper tiger (2026) — waiting 80d
-- wild horse nine (2026) — waiting 80d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 82d
+- club kid (2026) — waiting 81d
+- paper tiger (2026) — waiting 81d
+- wild horse nine (2026) — waiting 81d
 - Peck and Peck — Garmus — waiting 59d
-- All of a Sudden (2026) — waiting 28d
-- Artificial (2026) — waiting 28d
-- Behemoth! (2026) — waiting 28d
-- Elsinore (2026) — waiting 28d
-- Fatherland (2026) — waiting 28d
-- Once Upon a Time in Harlem (2026) — waiting 28d
-- Tender Loving Care (2026) — waiting 28d
-- The Debut (2026) — waiting 28d
+- All of a Sudden (2026) — waiting 29d
+- Artificial (2026) — waiting 29d
+- Behemoth! (2026) — waiting 29d
+- Elsinore (2026) — waiting 29d
+- Fatherland (2026) — waiting 29d
+- Once Upon a Time in Harlem (2026) — waiting 29d
+- Tender Loving Care (2026) — waiting 29d
+- The Debut (2026) — waiting 29d
 
