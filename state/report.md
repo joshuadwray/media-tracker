@@ -1,18 +1,19 @@
-# Media tracker report — 2026-10-10 02:15 UTC
+# Media tracker report — 2026-10-10 17:45 UTC
 
-## New sightings (1)
-- **Whalefall (2026)**: "WHALEFALL" playing at Angelika Dallas (2026-10-15, 2026-10-16, 2026-10-17, 2026-10-18) — [link](https://angelikafilmcenter.com/dallas/now-playing)
+## New sightings (2)
+- **fjord (2026)**: "fjord" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1401459)
+- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" now streaming on Hulu — [link](https://www.themoviedb.org/movie/1447853)
 
-## All current sightings (29)
+## All current sightings (31)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 10 out, 8 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 3 holds (~3 mo)
+  - reading: print book in denton library catalog — all 10 out, 10 holds · Kingsolver, Barbara
     - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 89 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 131 holds (~1.3 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 60 holds (~6 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 171 holds (~1.6 yr)
-  - sync: gap 152d > 14d loan — suspend the reading hold ~152d for listening
+    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 5 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 93 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 139 holds (~1.3 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 62 holds (~6 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 187 holds (~1.8 yr)
+  - sync: gap 153d > 14d loan — suspend the reading hold ~153d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -35,12 +36,15 @@
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **fjord (2026)**
   - Angelika Dallas: "FJORD" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
+  - "fjord" available to buy (Fandango At Home)
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" booked at Landmark Inwood Theatre, Dallas from 2026-11-06
   - "la bola negra" digital release: 2026-12-02
 - **Rose of Nevada (2026)**
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
   - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
+- **Oasis: Don't Look Back in Anger (2026)**
+  - "Oasis: Don't Look Back in Anger" now streaming on Hulu
 - **The Further Mis-Adventures of Cliff Booth (2026)**
   - "The Further Mis-Adventures of Cliff Booth" digital release: 2026-12-23
 - **Ink (2026)**
@@ -61,22 +65,22 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 30d, 70 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 8 observation(s)
+- ❌ `amc` (failing 30d, 71 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 82d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 83d
+- wild horse nine (2026) — waiting 82d
 - club kid (2026) — waiting 81d
 - paper tiger (2026) — waiting 81d
-- wild horse nine (2026) — waiting 81d
 - Peck and Peck — Garmus — waiting 60d
-- All of a Sudden (2026) — waiting 29d
-- Artificial (2026) — waiting 29d
-- Behemoth! (2026) — waiting 29d
-- Elsinore (2026) — waiting 29d
-- Fatherland (2026) — waiting 29d
-- Once Upon a Time in Harlem (2026) — waiting 29d
-- Tender Loving Care (2026) — waiting 29d
-- The Debut (2026) — waiting 29d
+- All of a Sudden (2026) — waiting 30d
+- Artificial (2026) — waiting 30d
+- Behemoth! (2026) — waiting 30d
+- Elsinore (2026) — waiting 30d
+- Fatherland (2026) — waiting 30d
+- Once Upon a Time in Harlem (2026) — waiting 30d
+- Tender Loving Care (2026) — waiting 30d
+- The Debut (2026) — waiting 30d
 
