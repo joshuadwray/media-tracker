@@ -1,22 +1,22 @@
-# Media tracker report — 2026-10-11 01:47 UTC
+# Media tracker report — 2026-10-11 18:00 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" now streaming on Disney Plus — [link](https://www.themoviedb.org/movie/1447853)
 
-## All current sightings (31)
+## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 10 holds · Kingsolver, Barbara
     - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 7 holds (~6 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 94 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 148 holds (~1.4 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 61 holds (~6 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 194 holds (~1.9 yr)
-  - sync: gap 150d > 14d loan — suspend the reading hold ~150d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 98 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 161 holds (~1.6 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~6 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 208 holds (~2 yr)
+  - sync: gap 161d > 14d loan — suspend the reading hold ~161d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
-  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-10, 2026-10-11, 2026-10-12, 2026-10-13)
+  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-11, 2026-10-12, 2026-10-13, 2026-10-14)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Digger (2026)**
   - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-11, 2026-10-12, 2026-10-13, 2026-10-14)
@@ -43,6 +43,7 @@
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
   - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
 - **Oasis: Don't Look Back in Anger (2026)**
+  - "Oasis: Don't Look Back in Anger" now streaming on Disney Plus
   - "Oasis: Don't Look Back in Anger" now streaming on Hulu
 - **The Further Mis-Adventures of Cliff Booth (2026)**
   - "The Further Mis-Adventures of Cliff Booth" digital release: 2026-12-23
@@ -64,22 +65,22 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 31d, 72 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 10 observation(s)
+- ❌ `amc` (failing 31d, 73 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 11 observation(s)
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 83d
-- club kid (2026) — waiting 82d
-- paper tiger (2026) — waiting 82d
-- wild horse nine (2026) — waiting 82d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 84d
+- club kid (2026) — waiting 83d
+- paper tiger (2026) — waiting 83d
+- wild horse nine (2026) — waiting 83d
 - Peck and Peck — Garmus — waiting 61d
-- All of a Sudden (2026) — waiting 30d
-- Artificial (2026) — waiting 30d
-- Behemoth! (2026) — waiting 30d
-- Elsinore (2026) — waiting 30d
-- Fatherland (2026) — waiting 30d
-- Once Upon a Time in Harlem (2026) — waiting 30d
-- Tender Loving Care (2026) — waiting 30d
-- The Debut (2026) — waiting 30d
+- All of a Sudden (2026) — waiting 31d
+- Artificial (2026) — waiting 31d
+- Behemoth! (2026) — waiting 31d
+- Elsinore (2026) — waiting 31d
+- Fatherland (2026) — waiting 31d
+- Once Upon a Time in Harlem (2026) — waiting 31d
+- Tender Loving Care (2026) — waiting 31d
+- The Debut (2026) — waiting 31d
 
