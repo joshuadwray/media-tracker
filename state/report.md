@@ -1,26 +1,25 @@
-# Media tracker report — 2026-10-10 17:45 UTC
+# Media tracker report — 2026-10-11 01:47 UTC
 
-## New sightings (2)
-- **fjord (2026)**: "fjord" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1401459)
-- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" now streaming on Hulu — [link](https://www.themoviedb.org/movie/1447853)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (31)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 10 holds · Kingsolver, Barbara
     - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
-    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 5 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 93 holds (~6 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 139 holds (~1.3 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 62 holds (~6 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 187 holds (~1.8 yr)
-  - sync: gap 153d > 14d loan — suspend the reading hold ~153d for listening
+    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 7 holds (~6 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 94 holds (~6 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 148 holds (~1.4 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 61 holds (~6 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 194 holds (~1.9 yr)
+  - sync: gap 150d > 14d loan — suspend the reading hold ~150d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
   - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-10, 2026-10-11, 2026-10-12, 2026-10-13)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Digger (2026)**
-  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-10, 2026-10-11, 2026-10-12, 2026-10-13)
+  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-11, 2026-10-12, 2026-10-13, 2026-10-14)
   - Texas Theatre: "Digger" mentioned on Texas Theatre
 - **You Can See Everything (2026)**
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-15, 2026-10-16, 2026-10-17, 2026-10-18)
@@ -65,16 +64,16 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 30d, 71 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 31d, 72 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (13)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 83d
+- club kid (2026) — waiting 82d
+- paper tiger (2026) — waiting 82d
 - wild horse nine (2026) — waiting 82d
-- club kid (2026) — waiting 81d
-- paper tiger (2026) — waiting 81d
-- Peck and Peck — Garmus — waiting 60d
+- Peck and Peck — Garmus — waiting 61d
 - All of a Sudden (2026) — waiting 30d
 - Artificial (2026) — waiting 30d
 - Behemoth! (2026) — waiting 30d
