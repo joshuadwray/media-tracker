@@ -1,18 +1,18 @@
-# Media tracker report — 2026-10-11 18:00 UTC
+# Media tracker report — 2026-10-12 02:14 UTC
 
-## New sightings (1)
-- **Oasis: Don't Look Back in Anger (2026)**: "Oasis: Don't Look Back in Anger" now streaming on Disney Plus — [link](https://www.themoviedb.org/movie/1447853)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 10 holds · Kingsolver, Barbara
     - also: print book in Lewisville library catalog — 3 on order, 12 holds ahead
     - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 7 holds (~6 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 98 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 161 holds (~1.6 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 65 holds (~6 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 208 holds (~2 yr)
-  - sync: gap 161d > 14d loan — suspend the reading hold ~161d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 99 holds (~7 mo)
+    - also: ebook in Libby catalog (Houston) — 0/4 available, 171 holds (~1.6 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 64 holds (~6 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/4 available, 213 holds (~2.1 yr)
+  - sync: gap 158d > 14d loan — suspend the reading hold ~158d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -65,7 +65,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 31d, 73 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 32d, 74 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 11 observation(s)
 
 ## Still looking (13)
@@ -74,7 +74,7 @@ On the watchlist, not matched at any source yet. This is the normal resting plac
 - club kid (2026) — waiting 83d
 - paper tiger (2026) — waiting 83d
 - wild horse nine (2026) — waiting 83d
-- Peck and Peck — Garmus — waiting 61d
+- Peck and Peck — Garmus — waiting 62d
 - All of a Sudden (2026) — waiting 31d
 - Artificial (2026) — waiting 31d
 - Behemoth! (2026) — waiting 31d
