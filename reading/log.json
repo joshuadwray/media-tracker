@@ -2330,6 +2330,19 @@
         "2026-10-09 471",
         "2026-10-10 656"
       ]
+    },
+    {
+      "title": "python’s kiss",
+      "author": "louise erdrich",
+      "slug": "python-s-kiss",
+      "status": "finished",
+      "rating": 3.5,
+      "page_count": 240,
+      "started": "2026-10-11",
+      "finished": "2026-10-11",
+      "sessions": [
+        "2026-10-11 240"
+      ]
     }
   ]
 }
