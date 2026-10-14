@@ -1,25 +1,25 @@
-# Media tracker report — 2026-10-13 19:50 UTC
+# Media tracker report — 2026-10-14 01:48 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **Whalefall (2026)**: "Whalefall" free advance screening at AMC Northpark 15, 7:00 pm (4 pass links) — [link](https://www.advancescreenings.com/screening/whalefall/us/tx/dallas#Ii6GNo0M)
 
 ## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 13 holds · Kingsolver, Barbara
     - also: print book in Lewisville library catalog — 3 on order, 14 holds ahead
-    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 9 holds (~7 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 8 holds (~6 mo)
     - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 108 holds (~7 mo)
-    - also: ebook in Libby catalog (Houston) — 0/4 available, 195 holds (~1.9 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 73 holds (~7 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/4 available, 224 holds (~2.2 yr)
-  - sync: gap 178d > 14d loan — suspend the reading hold ~178d for listening
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 199 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 75 holds (~7 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 229 holds (~1.1 yr)
+  - sync: gap 183d > 14d loan — suspend the reading hold ~183d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
   - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-13, 2026-10-14, 2026-10-15, 2026-10-16)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Digger (2026)**
-  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-13, 2026-10-14, 2026-10-15)
+  - Angelika Dallas: "DIGGER" playing at Angelika Dallas (2026-10-14, 2026-10-15)
   - Texas Theatre: "Digger" mentioned on Texas Theatre
 - **You Can See Everything (2026)**
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-15, 2026-10-16, 2026-10-17, 2026-10-18)
@@ -27,7 +27,7 @@
   - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
-  - AMC Northpark 15: "Whalefall" free advance screening at AMC Northpark 15, Tue Oct 13 7:00 pm (4 pass links)
+  - AMC Northpark 15: "Whalefall" free advance screening at AMC Northpark 15, 7:00 pm (4 pass links)
   - Landmark Inwood Theatre, Dallas: "Whalefall" booked at Landmark Inwood Theatre, Dallas from 2026-10-15
   - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-15, 2026-10-16, 2026-10-17, 2026-10-18)
 - **dune part 3 (2026)**
@@ -65,7 +65,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 33d, 77 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 34d, 78 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 11 observation(s)
 
 ## Still looking (13)
