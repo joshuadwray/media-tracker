@@ -5,6 +5,20 @@
   },
   "films": [
     {
+      "title": "You Can See Everything",
+      "year": 2026,
+      "slug": "you-can-see-everything",
+      "watched": "2026-10-15",
+      "rating": 5.0,
+      "rewatch": false,
+      "liked": false,
+      "review": null,
+      "tmdb_id": 1765072,
+      "poster_url": "https://a.ltrbxd.com/resized/film-poster/1/6/2/9/4/4/3/1629443-you-can-see-everything-0-600-0-900-crop.jpg?v=84f6724d74",
+      "letterboxd_uri": "https://letterboxd.com/joshwray/film/you-can-see-everything/",
+      "guid": "letterboxd-watch-1539992742"
+    },
+    {
       "title": "Primetime",
       "year": 2026,
       "slug": "primetime-2026",
