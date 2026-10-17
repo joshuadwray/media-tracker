@@ -1,18 +1,18 @@
-# Media tracker report — 2026-10-16 17:18 UTC
+# Media tracker report — 2026-10-17 01:14 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **Possible Love (2026)**: "Possible Love" booked at Landmark Inwood Theatre, Dallas from 2026-10-23 — [link](https://www.landmarktheatres.com/our-locations/)
 
-## All current sightings (30)
+## All current sightings (31)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 10 out, 13 holds · Kingsolver, Barbara
-    - also: print book in Lewisville library catalog — 3 on order, 15 holds ahead
-    - also: ebook in cloudLibrary catalog (Denton) — 0/1 available, 9 holds (~7 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 116 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 236 holds (~1.3 yr)
+  - reading: print book in Lewisville library catalog — 3 on shelf · Kingsolver, Barbara, author.
+    - also: print book in denton library catalog — all 10 out, 13 holds
+    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 8 holds (~3 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 117 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 238 holds (~1.3 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 88 holds (~8 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 250 holds (~1.2 yr)
-  - sync: gap 220d > 14d loan — suspend the reading hold ~220d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 254 holds (~1.2 yr)
+  - sync: gap 250d > 14d loan — suspend the reading hold ~250d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -21,6 +21,7 @@
 - **You Can See Everything (2026)**
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-16, 2026-10-17, 2026-10-18, 2026-10-19)
 - **Possible Love (2026)**
+  - Landmark Inwood Theatre, Dallas: "Possible Love" booked at Landmark Inwood Theatre, Dallas from 2026-10-23
   - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
@@ -61,17 +62,17 @@
 - ✅ `libby-houston`: 2 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `angelika`: 8 observation(s)
-- ✅ `inwood`: 2 observation(s)
+- ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 36d, 83 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 37d, 84 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (11)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 89d
-- paper tiger (2026) — waiting 87d
-- Peck and Peck — Garmus — waiting 66d
+- paper tiger (2026) — waiting 88d
+- Peck and Peck — Garmus — waiting 67d
 - All of a Sudden (2026) — waiting 36d
 - Artificial (2026) — waiting 36d
 - Behemoth! (2026) — waiting 36d
