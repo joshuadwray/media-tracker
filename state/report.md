@@ -1,35 +1,35 @@
-# Media tracker report — 2026-10-18 00:49 UTC
+# Media tracker report — 2026-10-18 16:27 UTC
 
-## New sightings (1)
-- **Fatherland (2026)**: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02) — [link](https://angelikafilmcenter.com/dallas/now-playing)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (33)
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on shelf · Kingsolver, Barbara, author.
     - also: print book in denton library catalog — all 10 out, 13 holds
     - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 9 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 120 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 250 holds (~1.4 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 89 holds (~8 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 262 holds (~1.3 yr)
-  - sync: gap 252d > 14d loan — suspend the reading hold ~252d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 122 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 259 holds (~1.4 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 93 holds (~9 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 272 holds (~1.3 yr)
+  - sync: gap 264d > 14d loan — suspend the reading hold ~264d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
-  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-17, 2026-10-18, 2026-10-19, 2026-10-20)
+  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-18, 2026-10-19, 2026-10-20, 2026-10-21)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Fatherland (2026)**
   - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - The Modern (Magnolia at the Modern): "Fatherland" mentioned on The Modern (Magnolia at the Modern)
 - **You Can See Everything (2026)**
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-17, 2026-10-18, 2026-10-19, 2026-10-20)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-18, 2026-10-19, 2026-10-20, 2026-10-21)
 - **Possible Love (2026)**
   - Landmark Inwood Theatre, Dallas: "Possible Love" booked at Landmark Inwood Theatre, Dallas from 2026-10-23
   - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
   - Landmark Inwood Theatre, Dallas: "Whalefall" playing at Landmark Inwood Theatre, Dallas (since 2026-10-15)
-  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-17, 2026-10-18, 2026-10-19, 2026-10-20)
+  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-18, 2026-10-19, 2026-10-20, 2026-10-21)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
@@ -68,19 +68,19 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 37d, 86 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 38d, 87 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 90d · nothing this whole time, so check the spelling
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 91d · nothing this whole time, so check the spelling
 - paper tiger (2026) — waiting 89d
 - Peck and Peck — Garmus — waiting 68d
-- All of a Sudden (2026) — waiting 37d
-- Artificial (2026) — waiting 37d
-- Behemoth! (2026) — waiting 37d
-- Elsinore (2026) — waiting 37d
-- Once Upon a Time in Harlem (2026) — waiting 37d
-- Tender Loving Care (2026) — waiting 37d
-- The Debut (2026) — waiting 37d
+- All of a Sudden (2026) — waiting 38d
+- Artificial (2026) — waiting 38d
+- Behemoth! (2026) — waiting 38d
+- Elsinore (2026) — waiting 38d
+- Once Upon a Time in Harlem (2026) — waiting 38d
+- Tender Loving Care (2026) — waiting 38d
+- The Debut (2026) — waiting 38d
 
