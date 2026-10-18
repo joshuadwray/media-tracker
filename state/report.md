@@ -1,24 +1,25 @@
-# Media tracker report — 2026-10-17 16:18 UTC
+# Media tracker report — 2026-10-18 00:49 UTC
 
 ## New sightings (1)
-- **Fatherland (2026)**: "Fatherland" mentioned on The Modern (Magnolia at the Modern) — [link](https://www.themodern.org/films)
+- **Fatherland (2026)**: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02) — [link](https://angelikafilmcenter.com/dallas/now-playing)
 
-## All current sightings (32)
+## All current sightings (33)
 - **Partita — Kingsolver**
   - reading: print book in Lewisville library catalog — 3 on shelf · Kingsolver, Barbara, author.
     - also: print book in denton library catalog — all 10 out, 13 holds
     - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 9 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 118 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 245 holds (~1.4 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 88 holds (~8 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 261 holds (~1.3 yr)
-  - sync: gap 250d > 14d loan — suspend the reading hold ~250d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 120 holds (~8 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 250 holds (~1.4 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 89 holds (~8 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 262 holds (~1.3 yr)
+  - sync: gap 252d > 14d loan — suspend the reading hold ~252d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
   - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-17, 2026-10-18, 2026-10-19, 2026-10-20)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Fatherland (2026)**
+  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - The Modern (Magnolia at the Modern): "Fatherland" mentioned on The Modern (Magnolia at the Modern)
 - **You Can See Everything (2026)**
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-17, 2026-10-18, 2026-10-19, 2026-10-20)
@@ -63,18 +64,18 @@
 - ✅ `libby-fortworth`: 2 observation(s)
 - ✅ `libby-houston`: 2 observation(s)
 - ✅ `texas-theatre`: 2 observation(s)
-- ✅ `angelika`: 8 observation(s)
+- ✅ `angelika`: 9 observation(s)
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 37d, 85 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 37d, 86 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 90d · nothing this whole time, so check the spelling
-- paper tiger (2026) — waiting 88d
-- Peck and Peck — Garmus — waiting 67d
+- paper tiger (2026) — waiting 89d
+- Peck and Peck — Garmus — waiting 68d
 - All of a Sudden (2026) — waiting 37d
 - Artificial (2026) — waiting 37d
 - Behemoth! (2026) — waiting 37d
