@@ -1,4 +1,4 @@
-# Media tracker report — 2026-10-18 16:27 UTC
+# Media tracker report — 2026-10-19 01:02 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -9,10 +9,10 @@
     - also: print book in denton library catalog — all 10 out, 13 holds
     - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 9 holds (~4 mo)
     - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 122 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 259 holds (~1.4 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 93 holds (~9 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 272 holds (~1.3 yr)
-  - sync: gap 264d > 14d loan — suspend the reading hold ~264d for listening
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 268 holds (~1.5 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 96 holds (~9 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 284 holds (~1.4 yr)
+  - sync: gap 272d > 14d loan — suspend the reading hold ~272d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -68,14 +68,14 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 38d, 87 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 39d, 88 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 91d · nothing this whole time, so check the spelling
-- paper tiger (2026) — waiting 89d
-- Peck and Peck — Garmus — waiting 68d
+- paper tiger (2026) — waiting 90d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 69d
 - All of a Sudden (2026) — waiting 38d
 - Artificial (2026) — waiting 38d
 - Behemoth! (2026) — waiting 38d
