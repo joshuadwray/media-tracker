@@ -1,18 +1,18 @@
-# Media tracker report — 2026-10-19 19:13 UTC
+# Media tracker report — 2026-10-20 01:42 UTC
 
 ## New sightings (0)
 - nothing new this run
 
 ## All current sightings (33)
 - **Partita — Kingsolver**
-  - reading: print book in Lewisville library catalog — 3 on shelf · Kingsolver, Barbara, author.
+  - reading: print book in Lewisville library catalog — 1 on shelf · a copy on the Lucky Day shelf, no hold needed · Kingsolver, Barbara, author.
     - also: print book in denton library catalog — all 10 out, 12 holds
-    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 9 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 126 holds (~8 mo)
-    - also: ebook in Libby catalog (Houston) — 0/7 available, 274 holds (~1.5 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 98 holds (~9 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/8 available, 288 holds (~1.4 yr)
-  - sync: gap 278d > 14d loan — suspend the reading hold ~278d for listening
+    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 10 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 130 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/7 available, 279 holds (~1.5 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 99 holds (~9 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/8 available, 287 holds (~1.4 yr)
+  - sync: gap 280d > 14d loan — suspend the reading hold ~280d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
@@ -22,14 +22,14 @@
   - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - The Modern (Magnolia at the Modern): "Fatherland" mentioned on The Modern (Magnolia at the Modern)
 - **You Can See Everything (2026)**
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-19, 2026-10-20, 2026-10-21, 2026-10-22)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-20, 2026-10-21, 2026-10-22)
 - **Possible Love (2026)**
   - Landmark Inwood Theatre, Dallas: "Possible Love" booked at Landmark Inwood Theatre, Dallas from 2026-10-23
   - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
   - Landmark Inwood Theatre, Dallas: "Whalefall" playing at Landmark Inwood Theatre, Dallas (since 2026-10-15)
-  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-19, 2026-10-20, 2026-10-21, 2026-10-22)
+  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-20, 2026-10-21, 2026-10-22)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
@@ -68,14 +68,14 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 39d, 89 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 40d, 90 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 10 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 92d · nothing this whole time, so check the spelling
 - paper tiger (2026) — waiting 91d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 69d
+- Peck and Peck — Garmus — waiting 70d
 - All of a Sudden (2026) — waiting 39d
 - Artificial (2026) — waiting 39d
 - Behemoth! (2026) — waiting 39d
