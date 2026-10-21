@@ -1,4 +1,4 @@
-# Media tracker report — 2026-10-21 01:29 UTC
+# Media tracker report — 2026-10-21 18:01 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -6,17 +6,17 @@
 ## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 13 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 11 holds (~4 mo)
-    - also: print book in Lewisville library catalog — all 3 out, 18 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 132 holds (~9 mo)
-    - also: ebook in Libby catalog (Houston) — 0/11 available, 288 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 102 holds (~10 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/11 available, 296 holds (~1 yr)
-  - sync: gap 259d > 14d loan — suspend the reading hold ~259d for listening
+    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 10 holds (~4 mo)
+    - also: print book in Lewisville library catalog — all 3 out, 19 holds · Lucky Day copy, currently out
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 131 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/11 available, 295 holds (~1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 103 holds (~10 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/11 available, 303 holds (~1.1 yr)
+  - sync: gap 262d > 14d loan — suspend the reading hold ~262d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
-  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-20, 2026-10-21, 2026-10-22)
+  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-21, 2026-10-22)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Fatherland (2026)**
   - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
@@ -29,7 +29,7 @@
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
   - Landmark Inwood Theatre, Dallas: "Whalefall" playing at Landmark Inwood Theatre, Dallas (since 2026-10-15)
-  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-20, 2026-10-21, 2026-10-22, 2026-10-23)
+  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-21, 2026-10-22, 2026-10-23, 2026-10-24)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
@@ -67,19 +67,19 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 41d, 92 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 41d, 93 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 93d · nothing this whole time, so check the spelling
-- paper tiger (2026) — waiting 92d · nothing this whole time, so check the spelling
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 94d · nothing this whole time, so check the spelling
+- paper tiger (2026) — waiting 93d · nothing this whole time, so check the spelling
 - Peck and Peck — Garmus — waiting 71d
-- All of a Sudden (2026) — waiting 40d
-- Artificial (2026) — waiting 40d
-- Behemoth! (2026) — waiting 40d
-- Elsinore (2026) — waiting 40d
-- Once Upon a Time in Harlem (2026) — waiting 40d
-- Tender Loving Care (2026) — waiting 40d
-- The Debut (2026) — waiting 40d
+- All of a Sudden (2026) — waiting 41d
+- Artificial (2026) — waiting 41d
+- Behemoth! (2026) — waiting 41d
+- Elsinore (2026) — waiting 41d
+- Once Upon a Time in Harlem (2026) — waiting 41d
+- Tender Loving Care (2026) — waiting 41d
+- The Debut (2026) — waiting 41d
 
