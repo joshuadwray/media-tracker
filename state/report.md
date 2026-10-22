@@ -1,4 +1,4 @@
-# Media tracker report — 2026-10-21 18:01 UTC
+# Media tracker report — 2026-10-22 01:25 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -8,21 +8,21 @@
   - reading: print book in denton library catalog — all 10 out, 13 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 10 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 19 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 131 holds (~9 mo)
-    - also: ebook in Libby catalog (Houston) — 0/11 available, 295 holds (~1 yr)
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 134 holds (~9 mo)
+    - also: ebook in Libby catalog (Houston) — 0/11 available, 302 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 103 holds (~10 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/11 available, 303 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/11 available, 302 holds (~1.1 yr)
   - sync: gap 262d > 14d loan — suspend the reading hold ~262d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **The History of Concrete (2026)**
-  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-21, 2026-10-22)
+  - Angelika Dallas: "THE HISTORY OF CONCRETE" playing at Angelika Dallas (2026-10-22)
   - Texas Theatre: "The History of Concrete" mentioned on Texas Theatre
 - **Fatherland (2026)**
   - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - The Modern (Magnolia at the Modern): "Fatherland" mentioned on The Modern (Magnolia at the Modern)
 - **You Can See Everything (2026)**
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-21, 2026-10-22, 2026-10-23, 2026-10-24)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
 - **Possible Love (2026)**
   - Landmark Inwood Theatre, Dallas: "Possible Love" booked at Landmark Inwood Theatre, Dallas from 2026-10-23
   - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-22, 2026-10-23, 2026-10-24, 2026-10-25)
@@ -67,14 +67,14 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 41d, 93 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 42d, 94 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 9 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 94d · nothing this whole time, so check the spelling
 - paper tiger (2026) — waiting 93d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 71d
+- Peck and Peck — Garmus — waiting 72d
 - All of a Sudden (2026) — waiting 41d
 - Artificial (2026) — waiting 41d
 - Behemoth! (2026) — waiting 41d
