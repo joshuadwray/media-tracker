@@ -1,18 +1,18 @@
-# Media tracker report — 2026-10-24 16:33 UTC
+# Media tracker report — 2026-10-25 00:59 UTC
 
-## New sightings (1)
-- **Fatherland (2026)**: "Fatherland" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1437696)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 15 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 12 holds (~5 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/2 available, 13 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 20 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 143 holds (~10 mo)
-    - also: ebook in Libby catalog (Houston) — 0/11 available, 318 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 104 holds (~10 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/11 available, 308 holds (~1.1 yr)
-  - sync: gap 260d > 14d loan — suspend the reading hold ~260d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/7 available, 142 holds (~10 mo)
+    - also: ebook in Libby catalog (Houston) — 0/11 available, 319 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/5 available, 106 holds (~10 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/11 available, 313 holds (~1.1 yr)
+  - sync: gap 266d > 14d loan — suspend the reading hold ~266d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on order, 1 hold ahead · Harpman, Jacqueline, author.
 - **Fatherland (2026)**
@@ -67,14 +67,14 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 44d, 99 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 44d, 100 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 11 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 97d · nothing this whole time, so check the spelling
-- paper tiger (2026) — waiting 95d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 74d
+- paper tiger (2026) — waiting 96d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 75d
 - All of a Sudden (2026) — waiting 44d
 - Artificial (2026) — waiting 44d
 - Behemoth! (2026) — waiting 44d
