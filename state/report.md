@@ -1,20 +1,20 @@
-# Media tracker report — 2026-10-28 18:48 UTC
+# Media tracker report — 2026-10-29 02:17 UTC
 
 ## New sightings (1)
-- **fjord (2026)**: "fjord" digital release: 2026-11-24 — [link](https://www.themoviedb.org/movie/1401459)
+- **You Can See Everything (2026)**: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-29) — [link](https://www.landmarktheatres.com/our-locations/)
 
 ## All current sightings (34)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 10 out, 19 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 15 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 148 holds (~5 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 14 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 145 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 21 holds · Lucky Day copy, currently out
     - also: ebook in Libby catalog (Houston) — 0/13 available, 342 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 109 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 341 holds (~1.1 yr)
-  - sync: gap 98d > 14d loan — suspend the reading hold ~98d for listening
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 108 holds (~5 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 344 holds (~1.1 yr)
+  - sync: gap 97d > 14d loan — suspend the reading hold ~97d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
-  - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
+  - reading: print book in Lewisville library catalog — checked out · Harpman, Jacqueline, author.
 - **Fatherland (2026)**
   - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - The Modern (Magnolia at the Modern): "Fatherland" mentioned on The Modern (Magnolia at the Modern)
@@ -24,15 +24,15 @@
   - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
-  - Landmark Inwood Theatre, Dallas: "You Can See Everything" booked at Landmark Inwood Theatre, Dallas from 2026-10-29
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-28, 2026-10-29, 2026-10-30, 2026-10-31)
+  - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-29)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-29, 2026-10-30, 2026-10-31, 2026-11-01)
 - **Possible Love (2026)**
-  - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-27)
-  - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-28, 2026-10-29, 2026-10-30, 2026-10-31)
+  - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-28)
+  - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-29, 2026-10-30, 2026-10-31, 2026-11-01)
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
   - Landmark Inwood Theatre, Dallas: "Whalefall" playing at Landmark Inwood Theatre, Dallas (since 2026-10-16)
-  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-28, 2026-10-29)
+  - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-29)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
@@ -68,14 +68,14 @@
 - ✅ `inwood`: 4 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 48d, 107 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 49d, 108 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 12 observation(s)
 
 ## Still looking (10)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 101d · nothing this whole time, so check the spelling
 - paper tiger (2026) — waiting 100d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 78d
+- Peck and Peck — Garmus — waiting 79d
 - All of a Sudden (2026) — waiting 48d
 - Artificial (2026) — waiting 48d
 - Behemoth! (2026) — waiting 48d
