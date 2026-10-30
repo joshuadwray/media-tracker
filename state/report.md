@@ -1,17 +1,17 @@
-# Media tracker report — 2026-10-29 18:56 UTC
+# Media tracker report — 2026-10-30 02:30 UTC
 
-## New sightings (1)
-- **Once Upon a Time in Harlem (2026)**: "Once Upon a Time in Harlem" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1596300)
+## New sightings (0)
+- nothing new this run
 
-## All current sightings (35)
+## All current sightings (34)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 20 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 14 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 142 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 15 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 145 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 22 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/13 available, 346 holds (~1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/13 available, 347 holds (~1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 109 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 345 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 349 holds (~1.1 yr)
   - sync: gap 51d > 14d loan — suspend the reading hold ~51d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — checked out · Harpman, Jacqueline, author.
@@ -25,13 +25,12 @@
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-29)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-29, 2026-10-30, 2026-10-31, 2026-11-01)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
 - **Possible Love (2026)**
-  - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-28)
-  - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-29, 2026-10-30, 2026-10-31, 2026-11-01)
+  - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-29)
+  - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-10-30, 2026-10-31, 2026-11-01, 2026-11-02)
   - "Possible Love" digital release: 2026-11-06
 - **Whalefall (2026)**
-  - Landmark Inwood Theatre, Dallas: "Whalefall" playing at Landmark Inwood Theatre, Dallas (since 2026-10-16)
   - Angelika Dallas: "WHALEFALL" playing at Angelika Dallas (2026-10-29)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
@@ -67,17 +66,17 @@
 - ✅ `libby-houston`: 2 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `angelika`: 9 observation(s)
-- ✅ `inwood`: 4 observation(s)
+- ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 49d, 109 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 50d, 110 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (9)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 102d · nothing this whole time, so check the spelling
 - paper tiger (2026) — waiting 101d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 79d
+- Peck and Peck — Garmus — waiting 80d
 - All of a Sudden (2026) — waiting 49d
 - Artificial (2026) — waiting 49d
 - Behemoth! (2026) — waiting 49d
