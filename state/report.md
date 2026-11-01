@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-01 02:03 UTC
+# Media tracker report — 2026-11-01 18:22 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -6,28 +6,28 @@
 ## All current sightings (34)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 18 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 17 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 19 holds (~5 mo)
     - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 149 holds (~5 mo)
-    - also: print book in Lewisville library catalog — all 3 out, 22 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/13 available, 348 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 111 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 357 holds (~1.1 yr)
-  - sync: gap 63d > 14d loan — suspend the reading hold ~63d for listening
+    - also: print book in Lewisville library catalog — all 3 out, 23 holds · Lucky Day copy, currently out
+    - also: ebook in Libby catalog (Houston) — 0/13 available, 356 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 112 holds (~5 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 369 holds (~1.2 yr)
+  - sync: gap 64d > 14d loan — suspend the reading hold ~64d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — checked out · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
   - Texas Theatre: "paper tiger" mentioned on Texas Theatre
 - **Fatherland (2026)**
-  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-10-31, 2026-11-01, 2026-11-02, 2026-11-03)
+  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-11-01, 2026-11-02, 2026-11-03, 2026-11-04)
   - The Modern (Magnolia at the Modern): "Fatherland" mentioned on The Modern (Magnolia at the Modern)
   - "Fatherland" available to buy (Fandango At Home)
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" booked at Landmark Inwood Theatre, Dallas from 2026-11-06
-  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-10-31, 2026-11-01, 2026-11-02, 2026-11-03)
+  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-01, 2026-11-02, 2026-11-03, 2026-11-04)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-29)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-10-31, 2026-11-01, 2026-11-02, 2026-11-03)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-01, 2026-11-02, 2026-11-03, 2026-11-04)
 - **Possible Love (2026)**
   - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-23)
   - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-11-01, 2026-11-02, 2026-11-03, 2026-11-04)
@@ -68,17 +68,17 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 52d, 114 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 52d, 115 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (8)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 104d · nothing this whole time, so check the spelling
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 105d · nothing this whole time, so check the spelling
 - Peck and Peck — Garmus — waiting 82d
-- All of a Sudden (2026) — waiting 51d
-- Artificial (2026) — waiting 51d
-- Behemoth! (2026) — waiting 51d
-- Elsinore (2026) — waiting 51d
-- Tender Loving Care (2026) — waiting 51d
-- The Debut (2026) — waiting 51d
+- All of a Sudden (2026) — waiting 52d
+- Artificial (2026) — waiting 52d
+- Behemoth! (2026) — waiting 52d
+- Elsinore (2026) — waiting 52d
+- Tender Loving Care (2026) — waiting 52d
+- The Debut (2026) — waiting 52d
 
