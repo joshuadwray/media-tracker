@@ -1,18 +1,18 @@
-# Media tracker report — 2026-11-01 18:22 UTC
+# Media tracker report — 2026-11-02 02:18 UTC
 
 ## New sightings (0)
 - nothing new this run
 
 ## All current sightings (34)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 5 out, 18 holds · Kingsolver, Barbara
+  - reading: print book in denton library catalog — all 5 out, 17 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 19 holds (~5 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 149 holds (~5 mo)
-    - also: print book in Lewisville library catalog — all 3 out, 23 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/13 available, 356 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 112 holds (~5 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 369 holds (~1.2 yr)
-  - sync: gap 64d > 14d loan — suspend the reading hold ~64d for listening
+    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 152 holds (~5 mo)
+    - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
+    - also: ebook in Libby catalog (Houston) — 0/13 available, 363 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 115 holds (~5 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 371 holds (~1.2 yr)
+  - sync: gap 72d > 14d loan — suspend the reading hold ~72d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — checked out · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -36,7 +36,7 @@
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **fjord (2026)**
-  - Angelika Dallas: "FJORD" playing at Angelika Dallas (2026-11-01, 2026-11-02, 2026-11-03, 2026-11-04)
+  - Angelika Dallas: "FJORD" playing at Angelika Dallas (2026-11-02, 2026-11-03, 2026-11-04, 2026-11-05)
   - "fjord" digital release: 2026-11-24
 - **wild horse nine (2026)**
   - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08)
@@ -68,13 +68,13 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 52d, 115 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 53d, 116 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (8)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 105d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 82d
+- Peck and Peck — Garmus — waiting 83d
 - All of a Sudden (2026) — waiting 52d
 - Artificial (2026) — waiting 52d
 - Behemoth! (2026) — waiting 52d
