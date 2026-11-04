@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-03 20:03 UTC
+# Media tracker report — 2026-11-04 03:01 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -7,11 +7,11 @@
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 18 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 19 holds (~5 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 158 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 165 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/13 available, 375 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 375 holds (~1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 128 holds (~6 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 383 holds (~1.2 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 386 holds (~1.2 yr)
   - sync: gap 85d > 14d loan — suspend the reading hold ~85d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — checked out · Harpman, Jacqueline, author.
@@ -65,7 +65,7 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 54d, 119 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 55d, 120 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 12 observation(s)
 
 ## Still looking (8)
