@@ -1,44 +1,48 @@
-# Media tracker report — 2026-11-04 03:01 UTC
+# Media tracker report — 2026-11-04 20:25 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (2)
+- **The History of Concrete (2026)**: "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex) — [link](https://www.themoviedb.org/movie/1596296)
+- **The History of Concrete (2026)**: "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home) — [link](https://www.themoviedb.org/movie/1596296)
 
-## All current sightings (32)
+## All current sightings (34)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 18 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 19 holds (~5 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 165 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 166 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
     - also: ebook in Libby catalog (Houston) — 0/14 available, 375 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 128 holds (~6 mo) · Barbara Kingsolver
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 133 holds (~6 mo) · Barbara Kingsolver
     - also: audiobook in Libby catalog (Houston) — 0/12 available, 386 holds (~1.2 yr)
-  - sync: gap 85d > 14d loan — suspend the reading hold ~85d for listening
+  - sync: gap 91d > 14d loan — suspend the reading hold ~91d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — checked out · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
   - Texas Theatre: "paper tiger" mentioned on Texas Theatre
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" booked at Landmark Inwood Theatre, Dallas from 2026-11-06
-  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06)
+  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-29)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07)
 - **Possible Love (2026)**
   - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-23)
-  - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-11-03, 2026-11-04)
+  - Angelika Dallas: "POSSIBLE LOVE" playing at Angelika Dallas (2026-11-04)
   - "Possible Love" digital release: 2026-11-06
 - **Fatherland (2026)**
-  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06)
+  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07)
   - "Fatherland" available to buy (Fandango At Home)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **fjord (2026)**
-  - Angelika Dallas: "FJORD" playing at Angelika Dallas (2026-11-04, 2026-11-05)
+  - Angelika Dallas: "FJORD" playing at Angelika Dallas (2026-11-05)
   - "fjord" digital release: 2026-11-24
 - **wild horse nine (2026)**
   - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08)
+- **The History of Concrete (2026)**
+  - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
+  - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
 - **Rose of Nevada (2026)**
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
   - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -65,17 +69,17 @@
 - ✅ `inwood`: 3 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 55d, 120 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 12 observation(s)
+- ❌ `amc` (failing 55d, 121 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (8)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 107d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 85d
-- All of a Sudden (2026) — waiting 54d
-- Artificial (2026) — waiting 54d
-- Behemoth! (2026) — waiting 54d
-- Elsinore (2026) — waiting 54d
-- Tender Loving Care (2026) — waiting 54d
-- The Debut (2026) — waiting 54d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 108d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 86d
+- All of a Sudden (2026) — waiting 55d
+- Artificial (2026) — waiting 55d
+- Behemoth! (2026) — waiting 55d
+- Elsinore (2026) — waiting 55d
+- Tender Loving Care (2026) — waiting 55d
+- The Debut (2026) — waiting 55d
 
