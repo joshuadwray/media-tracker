@@ -1,18 +1,18 @@
-# Media tracker report — 2026-11-06 19:56 UTC
+# Media tracker report — 2026-11-07 02:40 UTC
 
 ## New sightings (0)
 - nothing new this run
 
-## All current sightings (32)
+## All current sightings (31)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 19 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 20 holds (~5 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/15 available, 169 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/16 available, 168 holds (~5 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 21 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
     - also: ebook in Libby catalog (Houston) — 0/14 available, 381 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/11 available, 134 holds (~6 mo) · Barbara Kingsolver
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 133 holds (~4 mo) · Barbara Kingsolver
     - also: audiobook in Libby catalog (Houston) — 0/12 available, 386 holds (~1.2 yr)
-  - sync: gap 88d > 14d loan — suspend the reading hold ~88d for listening
+  - sync: gap 27d > 14d loan — suspend the reading hold ~27d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -35,8 +35,6 @@
   - Angelika Dallas: "CLUB KID" playing at Angelika Dallas (2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22)
 - **wild horse nine (2026)**
   - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-06, 2026-11-07, 2026-11-08, 2026-11-09)
-- **Possible Love (2026)**
-  - Landmark Inwood Theatre, Dallas: "Possible Love" playing at Landmark Inwood Theatre, Dallas (since 2026-10-30)
 - **The History of Concrete (2026)**
   - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -65,10 +63,10 @@
 - ✅ `libby-houston`: 2 observation(s)
 - ✅ `texas-theatre`: 1 observation(s)
 - ✅ `angelika`: 8 observation(s)
-- ✅ `inwood`: 3 observation(s)
+- ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 57d, 125 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 58d, 126 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 12 observation(s)
 
 ## Still looking (7)
