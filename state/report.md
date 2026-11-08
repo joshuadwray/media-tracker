@@ -1,24 +1,24 @@
-# Media tracker report — 2026-11-07 18:00 UTC
+# Media tracker report — 2026-11-08 02:15 UTC
 
-## New sightings (1)
-- **Possible Love (2026)**: "Possible Love" now streaming on Netflix — [link](https://www.themoviedb.org/movie/1483525)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 19 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/16 available, 170 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/16 available, 169 holds (~5 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 21 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 381 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 136 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 389 holds (~1.2 yr)
-  - sync: gap 29d > 14d loan — suspend the reading hold ~29d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 380 holds (~1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 133 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 392 holds (~1.3 yr)
+  - sync: gap 27d > 14d loan — suspend the reading hold ~27d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
   - Texas Theatre: "paper tiger" mentioned on Texas Theatre
 - **la bola negra**
-  - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
+  - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-07)
   - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-07, 2026-11-08, 2026-11-09, 2026-11-10)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
@@ -68,13 +68,13 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 58d, 127 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 59d, 128 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 111d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 88d
+- Peck and Peck — Garmus — waiting 89d
 - All of a Sudden (2026) — waiting 58d
 - Artificial (2026) — waiting 58d
 - Behemoth! (2026) — waiting 58d
