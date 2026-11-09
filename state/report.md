@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-08 18:19 UTC
+# Media tracker report — 2026-11-09 02:34 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -6,13 +6,13 @@
 ## All current sightings (32)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 19 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/16 available, 168 holds (~5 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/3 available, 22 holds (~5 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 21 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/16 available, 169 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 381 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 133 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 390 holds (~1.3 yr)
-  - sync: gap 27d > 14d loan — suspend the reading hold ~27d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 385 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 134 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 392 holds (~1.3 yr)
+  - sync: gap 28d > 14d loan — suspend the reading hold ~28d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -68,13 +68,13 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 59d, 129 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 60d, 130 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (7)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 112d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 89d
+- Peck and Peck — Garmus — waiting 90d · nothing this whole time, so check the spelling
 - All of a Sudden (2026) — waiting 59d
 - Artificial (2026) — waiting 59d
 - Behemoth! (2026) — waiting 59d
