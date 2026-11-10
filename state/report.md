@@ -1,20 +1,18 @@
-# Media tracker report — 2026-11-10 04:35 UTC
+# Media tracker report — 2026-11-10 20:25 UTC
 
-## New sightings (3)
-- **Behemoth! (2026)**: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06) — [link](https://angelikafilmcenter.com/dallas/now-playing)
-- **Once Upon a Time in Harlem (2026)**: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16) — [link](https://angelikafilmcenter.com/dallas/now-playing)
-- **paper tiger (2026)**: "PAPER TIGER" playing at Angelika Dallas (2026-11-24, 2026-11-25, 2026-11-26, 2026-11-27) — [link](https://angelikafilmcenter.com/dallas/now-playing)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (35)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 18 holds · Kingsolver, Barbara
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 21 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/16 available, 169 holds (~5 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/17 available, 171 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 389 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 140 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 399 holds (~1.3 yr)
-  - sync: gap 37d > 14d loan — suspend the reading hold ~37d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 392 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 145 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 398 holds (~1.3 yr)
+  - sync: gap 41d > 14d loan — suspend the reading hold ~41d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -75,15 +73,15 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 61d, 132 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 61d, 133 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (6)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 113d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 91d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 60d
-- Artificial (2026) — waiting 60d
-- Tender Loving Care (2026) — waiting 60d
-- The Debut (2026) — waiting 60d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 114d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 92d · nothing this whole time, so check the spelling
+- All of a Sudden (2026) — waiting 61d
+- Artificial (2026) — waiting 61d
+- Tender Loving Care (2026) — waiting 61d
+- The Debut (2026) — waiting 61d
 
