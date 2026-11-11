@@ -1,26 +1,29 @@
-# Media tracker report — 2026-11-11 02:43 UTC
+# Media tracker report — 2026-11-11 20:09 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **fjord (2026)**: "fjord" mentioned on The Modern (Magnolia at the Modern) — [link](https://www.themodern.org/films)
 
-## All current sightings (35)
+## All current sightings (36)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 5 out, 18 holds · Kingsolver, Barbara
+  - reading: print book in denton library catalog — all 5 out, 19 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/17 available, 171 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/17 available, 169 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 395 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 142 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 397 holds (~1.3 yr)
-  - sync: gap 38d > 14d loan — suspend the reading hold ~38d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 398 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 140 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 401 holds (~1.3 yr)
+  - sync: gap 33d > 14d loan — suspend the reading hold ~33d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
   - Angelika Dallas: "PAPER TIGER" playing at Angelika Dallas (2026-11-24, 2026-11-25, 2026-11-26, 2026-11-27)
   - Texas Theatre: "paper tiger" mentioned on Texas Theatre
+- **fjord (2026)**
+  - The Modern (Magnolia at the Modern): "fjord" mentioned on The Modern (Magnolia at the Modern)
+  - "fjord" digital release: 2026-11-24
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-10)
-  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-10, 2026-11-11, 2026-11-12, 2026-11-13)
+  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-11, 2026-11-12, 2026-11-13, 2026-11-14)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-30)
@@ -30,7 +33,7 @@
 - **Once Upon a Time in Harlem (2026)**
   - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16)
 - **Fatherland (2026)**
-  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-11-10, 2026-11-11, 2026-11-12)
+  - Angelika Dallas: "FATHERLAND" playing at Angelika Dallas (2026-11-11, 2026-11-12)
 - **Elsinore (2026)**
   - Angelika Dallas: "ELSINORE" playing at Angelika Dallas (2026-11-25, 2026-11-26, 2026-11-27, 2026-11-28)
 - **dune part 3 (2026)**
@@ -39,7 +42,7 @@
 - **club kid (2026)**
   - Angelika Dallas: "CLUB KID" playing at Angelika Dallas (2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22)
 - **wild horse nine (2026)**
-  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-10, 2026-11-11, 2026-11-12, 2026-11-13)
+  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-11, 2026-11-12, 2026-11-13, 2026-11-14)
 - **The History of Concrete (2026)**
   - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -58,8 +61,6 @@
 - **teenage sex and death at camp miasma (2026)**
   - "teenage sex and death at camp miasma" available to rent (Amazon Video, Apple TV Store, Fandango At Home)
   - "teenage sex and death at camp miasma" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
-- **fjord (2026)**
-  - "fjord" digital release: 2026-11-24
 
 ## Source status
 - ✅ `denton-library`: 1 observation(s)
@@ -68,20 +69,20 @@
 - ✅ `lewisville-print`: 2 observation(s)
 - ✅ `libby-fortworth`: 2 observation(s)
 - ✅ `libby-houston`: 2 observation(s)
-- ✅ `texas-theatre`: 1 observation(s)
+- ✅ `texas-theatre`: 2 observation(s)
 - ✅ `angelika`: 11 observation(s)
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 62d, 134 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 62d, 135 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (6)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 114d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 92d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 61d
-- Artificial (2026) — waiting 61d
-- Tender Loving Care (2026) — waiting 61d
-- The Debut (2026) — waiting 61d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 115d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 93d · nothing this whole time, so check the spelling
+- All of a Sudden (2026) — waiting 62d
+- Artificial (2026) — waiting 62d
+- Tender Loving Care (2026) — waiting 62d
+- The Debut (2026) — waiting 62d
 
