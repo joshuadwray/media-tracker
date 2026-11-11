@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-10 20:25 UTC
+# Media tracker report — 2026-11-11 02:43 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -9,22 +9,22 @@
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: ebook in Libby catalog (Fort Worth) — 0/17 available, 171 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 392 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 145 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/12 available, 398 holds (~1.3 yr)
-  - sync: gap 41d > 14d loan — suspend the reading hold ~41d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 395 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 142 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/12 available, 397 holds (~1.3 yr)
+  - sync: gap 38d > 14d loan — suspend the reading hold ~38d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
   - Angelika Dallas: "PAPER TIGER" playing at Angelika Dallas (2026-11-24, 2026-11-25, 2026-11-26, 2026-11-27)
   - Texas Theatre: "paper tiger" mentioned on Texas Theatre
 - **la bola negra**
-  - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-09)
+  - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-10)
   - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-10, 2026-11-11, 2026-11-12, 2026-11-13)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-30)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-10, 2026-11-11, 2026-11-12, 2026-11-13)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-11, 2026-11-12, 2026-11-13, 2026-11-14)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **Once Upon a Time in Harlem (2026)**
@@ -73,7 +73,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 61d, 133 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 62d, 134 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (6)
