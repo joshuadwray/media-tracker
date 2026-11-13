@@ -1,18 +1,18 @@
-# Media tracker report — 2026-11-13 03:21 UTC
+# Media tracker report — 2026-11-13 20:27 UTC
 
 ## New sightings (0)
 - nothing new this run
 
 ## All current sightings (36)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 5 out, 20 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 173 holds (~4 mo)
+  - reading: print book in denton library catalog — all 5 out, 21 holds · Kingsolver, Barbara
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 172 holds (~4 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 406 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 407 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 147 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 405 holds (~1 yr)
-  - sync: gap 33d > 14d loan — suspend the reading hold ~33d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 402 holds (~1 yr)
+  - sync: gap 29d > 14d loan — suspend the reading hold ~29d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -22,11 +22,11 @@
   - The Modern (Magnolia at the Modern): "fjord" mentioned on The Modern (Magnolia at the Modern)
   - "fjord" digital release: 2026-11-24
 - **la bola negra**
-  - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-11)
+  - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
   - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
-  - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-10-30)
+  - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
   - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
@@ -42,7 +42,7 @@
 - **club kid (2026)**
   - Angelika Dallas: "CLUB KID" playing at Angelika Dallas (2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22)
 - **wild horse nine (2026)**
-  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-12, 2026-11-13, 2026-11-14, 2026-11-15)
+  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16)
 - **The History of Concrete (2026)**
   - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -74,14 +74,14 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 64d, 138 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 64d, 139 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 116d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 94d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 63d
-- Artificial (2026) — waiting 63d
-- Tender Loving Care (2026) — waiting 63d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 117d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 95d · nothing this whole time, so check the spelling
+- All of a Sudden (2026) — waiting 64d
+- Artificial (2026) — waiting 64d
+- Tender Loving Care (2026) — waiting 64d
 
