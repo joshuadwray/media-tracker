@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-13 20:27 UTC
+# Media tracker report — 2026-11-14 03:00 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -6,12 +6,12 @@
 ## All current sightings (36)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 21 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 172 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 173 holds (~4 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 407 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 408 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 147 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 402 holds (~1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 405 holds (~1 yr)
   - sync: gap 29d > 14d loan — suspend the reading hold ~29d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
@@ -31,7 +31,7 @@
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **Once Upon a Time in Harlem (2026)**
-  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-13, 2026-11-14, 2026-11-15, 2026-11-16)
+  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-14, 2026-11-15, 2026-11-16, 2026-11-17)
 - **The Debut (2026)**
   - Angelika Dallas: "THE DEBUT" playing at Angelika Dallas (2026-12-24, 2026-12-25, 2026-12-26, 2026-12-27)
 - **Elsinore (2026)**
@@ -74,7 +74,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 64d, 139 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 65d, 140 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (5)
