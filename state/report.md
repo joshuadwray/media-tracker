@@ -1,18 +1,18 @@
-# Media tracker report — 2026-11-14 18:43 UTC
+# Media tracker report — 2026-11-15 02:31 UTC
 
-## New sightings (1)
-- **paper tiger (2026)**: "paper tiger" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1381273)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (37)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 22 holds · Kingsolver, Barbara
     - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 173 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 23 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 410 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 148 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 404 holds (~1 yr)
-  - sync: gap 26d > 14d loan — suspend the reading hold ~26d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 409 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 153 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 408 holds (~1 yr)
+  - sync: gap 30d > 14d loan — suspend the reading hold ~30d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -32,7 +32,7 @@
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **Once Upon a Time in Harlem (2026)**
-  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-14, 2026-11-15, 2026-11-16, 2026-11-17)
+  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-15, 2026-11-16, 2026-11-17, 2026-11-18)
 - **The Debut (2026)**
   - Angelika Dallas: "THE DEBUT" playing at Angelika Dallas (2026-12-24, 2026-12-25, 2026-12-26, 2026-12-27)
 - **Elsinore (2026)**
@@ -75,13 +75,13 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 65d, 141 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 66d, 142 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 118d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 95d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 96d · nothing this whole time, so check the spelling
 - All of a Sudden (2026) — waiting 65d
 - Artificial (2026) — waiting 65d
 - Tender Loving Care (2026) — waiting 65d
