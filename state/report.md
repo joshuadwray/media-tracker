@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-15 19:20 UTC
+# Media tracker report — 2026-11-16 02:41 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -6,12 +6,12 @@
 ## All current sightings (37)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 5 out, 22 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 170 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 168 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 21 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 411 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 409 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 158 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 410 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 409 holds (~1 yr)
   - sync: gap 34d > 14d loan — suspend the reading hold ~34d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
@@ -28,11 +28,11 @@
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-15, 2026-11-16, 2026-11-17, 2026-11-18)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-16, 2026-11-17, 2026-11-18, 2026-11-19)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **Once Upon a Time in Harlem (2026)**
-  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-15, 2026-11-16, 2026-11-17, 2026-11-18)
+  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-16, 2026-11-17, 2026-11-18, 2026-11-19)
 - **The Debut (2026)**
   - Angelika Dallas: "THE DEBUT" playing at Angelika Dallas (2026-12-24, 2026-12-25, 2026-12-26, 2026-12-27)
 - **Elsinore (2026)**
@@ -75,13 +75,13 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 66d, 143 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 67d, 144 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
 - Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 119d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 96d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 97d · nothing this whole time, so check the spelling
 - All of a Sudden (2026) — waiting 66d
 - Artificial (2026) — waiting 66d
 - Tender Loving Care (2026) — waiting 66d
