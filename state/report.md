@@ -1,50 +1,54 @@
-# Media tracker report — 2026-11-16 22:50 UTC
+# Media tracker report — 2026-11-17 05:02 UTC
 
-## New sightings (1)
-- **You Can See Everything (2026)**: "You Can See Everything" digital release: 2026-11-24 — [link](https://www.themoviedb.org/movie/1765072)
+## New sightings (3)
+- **club kid (2026)**: "club kid" mentioned on Texas Theatre — [link](https://thetexastheatre.com/)
+- **Elsinore (2026)**: "Elsinore" free advance screening at Angelika Film Center & Cafe, Wed Nov 18 7:00 pm (3 pass links) — [link](https://www.advancescreenings.com/screening/elsinore/us/tx/east_dallas#PYIbzTT4)
+- **la bola negra**: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23) — [link](https://angelikafilmcenter.com/dallas/now-playing)
 
-## All current sightings (38)
+## All current sightings (40)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 5 out, 23 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 168 holds (~4 mo)
+  - reading: print book in denton library catalog — all 9 out, 23 holds · Kingsolver, Barbara
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 169 holds (~4 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 407 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 158 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 412 holds (~1.1 yr)
-  - sync: gap 30d > 14d loan — suspend the reading hold ~30d for listening
+    - also: ebook in Libby catalog (Houston) — 0/14 available, 406 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 157 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 414 holds (~1.1 yr)
+  - sync: gap 75d > 14d loan — suspend the reading hold ~75d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
   - Angelika Dallas: "PAPER TIGER" playing at Angelika Dallas (2026-11-24, 2026-11-25, 2026-11-26, 2026-11-27)
   - Texas Theatre: "paper tiger" mentioned on Texas Theatre
   - "paper tiger" available to buy (Fandango At Home)
+- **club kid (2026)**
+  - Angelika Dallas: "CLUB KID" playing at Angelika Dallas (2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22)
+  - Texas Theatre: "club kid" mentioned on Texas Theatre
 - **fjord (2026)**
   - The Modern (Magnolia at the Modern): "fjord" mentioned on The Modern (Magnolia at the Modern)
   - "fjord" digital release: 2026-11-24
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
-  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-16, 2026-11-17, 2026-11-18)
+  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-17, 2026-11-18)
+    - also: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-16, 2026-11-17, 2026-11-18, 2026-11-19)
-  - "You Can See Everything" digital release: 2026-11-24
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-17, 2026-11-18, 2026-11-19, 2026-11-20)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **Once Upon a Time in Harlem (2026)**
-  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-16, 2026-11-17, 2026-11-18, 2026-11-19)
+  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-17, 2026-11-18, 2026-11-19)
 - **The Debut (2026)**
   - Angelika Dallas: "THE DEBUT" playing at Angelika Dallas (2026-12-24, 2026-12-25, 2026-12-26, 2026-12-27)
 - **Elsinore (2026)**
-  - Angelika Dallas: "ELSINORE" playing at Angelika Dallas (2026-11-25, 2026-11-26, 2026-11-27, 2026-11-28)
+  - Angelika Film Center & Cafe: "Elsinore" free advance screening at Angelika Film Center & Cafe, Wed Nov 18 7:00 pm (3 pass links)
+  - Angelika Dallas: "ELSINORE" playing at Angelika Dallas (2026-11-24, 2026-11-25, 2026-11-26, 2026-11-27)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
-- **club kid (2026)**
-  - Angelika Dallas: "CLUB KID" playing at Angelika Dallas (2026-11-18, 2026-11-19, 2026-11-20, 2026-11-21)
 - **wild horse nine (2026)**
-  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-16, 2026-11-17, 2026-11-18, 2026-11-19)
+  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-17, 2026-11-18, 2026-11-19, 2026-11-20)
 - **The History of Concrete (2026)**
   - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -71,13 +75,13 @@
 - ✅ `lewisville-print`: 2 observation(s)
 - ✅ `libby-fortworth`: 2 observation(s)
 - ✅ `libby-houston`: 2 observation(s)
-- ✅ `texas-theatre`: 2 observation(s)
-- ✅ `angelika`: 11 observation(s)
+- ✅ `texas-theatre`: 3 observation(s)
+- ✅ `angelika`: 12 observation(s)
 - ✅ `inwood`: 2 observation(s)
-- ✅ `advance-screenings`: 0 observation(s)
+- ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 67d, 145 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 15 observation(s)
+- ❌ `amc` (failing 68d, 146 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
