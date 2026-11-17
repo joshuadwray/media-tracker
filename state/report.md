@@ -1,20 +1,18 @@
-# Media tracker report — 2026-11-17 05:02 UTC
+# Media tracker report — 2026-11-17 21:40 UTC
 
-## New sightings (3)
-- **club kid (2026)**: "club kid" mentioned on Texas Theatre — [link](https://thetexastheatre.com/)
-- **Elsinore (2026)**: "Elsinore" free advance screening at Angelika Film Center & Cafe, Wed Nov 18 7:00 pm (3 pass links) — [link](https://www.advancescreenings.com/screening/elsinore/us/tx/east_dallas#PYIbzTT4)
-- **la bola negra**: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23) — [link](https://angelikafilmcenter.com/dallas/now-playing)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (40)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 9 out, 23 holds · Kingsolver, Barbara
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 169 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 167 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 21 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 24 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/14 available, 406 holds (~1.1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 157 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 414 holds (~1.1 yr)
-  - sync: gap 75d > 14d loan — suspend the reading hold ~75d for listening
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 409 holds (~1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 155 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 411 holds (~1.1 yr)
+  - sync: gap 73d > 14d loan — suspend the reading hold ~73d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -80,14 +78,14 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 68d, 146 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 68d, 147 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 120d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 98d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 67d
-- Artificial (2026) — waiting 67d
-- Tender Loving Care (2026) — waiting 67d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 121d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 99d · nothing this whole time, so check the spelling
+- All of a Sudden (2026) — waiting 68d
+- Artificial (2026) — waiting 68d
+- Tender Loving Care (2026) — waiting 68d
 
