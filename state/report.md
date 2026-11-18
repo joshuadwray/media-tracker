@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-18 04:09 UTC
+# Media tracker report — 2026-11-18 21:19 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -7,12 +7,12 @@
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 9 out, 23 holds · Kingsolver, Barbara
     - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 168 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 21 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 408 holds (~1 yr)
-  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 154 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 409 holds (~1 yr)
-  - sync: gap 72d > 14d loan — suspend the reading hold ~72d for listening
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 412 holds (~1.1 yr)
+  - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 155 holds (~4 mo) · Barbara Kingsolver
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 413 holds (~1.1 yr)
+  - sync: gap 73d > 14d loan — suspend the reading hold ~73d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -78,14 +78,14 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 69d, 148 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 69d, 149 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 121d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 99d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 68d
-- Artificial (2026) — waiting 68d
-- Tender Loving Care (2026) — waiting 68d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 122d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 100d · nothing this whole time, so check the spelling
+- All of a Sudden (2026) — waiting 69d
+- Artificial (2026) — waiting 69d
+- Tender Loving Care (2026) — waiting 69d
 
