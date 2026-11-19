@@ -1,18 +1,18 @@
-# Media tracker report — 2026-11-18 21:19 UTC
+# Media tracker report — 2026-11-19 04:04 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **Elsinore (2026)**: "Elsinore" free advance screening at Angelika Film Center & Cafe, 7:00 pm (3 pass links) — [link](https://www.advancescreenings.com/screening/elsinore/us/tx/east_dallas#PYIbzTT4)
 
-## All current sightings (40)
+## All current sightings (39)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 9 out, 23 holds · Kingsolver, Barbara
+  - reading: print book in denton library catalog — all 9 out, 22 holds · Kingsolver, Barbara
     - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 168 holds (~4 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 22 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 412 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 413 holds (~1.1 yr)
   - listening: audiobook in Libby catalog (Fort Worth) — 0/17 available, 155 holds (~4 mo) · Barbara Kingsolver
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 413 holds (~1.1 yr)
-  - sync: gap 73d > 14d loan — suspend the reading hold ~73d for listening
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 412 holds (~1.1 yr)
+  - sync: gap 75d > 14d loan — suspend the reading hold ~75d for listening
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -27,26 +27,25 @@
   - "fjord" digital release: 2026-11-24
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
-  - Angelika Dallas: "LA BOLA NEGRA in 35MM" playing at Angelika Dallas (2026-11-18)
-    - also: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23)
+  - Angelika Dallas: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-11-06)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-18, 2026-11-19, 2026-11-20, 2026-11-21)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **Once Upon a Time in Harlem (2026)**
-  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-18, 2026-11-19)
+  - Angelika Dallas: "ONCE UPON A TIME IN HARLEM" playing at Angelika Dallas (2026-11-19)
 - **The Debut (2026)**
   - Angelika Dallas: "THE DEBUT" playing at Angelika Dallas (2026-12-24, 2026-12-25, 2026-12-26, 2026-12-27)
 - **Elsinore (2026)**
-  - Angelika Film Center & Cafe: "Elsinore" free advance screening at Angelika Film Center & Cafe, Wed Nov 18 7:00 pm (3 pass links)
+  - Angelika Film Center & Cafe: "Elsinore" free advance screening at Angelika Film Center & Cafe, 7:00 pm (3 pass links)
   - Angelika Dallas: "ELSINORE" playing at Angelika Dallas (2026-11-24, 2026-11-25, 2026-11-26, 2026-11-27)
 - **dune part 3 (2026)**
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **wild horse nine (2026)**
-  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-18, 2026-11-19, 2026-11-20, 2026-11-21)
+  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-19, 2026-11-20, 2026-11-21, 2026-11-22)
 - **The History of Concrete (2026)**
   - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -74,11 +73,11 @@
 - ✅ `libby-fortworth`: 2 observation(s)
 - ✅ `libby-houston`: 2 observation(s)
 - ✅ `texas-theatre`: 3 observation(s)
-- ✅ `angelika`: 12 observation(s)
+- ✅ `angelika`: 11 observation(s)
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 1 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 69d, 149 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 70d, 150 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
