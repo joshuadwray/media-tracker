@@ -1,4 +1,4 @@
-# Media tracker report — 2026-11-20 21:00 UTC
+# Media tracker report — 2026-11-21 03:54 UTC
 
 ## New sightings (0)
 - nothing new this run
@@ -7,13 +7,13 @@
 - **Partita — Kingsolver**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Kingsolver, Barbara
     - also: print book in denton library catalog — all 9 out, 21 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 166 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 23 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 165 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 24 holds (~4 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 412 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 414 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available (~3 wk) · Kingsolver, Barbara, Tusing, Megan
-    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 151 holds (~4 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 409 holds (~1 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 150 holds (~4 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 410 holds (~1.1 yr)
   - sync: gap 0d, fits in a 21d loan
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
@@ -28,11 +28,11 @@
   - "fjord" digital release: 2026-11-24
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-13)
-  - Angelika Dallas: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23)
+  - Angelika Dallas: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-21, 2026-11-22, 2026-11-23, 2026-11-24)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-11-13)
-  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23)
+  - Angelika Dallas: "YOU CAN SEE EVERYTHING" playing at Angelika Dallas (2026-11-21, 2026-11-22, 2026-11-23)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **The Debut (2026)**
@@ -43,7 +43,7 @@
   - Angelika Dallas: "DUNE: PART THREE INSIDER SCREENING" playing at Angelika Dallas (2026-12-15)
     - also: "DUNE: PART THREE" playing at Angelika Dallas (2026-12-17, 2026-12-18, 2026-12-19, 2026-12-20)
 - **wild horse nine (2026)**
-  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-20, 2026-11-21, 2026-11-22, 2026-11-23)
+  - Angelika Dallas: "WILD HORSE NINE" playing at Angelika Dallas (2026-11-21, 2026-11-22, 2026-11-23, 2026-11-24)
 - **The History of Concrete (2026)**
   - "The History of Concrete" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "The History of Concrete" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
@@ -75,7 +75,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 71d, 153 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 72d, 154 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 13 observation(s)
 
 ## Still looking (5)
