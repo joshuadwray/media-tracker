@@ -1,19 +1,19 @@
-# Media tracker report — 2026-11-21 20:02 UTC
+# Media tracker report — 2026-11-22 02:58 UTC
 
-## New sightings (1)
-- **You Can See Everything (2026)**: "You Can See Everything" digital release: 2026-11-24 — [link](https://www.themoviedb.org/movie/1765072)
+## New sightings (0)
+- nothing new this run
 
 ## All current sightings (39)
 - **Partita — Kingsolver**
   - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Kingsolver, Barbara
     - also: print book in denton library catalog — all 9 out, 20 holds
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 164 holds (~4 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 169 holds (~4 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 26 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 418 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 415 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Kingsolver, Barbara, Tusing, Megan
     - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 149 holds (~4 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 411 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 408 holds (~1 yr)
   - sync: gap 0d, fits in a 21d loan
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
@@ -76,7 +76,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 72d, 155 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 73d, 156 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
