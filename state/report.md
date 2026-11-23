@@ -1,20 +1,20 @@
-# Media tracker report — 2026-11-22 20:16 UTC
+# Media tracker report — 2026-11-23 03:39 UTC
 
 ## New sightings (0)
 - nothing new this run
 
 ## All current sightings (39)
 - **Partita — Kingsolver**
-  - reading: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Kingsolver, Barbara
-    - also: print book in denton library catalog — all 9 out, 20 holds
+  - reading: print book in denton library catalog — all 9 out, 20 holds · Kingsolver, Barbara
+    - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 2 holds (~2 mo)
     - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 168 holds (~4 mo)
     - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 26 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 416 holds (~1.1 yr)
-  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 2 holds (~2 mo) · Kingsolver, Barbara, Tusing, Megan
-    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 149 holds (~4 mo)
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 419 holds (~1.1 yr)
+  - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Kingsolver, Barbara, Tusing, Megan
+    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 150 holds (~4 mo)
     - also: audiobook in Libby catalog (Houston) — 0/15 available, 407 holds (~1 yr)
-  - sync: gap 21d > 21d loan — suspend the reading hold ~21d for listening
+  - sync: gap 7d, fits in a 21d loan
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -28,7 +28,7 @@
   - "fjord" digital release: 2026-11-24
 - **la bola negra**
   - Landmark Inwood Theatre, Dallas: "La Bola Negra" playing at Landmark Inwood Theatre, Dallas (since 2026-11-13)
-  - Angelika Dallas: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-22, 2026-11-23, 2026-11-24)
+  - Angelika Dallas: "LA BOLA NEGRA" playing at Angelika Dallas (2026-11-23, 2026-11-24)
   - "la bola negra" digital release: 2026-12-02
 - **You Can See Everything (2026)**
   - Landmark Inwood Theatre, Dallas: "You Can See Everything" playing at Landmark Inwood Theatre, Dallas (since 2026-11-13)
@@ -76,7 +76,7 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 73d, 157 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ❌ `amc` (failing 74d, 158 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
 - ✅ `tmdb-streaming`: 14 observation(s)
 
 ## Still looking (5)
