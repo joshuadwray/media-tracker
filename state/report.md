@@ -1,20 +1,23 @@
-# Media tracker report — 2026-11-25 05:25 UTC
+# Media tracker report — 2026-11-25 22:21 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (4)
+- **fjord (2026)**: "fjord" available to rent (Amazon Video, Apple TV Store, Fandango At Home) — [link](https://www.themoviedb.org/movie/1401459)
+- **fjord (2026)**: "fjord" available to buy (Amazon Video, Apple TV Store, Fandango At Home) — [link](https://www.themoviedb.org/movie/1401459)
+- **You Can See Everything (2026)**: "You Can See Everything" available to rent (Amazon Video, Apple TV Store, Fandango At Home) — [link](https://www.themoviedb.org/movie/1765072)
+- **You Can See Everything (2026)**: "You Can See Everything" available to buy (Amazon Video, Apple TV Store, Fandango At Home) — [link](https://www.themoviedb.org/movie/1765072)
 
-## All current sightings (38)
+## All current sightings (42)
 - **Partita — Kingsolver**
-  - reading: print book in denton library catalog — all 9 out, 20 holds · Kingsolver, Barbara
+  - reading: print book in denton library catalog — all 9 out, 21 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 2 holds (~2 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 173 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 26 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 175 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 27 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 25 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 430 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 428 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Kingsolver, Barbara, Tusing, Megan
-    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 155 holds (~4 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 416 holds (~1.1 yr)
-  - sync: gap 7d, fits in a 21d loan
+    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 154 holds (~4 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 419 holds (~1.1 yr)
+  - sync: gap 10d, fits in a 21d loan
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
 - **paper tiger (2026)**
@@ -26,6 +29,8 @@
   - Texas Theatre: "club kid" mentioned on Texas Theatre
 - **fjord (2026)**
   - The Modern (Magnolia at the Modern): "fjord" mentioned on The Modern (Magnolia at the Modern)
+  - "fjord" available to rent (Amazon Video, Apple TV Store, Fandango At Home)
+  - "fjord" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
 - **The Debut (2026)**
@@ -49,6 +54,9 @@
 - **Rose of Nevada (2026)**
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
+- **You Can See Everything (2026)**
+  - "You Can See Everything" available to rent (Amazon Video, Apple TV Store, Fandango At Home)
+  - "You Can See Everything" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
 - **Possible Love (2026)**
   - "Possible Love" now streaming on Netflix
 - **Oasis: Don't Look Back in Anger (2026)**
@@ -75,14 +83,14 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 76d, 161 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 14 observation(s)
+- ❌ `amc` (failing 76d, 162 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 18 observation(s)
 
 ## Still looking (5)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 128d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 106d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 75d
-- Artificial (2026) — waiting 75d
-- Tender Loving Care (2026) — waiting 75d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 129d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 107d · nothing this whole time, so check the spelling
+- All of a Sudden (2026) — waiting 76d
+- Artificial (2026) — waiting 76d
+- Tender Loving Care (2026) — waiting 76d
 
