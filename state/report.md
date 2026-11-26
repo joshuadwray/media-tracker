@@ -1,19 +1,19 @@
-# Media tracker report — 2026-11-26 04:52 UTC
+# Media tracker report — 2026-11-26 22:14 UTC
 
-## New sightings (0)
-- nothing new this run
+## New sightings (1)
+- **All of a Sudden (2026)**: "All of a Sudden" available to buy (Fandango At Home) — [link](https://www.themoviedb.org/movie/1476614)
 
-## All current sightings (42)
+## All current sightings (43)
 - **Partita — Kingsolver**
   - reading: print book in denton library catalog — all 9 out, 21 holds · Kingsolver, Barbara
     - also: ebook in cloudLibrary catalog (Lewisville) — 0/1 available, 2 holds (~2 mo)
-    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 176 holds (~4 mo)
-    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 27 holds (~5 mo)
+    - also: ebook in Libby catalog (Fort Worth) — 0/22 available, 174 holds (~4 mo)
+    - also: ebook in cloudLibrary catalog (Denton) — 0/4 available, 26 holds (~5 mo)
     - also: print book in Lewisville library catalog — all 3 out, 27 holds · Lucky Day copy, currently out
-    - also: ebook in Libby catalog (Houston) — 0/15 available, 430 holds (~1.1 yr)
+    - also: ebook in Libby catalog (Houston) — 0/15 available, 433 holds (~1.1 yr)
   - listening: audiobook in cloudLibrary catalog (Lewisville) — 0/1 available, 1 hold (~6 wk) · Kingsolver, Barbara, Tusing, Megan
-    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 155 holds (~4 mo)
-    - also: audiobook in Libby catalog (Houston) — 0/15 available, 419 holds (~1.1 yr)
+    - also: audiobook in Libby catalog (Fort Worth) — 0/17 available, 152 holds (~4 mo)
+    - also: audiobook in Libby catalog (Houston) — 0/15 available, 421 holds (~1.1 yr)
   - sync: gap 10d, fits in a 21d loan
 - **We Were Forbidden — Harpman, Jacqueline, Schwartz, Ros**
   - reading: print book in Lewisville library catalog — 1 on shelf · Harpman, Jacqueline, author.
@@ -26,7 +26,7 @@
   - Texas Theatre: "club kid" mentioned on Texas Theatre
 - **fjord (2026)**
   - The Modern (Magnolia at the Modern): "fjord" mentioned on The Modern (Magnolia at the Modern)
-  - "fjord" available to rent (Amazon Video, Apple TV Store, Fandango At Home)
+  - "fjord" available to rent (Amazon Video, Apple TV Store, Fandango At Home, Plex)
   - "fjord" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
 - **Behemoth! (2026)**
   - Angelika Dallas: "BEHEMOTH!" playing at Angelika Dallas (2026-12-03, 2026-12-04, 2026-12-05, 2026-12-06)
@@ -52,13 +52,15 @@
   - "Rose of Nevada" available to rent (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home, Plex)
   - "Rose of Nevada" available to buy (Amazon Video, Apple TV Store, Google Play Movies, YouTube, Fandango At Home)
 - **You Can See Everything (2026)**
-  - "You Can See Everything" available to rent (Amazon Video, Apple TV Store, Fandango At Home)
+  - "You Can See Everything" available to rent (Amazon Video, Apple TV Store, Fandango At Home, Plex)
   - "You Can See Everything" available to buy (Amazon Video, Apple TV Store, Fandango At Home)
 - **Possible Love (2026)**
   - "Possible Love" now streaming on Netflix
 - **Oasis: Don't Look Back in Anger (2026)**
   - "Oasis: Don't Look Back in Anger" now streaming on Disney Plus
   - "Oasis: Don't Look Back in Anger" now streaming on Hulu
+- **All of a Sudden (2026)**
+  - "All of a Sudden" available to buy (Fandango At Home)
 - **The Further Mis-Adventures of Cliff Booth (2026)**
   - "The Further Mis-Adventures of Cliff Booth" digital release: 2026-12-23
 - **Whalefall (2026)**
@@ -80,14 +82,13 @@
 - ✅ `inwood`: 2 observation(s)
 - ✅ `advance-screenings`: 0 observation(s)
 - ✅ `cinemark`: 0 observation(s)
-- ❌ `amc` (failing 77d, 163 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
-- ✅ `tmdb-streaming`: 18 observation(s)
+- ❌ `amc` (failing 77d, 164 runs): RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403
+- ✅ `tmdb-streaming`: 19 observation(s)
 
-## Still looking (5)
+## Still looking (4)
 On the watchlist, not matched at any source yet. This is the normal resting place for a new or forthcoming title: it waits here until a library buys a copy or a theater books a date.
-- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 129d · nothing this whole time, so check the spelling
-- Peck and Peck — Garmus — waiting 107d · nothing this whole time, so check the spelling
-- All of a Sudden (2026) — waiting 76d
-- Artificial (2026) — waiting 76d
-- Tender Loving Care (2026) — waiting 76d
+- Attention-Seeking Behavior: A Novel — Varfis-van Warmelo, Aea — waiting 130d · nothing this whole time, so check the spelling
+- Peck and Peck — Garmus — waiting 108d · nothing this whole time, so check the spelling
+- Artificial (2026) — waiting 77d
+- Tender Loving Care (2026) — waiting 77d
 

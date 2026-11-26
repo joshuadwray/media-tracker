@@ -3,12 +3,12 @@
     "movie:behemoth": {
       "best": "other",
       "first": "2026-11-10T04:35:52+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:club-kid": {
       "best": "other",
       "first": "2026-11-05T20:34:09+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:digger": {
       "best": "home",
@@ -18,12 +18,12 @@
     "movie:dune-part-3": {
       "best": "preferred",
       "first": "2026-09-11T17:01:40+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:elsinore": {
       "best": "preferred",
       "first": "2026-11-05T20:34:09+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:fatherland": {
       "best": "other",
@@ -33,17 +33,17 @@
     "movie:fjord": {
       "best": "other",
       "first": "2026-11-11T20:09:34+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:ink": {
       "best": "other",
       "first": "2026-11-24T22:59:35+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:la-bola-negra": {
       "best": "other",
       "first": "2026-09-25T17:55:26+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:oasis-don-t-look-back-in-anger": {
       "best": "other",
@@ -58,7 +58,7 @@
     "movie:paper-tiger": {
       "best": "other",
       "first": "2026-10-31T02:14:00+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:possible-love": {
       "best": "other",
@@ -68,7 +68,7 @@
     "movie:the-debut": {
       "best": "other",
       "first": "2026-11-12T03:44:14+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:the-history-of-concrete": {
       "best": "other",
@@ -83,7 +83,7 @@
     "movie:wild-horse-nine": {
       "best": "other",
       "first": "2026-10-15T01:22:55+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:you-can-see-everything": {
       "best": "other",
@@ -95,7 +95,7 @@
     "amc": {
       "alerted": true,
       "last_error": "RuntimeError: AMC Stonebriar 24: HTTP 403; AMC Grapevine Mills 30: HTTP 403; AMC Northpark 15: HTTP 403",
-      "runs": 163,
+      "runs": 164,
       "since": "2026-09-10T00:59:25+00:00"
     }
   },
@@ -103,12 +103,12 @@
     "book:partita|listening": {
       "best": "turn",
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "book:partita|reading": {
       "best": "now",
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "book:the-buffalo-hunter-hunter|listening": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -125,7 +125,7 @@
     "book:we-were-forbidden|reading": {
       "best": "now",
       "first": "2026-09-28T15:35:06+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "book:yesteryear|listening": {
       "first": "2026-07-18T20:08:01+00:00",
@@ -137,7 +137,7 @@
     }
   },
   "meta": {
-    "last_run": "2026-11-26T04:52:16+00:00"
+    "last_run": "2026-11-26T22:14:27+00:00"
   },
   "seen": {
     "advance-screenings|movie:club-kid|\"Club Kid\" advance screening at Angelika Film Center & Cafe on 2026-10-27": {
@@ -230,7 +230,7 @@
         "2026-12-10"
       ],
       "first": "2026-11-10T04:35:52+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:club-kid|\"CLUB KID\" playing at Angelika Dallas": {
       "dates": [
@@ -252,7 +252,7 @@
         "2026-12-03"
       ],
       "first": "2026-11-05T20:34:09+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:digger|\"DIGGER\" playing at Angelika Dallas": {
       "dates": [
@@ -282,7 +282,7 @@
         "2026-12-15"
       ],
       "first": "2026-09-10T00:59:25+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:dune-part-3|\"DUNE: PART THREE\" playing at Angelika Dallas": {
       "dates": [
@@ -303,7 +303,7 @@
         "2026-12-31"
       ],
       "first": "2026-09-10T00:59:25+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:elsinore|\"ELSINORE\" playing at Angelika Dallas": {
       "dates": [
@@ -319,7 +319,7 @@
         "2026-12-03"
       ],
       "first": "2026-11-05T20:34:09+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:fatherland|\"FATHERLAND\" playing at Angelika Dallas": {
       "dates": [
@@ -447,7 +447,7 @@
         "2026-12-03"
       ],
       "first": "2026-11-10T04:35:52+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:possible-love|\"POSSIBLE LOVE\" playing at Angelika Dallas": {
       "dates": [
@@ -482,7 +482,7 @@
         "2026-12-31"
       ],
       "first": "2026-11-12T03:44:14+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:the-history-of-concrete|\"THE HISTORY OF CONCRETE\" playing at Angelika Dallas": {
       "dates": [
@@ -566,7 +566,7 @@
         "2026-12-03"
       ],
       "first": "2026-10-15T01:22:55+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "angelika|movie:you-can-see-everything|\"YOU CAN SEE EVERYTHING\" playing at Angelika Dallas": {
       "dates": [
@@ -685,15 +685,15 @@
     },
     "cloudlibrary-lewisville|book:partita|audiobook in catalog": {
       "first": "2026-11-20T03:57:04+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "cloudlibrary-lewisville|book:partita|ebook in catalog": {
       "first": "2026-11-20T03:57:04+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "cloudlibrary|book:partita|ebook in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "cloudlibrary|book:the-buffalo-hunter-hunter|audiobook in catalog": {
       "first": "2026-07-18T00:57:09+00:00",
@@ -717,7 +717,7 @@
     },
     "denton-library|book:partita|print book in catalog": {
       "first": "2026-10-06T02:53:14+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "denton-library|book:the-buffalo-hunter-hunter|EBOOK in catalog": {
       "first": "2026-07-18T00:51:48+00:00",
@@ -741,7 +741,7 @@
     },
     "inwood|movie:ink|\"Ink\" booked at Landmark Inwood Theatre, Dallas": {
       "first": "2026-11-24T22:59:35+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "inwood|movie:la-bola-negra|\"La Bola Negra\" booked at Landmark Inwood Theatre, Dallas": {
       "first": "2026-09-25T17:55:26+00:00",
@@ -749,7 +749,7 @@
     },
     "inwood|movie:la-bola-negra|\"La Bola Negra\" playing at Landmark Inwood Theatre, Dallas": {
       "first": "2026-11-06T03:23:17+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "inwood|movie:possible-love|\"Possible Love\" booked at Landmark Inwood Theatre, Dallas": {
       "first": "2026-10-17T01:14:18+00:00",
@@ -777,31 +777,31 @@
     },
     "lewisville-print|book:partita|print book in catalog": {
       "first": "2026-08-10T19:40:34+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "lewisville-print|book:we-were-forbidden|print book in catalog": {
       "first": "2026-09-28T15:35:06+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "libby-fortworth|book:partita|audiobook in catalog": {
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "libby-fortworth|book:partita|ebook in catalog": {
       "first": "2026-10-03T01:53:24+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "libby-houston|book:partita|audiobook in catalog": {
       "first": "2026-10-07T01:13:49+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "libby-houston|book:partita|ebook in catalog": {
       "first": "2026-10-07T01:13:49+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "texas-theatre|movie:club-kid|\"club kid\" mentioned on Texas Theatre": {
       "first": "2026-11-17T05:02:00+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "texas-theatre|movie:digger|\"Digger\" mentioned on Texas Theatre": {
       "first": "2026-09-21T18:37:53+00:00",
@@ -813,15 +813,15 @@
     },
     "texas-theatre|movie:fjord|\"fjord\" mentioned on The Modern (Magnolia at the Modern)": {
       "first": "2026-11-11T20:09:34+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "texas-theatre|movie:paper-tiger|\"paper tiger\" mentioned on Texas Theatre": {
       "first": "2026-10-31T02:14:00+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "texas-theatre|movie:paper-tiger|\"paper tiger\" mentioned on The Modern (Magnolia at the Modern)": {
       "first": "2026-11-24T00:42:36+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "texas-theatre|movie:teenage-sex-and-death-at-camp-miasma|\"teenage sex and death at camp miasma\" mentioned on Texas Theatre": {
       "first": "2026-08-06T00:05:40+00:00",
@@ -831,17 +831,21 @@
       "first": "2026-09-21T18:37:53+00:00",
       "last": "2026-10-22T01:25:09+00:00"
     },
+    "tmdb-streaming|movie:all-of-a-sudden|All of a Sudden available to buy": {
+      "first": "2026-11-26T22:14:27+00:00",
+      "last": "2026-11-26T22:14:27+00:00"
+    },
     "tmdb-streaming|movie:fatherland|Fatherland available to buy": {
       "first": "2026-10-24T16:33:07+00:00",
       "last": "2026-11-05T03:24:14+00:00"
     },
     "tmdb-streaming|movie:fjord|fjord available to buy": {
       "first": "2026-11-25T22:21:43+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:fjord|fjord available to rent": {
       "first": "2026-11-25T22:21:43+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:fjord|fjord digital 2026-11-24": {
       "first": "2026-10-28T18:48:23+00:00",
@@ -849,11 +853,11 @@
     },
     "tmdb-streaming|movie:ink|Ink digital 2027-01-08": {
       "first": "2026-09-10T14:25:06+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:la-bola-negra|la bola negra digital 2026-12-02": {
       "first": "2026-09-25T03:27:10+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:oasis-don-t-look-back-in-anger|Oasis: Don't Look Back in Anger digital 2026-10-09": {
       "first": "2026-09-28T20:07:09+00:00",
@@ -861,11 +865,11 @@
     },
     "tmdb-streaming|movie:oasis-don-t-look-back-in-anger|Oasis: Don't Look Back in Anger streaming on Disney Plus": {
       "first": "2026-10-11T18:00:28+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:oasis-don-t-look-back-in-anger|Oasis: Don't Look Back in Anger streaming on Hulu": {
       "first": "2026-10-10T17:45:54+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:once-upon-a-time-in-harlem|Once Upon a Time in Harlem available to buy": {
       "first": "2026-10-29T18:56:13+00:00",
@@ -881,23 +885,23 @@
     },
     "tmdb-streaming|movie:possible-love|Possible Love streaming on Netflix": {
       "first": "2026-11-07T18:00:49+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:rose-of-nevada|Rose of Nevada available to buy": {
       "first": "2026-09-10T14:25:06+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:rose-of-nevada|Rose of Nevada available to rent": {
       "first": "2026-09-10T14:25:06+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:teenage-sex-and-death-at-camp-miasma|teenage sex and death at camp miasma available to buy": {
       "first": "2026-09-19T16:23:16+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:teenage-sex-and-death-at-camp-miasma|teenage sex and death at camp miasma available to rent": {
       "first": "2026-10-31T17:38:31+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:teenage-sex-and-death-at-camp-miasma|teenage sex and death at camp miasma digital 2026-09-22": {
       "first": "2026-09-15T17:39:25+00:00",
@@ -905,15 +909,15 @@
     },
     "tmdb-streaming|movie:the-further-mis-adventures-of-cliff-booth|The Further Mis-Adventures of Cliff Booth digital 2026-12-23": {
       "first": "2026-09-10T14:25:06+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:the-history-of-concrete|The History of Concrete available to buy": {
       "first": "2026-11-04T20:25:33+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:the-history-of-concrete|The History of Concrete available to rent": {
       "first": "2026-11-04T20:25:33+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:the-history-of-concrete|The History of Concrete digital 2026-11-03": {
       "first": "2026-10-24T01:31:21+00:00",
@@ -921,19 +925,19 @@
     },
     "tmdb-streaming|movie:whalefall|Whalefall available to buy": {
       "first": "2026-11-24T22:59:35+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:whalefall|Whalefall digital 2026-12-01": {
       "first": "2026-11-24T22:59:35+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:you-can-see-everything|You Can See Everything available to buy": {
       "first": "2026-11-25T22:21:43+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:you-can-see-everything|You Can See Everything available to rent": {
       "first": "2026-11-25T22:21:43+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "tmdb-streaming|movie:you-can-see-everything|You Can See Everything digital 2026-11-24": {
       "first": "2026-11-21T20:02:37+00:00",
@@ -943,11 +947,11 @@
   "venues": {
     "movie:behemoth|Angelika Dallas": {
       "first": "2026-11-10T04:35:52+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:club-kid|Angelika Dallas": {
       "first": "2026-11-05T20:34:09+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:club-kid|Angelika Film Center & Cafe": {
       "first": "2026-10-15T17:43:36+00:00",
@@ -955,7 +959,7 @@
     },
     "movie:club-kid|Texas Theatre": {
       "first": "2026-11-17T05:02:00+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:digger|Angelika Dallas": {
       "first": "2026-09-16T01:20:13+00:00",
@@ -979,7 +983,7 @@
     },
     "movie:dune-part-3|Angelika Dallas": {
       "first": "2026-09-10T00:59:25+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:dune-part-3|Cinemark Dallas IMAX": {
       "first": "2026-09-10T00:59:25+00:00",
@@ -991,7 +995,7 @@
     },
     "movie:elsinore|Angelika Dallas": {
       "first": "2026-11-05T20:34:09+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:elsinore|Angelika Film Center & Cafe": {
       "first": "2026-11-17T05:02:00+00:00",
@@ -1011,11 +1015,11 @@
     },
     "movie:fjord|The Modern (Magnolia at the Modern)": {
       "first": "2026-11-11T20:09:34+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:ink|Landmark Inwood Theatre, Dallas": {
       "first": "2026-11-24T22:59:35+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:la-bola-negra|Angelika Dallas": {
       "first": "2026-10-27T18:39:11+00:00",
@@ -1023,7 +1027,7 @@
     },
     "movie:la-bola-negra|Landmark Inwood Theatre, Dallas": {
       "first": "2026-09-25T17:55:26+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:oasis-don-t-look-back-in-anger|Angelika Dallas": {
       "first": "2026-09-10T14:25:06+00:00",
@@ -1039,15 +1043,15 @@
     },
     "movie:paper-tiger|Angelika Dallas": {
       "first": "2026-11-10T04:35:52+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:paper-tiger|Texas Theatre": {
       "first": "2026-10-31T02:14:00+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:paper-tiger|The Modern (Magnolia at the Modern)": {
       "first": "2026-11-24T00:42:36+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:possible-love|Angelika Dallas": {
       "first": "2026-10-05T01:49:54+00:00",
@@ -1075,7 +1079,7 @@
     },
     "movie:the-debut|Angelika Dallas": {
       "first": "2026-11-12T03:44:14+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:the-history-of-concrete|Angelika Dallas": {
       "first": "2026-09-30T02:00:59+00:00",
@@ -1099,7 +1103,7 @@
     },
     "movie:wild-horse-nine|Angelika Dallas": {
       "first": "2026-10-15T01:22:55+00:00",
-      "last": "2026-11-26T04:52:16+00:00"
+      "last": "2026-11-26T22:14:27+00:00"
     },
     "movie:you-can-see-everything|Angelika Dallas": {
       "first": "2026-09-23T17:52:36+00:00",
